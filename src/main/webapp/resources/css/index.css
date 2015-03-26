@@ -1,0 +1,14 @@
+.thumbnail {
+	width: 100px;
+	float: left;
+}
+
+.thumbnail .caption p {
+    font-size: 12px;
+}
+
+@media (min-width: 992px) {
+	.col-md-3 {
+        width: 33%;
+	}
+}

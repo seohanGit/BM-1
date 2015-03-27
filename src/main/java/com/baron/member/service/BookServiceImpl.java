@@ -12,9 +12,9 @@ import java.util.Scanner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import org.xmlpull.v1.*;
 import com.baron.member.dao.BookDao;
 import com.baron.member.model.BookModel;
+
 
 //입력을 받는 컨트롤러 클래스와 데이터베이스를 처리하는 다오 클래스 사아에 비지니스 로직이나 트랜잭션을 처리하는 클래스
 @Service
@@ -26,7 +26,7 @@ public class BookServiceImpl implements BookService {
 
 	@Override
 	public List<BookModel> findBook(String keyword) throws Exception {
-		BufferedReader bf;
+		BufferedReader br;
 
 		BookModel bookModel = new BookModel();
 		List<BookModel> listBook = new ArrayList<BookModel>();
@@ -45,40 +45,36 @@ public class BookServiceImpl implements BookService {
 		addr = addr + "key=" + key + parameter;
 
 		URL url = new URL(addr);
-		bf = new BufferedReader(new InputStreamReader(url.openStream()));
-		InputStream in = url.openStream();
-		
-/*		DomParser domParser = new DomParser(bf);
-		contents = domParser.getByTagname("item");
-*/
-		Scanner sc = new Scanner(in);
+		br = new BufferedReader(new InputStreamReader(url.openStream()));
+		//InputStream in = url.openStream();
+
 		String line;
 		StringBuilder sBuffer = new StringBuilder();
-		
-		while ((line = bf.readLine()) != null) {
-			if(line==null){
+
+		while ((line = br.readLine()) != null) {
+			if (line == null) {
 				break;
 			}
 			sBuffer.append(line);
 			System.out.println(line);
 		}
-				
-		in.close();
-		/*for (int i = 0; i < contents.size(); i++) {
-			bookModel.setBookname(domParser.getByTagname("title").get(i));
-			bookModel.setLink(domParser.getByTagname("link").get(i));
-			bookModel.setImageurl(domParser.getByTagname("imageurl").get(i));
-			bookModel
-					.setPriceSales(domParser.getByTagname("priceSales").get(i));
-			bookModel.setWriter(domParser.getByTagname("writer").get(i));
+		
+		br.close();
+		XmlDom xmlDom = new XmlDom();
+		contents = xmlDom.XmlDom(url.openStream());
+	
+		
+		System.out.println(contents.get(0));
+			System.out.println(bookModel.getBookname());
+			System.out.println(bookModel.getWriter());
+			System.out.println(bookModel.getImageurl());
+			System.out.println(bookModel.getLink());
+			System.out.println(bookModel.getPriceSales());
+	
 
-			listBook.add(bookModel);
-		}
-*/
 		return listBook;
 	}
 
-	
 	@Override
 	public void insertBook(BookModel model) {
 		bookDao.insertBook(model);

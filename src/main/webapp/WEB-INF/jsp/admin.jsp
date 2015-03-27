@@ -32,7 +32,19 @@
 				<p>
 					<span class=></span>
 				</p>
-				<button type="button" class="btn btn-default" id="insertBook">도서추가</button>
+
+
+				<div class="input-group">
+					<input type="text" class="form-control" id="keyword"> <span
+						class="input-group-btn">
+						<button class="btn btn-default" type="button" id="btn_find">
+							<span class="glyphicon glyphicon-search"></span>인터파크 검색
+						</button>
+						<button type="button" class="btn btn-default" id="insertBook">도서추가</button>
+					</span>
+
+				</div>
+
 				<hr>
 				<img src="/resources/lava3.JPG" style="width: 450px; height: 250px"
 					id="image2">
@@ -101,7 +113,8 @@
 						강의 경험이 있는 많은 교수들의 자문도 구하였다. 이와 같은 준비 과정을 거쳐, 적절한 학습 분량의 데이터베이스의
 						기본적인 개념과 실용적인 주제들을 정선하여 이 책을 저술하였다. 실제 업무와 관련이 적은 순수한 데이터베이스 이론
 						주제들은 과감하게 배제하였고, 개념을 알기 쉽게 보여주는 그림들을 많이 사용하여 이해하기 쉬운 책이 되도록 꾸몄다.</p>
-					<c:forEach items="${bookmodel}" var="book" begin="0" end="2" step="1" varStatus="status">
+					<c:forEach items="${bookmodel}" var="book" begin="0" end="2"
+						step="1" varStatus="status">
 						<div class="row" align="center">
 							<div align="center">
 								<div class="thumbnail" align="center">

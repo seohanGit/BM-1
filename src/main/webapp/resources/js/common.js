@@ -15,6 +15,25 @@ $('#btn_search').click(function() {
 	});
 });
 
+
+$('#btn_find').click(function() {
+	$.ajax({
+		type:"GET",							// GET or POST
+		url:"/findBook",						// URL
+		datatype:"xml",						// html, xml, json, jsonp, script, text
+		data:{keyword:$('#keyword').val()},			// parameters as plain object
+		error:function() {						// Ajax error handler
+			alert('ajax failed');
+		},
+		success:function(data, status) {	// Ajax complete handelr
+			$('#image1').fadeOut();
+			$('#image2').fadeOut();
+			$('#searchResultArea').empty().append(data);
+		}
+	});
+});
+
+
 $('.board .btn').click(function() {
 	$(this).parent().parent().find('.content').toggleClass('ellipsis');
 });

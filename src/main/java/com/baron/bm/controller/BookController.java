@@ -43,6 +43,15 @@ public class BookController {
 		return "search";
 	}
 	
+	
+	@RequestMapping("/findBook")
+	public String findBook(String keyword,Model model){
+		List<BookModel> bookList = bookservice.searchBook(keyword);
+		model.addAttribute("bookList",bookList);
+		return "findBook";
+	}
+	
+	
 	@RequestMapping("/deletebook")
 	public String deleteBook(String booknum,HttpServletRequest request){
 		String permission;

@@ -1,5 +1,6 @@
 package com.baron.member.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,13 @@ public class BookServiceImpl implements BookService {
 	
 	@Autowired
 	private BookDao bookDao;
+	
+	private List<BookModel> findBook( String keyword){
+		List<BookModel> bookModel = new ArrayList<BookModel>() ;
+		
+		
+		return bookModel;
+	}
 	
 	@Override
 	public void insertBook(BookModel model) {

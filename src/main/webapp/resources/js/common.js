@@ -23,7 +23,7 @@ $('#btn_find').click(function() {
 		datatype:"xml",						// html, xml, json, jsonp, script, text
 		data:{keyword:$('#keyword').val()},			// parameters as plain object
 		error:function() {						// Ajax error handler
-			alert('ajax failed');
+			alert('검색어를 입력하세요');
 		},
 		success:function(data, status) {	// Ajax complete handelr
 			$('#image1').fadeOut();

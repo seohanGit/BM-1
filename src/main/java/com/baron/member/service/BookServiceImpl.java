@@ -1,31 +1,87 @@
 package com.baron.member.service;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import org.xmlpull.v1.*;
 import com.baron.member.dao.BookDao;
 import com.baron.member.model.BookModel;
-import com.baron.member.model.MemberModel;
+
 //입력을 받는 컨트롤러 클래스와 데이터베이스를 처리하는 다오 클래스 사아에 비지니스 로직이나 트랜잭션을 처리하는 클래스
 @Service
 public class BookServiceImpl implements BookService {
-	
+
 	@Autowired
 	private BookDao bookDao;
-	
-	private List<BookModel> findBook( String keyword){
-		List<BookModel> bookModel = new ArrayList<BookModel>() ;
+	private Object XMLPullParserFactory;
+
+	@Override
+	public List<BookModel> findBook(String keyword) throws Exception {
+		BufferedReader bf;
+
+		BookModel bookModel = new BookModel();
+		List<BookModel> listBook = new ArrayList<BookModel>();
+		List<String> contents = new ArrayList<String>();
+		String key = "B0F933E2847C6447203572CCC68F824A1054E7EF0D966C7B95245288CE95E300";
+		String addr = "http://book.interpark.com/api/search.api?";
+		String parameter = "";
+
+		key = URLEncoder.encode(key, "UTF-8");
+		keyword = URLEncoder.encode(keyword, "UTF-8");
+		parameter = parameter + "&" + "query=" + keyword;
+		parameter = parameter + "&" + "sort=accuracy";
+
+		key = URLEncoder.encode(key, "UTF-8");
+		keyword = URLEncoder.encode(keyword, "UTF-8");
+		addr = addr + "key=" + key + parameter;
+
+		URL url = new URL(addr);
+		bf = new BufferedReader(new InputStreamReader(url.openStream()));
+		InputStream in = url.openStream();
 		
+/*		DomParser domParser = new DomParser(bf);
+		contents = domParser.getByTagname("item");
+*/
+		Scanner sc = new Scanner(in);
+		String line;
+		StringBuilder sBuffer = new StringBuilder();
 		
-		return bookModel;
+		while ((line = bf.readLine()) != null) {
+			if(line==null){
+				break;
+			}
+			sBuffer.append(line);
+			System.out.println(line);
+		}
+				
+		in.close();
+		/*for (int i = 0; i < contents.size(); i++) {
+			bookModel.setBookname(domParser.getByTagname("title").get(i));
+			bookModel.setLink(domParser.getByTagname("link").get(i));
+			bookModel.setImageurl(domParser.getByTagname("imageurl").get(i));
+			bookModel
+					.setPriceSales(domParser.getByTagname("priceSales").get(i));
+			bookModel.setWriter(domParser.getByTagname("writer").get(i));
+
+			listBook.add(bookModel);
+		}
+*/
+		return listBook;
 	}
+
 	
 	@Override
 	public void insertBook(BookModel model) {
-		bookDao.insertBook(model);	
+		bookDao.insertBook(model);
 	}
 
 	@Override
@@ -43,7 +99,7 @@ public class BookServiceImpl implements BookService {
 	public void updateBook(BookModel bookmodel) {
 		// TODO Auto-generated method stub
 		bookDao.updateBook(bookmodel);
-		
+
 	}
 
 	@Override
@@ -62,7 +118,7 @@ public class BookServiceImpl implements BookService {
 	public void updateBookReser(BookModel bookmodel) {
 		// TODO Auto-generated method stub
 		bookDao.updateBookReser(bookmodel);
-		
+
 	}
 
 	@Override
@@ -70,9 +126,5 @@ public class BookServiceImpl implements BookService {
 		// TODO Auto-generated method stub
 		return bookDao.selectReservation(booknum);
 	}
-
-
-
-
 
 }

@@ -45,8 +45,8 @@ public class BookController {
 	
 	
 	@RequestMapping("/findBook")
-	public String findBook(String keyword,Model model){
-		List<BookModel> bookList = bookservice.searchBook(keyword);
+	public String findBook(String keyword,Model model) throws Exception{
+		List<BookModel> bookList = bookservice.findBook(keyword);
 		model.addAttribute("bookList",bookList);
 		return "findBook";
 	}

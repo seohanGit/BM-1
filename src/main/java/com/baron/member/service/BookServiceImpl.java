@@ -28,7 +28,6 @@ public class BookServiceImpl implements BookService {
 	public List<BookModel> findBook(String keyword) throws Exception {
 		BufferedReader br;
 
-		BookModel bookModel = new BookModel();
 		List<BookModel> listBook = new ArrayList<BookModel>();
 		List<String> contents = new ArrayList<String>();
 		String key = "B0F933E2847C6447203572CCC68F824A1054E7EF0D966C7B95245288CE95E300";
@@ -52,9 +51,6 @@ public class BookServiceImpl implements BookService {
 		StringBuilder sBuffer = new StringBuilder();
 
 		while ((line = br.readLine()) != null) {
-			if (line == null) {
-				break;
-			}
 			sBuffer.append(line);
 			System.out.println(line);
 		}
@@ -63,13 +59,7 @@ public class BookServiceImpl implements BookService {
 		XmlDom xmlDom = new XmlDom();
 		contents = xmlDom.XmlDom(url.openStream());
 	
-		
-		System.out.println(contents.get(0));
-			System.out.println(bookModel.getBookname());
-			System.out.println(bookModel.getWriter());
-			System.out.println(bookModel.getImageurl());
-			System.out.println(bookModel.getLink());
-			System.out.println(bookModel.getPriceSales());
+		System.out.println(contents.get(0));;
 	
 
 		return listBook;

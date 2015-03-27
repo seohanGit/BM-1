@@ -28,8 +28,7 @@ public class BookServiceImpl implements BookService {
 	public List<BookModel> findBook(String keyword) throws Exception {
 		BufferedReader br;
 
-		List<BookModel> listBook = new ArrayList<BookModel>();
-		List<String> contents = new ArrayList<String>();
+		List<BookModel> bookList = new ArrayList<BookModel>();
 		String key = "B0F933E2847C6447203572CCC68F824A1054E7EF0D966C7B95245288CE95E300";
 		String addr = "http://book.interpark.com/api/search.api?";
 		String parameter = "";
@@ -57,12 +56,9 @@ public class BookServiceImpl implements BookService {
 		
 		br.close();
 		XmlDom xmlDom = new XmlDom();
-		contents = xmlDom.XmlDom(url.openStream());
-	
-		System.out.println(contents.get(0));;
-	
+		bookList = xmlDom.XmlDom(url.openStream());
 
-		return listBook;
+		return bookList;
 	}
 
 	@Override

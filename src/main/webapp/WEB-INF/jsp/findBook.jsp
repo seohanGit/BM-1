@@ -4,25 +4,28 @@
 
 
 <c:forEach items="${bookList}" var="book" varStatus="status">
-
+	${status.index+1}번째 : ${book.bookname }
 	<table width="100%" border="10px" bordercolor="#fff">
 		<tbody>
 			<tr>
-				<td class="goods_img"><sapn class="goods_cnt"></sapn> <img
+				<td class="goods_img"><span class="goods_cnt"></span> <img
 					src="${book.imageurl}" width="95px"></td>
 				<td class="goods_infogrp">
-					<p>${book.link}|${book.bookname}</p>
-					<p>${book.writer}|${book.priceSales}</p>
+					<p><a href="${book.link}">${book.bookname}</a></p>
 					
-						<button class="btn btn-default" type="button" id="borrowbook"
-							onClick="location.href='/borrow?booknum=${book.booknum}'">대출</button>
+					<p>${book.writer}  |  ${book.priceSales}</p>
+
+					<button class="btn btn-default" type="button" id="borrowbook"
+						onClick="location.href='/borrow?booknum=${book.booknum}'">구매</button>
+
 					
-					</p>
 				</td>
 			</tr>
 
-			</c:forEach>
+
 		</tbody>
 	</table>
-	<script>
-	</script>
+</c:forEach>
+<script>
+	
+</script>

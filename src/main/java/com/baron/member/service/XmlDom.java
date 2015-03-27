@@ -13,9 +13,12 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
+import com.baron.member.model.BookModel;
+
 public class XmlDom {
-	public List<String> XmlDom(InputStream br) throws Exception {
-		List<String> info = new ArrayList<String>();
+	public List<BookModel> XmlDom(InputStream br) throws Exception {
+		List<BookModel> bookList = new ArrayList<BookModel>();
+		BookModel model = new BookModel();
 		// 팩토리 생성
 		DocumentBuilderFactory dbfactory = DocumentBuilderFactory.newInstance();
 		// 빌더 생성
@@ -29,28 +32,40 @@ public class XmlDom {
 		NodeList list = root.getElementsByTagName("item");
 		System.out.println("Node List Length : " + list.getLength());
 
-		for (int i = 0; i < list.getLength(); i++) {
+		for (int i = 0; i < list.getLength(); i++ ) {
+			
 			Element element = (Element) list.item(i);
-			String title = getChildren(element, "title");
-			String link = getChildren(element, "link");
-			String imageurl = getChildren(element, "coverSmallUrl");
-			String priceSales = getChildren(element, "priceSales");
-			String writer = getChildren(element, "author");
+			model.setBookname(getChildren(element, "title"));
+			model.setLink(getChildren(element, "link"));
+			model.setImageurl(getChildren(element, "coverSmallUrl"));
+			model.setPriceSales(getChildren(element, "priceSales"));
+			model.setWriter(getChildren(element, "author"));
 
-			System.out.println("Time  : " + title);
+			/*System.out.println("Time  : " + title);
 			System.out.println("Code : " + link);
 			System.out.println("writer : " + writer);
 			System.out.println("imageUrl : " + imageurl);
 			System.out.println("priceSales : " + priceSales);
 
-			info.add(title);
-			info.add(link);
-			info.add(imageurl);
-			info.add(priceSales);
-			info.add(writer);
-
+			model.setBookname(title);
+			model.setLink(link);
+			model.setImageurl(imageurl);
+			model.setPriceSales(priceSales);
+			model.setWriter(writer);
+			*/
+			bookList.add(model);
+			
+			System.out.println(bookList.get(i).getBookname());
+			System.out.println(bookList.get(i).getPriceSales());
+			System.out.println(bookList.get(i).getWriter());
+			
 		}
-		return info;
+
+		System.out.println(bookList.get(0).getBookname());
+		System.out.println(bookList.get(1).getBookname());
+		System.out.println(bookList.get(2).getBookname());
+		
+		return bookList;
 	}
 
 	/**

@@ -33,7 +33,7 @@ public class XmlDom {
 		System.out.println("Node List Length : " + list.getLength());
 
 		for (int i = 0; i < list.getLength(); i++ ) {
-			
+			BookModel model = new BookModel();
 			Element element = (Element) list.item(i);
 			model.setBookname(getChildren(element, "title"));
 			model.setLink(getChildren(element, "link"));

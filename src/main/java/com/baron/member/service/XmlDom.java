@@ -18,7 +18,7 @@ import com.baron.member.model.BookModel;
 public class XmlDom {
 	public List<BookModel> XmlDom(InputStream br) throws Exception {
 		List<BookModel> bookList = new ArrayList<BookModel>();
-		BookModel model = new BookModel();
+		
 		// 팩토리 생성
 		DocumentBuilderFactory dbfactory = DocumentBuilderFactory.newInstance();
 		// 빌더 생성
@@ -33,6 +33,7 @@ public class XmlDom {
 		System.out.println("Node List Length : " + list.getLength());
 
 		for (int i = 0; i < list.getLength(); i++ ) {
+			BookModel model = new BookModel();
 			
 			Element element = (Element) list.item(i);
 			model.setBookname(getChildren(element, "title"));

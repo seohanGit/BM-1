@@ -45,8 +45,6 @@ public class XmlDom {
 			model.setGenre(getChildren(element, "categoryName"));
 			model.setPublisher(getChildren(element, "publisher"));
 			
-			
-
 			bookList.add(model);
 			/*System.out.println("Time  : " + title);
 			System.out.println("Code : " + link);

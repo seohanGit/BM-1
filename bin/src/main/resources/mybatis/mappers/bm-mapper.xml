@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baron.member.MemberModel">
+
+	<select id="selectMemberById" resultType="int" parameterType="string">
+		SELECT COUNT(*)
+		FROM member
+		WHERE id = #{id}
+	</select>
+
+	<insert id="insertMember" parameterType="MemberModel">
+		INSERT INTO member(id,
+		pass, name,email,address,cell,home)
+		VALUES (#{id}, #{password},
+		#{name},#{email},#{address},#{cell},#{home})
+	</insert>
+
+
+	<select id="selectMember" resultType="MemberModel"
+		parameterType="MemberModel">
+		SELECT *
+		FROM member
+		WHERE id = #{id}
+		AND pass =
+		#{password}
+	</select>
+	
+	<select id="selectBest" resultType="MemberModel">
+	   SELECT name,score,id
+	   FROM member
+	   ORDER BY score DESC
+	</select>
+	
+	<select id="selectContent" resultType="ContentModel">
+	   SELECT *
+	   FROM notice
+	</select>
+
+	<select id="selectBoard" resultType="BoardModel">
+		SELECT *
+		FROM bulletinboard
+	</select>
+
+	<select id="selectBoardregister" resultType="BoardModel">
+		SELECT *
+		FROM bulletinboard
+		ORDER BY registerday;
+	</select>
+	
+	<select id="selectMaxGrade" resultType="int">
+	   SELECT MAX(grade)
+	   FROM book;
+	</select>
+
+	<select id="selectBoardtitle" resultType="BoardModel">
+		SELECT *
+		FROM bulletinboard
+		ORDER BY title;
+	</select>
+
+	<insert id="insertBoard" parameterType="BoardModel">
+		INSERT INTO bulletinboard
+		(title,content,registerday,modifiday,id)
+		VALUES
+		(#{title},#{content},NOW(),NOW(),#{id})
+	</insert>
+
+	<insert id="insertBook" parameterType="BookModel">
+		INSERT INTO book
+		(bookname,booknum,damage,genre,publisher,writer,grade,borrowcheck)
+		VALUES (#{bookname},#{booknum},0,#{genre},#{publisher},#{writer},0,0)
+	</insert>
+	
+	<select id="selectBestBook" resultType="BookModel">
+	   SELECT *
+	   FROM book
+	   ORDER BY grade DESC
+	</select>
+
+	<select id="selectPass" resultType="String" parameterType="String">
+		SELECT pass
+		FROM member
+		WHERE id = #{id}
+	</select>
+
+	<update id="updateMember" parameterType="MemberModel">
+		UPDATE member
+		SET pass =
+		#{password},email = #{email},address = #{address},cell =
+		#{cell},home =
+		#{home}
+		WHERE id = #{id}
+	</update>
+
+	<select id="selectBook" parameterType="String" resultType="BookModel">
+		SELECT booknum, bookname, genre, publisher, writer
+		,imageurl,borrowcheck,resernum
+		FROM book
+		WHERE bookname LIKE
+		CONCAT('%',#{keyword},'%')
+
+	</select>
+
+	<select id="selectBlack" resultType="MemberModel">
+		SELECT
+		A.id,A.name,A.email,A.address,A.cell,A.Home,A.numborrow,A.numarrear,B.endday
+		FROM member as A, blackList as B
+		WHERE A.id=B.id;
+	</select>
+
+	<select id="selectLate" resultType="MemberModel">
+		SELECT
+		a.id,a.name,a.email,a.address,a.cell,a.home, b.borrowday, b.returnday
+		FROM member as A ,book as B
+		WHERE NOW() > returnday and a.id=b.id;
+	</select>
+
+	<delete id="deleteBook" parameterType="String">
+		DELETE FROM book
+		WHERE
+		booknum=#{booknum}
+	</delete>
+
+	<update id="updateBook" parameterType="BookModel">
+		UPDATE book
+		SET
+		bookname=#{bookname}, genre=#{genre},
+		publisher=#{publisher},writer=#{writer}
+		WHERE booknum=#{booknum}
+	</update>
+
+	<select id="selectname" parameterType="String" resultType="String">
+		SELECT bookname
+		FROM book
+		WHERE booknum=#{booknum}
+	</select>
+
+	<insert id="insertReservation" parameterType="BookModel">
+		INSERT INTO
+		reservation(resernum,booknum, bookname, period,ID)
+		VALUES(#{resernum},#{booknum},#{bookname},date_add(now(),interval 7 day),#{reserid})
+	</insert>
+
+	<update id="updateBookReser" parameterType="BookModel">
+		UPDATE book
+		SET
+		resernum=#{resernum}
+		WHERE booknum=#{booknum}
+	</update>
+
+	<select id="selectReservation" parameterType="String"
+		resultType="String">
+		SELECT resernum
+		FROM book
+		WHERE booknum=#{booknum}
+	</select>
+</mapper>

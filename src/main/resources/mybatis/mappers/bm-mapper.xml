@@ -15,6 +15,7 @@
 		#{name},#{email},#{address},#{cell},#{home})
 	</insert>
 
+
 	<select id="selectMember" resultType="MemberModel"
 		parameterType="MemberModel">
 		SELECT *

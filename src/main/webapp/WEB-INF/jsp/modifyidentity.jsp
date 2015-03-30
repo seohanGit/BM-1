@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,19 +34,19 @@ body {
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">e-mail변경</label> <input type="text"
-                        class="form-control" id="email" name ="email" placeholder="email">
+                        class="form-control" id="email" name ="email" placeholder="${Member.email}">
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">주소 변경</label> <input type="text"
-                        class="form-control" id="address" name ="address" placeholder="주소">
+                        class="form-control" id="address" name ="address" placeholder="${Member.address}">
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">핸드폰변경</label> <input type="text"
-                        class="form-control" id="cell" name ="cell" placeholder="핸드폰번호">
+                        class="form-control" id="cell" name ="cell" placeholder="${Member.cell}">
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">집전화 변경</label> <input type="text"
-                        class="form-control" id="cell" name ="home" placeholder="집전화">
+                        class="form-control" id="cell" name ="home" placeholder="${Member.home}">
                 </div>
                 <button type="submit" class="btn btn-default">확인</button>
             </form>

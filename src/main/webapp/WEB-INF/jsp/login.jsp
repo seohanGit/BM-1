@@ -14,6 +14,8 @@
 </head>
 <body>
 	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	</nav>
+	
 		<div class="container">
 
 			<!-- Page Content -->
@@ -40,8 +42,7 @@
 			<!-- /.container -->
 
 		</div>
-	</nav>
-
+	
 	<!-- /.container -->
 	<script src="/resources/js/jquery/jquery.js"></script>
 	<script src="/resources/js/bootstrap.min.js"></script>

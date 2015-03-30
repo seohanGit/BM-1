@@ -7,6 +7,8 @@ import org.hibernate.validator.constraints.NotBlank;
 
 public class MemberModel {
 
+	
+	
 	private String id;	
 	@NotBlank(message = "패스워드를 입력하세요.")
 	private String password;	

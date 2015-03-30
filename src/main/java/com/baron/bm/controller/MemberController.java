@@ -33,32 +33,38 @@ public class MemberController {
 
 	@Autowired
 	private JoinService joinService;
-	
 
 	@RequestMapping("/modify")
-	public String modifyidentity(String password,HttpServletRequest request) {
+	public String modifyidentity(String password, HttpServletRequest request,
+			Model model) {
 		String pass = null;
-		
+
 		for (Cookie cookie : request.getCookies()) {
-			if(cookie.getName().equals("bm_id")) {
+			if (cookie.getName().equals("bm_id")) {
 				pass = joinService.identify(cookie.getValue());
+				MemberModel memberModel = new MemberModel();
+				memberModel.setId(cookie.getValue());
+				memberModel.setPassword(pass);
+				memberModel = joinService.login(memberModel);
+				model.addAttribute("Member", memberModel);
 			}
 		}
-		
+
 		return (pass.equals(password)) ? "modifyidentity" : "identifyfail";
 	}
-	
+
 	@RequestMapping("/modifySuccess")
-	public String modifySuccess(@Valid MemberModel model,HttpServletRequest request){
-				
-		for(Cookie cookie : request.getCookies()){
-			if(cookie.getName().equals("bm_id")){
+	public String modifySuccess(@Valid MemberModel model,
+			HttpServletRequest request) {
+
+		for (Cookie cookie : request.getCookies()) {
+			if (cookie.getName().equals("bm_id")) {
 				model.setId(cookie.getValue());
 			}
 		}
-		
+
 		joinService.updateMember(model);
-		
+
 		return "modifySuccess";
 	}
 
@@ -68,17 +74,17 @@ public class MemberController {
 	}
 
 	@RequestMapping("/login")
-	public ModelAndView login(HttpServletResponse response,MemberModel model) {
+	public ModelAndView login(HttpServletResponse response, MemberModel model) {
 
 		ModelAndView mav = new ModelAndView("loginResult");
 		model = joinService.login(model);
 		if (model != null) {
 			System.out.println(model.getId() + model.getPermission());
 			response.addCookie(new Cookie("bm_id", model.getId()));
-			response.addCookie(new Cookie("bm_permission", model.getPermission()));
+			response.addCookie(new Cookie("bm_permission", model
+					.getPermission()));
 			mav.addObject("result", true);
-		}
-		else {
+		} else {
 			mav.addObject("result", false);
 		}
 		return mav;
@@ -86,92 +92,90 @@ public class MemberController {
 
 	@RequestMapping("/identify")
 	public String identify() {
-		
+
 		return "identify";
 	}
 
-	
-
 	@RequestMapping("/admin")
-	public String admin(HttpServletRequest request,Model model) {
-		for(Cookie cookie : request.getCookies()){
-			if(cookie.getName().equals("bm_permission")){
+	public String admin(HttpServletRequest request, Model model) {
+		for (Cookie cookie : request.getCookies()) {
+			if (cookie.getName().equals("bm_permission")) {
 				System.out.println(cookie.getValue());
-				if("1".equals(cookie.getValue())){
+				if ("1".equals(cookie.getValue())) {
 					List<BookModel> bookmodel = joinService.selectBestBook();
 					List<MemberModel> memberList = joinService.selectBest();
-					model.addAttribute("bookmodel",bookmodel);
-					model.addAttribute("bestList",memberList);
+					model.addAttribute("bookmodel", bookmodel);
+					model.addAttribute("bestList", memberList);
 					return "admin";
-				}
-				else
+				} else
 					return "adminfail";
 			}
 		}
 		return null;
 	}
-	
+
 	@RequestMapping("/joinForm")
 	public String joinForm() {
 		return "join";
 	}
-	
+
 	@RequestMapping("/join")
 	public String join(@Valid MemberModel memberModel) throws Exception {
-		if(joinService.selectMemberById(memberModel.getId())==0){
+		if (joinService.selectMemberById(memberModel.getId()) == 0) {
 			joinService.join(memberModel);
 			return "joinSuccess";
-		}
-		else 
+		} else
 			return "joinFail";
 	}
-	
-	@RequestMapping("/logout") //쿠키 삭제
-	public String logout(HttpServletRequest request,MemberModel model,HttpServletResponse response){
-		
-		for(Cookie cookie: request.getCookies()){
-			if(cookie.getName().equals("bm_id")){
+
+	@RequestMapping("/logout")
+	// 쿠키 삭제
+	public String logout(HttpServletRequest request, MemberModel model,
+			HttpServletResponse response) {
+
+		for (Cookie cookie : request.getCookies()) {
+			if (cookie.getName().equals("bm_id")) {
 				cookie.setMaxAge(0);
 				model.setId("0");
-				response.addCookie(new Cookie("bm_id", model.getId()));			
-			}
-			else if(cookie.getName().equals("bm_permission")){
+				response.addCookie(new Cookie("bm_id", model.getId()));
+			} else if (cookie.getName().equals("bm_permission")) {
 				cookie.setMaxAge(0);
 				model.setPermission("0");
-				response.addCookie(new Cookie("bm_permission", model.getPermission()));
+				response.addCookie(new Cookie("bm_permission", model
+						.getPermission()));
 			}
 		}
 		return "logout";
 	}
-	
+
 	@RequestMapping("/adminfail")
-	public String adminfail(){
+	public String adminfail() {
 		return "adminfail";
 	}
-	
+
 	@RequestMapping("/searchBlack")
-	public String searchBlack(Model model){
+	public String searchBlack(Model model) {
 		List<MemberModel> memberList = joinService.selectBlack();
-		model.addAttribute("blackList",memberList);
+		model.addAttribute("blackList", memberList);
 		return "black";
 	}
-	
+
 	@RequestMapping("/searchLate")
-	public String searchLate(Model model){
+	public String searchLate(Model model) {
 		List<MemberModel> memberList = joinService.selectLate();
 		model.addAttribute("lateList", memberList);
 		return "late";
 	}
-	
+
 	@RequestMapping("/index")
 	public String index(Model model) {
 		List<ContentModel> content = joinService.selectContent();
 		List<MemberModel> memberList = joinService.selectBest();
 		List<BookModel> bookmodel = joinService.selectBestBook();
-		model.addAttribute("bestList",memberList);
+		model.addAttribute("bestList", memberList);
 		model.addAttribute("contentList", content);
-		model.addAttribute("bookmodel",bookmodel);
+		model.addAttribute("bookmodel", bookmodel);
 		return "index";
 	}
-	
+
 }

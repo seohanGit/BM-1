@@ -41,7 +41,13 @@ public class XmlDom {
 			model.setImageurl(getChildren(element, "coverSmallUrl"));
 			model.setPriceSales(getChildren(element, "priceSales"));
 			model.setWriter(getChildren(element, "author"));
+			model.setBooknum(getChildren(element, "isbn"));
+			model.setGenre(getChildren(element, "categoryName"));
+			model.setPublisher(getChildren(element, "publisher"));
+			
+			
 
+			bookList.add(model);
 			/*System.out.println("Time  : " + title);
 			System.out.println("Code : " + link);
 			System.out.println("writer : " + writer);
@@ -54,17 +60,17 @@ public class XmlDom {
 			model.setPriceSales(priceSales);
 			model.setWriter(writer);
 			*/
-			bookList.add(model);
+		
 			
-			System.out.println(bookList.get(i).getBookname());
+			/*System.out.println(bookList.get(i).getBookname());
 			System.out.println(bookList.get(i).getPriceSales());
 			System.out.println(bookList.get(i).getWriter());
-			
+			*/
 		}
-
+/*
 		System.out.println(bookList.get(0).getBookname());
 		System.out.println(bookList.get(1).getBookname());
-		System.out.println(bookList.get(2).getBookname());
+		System.out.println(bookList.get(2).getBookname());*/
 		
 		return bookList;
 	}

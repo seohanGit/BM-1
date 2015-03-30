@@ -36,6 +36,12 @@ public class BookController {
 		return "insertbookresult";
 	}
 	
+	@RequestMapping("/buybook")
+	public String buyBook(BookModel model){
+		bookservice.insertBook(model);		
+		return "insertbookresult";
+	}
+	
 	@RequestMapping("/searchBook")
 	public String searchBook(String keyword,Model model){
 		List<BookModel> bookList = bookservice.searchBook(keyword);

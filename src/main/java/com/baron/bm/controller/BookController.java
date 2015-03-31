@@ -37,8 +37,18 @@ public class BookController {
 	}
 	
 	@RequestMapping("/buybook")
-	public String buyBook(BookModel model){
-		bookservice.insertBook(model);		
+	public String buyBook(BookModel book, String booknum, String bookname, String genre, String writer, String publisher, String imageurl){
+		/*if(bookservice.selectReservation(booknum)!=null){
+			return "reservationfail";
+		}*/
+		book.setBookname(bookname);
+		book.setBooknum(booknum);
+		book.setGenre(genre);
+		book.setWriter(writer);
+		book.setPublisher(publisher);
+		book.setImageurl(imageurl);
+		
+		bookservice.insertBook(book);		
 		return "insertbookresult";
 	}
 	

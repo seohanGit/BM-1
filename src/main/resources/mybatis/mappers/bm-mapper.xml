@@ -67,8 +67,8 @@
 
 	<insert id="insertBook" parameterType="BookModel">
 		INSERT INTO book
-		(bookname,booknum,damage,genre,publisher,writer,grade,borrowcheck)
-		VALUES (#{bookname},#{booknum},0,#{genre},#{publisher},#{writer},0,0)
+		(bookname,booknum,damage,genre,publisher,writer,grade,borrowcheck,imageurl)
+		VALUES (#{bookname},#{booknum},0,#{genre},#{publisher},#{writer},0,0,#{imageurl})
 	</insert>
 	
 	<select id="selectBestBook" resultType="BookModel">

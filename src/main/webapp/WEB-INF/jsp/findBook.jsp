@@ -28,6 +28,7 @@
 
 		</tbody>
 	</table>
+	
 </c:forEach>
 <script>
 	

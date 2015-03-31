@@ -32,7 +32,7 @@ public class BookServiceImpl implements BookService {
 		getApiTest(url);
 	
 		XmlDom xmlDom = new XmlDom();
-		bookList = xmlDom.XmlDom(url.openStream());
+		bookList = xmlDom.getBooklist(url.openStream());
 
 		return bookList;
 	}
@@ -49,6 +49,7 @@ public class BookServiceImpl implements BookService {
 		keyword = URLEncoder.encode(keyword, "UTF-8");
 		parameter = parameter + "&" + "query=" + keyword;
 		parameter = parameter + "&" + "sort=accuracy";
+		parameter = parameter + "&" + "maxResults=20";
 
 		key = URLEncoder.encode(key, "UTF-8");
 		keyword = URLEncoder.encode(keyword, "UTF-8");

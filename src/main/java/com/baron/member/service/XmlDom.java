@@ -2,23 +2,40 @@ package com.baron.member.service;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 import com.baron.member.model.BookModel;
 
 public class XmlDom {
-	public List<BookModel> XmlDom(InputStream br) throws Exception {
-		List<BookModel> bookList = new ArrayList<BookModel>();
+/*	
+	public NodeList responseField(InputStream br) throws Exception{
+
+		Element root = makeDoc(br);
 		
+		NodeList result; 
+		result. root.getElementsByTagName("totalResults");
+		NodeList page = root.getElementsByTagName("startIndex");
+	
+		
+		return page;
+	}
+		*/
+	
+
+	private Element makeDoc(InputStream br)
+			throws ParserConfigurationException, SAXException, IOException {
 		// 팩토리 생성
 		DocumentBuilderFactory dbfactory = DocumentBuilderFactory.newInstance();
 		// 빌더 생성
@@ -29,12 +46,16 @@ public class XmlDom {
 		Element root = doc.getDocumentElement();
 		System.out.println("Root : " + root.getTagName());
 		// 각노드의 리스트 취득
-		NodeList list = root.getElementsByTagName("item");
-		System.out.println("Node List Length : " + list.getLength());
+		return root;
+	}
 
-		for (int i = 0; i < list.getLength(); i++ ) {
+	public List<BookModel> getBooklist(InputStream br) throws Exception, SAXException, IOException {
+		Element root = makeDoc(br);
+		NodeList list = root.getElementsByTagName("item");
+		List<BookModel> bookList = new ArrayList<BookModel>();
+		for (int i = 0; i < list.getLength(); i++) {
 			BookModel model = new BookModel();
-			
+
 			Element element = (Element) list.item(i);
 			model.setBookname(getChildren(element, "title"));
 			model.setLink(getChildren(element, "link"));
@@ -44,32 +65,26 @@ public class XmlDom {
 			model.setBooknum(getChildren(element, "isbn"));
 			model.setGenre(getChildren(element, "categoryName"));
 			model.setPublisher(getChildren(element, "publisher"));
-			
-			bookList.add(model);
-			/*System.out.println("Time  : " + title);
-			System.out.println("Code : " + link);
-			System.out.println("writer : " + writer);
-			System.out.println("imageUrl : " + imageurl);
-			System.out.println("priceSales : " + priceSales);
 
-			model.setBookname(title);
-			model.setLink(link);
-			model.setImageurl(imageurl);
-			model.setPriceSales(priceSales);
-			model.setWriter(writer);
-			*/
-		
-			
-			/*System.out.println(bookList.get(i).getBookname());
-			System.out.println(bookList.get(i).getPriceSales());
-			System.out.println(bookList.get(i).getWriter());
-			*/
+			bookList.add(model);
+			/*
+			 * System.out.println("Time  : " + title);
+			 * System.out.println("Code : " + link);
+			 * System.out.println("writer : " + writer);
+			 * System.out.println("imageUrl : " + imageurl);
+			 * System.out.println("priceSales : " + priceSales);
+			 * 
+			 * model.setBookname(title); model.setLink(link);
+			 * model.setImageurl(imageurl); model.setPriceSales(priceSales);
+			 * model.setWriter(writer);
+			 */
+
+			/*
+			 * System.out.println(bookList.get(i).getBookname());
+			 * System.out.println(bookList.get(i).getPriceSales());
+			 * System.out.println(bookList.get(i).getWriter());
+			 */
 		}
-/*
-		System.out.println(bookList.get(0).getBookname());
-		System.out.println(bookList.get(1).getBookname());
-		System.out.println(bookList.get(2).getBookname());*/
-		
 		return bookList;
 	}
 

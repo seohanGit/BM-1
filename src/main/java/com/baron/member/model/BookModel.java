@@ -8,7 +8,7 @@ public class BookModel {
 	private String genre;
 	private int damage;
 	private Date borrowday;
-	private Date retrunday;
+	private Date returnday;
 	private String publisher;
 	private String borrowcheck;
 	private String resernum;
@@ -99,12 +99,12 @@ public class BookModel {
 		this.borrowday = borrowday;
 	}
 
-	public Date getRetrunday() {
-		return retrunday;
+	public Date getReturnday() {
+		return returnday;
 	}
 
-	public void setRetrunday(Date retrunday) {
-		this.retrunday = retrunday;
+	public void setRetrunday(Date returnday) {
+		this.returnday = returnday;
 	}
 
 	public String getBorrowcheck() {

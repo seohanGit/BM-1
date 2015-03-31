@@ -15,6 +15,21 @@ $('#btn_search').click(function() {
 	});
 });
 
+$('#btn_next').click(function() {
+	$.ajax({
+		type:"GET",							// GET or POST
+		url:"/findBook",						// URL
+		datatype:"xml",						// html, xml, json, jsonp, script, text
+		data:{keyword:$('#pagenum').val()},			// parameters as plain object
+		error:function() {						// Ajax error handler
+			alert('에러');
+		},
+		success:function(data, status) {	// Ajax complete handelr
+			$('#searchResultArea').fadeOut();
+			$('#searchResultArea').empty().append(data);
+		}
+	});
+});
 
 $('#btn_find').click(function() {
 	$.ajax({

@@ -41,6 +41,7 @@
 							<span class="glyphicon glyphicon-search"></span>인터파크 검색
 						</button>
 						<button type="button" class="btn btn-default" id="insertBook">도서추가</button>
+						<button class="btn btn-default" type="button" id="btn_search">도서목록</button>
 					</span>
 
 				</div>

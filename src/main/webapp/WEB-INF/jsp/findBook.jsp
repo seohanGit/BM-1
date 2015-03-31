@@ -4,27 +4,33 @@
 
 
 <c:forEach items="${bookList}" var="book" varStatus="status">
-	
-	<table width="100%" border="10px" bordercolor="#fff">
+
+	<table width="100%" border="10px" bordercolor="#fff" >
 		<tbody>
 			<tr>
-				<td><span class="goods_cnt"></span> <img
-					src="${book.imageurl}" width="95px" height="170px"></td>
-				<td class="goods_infogrp">
-					<p><a href="${book.link}">${book.bookname}</a></p>
-					
-					<p>${book.writer}    |    ${book.priceSales}</p>
 
-					<button class="btn btn-default" type="button" id="borrowbook"
-						onClick="location.href='/borrow?booknum=${book.booknum}'">구매</button>
+				<td width="115px" style="margin:10px"><span class="goods_cnt"></span> <img src="${book.imageurl}"
+					width="95px" height="170px"></td>
+				<td class="goods_infogrp" align="left" style="margin-left:10px">
 
-					
+					<p>
+						<a href="${book.link}">${book.bookname}</a>
+					</p>
+
+					<p>${book.writer}|${book.priceSales}</p>
+
+					<button class="btn btn-default" type="button" id="buybook"
+						onClick="location.href='/buybook?bookname=${book.bookname}&booknum=${book.booknum}&genre=${book.genre}&writer=${book.writer}&publisher=${book.publisher}&imageurl=${book.imageurl}'">구매</button>
+
+
 				</td>
+
 			</tr>
 
 
 		</tbody>
 	</table>
+
 </c:forEach>
 <script>
 	

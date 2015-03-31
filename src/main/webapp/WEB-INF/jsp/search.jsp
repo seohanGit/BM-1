@@ -7,10 +7,10 @@
 	<table width="100%">
 		<tbody>
 			<tr>
-				<td class="goods_img"><sapn class="goods_cnt"></sapn> <img
-					src="${book.imageurl}" width="95px"></td>
+				<td class="goods_img"><span class="goods_cnt"></span> <img
+					src="${book.imageurl}" width="95px" height="170px"></td>
 				<td class="goods_infogrp">
-					<p>${book.booknum}| ${book.bookname}</p>
+					<p>${book.booknum}|${book.bookname}</p>
 					<p>
 						${book.writer} | ${book.publisher} |
 						<c:choose>
@@ -30,7 +30,7 @@
 						<button class="btn btn-default" type="button" id="modifybook"
 							onClick="location.href='/modifyBookForm?booknum=${book.booknum}'">도서수정</button>
 						<button class="btn btn-default" type="button" id="deletebook"
-							onClick="location.href='/deletebook?booknum=${book.booknum}'">도서삭제</button>
+							onClick="location.href='/deletebook?booknum=${book.booknum}'; del();">도서삭제</button>
 					</p>
 				</td>
 			</tr>
@@ -40,5 +40,10 @@
 	</table>
 </c:forEach>
 <script>
-	
+	function del() {
+		alert("삭제되었습니다.");
+	}
+	function reserve() {
+		alert("예약되었습니다.");
+	}
 </script>

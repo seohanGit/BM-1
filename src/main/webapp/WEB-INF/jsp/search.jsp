@@ -10,7 +10,7 @@
 			<tr>
 				<td width="115px" style="margin: 10px" class="goods_img"><span
 					class="goods_cnt"></span> <img src="${book.imageurl}" width="95px"
-					height="170px"></td>
+					height="150px"></td>
 				<td class="goods_infogrp">
 					<p>${book.booknum}|${book.bookname}</p>
 					<p>

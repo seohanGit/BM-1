@@ -10,7 +10,7 @@
 			<tr>
 
 				<td width="115px" style="margin: 10px"><span class="goods_cnt"></span>
-					<img src="${book.imageurl}" width="95px" height="170px"></td>
+					<img src="${book.imageurl}" width="95px" height="150px"></td>
 				<td class="goods_infogrp" align="left" style="margin-left: 10px">
 
 					<p>

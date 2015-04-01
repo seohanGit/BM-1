@@ -67,13 +67,7 @@ public class XmlDom {
 			model.setPublisher(getChildren(element, "publisher"));
 
 			bookList.add(model);
-			/*
-			 * System.out.println("Time  : " + title);
-			 * System.out.println("Code : " + link);
-			 * System.out.println("writer : " + writer);
-			 * System.out.println("imageUrl : " + imageurl);
-			 * System.out.println("priceSales : " + priceSales);
-			 */
+		
 
 		}
 		return bookList;

@@ -24,16 +24,17 @@
 		AND pass =
 		#{password}
 	</select>
-	
+
 	<select id="selectBest" resultType="MemberModel">
-	   SELECT name,score,id
-	   FROM member
-	   ORDER BY score DESC
+		SELECT name,score,id
+		FROM
+		member
+		ORDER BY score DESC
 	</select>
-	
+
 	<select id="selectContent" resultType="ContentModel">
-	   SELECT *
-	   FROM notice
+		SELECT *
+		FROM notice
 	</select>
 
 	<select id="selectBoard" resultType="BoardModel">
@@ -43,20 +44,32 @@
 
 	<select id="selectBoardregister" resultType="BoardModel">
 		SELECT *
-		FROM bulletinboard
+		FROM
+		bulletinboard
 		ORDER BY registerday;
 	</select>
-	
+
 	<select id="selectMaxGrade" resultType="int">
-	   SELECT MAX(grade)
-	   FROM book;
+		SELECT MAX(grade)
+		FROM
+		book;
 	</select>
 
 	<select id="selectBoardtitle" resultType="BoardModel">
 		SELECT *
-		FROM bulletinboard
+		FROM
+		bulletinboard
 		ORDER BY title;
 	</select>
+
+	<insert id="requestBook" parameterType="BookModel">
+		INSERT INTO request
+		(requestid, requestdate, ID, booknum, bookname,
+		writer,publisher,
+		genre, link, imageurl)
+		VALUES(#{requestid},date_add(now()),#{id},#{booknum},#{bookname},
+		#{writer},#{publisher},#{genre},#{link},#{imageurl})
+	</insert>
 
 	<insert id="insertBoard" parameterType="BoardModel">
 		INSERT INTO bulletinboard
@@ -68,13 +81,15 @@
 	<insert id="insertBook" parameterType="BookModel">
 		INSERT INTO book
 		(bookname,booknum,damage,genre,publisher,writer,grade,borrowcheck,imageurl)
-		VALUES (#{bookname},#{booknum},0,#{genre},#{publisher},#{writer},0,0,#{imageurl})
+		VALUES
+		(#{bookname},#{booknum},0,#{genre},#{publisher},#{writer},0,0,#{imageurl})
 	</insert>
-	
+
 	<select id="selectBestBook" resultType="BookModel">
-	   SELECT *
-	   FROM book
-	   ORDER BY grade DESC
+		SELECT *
+		FROM book
+		ORDER BY
+		grade DESC
 	</select>
 
 	<select id="selectPass" resultType="String" parameterType="String">
@@ -93,6 +108,11 @@
 	</update>
 
 	<select id="selectBook" parameterType="String" resultType="BookModel">
+		SELECT * FROM book WHERE booknum=#{booknum}
+	</select>
+
+
+	<select id="searchBook" parameterType="String" resultType="BookModel">
 		SELECT booknum, bookname, genre, publisher, writer
 		,imageurl,borrowcheck,resernum
 		FROM book
@@ -138,7 +158,8 @@
 	<insert id="insertReservation" parameterType="BookModel">
 		INSERT INTO
 		reservation(resernum,booknum, bookname, period,ID)
-		VALUES(#{resernum},#{booknum},#{bookname},date_add(now(),interval 7 day),#{reserid})
+		VALUES(#{resernum},#{booknum},#{bookname},date_add(now(),interval 7
+		day),#{id})
 	</insert>
 
 	<update id="updateBookReser" parameterType="BookModel">

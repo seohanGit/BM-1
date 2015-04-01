@@ -24,4 +24,8 @@ public interface BookService {
 	public String selectReservation(String booknum);
 	
 	public List<BookModel> findBook(String keyword) throws Exception;
+
+	void requestBook(BookModel model);
+
+	List<BookModel> selectBook(String booknum);
 }

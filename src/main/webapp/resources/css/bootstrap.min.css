@@ -2950,7 +2950,7 @@ textarea.input-lg, textarea.form-group-lg .form-control, select[multiple].input-
 		width: auto
 	}
 	.form-inline .input-group>.form-control {
-		width: 100%
+		width: 80%
 	}
 	.form-inline .control-label {
 		margin-bottom: 0;
@@ -3109,12 +3109,13 @@ textarea.input-lg, textarea.form-group-lg .form-control, select[multiple].input-
 	.btn-primary.active, .open>.dropdown-toggle.btn-primary {
 	color: #fff;
 	background-color: #3071a9;
-	border-color: #285e8e
+	border-color: #333
 }
 
 .btn-primary:active, .btn-primary.active, .open>.dropdown-toggle.btn-primary
 	{
-	background-image: none
+	background-image: none;
+	border-color: #333
 }
 
 .btn-primary.disabled, .btn-primary[disabled], fieldset[disabled] .btn-primary,
@@ -3125,7 +3126,7 @@ textarea.input-lg, textarea.form-group-lg .form-control, select[multiple].input-
 	.btn-primary.disabled.active, .btn-primary[disabled].active, fieldset[disabled] .btn-primary.active
 	{
 	background-color: #428bca;
-	border-color: #357ebd
+	border-color: #333
 }
 
 .btn-primary .badge {

@@ -73,17 +73,8 @@ public class XmlDom {
 			 * System.out.println("writer : " + writer);
 			 * System.out.println("imageUrl : " + imageurl);
 			 * System.out.println("priceSales : " + priceSales);
-			 * 
-			 * model.setBookname(title); model.setLink(link);
-			 * model.setImageurl(imageurl); model.setPriceSales(priceSales);
-			 * model.setWriter(writer);
 			 */
 
-			/*
-			 * System.out.println(bookList.get(i).getBookname());
-			 * System.out.println(bookList.get(i).getPriceSales());
-			 * System.out.println(bookList.get(i).getWriter());
-			 */
 		}
 		return bookList;
 	}

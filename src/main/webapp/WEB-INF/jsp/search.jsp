@@ -2,13 +2,15 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+
 <c:forEach items="${bookList}" var="book" varStatus="loop">
 
 	<table width="100%">
 		<tbody>
 			<tr>
-				<td class="goods_img"><span class="goods_cnt"></span> <img
-					src="${book.imageurl}" width="95px" height="170px"></td>
+				<td width="115px" style="margin: 10px" class="goods_img"><span
+					class="goods_cnt"></span> <img src="${book.imageurl}" width="95px"
+					height="170px"></td>
 				<td class="goods_infogrp">
 					<p>${book.booknum}|${book.bookname}</p>
 					<p>
@@ -39,6 +41,7 @@
 		</tbody>
 	</table>
 </c:forEach>
+<script src="/resources/js/common.js"></script>
 <script>
 	function del() {
 		alert("삭제되었습니다.");

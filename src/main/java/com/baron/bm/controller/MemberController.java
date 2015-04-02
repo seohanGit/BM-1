@@ -101,15 +101,20 @@ public class MemberController {
 	}
 
 	@RequestMapping("/admin")
-	public String admin(HttpServletRequest request, Model model) {
+	public String admin(HttpServletRequest request, Model model)
+			throws Exception {
 		for (Cookie cookie : request.getCookies()) {
 			if (cookie.getName().equals("bm_permission")) {
 				System.out.println(cookie.getValue());
 				if ("1".equals(cookie.getValue())) {
-					List<BookModel> bookmodel = joinService.selectBestBook();
+
 					List<MemberModel> memberList = joinService.selectBest();
-					model.addAttribute("bookmodel", bookmodel);
+					List<BookModel> bestSeller = bookService.getBestseller();
+					List<BookModel> newBook = bookService.getNewbook();
+
 					model.addAttribute("bestList", memberList);
+					model.addAttribute("bestseller", bestSeller);
+					model.addAttribute("newbook", newBook);
 					return "admin";
 				} else
 					return "adminfail";

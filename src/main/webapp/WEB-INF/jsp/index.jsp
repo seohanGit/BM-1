@@ -33,12 +33,24 @@
 				</select>
 
 				<hr>
-				<img src="/resources/main.JPG" style="width: 100%" id="image1">
+
+				<img src="/resources/main.JPG" style="width: 100%;" id="image1">
+
 				<div id="searchResultArea"></div>
 				<hr>
-				<p>잠은 인생의 사치입니다! 저는 하루 네 시간만 자면 충분하다고 생각해요. 물론,숙면을 취할 때 말이죠</p>
-				<a class="btn btn-primary" id="logout" name="logout">로그 아웃 <span
-					class="glyphicon glyphicon-chevron-right"></span></a>
+				<h4>원하는 책이 없다면 인터넷에서 주문하세요 !</h4>
+				<div class="input-group ">
+					<input type="text" class="form-control" id="query"
+						placeholder="인터파크 검색"> <span class="input-group-btn">
+						<button class="btn btn-default" type="button" id="btn_find">
+							<span class="glyphicon glyphicon-search"></span>
+						</button>
+					</span>
+
+				</div>
+				<hr>
+				<p>잠은 인생의 사치입니다! 저는 하루 네 시간만 자면 충분하다고 생각해요.</p>
+
 
 				<hr>
 				<!-- Pager -->
@@ -60,6 +72,9 @@
 							</button>
 						</span>
 					</div>
+
+
+
 					<!-- /.input-group -->
 				</div>
 				<!-- Blog Categories Well -->
@@ -68,7 +83,7 @@
 					<br>
 					<div>
 
-						<div  align="center">
+						<div align="center">
 							<c:forEach items="${bestList}" var="best" begin="0" end="2"
 								step="1" varStatus="status">
 								<strong> ${best.id} </strong>
@@ -137,7 +152,7 @@
 		</div>
 		<!-- /.row -->
 	</footer>
-	</div>
+
 	<!-- /.container -->
 	<!-- jQuery -->
 	<script src="/resources/js/jquery/jquery.js"></script>

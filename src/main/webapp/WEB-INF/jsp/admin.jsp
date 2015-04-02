@@ -26,7 +26,7 @@
 				</h1>
 				<!-- First Blog Post -->
 				<h2>
-					<a href="#">도서 검색/수정/삭제</a>
+					도서 검색/수정/삭제
 				</h2>
 
 				<p>
@@ -34,11 +34,11 @@
 				</p>
 
 
-				<div class="input-group">
-					<input type="text" class="form-control" id="keyword"> <span
+				<div class="input-group ">
+					<input type="text" class="form-control" id="query" placeholder="인터파크 검색"> <span
 						class="input-group-btn">
 						<button class="btn btn-default" type="button" id="btn_find">
-							<span class="glyphicon glyphicon-search"></span>인터파크 검색
+							<span class="glyphicon glyphicon-search"></span>
 						</button>
 						<button type="button" class="btn btn-default" id="insertBook">도서추가</button>
 						<button class="btn btn-default" type="button" id="btn_search">도서목록</button>
@@ -47,7 +47,7 @@
 				</div>
 
 				<hr>
-				<img src="/resources/lava3.JPG" style="width: 450px; height: 250px"
+				<img src="/resources/lava3.JPG" style="width:100%; "
 					id="image2">
 				<div id="searchResultArea"></div>
 				<hr>
@@ -65,7 +65,7 @@
 				<button type="button" class="btn btn-default" role="button"
 					id="blackList">블랙리스트 보기</button>
 				<hr>
-				<img src="/resources/lava4.JPG" style="width: 450px; height: 250px"
+				<img src="/resources/lava4.JPG" style="width: 100%;"
 					id="image3">
 				<div id="personResultArea"></div>
 				<hr>

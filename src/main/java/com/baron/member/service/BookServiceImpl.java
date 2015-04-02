@@ -46,8 +46,10 @@ public class BookServiceImpl implements BookService {
 
 		getApiTest(url);
 
+
 		XmlDom xmlDom = new XmlDom();
 		bookList = xmlDom.getBooklist(url.openStream());
+		System.out.println(keyword);
 
 		return bookList;
 	}
@@ -72,10 +74,20 @@ public class BookServiceImpl implements BookService {
 	}
 
 	@Override
+	public void requestBook(BookModel model){
+		bookDao.requestBook(model);
+	}
+	
+	@Override
 	public List<BookModel> searchBook(String keyword) {
-		return bookDao.selectBook(keyword);
+		return bookDao.searchBook(keyword);
 	}
 
+	/*@Override
+	public List<BookModel> selectBook(String booknum) {
+		return bookDao.selectBook(booknum);
+	}*/
+	
 	@Override
 	public void deleteBook(String booknum) {
 		// TODO Auto-generated method stub

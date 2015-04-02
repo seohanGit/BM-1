@@ -153,14 +153,6 @@ public class BookModel {
 		this.borrowcheck = borrowcheck;
 	}
 
-	public String getresernum() {
-		return resernum;
-	}
-
-	public void setresernum(String resernum) {
-		this.resernum = resernum;
-	}
-
 	public int getGrade() {
 		return grade;
 	}

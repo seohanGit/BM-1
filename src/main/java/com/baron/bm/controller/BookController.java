@@ -130,7 +130,7 @@ public class BookController {
 		System.out.println(bookname);
 		book.setBookname(bookname);
 		resername = "reser" + book.getBooknum();
-		book.setresernum(resername);
+		book.setResernum(resername);
 
 		for (Cookie cookie : request.getCookies()) {
 			if (cookie.getName().equals("bm_id"))

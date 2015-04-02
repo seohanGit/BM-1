@@ -20,8 +20,11 @@
 				<li><a href="#" data-toggle="modal" data-target="#myModal">사용자정보수정</a></li>
 				<li><a href="board">게시판</a></li>
 				<li><a href="admin">관리자페이지</a></li>
-				<li><a class="btn btn-primary" id="logout" name="logout">로그
-						아웃 <span class="glyphicon glyphicon-chevron-right"></span>
+
+
+				<li><a class="btn btn-primary" style="" id="logout"
+					name="logout">로그 아웃 <span
+						class="glyphicon glyphicon-chevron-right"></span>
 				</a></li>
 			</ul>
 		</div>

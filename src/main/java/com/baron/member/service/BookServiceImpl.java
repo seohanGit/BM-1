@@ -51,6 +51,7 @@ public class BookServiceImpl implements BookService {
 		parameter = parameter + "&" + "sort=accuracy";
 		parameter = parameter + "&" + "maxResults=20";
 
+		System.out.println(keyword);
 		key = URLEncoder.encode(key, "UTF-8");
 		keyword = URLEncoder.encode(keyword, "UTF-8");
 		addr = addr + "key=" + key + parameter;
@@ -85,10 +86,20 @@ public class BookServiceImpl implements BookService {
 	}
 
 	@Override
+	public void requestBook(BookModel model){
+		bookDao.requestBook(model);
+	}
+	
+	@Override
 	public List<BookModel> searchBook(String keyword) {
-		return bookDao.selectBook(keyword);
+		return bookDao.searchBook(keyword);
 	}
 
+	@Override
+	public List<BookModel> selectBook(String booknum) {
+		return bookDao.selectBook(booknum);
+	}
+	
 	@Override
 	public void deleteBook(String booknum) {
 		// TODO Auto-generated method stub

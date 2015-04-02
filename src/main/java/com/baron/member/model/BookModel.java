@@ -9,15 +9,53 @@ public class BookModel {
 	private int damage;
 	private Date borrowday;
 	private Date returnday;
+	private Date requestdate;
+	private String requestid;
 	private String publisher;
 	private String borrowcheck;
 	private String resernum;
 	private int grade;
 	private String writer;
 	private String imageurl;
-	private String reserid;
+	private String id;
 	private String priceSales;
 	private String link;
+
+	public Date getRequestdate() {
+		return requestdate;
+	}
+
+	public void setRequestdate(Date requestdate) {
+		this.requestdate = requestdate;
+	}
+
+	public String getRequestid() {
+		return requestid;
+	}
+
+	public void setRequestid(String requestid) {
+		this.requestid = requestid;
+	}
+
+	public String getResernum() {
+		return resernum;
+	}
+
+	public void setResernum(String resernum) {
+		this.resernum = resernum;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public void setReturnday(Date returnday) {
+		this.returnday = returnday;
+	}
 
 	public String getPriceSales() {
 		return priceSales;
@@ -36,11 +74,11 @@ public class BookModel {
 	}
 
 	public String getReserid() {
-		return reserid;
+		return id;
 	}
 
 	public void setReserid(String reserid) {
-		this.reserid = reserid;
+		this.id = reserid;
 	}
 
 	public String getImageurl() {
@@ -113,14 +151,6 @@ public class BookModel {
 
 	public void setBorrowcheck(String borrowcheck) {
 		this.borrowcheck = borrowcheck;
-	}
-
-	public String getresernum() {
-		return resernum;
-	}
-
-	public void setresernum(String resernum) {
-		this.resernum = resernum;
 	}
 
 	public int getGrade() {

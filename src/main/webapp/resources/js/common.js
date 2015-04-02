@@ -15,7 +15,7 @@ $('#btn_search').click(function() {
 	});
 });
 
-$('#btn_next').click(function() {
+/*$('#btn_next').click(function() {
 	$.ajax({
 		type:"GET",							// GET or POST
 		url:"/findBook",						// URL
@@ -30,13 +30,13 @@ $('#btn_next').click(function() {
 		}
 	});
 });
-
+*/
 $('#btn_find').click(function() {
 	$.ajax({
 		type:"GET",							// GET or POST
 		url:"/findBook",						// URL
 		datatype:"xml",						// html, xml, json, jsonp, script, text
-		data:{keyword:$('#keyword').val()},			// parameters as plain object
+		data:{keyword:$('#query').val()},			// parameters as plain object
 		error:function() {						// Ajax error handler
 			alert('검색어를 입력하세요');
 		},

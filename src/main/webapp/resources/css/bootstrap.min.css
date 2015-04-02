@@ -3109,7 +3109,7 @@ textarea.input-lg, textarea.form-group-lg .form-control, select[multiple].input-
 	.btn-primary.active, .open>.dropdown-toggle.btn-primary {
 	color: #fff;
 	background-color: #3071a9;
-	border-color: #285e8e
+	border-color: #333
 }
 
 .btn-primary:active, .btn-primary.active, .open>.dropdown-toggle.btn-primary

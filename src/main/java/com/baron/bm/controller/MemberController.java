@@ -172,6 +172,7 @@ public class MemberController {
 		List<ContentModel> content = joinService.selectContent();
 		List<MemberModel> memberList = joinService.selectBest();
 		List<BookModel> bookmodel = joinService.selectBestBook();
+		
 		model.addAttribute("bestList", memberList);
 		model.addAttribute("contentList", content);
 		model.addAttribute("bookmodel", bookmodel);

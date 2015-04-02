@@ -33,14 +33,12 @@
 				</select>
 				
 				<hr>
-				<img src="/resources/main.JPG" style="width: 750px; height: 400px"
+				<img src="/resources/main.JPG" style="width: 100%;"
 					id="image1">
 				<div id="searchResultArea"></div>
 				<hr>
 				<p>잠은 인생의 사치입니다! 저는 하루 네 시간만 자면 충분하다고 생각해요. 물론,숙면을 취할 때 말이죠</p>
-				<a class="btn btn-primary" id="logout" name="logout">로그 아웃 <span
-					class="glyphicon glyphicon-chevron-right"></span></a>
-
+				
 				<hr>
 				<!-- Pager -->
 				<ul class="pager">

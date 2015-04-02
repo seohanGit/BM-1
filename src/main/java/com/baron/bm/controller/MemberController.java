@@ -23,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.baron.member.model.BookModel;
 import com.baron.member.model.ContentModel;
 import com.baron.member.model.MemberModel;
+import com.baron.member.service.BookService;
 import com.baron.member.service.JoinService;
 
 /**
@@ -33,6 +34,9 @@ public class MemberController {
 
 	@Autowired
 	private JoinService joinService;
+
+	@Autowired
+	private BookService bookService;
 
 	@RequestMapping("/modify")
 	public String modifyidentity(String password, HttpServletRequest request,
@@ -168,13 +172,15 @@ public class MemberController {
 	}
 
 	@RequestMapping("/index")
-	public String index(Model model) {
+	public String index(Model model) throws Exception {
 		List<ContentModel> content = joinService.selectContent();
 		List<MemberModel> memberList = joinService.selectBest();
-		List<BookModel> bookmodel = joinService.selectBestBook();
+		List<BookModel> bestSeller = bookService.getBestseller();
+		List<BookModel> newBook = bookService.getNewbook();
 		model.addAttribute("bestList", memberList);
 		model.addAttribute("contentList", content);
-		model.addAttribute("bookmodel", bookmodel);
+		model.addAttribute("bestseller", bestSeller);
+		model.addAttribute("newbook", newBook);
 		return "index";
 	}
 

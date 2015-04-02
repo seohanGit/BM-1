@@ -24,60 +24,47 @@ public class BookServiceImpl implements BookService {
 	private BookDao bookDao;
 
 	@Override
+	public List<BookModel> getNewbook() throws Exception {
+		List<BookModel> bookList = new ArrayList<BookModel>();
+
+		URL url = getNewbookUrl();
+
+		getApiTest(url);
+
+		XmlDom xmlDom = new XmlDom();
+		bookList = xmlDom.getBooklist(url.openStream());
+
+		return bookList;
+
+	}
+
+	@Override
 	public List<BookModel> findBook(String keyword) throws Exception {
 		List<BookModel> bookList = new ArrayList<BookModel>();
 
-		URL url = getUrl(keyword);
-		
+		URL url = getSearchUrl(keyword);
+
 		getApiTest(url);
-	
+
 		XmlDom xmlDom = new XmlDom();
 		bookList = xmlDom.getBooklist(url.openStream());
 
 		return bookList;
 	}
 
+	@Override
+	public List<BookModel> getBestseller() throws Exception {
+		List<BookModel> bookList = new ArrayList<BookModel>();
 
+		URL url = getBestsellerUrl();
 
-	private URL getUrl(String keyword) throws UnsupportedEncodingException,
-			MalformedURLException {
-		String key = "B0F933E2847C6447203572CCC68F824A1054E7EF0D966C7B95245288CE95E300";
-		String addr = "http://book.interpark.com/api/search.api?";
-		String parameter = "";
+		getApiTest(url);
 
-		key = URLEncoder.encode(key, "UTF-8");
-		keyword = URLEncoder.encode(keyword, "UTF-8");
-		parameter = parameter + "&" + "query=" + keyword;
-		parameter = parameter + "&" + "sort=accuracy";
-		parameter = parameter + "&" + "maxResults=20";
+		XmlDom xmlDom = new XmlDom();
+		bookList = xmlDom.getBooklist(url.openStream());
 
-		key = URLEncoder.encode(key, "UTF-8");
-		keyword = URLEncoder.encode(keyword, "UTF-8");
-		addr = addr + "key=" + key + parameter;
-
-		URL url = new URL(addr);
-		return url;
+		return bookList;
 	}
-
-
-
-	private void getApiTest(URL url) throws IOException {
-		BufferedReader br;
-		/* api 출력 확인 */
-		br = new BufferedReader(new InputStreamReader(url.openStream()));
-
-		String line;
-		StringBuilder sBuffer = new StringBuilder();
-
-		while ((line = br.readLine()) != null) {
-			sBuffer.append(line);
-			System.out.println(line);
-		}
-
-		br.close();
-	}
-
-	
 
 	@Override
 	public void insertBook(BookModel model) {
@@ -126,5 +113,72 @@ public class BookServiceImpl implements BookService {
 		// TODO Auto-generated method stub
 		return bookDao.selectReservation(booknum);
 	}
+
+	private URL getNewbookUrl() throws UnsupportedEncodingException,
+			MalformedURLException {
+		String key = "B0F933E2847C6447203572CCC68F824A1054E7EF0D966C7B95245288CE95E300";
+		String addr = "http://book.interpark.com/api/newBook.api?";
+		String parameter = "";
+
+		key = URLEncoder.encode(key, "UTF-8");
+		parameter = parameter + "&" + "categoryId=100";
+
+		addr = addr + "key=" + key + parameter;
+
+		URL url = new URL(addr);
+		return url;
+	}
+
+	private URL getBestsellerUrl() throws UnsupportedEncodingException,
+			MalformedURLException {
+		String key = "B0F933E2847C6447203572CCC68F824A1054E7EF0D966C7B95245288CE95E300";
+		String addr = "http://book.interpark.com/api/bestSeller.api?";
+		String parameter = "";
+
+		key = URLEncoder.encode(key, "UTF-8");
+		parameter = parameter + "&" + "categoryId=100";
+
+		addr = addr + "key=" + key + parameter;
+
+		URL url = new URL(addr);
+		return url;
+	}
+
+	private URL getSearchUrl(String keyword)
+			throws UnsupportedEncodingException, MalformedURLException {
+		String key = "B0F933E2847C6447203572CCC68F824A1054E7EF0D966C7B95245288CE95E300";
+		String addr = "http://book.interpark.com/api/search.api?";
+		String parameter = "";
+
+		key = URLEncoder.encode(key, "UTF-8");
+		keyword = URLEncoder.encode(keyword, "UTF-8");
+		parameter = parameter + "&" + "query=" + keyword;
+		parameter = parameter + "&" + "sort=accuracy";
+		parameter = parameter + "&" + "maxResults=20";
+
+		key = URLEncoder.encode(key, "UTF-8");
+		keyword = URLEncoder.encode(keyword, "UTF-8");
+		addr = addr + "key=" + key + parameter;
+
+		URL url = new URL(addr);
+		return url;
+	}
+
+	private void getApiTest(URL url) throws IOException {
+		BufferedReader br;
+		/* api 출력 확인 */
+		br = new BufferedReader(new InputStreamReader(url.openStream()));
+
+		String line;
+		StringBuilder sBuffer = new StringBuilder();
+
+		while ((line = br.readLine()) != null) {
+			sBuffer.append(line);
+			System.out.println(line);
+		}
+
+		br.close();
+	}
+
 
 }

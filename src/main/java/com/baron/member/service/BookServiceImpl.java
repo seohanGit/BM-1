@@ -39,6 +39,20 @@ public class BookServiceImpl implements BookService {
 	}
 
 	@Override
+	public BookModel findBookOne(String isbn) throws Exception {
+		BookModel book = new BookModel();
+		URL url = getSearchUrl(isbn);
+
+		getApiTest(url);
+
+		XmlDom xmlDom = new XmlDom();
+		book = xmlDom.getBook(url.openStream());
+		System.out.println(isbn);
+
+		return book;
+	}
+
+	@Override
 	public List<BookModel> findBook(String keyword) throws Exception {
 		List<BookModel> bookList = new ArrayList<BookModel>();
 
@@ -141,14 +155,14 @@ public class BookServiceImpl implements BookService {
 		return url;
 	}
 
-	private URL getBestsellerUrl(String categoryId) throws UnsupportedEncodingException,
-			MalformedURLException {
+	private URL getBestsellerUrl(String categoryId)
+			throws UnsupportedEncodingException, MalformedURLException {
 		String key = "B0F933E2847C6447203572CCC68F824A1054E7EF0D966C7B95245288CE95E300";
 		String addr = "http://book.interpark.com/api/bestSeller.api?";
 		String parameter = "";
 
 		key = URLEncoder.encode(key, "UTF-8");
-		parameter = parameter + "&" + "categoryId="+ categoryId;
+		parameter = parameter + "&" + "categoryId=" + categoryId;
 
 		addr = addr + "key=" + key + parameter;
 
@@ -191,6 +205,5 @@ public class BookServiceImpl implements BookService {
 
 		br.close();
 	}
-
 
 }

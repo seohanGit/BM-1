@@ -32,6 +32,8 @@ public interface BookService {
 
 	void requestBook(BookModel model);
 
+	public BookModel findBookOne(String isbn) throws Exception;
+
 
 
 	

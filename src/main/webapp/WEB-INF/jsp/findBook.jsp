@@ -2,7 +2,12 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-
+<script src="/resources/js/jquery/jquery.js"></script>
+<script type="text/javascript">
+	function request(){
+		alert("구매요청되엇습니다.");
+	}
+</script>
 <c:forEach items="${bookList}" var="book" varStatus="status">
 
 	<table width="100%" border="10px" bordercolor="#fff">
@@ -22,7 +27,7 @@
 					<button class="btn btn-default" type="button" id="requestbook"
 						onClick="location.href='/requestbook?bookname=${book.bookname}&booknum=${book.booknum}&
 						genre=${book.genre}&writer=${book.writer}&publisher=${book.publisher}&
-						imageurl=${book.imageurl}' request();">구매</button>
+						imageurl=${book.imageurl}'">구매</button>
 
 
 				</td>
@@ -34,9 +39,3 @@
 	</table>
 
 </c:forEach>
-<script src="/resources/js/jquery/jquery.js"></script>
-<script>
-	function request(){
-		alert("구매요청되엇습니다.");
-	}
-</script>

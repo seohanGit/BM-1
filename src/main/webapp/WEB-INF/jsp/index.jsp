@@ -117,23 +117,7 @@
 						</div>
 						<hr>
 					</c:forEach>
-					<h3>베스트 셀러</h3>
-					<c:forEach items="${bestseller}" var="book" begin="0" end="2"
-						step="1" varStatus="status">
-
-						<div class="row " align="center">
-							<div class="thumbnail" align="left"
-								style="max-height: 150px; max-width: 100px">
-								<img src="${book.imageurl}" height="100%" width="100%">
-							</div>
-							<div align="left">
-								<p class="caption">${book.bookname}</p>
-								<p class="caption">${book.writer}</p>
-								<p class="caption">${book.genre}</p>
-							</div>
-						</div>
-						<hr>
-					</c:forEach>
+					<button class="btn btn-default" type="button" id="btn_national">국내베스트셀러</button>
 				</div>
 
 			</div>
@@ -159,6 +143,7 @@
 	<!-- Bootstrap Core JavaScript -->
 	<script src="/resources/js/bootstrap.min.js"></script>
 	<script src="/resources/js/common.js"></script>
+	<script src="/resources/js/book.js"></script>
 	<script>
 		$("#logout").click(function() {
 			location.href = "/logout"

@@ -26,10 +26,14 @@ public interface BookService {
 	public List<BookModel> findBook(String keyword) throws Exception;
 
 
-	List<BookModel> getBestseller() throws Exception;
+	List<BookModel> getBestseller(String catogoryId) throws Exception;
 
 	List<BookModel> getNewbook() throws Exception;
 
 	void requestBook(BookModel model);
+
+
+
+	
 
 }

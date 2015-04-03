@@ -109,7 +109,7 @@ public class MemberController {
 				if ("1".equals(cookie.getValue())) {
 
 					List<MemberModel> memberList = joinService.selectBest();
-					List<BookModel> bestSeller = bookService.getBestseller();
+					List<BookModel> bestSeller = bookService.getBestseller("300");
 					List<BookModel> newBook = bookService.getNewbook();
 
 					model.addAttribute("bestList", memberList);
@@ -180,7 +180,7 @@ public class MemberController {
 	public String index(Model model) throws Exception {
 		List<ContentModel> content = joinService.selectContent();
 		List<MemberModel> memberList = joinService.selectBest();
-		List<BookModel> bestSeller = bookService.getBestseller();
+		List<BookModel> bestSeller = bookService.getBestseller("100");
 		List<BookModel> newBook = bookService.getNewbook();
 		model.addAttribute("bestList", memberList);
 		model.addAttribute("contentList", content);

@@ -15,6 +15,11 @@
 		#{name},#{email},#{address},#{cell},#{home})
 	</insert>
 
+	<select id="requestList" resultType="BookModel">
+		SELECT *
+		FROM
+		request
+	</select>
 
 	<select id="selectMember" resultType="MemberModel"
 		parameterType="MemberModel">
@@ -77,11 +82,13 @@
 	</insert>
 
 	<insert id="requestBook" parameterType="BookModel">
-		INSERT INTO book
-		(requestid, requestdate, ID,
-		bookname,booknum,writer,publisher,genre,link,imageurl,isbn)
+		INSERT INTO request
+		(requestid, requestdate,
+		bookname,booknum, pricesales,writer,publisher,genre,link,
+		imageurl, isbn)
 		VALUES
-		(#{requestid}, now(),#{bookname},#{booknum},#{writer},#{publisher},#{genre},#{link},#{imageurl},#{isbn})
+		(#{requestid},
+		now(),#{bookname},#{booknum},#{priceSales},#{writer},#{publisher},#{genre},#{link},#{imageurl},#{isbn})
 	</insert>
 
 	<select id="selectBestBook" resultType="BookModel">

@@ -90,11 +90,11 @@ public class XmlDom {
 
 	public BookModel getBook(InputStream br, String requestid)
 			throws Exception, SAXException, IOException {
-		requestid = null;
+		
 		BookModel model = new BookModel();
 		Element root = makeDoc(br);
 		NodeList list = root.getElementsByTagName("item");
-		List<BookModel> bookList = new ArrayList<BookModel>();
+		
 		for (int i = 0; i < list.getLength(); i++) {
 
 			Element element = (Element) list.item(i);
@@ -126,6 +126,8 @@ public class XmlDom {
 			 * System.out.println(bookList.get(i).getWriter());
 			 */
 		}
+		
+		System.out.println(model.getRequestid());
 		return model;
 	}
 

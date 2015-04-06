@@ -24,31 +24,34 @@
 				<h1 class="page-header">
 					관리자 페이지 <small>Admin</small>
 				</h1>
+				<div class="btn-group" role="group" aria-label="...">
+					<button type="button" class="btn btn-default" id="requestList">구매요청
+						페이지</button>
+					<button type="button" class="btn btn-default">Middle</button>
+					<button type="button" class="btn btn-default">Right</button>
+				</div>
 				<!-- First Blog Post -->
-				<h2>
-					<a href="#">도서 검색/수정/삭제</a>
-				</h2>
-
-				<p>
-					<span class=></span>
-				</p>
-
+				<hr>
 
 				<div class="input-group">
-					<input type="text" class="form-control" id="keyword"> <span
-						class="input-group-btn">
-						<button class="btn btn-default" type="button" id="btn_find">
-							<span class="glyphicon glyphicon-search"></span>인터파크 검색
-						</button>
-						<button type="button" class="btn btn-default" id="insertBook">도서추가</button>
-						<button class="btn btn-default" type="button" id="btn_search">도서목록</button>
-					</span>
+					<div style="width: 100%">
+						<span class="input-group-btn" style="width: 340px"> <input
+							type="text" class="form-control" id="keyword"></span>
+					</div>
+					
+					<button class="btn btn-default" type="button" id="btn_find"
+						style="width: 40%">
+						<span class="glyphicon glyphicon-search"></span>인터파크 검색
+					</button>
+					<button type="button" class="btn btn-default" id="insertBook">도서추가</button>
+					<button class="btn btn-default" type="button" id="btn_bookList">도서목록</button>
+
+
 
 				</div>
 
 				<hr>
-				<img src="/resources/lava3.JPG" style="width: 450px; height: 250px"
-					id="image2">
+				<img src="/resources/lava3.JPG" style="width: 100%" id="image2">
 				<div id="searchResultArea"></div>
 				<hr>
 				<hr>

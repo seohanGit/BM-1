@@ -24,6 +24,8 @@ public interface BookDao {
 
 	public void requestBook(BookModel model);
 
+	public List<BookModel> requestList();
+
 
 	
 }

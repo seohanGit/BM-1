@@ -39,8 +39,8 @@ public class BookServiceImpl implements BookService {
 	}
 
 	@Override
-	public BookModel addRequestBook(String isbn, String id)
-			throws Exception, IOException {
+	public BookModel addRequestBook(String isbn, String id) throws Exception,
+			IOException {
 		BookModel book = new BookModel();
 		URL url = getIsbnUrl(isbn);
 
@@ -49,6 +49,8 @@ public class BookServiceImpl implements BookService {
 		XmlDom xmlDom = new XmlDom();
 		book = xmlDom.getBook(url.openStream(), id);
 
+		System.out.println(book.getRequestid());
+		System.out.println(book.getGenre());
 		return book;
 	}
 
@@ -114,6 +116,14 @@ public class BookServiceImpl implements BookService {
 	}
 
 	@Override
+	public void requestBook(BookModel model) {
+		model.setBooknum(model.getRequestid()+model.getIsbn());
+		System.out.println(model.getBookname());
+		System.out.println(model.getIsbn());
+		bookDao.requestBook(model);
+	}
+
+	@Override
 	public List<BookModel> searchBook(String keyword) {
 		return bookDao.selectBook(keyword);
 	}
@@ -154,6 +164,12 @@ public class BookServiceImpl implements BookService {
 	public String selectReservation(String booknum) {
 		// TODO Auto-generated method stub
 		return bookDao.selectReservation(booknum);
+	}
+
+	@Override
+	public List<BookModel> requestList() {
+		// TODO Auto-generated method stub
+		return bookDao.requestList();
 	}
 
 }

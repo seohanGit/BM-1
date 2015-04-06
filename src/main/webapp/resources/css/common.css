@@ -15,3 +15,10 @@ footer {
 	-webkit-line-clamp: 5;
 	-webkit-box-orient: vertical;
 }
+
+#btn_bookList{
+	width:30%;
+}
+#insertBook{
+	width:30%;
+}

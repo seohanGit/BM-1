@@ -17,6 +17,43 @@ $('#btn_search').click(function() {
 	});
 });
 
+$('#requestList').click(function() {
+	$.ajax({
+		type : "GET", // GET or POST
+		url : "/requestList", // URL
+		datatype : "xml", // html, xml, json, jsonp, script, text
+		error : function() { // Ajax error handler
+			alert('ajax failed');
+		},
+		success : function(data, status) { // Ajax complete handelr]
+			$('#image1').fadeOut();
+			$('#image2').fadeOut();
+			$('#searchResultArea').empty().append(data);
+		}
+	});
+
+})
+
+
+$('#btn_bookList').click(function() {
+	$.ajax({
+		type : "GET", // GET or POST
+		url : "/listBook", // URL
+		datatype : "xml", // html, xml, json, jsonp, script, text
+		data : {
+			keyword : $('#keyword').val()
+		}, // parameters as plain object
+		error : function() { // Ajax error handler
+			alert('ajax failed');
+		},
+		success : function(data, status) { // Ajax complete handelr
+			$('#image1').fadeOut();
+			$('#image2').fadeOut();
+			$('#searchResultArea').empty().append(data);
+		}
+	});
+});
+
 $('#btn_next').click(function() {
 	$.ajax({
 		type : "GET", // GET or POST

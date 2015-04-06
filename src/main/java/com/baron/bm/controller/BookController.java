@@ -1,5 +1,6 @@
 package com.baron.bm.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.Cookie;
@@ -32,6 +33,29 @@ public class BookController {
 		bookservice.insertBook(model);
 		return "insertbookresult";
 	}
+/*
+	@RequestMapping("/requestOk")
+	public String requestOk(BookModel model) {
+		System.out.println(model.getRequestid());
+		bookservice.requestBook(model);
+		return "requestBookResult";
+	}
+*/
+	@RequestMapping("/confirmRequest")
+	public String requestResult(BookModel model) {
+		System.out.println(model.getRequestid());
+		bookservice.requestBook(model);
+		return "requestBookResult";
+	}
+	
+
+	@RequestMapping("/requestList")
+	public String requestList(Model model) {
+		List<BookModel> BookList = new ArrayList<BookModel>();
+		BookList = bookservice.requestList();
+		model.addAttribute("bookList",BookList);
+		return "requestList";
+	}
 
 	@RequestMapping("/requestbook")
 	public String requestBook(String isbn, Model model,
@@ -44,17 +68,29 @@ public class BookController {
 		 * book.setBooknum(booknum); book.setGenre(genre);
 		 * book.setWriter(writer); book.setPublisher(publisher);
 		 * book.setImageurl(imageurl);
-		 */for (Cookie cookie : request.getCookies()) {
+		 */
+		for (Cookie cookie : request.getCookies()) {
 			if (cookie.getName().equals("bm_id"))
 				id = cookie.getValue();
 		}
+
 		book = bookservice.addRequestBook(isbn, id);
-		model.addAttribute(book);
+		model.addAttribute("book", book);
+		System.out.println(book.getBookname());
+		System.out.println(book.getIsbn());
 		return "confirmRequest";
 	}
 
 	@RequestMapping("/searchBook")
 	public String searchBook(String keyword, Model model) {
+		List<BookModel> bookList = bookservice.searchBook(keyword);
+		model.addAttribute("bookList", bookList);
+		return "search";
+	}
+
+	@RequestMapping("/listBook")
+	public String listBook(String keyword, Model model) {
+		keyword = "";
 		List<BookModel> bookList = bookservice.searchBook(keyword);
 		model.addAttribute("bookList", bookList);
 		return "search";

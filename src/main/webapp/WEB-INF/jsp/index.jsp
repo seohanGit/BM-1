@@ -33,7 +33,7 @@
 				</select>
 				
 				<hr>
-				<img src="/resources/main.JPG" style="width: 750px; height: 400px"
+				<img src="/resources/main.JPG" style="width: 100%">
 					id="image1">
 				<div id="searchResultArea"></div>
 				<hr>

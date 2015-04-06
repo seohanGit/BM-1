@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
-<title>도서 추가 페이지</title>
+<title>사용자 정보 변경</title>
 <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
 <script src="/resources/js/jquery/jquery.js"></script>
 <script src="/resources/js/bootstrap.min.js"></script>

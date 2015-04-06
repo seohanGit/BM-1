@@ -28,4 +28,9 @@ public interface BookService {
 
 	public BookModel addRequestBook(String isbn, String id) throws Exception,
 			IOException;
+
+	public List<BookModel> requestList();
+
+	void requestBook(BookModel model);
+
 }

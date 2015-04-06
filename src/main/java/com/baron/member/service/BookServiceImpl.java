@@ -12,6 +12,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.xml.sax.SAXException;
 
 import com.baron.member.dao.BookDao;
 import com.baron.member.model.BookModel;
@@ -28,16 +29,28 @@ public class BookServiceImpl implements BookService {
 		List<BookModel> bookList = new ArrayList<BookModel>();
 
 		URL url = getUrl(keyword);
-		
+
 		getApiTest(url);
-	
+
 		XmlDom xmlDom = new XmlDom();
 		bookList = xmlDom.getBooklist(url.openStream());
 
 		return bookList;
 	}
 
+	@Override
+	public BookModel addRequestBook(String isbn, String id)
+			throws Exception, IOException {
+		BookModel book = new BookModel();
+		URL url = getIsbnUrl(isbn);
 
+		getApiTest(url);
+
+		XmlDom xmlDom = new XmlDom();
+		book = xmlDom.getBook(url.openStream(), id);
+
+		return book;
+	}
 
 	private URL getUrl(String keyword) throws UnsupportedEncodingException,
 			MalformedURLException {
@@ -59,7 +72,25 @@ public class BookServiceImpl implements BookService {
 		return url;
 	}
 
+	private URL getIsbnUrl(String keyword) throws UnsupportedEncodingException,
+			MalformedURLException {
+		String key = "B0F933E2847C6447203572CCC68F824A1054E7EF0D966C7B95245288CE95E300";
+		String addr = "http://book.interpark.com/api/search.api?";
+		String parameter = "";
 
+		key = URLEncoder.encode(key, "UTF-8");
+		keyword = URLEncoder.encode(keyword, "UTF-8");
+		parameter = parameter + "&" + "query=" + keyword;
+		parameter = parameter + "&" + "queryType=isbn";
+		parameter = parameter + "&" + "maxResults=1";
+
+		key = URLEncoder.encode(key, "UTF-8");
+		keyword = URLEncoder.encode(keyword, "UTF-8");
+		addr = addr + "key=" + key + parameter;
+
+		URL url = new URL(addr);
+		return url;
+	}
 
 	private void getApiTest(URL url) throws IOException {
 		BufferedReader br;
@@ -76,8 +107,6 @@ public class BookServiceImpl implements BookService {
 
 		br.close();
 	}
-
-	
 
 	@Override
 	public void insertBook(BookModel model) {

@@ -19,20 +19,17 @@ import org.xml.sax.SAXException;
 import com.baron.member.model.BookModel;
 
 public class XmlDom {
-/*	
-	public NodeList responseField(InputStream br) throws Exception{
-
-		Element root = makeDoc(br);
-		
-		NodeList result; 
-		result. root.getElementsByTagName("totalResults");
-		NodeList page = root.getElementsByTagName("startIndex");
-	
-		
-		return page;
-	}
-		*/
-	
+	/*
+	 * public NodeList responseField(InputStream br) throws Exception{
+	 * 
+	 * Element root = makeDoc(br);
+	 * 
+	 * NodeList result; result. root.getElementsByTagName("totalResults");
+	 * NodeList page = root.getElementsByTagName("startIndex");
+	 * 
+	 * 
+	 * return page; }
+	 */
 
 	private Element makeDoc(InputStream br)
 			throws ParserConfigurationException, SAXException, IOException {
@@ -49,7 +46,9 @@ public class XmlDom {
 		return root;
 	}
 
-	public List<BookModel> getBooklist(InputStream br) throws Exception, SAXException, IOException {
+	public List<BookModel> getBooklist(InputStream br)
+			throws Exception, SAXException, IOException {
+		
 		Element root = makeDoc(br);
 		NodeList list = root.getElementsByTagName("item");
 		List<BookModel> bookList = new ArrayList<BookModel>();
@@ -62,9 +61,10 @@ public class XmlDom {
 			model.setImageurl(getChildren(element, "coverSmallUrl"));
 			model.setPriceSales(getChildren(element, "priceSales"));
 			model.setWriter(getChildren(element, "author"));
-			model.setBooknum(getChildren(element, "isbn"));
+			model.setIsbn(getChildren(element, "isbn"));
 			model.setGenre(getChildren(element, "categoryName"));
 			model.setPublisher(getChildren(element, "publisher"));
+			
 
 			bookList.add(model);
 			/*
@@ -86,6 +86,47 @@ public class XmlDom {
 			 */
 		}
 		return bookList;
+	}
+
+	public BookModel getBook(InputStream br, String requestid)
+			throws Exception, SAXException, IOException {
+		requestid = null;
+		BookModel model = new BookModel();
+		Element root = makeDoc(br);
+		NodeList list = root.getElementsByTagName("item");
+		List<BookModel> bookList = new ArrayList<BookModel>();
+		for (int i = 0; i < list.getLength(); i++) {
+
+			Element element = (Element) list.item(i);
+			model.setBookname(getChildren(element, "title"));
+			model.setLink(getChildren(element, "link"));
+			model.setImageurl(getChildren(element, "coverSmallUrl"));
+			model.setPriceSales(getChildren(element, "priceSales"));
+			model.setWriter(getChildren(element, "author"));
+			model.setIsbn(getChildren(element, "isbn"));
+			model.setGenre(getChildren(element, "categoryName"));
+			model.setPublisher(getChildren(element, "publisher"));
+			model.setRequestid(requestid);
+
+			/*
+			 * System.out.println("Time  : " + title);
+			 * System.out.println("Code : " + link);
+			 * System.out.println("writer : " + writer);
+			 * System.out.println("imageUrl : " + imageurl);
+			 * System.out.println("priceSales : " + priceSales);
+			 * 
+			 * model.setBookname(title); model.setLink(link);
+			 * model.setImageurl(imageurl); model.setPriceSales(priceSales);
+			 * model.setWriter(writer);
+			 */
+
+			/*
+			 * System.out.println(bookList.get(i).getBookname());
+			 * System.out.println(bookList.get(i).getPriceSales());
+			 * System.out.println(bookList.get(i).getWriter());
+			 */
+		}
+		return model;
 	}
 
 	/**

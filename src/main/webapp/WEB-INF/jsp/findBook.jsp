@@ -20,7 +20,7 @@
 					<p>${book.writer}|${book.priceSales}</p>
 
 					<button class="btn btn-default" type="button" id="buybook"
-						onClick="location.href='/buybook?bookname=${book.bookname}&booknum=${book.booknum}&genre=${book.genre}&writer=${book.writer}&publisher=${book.publisher}&imageurl=${book.imageurl}'">구매</button>
+						onClick="location.href='/requestbook?isbn=${book.isbn}'">구매</button>
 
 
 				</td>

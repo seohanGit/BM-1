@@ -22,6 +22,8 @@ public interface BookDao {
 
 	public String selectReservation(String booknum);
 
+	public void requestBook(BookModel model);
+
 
 	
 }

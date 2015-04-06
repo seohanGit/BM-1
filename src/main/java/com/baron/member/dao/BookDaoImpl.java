@@ -71,4 +71,11 @@ public class BookDaoImpl implements BookDao {
 		
 	}
 
+	@Override
+	public void requestBook(BookModel model) {
+		// TODO Auto-generated method stub
+		session.insert(NAMESPACE+"requestBook", model);
+		
+	}
+
 }

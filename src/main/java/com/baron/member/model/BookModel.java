@@ -18,6 +18,33 @@ public class BookModel {
 	private String reserid;
 	private String priceSales;
 	private String link;
+	private String isbn;
+	private String requestid;
+	private Date requestDate;
+
+	public Date getRequestDate() {
+		return requestDate;
+	}
+
+	public void setRequestDate(Date requestDate) {
+		this.requestDate = requestDate;
+	}
+
+	public String getRequestid() {
+		return requestid;
+	}
+
+	public void setRequestid(String requestid) {
+		this.requestid = requestid;
+	}
+
+	public String getIsbn() {
+		return isbn;
+	}
+
+	public void setIsbn(String isbn) {
+		this.isbn = isbn;
+	}
 
 	public String getPriceSales() {
 		return priceSales;
@@ -138,4 +165,6 @@ public class BookModel {
 	public void setWriter(String writer) {
 		this.writer = writer;
 	}
+
+	
 }

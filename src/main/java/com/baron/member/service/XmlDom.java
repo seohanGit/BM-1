@@ -88,7 +88,7 @@ public class XmlDom {
 		return bookList;
 	}
 
-	public BookModel getBook(InputStream br, String requestid)
+	public BookModel getBook(InputStream br)
 			throws Exception, SAXException, IOException {
 		
 		BookModel model = new BookModel();
@@ -106,7 +106,7 @@ public class XmlDom {
 			model.setIsbn(getChildren(element, "isbn"));
 			model.setGenre(getChildren(element, "categoryName"));
 			model.setPublisher(getChildren(element, "publisher"));
-			model.setRequestid(requestid);
+			
 
 			/*
 			 * System.out.println("Time  : " + title);

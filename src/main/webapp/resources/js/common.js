@@ -17,6 +17,23 @@ $('#btn_search').click(function() {
 	});
 });
 
+$('#borrow_list').click(function() {
+	$.ajax({
+		type : "GET", // GET or POST
+		url : "/borrowList", // URL
+		datatype : "xml", // html, xml, json, jsonp, script, text
+		 // parameters as plain object
+		error : function() { // Ajax error handler
+			alert('ajax failed');
+		},
+		success : function(data, status) { // Ajax complete handelr
+			$('#image1').fadeOut();
+			$('#image2').fadeOut();
+			$('#searchResultArea').empty().append(data);
+		}
+	});
+});
+
 $('#requestList').click(function() {
 	$.ajax({
 		type : "GET", // GET or POST

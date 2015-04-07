@@ -27,7 +27,7 @@
 				<div class="btn-group" role="group" aria-label="...">
 					<button type="button" class="btn btn-default" id="requestList">구매요청
 						페이지</button>
-					<button type="button" class="btn btn-default">Middle</button>
+					<button type="button" class="btn btn-default">대여현황</button>
 					<button type="button" class="btn btn-default">Right</button>
 				</div>
 				<!-- First Blog Post -->
@@ -38,7 +38,7 @@
 						<span class="input-group-btn" style="width: 340px"> <input
 							type="text" class="form-control" id="keyword"></span>
 					</div>
-					
+
 					<button class="btn btn-default" type="button" id="btn_find"
 						style="width: 40%">
 						<span class="glyphicon glyphicon-search"></span>인터파크 검색
@@ -68,8 +68,7 @@
 				<button type="button" class="btn btn-default" role="button"
 					id="blackList">블랙리스트 보기</button>
 				<hr>
-				<img src="/resources/lava4.JPG" style="width: 100%"
-					id="image3">
+				<img src="/resources/lava4.JPG" style="width: 100%" id="image3">
 				<div id="personResultArea"></div>
 				<hr>
 				<hr>
@@ -78,7 +77,9 @@
 			<div class="col-md-4">
 				<!-- Blog Search Well -->
 				<div class="well">
-					<h4>도서 검색</h4>
+					<h4>도서 검색</h4> 
+						
+
 					<div class="input-group">
 						<input type="text" class="form-control" id="keyword"> <span
 							class="input-group-btn">

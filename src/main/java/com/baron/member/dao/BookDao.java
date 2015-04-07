@@ -26,6 +26,8 @@ public interface BookDao {
 
 	public List<BookModel> requestList();
 
+	public List<BookModel> borrowList(String id);
+
 
 	
 }

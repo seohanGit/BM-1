@@ -84,4 +84,10 @@ public class BookDaoImpl implements BookDao {
 		return session.selectList(NAMESPACE + "requestList");
 	}
 
+	@Override
+	public List<BookModel> borrowList(String id) {
+		// TODO Auto-generated method stub
+		return session.selectList(NAMESPACE + "borrowList", id);
+	}
+
 }

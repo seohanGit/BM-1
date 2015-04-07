@@ -84,11 +84,11 @@
 	<insert id="requestBook" parameterType="BookModel">
 		INSERT INTO request
 		(requestid, requestdate,
-		bookname,booknum, pricesales,writer,publisher,genre,link,
+		bookname,booknum, pricesales,writer,quantity,genre,link,
 		imageurl, isbn)
 		VALUES
 		(#{requestid},
-		now(),#{bookname},#{booknum},#{priceSales},#{writer},#{publisher},#{genre},#{link},#{imageurl},#{isbn})
+		now(),#{bookname},#{booknum},#{priceSales},#{writer},#{quantity},#{genre},#{link},#{imageurl},#{isbn})
 	</insert>
 
 	<select id="selectBestBook" resultType="BookModel">
@@ -96,6 +96,12 @@
 		FROM book
 		ORDER BY
 		grade DESC
+	</select>
+	
+	<select id="borrowList" resultType="BookModel" parameterType="String">
+		SELECT *
+		FROM borrow
+		WHERE borrowid = #{id}
 	</select>
 
 	<select id="selectPass" resultType="String" parameterType="String">

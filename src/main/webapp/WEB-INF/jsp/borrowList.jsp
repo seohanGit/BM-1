@@ -13,29 +13,16 @@
 					<p>${book.booknum}|${book.bookname}</p>
 					<p>
 						${book.writer} | ${book.publisher} |
-						<c:choose>
-							<c:when test="${book.borrowcheck eq '1'}"> 대여중</c:when>
-							<c:otherwise> 대여가능</c:otherwise>
-						</c:choose>
+						
 					</p>
-					<p>${book.genre}
-						|
-						<c:choose>
-							<c:when test="${empty book.resernum}"> 예약 가능</c:when>
-							<c:otherwise> 예약 중</c:otherwise>
-						</c:choose>
+					<p>${book.genre}	|
+						
 					<p>
 						<button class="btn btn-default" type="button" id="reservebook"
 							onClick="location.href='/borrowbook?booknum=${book.booknum}'">대출</button>
 						<button class="btn btn-default" type="button" id="reservebook"
 							onClick="location.href='/returnbook?booknum=${book.booknum}'">반납</button>
-						<button class="btn btn-default" type="button" id="reservebook"
-							onClick="location.href='/reservation?booknum=${book.booknum}'">예약</button>
-						<button class="btn btn-default" type="button" id="modifybook"
-							onClick="location.href='/modifyBookForm?booknum=${book.booknum}'">도서수정</button>
-						<button class="btn btn-default" type="button" id="deletebook"
-							onClick="location.href='/deletebook?booknum=${book.booknum}'; del();">도서삭제</button>
-
+					
 					</p>
 				</td>
 			</tr>

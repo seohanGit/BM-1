@@ -7,8 +7,8 @@
 			<td width="80px">표지</td>
 			<td width="15%">도서명</td>
 			<td width="9%">가격</td>
+			<td width="6%">수량</td>
 			<td width="13%">저자</td>
-			<td width="13%">출판사</td>
 			<td width="12%">장르</td>
 			<td width="8%">아이디</td>
 			<td width="12%">요청일자</td>
@@ -29,13 +29,15 @@
 			</tr>
 			<tr>
 				<td>${book.genre}</td>
-				<td>${book.requestid }</td>
+				<td>요청자 : ${book.requestid }</td>
 			</tr>
 			<tr>
 				<td>${book.priceSales}원</td>
-				<td><button onClick="location.href='${book.link}'">구매</button>
+				<td>수량 : ${book.quantity}
+					<button onClick="location.href='${book.link}'">구매</button>
 					<button
-						onClick="location.href='deleteRequest?requestid=${book.requestid}'">삭제</button></td>
+						onClick="location.href='deleteRequest?requestid=${book.requestid}'">삭제</button>
+				</td>
 			</tr>
 		</tbody>
 
@@ -46,8 +48,8 @@
 					style="width: 100%"></td>
 				<td>${book.bookname }</td>
 				<td>${book.priceSales}원</td>
+				<td>${book.quantity}</td>
 				<td>${book.writer}</td>
-				<td>${book.publisher}</td>
 				<td>${book.genre}</td>
 				<td>${book.requestid}</td>
 				<td>${book.requestDate}</td>

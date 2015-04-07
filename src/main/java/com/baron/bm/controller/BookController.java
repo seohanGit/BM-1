@@ -33,32 +33,29 @@ public class BookController {
 		bookservice.insertBook(model);
 		return "insertbookresult";
 	}
-/*
-	@RequestMapping("/requestOk")
-	public String requestOk(BookModel model) {
-		System.out.println(model.getRequestid());
-		bookservice.requestBook(model);
-		return "requestBookResult";
-	}
-*/
+
+	/*
+	 * @RequestMapping("/requestOk") public String requestOk(BookModel model) {
+	 * System.out.println(model.getRequestid()); bookservice.requestBook(model);
+	 * return "requestBookResult"; }
+	 */
 	@RequestMapping("/confirmRequest")
 	public String requestResult(BookModel model) {
 		System.out.println(model.getRequestid());
 		bookservice.requestBook(model);
 		return "requestBookResult";
 	}
-	
 
 	@RequestMapping("/requestList")
 	public String requestList(Model model) {
 		List<BookModel> BookList = new ArrayList<BookModel>();
 		BookList = bookservice.requestList();
-		model.addAttribute("bookList",BookList);
+		model.addAttribute("bookList", BookList);
 		return "requestList";
 	}
 
 	@RequestMapping("/requestbook")
-	public String requestBook(String isbn, Model model,
+	public String requestBook(String isbn, int quantity, Model model,
 			HttpServletRequest request) throws Exception {
 		String id = null;
 		BookModel book = new BookModel();
@@ -74,7 +71,7 @@ public class BookController {
 				id = cookie.getValue();
 		}
 
-		book = bookservice.addRequestBook(isbn, id);
+		book = bookservice.addRequestBook(isbn, id, quantity);
 		model.addAttribute("book", book);
 		System.out.println(book.getBookname());
 		System.out.println(book.getIsbn());
@@ -142,6 +139,31 @@ public class BookController {
 		bookmodel.setBooknum(booknum1);
 		bookservice.updateBook(bookmodel);
 		return "modifybookresult";
+	}
+
+	@RequestMapping("/borrowbook")
+	public String borrowBook(String booknum, BookModel book) {
+
+		return "borrowresult";
+	}
+
+	@RequestMapping("/returnbook")
+	public String returnBook(String booknum, BookModel book) {
+
+		return "returnresult";
+	}
+
+	@RequestMapping("/borrowList")
+	public String borrowList(HttpServletRequest request, Model model) {
+		String id = null;
+		for(Cookie cookie : request.getCookies()){
+			if(cookie.getName().equals("bm_id"))
+				id=cookie.getValue();
+		}
+		List<BookModel> bookList = bookservice.borrowList(id);
+
+		model.addAttribute("bookList", bookList);
+		return "borrowList";
 	}
 
 	@RequestMapping("/reservation")

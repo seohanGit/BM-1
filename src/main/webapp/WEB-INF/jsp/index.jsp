@@ -51,7 +51,8 @@
 			<div class="col-md-4">
 				<!-- Blog Search Well -->
 				<div class="well">
-					<h4>도서 검색</h4>
+					<h4>도서 검색 &nbsp; &nbsp;<button class="btn btn-default" type="button" id="btn_bookList"
+							style="width: 150px">도서목록</button></h4>
 					<div class="input-group">
 						<input type="text" class="form-control" id="keyword"> <span
 							class="input-group-btn">

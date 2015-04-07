@@ -39,7 +39,7 @@ public class BookServiceImpl implements BookService {
 	}
 
 	@Override
-	public BookModel addRequestBook(String isbn, String id) throws Exception,
+	public BookModel addRequestBook(String isbn, String id, int quantity) throws Exception,
 			IOException {
 		BookModel book = new BookModel();
 		URL url = getIsbnUrl(isbn);
@@ -47,8 +47,9 @@ public class BookServiceImpl implements BookService {
 		getApiTest(url);
 
 		XmlDom xmlDom = new XmlDom();
-		book = xmlDom.getBook(url.openStream(), id);
-
+		book = xmlDom.getBook(url.openStream());
+		book.setRequestid(id);
+		book.setQuantity(quantity);
 		System.out.println(book.getRequestid());
 		System.out.println(book.getGenre());
 		return book;
@@ -170,6 +171,12 @@ public class BookServiceImpl implements BookService {
 	public List<BookModel> requestList() {
 		// TODO Auto-generated method stub
 		return bookDao.requestList();
+	}
+
+	@Override
+	public List<BookModel> borrowList(String id) {
+		// TODO Auto-generated method stub
+		return bookDao.borrowList(id);
 	}
 
 }

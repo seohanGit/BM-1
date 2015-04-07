@@ -1,14 +1,18 @@
 .thumbnail {
-	width: 100px;
+	width: 30%;
 	float: left;
 }
 
 .thumbnail .caption p {
-    font-size: 12px;
+	max-height: 150px;
+	font-size: 60%;
+	max-width: 100px;
+	font-family:sans-serif;
 }
 
-@media (min-width: 992px) {
+}
+@media ( min-width : 992px) {
 	.col-md-3 {
-        width: 33%;
+		width: 33%;
 	}
 }

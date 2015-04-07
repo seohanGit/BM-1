@@ -25,10 +25,14 @@ public class BookServiceImpl implements BookService {
 	private BookDao bookDao;
 
 	@Override
-	public List<BookModel> findBook(String keyword) throws Exception {
+	public List<BookModel> getNewbook() throws Exception {
 		List<BookModel> bookList = new ArrayList<BookModel>();
 
+<<<<<<< HEAD
 		URL url = getUrl(keyword);
+=======
+		URL url = getNewbookUrl();
+>>>>>>> 5308682d6d996a04e3756f10010cd91de3dccfdc
 
 		getApiTest(url);
 
@@ -36,9 +40,11 @@ public class BookServiceImpl implements BookService {
 		bookList = xmlDom.getBooklist(url.openStream());
 
 		return bookList;
+
 	}
 
 	@Override
+<<<<<<< HEAD
 	public BookModel addRequestBook(String isbn, String id, int quantity) throws Exception,
 			IOException {
 		BookModel book = new BookModel();
@@ -54,27 +60,30 @@ public class BookServiceImpl implements BookService {
 		System.out.println(book.getGenre());
 		return book;
 	}
+=======
+	public BookModel findBookOne(String isbn) throws Exception {
+		BookModel book = new BookModel();
+		URL url = getSearchUrl(isbn);
 
-	private URL getUrl(String keyword) throws UnsupportedEncodingException,
-			MalformedURLException {
-		String key = "B0F933E2847C6447203572CCC68F824A1054E7EF0D966C7B95245288CE95E300";
-		String addr = "http://book.interpark.com/api/search.api?";
-		String parameter = "";
+		getApiTest(url);
+>>>>>>> 5308682d6d996a04e3756f10010cd91de3dccfdc
 
-		key = URLEncoder.encode(key, "UTF-8");
-		keyword = URLEncoder.encode(keyword, "UTF-8");
-		parameter = parameter + "&" + "query=" + keyword;
-		parameter = parameter + "&" + "sort=accuracy";
-		parameter = parameter + "&" + "maxResults=20";
+		XmlDom xmlDom = new XmlDom();
+		book = xmlDom.getBook(url.openStream());
+		System.out.println(isbn);
 
-		key = URLEncoder.encode(key, "UTF-8");
-		keyword = URLEncoder.encode(keyword, "UTF-8");
-		addr = addr + "key=" + key + parameter;
-
-		URL url = new URL(addr);
-		return url;
+		return book;
 	}
 
+	@Override
+	public List<BookModel> findBook(String keyword) throws Exception {
+		List<BookModel> bookList = new ArrayList<BookModel>();
+
+		URL url = getSearchUrl(keyword);
+
+		getApiTest(url);
+
+<<<<<<< HEAD
 	private URL getIsbnUrl(String keyword) throws UnsupportedEncodingException,
 			MalformedURLException {
 		String key = "B0F933E2847C6447203572CCC68F824A1054E7EF0D966C7B95245288CE95E300";
@@ -93,24 +102,32 @@ public class BookServiceImpl implements BookService {
 
 		URL url = new URL(addr);
 		return url;
+=======
+		XmlDom xmlDom = new XmlDom();
+		bookList = xmlDom.getBooklist(url.openStream());
+		System.out.println(keyword);
+
+		return bookList;
+>>>>>>> 5308682d6d996a04e3756f10010cd91de3dccfdc
 	}
 
-	private void getApiTest(URL url) throws IOException {
-		BufferedReader br;
-		/* api 출력 확인 */
-		br = new BufferedReader(new InputStreamReader(url.openStream()));
+	@Override
+	public List<BookModel> getBestseller(String categoryId) throws Exception {
+		List<BookModel> bookList = new ArrayList<BookModel>();
 
-		String line;
-		StringBuilder sBuffer = new StringBuilder();
+		URL url = getBestsellerUrl(categoryId);
 
-		while ((line = br.readLine()) != null) {
-			sBuffer.append(line);
-			System.out.println(line);
-		}
+		getApiTest(url);
 
-		br.close();
+		XmlDom xmlDom = new XmlDom();
+		bookList = xmlDom.getBooklist(url.openStream());
+
+<<<<<<< HEAD
+=======
+		return bookList;
 	}
 
+>>>>>>> 5308682d6d996a04e3756f10010cd91de3dccfdc
 	@Override
 	public void insertBook(BookModel model) {
 		bookDao.insertBook(model);
@@ -118,16 +135,25 @@ public class BookServiceImpl implements BookService {
 
 	@Override
 	public void requestBook(BookModel model) {
+<<<<<<< HEAD
 		model.setBooknum(model.getRequestid()+model.getIsbn());
 		System.out.println(model.getBookname());
 		System.out.println(model.getIsbn());
+=======
+		System.out.println(model.getBookname());
+>>>>>>> 5308682d6d996a04e3756f10010cd91de3dccfdc
 		bookDao.requestBook(model);
 	}
 
 	@Override
 	public List<BookModel> searchBook(String keyword) {
-		return bookDao.selectBook(keyword);
+		return bookDao.searchBook(keyword);
 	}
+
+	/*
+	 * @Override public List<BookModel> selectBook(String booknum) { return
+	 * bookDao.selectBook(booknum); }
+	 */
 
 	@Override
 	public void deleteBook(String booknum) {
@@ -167,6 +193,7 @@ public class BookServiceImpl implements BookService {
 		return bookDao.selectReservation(booknum);
 	}
 
+<<<<<<< HEAD
 	@Override
 	public List<BookModel> requestList() {
 		// TODO Auto-generated method stub
@@ -177,6 +204,72 @@ public class BookServiceImpl implements BookService {
 	public List<BookModel> borrowList(String id) {
 		// TODO Auto-generated method stub
 		return bookDao.borrowList(id);
+=======
+	private URL getNewbookUrl() throws UnsupportedEncodingException,
+			MalformedURLException {
+		String key = "B0F933E2847C6447203572CCC68F824A1054E7EF0D966C7B95245288CE95E300";
+		String addr = "http://book.interpark.com/api/newBook.api?";
+		String parameter = "";
+
+		key = URLEncoder.encode(key, "UTF-8");
+		parameter = parameter + "&" + "categoryId=100";
+
+		addr = addr + "key=" + key + parameter;
+
+		URL url = new URL(addr);
+		return url;
+	}
+
+	private URL getBestsellerUrl(String categoryId)
+			throws UnsupportedEncodingException, MalformedURLException {
+		String key = "B0F933E2847C6447203572CCC68F824A1054E7EF0D966C7B95245288CE95E300";
+		String addr = "http://book.interpark.com/api/bestSeller.api?";
+		String parameter = "";
+
+		key = URLEncoder.encode(key, "UTF-8");
+		parameter = parameter + "&" + "categoryId=" + categoryId;
+
+		addr = addr + "key=" + key + parameter;
+
+		URL url = new URL(addr);
+		return url;
+	}
+
+	private URL getSearchUrl(String keyword)
+			throws UnsupportedEncodingException, MalformedURLException {
+		String key = "B0F933E2847C6447203572CCC68F824A1054E7EF0D966C7B95245288CE95E300";
+		String addr = "http://book.interpark.com/api/search.api?";
+		String parameter = "";
+
+		key = URLEncoder.encode(key, "UTF-8");
+		keyword = URLEncoder.encode(keyword, "UTF-8");
+		parameter = parameter + "&" + "query=" + keyword;
+		parameter = parameter + "&" + "sort=accuracy";
+		parameter = parameter + "&" + "maxResults=20";
+
+		key = URLEncoder.encode(key, "UTF-8");
+		keyword = URLEncoder.encode(keyword, "UTF-8");
+		addr = addr + "key=" + key + parameter;
+
+		URL url = new URL(addr);
+		return url;
+	}
+
+	private void getApiTest(URL url) throws IOException {
+		BufferedReader br;
+		/* api 출력 확인 */
+		br = new BufferedReader(new InputStreamReader(url.openStream()));
+
+		String line;
+		StringBuilder sBuffer = new StringBuilder();
+
+		while ((line = br.readLine()) != null) {
+			sBuffer.append(line);
+			System.out.println(line);
+		}
+
+		br.close();
+>>>>>>> 5308682d6d996a04e3756f10010cd91de3dccfdc
 	}
 
 }

@@ -46,9 +46,35 @@ public class XmlDom {
 		return root;
 	}
 
+<<<<<<< HEAD
 	public List<BookModel> getBooklist(InputStream br)
 			throws Exception, SAXException, IOException {
 		
+=======
+	public BookModel getBook(InputStream br) throws Exception, SAXException,
+			IOException {
+		Element root = makeDoc(br);
+		NodeList list = root.getElementsByTagName("item");
+
+		BookModel book = new BookModel();
+		for (int i = 0; i < list.getLength(); i++) {
+
+			Element element = (Element) list.item(0);
+			book.setBookname(getChildren(element, "title"));
+			book.setLink(getChildren(element, "link"));
+			book.setImageurl(getChildren(element, "coverSmallUrl"));
+			book.setPriceSales(getChildren(element, "priceSales"));
+			book.setWriter(getChildren(element, "author"));
+			book.setBooknum(getChildren(element, "isbn"));
+			book.setGenre(getChildren(element, "categoryName"));
+			book.setPublisher(getChildren(element, "publisher"));
+		}
+		return book;
+	}
+
+	public List<BookModel> getBooklist(InputStream br) throws Exception,
+			SAXException, IOException {
+>>>>>>> 5308682d6d996a04e3756f10010cd91de3dccfdc
 		Element root = makeDoc(br);
 		NodeList list = root.getElementsByTagName("item");
 		List<BookModel> bookList = new ArrayList<BookModel>();
@@ -67,23 +93,7 @@ public class XmlDom {
 			
 
 			bookList.add(model);
-			/*
-			 * System.out.println("Time  : " + title);
-			 * System.out.println("Code : " + link);
-			 * System.out.println("writer : " + writer);
-			 * System.out.println("imageUrl : " + imageurl);
-			 * System.out.println("priceSales : " + priceSales);
-			 * 
-			 * model.setBookname(title); model.setLink(link);
-			 * model.setImageurl(imageurl); model.setPriceSales(priceSales);
-			 * model.setWriter(writer);
-			 */
 
-			/*
-			 * System.out.println(bookList.get(i).getBookname());
-			 * System.out.println(bookList.get(i).getPriceSales());
-			 * System.out.println(bookList.get(i).getWriter());
-			 */
 		}
 		return bookList;
 	}

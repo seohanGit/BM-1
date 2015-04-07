@@ -67,6 +67,15 @@
 		ORDER BY title;
 	</select>
 
+	<insert id="requestBook" parameterType="BookModel">
+		INSERT INTO request
+		(requestid, requestdate, ID, booknum, bookname,
+		writer,publisher,
+		genre, link, imageurl)
+		VALUES(#{requestid},date_add(now()),#{id},#{booknum},#{bookname},
+		#{writer},#{publisher},#{genre},#{link},#{imageurl})
+	</insert>
+
 	<insert id="insertBoard" parameterType="BoardModel">
 		INSERT INTO bulletinboard
 		(title,content,registerday,modifiday,id)
@@ -81,6 +90,7 @@
 		(#{bookname},#{booknum},0,#{genre},#{publisher},#{writer},0,0,#{imageurl})
 	</insert>
 
+<<<<<<< HEAD
 	<insert id="requestBook" parameterType="BookModel">
 		INSERT INTO request
 		(requestid, requestdate,
@@ -91,17 +101,22 @@
 		now(),#{bookname},#{booknum},#{priceSales},#{writer},#{quantity},#{genre},#{link},#{imageurl},#{isbn})
 	</insert>
 
+=======
+>>>>>>> 5308682d6d996a04e3756f10010cd91de3dccfdc
 	<select id="selectBestBook" resultType="BookModel">
 		SELECT *
 		FROM book
 		ORDER BY
 		grade DESC
+<<<<<<< HEAD
 	</select>
 	
 	<select id="borrowList" resultType="BookModel" parameterType="String">
 		SELECT *
 		FROM borrow
 		WHERE borrowid = #{id}
+=======
+>>>>>>> 5308682d6d996a04e3756f10010cd91de3dccfdc
 	</select>
 
 	<select id="selectPass" resultType="String" parameterType="String">
@@ -120,6 +135,11 @@
 	</update>
 
 	<select id="selectBook" parameterType="String" resultType="BookModel">
+		SELECT * FROM book WHERE booknum=#{booknum}
+	</select>
+
+
+	<select id="searchBook" parameterType="String" resultType="BookModel">
 		SELECT booknum, bookname, genre, publisher, writer
 		,imageurl,borrowcheck,resernum
 		FROM book
@@ -167,7 +187,11 @@
 		INSERT INTO
 		reservation(resernum,booknum, bookname, period,ID)
 		VALUES(#{resernum},#{booknum},#{bookname},date_add(now(),interval 7
+<<<<<<< HEAD
 		day),#{reserid})
+=======
+		day),#{id})
+>>>>>>> 5308682d6d996a04e3756f10010cd91de3dccfdc
 	</insert>
 
 

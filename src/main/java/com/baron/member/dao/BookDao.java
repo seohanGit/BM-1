@@ -24,9 +24,13 @@ public interface BookDao {
 
 	public void requestBook(BookModel model);
 
+<<<<<<< HEAD
 	public List<BookModel> requestList();
 
 	public List<BookModel> borrowList(String id);
+=======
+	List<BookModel> searchBook(String keyword);
+>>>>>>> 5308682d6d996a04e3756f10010cd91de3dccfdc
 
 
 	

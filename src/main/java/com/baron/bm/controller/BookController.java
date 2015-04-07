@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.HttpRequestHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.baron.member.model.BookModel;
@@ -34,6 +35,7 @@ public class BookController {
 		return "insertbookresult";
 	}
 
+<<<<<<< HEAD
 	/*
 	 * @RequestMapping("/requestOk") public String requestOk(BookModel model) {
 	 * System.out.println(model.getRequestid()); bookservice.requestBook(model);
@@ -78,6 +80,40 @@ public class BookController {
 		return "confirmRequest";
 	}
 
+=======
+	@RequestMapping("/national")
+	public String getNationalBest(BookModel model) throws Exception {
+		bookservice.getBestseller("200");
+		return "book/nationalBest";
+	}
+
+	@RequestMapping("/requestbook")
+	public String requestBook(HttpServletRequest request, BookModel book,
+			String isbn) throws Exception {
+
+		book=bookservice.findBookOne(isbn);
+/*
+		book.setBookname(bookname);
+		System.out.println(book.getBookname());
+		book.setBooknum(booknum);
+		book.setGenre(genre);
+		book.setWriter(writer);
+		book.setPublisher(publisher);
+		book.setImageurl(imageurl);
+*/
+		System.out.println(isbn);
+		book.setRequestid("req" + book.getBooknum());
+		System.out.println(book.getBookname());
+		for (Cookie cookie : request.getCookies()) {
+			if (cookie.getName().equals("bm_id"))
+				book.setId(cookie.getValue());
+		}
+		bookservice.requestBook(book);
+		System.out.println(book.getBookname());
+		return "admin";
+	}
+
+>>>>>>> 5308682d6d996a04e3756f10010cd91de3dccfdc
 	@RequestMapping("/searchBook")
 	public String searchBook(String keyword, Model model) {
 		List<BookModel> bookList = bookservice.searchBook(keyword);
@@ -85,6 +121,7 @@ public class BookController {
 		return "search";
 	}
 
+<<<<<<< HEAD
 	@RequestMapping("/listBook")
 	public String listBook(String keyword, Model model) {
 		keyword = "";
@@ -93,11 +130,17 @@ public class BookController {
 		return "search";
 	}
 
+=======
+>>>>>>> 5308682d6d996a04e3756f10010cd91de3dccfdc
 	@RequestMapping("/findBook")
 	public String findBook(String keyword, Model model) throws Exception {
 		List<BookModel> bookList = bookservice.findBook(keyword);
 
 		model.addAttribute("bookList", bookList);
+<<<<<<< HEAD
+=======
+
+>>>>>>> 5308682d6d996a04e3756f10010cd91de3dccfdc
 		return "findBook";
 	}
 
@@ -121,7 +164,12 @@ public class BookController {
 	}
 
 	@RequestMapping("/modifyBookForm")
+<<<<<<< HEAD
 	public String modifyBookForm(String booknum, HttpServletRequest request) {
+=======
+	public String modifyBookForm(String booknum, HttpServletRequest request,
+			Model model) {
+>>>>>>> 5308682d6d996a04e3756f10010cd91de3dccfdc
 		String permission;
 		for (Cookie cookie : request.getCookies()) {
 			if (cookie.getName().equals("bm_permission")) {
@@ -141,6 +189,7 @@ public class BookController {
 		return "modifybookresult";
 	}
 
+<<<<<<< HEAD
 	@RequestMapping("/borrowbook")
 	public String borrowBook(String booknum, BookModel book) {
 
@@ -166,6 +215,8 @@ public class BookController {
 		return "borrowList";
 	}
 
+=======
+>>>>>>> 5308682d6d996a04e3756f10010cd91de3dccfdc
 	@RequestMapping("/reservation")
 	public String reservation(String booknum, BookModel book,
 			HttpServletRequest request) {
@@ -181,7 +232,11 @@ public class BookController {
 		System.out.println(bookname);
 		book.setBookname(bookname);
 		resername = "reser" + book.getBooknum();
+<<<<<<< HEAD
 		book.setresernum(resername);
+=======
+		book.setResernum(resername);
+>>>>>>> 5308682d6d996a04e3756f10010cd91de3dccfdc
 
 		for (Cookie cookie : request.getCookies()) {
 			if (cookie.getName().equals("bm_id"))

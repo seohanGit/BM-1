@@ -21,6 +21,7 @@
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse"
 			id="bs-example-navbar-collapse-1">
+<<<<<<< HEAD
 			<ul class="nav navbar-nav " role="menu">
 				<div class="btn-group" style="height: 50PX">
 					<button type="button" class="btn btn-default dropdown-toggle"
@@ -43,6 +44,22 @@
 	</div>
 	<!-- /.navbar-collapse -->
 
+=======
+			<ul class="nav navbar-nav">
+				<li><a href="#" data-toggle="modal" data-target="#myModal">사용자정보수정</a></li>
+				<li><a href="board">게시판</a></li>
+				<li><a href="admin">관리자페이지</a></li>
+
+
+				<li><a class="btn btn-primary" style="" id="logout"
+					name="logout">로그 아웃 <span
+						class="glyphicon glyphicon-chevron-right"></span>
+				</a></li>
+			</ul>
+		</div>
+		<!-- /.navbar-collapse -->
+	</div>
+>>>>>>> 5308682d6d996a04e3756f10010cd91de3dccfdc
 	<!-- /.container -->
 </nav>
 

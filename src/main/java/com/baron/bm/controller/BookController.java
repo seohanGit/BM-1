@@ -20,7 +20,7 @@ import com.baron.member.service.BookService;
 @Controller
 public class BookController {
 
-	String booknum1;
+	String bookCode1;
 
 	@Autowired
 	private BookService bookservice;
@@ -43,7 +43,7 @@ public class BookController {
 	 */
 	@RequestMapping("/confirmRequest")
 	public String requestResult(BookModel model) {
-		System.out.println(model.getRequestid());
+		System.out.println(model.getId());
 		bookservice.requestBook(model);
 		return "requestBookResult";
 	}
@@ -73,33 +73,25 @@ public class BookController {
 	}
 	@RequestMapping("/requestbook")
 	public String requestBook(HttpServletRequest request, BookModel book,
-			String isbn) throws Exception {
-
-		book=bookservice.findBookOne(isbn);
-/*
-		book.setBookname(bookname);
-		System.out.println(book.getBookname());
-		book.setBooknum(booknum);
-		book.setGenre(genre);
-		book.setWriter(writer);
-		book.setPublisher(publisher);
-		book.setImageurl(imageurl);
-*/
-		System.out.println(isbn);
-		book.setRequestid("req" + book.getBooknum());
-		System.out.println(book.getBookname());
+			String isbn, int quantity) throws Exception {
+		
+		book = bookservice.findBookOne(isbn);
+		book.setQuantity(quantity);
+		
 		for (Cookie cookie : request.getCookies()) {
 			if (cookie.getName().equals("bm_id"))
 				book.setId(cookie.getValue());
 		}
+		
 		bookservice.requestBook(book);
 		System.out.println(book.getBookname());
+		
 		return "admin";
 	}
 	
 	@RequestMapping("/deleteRequest")
-	public String deleteRequest(String booknum){
-		bookservice.deleteRequest(booknum);
+	public String deleteRequest(String bookCode){
+		bookservice.deleteRequest(bookCode);
 		return "admin";
 	}
 	
@@ -128,7 +120,7 @@ public class BookController {
 	}
 
 	@RequestMapping("/deletebook")
-	public String deleteBook(String booknum, HttpServletRequest request) {
+	public String deleteBook(String bookCode, HttpServletRequest request) {
 		String permission;
 		for (Cookie cookie : request.getCookies()) {
 			if (cookie.getName().equals("bm_permission")) {
@@ -137,17 +129,17 @@ public class BookController {
 					return "adminfail";
 			}
 		}
-		if (bookservice.selectReservation(booknum) != null) {
+		if (bookservice.selectReservation(bookCode) != null) {
 			return "reservationfail";
 		}
 
-		bookservice.deleteBook(booknum);
+		bookservice.deleteBook(bookCode);
 		return "admin";
 
 	}
 
 	@RequestMapping("/modifyBookForm")
-	public String modifyBookForm(String booknum, HttpServletRequest request,
+	public String modifyBookForm(String bookCode, HttpServletRequest request,
 			Model model) {
 		String permission;
 		for (Cookie cookie : request.getCookies()) {
@@ -157,25 +149,25 @@ public class BookController {
 					return "adminfail";
 			}
 		}
-		booknum1 = booknum;
+		bookCode1 = bookCode;
 		return "modifyBook";
 	}
 
 	@RequestMapping("/modifybook1")
 	public String modifybookresult(BookModel bookmodel) {
-		bookmodel.setBooknum(booknum1);
+		bookmodel.setBookCode(bookCode1);
 		bookservice.updateBook(bookmodel);
 		return "modifybookresult";
 	}
 
 	@RequestMapping("/borrowbook")
-	public String borrowBook(String booknum, BookModel book) {
+	public String borrowBook(String bookCode, BookModel book) {
 
 		return "borrowresult";
 	}
 
 	@RequestMapping("/returnbook")
-	public String returnBook(String booknum, BookModel book) {
+	public String returnBook(String bookCode, BookModel book) {
 
 		return "returnresult";
 	}
@@ -194,22 +186,19 @@ public class BookController {
 	}
 
 	@RequestMapping("/reservation")
-	public String reservation(String booknum, BookModel book,
+	public String reservation(String bookCode, BookModel book,
 			HttpServletRequest request) {
 
-		if (bookservice.selectReservation(booknum) != null) {
+		if (bookservice.selectReservation(bookCode) != null) {
 			return "reservationfail";
 		}
 
 		String bookname;
-		String resername;
-		book.setBooknum(booknum);
-		bookname = bookservice.selectname(booknum);
+		book.setBookCode(bookCode);
+		bookname = bookservice.selectname(bookCode);
 		System.out.println(bookname);
 		book.setBookname(bookname);
-		resername = "reser" + book.getBooknum();
-		book.setResernum(resername);
-
+		
 		for (Cookie cookie : request.getCookies()) {
 			if (cookie.getName().equals("bm_id"))
 				book.setReserid(cookie.getValue());

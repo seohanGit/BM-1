@@ -61,9 +61,11 @@ public class XmlDom {
 			book.setImageurl(getChildren(element, "coverSmallUrl"));
 			book.setPriceSales(getChildren(element, "priceSales"));
 			book.setWriter(getChildren(element, "author"));
-			book.setBooknum(getChildren(element, "isbn"));
+			book.setIsbn(getChildren(element, "isbn"));
 			book.setGenre(getChildren(element, "categoryName"));
 			book.setPublisher(getChildren(element, "publisher"));
+			book.setSummary(getChildren(element, "description"));
+
 		}
 		return book;
 	}
@@ -74,20 +76,20 @@ public class XmlDom {
 		NodeList list = root.getElementsByTagName("item");
 		List<BookModel> bookList = new ArrayList<BookModel>();
 		for (int i = 0; i < list.getLength(); i++) {
-			BookModel model = new BookModel();
+			BookModel book = new BookModel();
 
 			Element element = (Element) list.item(i);
-			model.setBookname(getChildren(element, "title"));
-			model.setLink(getChildren(element, "link"));
-			model.setImageurl(getChildren(element, "coverSmallUrl"));
-			model.setPriceSales(getChildren(element, "priceSales"));
-			model.setWriter(getChildren(element, "author"));
-			model.setIsbn(getChildren(element, "isbn"));
-			model.setGenre(getChildren(element, "categoryName"));
-			model.setPublisher(getChildren(element, "publisher"));
-			
+			book.setBookname(getChildren(element, "title"));
+			book.setLink(getChildren(element, "link"));
+			book.setImageurl(getChildren(element, "coverSmallUrl"));
+			book.setPriceSales(getChildren(element, "priceSales"));
+			book.setWriter(getChildren(element, "author"));
+			book.setIsbn(getChildren(element, "isbn"));
+			book.setGenre(getChildren(element, "categoryName"));
+			book.setPublisher(getChildren(element, "publisher"));
+			book.setSummary(getChildren(element, "description"));
 
-			bookList.add(model);
+			bookList.add(book);
 
 		}
 		return bookList;

@@ -51,7 +51,7 @@
 		SELECT *
 		FROM
 		bulletinboard
-		ORDER BY registerday;
+		ORDER BY registerdate;
 	</select>
 
 	<select id="selectMaxGrade" resultType="int">
@@ -71,27 +71,27 @@
 
 	<insert id="insertBoard" parameterType="BoardModel">
 		INSERT INTO bulletinboard
-		(title,content,registerday,modifiday,id)
+		(title,content,registerdate,modifidate,id)
 		VALUES
 		(#{title},#{content},NOW(),NOW(),#{id})
 	</insert>
 
 	<insert id="insertBook" parameterType="BookModel">
 		INSERT INTO book
-		(bookname,booknum,damage,genre,publisher,writer,grade,borrowcheck,imageurl)
+		(bookname,bookCode,damage,genre,publisher,writer,grade,borrowcheck,imageurl)
 		VALUES
-		(#{bookname},#{booknum},0,#{genre},#{publisher},#{writer},0,0,#{imageurl})
+		(#{bookname},#{bookCode},0,#{genre},#{publisher},#{writer},0,0,#{imageurl})
 	</insert>
 
 	<insert id="requestBook" parameterType="BookModel">
 		INSERT INTO request
-		(requestid, requestdate,
-		bookname,booknum,
+		(id, requestdate,
+		bookname,bookCode,
 		pricesales,writer,quantity,genre,link,
-		imageurl, isbn)
+		imageurl, isbn, publisher, summary)
 		VALUES
-		(#{requestid},
-		now(),#{bookname},#{booknum},#{priceSales},#{writer},#{quantity},#{genre},#{link},#{imageurl},#{isbn})
+		(#{id},
+		now(),#{bookname},#{bookCode},#{priceSales},#{writer},#{quantity},#{genre},#{link},#{imageurl},#{isbn}, #{publisher}, #{summary})
 	</insert>
 
 	<select id="selectBorrowList" resultType="BookModel">
@@ -100,7 +100,7 @@
 	
 	<delete id="deleteRequest" parameterType="String">
 		DELETE * FROM request
-		WHERE booknum=#{booknum}
+		WHERE bookCode=#{bookCode}
 	</delete>
 
 	<select id="selectBestBook" resultType="BookModel">
@@ -113,7 +113,7 @@
 	<select id="borrowList" resultType="BookModel" parameterType="String">
 		SELECT *
 		FROM borrow
-		WHERE borrowid = #{id}
+		WHERE id = #{id}
 	</select>
 
 	<select id="selectPass" resultType="String" parameterType="String">
@@ -132,37 +132,38 @@
 	</update>
 
 	<select id="selectBook" parameterType="String" resultType="BookModel">
-		SELECT * FROM book WHERE booknum=#{booknum}
+		SELECT * FROM book WHERE bookCode=#{bookCode}
 	</select>
 
 
 	<select id="searchBook" parameterType="String" resultType="BookModel">
-		SELECT booknum, bookname, genre, publisher, writer
-		,imageurl,borrowcheck,resernum
-		FROM book
+		SELECT bookCode, bookname, genre, publisher, writer
+		,imageurl	FROM book
 		WHERE bookname LIKE
 		CONCAT('%',#{keyword},'%')
 
 	</select>
 
+
+
 	<select id="selectBlack" resultType="MemberModel">
 		SELECT
-		A.id,A.name,A.email,A.address,A.cell,A.Home,A.numborrow,A.numarrear,B.endday
+		A.id,A.name,A.email,A.address,A.cell,A.Home,A.numborrow,A.numarrear
 		FROM member as A, blackList as B
 		WHERE A.id=B.id;
 	</select>
 
 	<select id="selectLate" resultType="MemberModel">
 		SELECT
-		a.id,a.name,a.email,a.address,a.cell,a.home, b.borrowday, b.returnday
-		FROM member as A ,book as B
-		WHERE NOW() > returnday and a.id=b.id;
+		a.id,a.name,a.email,a.address,a.cell,a.home, b.borrowdate, b.returndate
+		FROM member as A ,borrow as B
+		WHERE NOW() > returndate and a.id=b.id;
 	</select>
 
 	<delete id="deleteBook" parameterType="String">
 		DELETE FROM book
 		WHERE
-		booknum=#{booknum}
+		bookCode=#{bookCode}
 	</delete>
 
 
@@ -171,21 +172,20 @@
 		SET
 		bookname=#{bookname}, genre=#{genre},
 		publisher=#{publisher},writer=#{writer}
-		WHERE booknum=#{booknum}
+		WHERE bookCode=#{bookCode}
 	</update>
 
 	<select id="selectname" parameterType="String" resultType="String">
 		SELECT bookname
 		FROM book
-		WHERE booknum=#{booknum}
+		WHERE bookCode=#{bookCode}
 	</select>
 
 	<insert id="insertReservation" parameterType="BookModel">
 		INSERT INTO
-		reservation(resernum,booknum, bookname, period,ID)
-		VALUES(#{resernum},#{booknum},#{bookname},date_add(now(),interval 7
-		day),#{reserid})
-		day),#{id})
+		reservation(id, bookCode, reserveDate, status)
+		VALUES(#{id},#{bookCode},date_add(now(),interval 7
+		date), 2)
 	</insert>
 
 
@@ -193,13 +193,13 @@
 		UPDATE book
 		SET
 		resernum=#{resernum}
-		WHERE booknum=#{booknum}
+		WHERE bookCode=#{bookCode}
 	</update>
 
 	<select id="selectReservation" parameterType="String"
 		resultType="String">
 		SELECT resernum
 		FROM book
-		WHERE booknum=#{booknum}
+		WHERE bookCode=#{bookCode}
 	</select>
 </mapper>

@@ -37,23 +37,24 @@
 				<div class="input-group">
 					<div style="width: 100%">
 						<span class="input-group-btn" style="width: 340px"> <input
-							type="text" class="form-control" id="keyword" placeholder="원하는 책이 없다면 인터넷에서 주문하세요 !"></span>
+							type="text" class="form-control" id="keyword"
+							placeholder="원하는 책이 없다면 인터넷에서 주문하세요 !"></span>
 					</div>
 
 					<button class="btn btn-default" type="button" id="btn_find"
 						style="width: 40%">
 						<span class="glyphicon glyphicon-search"></span>인터파크 검색
 					</button>
-				
-						<button type="button" class="btn btn-default" id="insertBook">도서추가</button>
-						<button class="btn btn-default" type="button" id="btn_search">도서목록</button>
-				
+
+					<button type="button" class="btn btn-default" id="insertBook">도서추가</button>
+					<button class="btn btn-default" type="button" id="btn_search">도서목록</button>
+
 
 				</div>
 
 				<hr>
 				<img src="/resources/lava3.JPG" style="width: 100%" id="image2">
-				
+
 				<div id="searchResultArea"></div>
 				<hr>
 				<hr>
@@ -71,7 +72,7 @@
 					id="blackList">블랙리스트 보기</button>
 				<hr>
 				<img src="/resources/lava4.JPG" style="width: 100%" id="image3">
-		
+
 				<div id="personResultArea"></div>
 				<hr>
 				<hr>
@@ -80,8 +81,8 @@
 			<div class="col-md-4">
 				<!-- Blog Search Well -->
 				<div class="well">
-					<h4>도서 검색</h4> 
-						
+					<h4>도서 검색</h4>
+
 
 					<div class="input-group">
 						<input type="text" class="form-control" id="keyword"> <span
@@ -100,7 +101,7 @@
 					<br>
 					<div>
 
-						<div  align="center">
+						<div align="center">
 							<c:forEach items="${bestList}" var="best" begin="0" end="2"
 								step="1" varStatus="status">
 								<strong> ${best.id} </strong>
@@ -121,7 +122,7 @@
 					<c:forEach items="${newbook}" var="newbook" begin="0" end="2"
 						step="1" varStatus="status">
 
-						<div class="row " align="center">
+						<div class="row " align="center" onclick="location.href='${newbook.link}'">
 							<div class="thumbnail" align="left"
 								style="max-height: 150px; max-width: 100px">
 								<img src="${newbook.imageurl}" height="100%" width="100%">
@@ -138,7 +139,8 @@
 					<c:forEach items="${bestseller}" var="book" begin="0" end="2"
 						step="1" varStatus="status">
 
-						<div class="row " align="center">
+						<div onclick="location.href='${book.link}'" class="row "
+							align="center">
 							<div class="thumbnail" align="left"
 								style="max-height: 150px; max-width: 100px">
 								<img src="${book.imageurl}" height="100%" width="100%">
@@ -178,6 +180,7 @@
 		$("#insertBook").click(function() {
 			location.href = "/insertbookForm"
 		})
+	
 	</script>
 </body>
 </html>

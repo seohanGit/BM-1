@@ -4,14 +4,11 @@ import java.sql.Date;
 
 import org.hibernate.validator.constraints.NotBlank;
 
-
 public class MemberModel {
 
-	
-	
-	private String id;	
+	private String id;
 	@NotBlank(message = "패스워드를 입력하세요.")
-	private String password;	
+	private String password;
 	private String name;
 	private String email;
 	private String address;
@@ -21,11 +18,9 @@ public class MemberModel {
 	private Date endday;
 	private int numborrow;
 	private int numarrear;
-	private Date borrowday;
-	private Date returnday;
 	private int score;
 	private String content;
-	
+
 	public String getContent() {
 		return content;
 	}
@@ -41,23 +36,6 @@ public class MemberModel {
 	public void setScore(int score) {
 		this.score = score;
 	}
-
-	public Date getBorrowday() {
-		return borrowday;
-	}
-
-	public void setBorrowday(Date borrowday) {
-		this.borrowday = borrowday;
-	}
-
-	public Date getReturnday() {
-		return returnday;
-	}
-
-	public void setReturnday(Date returnday) {
-		this.returnday = returnday;
-	}
-
 
 	public int getNumarrear() {
 		return numarrear;

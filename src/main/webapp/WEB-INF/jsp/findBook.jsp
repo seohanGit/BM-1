@@ -30,14 +30,12 @@
 					<p>${book.writer} | ${book.priceSales}원</p>
 					<form action="requestbook" method="get">
 					<input type="hidden" value="${book.isbn}" name="isbn">
-					<input type="number" name="quantity" value="1">
+					<input type="number" name="quantity" placeholder="구매 수량">
 						<button class="btn btn-default" type="submit" id="requestbook">구매</button>
 
 					</form>
 
-					<p>${book.writer}|${book.priceSales}</p>
-					<button type="button" id="btn_request" class="btn btn-default"
-						onClick="location.href='/requestbook?isbn=${book.isbn}'; request(); ">구매</button>
+				
 					<%-- 
 					<button class="btn btn-default" type="button" id="requestbook"
 						onClick="location.href='/requestbook?isbn=${book.isbn}'">구매</button>

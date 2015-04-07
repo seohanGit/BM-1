@@ -29,14 +29,14 @@
 			</tr>
 			<tr>
 				<td>${book.genre}</td>
-				<td>요청자 : ${book.requestid }</td>
+				<td>요청자 : ${book.id}</td>
 			</tr>
 			<tr>
 				<td>${book.priceSales}원</td>
 				<td>수량 : ${book.quantity}
 					<button onClick="location.href='${book.link}'">구매</button>
 					<button
-						onClick="location.href='deleteRequest?booknum=${book.booknum}'">삭제</button>
+						onClick="location.href='deleteRequest?bookCode=${book.bookCode}'">삭제</button>
 				</td>
 			</tr>
 		</tbody>
@@ -51,11 +51,11 @@
 				<td>${book.quantity}</td>
 				<td>${book.writer}</td>
 				<td>${book.genre}</td>
-				<td>${book.requestid}</td>
+				<td>${book.id}</td>
 				<td>${book.requestdate}</td>
 				<td><button id="buyBook" onClick="location.href='${book.link}'">구매</button>
 					<button
-						onClick="location.href='deleteRequest?requestid=${book.requestid}'">삭제</button></td>
+						onClick="location.href='deleteRequest?id=${book.id}'">삭제</button></td>
 
 			</tr>
 		</tbody>

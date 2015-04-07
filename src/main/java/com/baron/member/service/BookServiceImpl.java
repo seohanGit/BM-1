@@ -50,16 +50,16 @@ public class BookServiceImpl implements BookService {
 
 		XmlDom xmlDom = new XmlDom();
 		book = xmlDom.getBook(url.openStream());
-		book.setRequestid(id);
+		book.setId(id);
 		book.setQuantity(quantity);
-		System.out.println(book.getRequestid());
+		System.out.println(book.getId());
 		System.out.println(book.getGenre());
 		return book;
 	}
 
 	public BookModel findBookOne(String isbn) throws Exception {
 		BookModel book = new BookModel();
-		URL url = getSearchUrl(isbn);
+		URL url = getIsbnUrl(isbn);
 
 		getApiTest(url);
 
@@ -126,7 +126,7 @@ public class BookServiceImpl implements BookService {
 
 	@Override
 	public void requestBook(BookModel model) {
-		model.setBooknum(model.getRequestid() + model.getIsbn());
+		model.setBookCode(model.getId() + model.getIsbn());
 		System.out.println(model.getBookname());
 		System.out.println(model.getIsbn());
 		System.out.println(model.getBookname());
@@ -139,14 +139,14 @@ public class BookServiceImpl implements BookService {
 	}
 
 	/*
-	 * @Override public List<BookModel> selectBook(String booknum) { return
-	 * bookDao.selectBook(booknum); }
+	 * @Override public List<BookModel> selectBook(String bookCode) { return
+	 * bookDao.selectBook(bookCode); }
 	 */
 
 	@Override
-	public void deleteBook(String booknum) {
+	public void deleteBook(String bookCode) {
 		// TODO Auto-generated method stub
-		bookDao.deleteBook(booknum);
+		bookDao.deleteBook(bookCode);
 	}
 
 	@Override
@@ -163,9 +163,9 @@ public class BookServiceImpl implements BookService {
 	}
 
 	@Override
-	public String selectname(String booknum) {
+	public String selectname(String bookCode) {
 		// TODO Auto-generated method stub
-		return bookDao.selectname(booknum);
+		return bookDao.selectname(bookCode);
 	}
 
 	@Override
@@ -176,9 +176,9 @@ public class BookServiceImpl implements BookService {
 	}
 
 	@Override
-	public String selectReservation(String booknum) {
+	public String selectReservation(String bookCode) {
 		// TODO Auto-generated method stub
-		return bookDao.selectReservation(booknum);
+		return bookDao.selectReservation(bookCode);
 	}
 
 	@Override
@@ -260,8 +260,8 @@ public class BookServiceImpl implements BookService {
 	}
 
 	@Override
-	public void deleteRequest(String booknum) {
-		 bookDao.deleteRequest(booknum);
+	public void deleteRequest(String bookCode) {
+		 bookDao.deleteRequest(bookCode);
 	}
 
 	@Override

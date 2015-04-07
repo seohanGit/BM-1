@@ -28,14 +28,14 @@ public class BookDaoImpl implements BookDao {
 	}
 
 	@Override
-	public List<BookModel> selectBook(String booknum) {
-		return session.selectList(NAMESPACE + "selectBook", booknum);
+	public List<BookModel> selectBook(String bookCode) {
+		return session.selectList(NAMESPACE + "selectBook", bookCode);
 	}
 
 	@Override
-	public void deleteBook(String booknum) {
+	public void deleteBook(String bookCode) {
 
-		session.delete(NAMESPACE + "deleteBook", booknum);
+		session.delete(NAMESPACE + "deleteBook", bookCode);
 		// TODO Auto-generated method stub
 
 	}
@@ -48,8 +48,8 @@ public class BookDaoImpl implements BookDao {
 	}
 
 	@Override
-	public String selectname(String booknum) {
-		return session.selectOne(NAMESPACE + "selectname", booknum);
+	public String selectname(String bookCode) {
+		return session.selectOne(NAMESPACE + "selectname", bookCode);
 		// TODO Auto-generated method stub
 
 	}
@@ -69,8 +69,8 @@ public class BookDaoImpl implements BookDao {
 	}
 
 	@Override
-	public String selectReservation(String booknum) {
-		return session.selectOne(NAMESPACE + "selectReservation", booknum);
+	public String selectReservation(String bookCode) {
+		return session.selectOne(NAMESPACE + "selectReservation", bookCode);
 		// TODO Auto-generated method stub
 
 	}
@@ -95,9 +95,9 @@ public class BookDaoImpl implements BookDao {
 	}
 
 	@Override
-	public void deleteRequest(String booknum) {
+	public void deleteRequest(String bookCode) {
 		// TODO Auto-generated method stub
-		session.delete(NAMESPACE + "deleteRequest", booknum);
+		session.delete(NAMESPACE + "deleteRequest", bookCode);
 
 	}
 

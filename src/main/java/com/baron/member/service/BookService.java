@@ -8,9 +8,9 @@ import com.baron.member.model.BookModel;
 public interface BookService {
 
 	public void insertBook(BookModel model);
-	
+
 	public List<BookModel> searchBook(String keyword);
-	
+
 	public void deleteBook(String booknum);
 
 	public void updateBook(BookModel bookmodel);
@@ -22,10 +22,20 @@ public interface BookService {
 	public void updateBookReser(BookModel bookmodel);
 
 	public String selectReservation(String booknum);
-	
+
 	public List<BookModel> findBook(String keyword) throws Exception;
+
+
+	List<BookModel> getBestseller(String catogoryId) throws Exception;
+
+	List<BookModel> getNewbook() throws Exception;
 
 	void requestBook(BookModel model);
 
-	List<BookModel> selectBook(String booknum);
+	public BookModel findBookOne(String isbn) throws Exception;
+
+
+
+	
+
 }

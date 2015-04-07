@@ -91,40 +91,58 @@
 				<div class="well" align="center">
 					<h3>이달의 베스트 회원 Top 3</h3>
 					<br>
-					<div class="row">
-						<div align="center">
+					<div>
+
+						<div  align="center">
 							<c:forEach items="${bestList}" var="best" begin="0" end="2"
 								step="1" varStatus="status">
-								<font size=3><strong> ${best.id} </strong></font>
+								<strong> ${best.id} </strong>
 								<br>
-								<strong>${best.name}</strong>
-								<br>
-                                  ${best.score}점<br>
+								<strong>${best.name}</strong>  ${best.score}점
 								<br>
 							</c:forEach>
 						</div>
+
 						<!-- /.col-lg-6 -->
 					</div>
 					<!-- /.row -->
 				</div>
 				<!-- Side Widget Well -->
 				<div class="well">
-					<h4>데이터베이스 배움터</h4>
-					<p>이 책을 저술하기 위해서 약 20,000페이지에 가까운 자료를 찾아서 검토하였다. 또한 이 분야에서 오랜
-						강의 경험이 있는 많은 교수들의 자문도 구하였다. 이와 같은 준비 과정을 거쳐, 적절한 학습 분량의 데이터베이스의
-						기본적인 개념과 실용적인 주제들을 정선하여 이 책을 저술하였다. 실제 업무와 관련이 적은 순수한 데이터베이스 이론
-						주제들은 과감하게 배제하였고, 개념을 알기 쉽게 보여주는 그림들을 많이 사용하여 이해하기 쉬운 책이 되도록 꾸몄다.</p>
-					<c:forEach items="${bookmodel}" var="book" begin="0" end="2"
+
+					<h3>신간도서</h3>
+					<c:forEach items="${newbook}" var="newbook" begin="0" end="2"
 						step="1" varStatus="status">
-						<div class="row" align="center">
-							<div align="center">
-								<div class="thumbnail" align="center">
-									<img src="${book.imageurl}">
-									<div class="caption">
-										<p>${book.bookname}</p>
-									</div>
-								</div>
+
+						<div class="row " align="center">
+							<div class="thumbnail" align="left"
+								style="max-height: 150px; max-width: 100px">
+								<img src="${newbook.imageurl}" height="100%" width="100%">
 							</div>
+							<div align="left">
+								<p class="caption">${newbook.bookname}</p>
+								<p class="caption">${newbook.writer}</p>
+								<p class="caption">${newbook.genre}</p>
+							</div>
+						</div>
+						<hr>
+					</c:forEach>
+					<h3>베스트 셀러</h3>
+					<c:forEach items="${bestseller}" var="book" begin="0" end="2"
+						step="1" varStatus="status">
+
+						<div class="row " align="center">
+							<div class="thumbnail" align="left"
+								style="max-height: 150px; max-width: 100px">
+								<img src="${book.imageurl}" height="100%" width="100%">
+							</div>
+							<div align="left">
+								<p class="caption">${book.bookname}</p>
+								<p class="caption">${book.writer}</p>
+								<p class="caption">${book.genre}</p>
+							</div>
+						</div>
+						<hr>
 					</c:forEach>
 				</div>
 			</div>

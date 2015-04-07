@@ -23,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.baron.member.model.BookModel;
 import com.baron.member.model.ContentModel;
 import com.baron.member.model.MemberModel;
+import com.baron.member.service.BookService;
 import com.baron.member.service.JoinService;
 
 /**
@@ -33,6 +34,9 @@ public class MemberController {
 
 	@Autowired
 	private JoinService joinService;
+
+	@Autowired
+	private BookService bookService;
 
 	@RequestMapping("/modify")
 	public String modifyidentity(String password, HttpServletRequest request,
@@ -97,15 +101,20 @@ public class MemberController {
 	}
 
 	@RequestMapping("/admin")
-	public String admin(HttpServletRequest request, Model model) {
+	public String admin(HttpServletRequest request, Model model)
+			throws Exception {
 		for (Cookie cookie : request.getCookies()) {
 			if (cookie.getName().equals("bm_permission")) {
 				System.out.println(cookie.getValue());
 				if ("1".equals(cookie.getValue())) {
-					List<BookModel> bookmodel = joinService.selectBestBook();
+
 					List<MemberModel> memberList = joinService.selectBest();
-					model.addAttribute("bookmodel", bookmodel);
+					List<BookModel> bestSeller = bookService.getBestseller("300");
+					List<BookModel> newBook = bookService.getNewbook();
+
 					model.addAttribute("bestList", memberList);
+					model.addAttribute("bestseller", bestSeller);
+					model.addAttribute("newbook", newBook);
 					return "admin";
 				} else
 					return "adminfail";
@@ -168,14 +177,20 @@ public class MemberController {
 	}
 
 	@RequestMapping("/index")
-	public String index(Model model) {
+	public String index(Model model) throws Exception {
 		List<ContentModel> content = joinService.selectContent();
 		List<MemberModel> memberList = joinService.selectBest();
+<<<<<<< HEAD
 		List<BookModel> bookmodel = joinService.selectBestBook();
 		
+=======
+		List<BookModel> bestSeller = bookService.getBestseller("100");
+		List<BookModel> newBook = bookService.getNewbook();
+>>>>>>> feature/#6
 		model.addAttribute("bestList", memberList);
 		model.addAttribute("contentList", content);
-		model.addAttribute("bookmodel", bookmodel);
+		model.addAttribute("bestseller", bestSeller);
+		model.addAttribute("newbook", newBook);
 		return "index";
 	}
 

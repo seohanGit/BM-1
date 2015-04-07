@@ -15,6 +15,9 @@ $('#btn_search').click(function() {
 	});
 });
 
+
+
+
 /*$('#btn_next').click(function() {
 	$.ajax({
 		type:"GET",							// GET or POST

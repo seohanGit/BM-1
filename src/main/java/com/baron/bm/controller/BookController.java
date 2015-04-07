@@ -34,28 +34,35 @@ public class BookController {
 		return "insertbookresult";
 	}
 
+	@RequestMapping("/national")
+	public String getNationalBest(BookModel model) throws Exception {
+		bookservice.getBestseller("200");
+		return "book/nationalBest";
+	}
+
 	@RequestMapping("/requestbook")
-	public String buyBook(HttpServletRequest request, BookModel book,
-			String booknum, String bookname, String genre, String writer,
-			String publisher, String imageurl) {
-		/*
-		 * if(bookservice.selectReservation(booknum)!=null){ return
-		 * "reservationfail"; }
-		 */
+	public String requestBook(HttpServletRequest request, BookModel book,
+			String isbn) throws Exception {
+
+		book=bookservice.findBookOne(isbn);
+/*
 		book.setBookname(bookname);
+		System.out.println(book.getBookname());
 		book.setBooknum(booknum);
 		book.setGenre(genre);
 		book.setWriter(writer);
 		book.setPublisher(publisher);
 		book.setImageurl(imageurl);
-
+*/
+		System.out.println(isbn);
 		book.setRequestid("req" + book.getBooknum());
-
+		System.out.println(book.getBookname());
 		for (Cookie cookie : request.getCookies()) {
 			if (cookie.getName().equals("bm_id"))
 				book.setId(cookie.getValue());
 		}
 		bookservice.requestBook(book);
+		System.out.println(book.getBookname());
 		return "admin";
 	}
 
@@ -71,6 +78,7 @@ public class BookController {
 		List<BookModel> bookList = bookservice.findBook(keyword);
 
 		model.addAttribute("bookList", bookList);
+
 		return "findBook";
 	}
 

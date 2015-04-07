@@ -19,20 +19,17 @@ import org.xml.sax.SAXException;
 import com.baron.member.model.BookModel;
 
 public class XmlDom {
-/*	
-	public NodeList responseField(InputStream br) throws Exception{
-
-		Element root = makeDoc(br);
-		
-		NodeList result; 
-		result. root.getElementsByTagName("totalResults");
-		NodeList page = root.getElementsByTagName("startIndex");
-	
-		
-		return page;
-	}
-		*/
-	
+	/*
+	 * public NodeList responseField(InputStream br) throws Exception{
+	 * 
+	 * Element root = makeDoc(br);
+	 * 
+	 * NodeList result; result. root.getElementsByTagName("totalResults");
+	 * NodeList page = root.getElementsByTagName("startIndex");
+	 * 
+	 * 
+	 * return page; }
+	 */
 
 	private Element makeDoc(InputStream br)
 			throws ParserConfigurationException, SAXException, IOException {
@@ -49,7 +46,29 @@ public class XmlDom {
 		return root;
 	}
 
-	public List<BookModel> getBooklist(InputStream br) throws Exception, SAXException, IOException {
+	public BookModel getBook(InputStream br) throws Exception, SAXException,
+			IOException {
+		Element root = makeDoc(br);
+		NodeList list = root.getElementsByTagName("item");
+
+		BookModel book = new BookModel();
+		for (int i = 0; i < list.getLength(); i++) {
+
+			Element element = (Element) list.item(0);
+			book.setBookname(getChildren(element, "title"));
+			book.setLink(getChildren(element, "link"));
+			book.setImageurl(getChildren(element, "coverSmallUrl"));
+			book.setPriceSales(getChildren(element, "priceSales"));
+			book.setWriter(getChildren(element, "author"));
+			book.setBooknum(getChildren(element, "isbn"));
+			book.setGenre(getChildren(element, "categoryName"));
+			book.setPublisher(getChildren(element, "publisher"));
+		}
+		return book;
+	}
+
+	public List<BookModel> getBooklist(InputStream br) throws Exception,
+			SAXException, IOException {
 		Element root = makeDoc(br);
 		NodeList list = root.getElementsByTagName("item");
 		List<BookModel> bookList = new ArrayList<BookModel>();
@@ -67,7 +86,6 @@ public class XmlDom {
 			model.setPublisher(getChildren(element, "publisher"));
 
 			bookList.add(model);
-		
 
 		}
 		return bookList;

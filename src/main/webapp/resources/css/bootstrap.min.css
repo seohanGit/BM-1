@@ -5016,7 +5016,7 @@ a.list-group-item.active>.badge, .nav-pills>.active>a>.badge {
 .thumbnail {
 	display: block;
 	padding: 4px;
-	margin-bottom: 20px;
+	
 	line-height: 1.42857143;
 	background-color: #fff;
 	border: 1px solid #ddd;

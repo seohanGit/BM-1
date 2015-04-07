@@ -24,7 +24,17 @@ public interface BookDao {
 
 	public void requestBook(BookModel model);
 
+
+	public List<BookModel> requestList();
+
+	public List<BookModel> borrowList(String id);
+
 	List<BookModel> searchBook(String keyword);
+
+	public void deleteRequest(String requestid);
+
+	public List<BookModel> selectBorrowList();
+
 
 
 	

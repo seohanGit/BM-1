@@ -1,5 +1,6 @@
 package com.baron.bm.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.Cookie;
@@ -11,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.HttpRequestHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.baron.member.dao.BookDao;
 import com.baron.member.model.BookModel;
 import com.baron.member.model.MemberModel;
 import com.baron.member.service.BookService;
@@ -34,12 +36,41 @@ public class BookController {
 		return "insertbookresult";
 	}
 
+	/*
+	 * @RequestMapping("/requestOk") public String requestOk(BookModel model) {
+	 * System.out.println(model.getRequestid()); bookservice.requestBook(model);
+	 * return "requestBookResult"; }
+	 */
+	@RequestMapping("/confirmRequest")
+	public String requestResult(BookModel model) {
+		System.out.println(model.getRequestid());
+		bookservice.requestBook(model);
+		return "requestBookResult";
+	}
+
+	@RequestMapping("/requestList")
+	public String requestList(Model model) {
+		List<BookModel> BookList = new ArrayList<BookModel>();
+		BookList = bookservice.requestList();
+		model.addAttribute("bookList", BookList);
+		return "requestList";
+	}
+
+	
+
 	@RequestMapping("/national")
 	public String getNationalBest(BookModel model) throws Exception {
 		bookservice.getBestseller("200");
 		return "book/nationalBest";
 	}
 
+	@RequestMapping("/borrowListAll")
+	public String borrowListAll(Model model){
+		List<BookModel> bookList = new ArrayList<BookModel>();
+		bookList = bookservice.selectBorrowList();
+		model.addAttribute("bookList", bookList);
+		return "borrowListAll";
+	}
 	@RequestMapping("/requestbook")
 	public String requestBook(HttpServletRequest request, BookModel book,
 			String isbn) throws Exception {
@@ -65,9 +96,24 @@ public class BookController {
 		System.out.println(book.getBookname());
 		return "admin";
 	}
-
+	
+	@RequestMapping("/deleteRequest")
+	public String deleteRequest(String booknum){
+		bookservice.deleteRequest(booknum);
+		return "admin";
+	}
+	
+	
 	@RequestMapping("/searchBook")
 	public String searchBook(String keyword, Model model) {
+		List<BookModel> bookList = bookservice.searchBook(keyword);
+		model.addAttribute("bookList", bookList);
+		return "search";
+	}
+
+	@RequestMapping("/listBook")
+	public String listBook(String keyword, Model model) {
+		keyword = "";
 		List<BookModel> bookList = bookservice.searchBook(keyword);
 		model.addAttribute("bookList", bookList);
 		return "search";
@@ -78,7 +124,6 @@ public class BookController {
 		List<BookModel> bookList = bookservice.findBook(keyword);
 
 		model.addAttribute("bookList", bookList);
-
 		return "findBook";
 	}
 
@@ -121,6 +166,31 @@ public class BookController {
 		bookmodel.setBooknum(booknum1);
 		bookservice.updateBook(bookmodel);
 		return "modifybookresult";
+	}
+
+	@RequestMapping("/borrowbook")
+	public String borrowBook(String booknum, BookModel book) {
+
+		return "borrowresult";
+	}
+
+	@RequestMapping("/returnbook")
+	public String returnBook(String booknum, BookModel book) {
+
+		return "returnresult";
+	}
+
+	@RequestMapping("/borrowList")
+	public String borrowList(HttpServletRequest request, Model model) {
+		String id = null;
+		for(Cookie cookie : request.getCookies()){
+			if(cookie.getName().equals("bm_id"))
+				id=cookie.getValue();
+		}
+		List<BookModel> bookList = bookservice.borrowList(id);
+
+		model.addAttribute("bookList", bookList);
+		return "borrowList";
 	}
 
 	@RequestMapping("/reservation")

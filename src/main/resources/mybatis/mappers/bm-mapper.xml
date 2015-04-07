@@ -15,6 +15,11 @@
 		#{name},#{email},#{address},#{cell},#{home})
 	</insert>
 
+	<select id="requestList" resultType="BookModel">
+		SELECT *
+		FROM
+		request
+	</select>
 
 	<select id="selectMember" resultType="MemberModel"
 		parameterType="MemberModel">
@@ -62,14 +67,7 @@
 		ORDER BY title;
 	</select>
 
-	<insert id="requestBook" parameterType="BookModel">
-		INSERT INTO request
-		(requestid, requestdate, ID, booknum, bookname,
-		writer,publisher,
-		genre, link, imageurl)
-		VALUES(#{requestid},date_add(now()),#{id},#{booknum},#{bookname},
-		#{writer},#{publisher},#{genre},#{link},#{imageurl})
-	</insert>
+
 
 	<insert id="insertBoard" parameterType="BoardModel">
 		INSERT INTO bulletinboard
@@ -85,11 +83,37 @@
 		(#{bookname},#{booknum},0,#{genre},#{publisher},#{writer},0,0,#{imageurl})
 	</insert>
 
+	<insert id="requestBook" parameterType="BookModel">
+		INSERT INTO request
+		(requestid, requestdate,
+		bookname,booknum,
+		pricesales,writer,quantity,genre,link,
+		imageurl, isbn)
+		VALUES
+		(#{requestid},
+		now(),#{bookname},#{booknum},#{priceSales},#{writer},#{quantity},#{genre},#{link},#{imageurl},#{isbn})
+	</insert>
+
+	<select id="selectBorrowList" resultType="BookModel">
+		SELECT * FROM borrow
+	</select>
+	
+	<delete id="deleteRequest" parameterType="String">
+		DELETE * FROM request
+		WHERE booknum=#{booknum}
+	</delete>
+
 	<select id="selectBestBook" resultType="BookModel">
 		SELECT *
 		FROM book
 		ORDER BY
 		grade DESC
+	</select>
+
+	<select id="borrowList" resultType="BookModel" parameterType="String">
+		SELECT *
+		FROM borrow
+		WHERE borrowid = #{id}
 	</select>
 
 	<select id="selectPass" resultType="String" parameterType="String">
@@ -141,6 +165,7 @@
 		booknum=#{booknum}
 	</delete>
 
+
 	<update id="updateBook" parameterType="BookModel">
 		UPDATE book
 		SET
@@ -159,8 +184,10 @@
 		INSERT INTO
 		reservation(resernum,booknum, bookname, period,ID)
 		VALUES(#{resernum},#{booknum},#{bookname},date_add(now(),interval 7
+		day),#{reserid})
 		day),#{id})
 	</insert>
+
 
 	<update id="updateBookReser" parameterType="BookModel">
 		UPDATE book

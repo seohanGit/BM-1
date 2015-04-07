@@ -1,6 +1,12 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!-- Navigation -->
+
+<!--
+
+//-->
+
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 	<div class="container">
 		<!-- Brand and toggle get grouped for better mobile display -->
@@ -16,22 +22,39 @@
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse"
 			id="bs-example-navbar-collapse-1">
-			<ul class="nav navbar-nav">
-				<li><a href="#" data-toggle="modal" data-target="#myModal">사용자정보수정</a></li>
+			<ul class="nav navbar-nav " role="menu">
+				<div class="btn-group" style="height: 50PX">
+					<button type="button" class="btn btn-default dropdown-toggle"
+						data-toggle="dropdown" aria-expanded="false" style="height: 50PX">
+						내 정보<span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu" role="menu">
+						<li><a id="borrow_list" href="">대여현항</a></li>
+						<li><a href="#" data-toggle="modal" data-target="#myModal">사용자정보수정</a></li>
+						<li class="divider"></li>
+
+						<li><a class="btn " style="" id="logout"
+							name="logout">로그 아웃 <span
+								class="glyphicon glyphicon-chevron-right"></span></a></li>
+					</ul>
+				</div>
 				<li><a href="board">게시판</a></li>
 				<li><a href="admin">관리자페이지</a></li>
-
-
-				<li><a class="btn btn-primary" style="" id="logout"
-					name="logout">로그 아웃 <span
-						class="glyphicon glyphicon-chevron-right"></span>
-				</a></li>
 			</ul>
+
 		</div>
-		<!-- /.navbar-collapse -->
+
 	</div>
+	<!-- /.navbar-collapse -->
+
+
+
+
+
 	<!-- /.container -->
 </nav>
+
+
 <div class="modal fade" id="myModal">
 	<div class="modal-dialog">
 		<div class="modal-content">

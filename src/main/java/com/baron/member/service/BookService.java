@@ -1,5 +1,6 @@
 package com.baron.member.service;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
@@ -25,17 +26,24 @@ public interface BookService {
 
 	public List<BookModel> findBook(String keyword) throws Exception;
 
+	public BookModel addRequestBook(String isbn, String id, int quantity) throws Exception,
+			IOException;
+
+	public List<BookModel> requestList();
+
+	void requestBook(BookModel model);
+
+	public List<BookModel> borrowList(String id);
 
 	List<BookModel> getBestseller(String catogoryId) throws Exception;
 
 	List<BookModel> getNewbook() throws Exception;
 
-	void requestBook(BookModel model);
-
 	public BookModel findBookOne(String isbn) throws Exception;
 
+	public void deleteRequest(String requestid);
 
+	public List<BookModel> selectBorrowList();
 
-	
 
 }

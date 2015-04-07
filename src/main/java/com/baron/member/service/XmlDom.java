@@ -46,6 +46,7 @@ public class XmlDom {
 		return root;
 	}
 
+
 	public BookModel getBook(InputStream br) throws Exception, SAXException,
 			IOException {
 		Element root = makeDoc(br);
@@ -81,9 +82,10 @@ public class XmlDom {
 			model.setImageurl(getChildren(element, "coverSmallUrl"));
 			model.setPriceSales(getChildren(element, "priceSales"));
 			model.setWriter(getChildren(element, "author"));
-			model.setBooknum(getChildren(element, "isbn"));
+			model.setIsbn(getChildren(element, "isbn"));
 			model.setGenre(getChildren(element, "categoryName"));
 			model.setPublisher(getChildren(element, "publisher"));
+			
 
 			bookList.add(model);
 
@@ -91,6 +93,7 @@ public class XmlDom {
 		return bookList;
 	}
 
+	
 	/**
 	 * 지정한 엘레멘트의 값을 취득
 	 * 

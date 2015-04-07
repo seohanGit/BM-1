@@ -6,9 +6,9 @@ public class BookModel {
 	private String booknum;
 	private String bookname;
 	private String genre;
-	private int damage;
-	private Date borrowday;
-	private Date returnday;
+	private int quantity;
+	private Date borrowdate;
+	private Date returndate;
 	private Date requestdate;
 	private String requestid;
 	private String publisher;
@@ -21,6 +21,14 @@ public class BookModel {
 	private String priceSales;
 	private String link;
 	private String isbn;
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
 
 	public String getIsbn() {
 		return isbn;
@@ -63,7 +71,7 @@ public class BookModel {
 	}
 
 	public void setReturnday(Date returnday) {
-		this.returnday = returnday;
+		this.returndate = returnday;
 	}
 
 	public String getPriceSales() {
@@ -130,28 +138,20 @@ public class BookModel {
 		this.genre = genre;
 	}
 
-	public int getDamage() {
-		return damage;
-	}
-
-	public void setDamage(int damage) {
-		this.damage = damage;
-	}
-
 	public Date getBorrowday() {
-		return borrowday;
+		return borrowdate;
 	}
 
 	public void setBorrowday(Date borrowday) {
-		this.borrowday = borrowday;
+		this.borrowdate = borrowday;
 	}
 
 	public Date getReturnday() {
-		return returnday;
+		return returndate;
 	}
 
 	public void setRetrunday(Date returnday) {
-		this.returnday = returnday;
+		this.returndate = returnday;
 	}
 
 	public String getBorrowcheck() {
@@ -177,4 +177,5 @@ public class BookModel {
 	public void setWriter(String writer) {
 		this.writer = writer;
 	}
+
 }

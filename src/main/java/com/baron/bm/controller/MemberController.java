@@ -180,13 +180,9 @@ public class MemberController {
 	public String index(Model model) throws Exception {
 		List<ContentModel> content = joinService.selectContent();
 		List<MemberModel> memberList = joinService.selectBest();
-<<<<<<< HEAD
-		List<BookModel> bookmodel = joinService.selectBestBook();
 		
-=======
 		List<BookModel> bestSeller = bookService.getBestseller("100");
 		List<BookModel> newBook = bookService.getNewbook();
->>>>>>> feature/#6
 		model.addAttribute("bestList", memberList);
 		model.addAttribute("contentList", content);
 		model.addAttribute("bestseller", bestSeller);

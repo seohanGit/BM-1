@@ -28,11 +28,16 @@
 						</c:choose>
 					<p>
 						<button class="btn btn-default" type="button" id="reservebook"
+							onClick="location.href='/borrowbook?booknum=${book.booknum}'">대출</button>
+						<button class="btn btn-default" type="button" id="reservebook"
+							onClick="location.href='/returnbook?booknum=${book.booknum}'">반납</button>
+						<button class="btn btn-default" type="button" id="reservebook"
 							onClick="location.href='/reservation?booknum=${book.booknum}'">예약</button>
 						<button class="btn btn-default" type="button" id="modifybook"
 							onClick="location.href='/modifyBookForm?booknum=${book.booknum}'">도서수정</button>
 						<button class="btn btn-default" type="button" id="deletebook"
 							onClick="location.href='/deletebook?booknum=${book.booknum}'; del();">도서삭제</button>
+
 					</p>
 				</td>
 			</tr>

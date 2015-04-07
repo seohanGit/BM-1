@@ -68,7 +68,7 @@
 				<button type="button" class="btn btn-default" role="button"
 					id="blackList">블랙리스트 보기</button>
 				<hr>
-				<img src="/resources/lava4.JPG" style="width: 450px; height: 250px"
+				<img src="/resources/lava4.JPG" style="width: 100%"
 					id="image3">
 				<div id="personResultArea"></div>
 				<hr>

@@ -1,40 +1,62 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<table class="table table-striped">
+<table class="table table-striped ">
 	<thead>
-		<tr>
-			<td>표지</td>
-			<td>아이디</td>
-			<td>가격</td>
-			<td>저자</td>
-			<td>출판사</td>
-			<td>장르</td>
-			<td>요청일자</td>
+		<tr class="hidden-xs">
+			<td width="80px">표지</td>
+			<td width="15%">도서명</td>
+			<td width="9%">가격</td>
+			<td width="13%">저자</td>
+			<td width="13%">출판사</td>
+			<td width="12%">장르</td>
+			<td width="8%">아이디</td>
+			<td width="12%">요청일자</td>
+			<td width="60px"></td>
 		</tr>
 	</thead>
 
-	<tbody>
-		<c:forEach items="${bookList}" var="book" varStatus="status">
-			<form action="/requestOk" method="post">
-				<input type="hidden" value="${book.imageurl}"> <input
-					type="hidden" value="${book.requestid}"> <input
-					type="hidden" value="${book.priceSales}"> <input
-					type="hidden" value="${book.writer}"> <input type="hidden"
-					value="${book.publisher}"> <input type="hidden"
-					value="${book.genre}"> <input type="hidden"
-					value="${book.requestDate}">
-				<tr>
-					<td><img src="${book.imageurl}"></td>
-					<td>${book.requestid}</td>
-					<td>${book.priceSales}</td>
-					<td>${book.writer}</td>
-					<td>${book.publisher}</td>
-					<td>${book.genre}</td>
-					<td>${book.requestDate}</td>
-					<td><button type="submit"> 승인 </button>
-				</tr>
-			</form>
-		</c:forEach>
-	</tbody>
+
+	<c:forEach items="${bookList}" var="book" varStatus="status">
+		<tbody class="visible-xs-block">
+			<tr>
+				<td rowspan="4" style="max-width: 100px" align="left"><img
+					src="${book.imageurl}"></td>
+			</tr>
+			<tr>
+				<td width="30%" align="left">${book.bookname }</td>
+				<td width="40%" align="left">${book.writer }</td>
+			</tr>
+			<tr>
+				<td>${book.genre}</td>
+				<td>${book.requestid }</td>
+			</tr>
+			<tr>
+				<td>${book.priceSales}원</td>
+				<td><button onClick="location.href='${book.link}'">구매</button>
+					<button
+						onClick="location.href='deleteRequest?requestid=${book.requestid}'">삭제</button></td>
+			</tr>
+		</tbody>
+
+
+		<tbody>
+			<tr class="hidden-xs">
+				<td width="80px"><img src="${book.imageurl}"
+					style="width: 100%"></td>
+				<td>${book.bookname }</td>
+				<td>${book.priceSales}원</td>
+				<td>${book.writer}</td>
+				<td>${book.publisher}</td>
+				<td>${book.genre}</td>
+				<td>${book.requestid}</td>
+				<td>${book.requestDate}</td>
+				<td><button id="buyBook" onClick="location.href='${book.link}'">구매</button>
+					<button
+						onClick="location.href='deleteRequest?requestid=${book.requestid}'">삭제</button></td>
+
+			</tr>
+		</tbody>
+	</c:forEach>
+
 </table>

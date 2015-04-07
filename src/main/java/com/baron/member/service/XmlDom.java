@@ -46,11 +46,7 @@ public class XmlDom {
 		return root;
 	}
 
-<<<<<<< HEAD
-	public List<BookModel> getBooklist(InputStream br)
-			throws Exception, SAXException, IOException {
-		
-=======
+
 	public BookModel getBook(InputStream br) throws Exception, SAXException,
 			IOException {
 		Element root = makeDoc(br);
@@ -74,7 +70,6 @@ public class XmlDom {
 
 	public List<BookModel> getBooklist(InputStream br) throws Exception,
 			SAXException, IOException {
->>>>>>> 5308682d6d996a04e3756f10010cd91de3dccfdc
 		Element root = makeDoc(br);
 		NodeList list = root.getElementsByTagName("item");
 		List<BookModel> bookList = new ArrayList<BookModel>();
@@ -98,49 +93,7 @@ public class XmlDom {
 		return bookList;
 	}
 
-	public BookModel getBook(InputStream br)
-			throws Exception, SAXException, IOException {
-		
-		BookModel model = new BookModel();
-		Element root = makeDoc(br);
-		NodeList list = root.getElementsByTagName("item");
-		
-		for (int i = 0; i < list.getLength(); i++) {
-
-			Element element = (Element) list.item(i);
-			model.setBookname(getChildren(element, "title"));
-			model.setLink(getChildren(element, "link"));
-			model.setImageurl(getChildren(element, "coverSmallUrl"));
-			model.setPriceSales(getChildren(element, "priceSales"));
-			model.setWriter(getChildren(element, "author"));
-			model.setIsbn(getChildren(element, "isbn"));
-			model.setGenre(getChildren(element, "categoryName"));
-			model.setPublisher(getChildren(element, "publisher"));
-			
-
-			/*
-			 * System.out.println("Time  : " + title);
-			 * System.out.println("Code : " + link);
-			 * System.out.println("writer : " + writer);
-			 * System.out.println("imageUrl : " + imageurl);
-			 * System.out.println("priceSales : " + priceSales);
-			 * 
-			 * model.setBookname(title); model.setLink(link);
-			 * model.setImageurl(imageurl); model.setPriceSales(priceSales);
-			 * model.setWriter(writer);
-			 */
-
-			/*
-			 * System.out.println(bookList.get(i).getBookname());
-			 * System.out.println(bookList.get(i).getPriceSales());
-			 * System.out.println(bookList.get(i).getWriter());
-			 */
-		}
-		
-		System.out.println(model.getRequestid());
-		return model;
-	}
-
+	
 	/**
 	 * 지정한 엘레멘트의 값을 취득
 	 * 

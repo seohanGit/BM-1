@@ -23,20 +23,15 @@ public class BookDaoImpl implements BookDao {
 	}
 
 	@Override
-<<<<<<< HEAD
-	public List<BookModel> selectBook(String keyword) {
-		return session.selectList(NAMESPACE + "selectBook", keyword);
-=======
 	public List<BookModel> searchBook(String keyword) {
-		return session.selectList(NAMESPACE+"searchBook",keyword);
->>>>>>> 5308682d6d996a04e3756f10010cd91de3dccfdc
+		return session.selectList(NAMESPACE + "searchBook", keyword);
 	}
 
 	@Override
 	public List<BookModel> selectBook(String booknum) {
-		return session.selectList(NAMESPACE+"selectBook",booknum);
+		return session.selectList(NAMESPACE + "selectBook", booknum);
 	}
-	
+
 	@Override
 	public void deleteBook(String booknum) {
 
@@ -88,7 +83,6 @@ public class BookDaoImpl implements BookDao {
 
 	}
 
-
 	@Override
 	public List<BookModel> requestList() {
 		return session.selectList(NAMESPACE + "requestList");
@@ -101,10 +95,15 @@ public class BookDaoImpl implements BookDao {
 	}
 
 	@Override
-	public void requestBook(BookModel bookmodel) {
-		session.insert(NAMESPACE+"requestBook",bookmodel);
+	public void deleteRequest(String booknum) {
 		// TODO Auto-generated method stub
-		
+		session.delete(NAMESPACE + "deleteRequest", booknum);
+
+	}
+
+	@Override
+	public List<BookModel> selectBorrowList() {
+		return session.selectList(NAMESPACE + "selectBorrowList");
 	}
 
 }

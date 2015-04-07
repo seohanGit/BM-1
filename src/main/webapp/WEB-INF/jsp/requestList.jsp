@@ -24,8 +24,8 @@
 					src="${book.imageurl}"></td>
 			</tr>
 			<tr>
-				<td width="30%" align="left">${book.bookname }</td>
-				<td width="40%" align="left">${book.writer }</td>
+				<td width="27%" align="left">${book.bookname }</td>
+				<td width="50%" align="left">${book.writer }</td>
 			</tr>
 			<tr>
 				<td>${book.genre}</td>
@@ -36,7 +36,7 @@
 				<td>수량 : ${book.quantity}
 					<button onClick="location.href='${book.link}'">구매</button>
 					<button
-						onClick="location.href='deleteRequest?requestid=${book.requestid}'">삭제</button>
+						onClick="location.href='deleteRequest?booknum=${book.booknum}'">삭제</button>
 				</td>
 			</tr>
 		</tbody>
@@ -52,7 +52,7 @@
 				<td>${book.writer}</td>
 				<td>${book.genre}</td>
 				<td>${book.requestid}</td>
-				<td>${book.requestDate}</td>
+				<td>${book.requestdate}</td>
 				<td><button id="buyBook" onClick="location.href='${book.link}'">구매</button>
 					<button
 						onClick="location.href='deleteRequest?requestid=${book.requestid}'">삭제</button></td>

@@ -33,18 +33,14 @@
 				</select>
 
 				<hr>
-<<<<<<< HEAD
+
 				<img src="/resources/main.JPG" style="width: 100%" id="image1">
-=======
 
-				<img src="/resources/main.JPG" style="width: 100%;" id="image1">
-
->>>>>>> 5308682d6d996a04e3756f10010cd91de3dccfdc
 				<div id="searchResultArea"></div>
 				<hr>
 				<h4>원하는 책이 없다면 인터넷에서 주문하세요 !</h4>
 				<div class="input-group ">
-					<input type="text" class="form-control" id="query"
+					<input type="text" class="form-control" id="keyword"
 						placeholder="인터파크 검색"> <span class="input-group-btn">
 						<button class="btn btn-default" type="button" id="btn_find">
 							<span class="glyphicon glyphicon-search"></span>
@@ -54,11 +50,6 @@
 				</div>
 				<hr>
 				<p>잠은 인생의 사치입니다! 저는 하루 네 시간만 자면 충분하다고 생각해요.</p>
-<<<<<<< HEAD
-=======
-
->>>>>>> feature/#6
-
 				<hr>
 				<!-- Pager -->
 				<ul class="pager">
@@ -70,8 +61,10 @@
 			<div class="col-md-4">
 				<!-- Blog Search Well -->
 				<div class="well">
-					<h4>도서 검색 &nbsp; &nbsp;<button class="btn btn-default" type="button" id="btn_bookList"
-							style="width: 150px">도서목록</button></h4>
+					<tr>
+					<td><button class="btn btn-default" type="button" id="btn_search"
+						style="width: 150px">도서목록</button></td>
+					<td><h4 align="right" >도서 검색</h4></td></tr>
 					<div class="input-group">
 						<input type="text" class="form-control" id="keyword"> <span
 							class="input-group-btn">
@@ -126,6 +119,8 @@
 						<hr>
 					</c:forEach>
 					<button class="btn btn-default" type="button" id="btn_national">국내베스트셀러</button>
+					<button class="btn btn-default" type="button"
+						id="btn_international">국외베스트셀러</button>
 				</div>
 
 			</div>

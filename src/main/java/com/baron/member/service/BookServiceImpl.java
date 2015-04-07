@@ -28,11 +28,8 @@ public class BookServiceImpl implements BookService {
 	public List<BookModel> getNewbook() throws Exception {
 		List<BookModel> bookList = new ArrayList<BookModel>();
 
-<<<<<<< HEAD
-		URL url = getUrl(keyword);
-=======
+		
 		URL url = getNewbookUrl();
->>>>>>> 5308682d6d996a04e3756f10010cd91de3dccfdc
 
 		getApiTest(url);
 
@@ -44,9 +41,8 @@ public class BookServiceImpl implements BookService {
 	}
 
 	@Override
-<<<<<<< HEAD
-	public BookModel addRequestBook(String isbn, String id, int quantity) throws Exception,
-			IOException {
+	public BookModel addRequestBook(String isbn, String id, int quantity)
+			throws Exception, IOException {
 		BookModel book = new BookModel();
 		URL url = getIsbnUrl(isbn);
 
@@ -60,13 +56,12 @@ public class BookServiceImpl implements BookService {
 		System.out.println(book.getGenre());
 		return book;
 	}
-=======
+
 	public BookModel findBookOne(String isbn) throws Exception {
 		BookModel book = new BookModel();
 		URL url = getSearchUrl(isbn);
 
 		getApiTest(url);
->>>>>>> 5308682d6d996a04e3756f10010cd91de3dccfdc
 
 		XmlDom xmlDom = new XmlDom();
 		book = xmlDom.getBook(url.openStream());
@@ -82,8 +77,13 @@ public class BookServiceImpl implements BookService {
 		URL url = getSearchUrl(keyword);
 
 		getApiTest(url);
+		XmlDom xmlDom = new XmlDom();
+		bookList = xmlDom.getBooklist(url.openStream());
+		System.out.println(keyword);
 
-<<<<<<< HEAD
+		return bookList;
+	}
+
 	private URL getIsbnUrl(String keyword) throws UnsupportedEncodingException,
 			MalformedURLException {
 		String key = "B0F933E2847C6447203572CCC68F824A1054E7EF0D966C7B95245288CE95E300";
@@ -102,13 +102,7 @@ public class BookServiceImpl implements BookService {
 
 		URL url = new URL(addr);
 		return url;
-=======
-		XmlDom xmlDom = new XmlDom();
-		bookList = xmlDom.getBooklist(url.openStream());
-		System.out.println(keyword);
-
-		return bookList;
->>>>>>> 5308682d6d996a04e3756f10010cd91de3dccfdc
+	
 	}
 
 	@Override
@@ -122,12 +116,9 @@ public class BookServiceImpl implements BookService {
 		XmlDom xmlDom = new XmlDom();
 		bookList = xmlDom.getBooklist(url.openStream());
 
-<<<<<<< HEAD
-=======
 		return bookList;
 	}
 
->>>>>>> 5308682d6d996a04e3756f10010cd91de3dccfdc
 	@Override
 	public void insertBook(BookModel model) {
 		bookDao.insertBook(model);
@@ -135,13 +126,10 @@ public class BookServiceImpl implements BookService {
 
 	@Override
 	public void requestBook(BookModel model) {
-<<<<<<< HEAD
-		model.setBooknum(model.getRequestid()+model.getIsbn());
+		model.setBooknum(model.getRequestid() + model.getIsbn());
 		System.out.println(model.getBookname());
 		System.out.println(model.getIsbn());
-=======
 		System.out.println(model.getBookname());
->>>>>>> 5308682d6d996a04e3756f10010cd91de3dccfdc
 		bookDao.requestBook(model);
 	}
 
@@ -193,7 +181,6 @@ public class BookServiceImpl implements BookService {
 		return bookDao.selectReservation(booknum);
 	}
 
-<<<<<<< HEAD
 	@Override
 	public List<BookModel> requestList() {
 		// TODO Auto-generated method stub
@@ -204,7 +191,8 @@ public class BookServiceImpl implements BookService {
 	public List<BookModel> borrowList(String id) {
 		// TODO Auto-generated method stub
 		return bookDao.borrowList(id);
-=======
+	}
+
 	private URL getNewbookUrl() throws UnsupportedEncodingException,
 			MalformedURLException {
 		String key = "B0F933E2847C6447203572CCC68F824A1054E7EF0D966C7B95245288CE95E300";
@@ -269,7 +257,17 @@ public class BookServiceImpl implements BookService {
 		}
 
 		br.close();
->>>>>>> 5308682d6d996a04e3756f10010cd91de3dccfdc
+	}
+
+	@Override
+	public void deleteRequest(String booknum) {
+		 bookDao.deleteRequest(booknum);
+	}
+
+	@Override
+	public List<BookModel> selectBorrowList() {
+		// TODO Auto-generated method stub
+		return bookDao.selectBorrowList();
 	}
 
 }

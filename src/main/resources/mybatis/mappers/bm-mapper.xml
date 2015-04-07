@@ -67,14 +67,7 @@
 		ORDER BY title;
 	</select>
 
-	<insert id="requestBook" parameterType="BookModel">
-		INSERT INTO request
-		(requestid, requestdate, ID, booknum, bookname,
-		writer,publisher,
-		genre, link, imageurl)
-		VALUES(#{requestid},date_add(now()),#{id},#{booknum},#{bookname},
-		#{writer},#{publisher},#{genre},#{link},#{imageurl})
-	</insert>
+
 
 	<insert id="insertBoard" parameterType="BoardModel">
 		INSERT INTO bulletinboard
@@ -90,33 +83,37 @@
 		(#{bookname},#{booknum},0,#{genre},#{publisher},#{writer},0,0,#{imageurl})
 	</insert>
 
-<<<<<<< HEAD
 	<insert id="requestBook" parameterType="BookModel">
 		INSERT INTO request
 		(requestid, requestdate,
-		bookname,booknum, pricesales,writer,quantity,genre,link,
+		bookname,booknum,
+		pricesales,writer,quantity,genre,link,
 		imageurl, isbn)
 		VALUES
 		(#{requestid},
 		now(),#{bookname},#{booknum},#{priceSales},#{writer},#{quantity},#{genre},#{link},#{imageurl},#{isbn})
 	</insert>
 
-=======
->>>>>>> 5308682d6d996a04e3756f10010cd91de3dccfdc
+	<select id="selectBorrowList" resultType="BookModel">
+		SELECT * FROM borrow
+	</select>
+	
+	<delete id="deleteRequest" parameterType="String">
+		DELETE * FROM request
+		WHERE booknum=#{booknum}
+	</delete>
+
 	<select id="selectBestBook" resultType="BookModel">
 		SELECT *
 		FROM book
 		ORDER BY
 		grade DESC
-<<<<<<< HEAD
 	</select>
-	
+
 	<select id="borrowList" resultType="BookModel" parameterType="String">
 		SELECT *
 		FROM borrow
 		WHERE borrowid = #{id}
-=======
->>>>>>> 5308682d6d996a04e3756f10010cd91de3dccfdc
 	</select>
 
 	<select id="selectPass" resultType="String" parameterType="String">
@@ -187,11 +184,8 @@
 		INSERT INTO
 		reservation(resernum,booknum, bookname, period,ID)
 		VALUES(#{resernum},#{booknum},#{bookname},date_add(now(),interval 7
-<<<<<<< HEAD
 		day),#{reserid})
-=======
 		day),#{id})
->>>>>>> 5308682d6d996a04e3756f10010cd91de3dccfdc
 	</insert>
 
 

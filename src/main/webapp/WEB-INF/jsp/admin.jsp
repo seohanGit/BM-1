@@ -27,54 +27,33 @@
 				<div class="btn-group" role="group" aria-label="...">
 					<button type="button" class="btn btn-default" id="requestList">구매요청
 						페이지</button>
-					<button type="button" class="btn btn-default">대여현황</button>
+					<button type="button" class="btn btn-default" id="borrowListAll">대여현황</button>
 					<button type="button" class="btn btn-default">Right</button>
 				</div>
 				<!-- First Blog Post -->
-<<<<<<< HEAD
+
 				<hr>
-=======
-				<h2>
-					도서 검색/수정/삭제
-				</h2>
->>>>>>> 5308682d6d996a04e3756f10010cd91de3dccfdc
 
 				<div class="input-group">
 					<div style="width: 100%">
 						<span class="input-group-btn" style="width: 340px"> <input
-							type="text" class="form-control" id="keyword"></span>
+							type="text" class="form-control" id="keyword" placeholder="원하는 책이 없다면 인터넷에서 주문하세요 !"></span>
 					</div>
 
 					<button class="btn btn-default" type="button" id="btn_find"
 						style="width: 40%">
 						<span class="glyphicon glyphicon-search"></span>인터파크 검색
 					</button>
-					<button type="button" class="btn btn-default" id="insertBook">도서추가</button>
-					<button class="btn btn-default" type="button" id="btn_bookList">도서목록</button>
-
-
-<<<<<<< HEAD
-=======
-				<div class="input-group ">
-					<input type="text" class="form-control" id="query" placeholder="인터파크 검색"> <span
-						class="input-group-btn">
-						<button class="btn btn-default" type="button" id="btn_find">
-							<span class="glyphicon glyphicon-search"></span>
-						</button>
+				
 						<button type="button" class="btn btn-default" id="insertBook">도서추가</button>
 						<button class="btn btn-default" type="button" id="btn_search">도서목록</button>
-					</span>
->>>>>>> 5308682d6d996a04e3756f10010cd91de3dccfdc
+				
 
 				</div>
 
 				<hr>
-<<<<<<< HEAD
 				<img src="/resources/lava3.JPG" style="width: 100%" id="image2">
-=======
-				<img src="/resources/lava3.JPG" style="width:100%; "
-					id="image2">
->>>>>>> 5308682d6d996a04e3756f10010cd91de3dccfdc
+				
 				<div id="searchResultArea"></div>
 				<hr>
 				<hr>
@@ -91,12 +70,8 @@
 				<button type="button" class="btn btn-default" role="button"
 					id="blackList">블랙리스트 보기</button>
 				<hr>
-<<<<<<< HEAD
 				<img src="/resources/lava4.JPG" style="width: 100%" id="image3">
-=======
-				<img src="/resources/lava4.JPG" style="width: 100%;"
-					id="image3">
->>>>>>> 5308682d6d996a04e3756f10010cd91de3dccfdc
+		
 				<div id="personResultArea"></div>
 				<hr>
 				<hr>

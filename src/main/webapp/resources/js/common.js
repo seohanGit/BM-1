@@ -17,12 +17,29 @@ $('#btn_search').click(function() {
 	});
 });
 
+$('#borrowListAll').click(function() {
+	$.ajax({
+		type : "GET", // GET or POST
+		url : "/borrowListAll", // URL
+		datatype : "xml", // html, xml, json, jsonp, script, text
+		// parameters as plain object
+		error : function() { // Ajax error handler
+			alert('ajax failed');
+		},
+		success : function(data, status) { // Ajax complete handelr
+			$('#image1').fadeOut();
+			$('#image2').fadeOut();
+			$('#searchResultArea').empty().append(data);
+		}
+	});
+});
+
 $('#borrow_list').click(function() {
 	$.ajax({
 		type : "GET", // GET or POST
 		url : "/borrowList", // URL
 		datatype : "xml", // html, xml, json, jsonp, script, text
-		 // parameters as plain object
+		// parameters as plain object
 		error : function() { // Ajax error handler
 			alert('ajax failed');
 		},
@@ -51,15 +68,11 @@ $('#requestList').click(function() {
 
 })
 
-
 $('#btn_bookList').click(function() {
 	$.ajax({
 		type : "GET", // GET or POST
 		url : "/listBook", // URL
 		datatype : "xml", // html, xml, json, jsonp, script, text
-		data : {
-			keyword : $('#keyword').val()
-		}, // parameters as plain object
 		error : function() { // Ajax error handler
 			alert('ajax failed');
 		},
@@ -71,30 +84,17 @@ $('#btn_bookList').click(function() {
 	});
 });
 
-
-
-
-/*$('#btn_next').click(function() {
-	$.ajax({
-		type : "GET", // GET or POST
-		url : "/findBook", // URL
-		datatype : "xml", // html, xml, json, jsonp, script, text
-		data : {
-			keyword : $('#pagenum').val()
-		}, // parameters as plain object
-		error : function() { // Ajax error handler
-			alert('에러');
-		},
-		success : function(data, status) { // Ajax complete handelr
-			$('#searchResultArea').fadeOut();
-			$('#searchResultArea').empty().append(data);
-		}
-	});
-});
-*/
+/*
+ * $('#btn_next').click(function() { $.ajax({ type : "GET", // GET or POST url :
+ * "/findBook", // URL datatype : "xml", // html, xml, json, jsonp, script, text
+ * data : { keyword : $('#pagenum').val() }, // parameters as plain object error :
+ * function() { // Ajax error handler alert('에러'); }, success : function(data,
+ * status) { // Ajax complete handelr $('#searchResultArea').fadeOut();
+ * $('#searchResultArea').empty().append(data); } }); });
+ */
 $('#btn_find').click(function() {
 	$.ajax({
-<<<<<<< HEAD
+
 		type : "GET", // GET or POST
 		url : "/findBook", // URL
 		datatype : "xml", // html, xml, json, jsonp, script, text
@@ -102,13 +102,7 @@ $('#btn_find').click(function() {
 			keyword : $('#keyword').val()
 		}, // parameters as plain object
 		error : function() { // Ajax error handler
-=======
-		type:"GET",							// GET or POST
-		url:"/findBook",						// URL
-		datatype:"xml",						// html, xml, json, jsonp, script, text
-		data:{keyword:$('#query').val()},			// parameters as plain object
-		error:function() {						// Ajax error handler
->>>>>>> 5308682d6d996a04e3756f10010cd91de3dccfdc
+
 			alert('검색어를 입력하세요');
 		},
 		success : function(data, status) { // Ajax complete handelr

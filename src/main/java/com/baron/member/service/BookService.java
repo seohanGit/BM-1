@@ -26,7 +26,6 @@ public interface BookService {
 
 	public List<BookModel> findBook(String keyword) throws Exception;
 
-<<<<<<< HEAD
 	public BookModel addRequestBook(String isbn, String id, int quantity) throws Exception,
 			IOException;
 
@@ -35,19 +34,16 @@ public interface BookService {
 	void requestBook(BookModel model);
 
 	public List<BookModel> borrowList(String id);
-=======
 
 	List<BookModel> getBestseller(String catogoryId) throws Exception;
 
 	List<BookModel> getNewbook() throws Exception;
 
-	void requestBook(BookModel model);
-
 	public BookModel findBookOne(String isbn) throws Exception;
 
+	public void deleteRequest(String requestid);
 
+	public List<BookModel> selectBorrowList();
 
-	
->>>>>>> 5308682d6d996a04e3756f10010cd91de3dccfdc
 
 }

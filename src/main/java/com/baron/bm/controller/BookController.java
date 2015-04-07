@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.HttpRequestHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.baron.member.dao.BookDao;
 import com.baron.member.model.BookModel;
 import com.baron.member.model.MemberModel;
 import com.baron.member.service.BookService;
@@ -35,7 +36,6 @@ public class BookController {
 		return "insertbookresult";
 	}
 
-<<<<<<< HEAD
 	/*
 	 * @RequestMapping("/requestOk") public String requestOk(BookModel model) {
 	 * System.out.println(model.getRequestid()); bookservice.requestBook(model);
@@ -56,37 +56,21 @@ public class BookController {
 		return "requestList";
 	}
 
-	@RequestMapping("/requestbook")
-	public String requestBook(String isbn, int quantity, Model model,
-			HttpServletRequest request) throws Exception {
-		String id = null;
-		BookModel book = new BookModel();
-		/*
-		 * if(bookservice.selectReservation(booknum)!=null){ return
-		 * "reservationfail"; } book.setBookname(bookname);
-		 * book.setBooknum(booknum); book.setGenre(genre);
-		 * book.setWriter(writer); book.setPublisher(publisher);
-		 * book.setImageurl(imageurl);
-		 */
-		for (Cookie cookie : request.getCookies()) {
-			if (cookie.getName().equals("bm_id"))
-				id = cookie.getValue();
-		}
+	
 
-		book = bookservice.addRequestBook(isbn, id, quantity);
-		model.addAttribute("book", book);
-		System.out.println(book.getBookname());
-		System.out.println(book.getIsbn());
-		return "confirmRequest";
-	}
-
-=======
 	@RequestMapping("/national")
 	public String getNationalBest(BookModel model) throws Exception {
 		bookservice.getBestseller("200");
 		return "book/nationalBest";
 	}
 
+	@RequestMapping("/borrowListAll")
+	public String borrowListAll(Model model){
+		List<BookModel> bookList = new ArrayList<BookModel>();
+		bookList = bookservice.selectBorrowList();
+		model.addAttribute("bookList", bookList);
+		return "borrowListAll";
+	}
 	@RequestMapping("/requestbook")
 	public String requestBook(HttpServletRequest request, BookModel book,
 			String isbn) throws Exception {
@@ -112,8 +96,14 @@ public class BookController {
 		System.out.println(book.getBookname());
 		return "admin";
 	}
-
->>>>>>> 5308682d6d996a04e3756f10010cd91de3dccfdc
+	
+	@RequestMapping("/deleteRequest")
+	public String deleteRequest(String booknum){
+		bookservice.deleteRequest(booknum);
+		return "admin";
+	}
+	
+	
 	@RequestMapping("/searchBook")
 	public String searchBook(String keyword, Model model) {
 		List<BookModel> bookList = bookservice.searchBook(keyword);
@@ -121,7 +111,6 @@ public class BookController {
 		return "search";
 	}
 
-<<<<<<< HEAD
 	@RequestMapping("/listBook")
 	public String listBook(String keyword, Model model) {
 		keyword = "";
@@ -130,17 +119,11 @@ public class BookController {
 		return "search";
 	}
 
-=======
->>>>>>> 5308682d6d996a04e3756f10010cd91de3dccfdc
 	@RequestMapping("/findBook")
 	public String findBook(String keyword, Model model) throws Exception {
 		List<BookModel> bookList = bookservice.findBook(keyword);
 
 		model.addAttribute("bookList", bookList);
-<<<<<<< HEAD
-=======
-
->>>>>>> 5308682d6d996a04e3756f10010cd91de3dccfdc
 		return "findBook";
 	}
 
@@ -164,12 +147,8 @@ public class BookController {
 	}
 
 	@RequestMapping("/modifyBookForm")
-<<<<<<< HEAD
-	public String modifyBookForm(String booknum, HttpServletRequest request) {
-=======
 	public String modifyBookForm(String booknum, HttpServletRequest request,
 			Model model) {
->>>>>>> 5308682d6d996a04e3756f10010cd91de3dccfdc
 		String permission;
 		for (Cookie cookie : request.getCookies()) {
 			if (cookie.getName().equals("bm_permission")) {
@@ -189,7 +168,6 @@ public class BookController {
 		return "modifybookresult";
 	}
 
-<<<<<<< HEAD
 	@RequestMapping("/borrowbook")
 	public String borrowBook(String booknum, BookModel book) {
 
@@ -215,8 +193,6 @@ public class BookController {
 		return "borrowList";
 	}
 
-=======
->>>>>>> 5308682d6d996a04e3756f10010cd91de3dccfdc
 	@RequestMapping("/reservation")
 	public String reservation(String booknum, BookModel book,
 			HttpServletRequest request) {
@@ -232,11 +208,7 @@ public class BookController {
 		System.out.println(bookname);
 		book.setBookname(bookname);
 		resername = "reser" + book.getBooknum();
-<<<<<<< HEAD
-		book.setresernum(resername);
-=======
 		book.setResernum(resername);
->>>>>>> 5308682d6d996a04e3756f10010cd91de3dccfdc
 
 		for (Cookie cookie : request.getCookies()) {
 			if (cookie.getName().equals("bm_id"))

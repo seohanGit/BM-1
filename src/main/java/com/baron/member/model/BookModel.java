@@ -7,8 +7,8 @@ public class BookModel {
 	private String bookname;
 	private String genre;
 	private int quantity;
-	private Date borrowday;
-	private Date returnday;
+	private Date borrowdate;
+	private Date returndate;
 	private Date requestdate;
 	private String requestid;
 	private String publisher;
@@ -21,9 +21,6 @@ public class BookModel {
 	private String priceSales;
 	private String link;
 	private String isbn;
-<<<<<<< HEAD
-	private String requestid;
-	private Date requestDate;
 
 	public int getQuantity() {
 		return quantity;
@@ -32,14 +29,6 @@ public class BookModel {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
-
-	public Date getRequestDate() {
-		return requestDate;
-	}
-
-	public void setRequestDate(Date requestDate) {
-		this.requestDate = requestDate;
-=======
 
 	public String getIsbn() {
 		return isbn;
@@ -55,7 +44,6 @@ public class BookModel {
 
 	public void setRequestdate(Date requestdate) {
 		this.requestdate = requestdate;
->>>>>>> 5308682d6d996a04e3756f10010cd91de3dccfdc
 	}
 
 	public String getRequestid() {
@@ -66,14 +54,6 @@ public class BookModel {
 		this.requestid = requestid;
 	}
 
-<<<<<<< HEAD
-	public String getIsbn() {
-		return isbn;
-	}
-
-	public void setIsbn(String isbn) {
-		this.isbn = isbn;
-=======
 	public String getResernum() {
 		return resernum;
 	}
@@ -91,8 +71,7 @@ public class BookModel {
 	}
 
 	public void setReturnday(Date returnday) {
-		this.returnday = returnday;
->>>>>>> 5308682d6d996a04e3756f10010cd91de3dccfdc
+		this.returndate = returnday;
 	}
 
 	public String getPriceSales() {
@@ -160,19 +139,19 @@ public class BookModel {
 	}
 
 	public Date getBorrowday() {
-		return borrowday;
+		return borrowdate;
 	}
 
 	public void setBorrowday(Date borrowday) {
-		this.borrowday = borrowday;
+		this.borrowdate = borrowday;
 	}
 
 	public Date getReturnday() {
-		return returnday;
+		return returndate;
 	}
 
 	public void setRetrunday(Date returnday) {
-		this.returnday = returnday;
+		this.returndate = returnday;
 	}
 
 	public String getBorrowcheck() {

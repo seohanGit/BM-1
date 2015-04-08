@@ -38,7 +38,7 @@
 				<div class="input-group">
 					<div style="width: 100%">
 						<span class="input-group-btn" style="width: 340px"> <input
-							type="text" class="form-control" id="keyword"
+							type="text" class="form-control" id="query"
 							placeholder="원하는 책이 없다면 인터넷에서 주문하세요 !"></span>
 					</div>
 

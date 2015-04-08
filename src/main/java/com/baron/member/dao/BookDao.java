@@ -18,8 +18,6 @@ public interface BookDao {
 
 	public String selectname(String booknum);
 
-	public void updateBookReser(BookModel bookmodel);
-
 	public String selectReservation(String booknum);
 
 	public List<BookModel> borrowList(String id);
@@ -32,7 +30,7 @@ public interface BookDao {
 
 	public void returnBook(String bookCode);
 
-	public void updateBookBorrow(BookModel bookmodel);
+	public void updateBookTable(BookModel bookmodel);
 
 	public void deleteBorrow(String bookCode);
 

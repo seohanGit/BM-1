@@ -28,10 +28,10 @@
 					</p>
 
 					<p>${book.writer} | ${book.priceSales}원</p>
-					<form action="requestbook" method="get">
+					<form action="/requestbook" method="get">
 					<input type="hidden" value="${book.isbn}" name="isbn">
 					<input type="number" name="quantity" placeholder="구매 수량">
-						<button class="btn btn-default" type="submit" id="requestbook">구매</button>
+						<button class="btn btn-default" type="submit" id="requestbook">구매요청</button>
 
 					</form>
 

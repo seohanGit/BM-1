@@ -36,8 +36,8 @@ public class RequestController {
 	}
 
 	@RequestMapping("/requestbook")
-	public String requestBook(HttpServletRequest request, BookModel book,
-			String isbn, int quantity) throws Exception {
+	public String requestBook(HttpServletRequest request, Model model,
+			BookModel book, String isbn, int quantity) throws Exception {
 
 		book = requestservice.findBookOne(isbn);
 		book.setQuantity(quantity);
@@ -46,11 +46,10 @@ public class RequestController {
 			if (cookie.getName().equals("bm_id"))
 				book.setId(cookie.getValue());
 		}
-
-		requestservice.requestBook(book);
+		model.addAttribute("book", book);
 		System.out.println(book.getBookname());
 
-		return "admin";
+		return "confirmRequest";
 	}
 
 	@RequestMapping("/deleteRequest")
@@ -59,7 +58,7 @@ public class RequestController {
 		System.out.println(bookCode);
 		System.out.println(bookCode);
 		System.out.println(bookCode);
-		
+
 		requestservice.deleteRequest(bookCode);
 		return "admin";
 	}

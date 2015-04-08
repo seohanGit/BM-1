@@ -25,24 +25,26 @@
 			<ul class="nav navbar-nav " role="menu">
 
 				<div class="btn-group" style="height: 50PX">
-					<button type="button" class="btn btn-default dropdown-toggle"
-						data-toggle="dropdown" aria-expanded="false" style="height: 50PX">
+					<button type="button" id="nav-input" class="btn btn-default  dropdown-toggle"
+						data-toggle="dropdown" aria-expanded="false" style="height: 40PX">
 						내 정보<span class="caret"></span>
 					</button>
 					<ul class="dropdown-menu" role="menu">
-						<li><a id="borrowList">대여현항</a></li>
+						<li><a href="#" id="borrowList">대여현항</a></li>
 						<li><a href="#" data-toggle="modal" data-target="#myModal">사용자정보수정</a></li>
 						<li class="divider"></li>
 
-						<li><a class="btn " style="" id="logout" name="logout">로그
+						<li><a href="#" id="logout" name="logout">로그
 								아웃 <span class="glyphicon glyphicon-chevron-right"></span>
 						</a></li>
 					</ul>
 				</div>
-				<li ><input type="text" class="form-control" id="keyword" style="height:48px; align:center;"
-					placeholder="도서검색"></li>
-				<li><button class="btn btn-default" type="button"
-						id="btn_search" style="height:48px; align:center;" ></button></li>
+				<li id="nav-input"><input type="text" class="form-control" id="keyword"
+					style="height: 40px;" placeholder="도서검색"></li>
+				<li id="nav-input"><button class="btn btn-default" type="button"
+						id="btn_search" style="height: 40px; align: center;">
+						<span class="glyphicon glyphicon-search"></span>
+					</button></li>
 				<li><a href="board">게시판</a></li>
 				<li><a href="admin">관리자페이지</a></li>
 

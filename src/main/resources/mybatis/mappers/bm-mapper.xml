@@ -187,36 +187,42 @@
 		SELECT *
 		FROM book AS a, borrow AS b
 		WHERE b.id = #{id} AND
-		borrowcheck=1 AND
+		b.borrowcheck='1' AND
 		a.bookCode=b.bookCode;
 	</select>
 
-	<insert id="borrowBook" parameterType="BookModel">
+	<insert id="borrowBook1" parameterType="BookModel">
 		INSERT INTO
-		borrow(bookCode, borrowdate, returndate, borrowcheck, id)
+		borrow
+		(bookCode, borrowdate, returndate, borrowcheck, id)
 		VALUES(#{bookCode}, now(), date_add(now(), interval +20 day),
 		1, #{id})
 	</insert>
 
-	<update id="updateBookBorrow" parameterType="BookModel">
-		UPDATE book
+	<update id="borrowBook2" parameterType="BookModel">
+		UPDATE
+		book
 		SET
 		id=#{id},
-		borrowcheck=1
+		borrowcheck='1'
 		WHERE bookCode=#{bookCode}
 	</update>
 
-	<update id="returnBook" parameterType="String">
-		UPDATE book
+	<update id="returnBook1" parameterType="String">
+		UPDATE
+		book
 		SET
 		id='',
 		borrowcheck=0
 		WHERE bookCode=#{bookCode};
 	</update>
 
-	<update id="deleteBorrow" parameterType="String">
-		UPDATE borrow SET
-		borrowcheck=0, id='' WHERE bookCode=#{bookCode}
+	<update id="returnBook2" parameterType="String">
+		UPDATE
+		borrow
+		SET
+		borrowcheck='0', id=''
+		WHERE bookCode=#{bookCode}
 	</update>
 
 	<select id="recordBorrow" parameterType="String">
@@ -233,6 +239,11 @@
 		date), 1)
 	</insert>
 
+	<update id="updateReservation" parameterType="String">
+		UPDATE book SET
+		borrowcheck='1', reservecheck='0' WHERE bookCode=#{bookCode}
+	</update>
+
 	<select id="selectReservation" parameterType="String"
 		resultType="String">
 		SELECT reservecheck
@@ -242,13 +253,10 @@
 
 	<delete id="deleteReservation" parameterType="BookModel">
 		DELETE ON reserve
-		WHERE id=#{id}, bookCode=#{bookCode}
+		WHERE id=#{id} AND bookCode=#{bookCode}
 	</delete>
 
-	<update id="updateReservation" parameterType="String">
-		UPDATE book SET
-		status=1, reserve=0 WHERE bookCode=#{bookCode}
-	</update>
+
 
 	<!-- 기타 쿼리 -->
 

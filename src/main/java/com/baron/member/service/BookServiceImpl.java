@@ -12,7 +12,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.xml.sax.SAXException;
 
 import com.baron.member.dao.BookDao;
 import com.baron.member.model.BookModel;
@@ -30,8 +29,6 @@ public class BookServiceImpl implements BookService {
 
 		URL url = getNewbookUrl();
 
-		getApiTest(url);
-
 		XmlDom xmlDom = new XmlDom();
 		bookList = xmlDom.getBooklist(url.openStream());
 
@@ -45,7 +42,6 @@ public class BookServiceImpl implements BookService {
 
 		URL url = getSearchUrl(keyword);
 
-		getApiTest(url);
 		XmlDom xmlDom = new XmlDom();
 		bookList = xmlDom.getBooklist(url.openStream());
 		System.out.println(keyword);
@@ -58,9 +54,6 @@ public class BookServiceImpl implements BookService {
 		List<BookModel> bookList = new ArrayList<BookModel>();
 
 		URL url = getBestsellerUrl(categoryId);
-
-		getApiTest(url);
-
 		XmlDom xmlDom = new XmlDom();
 		bookList = xmlDom.getBooklist(url.openStream());
 
@@ -107,13 +100,8 @@ public class BookServiceImpl implements BookService {
 		return bookDao.selectname(bookCode);
 	}
 
-	@Override
-	public void updateBookReser(BookModel bookmodel) {
-		// TODO Auto-generated method stub
-		bookDao.updateBookReser(bookmodel);
-
-	}
-
+	/*대여 예약 서비스
+*/
 	@Override
 	public String selectReservation(String bookCode) {
 		// TODO Auto-generated method stub
@@ -124,6 +112,36 @@ public class BookServiceImpl implements BookService {
 	public List<BookModel> borrowList(String id) {
 		// TODO Auto-generated method stub
 		return bookDao.borrowList(id);
+	}
+
+	@Override
+	public List<BookModel> borrowListAll() {
+		// TODO Auto-generated method stub
+
+		return bookDao.borrowListAll();
+	}
+
+	@Override
+	public void borrowBook(BookModel bookmodel) {
+		bookDao.borrowBook(bookmodel);
+		bookDao.updateBookTable(bookmodel);
+
+	}
+
+	@Override
+	public void returnBook(String bookCode) {
+		bookDao.returnBook(bookCode);
+		bookDao.deleteBorrow(bookCode);
+	}
+
+	
+	
+	@Override
+	public void returnManyBook(List<String> bookCodeList) {
+		for (String bookCode : bookCodeList) {
+			bookDao.returnBook(bookCode);
+			bookDao.deleteBorrow(bookCode);
+		}
 	}
 
 	private URL getNewbookUrl() throws UnsupportedEncodingException,
@@ -168,8 +186,6 @@ public class BookServiceImpl implements BookService {
 		parameter = parameter + "&" + "sort=accuracy";
 		parameter = parameter + "&" + "maxResults=20";
 
-		key = URLEncoder.encode(key, "UTF-8");
-		keyword = URLEncoder.encode(keyword, "UTF-8");
 		addr = addr + "key=" + key + parameter;
 
 		URL url = new URL(addr);
@@ -191,54 +207,23 @@ public class BookServiceImpl implements BookService {
 
 		br.close();
 	}
-
-	private URL getIsbnUrl(String keyword) throws UnsupportedEncodingException,
-			MalformedURLException {
-		String key = "B0F933E2847C6447203572CCC68F824A1054E7EF0D966C7B95245288CE95E300";
-		String addr = "http://book.interpark.com/api/search.api?";
-		String parameter = "";
-
-		key = URLEncoder.encode(key, "UTF-8");
-		keyword = URLEncoder.encode(keyword, "UTF-8");
-		parameter = parameter + "&" + "query=" + keyword;
-		parameter = parameter + "&" + "queryType=isbn";
-		parameter = parameter + "&" + "maxResults=1";
-
-		key = URLEncoder.encode(key, "UTF-8");
-		keyword = URLEncoder.encode(keyword, "UTF-8");
-		addr = addr + "key=" + key + parameter;
-
-		URL url = new URL(addr);
-		return url;
-
-	}
-
-	@Override
-	public List<BookModel> borrowListAll() {
-		// TODO Auto-generated method stub
-
-		return bookDao.borrowListAll();
-	}
-
-	@Override
-	public void borrowBook(BookModel bookmodel) {
-		bookDao.borrowBook(bookmodel);
-		bookDao.updateBookBorrow(bookmodel);
-
-	}
-
-	@Override
-	public void returnBook(String bookCode) {
-		bookDao.returnBook(bookCode);
-		bookDao.deleteBorrow(bookCode);
-	}
-
-	@Override
-	public void returnManyBook(List<String> bookCodeList) {
-		for (String bookCode : bookCodeList) {
-			bookDao.returnBook(bookCode);
-			bookDao.deleteBorrow(bookCode);
-		}
-	}
+	/*
+	 * private URL getIsbnUrl(String keyword) throws
+	 * UnsupportedEncodingException, MalformedURLException { String key =
+	 * "B0F933E2847C6447203572CCC68F824A1054E7EF0D966C7B95245288CE95E300";
+	 * String addr = "http://book.interpark.com/api/search.api?"; String
+	 * parameter = "";
+	 * 
+	 * key = URLEncoder.encode(key, "UTF-8"); keyword =
+	 * URLEncoder.encode(keyword, "UTF-8"); parameter = parameter + "&" +
+	 * "query=" + keyword; parameter = parameter + "&" + "queryType=isbn";
+	 * parameter = parameter + "&" + "maxResults=1";
+	 * 
+	 * addr = addr + "key=" + key + parameter;
+	 * 
+	 * URL url = new URL(addr); return url;
+	 * 
+	 * }
+	 */
 
 }

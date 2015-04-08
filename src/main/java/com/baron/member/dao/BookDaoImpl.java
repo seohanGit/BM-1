@@ -60,12 +60,6 @@ public class BookDaoImpl implements BookDao {
 	}
 
 	@Override
-	public void updateBookReser(BookModel bookmodel) {
-		session.update(NAMESPACE + "updateBookReser", bookmodel);
-		// TODO Auto-generated method stub
-	}
-
-	@Override
 	public String selectReservation(String bookCode) {
 		return session.selectOne(NAMESPACE + "selectReservation", bookCode);
 		// TODO Auto-generated method stub
@@ -85,23 +79,23 @@ public class BookDaoImpl implements BookDao {
 
 	@Override
 	public void borrowBook(BookModel bookmodel) {
-		session.insert(NAMESPACE + "borrowBook", bookmodel);
+		session.insert(NAMESPACE + "borrowBook1", bookmodel);
 
 	}
 
 	@Override
-	public void updateBookBorrow(BookModel bookmodel) {
-		session.update(NAMESPACE + "updateBookBorrow", bookmodel);
+	public void updateBookTable(BookModel bookmodel) {
+		session.update(NAMESPACE + "borrowBook2", bookmodel);
 	}
 
 	@Override
 	public void returnBook(String bookCode) {
 
-		session.update(NAMESPACE + "returnBook", bookCode);
+		session.update(NAMESPACE + "returnBook1", bookCode);
 	}
 
 	@Override
 	public void deleteBorrow(String bookCode) {
-		session.update(NAMESPACE + "deleteBorrow", bookCode);
+		session.update(NAMESPACE + "returnBook2", bookCode);
 	}
 }

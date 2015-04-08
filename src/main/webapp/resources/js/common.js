@@ -118,7 +118,7 @@ $('#btn_find').click(function() {
 		url : "/findBook", // URL
 		datatype : "xml", // html, xml, json, jsonp, script, text
 		data : {
-			keyword : $('#keyword').val()
+			keyword : $('#query').val()
 		}, // parameters as plain object
 		error : function() { // Ajax error handler
 

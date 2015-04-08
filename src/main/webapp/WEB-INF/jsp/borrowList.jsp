@@ -20,7 +20,7 @@
 							<p>${book.writer}|${book.publisher}|</p>
 							<p>${book.genre}|${book.id}</p>
 							<p>${book.borrowdate}|${book.returndate}
-
+<p>${book.borrowcheck} == 1 then 대여요청 ==2 대여 중
 								<button class="btn btn-default" type="button" id="reservebook"
 									onClick="location.href='/returnbook?bookCode=${book.bookCode}'">반납</button>
 

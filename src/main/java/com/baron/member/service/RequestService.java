@@ -12,10 +12,10 @@ public interface RequestService {
 	public void deleteRequest(String bookCode);
 
 	public void requestBook(BookModel model);
-
-	public BookModel addRequestBook(String isbn, String id, int quantity)
+/*
+	public BookModel getRequestBook(String isbn, String id, int quantity)
 			throws Exception, IOException;
-
+*/
 	public BookModel findBookOne(String isbn)throws Exception ;
 
 }

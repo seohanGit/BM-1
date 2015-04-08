@@ -191,7 +191,7 @@ public class BookController {
 				book.setReserid(cookie.getValue());
 		}
 		bookservice.insertReservation(book);
-		bookservice.updateBookReser(book);
+		
 		return "reservationresult";
 	}
 

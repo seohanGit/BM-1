@@ -20,7 +20,6 @@ public interface BookService {
 
 	public String selectname(String booknum);
 
-	public void updateBookReser(BookModel bookmodel);
 
 	public String selectReservation(String booknum);
 

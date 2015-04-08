@@ -40,9 +40,9 @@ public class RequestServiceImpl implements RequestService {
 		System.out.println(model.getBookname());
 		requestDao.requestBook(model);
 	}
-
+/*
 	@Override
-	public BookModel addRequestBook(String isbn, String id, int quantity)
+	public BookModel getRequestBook(String isbn, String id, int quantity)
 			throws Exception, IOException {
 		BookModel book = new BookModel();
 		URL url = getIsbnUrl(isbn);
@@ -57,7 +57,7 @@ public class RequestServiceImpl implements RequestService {
 		System.out.println(book.getGenre());
 		return book;
 	}
-
+*/
 	public BookModel findBookOne(String isbn) throws Exception {
 		BookModel book = new BookModel();
 		URL url = getIsbnUrl(isbn);
@@ -70,7 +70,7 @@ public class RequestServiceImpl implements RequestService {
 
 		return book;
 	}
-
+	
 	private URL getIsbnUrl(String keyword) throws UnsupportedEncodingException,
 			MalformedURLException {
 		String key = "B0F933E2847C6447203572CCC68F824A1054E7EF0D966C7B95245288CE95E300";

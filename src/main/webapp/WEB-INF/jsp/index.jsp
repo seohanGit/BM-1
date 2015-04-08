@@ -36,7 +36,7 @@
 				<hr>
 				<h4>원하는 책이 없다면 인터넷에서 주문하세요 !</h4>
 				<div class="input-group ">
-					<input type="text" class="form-control" id="keyword"
+					<input type="text" class="form-control" id="query"
 						placeholder="인터파크 검색"> <span class="input-group-btn">
 						<button class="btn btn-default" type="button" id="btn_find">
 							<span class="glyphicon glyphicon-search"></span>
@@ -48,17 +48,7 @@
 				<img src="/resources/main.JPG" style="width: 100%" id="image1">
 
 				<div id="searchResultArea"></div>
-				<hr>
-				<h4>원하는 책이 없다면 인터넷에서 주문하세요 !</h4>
-				<div class="input-group ">
-					<input type="text" class="form-control" id="keyword"
-						placeholder="인터파크 검색"> <span class="input-group-btn">
-						<button class="btn btn-default" type="button" id="btn_find">
-							<span class="glyphicon glyphicon-search"></span>
-						</button>
-					</span>
-
-				</div>
+				
 				<hr>
 				<p>잠은 인생의 사치입니다! 저는 하루 네 시간만 자면 충분하다고 생각해요.</p>
 				<hr>

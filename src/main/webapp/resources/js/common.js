@@ -10,6 +10,7 @@ $('#btn_search').click(function() {
 			alert('ajax failed');
 		},
 		success : function(data, status) { // Ajax complete handelr
+			$('#goodPhrase').fadeOut();
 			$('#image1').fadeOut();
 			$('#image2').fadeOut();
 			$('#searchResultArea').empty().append(data);
@@ -34,7 +35,24 @@ $('#borrowListAll').click(function() {
 	});
 });
 
-$('#borrow_list').click(function() {
+$('#returnList').click(function() {
+	$.ajax({
+		type : "GET", // GET or POST
+		url : "/returnList", // URL
+		datatype : "xml", // html, xml, json, jsonp, script, text
+		// parameters as plain object
+		error : function() { // Ajax error handler
+			alert('ajax failed');
+		},
+		success : function(data, status) { // Ajax complete handelr
+			$('#image1').fadeOut();
+			$('#image2').fadeOut();
+			$('#searchResultArea').empty().append(data);
+		}
+	});
+});
+
+$('#borrowList').click(function() {
 	$.ajax({
 		type : "GET", // GET or POST
 		url : "/borrowList", // URL
@@ -44,6 +62,7 @@ $('#borrow_list').click(function() {
 			alert('ajax failed');
 		},
 		success : function(data, status) { // Ajax complete handelr
+			$('#goodPhrase').fadeOut();
 			$('#image1').fadeOut();
 			$('#image2').fadeOut();
 			$('#searchResultArea').empty().append(data);
@@ -71,12 +90,13 @@ $('#requestList').click(function() {
 $('#btn_bookList').click(function() {
 	$.ajax({
 		type : "GET", // GET or POST
-		url : "/listBook", // URL
+		url : "/bookList", // URL
 		datatype : "xml", // html, xml, json, jsonp, script, text
 		error : function() { // Ajax error handler
 			alert('ajax failed');
 		},
 		success : function(data, status) { // Ajax complete handelr
+			$('#goodPhrase').fadeOut();
 			$('#image1').fadeOut();
 			$('#image2').fadeOut();
 			$('#searchResultArea').empty().append(data);
@@ -99,13 +119,14 @@ $('#btn_find').click(function() {
 		url : "/findBook", // URL
 		datatype : "xml", // html, xml, json, jsonp, script, text
 		data : {
-			keyword : $('#keyword').val()
+			keyword : $('#query').val()
 		}, // parameters as plain object
 		error : function() { // Ajax error handler
 
 			alert('검색어를 입력하세요');
 		},
 		success : function(data, status) { // Ajax complete handelr
+			$('#goodPhrase').fadeOut();
 			$('#image1').fadeOut();
 			$('#image2').fadeOut();
 			$('#searchResultArea').empty().append(data);

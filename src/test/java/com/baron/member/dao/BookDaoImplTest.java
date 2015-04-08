@@ -36,7 +36,7 @@ public class BookDaoImplTest {
 	@Ignore
 	public void insertBook()throws Exception{
 		BookModel model = new BookModel();
-		model.setBooknum("mj1111");
+		model.setBookCode("mj1111");
 		model.setBookname("안드로이드 프로그래밍 정복1");
 		model.setGenre("JAVA");
 		model.setPublisher("한빛미디어");

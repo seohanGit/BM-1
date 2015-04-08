@@ -31,7 +31,11 @@
 							onClick="location.href='/returnbook?bookCode=${book.bookCode}'">반납</button>
 						<button class="btn btn-default" type="button" id="reservebook"
 							onClick="location.href='/reservation?bookCode=${book.bookCode}'">예약</button>
-						
+						<button class="btn btn-default" type="button" id="modifybook"
+							onClick="location.href='/modifyBookForm?bookCode=${book.bookCode}'">도서수정</button>
+						<button class="btn btn-default" type="button" id="deletebook"
+							onClick="location.href='/deletebook?bookCode=${book.bookCode}'; del();">도서삭제</button>
+
 					</p>
 				</td>
 			</tr>

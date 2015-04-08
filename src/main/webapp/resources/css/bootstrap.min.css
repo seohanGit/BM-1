@@ -1,17 +1,19 @@
-<<<<<<< HEAD
-/*!
+<<<<<<<
+HEAD /*!
  * Bootstrap v3.3.0 (http://getbootstrap.com)
  * Copyright 2011-2014 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
- */ /*! normalize.css v3.0.2 | MIT License | git.io/normalize */
+ */ /*! normalize.css v3.0.2 | MIT License | git.io/normalize */ 
 html {
 	font-family: sans-serif;
 	-webkit-text-size-adjust: 100%;
 	-ms-text-size-adjust: 100%
 }
-.hide{
+
+.hide {
 	visibility: hidden;
 }
+
 body {
 	margin: 0
 }
@@ -27,24 +29,38 @@ audio, canvas, progress, video {
 }
 
 audio
+
+
 :not
+
  
+
 (
 [
 controls
 ]
+
  
+
 ){
 display
-:
- 
-none
-;
 
-	
-height
+
 :
+
  
+
+none
+
+
+;
+height
+
+
+:
+
+ 
+
 0
 }
 [hidden], template {
@@ -105,16 +121,28 @@ img {
 }
 
 svg
+
+
 :not
+
  
+
 (
 :root
+
  
+
 ){
 overflow
+
+
 :
+
  
+
 hidden
+
+
 
 
 }
@@ -2681,19 +2709,19 @@ input[type=search] {
 input[type=date], input[type=time], input[type=datetime-local], input[type=month]
 	{
 	line-height: 34px;
-	line-height: 1.42857143 \0
+	line-height: 1.42857143 \0
 }
 
 input[type=date].input-sm, input[type=time].input-sm, input[type=datetime-local].input-sm,
 	input[type=month].input-sm {
 	line-height: 30px;
-	line-height: 1.5 \0
+	line-height: 1.5 \0
 }
 
 input[type=date].input-lg, input[type=time].input-lg, input[type=datetime-local].input-lg,
 	input[type=month].input-lg {
 	line-height: 46px;
-	line-height: 1.33 \0
+	line-height: 1.33 \0
 }
 
 _:-ms-fullscreen, :root input[type=date], _:-ms-fullscreen, :root input[type=time],
@@ -3602,28 +3630,46 @@ tbody.collapse.in {
 .btn-group
 >
 .btn
+
+
 :not
+
  
+
 (
 :first-child
+
  
+
 )
 :not
+
  
+
 (
 :last-child
+
  
+
 )
 :not
+
  
+
 (
 .dropdown-toggle
 
+
 	
+
 ){
 border-radius
+
+
 :
+
  
+
 0
 }
 .btn-group>.btn:first-child {
@@ -3633,55 +3679,97 @@ border-radius
 .btn-group
 >
 .btn
+
+
 :first-child
+
+
 :not
+
  
+
 (
 :last-child
+
  
+
 )
 :not
+
  
+
 (
 .dropdown-toggle
+
  
+
 ){
 border-top-right-radius
+
+
 :
+
  
+
 0;
 border-bottom-right-radius
+
+
 :
+
  
+
 0
 }
 .btn-group
 >
 .btn
+
+
 :last-child
+
+
 :not
+
  
+
 (
 :first-child
+
  
+
 ),
 .btn-group
 >
 .dropdown-toggle
+
+
 :not
 
+
 	
+
 (
 :first-child
+
  
+
 ){
 border-top-left-radius
+
+
 :
+
  
+
 0;
 border-bottom-left-radius
+
+
 :
+
  
+
 0
 }
 .btn-group>.btn-group {
@@ -3762,73 +3850,129 @@ border-bottom-left-radius
 .btn-group-vertical
 >
 .btn
+
+
 :not
+
  
+
 (
 :first-child
+
  
+
 )
 :not
+
  
+
 (
 :last-child
+
  
+
 ){
 border-radius
+
+
 :
+
  
+
 0
 }
 .btn-group-vertical
 >
 .btn
+
+
 :first-child
+
+
 :not
+
  
+
 (
 :last-child
+
  
+
 ){
 border-top-right-radius
+
+
 :
+
  
+
 4
 px
-;
 
-	
+
+;
 border-bottom-right-radius
+
+
 :
+
  
+
 0;
 border-bottom-left-radius
+
+
 :
+
  
+
 0
 }
 .btn-group-vertical
 >
 .btn
+
+
 :last-child
+
+
 :not
+
  
+
 (
 :first-child
+
  
+
 ){
 border-top-left-radius
+
+
 :
+
  
+
 0;
 border-top-right-radius
+
+
 :
+
  
+
 0;
 border-bottom-left-radius
+
+
 :
+
  
+
 4
 px
+
+
 
 
 }
@@ -3948,50 +4092,86 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 }
 
 .input-group-addon
-:not
- 
-(
-:first-child
- 
-)
-:not
- 
-(
-:last-child
- 
-),
-.input-group-btn
-:not
- 
-(
-:first-child
- 
-)
-:not
- 
-(
-:last-child
- 
-),
-.input-group
- 
-.form-control
+
+
 :not
 
-	
+ 
+
 (
 :first-child
+
  
+
 )
 :not
+
  
+
 (
 :last-child
+
  
+
+),
+.input-group-btn
+
+
+:not
+
+ 
+
+(
+:first-child
+
+ 
+
+)
+:not
+
+ 
+
+(
+:last-child
+
+ 
+
+),
+.input-group
+
+ 
+
+.form-control
+
+
+:not
+
+
+	
+
+(
+:first-child
+
+ 
+
+)
+:not
+
+ 
+
+(
+:last-child
+
+ 
+
 ){
 border-radius
+
+
 :
+
  
+
 0
 }
 .input-group-addon, .input-group-btn {
@@ -4093,6 +4273,12 @@ border-radius
 .nav>li {
 	position: relative;
 	display: block
+}
+
+.nav>li>a {
+	position: relative;
+	display: block;
+	padding: 10px 15px
 }
 
 .nav>li>a {
@@ -4311,7 +4497,7 @@ border-radius
 .navbar {
 	position: relative;
 	min-height: 50px;
-	margin-bottom: 20px;
+	margin-bottom: 10px;
 	border: 1px solid transparent
 }
 
@@ -4484,6 +4670,7 @@ border-radius
 }
 
 .navbar-nav {
+	vertical-align: middle;
 	margin: 7.5px -15px
 }
 
@@ -4495,10 +4682,10 @@ border-radius
 
 @media ( max-width :767px) {
 	.navbar-nav .open .dropdown-menu {
-		position: static;
+		position: relative;
 		float: none;
 		width: auto;
-		margin-top: 0;
+		margin-top: 3px;
 		background-color: transparent;
 		border: 0;
 		-webkit-box-shadow: none;
@@ -4528,6 +4715,12 @@ border-radius
 	.navbar-nav>li>a {
 		padding-top: 15px;
 		padding-bottom: 15px
+	}
+	.navbar-nav>li>input {
+		padding-top: 5px;
+	}
+	.navbar-nav>li>button {
+		padding-top: 5px;
 	}
 }
 
@@ -7096,35 +7289,48 @@ button.close {
 	.hidden-print {
 		display: none !important
 	}
-=======
-/*!
+	=======
+	/*!
  * Bootstrap v3.3.0 (http://getbootstrap.com)
  * Copyright 2011-2014 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */ /*! normalize.css v3.0.2 | MIT License | git.io/normalize */
-html {
-	font-family: sans-serif;
-	-webkit-text-size-adjust: 100%;
-	-ms-text-size-adjust: 100%
-}
-
-body {
-	margin: 0
-}
-
-article, aside, details, figcaption, figure, footer, header, hgroup,
-	main, menu, nav, section, summary {
-	display: block
-}
-
-audio, canvas, progress, video {
-	display: inline-block;
-	vertical-align: baseline
-}
-
-audio:not ([controls] ){
-	display: none;
-	height: 0
+	html {
+		font-family: sans-serif;
+		-webkit-text-size-adjust: 100%;
+		-ms-text-size-adjust: 100%
+	}
+	body {
+		margin: 0
+	}
+	article, aside, details, figcaption, figure, footer, header, hgroup,
+		main, menu, nav, section, summary {
+		display: block
+	}
+	audio, canvas, progress, video {
+		display: inline-block;
+		vertical-align: baseline
+	}
+	audio
+	:not
+	 
+	(
+	[
+	controls
+	]
+	 
+	){
+	display
+	:
+	 
+	none
+	;
+	
+	
+	height
+	:
+	 
+	0
 }
 
 [hidden], template {
@@ -7184,10 +7390,20 @@ img {
 	border: 0
 }
 
-svg:not (:root ){
-	overflow: hidden
-}
+svg
+:not
+ 
+(
+:root
+ 
+){
+overflow
+:
+ 
+hidden
 
+
+}
 figure {
 	margin: 1em 40px
 }
@@ -7291,7 +7507,7 @@ table {
 td, th {
 	padding: 0
 }
-	/*! Source: https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css */
+/*! Source: https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css */
 @media print {
 	*, :before, :after {
 		color: #000 !important;
@@ -9752,18 +9968,21 @@ input[type=date], input[type=time], input[type=datetime-local], input[type=month
 	{
 	line-height: 34px;
 	line-height: 1.42857143 \0
+
 }
 
 input[type=date].input-sm, input[type=time].input-sm, input[type=datetime-local].input-sm,
 	input[type=month].input-sm {
 	line-height: 30px;
 	line-height: 1.5 \0
+
 }
 
 input[type=date].input-lg, input[type=time].input-lg, input[type=datetime-local].input-lg,
 	input[type=month].input-lg {
 	line-height: 46px;
 	line-height: 1.33 \0
+
 }
 
 _:-ms-fullscreen, :root input[type=date], _:-ms-fullscreen, :root input[type=time],
@@ -10670,26 +10889,91 @@ tbody.collapse.in {
 	margin-left: 5px
 }
 
-.btn-group>.btn:not (:first-child ):not (:last-child ):not (.dropdown-toggle
-	){
-	border-radius: 0
-}
+.btn-group
+>
+.btn
+:not
+ 
+(
+:first-child
+ 
+)
+:not
+ 
+(
+:last-child
+ 
+)
+:not
+ 
+(
+.dropdown-toggle
 
+	
+){
+border-radius
+:
+ 
+0
+}
 .btn-group>.btn:first-child {
 	margin-left: 0
 }
 
-.btn-group>.btn:first-child:not (:last-child ):not (.dropdown-toggle ){
-	border-top-right-radius: 0;
-	border-bottom-right-radius: 0
+.btn-group
+>
+.btn
+:first-child
+:not
+ 
+(
+:last-child
+ 
+)
+:not
+ 
+(
+.dropdown-toggle
+ 
+){
+border-top-right-radius
+:
+ 
+0;
+border-bottom-right-radius
+:
+ 
+0
 }
+.btn-group
+>
+.btn
+:last-child
+:not
+ 
+(
+:first-child
+ 
+),
+.btn-group
+>
+.dropdown-toggle
+:not
 
-.btn-group>.btn:last-child:not (:first-child ), .btn-group>.dropdown-toggle:not
-	(:first-child ){
-	border-top-left-radius: 0;
-	border-bottom-left-radius: 0
+	
+(
+:first-child
+ 
+){
+border-top-left-radius
+:
+ 
+0;
+border-bottom-left-radius
+:
+ 
+0
 }
-
 .btn-group>.btn-group {
 	float: left
 }
@@ -10765,22 +11049,79 @@ tbody.collapse.in {
 	margin-left: 0
 }
 
-.btn-group-vertical>.btn:not (:first-child ):not (:last-child ){
-	border-radius: 0
+.btn-group-vertical
+>
+.btn
+:not
+ 
+(
+:first-child
+ 
+)
+:not
+ 
+(
+:last-child
+ 
+){
+border-radius
+:
+ 
+0
 }
+.btn-group-vertical
+>
+.btn
+:first-child
+:not
+ 
+(
+:last-child
+ 
+){
+border-top-right-radius
+:
+ 
+4
+px
+;
 
-.btn-group-vertical>.btn:first-child:not (:last-child ){
-	border-top-right-radius: 4px;
-	border-bottom-right-radius: 0;
-	border-bottom-left-radius: 0
+	
+border-bottom-right-radius
+:
+ 
+0;
+border-bottom-left-radius
+:
+ 
+0
 }
+.btn-group-vertical
+>
+.btn
+:last-child
+:not
+ 
+(
+:first-child
+ 
+){
+border-top-left-radius
+:
+ 
+0;
+border-top-right-radius
+:
+ 
+0;
+border-bottom-left-radius
+:
+ 
+4
+px
 
-.btn-group-vertical>.btn:last-child:not (:first-child ){
-	border-top-left-radius: 0;
-	border-top-right-radius: 0;
-	border-bottom-left-radius: 4px
+
 }
-
 .btn-group-vertical>.btn-group:not (:first-child ):not (:last-child )>.btn
 	{
 	border-radius: 0
@@ -10896,12 +11237,53 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 	display: table-cell
 }
 
-.input-group-addon:not (:first-child ):not (:last-child ),
-	.input-group-btn:not (:first-child ):not (:last-child ), .input-group .form-control:not
-	(:first-child ):not (:last-child ){
-	border-radius: 0
-}
+.input-group-addon
+:not
+ 
+(
+:first-child
+ 
+)
+:not
+ 
+(
+:last-child
+ 
+),
+.input-group-btn
+:not
+ 
+(
+:first-child
+ 
+)
+:not
+ 
+(
+:last-child
+ 
+),
+.input-group
+ 
+.form-control
+:not
 
+	
+(
+:first-child
+ 
+)
+:not
+ 
+(
+:last-child
+ 
+){
+border-radius
+:
+ 
+0
+}
 .input-group-addon, .input-group-btn {
 	width: 1%;
 	white-space: nowrap;
@@ -10940,8 +11322,8 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 .input-group .form-control:first-child, .input-group-addon:first-child,
 	.input-group-btn:first-child>.btn, .input-group-btn:first-child>.btn-group>.btn,
 	.input-group-btn:first-child>.dropdown-toggle, .input-group-btn:last-child>.btn:not
-	(:last-child ):not (.dropdown-toggle ), .input-group-btn:last-child>.btn-group:not
-	(:last-child )>.btn {
+	 (:last-child ):not (.dropdown-toggle ), .input-group-btn:last-child>.btn-group:not
+	 (:last-child )>.btn {
 	border-top-right-radius: 0;
 	border-bottom-right-radius: 0
 }
@@ -10953,8 +11335,8 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 .input-group .form-control:last-child, .input-group-addon:last-child,
 	.input-group-btn:last-child>.btn, .input-group-btn:last-child>.btn-group>.btn,
 	.input-group-btn:last-child>.dropdown-toggle, .input-group-btn:first-child>.btn:not
-	(:first-child ), .input-group-btn:first-child>.btn-group:not (:first-child
-	)>.btn {
+	 (:first-child ), .input-group-btn:first-child>.btn-group:not (:first-child
+	 )>.btn {
 	border-top-left-radius: 0;
 	border-bottom-left-radius: 0
 }
@@ -12115,7 +12497,6 @@ a.list-group-item.active>.badge, .nav-pills>.active>a>.badge {
 .thumbnail {
 	display: block;
 	padding: 4px;
-	
 	line-height: 1.42857143;
 	background-color: #fff;
 	border: 1px solid #ddd;
@@ -14004,5 +14385,9 @@ button.close {
 	.hidden-print {
 		display: none !important
 	}
->>>>>>> 5308682d6d996a04e3756f10010cd91de3dccfdc
+	>>>>>>>
+	5308682
+	d6d996a04e3756f10010cd91de3dccfdc
+	
+
 }

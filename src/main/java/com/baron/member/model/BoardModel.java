@@ -7,8 +7,8 @@ public class BoardModel {
 	private int boardnum;
 	private String title;
 	private String content;
-	private Date registerday;
-	private Date modifiday;
+	private Date registerdate;
+	private Date modifidate;
 	private String id;
 	
 	public int getBoardnum() {
@@ -29,17 +29,17 @@ public class BoardModel {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public Date getRegisterday() {
-		return registerday;
+	public Date getRegisterdate() {
+		return registerdate;
 	}
-	public void setRegisterday(Date registerday) {
-		this.registerday = registerday;
+	public void setRegisterdate(Date registerdate) {
+		this.registerdate = registerdate;
 	}
-	public Date getModifiday() {
-		return modifiday;
+	public Date getModifidate() {
+		return modifidate;
 	}
-	public void setModifiday(Date modifiday) {
-		this.modifiday = modifiday;
+	public void setModifidate(Date modifidate) {
+		this.modifidate = modifidate;
 	}
 	public String getId() {
 		return id;

@@ -16,16 +16,19 @@ footer {
 	-webkit-box-orient: vertical;
 }
 
-<<<<<<< HEAD
-#btn_bookList{
-	width:30%;
+#btn_bookList {
+	width: 30%;
 }
-#insertBook{
-	width:30%;
+
+#insertBook {
+	width: 30%;
 }
-=======
+
 .row {
 	background-color: #fff;
 }
 
->>>>>>> 5308682d6d996a04e3756f10010cd91de3dccfdc
+#nav-input {
+	margin-top: 5px;
+	vertical-align: middle;
+}

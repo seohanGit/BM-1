@@ -3,24 +3,40 @@ package com.baron.member.model;
 import java.sql.Date;
 
 public class BookModel {
-	private String booknum;
+	private String bookCode;
 	private String bookname;
 	private String genre;
 	private int quantity;
 	private Date borrowdate;
 	private Date returndate;
 	private Date requestdate;
-	private String requestid;
+	private String id;
 	private String publisher;
 	private String borrowcheck;
-	private String resernum;
+	private String reservecheck;
 	private int grade;
 	private String writer;
 	private String imageurl;
-	private String id;
 	private String priceSales;
 	private String link;
 	private String isbn;
+	private String summary;
+
+	public String getReservecheck() {
+		return reservecheck;
+	}
+
+	public void setReservecheck(String reservecheck) {
+		this.reservecheck = reservecheck;
+	}
+
+	public String getSummary() {
+		return summary;
+	}
+
+	public void setSummary(String summary) {
+		this.summary = summary;
+	}
 
 	public int getQuantity() {
 		return quantity;
@@ -46,22 +62,6 @@ public class BookModel {
 		this.requestdate = requestdate;
 	}
 
-	public String getRequestid() {
-		return requestid;
-	}
-
-	public void setRequestid(String requestid) {
-		this.requestid = requestid;
-	}
-
-	public String getResernum() {
-		return resernum;
-	}
-
-	public void setResernum(String resernum) {
-		this.resernum = resernum;
-	}
-
 	public String getId() {
 		return id;
 	}
@@ -70,8 +70,8 @@ public class BookModel {
 		this.id = id;
 	}
 
-	public void setReturnday(Date returnday) {
-		this.returndate = returnday;
+	public void setReturndate(Date returndate) {
+		this.returndate = returndate;
 	}
 
 	public String getPriceSales() {
@@ -106,12 +106,12 @@ public class BookModel {
 		this.imageurl = imageurl;
 	}
 
-	public String getBooknum() {
-		return booknum;
+	public String getBookCode() {
+		return bookCode;
 	}
 
-	public void setBooknum(String booknum) {
-		this.booknum = booknum;
+	public void setBookCode(String bookCode) {
+		this.bookCode = bookCode;
 	}
 
 	public String getPublisher() {
@@ -138,20 +138,20 @@ public class BookModel {
 		this.genre = genre;
 	}
 
-	public Date getBorrowday() {
+	public Date getBorrowdate() {
 		return borrowdate;
 	}
 
-	public void setBorrowday(Date borrowday) {
-		this.borrowdate = borrowday;
+	public void setBorrowdate(Date borrowdate) {
+		this.borrowdate = borrowdate;
 	}
 
-	public Date getReturnday() {
+	public Date getReturndate() {
 		return returndate;
 	}
 
-	public void setRetrunday(Date returnday) {
-		this.returndate = returnday;
+	public void setRetrundate(Date returndate) {
+		this.returndate = returndate;
 	}
 
 	public String getBorrowcheck() {

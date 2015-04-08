@@ -8,7 +8,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.baron.member.model.BookModel;
-import com.baron.member.model.MemberModel;
 
 @Repository
 public class BookDaoImpl implements BookDao {
@@ -28,14 +27,14 @@ public class BookDaoImpl implements BookDao {
 	}
 
 	@Override
-	public List<BookModel> selectBook(String booknum) {
-		return session.selectList(NAMESPACE + "selectBook", booknum);
+	public List<BookModel> selectBook(String bookCode) {
+		return session.selectList(NAMESPACE + "selectBook", bookCode);
 	}
 
 	@Override
-	public void deleteBook(String booknum) {
+	public void deleteBook(String bookCode) {
 
-		session.delete(NAMESPACE + "deleteBook", booknum);
+		session.delete(NAMESPACE + "deleteBook", bookCode);
 		// TODO Auto-generated method stub
 
 	}
@@ -44,12 +43,11 @@ public class BookDaoImpl implements BookDao {
 	public void updateBook(BookModel bookmodel) {
 		// TODO Auto-generated method stub
 		session.update(NAMESPACE + "updateBook", bookmodel);
-
 	}
 
 	@Override
-	public String selectname(String booknum) {
-		return session.selectOne(NAMESPACE + "selectname", booknum);
+	public String selectname(String bookCode) {
+		return session.selectOne(NAMESPACE + "selectname", bookCode);
 		// TODO Auto-generated method stub
 
 	}
@@ -62,30 +60,10 @@ public class BookDaoImpl implements BookDao {
 	}
 
 	@Override
-	public void updateBookReser(BookModel bookmodel) {
-		session.update(NAMESPACE + "updateBookReser", bookmodel);
+	public String selectReservation(String bookCode) {
+		return session.selectOne(NAMESPACE + "selectReservation", bookCode);
 		// TODO Auto-generated method stub
 
-	}
-
-	@Override
-	public String selectReservation(String booknum) {
-		return session.selectOne(NAMESPACE + "selectReservation", booknum);
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void requestBook(BookModel model) {
-		System.out.println(model.getBookname());
-		// TODO Auto-generated method stub
-		session.insert(NAMESPACE + "requestBook", model);
-
-	}
-
-	@Override
-	public List<BookModel> requestList() {
-		return session.selectList(NAMESPACE + "requestList");
 	}
 
 	@Override
@@ -95,15 +73,29 @@ public class BookDaoImpl implements BookDao {
 	}
 
 	@Override
-	public void deleteRequest(String booknum) {
-		// TODO Auto-generated method stub
-		session.delete(NAMESPACE + "deleteRequest", booknum);
+	public List<BookModel> borrowListAll() {
+		return session.selectList(NAMESPACE + "borrowListAll");
+	}
+
+	@Override
+	public void borrowBook(BookModel bookmodel) {
+		session.insert(NAMESPACE + "borrowBook1", bookmodel);
 
 	}
 
 	@Override
-	public List<BookModel> selectBorrowList() {
-		return session.selectList(NAMESPACE + "selectBorrowList");
+	public void updateBookTable(BookModel bookmodel) {
+		session.update(NAMESPACE + "borrowBook2", bookmodel);
 	}
 
+	@Override
+	public void returnBook(String bookCode) {
+
+		session.update(NAMESPACE + "returnBook1", bookCode);
+	}
+
+	@Override
+	public void deleteBorrow(String bookCode) {
+		session.update(NAMESPACE + "returnBook2", bookCode);
+	}
 }

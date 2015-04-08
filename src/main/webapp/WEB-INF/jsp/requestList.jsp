@@ -24,19 +24,24 @@
 					src="${book.imageurl}"></td>
 			</tr>
 			<tr>
-				<td width="27%" align="left">${book.bookname }</td>
-				<td width="50%" align="left">${book.writer }</td>
+				<td width="40%" align="left">${book.bookname }</td>
+				<td width="30%" align="left">${book.writer }</td>
+				<td width="20%" align="right"></td>
 			</tr>
 			<tr>
 				<td>${book.genre}</td>
-				<td>요청자 : ${book.requestid }</td>
+				<td>요청자 : ${book.id}</td>
+				<td>
+					<button class="btn btn-default" type="button"
+						onClick="location.href='${book.link}'">구매</button>
+				</td>
 			</tr>
 			<tr>
 				<td>${book.priceSales}원</td>
-				<td>수량 : ${book.quantity}
-					<button onClick="location.href='${book.link}'">구매</button>
-					<button
-						onClick="location.href='deleteRequest?booknum=${book.booknum}'">삭제</button>
+				<td>수량 : ${book.quantity}</td>
+				<td>
+					<button class="btn btn-default" type="button"
+						onClick="location.href='deleteRequest?bookCode=${book.bookCode}' ; del();">삭제</button>
 				</td>
 			</tr>
 		</tbody>
@@ -51,14 +56,21 @@
 				<td>${book.quantity}</td>
 				<td>${book.writer}</td>
 				<td>${book.genre}</td>
-				<td>${book.requestid}</td>
+				<td>${book.id}</td>
 				<td>${book.requestdate}</td>
-				<td><button id="buyBook" onClick="location.href='${book.link}'">구매</button>
-					<button
-						onClick="location.href='deleteRequest?requestid=${book.requestid}'">삭제</button></td>
+				<td><button class="btn btn-default" type="button" id="buyBook"
+						onClick="location.href='${book.link}'">구매</button>
+					<button class="btn btn-default" type="button"
+						onClick="location.href='deleteRequest?bookCode=${book.bookCode}'; del();">삭제</button></td>
 
 			</tr>
 		</tbody>
 	</c:forEach>
 
 </table>
+<script>
+	function del() {
+		alert("삭제되었습니다.");
+	}
+	
+</script>

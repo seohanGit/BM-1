@@ -17,7 +17,7 @@
 </style>
 </head>
 <body>
-    <jsp:include page="nav.jsp"/>
+    <jsp:include page="../nav.jsp"/>
 	<div class="container">
 	   <h1>회원가입</h1>
 		<div class="panel panel-default">

@@ -26,9 +26,6 @@ import com.baron.member.model.MemberModel;
 import com.baron.member.service.BookService;
 import com.baron.member.service.JoinService;
 
-/**
- * @author pokbab
- */
 @Controller
 public class MemberController {
 
@@ -54,7 +51,7 @@ public class MemberController {
 			}
 		}
 
-		return (pass.equals(password)) ? "modifyidentity" : "identifyfail";
+		return (pass.equals(password)) ? "/member/modifyidentity" : "/member/identifyfail";
 	}
 
 	@RequestMapping("/modifySuccess")
@@ -69,18 +66,18 @@ public class MemberController {
 
 		joinService.updateMember(model);
 
-		return "modifySuccess";
+		return "/member/modifySuccess";
 	}
 
 	@RequestMapping("/")
 	public String loginForm() {
-		return "login";
+		return "/member/login";
 	}
 
 	@RequestMapping("/login")
 	public ModelAndView login(HttpServletResponse response, MemberModel model) {
 
-		ModelAndView mav = new ModelAndView("loginResult");
+		ModelAndView mav = new ModelAndView("/member/loginResult");
 		model = joinService.login(model);
 		if (model != null) {
 			System.out.println(model.getId() + model.getPermission());
@@ -97,7 +94,7 @@ public class MemberController {
 	@RequestMapping("/identify")
 	public String identify() {
 
-		return "identify";
+		return "/member/identify";
 	}
 
 	@RequestMapping("/admin")
@@ -115,9 +112,9 @@ public class MemberController {
 					model.addAttribute("bestList", memberList);
 					model.addAttribute("bestseller", bestSeller);
 					model.addAttribute("newbook", newBook);
-					return "admin";
+					return "/member/admin";
 				} else
-					return "adminfail";
+					return "/member/adminfail";
 			}
 		}
 		return null;
@@ -125,16 +122,16 @@ public class MemberController {
 
 	@RequestMapping("/joinForm")
 	public String joinForm() {
-		return "join";
+		return "/member/join";
 	}
 
 	@RequestMapping("/join")
 	public String join(@Valid MemberModel memberModel) throws Exception {
 		if (joinService.selectMemberById(memberModel.getId()) == 0) {
 			joinService.join(memberModel);
-			return "joinSuccess";
+			return "/member/joinSuccess";
 		} else
-			return "joinFail";
+			return "/member/joinFail";
 	}
 
 	@RequestMapping("/logout")
@@ -154,26 +151,26 @@ public class MemberController {
 						.getPermission()));
 			}
 		}
-		return "logout";
+		return "/member/logout";
 	}
 
 	@RequestMapping("/adminfail")
 	public String adminfail() {
-		return "adminfail";
+		return "/member/adminfail";
 	}
 
 	@RequestMapping("/searchBlack")
 	public String searchBlack(Model model) {
 		List<MemberModel> memberList = joinService.selectBlack();
 		model.addAttribute("blackList", memberList);
-		return "black";
+		return "/member/black";
 	}
 
 	@RequestMapping("/searchLate")
 	public String searchLate(Model model) {
 		List<MemberModel> memberList = joinService.selectLate();
 		model.addAttribute("lateList", memberList);
-		return "late";
+		return "/member/late";
 	}
 
 	@RequestMapping("/index")

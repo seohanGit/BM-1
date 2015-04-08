@@ -21,26 +21,22 @@
 		<div class="row">
 			<!-- Blog Entries Column -->
 			<div class="col-md-8">
-				<h1 class="page-header">
-					한줄 명언 <small>민상훈책방</small>
-				</h1>
-				<!-- First Blog Post -->
-				<select multiple class="form-control">
-					<c:forEach items="${contentList}" var="con" varStatus="status">
-						<option>${con.content}</option>
+				<div id="goodPhrase">
+					<h1 class="page-header">
+						한줄 명언 <small>민상훈책방</small>
+					</h1>
+					<!-- First Blog Post -->
+					<select multiple class="form-control">
+						<c:forEach items="${contentList}" var="con" varStatus="status">
+							<option>${con.content}</option>
 
-					</c:forEach>
-				</select>
-
-				<hr>
-
-				<img src="/resources/main.JPG" style="width: 100%" id="image1">
-
-				<div id="searchResultArea"></div>
+						</c:forEach>
+					</select>
+				</div>
 				<hr>
 				<h4>원하는 책이 없다면 인터넷에서 주문하세요 !</h4>
 				<div class="input-group ">
-					<input type="text" class="form-control" id="keyword"
+					<input type="text" class="form-control" id="query"
 						placeholder="인터파크 검색"> <span class="input-group-btn">
 						<button class="btn btn-default" type="button" id="btn_find">
 							<span class="glyphicon glyphicon-search"></span>
@@ -49,6 +45,11 @@
 
 				</div>
 				<hr>
+				<img src="/resources/main.JPG" style="width: 100%" id="image1">
+
+				<div id="searchResultArea"></div>
+				
+				<hr>
 				<p>잠은 인생의 사치입니다! 저는 하루 네 시간만 자면 충분하다고 생각해요.</p>
 				<hr>
 				<!-- Pager -->
@@ -56,18 +57,20 @@
 					<li class="previous"><a href="#">&larr; Older</a></li>
 					<li class="next"><a href="#">Newer &rarr;</a></li>
 				</ul>
+
 			</div>
 			<!-- Blog Sidebar Widgets Column -->
 			<div class="col-md-4">
-				<!-- Blog Search Well -->
+				<!-- Blog Search Well --><!-- 
 				<div class="well">
 					<tr>
-					<td><button class="btn btn-default" type="button" id="btn_search"
-						style="width: 150px">도서목록</button></td>
-					<td><h4 align="right" >도서 검색</h4></td></tr>
+						<td><button class="btn btn-default" type="button"
+								id="btn_bookList" style="width: 100%">도서목록</button></td>
+					</tr>
+					<hr>
 					<div class="input-group">
-						<input type="text" class="form-control" id="keyword"> <span
-							class="input-group-btn">
+						<input type="text" class="form-control" id="keyword"
+							placeholder="도서검색"> <span class="input-group-btn">
 							<button class="btn btn-default" type="button" id="btn_search">
 								<span class="glyphicon glyphicon-search"></span>
 							</button>
@@ -76,9 +79,10 @@
 
 
 
-					<!-- /.input-group -->
-				</div>
+					/.input-group
+				</div> -->
 				<!-- Blog Categories Well -->
+				<%-- 
 				<div class="well" align="center">
 					<h3>이달의 베스트 회원 Top 3</h3>
 					<br>
@@ -98,6 +102,7 @@
 					</div>
 					<!-- /.row -->
 				</div>
+				 --%>
 				<!-- Side Widget Well -->
 				<div class="well">
 
@@ -114,6 +119,25 @@
 								<p class="caption">${newbook.bookname}</p>
 								<p class="caption">${newbook.writer}</p>
 								<p class="caption">${newbook.genre}</p>
+							</div>
+						</div>
+						<hr>
+					</c:forEach>
+
+					<h3>베스트 셀러</h3>
+					<c:forEach items="${bestseller}" var="book" begin="0" end="2"
+						step="1" varStatus="status">
+
+						<div onclick="location.href='${book.link}'" class="row "
+							align="center">
+							<div class="thumbnail" align="left"
+								style="max-height: 150px; max-width: 100px">
+								<img src="${book.imageurl}" height="100%" width="100%">
+							</div>
+							<div align="left">
+								<p class="caption">${book.bookname}</p>
+								<p class="caption">${book.writer}</p>
+								<p class="caption">${book.genre}</p>
 							</div>
 						</div>
 						<hr>

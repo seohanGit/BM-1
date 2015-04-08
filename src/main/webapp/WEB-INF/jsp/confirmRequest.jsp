@@ -57,7 +57,7 @@ body {
 				</div>
 				<input type="hidden" name="imageurl" value="${book.imageurl }">
 				<input type="hidden" name="link" value="${book.link}"> <input
-					type="hidden" name="requestid" value="${book.requestid}"> <input
+					type="hidden" name="requestid" value="${book.id}"> <input
 					type="hidden" name="priceSales" value="${book.priceSales}">
 				<button type="submit" class="btn btn-default">확인</button>
 			</form>

@@ -20,18 +20,10 @@ public interface BookService {
 
 	public String selectname(String booknum);
 
-	public void updateBookReser(BookModel bookmodel);
 
 	public String selectReservation(String booknum);
 
 	public List<BookModel> findBook(String keyword) throws Exception;
-
-	public BookModel addRequestBook(String isbn, String id, int quantity) throws Exception,
-			IOException;
-
-	public List<BookModel> requestList();
-
-	void requestBook(BookModel model);
 
 	public List<BookModel> borrowList(String id);
 
@@ -39,11 +31,13 @@ public interface BookService {
 
 	List<BookModel> getNewbook() throws Exception;
 
-	public BookModel findBookOne(String isbn) throws Exception;
+	public List<BookModel> borrowListAll();
 
-	public void deleteRequest(String requestid);
+	public void borrowBook(BookModel bookmodel);
 
-	public List<BookModel> selectBorrowList();
+	public void returnBook(String bookCode);
+
+	void returnManyBook(List<String> bookCodeList);
 
 
 }

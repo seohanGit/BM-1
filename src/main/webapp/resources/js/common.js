@@ -90,12 +90,13 @@ $('#requestList').click(function() {
 $('#btn_bookList').click(function() {
 	$.ajax({
 		type : "GET", // GET or POST
-		url : "/listBook", // URL
+		url : "/bookList", // URL
 		datatype : "xml", // html, xml, json, jsonp, script, text
 		error : function() { // Ajax error handler
 			alert('ajax failed');
 		},
 		success : function(data, status) { // Ajax complete handelr
+			$('#goodPhrase').fadeOut();
 			$('#image1').fadeOut();
 			$('#image2').fadeOut();
 			$('#searchResultArea').empty().append(data);

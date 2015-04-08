@@ -33,12 +33,6 @@ public class BookController {
 		return "insertbookresult";
 	}
 
-	/*
-	 * @RequestMapping("/requestOk") public String requestOk(BookModel model) {
-	 * System.out.println(model.getRequestid()); bookservice.requestBook(model);
-	 * return "requestBookResult"; }
-	 */
-
 	@RequestMapping("/national")
 	public String getNationalBest(BookModel model) throws Exception {
 		bookservice.getBestseller("200");
@@ -62,11 +56,9 @@ public class BookController {
 		return "searchadmin";
 	}
 
-	
-
-	@RequestMapping("/listBook")
-	public String listBook(String keyword, Model model) {
-		keyword = "";
+	@RequestMapping("/bookList")
+	public String listBook( Model model) {
+		String keyword = "";
 		List<BookModel> bookList = bookservice.searchBook(keyword);
 		model.addAttribute("bookList", bookList);
 		return "search";
@@ -121,6 +113,15 @@ public class BookController {
 		return "modifybookresult";
 	}
 
+
+	
+
+	/*
+	 * @RequestMapping("/requestOk") public String requestOk(BookModel model) {
+	 * System.out.println(model.getRequestid()); bookservice.requestBook(model);
+	 * return "requestBookResult"; }
+	 */
+	
 	@RequestMapping("/borrowbook")
 	public String borrowBook(HttpServletRequest request, String bookCode,
 			BookModel book) {

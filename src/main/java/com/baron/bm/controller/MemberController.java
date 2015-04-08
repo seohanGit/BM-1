@@ -26,9 +26,6 @@ import com.baron.member.model.MemberModel;
 import com.baron.member.service.BookService;
 import com.baron.member.service.JoinService;
 
-/**
- * @author pokbab
- */
 @Controller
 public class MemberController {
 

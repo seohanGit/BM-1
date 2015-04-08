@@ -61,11 +61,11 @@
 			</div>
 			<!-- Blog Sidebar Widgets Column -->
 			<div class="col-md-4">
-				<!-- Blog Search Well -->
+				<!-- Blog Search Well --><!-- 
 				<div class="well">
 					<tr>
 						<td><button class="btn btn-default" type="button"
-								id="btn_search" style="width: 100%">도서목록</button></td>
+								id="btn_bookList" style="width: 100%">도서목록</button></td>
 					</tr>
 					<hr>
 					<div class="input-group">
@@ -79,8 +79,8 @@
 
 
 
-					<!-- /.input-group -->
-				</div>
+					/.input-group
+				</div> -->
 				<!-- Blog Categories Well -->
 				<%-- 
 				<div class="well" align="center">

@@ -48,7 +48,7 @@
 					</button>
 
 					<button type="button" class="btn btn-default" id="insertBook">도서추가</button>
-					<button class="btn btn-default" type="button" id="btn_search">도서목록</button>
+					<button class="btn btn-default" type="button" id="btn_bookList">도서목록</button>
 
 
 				</div>

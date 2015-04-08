@@ -52,6 +52,12 @@ public class RequestController {
 		return "confirmRequest";
 	}
 
+	/*
+	 * @RequestMapping("/requestOk") public String requestOk(BookModel model) {
+	 * System.out.println(model.getRequestid()); bookservice.requestBook(model);
+	 * return "requestBookResult"; }
+	 */
+
 	@RequestMapping("/deleteRequest")
 	public String deleteRequest(String bookCode) {
 		System.out.println(bookCode);

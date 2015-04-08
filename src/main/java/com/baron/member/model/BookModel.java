@@ -13,6 +13,7 @@ public class BookModel {
 	private String id;
 	private String publisher;
 	private String borrowcheck;
+	private String reservecheck;
 	private int grade;
 	private String writer;
 	private String imageurl;
@@ -20,6 +21,14 @@ public class BookModel {
 	private String link;
 	private String isbn;
 	private String summary;
+
+	public String getReservecheck() {
+		return reservecheck;
+	}
+
+	public void setReservecheck(String reservecheck) {
+		this.reservecheck = reservecheck;
+	}
 
 	public String getSummary() {
 		return summary;

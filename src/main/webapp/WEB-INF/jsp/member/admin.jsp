@@ -15,7 +15,7 @@
 <link href="/resources/css/index.css" rel="stylesheet">
 </head>
 <body>
-	<jsp:include page="nav.jsp" />
+	<jsp:include page="../nav.jsp" />
 	<!-- Page Content -->
 	<div class="container">
 		<div class="row">
@@ -26,9 +26,10 @@
 				</h1>
 				<div class="btn-group" role="group" aria-label="...">
 					<button type="button" class="btn btn-default" id="requestList">구매요청
-						페이지</button>
-					<button type="button" class="btn btn-default" id="borrowListAll">대여현황</button>
-					<button type="button" class="btn btn-default">Right</button>
+					</button>
+					<button type="button" class="btn btn-default" id="borrowListAll">대여요청</button>
+					<button type="button" class="btn btn-default">반납요청</button>
+					<button type="button" class="btn btn-default">예약현황</button>
 				</div>
 				<!-- First Blog Post -->
 
@@ -122,7 +123,8 @@
 					<c:forEach items="${newbook}" var="newbook" begin="0" end="2"
 						step="1" varStatus="status">
 
-						<div class="row " align="center" onclick="location.href='${newbook.link}'">
+						<div class="row " align="center"
+							onclick="location.href='${newbook.link}'">
 							<div class="thumbnail" align="left"
 								style="max-height: 150px; max-width: 100px">
 								<img src="${newbook.imageurl}" height="100%" width="100%">
@@ -180,7 +182,6 @@
 		$("#insertBook").click(function() {
 			location.href = "/insertbookForm"
 		})
-	
 	</script>
 </body>
 </html>

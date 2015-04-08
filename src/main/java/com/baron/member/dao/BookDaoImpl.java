@@ -8,7 +8,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.baron.member.model.BookModel;
-import com.baron.member.model.MemberModel;
 
 @Repository
 public class BookDaoImpl implements BookDao {
@@ -44,7 +43,6 @@ public class BookDaoImpl implements BookDao {
 	public void updateBook(BookModel bookmodel) {
 		// TODO Auto-generated method stub
 		session.update(NAMESPACE + "updateBook", bookmodel);
-
 	}
 
 	@Override
@@ -65,7 +63,6 @@ public class BookDaoImpl implements BookDao {
 	public void updateBookReser(BookModel bookmodel) {
 		session.update(NAMESPACE + "updateBookReser", bookmodel);
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
@@ -76,34 +73,35 @@ public class BookDaoImpl implements BookDao {
 	}
 
 	@Override
-	public void requestBook(BookModel model) {
-		System.out.println(model.getBookname());
-		// TODO Auto-generated method stub
-		session.insert(NAMESPACE + "requestBook", model);
-
-	}
-
-	@Override
-	public List<BookModel> requestList() {
-		return session.selectList(NAMESPACE + "requestList");
-	}
-
-	@Override
 	public List<BookModel> borrowList(String id) {
 		// TODO Auto-generated method stub
 		return session.selectList(NAMESPACE + "borrowList", id);
 	}
 
 	@Override
-	public void deleteRequest(String bookCode) {
-		// TODO Auto-generated method stub
-		session.delete(NAMESPACE + "deleteRequest", bookCode);
+	public List<BookModel> borrowListAll() {
+		return session.selectList(NAMESPACE + "borrowListAll");
+	}
+
+	@Override
+	public void borrowBook(BookModel bookmodel) {
+		session.insert(NAMESPACE + "borrowBook", bookmodel);
 
 	}
 
 	@Override
-	public List<BookModel> selectBorrowList() {
-		return session.selectList(NAMESPACE + "selectBorrowList");
+	public void updateBookBorrow(BookModel bookmodel) {
+		session.update(NAMESPACE + "updateBookBorrow", bookmodel);
 	}
 
+	@Override
+	public void returnBook(String bookCode) {
+
+		session.update(NAMESPACE + "returnBook", bookCode);
+	}
+
+	@Override
+	public void deleteBorrow(String bookCode) {
+		session.update(NAMESPACE + "deleteBorrow", bookCode);
+	}
 }

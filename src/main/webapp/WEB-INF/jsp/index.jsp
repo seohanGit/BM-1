@@ -21,19 +21,30 @@
 		<div class="row">
 			<!-- Blog Entries Column -->
 			<div class="col-md-8">
-				<h1 class="page-header">
-					한줄 명언 <small>민상훈책방</small>
-				</h1>
-				<!-- First Blog Post -->
-				<select multiple class="form-control">
-					<c:forEach items="${contentList}" var="con" varStatus="status">
-						<option>${con.content}</option>
+				<div id="goodPhrase">
+					<h1 class="page-header">
+						한줄 명언 <small>민상훈책방</small>
+					</h1>
+					<!-- First Blog Post -->
+					<select multiple class="form-control">
+						<c:forEach items="${contentList}" var="con" varStatus="status">
+							<option>${con.content}</option>
 
-					</c:forEach>
-				</select>
-
+						</c:forEach>
+					</select>
+				</div>
 				<hr>
+				<h4>원하는 책이 없다면 인터넷에서 주문하세요 !</h4>
+				<div class="input-group ">
+					<input type="text" class="form-control" id="keyword"
+						placeholder="인터파크 검색"> <span class="input-group-btn">
+						<button class="btn btn-default" type="button" id="btn_find">
+							<span class="glyphicon glyphicon-search"></span>
+						</button>
+					</span>
 
+				</div>
+				<hr>
 				<img src="/resources/main.JPG" style="width: 100%" id="image1">
 
 				<div id="searchResultArea"></div>
@@ -56,6 +67,7 @@
 					<li class="previous"><a href="#">&larr; Older</a></li>
 					<li class="next"><a href="#">Newer &rarr;</a></li>
 				</ul>
+
 			</div>
 			<!-- Blog Sidebar Widgets Column -->
 			<div class="col-md-4">

@@ -22,18 +22,19 @@ public interface BookDao {
 
 	public String selectReservation(String booknum);
 
-	public void requestBook(BookModel model);
-
-
-	public List<BookModel> requestList();
-
 	public List<BookModel> borrowList(String id);
 
 	List<BookModel> searchBook(String keyword);
 
-	public void deleteRequest(String requestid);
+	public List<BookModel> borrowListAll();
 
-	public List<BookModel> selectBorrowList();
+	public void borrowBook(BookModel bookmodel);
+
+	public void returnBook(String bookCode);
+
+	public void updateBookBorrow(BookModel bookmodel);
+
+	public void deleteBorrow(String bookCode);
 
 
 

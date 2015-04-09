@@ -14,7 +14,7 @@
 <link href="/resources/css/common.css" rel="stylesheet">
 </head>
 <body>
-	<jsp:include page="nav.jsp" />
+	<jsp:include page="../nav.jsp" />
 	<!-- Page Content -->
 	<div class="container">
 		<div class="row row-offcanvas row-offcanvas-right">

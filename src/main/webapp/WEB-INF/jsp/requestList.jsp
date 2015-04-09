@@ -41,7 +41,7 @@
 				<td>수량 : ${book.quantity}</td>
 				<td>
 					<button class="btn btn-default" type="button"
-						onClick="location.href='deleteRequest?bookCode=${book.bookCode}' ; del();">삭제</button>
+						onClick="location.href='deleteRequest?bookCode=${book.bookCode}'; del();">삭제</button>
 				</td>
 			</tr>
 		</tbody>

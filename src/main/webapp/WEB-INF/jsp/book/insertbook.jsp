@@ -8,9 +8,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
-<title>도서 구매 요청</title>
+<title>도서 추가 페이지</title>
 <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="/resources/css/common.css" rel="stylesheet">
+<link href="/resources/css/signin.css" rel="stylesheet">
 <script src="/resources/js/jquery/jquery.js"></script>
 <script src="/resources/js/bootstrap.min.js"></script>
 <style type="text/css">
@@ -20,48 +21,34 @@ body {
 </style>
 </head>
 <body>
-	<jsp:include page="nav.jsp" />
+	<jsp:include page="../nav.jsp" />
 	<div class="container">
-		<h2>도서 구매 요청</h2>
+		<h2>도서 추가 페이지</h2>
 		<div class="panelpanel-default">
-			<form action="/confirmRequest" method="post" class="panel-body">
-				<input type="image" name="imageurl" src="${book.imageurl}">
-				<h3>도서 정가 ${book.priceSales }원</h3>
+			<form action="/insertbook" method="post" class="panel-body">
 				<div class="form-group">
-					<label for="exampleInputEmail1">ISBN</label> <input type="text"
-						class="form-control" id="isbn" name="isbn" value="${book.isbn}">
+					<label for="exampleInputEmail1">도서번호</label> <input type="text"
+						class="form-control" id="booknum" name="booknum"
+						placeholder="도서번호">
 				</div>
 				<div class="form-group">
 					<label for="exampleInputPassword1">도서명</label> <input type="text"
 						class="form-control" id="bookname" name="bookname"
-						value="${book.bookname }">
+						placeholder="도서명">
 				</div>
 				<div class="form-group">
 					<label for="exampleInputPassword1">장르</label> <input type="text"
-						class="form-control" id="genre" name="genre" value="${book.genre}">
+						class="form-control" id="genre" name="genre" placeholder="장르">
 				</div>
 				<div class="form-group">
-					<label for="exampleInputPassword1">수량</label> <input type="text"
-						class="form-control" id="quantity" name="quantity"
-						value="${book.quantity}">
+					<label for="exampleInputPassword1">출판사</label> <input type="text"
+						class="form-control" id="publisher" name="publisher"
+						placeholder="출판사">
 				</div>
-
-				<div class="form-group">
-					<label for="exampleInputPassword1">저자</label> <input type="text"
-						class="form-control" id="writer" name="writer"
-						value="${book.writer }">
-				</div>
-				<%-- 
 				<div class="form-group">
 					<label for="exampleInputPassword1">저자</label> <input type="text"
-						class="form-control" id="writer" name="writer"
-						value="${book.writer}">
+						class="form-control" id="writer" name="writer" placeholder="저자">
 				</div>
-				 --%>
-				<input type="hidden" name="imageurl" value="${book.imageurl }">
-				<input type="hidden" name="link" value="${book.link}"> <input
-					type="hidden" name="requestid" value="${book.id}"> <input
-					type="hidden" name="priceSales" value="${book.priceSales}">
 				<button type="submit" class="btn btn-default">확인</button>
 			</form>
 		</div>

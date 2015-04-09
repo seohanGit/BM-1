@@ -1,10 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<h2>대여요청 목록</h2>
-<form action="/confirmBorrowBookList" method="post" class="panel-body">
+<h2>대여현황 목록</h2>
 	<div class="form-group">
-		<button class="btn btn-default" type="submit" id="returnBook">승인</button>
 		<hr>
 		<c:forEach items="${bookList}" var="book" varStatus="loop">
 
@@ -36,8 +34,7 @@
 		</c:forEach>
 	</div>
 	<hr>
-	<button class="btn btn-default" type="submit" id="returnBook">승인</button>
-</form>
+	
 <script>
 	function del() {
 		alert("승인되었습니다.");

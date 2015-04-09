@@ -11,9 +11,10 @@
 <title>게시판 작성</title>
 <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="/resources/css/signin.css" rel="stylesheet">
+<link href="/resources/css/common.css" rel="stylesheet">
 </head>
 <body>
-	<jsp:include page="nav.jsp" />
+	<jsp:include page="../nav.jsp" />
 	<div class="container">
 		<br>
 		<h1>추천 게시판글 작성하기</h1>

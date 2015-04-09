@@ -70,10 +70,10 @@ public class BookServiceImpl implements BookService {
 		return bookDao.searchBook(keyword);
 	}
 
-	/*
-	 * @Override public List<BookModel> selectBook(String bookCode) { return
-	 * bookDao.selectBook(bookCode); }
-	 */
+	@Override
+	public BookModel selectBook(String bookCode) {
+		return bookDao.selectBook(bookCode);
+	}
 
 	@Override
 	public void deleteBook(String bookCode) {
@@ -89,60 +89,14 @@ public class BookServiceImpl implements BookService {
 	}
 
 	@Override
-	public void insertReservation(BookModel bookmodel) {
-		// TODO Auto-generated method stub
-		bookDao.insertReservation(bookmodel);
-	}
-
-	@Override
 	public String selectname(String bookCode) {
 		// TODO Auto-generated method stub
 		return bookDao.selectname(bookCode);
 	}
 
-	/*대여 예약 서비스
-*/
-	@Override
-	public String selectReservation(String bookCode) {
-		// TODO Auto-generated method stub
-		return bookDao.selectReservation(bookCode);
-	}
-
-	@Override
-	public List<BookModel> borrowList(String id) {
-		// TODO Auto-generated method stub
-		return bookDao.borrowList(id);
-	}
-
-	@Override
-	public List<BookModel> borrowListAll() {
-		// TODO Auto-generated method stub
-
-		return bookDao.borrowListAll();
-	}
-
-	@Override
-	public void borrowBook(BookModel bookmodel) {
-		bookDao.borrowBook(bookmodel);
-		bookDao.updateBookTable(bookmodel);
-
-	}
-
-	@Override
-	public void returnBook(String bookCode) {
-		bookDao.returnBook(bookCode);
-		bookDao.deleteBorrow(bookCode);
-	}
-
-	
-	
-	@Override
-	public void returnManyBook(List<String> bookCodeList) {
-		for (String bookCode : bookCodeList) {
-			bookDao.returnBook(bookCode);
-			bookDao.deleteBorrow(bookCode);
-		}
-	}
+	/*
+	 * 대여 예약 서비스
+	 */
 
 	private URL getNewbookUrl() throws UnsupportedEncodingException,
 			MalformedURLException {

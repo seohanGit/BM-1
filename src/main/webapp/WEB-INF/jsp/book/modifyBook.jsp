@@ -8,8 +8,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
-<title>도서 추가 페이지</title>
+<title>도서 수정</title>
 <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
+<link href="/resources/css/signin.css" rel="stylesheet">
+<link href="/resources/css/common.css" rel="stylesheet">
 <script src="/resources/js/jquery/jquery.js"></script>
 <script src="/resources/js/bootstrap.min.js"></script>
 <style type="text/css">
@@ -19,30 +21,38 @@ body {
 </style>
 </head>
 <body>
+<jsp:include page="../nav.jsp"></jsp:include>
 	<div class="container">
-		<h2>도서 추가 페이지</h2>
+		<h2>도서 수정 페이지</h2>
 		<div class="panelpanel-default">
-			<form action="/insertbook" method = "post" class="panel-body">
+			<form action="/modifybook1" method="post" class="panel-body">
+				<img src="${book.imageurl}">
 				<div class="form-group">
-					<label for="exampleInputEmail1">도서번호</label> <input type="text"
-						class="form-control" id="booknum" name ="booknum" placeholder="도서번호">
+					<label for="exampleInputPassword1">도서코드</label> <input type="text"
+						class="form-control" id="bookCode" name="bookCode"
+						placeholder="${book.bookCode}">
 				</div>
-				<div class="form-group">
+				<div>
 					<label for="exampleInputPassword1">도서명</label> <input type="text"
-						class="form-control" id="bookname" name ="bookname" placeholder="도서명">
+						class="form-control" id="bookname" name="bookname"
+						placeholder="${book.bookname}">
 				</div>
 				<div class="form-group">
-					<label for="exampleInputPassword1">장르</label> <input type="text"
-						class="form-control" id="genre" name ="genre" placeholder="장르">
+					<label for="exampleInputPassword1">카테고리</label> <input type="text"
+						class="form-control" id="genre" name="genre"
+						placeholder="${book.genre}">
 				</div>
 				<div class="form-group">
 					<label for="exampleInputPassword1">출판사</label> <input type="text"
-						class="form-control" id="publisher" name ="publisher" placeholder="출판사">
+						class="form-control" id="publisher" name="publisher"
+						placeholder="${book.publisher}">
 				</div>
 				<div class="form-group">
 					<label for="exampleInputPassword1">저자</label> <input type="text"
-						class="form-control" id="writer" name ="writer" placeholder="저자">
+						class="form-control" id="writer" name="writer"
+						placeholder="${book.writer}">
 				</div>
+
 				<button type="submit" class="btn btn-default">확인</button>
 			</form>
 		</div>

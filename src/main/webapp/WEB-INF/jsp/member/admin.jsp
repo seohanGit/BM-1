@@ -28,8 +28,10 @@
 					<button type="button" class="btn btn-default" id="requestList">구매요청
 					</button>
 					<button type="button" class="btn btn-default" id="borrowListAll">대여요청</button>
-					<button type="button" class="btn btn-default">반납요청</button>
+					<button type="button" class="btn btn-default" id="returnListAll">반납요청</button>
+					<button type="button" class="btn btn-default" id="rentListAll">대여현황</button>
 					<button type="button" class="btn btn-default">예약현황</button>
+					<button type="button" class="btn btn-default" id="recordList">대여기록</button>
 				</div>
 				<!-- First Blog Post -->
 
@@ -181,6 +183,9 @@
 	<script>
 		$("#insertBook").click(function() {
 			location.href = "/insertbookForm"
+		})
+		$("#recordList").click(function() {
+			location.href = "/recordList"
 		})
 	</script>
 </body>

@@ -27,8 +27,8 @@ public class BookDaoImpl implements BookDao {
 	}
 
 	@Override
-	public List<BookModel> selectBook(String bookCode) {
-		return session.selectList(NAMESPACE + "selectBook", bookCode);
+	public BookModel selectBook(String bookCode) {
+		return session.selectOne(NAMESPACE + "selectBook", bookCode);
 	}
 
 	@Override
@@ -52,50 +52,5 @@ public class BookDaoImpl implements BookDao {
 
 	}
 
-	@Override
-	public void insertReservation(BookModel bookmodel) {
-		// TODO Auto-generated method stub
-		session.insert(NAMESPACE + "insertReservation", bookmodel);
-
-	}
-
-	@Override
-	public String selectReservation(String bookCode) {
-		return session.selectOne(NAMESPACE + "selectReservation", bookCode);
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public List<BookModel> borrowList(String id) {
-		// TODO Auto-generated method stub
-		return session.selectList(NAMESPACE + "borrowList", id);
-	}
-
-	@Override
-	public List<BookModel> borrowListAll() {
-		return session.selectList(NAMESPACE + "borrowListAll");
-	}
-
-	@Override
-	public void borrowBook(BookModel bookmodel) {
-		session.insert(NAMESPACE + "borrowBook1", bookmodel);
-
-	}
-
-	@Override
-	public void updateBookTable(BookModel bookmodel) {
-		session.update(NAMESPACE + "borrowBook2", bookmodel);
-	}
-
-	@Override
-	public void returnBook(String bookCode) {
-
-		session.update(NAMESPACE + "returnBook1", bookCode);
-	}
-
-	@Override
-	public void deleteBorrow(String bookCode) {
-		session.update(NAMESPACE + "returnBook2", bookCode);
-	}
+	
 }

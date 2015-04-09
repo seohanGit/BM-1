@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<h2>대여요청 목록</h2>
-<form action="/confirmBorrowBookList" method="post" class="panel-body">
+<h2>반납요청 목록</h2>
+<form action="/confirmReturnBookList" method="post" class="panel-body">
 	<div class="form-group">
 		<button class="btn btn-default" type="submit" id="returnBook">승인</button>
 		<hr>
@@ -24,7 +24,7 @@
 							<p>${book.borrowcheck}
 								== 1 then 대여요청 ==2 대여 중
 								<button class="btn btn-default" type="button" id="reservebook"
-									onClick="location.href='/confirmBorrowBook?bookCode=${book.bookCode}'">승인</button>
+									onClick="location.href='/confirmReturnBook?bookCode=${book.bookCode}'">승인</button>
 
 							</p>
 						</td>

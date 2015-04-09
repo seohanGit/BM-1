@@ -18,6 +18,50 @@ $('#btn_search').click(function() {
 	});
 });
 
+$('#btn_find').click(function() {
+	$.ajax({
+
+		type : "GET", // GET or POST
+		url : "/findBook", // URL
+		datatype : "xml", // html, xml, json, jsonp, script, text
+		data : {
+			keyword : $('#query').val()
+		}, // parameters as plain object
+		error : function() { // Ajax error handler
+
+			alert('검색어를 입력하세요');
+		},
+		success : function(data, status) { // Ajax complete handelr
+			$('#goodPhrase').fadeOut();
+			$('#image1').fadeOut();
+			$('#image2').fadeOut();
+			$('#searchResultArea').empty().append(data);
+		}
+	});
+});
+
+
+/////////////////////////////////리스트
+
+
+$('#borrowList').click(function() {
+	$.ajax({
+		type : "GET", // GET or POST
+		url : "/borrowList", // URL
+		datatype : "xml", // html, xml, json, jsonp, script, text
+		// parameters as plain object
+		error : function() { // Ajax error handler
+			alert('ajax failed');
+		},
+		success : function(data, status) { // Ajax complete handelr
+			$('#goodPhrase').fadeOut();
+			$('#image1').fadeOut();
+			$('#image2').fadeOut();
+			$('#searchResultArea').empty().append(data);
+		}
+	});
+});
+
 $('#borrowListAll').click(function() {
 	$.ajax({
 		type : "GET", // GET or POST
@@ -35,10 +79,10 @@ $('#borrowListAll').click(function() {
 	});
 });
 
-$('#returnList').click(function() {
+$('#returnListAll').click(function() {
 	$.ajax({
 		type : "GET", // GET or POST
-		url : "/returnList", // URL
+		url : "/returnListAll", // URL
 		datatype : "xml", // html, xml, json, jsonp, script, text
 		// parameters as plain object
 		error : function() { // Ajax error handler
@@ -52,17 +96,16 @@ $('#returnList').click(function() {
 	});
 });
 
-$('#borrowList').click(function() {
+$('#rentListAll').click(function() {
 	$.ajax({
 		type : "GET", // GET or POST
-		url : "/borrowList", // URL
+		url : "/rentListAll", // URL
 		datatype : "xml", // html, xml, json, jsonp, script, text
 		// parameters as plain object
 		error : function() { // Ajax error handler
 			alert('ajax failed');
 		},
 		success : function(data, status) { // Ajax complete handelr
-			$('#goodPhrase').fadeOut();
 			$('#image1').fadeOut();
 			$('#image2').fadeOut();
 			$('#searchResultArea').empty().append(data);
@@ -104,26 +147,14 @@ $('#btn_bookList').click(function() {
 	});
 });
 
-/*
- * $('#btn_next').click(function() { $.ajax({ type : "GET", // GET or POST url :
- * "/findBook", // URL datatype : "xml", // html, xml, json, jsonp, script, text
- * data : { keyword : $('#pagenum').val() }, // parameters as plain object error :
- * function() { // Ajax error handler alert('에러'); }, success : function(data,
- * status) { // Ajax complete handelr $('#searchResultArea').fadeOut();
- * $('#searchResultArea').empty().append(data); } }); });
- */
-$('#btn_find').click(function() {
+
+$('#btn_bookListByAdmin').click(function() {
 	$.ajax({
-
 		type : "GET", // GET or POST
-		url : "/findBook", // URL
+		url : "/bookListByAdmin", // URL
 		datatype : "xml", // html, xml, json, jsonp, script, text
-		data : {
-			keyword : $('#query').val()
-		}, // parameters as plain object
 		error : function() { // Ajax error handler
-
-			alert('검색어를 입력하세요');
+			alert('ajax failed');
 		},
 		success : function(data, status) { // Ajax complete handelr
 			$('#goodPhrase').fadeOut();
@@ -133,6 +164,14 @@ $('#btn_find').click(function() {
 		}
 	});
 });
+/*
+ * $('#btn_next').click(function() { $.ajax({ type : "GET", // GET or POST url :
+ * "/findBook", // URL datatype : "xml", // html, xml, json, jsonp, script, text
+ * data : { keyword : $('#pagenum').val() }, // parameters as plain object error :
+ * function() { // Ajax error handler alert('에러'); }, success : function(data,
+ * status) { // Ajax complete handelr $('#searchResultArea').fadeOut();
+ * $('#searchResultArea').empty().append(data); } }); });
+ */
 
 $('.board .btn').click(function() {
 	$(this).parent().parent().find('.content').toggleClass('ellipsis');

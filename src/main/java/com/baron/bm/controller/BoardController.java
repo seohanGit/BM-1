@@ -23,12 +23,12 @@ public class BoardController {
 	public String board(Model model) {
 		List<BoardModel> boardList =boardService.selectBoard();
 		model.addAttribute("boardList", boardList);
-		return "board";
+		return "board/board";
 	}
 	
 	@RequestMapping("/boardwrite")
 	public String writeboard(){
-		return "boardinsert";
+		return "board/boardinsert";
 	}
 	
 	@RequestMapping("/boardsuccess")
@@ -40,7 +40,7 @@ public class BoardController {
 			}
 		}
 		boardService.insertBoard(model);
-		return "boardsuccess";
+		return "board/boardsuccess";
 	}
 	
 	@RequestMapping("/selectboard")
@@ -55,7 +55,7 @@ public class BoardController {
 			model.addAttribute("boardList",boardList);
 		}
 		
-		return "selectboard";
+		return "board/selectboard";
 			
 	}
 }

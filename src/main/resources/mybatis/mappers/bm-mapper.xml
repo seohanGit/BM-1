@@ -199,42 +199,78 @@
 		1, #{id})
 	</insert>
 
-	<update id="borrowBook2" parameterType="BookModel">
+	<update id="borrowBook2" parameterType="String">
 		UPDATE
 		book
 		SET
-		id=#{id},
 		borrowcheck='1'
 		WHERE bookCode=#{bookCode}
 	</update>
 
-	<update id="returnBook1" parameterType="String">
-		UPDATE
-		book
+	<update id="confirmBorrowBook" parameterType="String">
+		UPDATE book A INNER
+		JOIN borrow B
+		ON A.borrowcheck = B.borrowcheck
 		SET
-		id='',
-		borrowcheck=0
-		WHERE bookCode=#{bookCode};
+		A.borrowcheck='2',
+		B.borrowcheck='2'
+		WHERE
+		A.bookCode=#{bookCode} AND
+		B.bookCode=#{bookCode}
 	</update>
 
-	<update id="returnBook2" parameterType="String">
-		UPDATE
-		borrow
+
+	<update id="returnBook" parameterType="String">
+		UPDATE book A INNER
+		JOIN
+		borrow B
+		ON A.borrowcheck = B.borrowcheck
 		SET
-		borrowcheck='0', id=''
-		WHERE bookCode=#{bookCode}
+		A.borrowcheck='3',
+		B.borrowcheck='3'
+		WHERE
+		A.bookCode=#{bookCode} AND
+		B.bookCode=#{bookCode}
 	</update>
 
-	<select id="recordBorrow" parameterType="String">
-		SELECT * FROM borrow
-		WHERE <![CDATA[borrowdate < NOW()]]>
-		AND id=#{id} AND borrowcheck=0;
+	<update id="confirmReturnBook" parameterType="String">
+		UPDATE book A INNER
+		JOIN borrow B
+		ON A.borrowcheck = B.borrowcheck
+		SET
+		A.borrowcheck='0',
+		B.borrowcheck='0'
+		WHERE
+		A.bookCode=#{bookCode} AND
+		B.bookCode=#{bookCode}
+	</update>
+
+	<select id="returnListAll" resultType="BookModel">
+		SELECT *
+		FROM book AS a,
+		borrow AS b
+		WHERE b.borrowcheck=3 AND a.bookCode=b.bookCode;
 	</select>
 
 
+	<select id="recordList" parameterType="String" resultType="BookModel">
+		SELECT * FROM book AS a, borrow AS b
+		WHERE <![CDATA[b.borrowdate < NOW()]]> AND b.id=#{id} AND a.bookCode=b.bookCode
+	</select>
+
+	<select id="rentListAll" resultType="BookModel">
+		SELECT *
+		FROM book AS a,
+		borrow AS b
+		WHERE b.borrowcheck=2 AND a.bookCode=b.bookCode;
+	</select>
+	
+
+	<!-- 에약관련 쿼리 -->
+
 	<insert id="insertReservation" parameterType="BookModel">
 		INSERT INTO
-		reservation(id, bookCode, reserveDate, status)
+		reservation(id, bookCode, reserveDate, reservecheck)
 		VALUES(#{id},#{bookCode},date_add(now(),interval 7
 		date), 1)
 	</insert>

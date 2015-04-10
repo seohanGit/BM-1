@@ -14,6 +14,8 @@
 <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="/resources/css/signin.css" rel="stylesheet">
 <link href="/resources/css/common.css" rel="stylesheet">
+<script src="/resources/js/jquery/jquery.js"></script>
+<script src="/resources/js/bootstrap.min.js"></script>
 
 <style type="text/css">
 body {
@@ -51,7 +53,7 @@ body {
 										<p>${book.writer}|${book.publisher}|</p>
 										<p>${book.genre}|${book.id}</p>
 										<p>${book.borrowdate}|${book.returndate}
-										<p>${book.borrowcheck}==1 then 대여요청 ==2 대여 중</p>
+										<p>${book.borrowcheck}==1then대여요청 ==2 대여 중</p>
 									</td>
 								</tr>
 								<tr></tr>
@@ -60,10 +62,12 @@ body {
 					</c:forEach>
 				</div>
 			</div>
-			<hr>
-			<script src="/resources/js/jquery/jquery.js"></script>
-			<script src="/resources/js/bootstrap.min.js"></script>
-			<script src="/resources/js/common.js"></script>
-			<script src="/resources/js/book.js"></script>
+		</div>
+	</div>
+	<hr>
+	<script src="/resources/js/jquery/jquery.js"></script>
+	<script src="/resources/js/bootstrap.min.js"></script>
+	
+	<script src="/resources/js/book.js"></script>
 </body>
 </html>

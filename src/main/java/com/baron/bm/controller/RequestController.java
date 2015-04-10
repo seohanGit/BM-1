@@ -61,6 +61,6 @@ public class RequestController {
 		System.out.println(bookCode);
 
 		requestservice.deleteRequest(bookCode);
-		return "member/admin";
+		return "redirect:requestList";
 	}
 }

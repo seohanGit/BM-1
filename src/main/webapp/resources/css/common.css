@@ -16,6 +16,12 @@ footer {
 	-webkit-box-orient: vertical;
 }
 
+#nav-input {
+	margin-top: 5px;
+	margin-right: 5px;
+	vertical-align: middle;
+}
+
 #btn_bookList {
 	width: 30%;
 }

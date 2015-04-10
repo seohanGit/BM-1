@@ -94,4 +94,23 @@ public class RentServiceImpl implements RentService {
 		// TODO Auto-generated method stub
 		return rentDao.recordList(id);
 	}
+
+	@Override
+	public List<BookModel> recordListAll() {
+		// TODO Auto-generated method stub
+		return rentDao.recordListAll();
+	}
+
+	@Override
+	public List<BookModel> reservationListAll() {
+		// TODO Auto-generated method stub
+		return rentDao.reservationListAll();
+	}
+
+	@Override
+	public void upPoint(String id) {
+		rentDao.upPoint(id);
+		
+	}
+
 }

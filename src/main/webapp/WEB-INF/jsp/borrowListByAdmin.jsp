@@ -37,13 +37,17 @@ body {
 			<!-- Blog Entries Column -->
 			<div class="col-md-8">
 				<div id="searchResultArea">
-					<h2>대여요청 현황</h2>
+					<h2>대여요청 목록</h2>
 					<hr>
 					<c:forEach items="${bookList}" var="book" varStatus="loop">
-						<table class="table table-striped table-bordered">
-							<tbody>
-								<tr>
 
+						<table>
+
+							<tbody>
+
+								<tr>
+									<td><input type="checkbox" name="bookCode"
+										value="${book.bookCode}"></td>
 									<td class="goods_img"><span class="goods_cnt"></span> <img
 										src="${book.imageurl}" width="95px" height="170px"></td>
 									<td class="goods_infogrp">
@@ -51,12 +55,19 @@ body {
 										<p>${book.writer}|${book.publisher}|</p>
 										<p>${book.genre}|${book.id}</p>
 										<p>${book.borrowdate}|${book.returndate}
-										<p>${book.borrowcheck}==1 then 대여요청 ==2 대여 중</p>
+										<p>${book.borrowcheck}
+											== 1 then 대여요청 ==2 대여 중
+											<button class="btn btn-default" type="button"
+												id="reservebook"
+												onClick="location.href='/confirmBorrowBook?bookCode=${book.bookCode}'">승인</button>
+
+										</p>
 									</td>
 								</tr>
-								<tr></tr>
 							</tbody>
+
 						</table>
+
 					</c:forEach>
 				</div>
 			</div>

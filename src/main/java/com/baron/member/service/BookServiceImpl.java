@@ -37,15 +37,15 @@ public class BookServiceImpl implements BookService {
 	}
 
 	@Override
-	public List<BookModel> findBook(String keyword) throws Exception {
+	public List<BookModel> findBook(String keyword)
+			throws Exception {
 		List<BookModel> bookList = new ArrayList<BookModel>();
 
 		URL url = getSearchUrl(keyword);
 
 		XmlDom xmlDom = new XmlDom();
 		bookList = xmlDom.getBooklist(url.openStream());
-		System.out.println(keyword);
-
+		
 		return bookList;
 	}
 
@@ -137,9 +137,10 @@ public class BookServiceImpl implements BookService {
 		key = URLEncoder.encode(key, "UTF-8");
 		keyword = URLEncoder.encode(keyword, "UTF-8");
 		parameter = parameter + "&" + "query=" + keyword;
-		parameter = parameter + "&" + "sort=accuracy";
+		parameter = parameter + "&" + "sort=salesPoint";
 		parameter = parameter + "&" + "maxResults=20";
-
+		parameter = parameter + "&" + "start=1";
+		
 		addr = addr + "key=" + key + parameter;
 
 		URL url = new URL(addr);

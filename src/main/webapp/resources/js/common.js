@@ -13,7 +13,10 @@ $('#btn_search').click(function() {
 			$('#goodPhrase').fadeOut();
 			$('#image1').fadeOut();
 			$('#image2').fadeOut();
+			$('#jumbotron').fadeOut();
 			$('#searchResultArea').empty().append(data);
+			$('#bulletin').empty().append(data);
+			
 		}
 	});
 });
@@ -61,7 +64,7 @@ $('#borrowList').click(function() {
 		}
 	});
 });
-
+/*
 $('#borrowListAll').click(function() {
 	$.ajax({
 		type : "GET", // GET or POST
@@ -95,7 +98,8 @@ $('#returnListAll').click(function() {
 		}
 	});
 });
-
+*/
+/*
 $('#rentListAll').click(function() {
 	$.ajax({
 		type : "GET", // GET or POST
@@ -112,7 +116,7 @@ $('#rentListAll').click(function() {
 		}
 	});
 });
-
+*/
 $('#requestList').click(function() {
 	$.ajax({
 		type : "GET", // GET or POST
@@ -148,10 +152,10 @@ $('#btn_bookList').click(function() {
 });
 
 
-$('#btn_bookListByAdmin').click(function() {
+$('#btn_bookList').click(function() {
 	$.ajax({
 		type : "GET", // GET or POST
-		url : "/bookListByAdmin", // URL
+		url : "/bookList", // URL
 		datatype : "xml", // html, xml, json, jsonp, script, text
 		error : function() { // Ajax error handler
 			alert('ajax failed');
@@ -161,6 +165,7 @@ $('#btn_bookListByAdmin').click(function() {
 			$('#image1').fadeOut();
 			$('#image2').fadeOut();
 			$('#searchResultArea').empty().append(data);
+			$('#container').empty().append(data);
 		}
 	});
 });

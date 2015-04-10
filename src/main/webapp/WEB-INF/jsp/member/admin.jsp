@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
-<title>Blog Home - Start Bootstrap Template</title>
+<title>관리자 페이지</title>
 <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="/resources/css/common.css" rel="stylesheet">
 <link href="/resources/css/index.css" rel="stylesheet">
@@ -28,10 +28,9 @@
 					<button type="button" class="btn btn-default" id="requestList">구매요청
 					</button>
 					<button type="button" class="btn btn-default" id="borrowListAll">대여요청</button>
-					<button type="button" class="btn btn-default" id="returnListAll">반납요청</button>
 					<button type="button" class="btn btn-default" id="rentListAll">대여현황</button>
-					<button type="button" class="btn btn-default">예약현황</button>
-					<button type="button" class="btn btn-default" id="recordList">대여기록</button>
+					<button type="button" class="btn btn-default" id="reservationListAll">예약현황</button>
+					<button type="button" class="btn btn-default" id="recordListAll">대여기록</button>
 				</div>
 				<!-- First Blog Post -->
 
@@ -173,7 +172,7 @@
 		</div>
 		<!-- /.row -->
 	</footer>
-	</div>
+
 	<!-- /.container -->
 	<!-- jQuery -->
 	<script src="/resources/js/jquery/jquery.js"></script>
@@ -184,9 +183,19 @@
 		$("#insertBook").click(function() {
 			location.href = "/insertbookForm"
 		})
-		$("#recordList").click(function() {
-			location.href = "/recordList"
+		$("#recordListAll").click(function() {
+			location.href = "/recordListAll"
 		})
+		$("#rentListAll").click(function() {
+			location.href = "/rentListAll"
+		})
+		$("#reservationListAll").click(function() {
+			location.href = "/reservationListAll"
+		})
+		$("#borrowListAll").click(function() {
+			location.href = "/borrowListAll"
+		})
+		
 	</script>
 </body>
 </html>

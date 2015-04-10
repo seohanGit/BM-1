@@ -9,11 +9,11 @@ public class BookModel {
 	private int quantity;
 	private Date borrowdate;
 	private Date returndate;
+	private Date reservedate;
 	private Date requestdate;
 	private String id;
 	private String publisher;
 	private String borrowcheck;
-	private String reservecheck;
 	private int grade;
 	private String writer;
 	private String imageurl;
@@ -21,6 +21,36 @@ public class BookModel {
 	private String link;
 	private String isbn;
 	private String summary;
+	private int totalResults;
+	private String startindex;
+
+	
+	public String getStartindex() {
+		return startindex;
+	}
+
+	public void setStartindex(String startindex) {
+		this.startindex = startindex;
+	}
+
+	public int getTotalResults() {
+		return totalResults;
+	}
+
+	public void setTotalResults(int totalResults) {
+		this.totalResults = totalResults;
+	}
+
+
+	public Date getReservedate() {
+		return reservedate;
+	}
+
+	public void setReservedate(Date reservedate) {
+		this.reservedate = reservedate;
+	}
+
+	private String reservecheck;
 
 	public String getReservecheck() {
 		return reservecheck;

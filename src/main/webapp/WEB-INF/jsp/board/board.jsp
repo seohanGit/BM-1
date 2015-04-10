@@ -23,7 +23,7 @@
 					<button type="button" class="btn btn-primary btn-xs"
 						data-toggle="offcanvas">Toggle nav</button>
 				</p>
-				<div class="jumbotron">
+				<div class="jumbotron" id="jumbotron">
 					<h1>추천 게시판</h1>
 					<p>다른 사용자에게 도서를 추천해주는 공간입니다.</p>
 				</div>

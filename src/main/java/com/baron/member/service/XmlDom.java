@@ -46,7 +46,6 @@ public class XmlDom {
 		return root;
 	}
 
-
 	public BookModel getBook(InputStream br) throws Exception, SAXException,
 			IOException {
 		Element root = makeDoc(br);
@@ -88,6 +87,7 @@ public class XmlDom {
 			book.setGenre(getChildren(element, "categoryName"));
 			book.setPublisher(getChildren(element, "publisher"));
 			book.setSummary(getChildren(element, "description"));
+			
 
 			bookList.add(book);
 
@@ -95,7 +95,6 @@ public class XmlDom {
 		return bookList;
 	}
 
-	
 	/**
 	 * 지정한 엘레멘트의 값을 취득
 	 * 

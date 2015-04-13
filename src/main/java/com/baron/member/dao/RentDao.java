@@ -32,4 +32,15 @@ public interface RentDao {
 
 	List<BookModel> recordList(String id);
 
+	List<BookModel> recordListAll();
+
+	List<BookModel> reservationListAll();
+
+	void upPoint(String id);
+
+	void extendBorrowBook(String bookCode);
+
+	void cancleBorrowBook(String bookCode);
+
+
 }

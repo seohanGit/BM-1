@@ -78,13 +78,13 @@ public class RequestServiceImpl implements RequestService {
 		String parameter = "";
 
 		key = URLEncoder.encode(key, "UTF-8");
-		keyword = URLEncoder.encode(keyword, "UTF-8");
 		parameter = parameter + "&" + "query=" + keyword;
 		parameter = parameter + "&" + "queryType=isbn";
 		parameter = parameter + "&" + "maxResults=1";
+		parameter = parameter + "&" + "searchTarget=book";
+		parameter = parameter + "&" + "sort=salesPoint";
 
 		key = URLEncoder.encode(key, "UTF-8");
-		keyword = URLEncoder.encode(keyword, "UTF-8");
 		addr = addr + "key=" + key + parameter;
 
 		URL url = new URL(addr);

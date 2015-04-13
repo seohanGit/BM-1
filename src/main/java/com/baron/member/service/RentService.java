@@ -32,4 +32,15 @@ public interface RentService {
 
 	public List<BookModel> recordList(String id);
 
+	List<BookModel> recordListAll();
+
+	public List<BookModel> reservationListAll();
+
+	public void upPoint(String id);
+
+	public void extendBorrowBook(String bookCode);
+
+	public void cancleBorrowBook(String bookCode);
+
+
 }

@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
-<title>Blog Home - Start Bootstrap Template</title>
+<title>관리자 페이지</title>
 <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="/resources/css/common.css" rel="stylesheet">
 <link href="/resources/css/index.css" rel="stylesheet">
@@ -24,14 +24,16 @@
 				<h1 class="page-header">
 					관리자 페이지 <small>Admin</small>
 				</h1>
-				<div class="btn-group" role="group" aria-label="...">
+				<div class="btn-group" role="group" aria-label="..."
+					style="width: 100%;">
 					<button type="button" class="btn btn-default" id="requestList">구매요청
 					</button>
 					<button type="button" class="btn btn-default" id="borrowListAll">대여요청</button>
-					<button type="button" class="btn btn-default" id="returnListAll">반납요청</button>
 					<button type="button" class="btn btn-default" id="rentListAll">대여현황</button>
-					<button type="button" class="btn btn-default">예약현황</button>
-					<button type="button" class="btn btn-default" id="recordList">대여기록</button>
+					<button type="button" class="btn btn-default"
+						id="reservationListAll">예약현황</button>
+					<button type="button" class="btn btn-default" id="recordListAll">대여기록</button>
+					<button type="button" class="btn btn-default" id="notice">공지사항</button>
 				</div>
 				<!-- First Blog Post -->
 
@@ -39,16 +41,17 @@
 
 				<div class="input-group">
 					<div style="width: 100%">
-						<span class="input-group-btn" style="width: 340px"> <input
-							type="text" class="form-control" id="query"
-							placeholder="원하는 책이 없다면 인터넷에서 주문하세요 !"></span>
+						<form action="/findBook" method="get">
+							<span class="input-group-btn"> <input type="text"
+								class="form-control" id="query" name="keyword"
+								placeholder="원하는 책이 없다면 인터넷에서 주문하세요 !"></span>
 					</div>
 
-					<button class="btn btn-default" type="button" id="btn_find"
+					<button class="btn btn-default" type="submit" id="btn_find"
 						style="width: 40%">
 						<span class="glyphicon glyphicon-search"></span>인터파크 검색
 					</button>
-
+					</form>
 					<button type="button" class="btn btn-default" id="insertBook">도서추가</button>
 					<button class="btn btn-default" type="button" id="btn_bookList">도서목록</button>
 
@@ -173,7 +176,7 @@
 		</div>
 		<!-- /.row -->
 	</footer>
-	</div>
+
 	<!-- /.container -->
 	<!-- jQuery -->
 	<script src="/resources/js/jquery/jquery.js"></script>
@@ -184,8 +187,20 @@
 		$("#insertBook").click(function() {
 			location.href = "/insertbookForm"
 		})
-		$("#recordList").click(function() {
-			location.href = "/recordList"
+		$("#recordListAll").click(function() {
+			location.href = "/recordListAll"
+		})
+		$("#rentListAll").click(function() {
+			location.href = "/rentListAll"
+		})
+		$("#reservationListAll").click(function() {
+			location.href = "/reservationListAll"
+		})
+		$("#borrowListAll").click(function() {
+			location.href = "/borrowListAll"
+		})
+		$("#logout").click(function() {
+			location.href = "/logout"
 		})
 	</script>
 </body>

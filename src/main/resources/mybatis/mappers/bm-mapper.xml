@@ -47,11 +47,11 @@
 
 	<select id="selectLate" resultType="MemberModel">
 		SELECT
-		a.id,a.name,a.email,a.address,a.cell,a.home, b.borrowdate,
-		b.returndate
+		A.id,A.name,A.email,A.address,A.cell,A.home, B.borrowdate,
+		B.returndate
 		FROM member as A ,borrow as B
 		WHERE NOW() > returndate and
-		a.id=b.id;
+		A.id=B.id;
 	</select>
 	<select id="selectBest" resultType="MemberModel">
 		SELECT name,score,id
@@ -172,23 +172,24 @@
 	<select id="requestList" resultType="BookModel">
 		SELECT *
 		FROM
-		request
+		request AS A,
+		member AS B WHERE A.id=B.id
 	</select>
 
 
 
 	<!-- 대여관련 쿼리 -->
 	<select id="borrowListAll" resultType="BookModel">
-		SELECT * FROM book AS a,
-		borrow AS b WHERE b.borrowcheck=1 AND a.bookCode=b.bookCode;
+		SELECT * FROM book AS A,
+		borrow AS B WHERE B.borrowcheck=1 AND A.bookCode=B.bookCode;
 	</select>
 
 	<select id="borrowList" resultType="BookModel" parameterType="String">
 		SELECT *
-		FROM book AS a, borrow AS b
-		WHERE b.id = #{id} AND
-		b.borrowcheck='1' AND
-		a.bookCode=b.bookCode;
+		FROM book AS A, borrow AS B
+		WHERE B.id = #{id} AND
+		B.borrowcheck='1' AND
+		A.bookCode=B.bookCode;
 	</select>
 
 	<insert id="borrowBook1" parameterType="BookModel">
@@ -219,6 +220,11 @@
 		B.bookCode=#{bookCode}
 	</update>
 
+	<update id="upPoint" parameterType="String">
+		UPDATE member SET numborrow =
+		numborrow + 1
+		WHERE id = #{id}
+	</update>
 
 	<update id="returnBook" parameterType="String">
 		UPDATE book A INNER
@@ -226,53 +232,68 @@
 		borrow B
 		ON A.borrowcheck = B.borrowcheck
 		SET
-		A.borrowcheck='3',
-		B.borrowcheck='3'
-		WHERE
-		A.bookCode=#{bookCode} AND
-		B.bookCode=#{bookCode}
-	</update>
-
-	<update id="confirmReturnBook" parameterType="String">
-		UPDATE book A INNER
-		JOIN borrow B
-		ON A.borrowcheck = B.borrowcheck
-		SET
 		A.borrowcheck='0',
-		B.borrowcheck='0'
+		B.borrowcheck='3',
+		B.borrowdate=NOW()
 		WHERE
 		A.bookCode=#{bookCode} AND
 		B.bookCode=#{bookCode}
 	</update>
-
+	<!-- <update id="confirmReturnBook" parameterType="String"> UPDATE book 
+		A INNER JOIN borrow B ON A.borrowcheck = B.borrowcheck SET A.borrowcheck='0', 
+		B.borrowcheck='0' WHERE A.bookCode=#{bookCode} AND B.bookCode=#{bookCode} 
+		</update> -->
 	<select id="returnListAll" resultType="BookModel">
 		SELECT *
-		FROM book AS a,
-		borrow AS b
-		WHERE b.borrowcheck=3 AND a.bookCode=b.bookCode;
+		FROM book AS A,
+		borrow AS B
+		WHERE B.borrowcheck=3 AND A.bookCode=B.bookCode;
 	</select>
 
-
-	<select id="recordList" parameterType="String" resultType="BookModel">
-		SELECT * FROM book AS a, borrow AS b
-		WHERE <![CDATA[b.borrowdate < NOW()]]> AND b.id=#{id} AND a.bookCode=b.bookCode
-	</select>
-
-	<select id="rentListAll" resultType="BookModel">
-		SELECT *
-		FROM book AS a,
-		borrow AS b
-		WHERE b.borrowcheck=2 AND a.bookCode=b.bookCode;
-	</select>
+	<update id="extendBorrowBook" parameterType="String">
+		UPDATE borrow
+		SET returndate = date_add(now(), interval +20 day)
+		WHERE
+		bookCode=#{bookCode} AND borrowcheck='2';
+	</update>
 	
+	<update id="cancelBorrowBook" parameterType="String">
+		UPDATE borrow
+		SET borrowcheck='0'
+		WHERE
+		bookCode=#{bookCode} AND borrowcheck='1';
+	</update>
+
+	<select id="rentListAll" parameterType="String" resultType="BookModel">
+		SELECT * FROM book AS A, borrow AS B
+		WHERE <![CDATA[B.returndate > NOW()]]>
+		AND A.bookCode=B.bookCode AND B.borrowcheck='2'
+	</select>
+
+	<!-- <delete id="deleteRecord" parameterType="String"> DELETE ON borrow 
+		WHERE DELETE ON reserve WHERE id=#{id} AND bookCode=#{bookCode} </delete> -->
+	<select id="recordList" parameterType="String" resultType="BookModel">
+		SELECT * FROM book AS A, borrow AS B
+		WHERE <![CDATA[B.borrowdate < NOW()]]>
+		AND B.id=#{id} AND A.bookCode=B.bookCode AND B.borrowcheck='3'
+	</select>
+
+	<select id="recordListAll" resultType="BookModel">
+		SELECT * FROM book AS A, borrow AS B
+		WHERE <![CDATA[B.borrowdate < NOW()]]>
+		AND A.bookCode=B.bookCode AND B.borrowcheck='3'
+	</select>
+
+
 
 	<!-- 에약관련 쿼리 -->
 
 	<insert id="insertReservation" parameterType="BookModel">
 		INSERT INTO
 		reservation(id, bookCode, reserveDate, reservecheck)
-		VALUES(#{id},#{bookCode},date_add(now(),interval 7
-		date), 1)
+		VALUES(#{id},
+		#{bookCode}, date_add(now(), interval 7
+		day), 1)
 	</insert>
 
 	<update id="updateReservation" parameterType="String">
@@ -285,6 +306,22 @@
 		SELECT reservecheck
 		FROM book
 		WHERE bookCode=#{bookCode}
+	</select>
+
+	<select id="reservationList" parameterType="String" resultType="BookModel">
+		SELECT *
+		FROM book AS A, reservation AS B
+		WHERE B.bookCode=#{bookCode}
+		AND
+		B.id=#{id}
+	</select>
+
+	<select id="reservationListAll" resultType="BookModel">
+		SELECT *
+		FROM book AS
+		A, reservation AS B
+		WHERE A.bookCode=B.bookCode AND
+		B.reservecheck='1'
 	</select>
 
 	<delete id="deleteReservation" parameterType="BookModel">

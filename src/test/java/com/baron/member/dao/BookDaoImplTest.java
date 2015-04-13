@@ -46,13 +46,13 @@ public class BookDaoImplTest {
 		
 	}
 	
-	
+/*	
 	@Test
 	public void selectBook()throws Exception{
-		List<BookModel> model =bookDao.selectBook("뇌");
+		List<BookModel> model =bookDao.selectBook("그 후에");
 		assertNotNull(model);
 		assertTrue(model.size()>0);
 		
 	}
-
+*/
 }

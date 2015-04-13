@@ -13,7 +13,7 @@ import com.baron.member.model.BookModel;
 public class RentDaoImpl implements RentDao {
 
 	private static final String NAMESPACE = "com.baron.member.MemberModel.";
-	
+
 	@Resource(name = "sqlSession")
 	private SqlSession session;
 
@@ -69,7 +69,13 @@ public class RentDaoImpl implements RentDao {
 	@Override
 	public void confirmBorrowBook(String bookCode) {
 		session.update(NAMESPACE + "confirmBorrowBook", bookCode);
-		
+
+	}
+
+	@Override
+	public void upPoint(String id) {
+
+		session.update(NAMESPACE + "upPoint", id);
 	}
 
 	@Override
@@ -87,7 +93,7 @@ public class RentDaoImpl implements RentDao {
 	@Override
 	public void confirmReturnBook(String bookCode) {
 		session.update(NAMESPACE + "confirmReturnBook", bookCode);
-		
+
 	}
 
 	@Override
@@ -95,4 +101,30 @@ public class RentDaoImpl implements RentDao {
 		// TODO Auto-generated method stub
 		return session.selectList(NAMESPACE + "recordList", id);
 	}
+
+	@Override
+	public List<BookModel> recordListAll() {
+		// TODO Auto-generated method stub
+		return session.selectList(NAMESPACE + "recordListAll");
+	}
+
+	@Override
+	public List<BookModel> reservationListAll() {
+		// TODO Auto-generated method stub
+		return session.selectList(NAMESPACE + "reservationListAll");
+	}
+
+	@Override
+	public void extendBorrowBook(String bookCode) {
+		session.update(NAMESPACE + "extendBorrowBook", bookCode);
+		
+	}
+
+	@Override
+	public void cancleBorrowBook(String bookCode) {
+		session.update(NAMESPACE + "cancelBorrowBook", bookCode);
+		
+	}
+
+	
 }

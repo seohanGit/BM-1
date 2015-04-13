@@ -3,43 +3,63 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
-<c:forEach items="${bookList}" var="book" varStatus="loop">
+<div>
+	<!-- Blog Entries Column -->
 
-	<table width="100%">
-		<tbody>
+	<h2>도서검색 목록</h2>
+	<hr>
+
+
+	<table class="table table-striped ">
+		<thead>
 			<tr>
-				<td width="115px" style="margin: 10px" class="goods_img"><span
-					class="goods_cnt"></span> <img src="${book.imageurl}" width="95px"
-					height="150px"></td>
-				<td class="goods_infogrp">
-					<p>${book.isbn}|${book.bookname}</p>
-					<p>
-						${book.writer} | ${book.publisher} |
-					
-					</p>
-					<p>${book.genre} |
-<%-- 
+				<td width="12%">표지</td>
+				<td width="15%">도서명</td>
+				<td width="13%">저자</td>
+				<td width="10%">장르</td>
+
+				<td width="16%">대여상태</td>
+				<td width="60px"></td>
+			</tr>
+		</thead>
+		<%-- 
 						<c:choose>
 							<c:when test="${empty book.status}"> 예약 가능</c:when>
 							<c:otherwise> 예약 중</c:otherwise>
 						</c:choose>
  --%>
-					<p>
+		<c:forEach items="${bookList}" var="book" varStatus="loop">
+			<tbody>
+
+				
+				<tr>
+					<td rowspan="2" style="max-width: 80%" align="left"><img
+						src="${book.imageurl}"></td>
+				</tr>
+				<tr>
+					<td width="20%" align="left">${book.bookname }</td>
+					<td width="10%" align="left">${book.writer }</td>
+					<td width="10%" align="left">${book.genre}</td>
+					<td width="10%" align="left">${book.borrowcheck}</td>
+					<td>
 						<button class="btn btn-default" type="button" id="borrowbook"
 							onClick="location.href='/borrowbook?bookCode=${book.bookCode}'">대출</button>
 						<button class="btn btn-default" type="button" id="returnbook"
 							onClick="location.href='/returnbook?bookCode=${book.bookCode}'">반납</button>
 						<button class="btn btn-default" type="button" id="reservebook"
 							onClick="location.href='/reservation?bookCode=${book.bookCode}'">예약</button>
-						
-					</p>
-				</td>
-			</tr>
+
+					</td>
+				</tr>
 
 
-		</tbody>
+
+			</tbody>
+		</c:forEach>
 	</table>
-</c:forEach>
+
+</div>
+
 <script src="/resources/js/common.js"></script>
 <script>
 	function del() {

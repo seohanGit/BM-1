@@ -51,6 +51,11 @@ body {
 						class="form-control" id="writer" name="writer"
 						value="${book.writer }">
 				</div>
+				<div class="form-group">
+					<label for="exampleInputPassword1">구매요청자</label> <input type="text"
+						class="form-control" id="id" name="id"
+						value="${book.id }">
+				</div>
 				<%-- 
 				<div class="form-group">
 					<label for="exampleInputPassword1">저자</label> <input type="text"
@@ -59,8 +64,9 @@ body {
 				</div>
 				 --%>
 				<input type="hidden" name="imageurl" value="${book.imageurl }">
-				<input type="hidden" name="link" value="${book.link}"> <input
-					type="hidden" name="requestid" value="${book.id}"> <input
+				<input type="hidden" name="link" value="${book.link}"> 
+				<input type="hidden" name="publisher" value="${book.publisher}"><input
+					type="hidden" name="summary" value="${book.summary}"> <input
 					type="hidden" name="priceSales" value="${book.priceSales}">
 				<button type="submit" class="btn btn-default">확인</button>
 			</form>

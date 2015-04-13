@@ -5,15 +5,16 @@ import java.sql.Date;
 public class BookModel {
 	private String bookCode;
 	private String bookname;
+	private String name;
 	private String genre;
 	private int quantity;
 	private Date borrowdate;
 	private Date returndate;
+	private Date reservedate;
 	private Date requestdate;
 	private String id;
 	private String publisher;
 	private String borrowcheck;
-	private String reservecheck;
 	private int grade;
 	private String writer;
 	private String imageurl;
@@ -21,6 +22,51 @@ public class BookModel {
 	private String link;
 	private String isbn;
 	private String summary;
+	private int totalResults;
+	private int startindex;
+	private String keyword;
+
+	public String getKeyword() {
+		return keyword;
+	}
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getStartindex() {
+		return startindex;
+	}
+
+	public void setStartindex(int startIndex) {
+		this.startindex = startIndex;
+	}
+
+	public int getTotalResults() {
+		return totalResults;
+	}
+
+	public void setTotalResults(int totalResults) {
+		this.totalResults = totalResults;
+	}
+
+	public Date getReservedate() {
+		return reservedate;
+	}
+
+	public void setReservedate(Date reservedate) {
+		this.reservedate = reservedate;
+	}
+
+	private String reservecheck;
 
 	public String getReservecheck() {
 		return reservecheck;

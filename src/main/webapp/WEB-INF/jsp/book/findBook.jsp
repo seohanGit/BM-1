@@ -17,7 +17,6 @@
 
 <script src="/resources/js/jquery/jquery.js"></script>
 <script src="/resources/js/jquery/book.js"></script>
-<script src="/resources/js/jquery/common.js"></script>
 <script type="text/javascript">
 	function request() {
 		alert("구매요청되엇습니다.");
@@ -101,6 +100,7 @@
 		</div>
 		<!-- /.row -->
 	</footer>
+	<script src="/resources/js/jquery/bootstrap.min.js"></script>
 	<script src="/resources/js/jquery/common.js"></script>
 </body>
 </html>

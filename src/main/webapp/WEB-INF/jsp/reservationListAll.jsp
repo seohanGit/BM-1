@@ -29,7 +29,7 @@ body {
 		<div class="row">
 			<div id="searchResultArea">
 				<hr>
-				<h2>에약 현황</h2>
+				<h2>예약 현황</h2>
 				<hr>
 				<table class="table table-striped table-bordered">
 					<thead>

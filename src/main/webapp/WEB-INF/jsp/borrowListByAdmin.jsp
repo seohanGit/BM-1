@@ -64,7 +64,7 @@ body {
 								
 								<td><button class="btn btn-default" type="button"
 										id="reservebook"
-										onClick="location.href='/returnBook?bookCode=${book.bookCode}'">반납</button>
+										onClick="location.href='/returnBook?bookCode=${book.bookCode}'">승인</button>
 								</td>
 							</tr>
 

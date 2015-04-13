@@ -49,9 +49,8 @@ public class BookDaoImplTest {
 	
 	@Test
 	public void selectBook()throws Exception{
-		List<BookModel> model =bookDao.selectBook("뇌");
+		BookModel model =bookDao.selectBook("뇌");
 		assertNotNull(model);
-		assertTrue(model.size()>0);
 		
 	}
 

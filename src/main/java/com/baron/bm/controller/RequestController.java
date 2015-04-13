@@ -47,7 +47,7 @@ public class RequestController {
 				book.setId(cookie.getValue());
 		}
 		model.addAttribute("book", book);
-		System.out.println(book.getBookname());
+		System.out.println(book.getId());
 
 		return "confirmRequest";
 	}

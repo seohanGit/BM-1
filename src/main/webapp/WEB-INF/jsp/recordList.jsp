@@ -26,53 +26,56 @@ body {
 <body>
 	<jsp:include page="nav.jsp" />
 	<div class="container">
-		<div id="searchResultArea">
-			<h2>대여 기록</h2>
-			기록 검색
-			<table class="table table-striped table-bordered">
-				<thead>
-					<tr class="hidden-xs ">
+		<div class="row">
+			<div id="searchResultArea">
+				<hr>
+				<h2>대여 기록</h2>
+				<hr>
+				기록 검색
+				<table class="table table-striped table-bordered">
+					<thead>
+						<tr class="hidden-xs title">
 
-						<td>도서명</td>
-						<td>대여일자</td>
-						<td>반납일자</td>
-						<td>카테고리</td>
-						<td>대출자</td>
-						<td>기록삭제</td>
-					</tr>
-				</thead>
-
-
-				<c:forEach items="${bookList}" var="book" varStatus="status">
-					<tbody>
-
-						<tr>
-
-							<td width="25%" align="left">${book.bookname }</td>
-							<td width="15%" align="left">${book.borrowdate }</td>
-							<td width="15%" align="left">${book.returndate }</td>
-							<td width="15%">${book.genre}</td>
-							<td width="10%">${book.id}</td>
-
+							<td>도서명</td>
+							<td>대여일자</td>
+							<td>반납일자</td>
+							<td>카테고리</td>
+							<td>대출자</td>
+							<td>기록삭제</td>
 						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
+					</thead>
 
-					</tbody>
 
-				</c:forEach>
-			</table>
+					<c:forEach items="${bookList}" var="book" varStatus="status">
+						<tbody>
+
+							<tr>
+
+								<td width="25%" align="left">${book.bookname }</td>
+								<td width="15%" align="left">${book.borrowdate }</td>
+								<td width="15%" align="left">${book.returndate }</td>
+								<td width="15%">${book.genre}</td>
+								<td width="10%">${book.id}</td>
+
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+
+						</tbody>
+
+					</c:forEach>
+				</table>
+			</div>
 		</div>
-	</div>
-<script src="/resources/js/jquery/jquery.js"></script>
-<script src="/resources/js/bootstrap.min.js"></script>
-<script src="/resources/js/common.js"></script>
-<script src="/resources/js/book.js"></script>
+		<script src="/resources/js/jquery/jquery.js"></script>
+		<script src="/resources/js/bootstrap.min.js"></script>
+		<script src="/resources/js/common.js"></script>
+		<script src="/resources/js/book.js"></script>
 </body>
 </html>

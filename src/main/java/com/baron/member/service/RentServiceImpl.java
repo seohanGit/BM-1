@@ -113,4 +113,15 @@ public class RentServiceImpl implements RentService {
 		
 	}
 
+	@Override
+	public void extendBorrowBook(String bookCode) {
+		rentDao.extendBorrowBook(bookCode);
+	}
+
+	@Override
+	public void cancleBorrowBook(String bookCode) {
+		rentDao.cancleBorrowBook(bookCode);
+		
+	}
+
 }

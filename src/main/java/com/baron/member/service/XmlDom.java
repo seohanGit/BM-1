@@ -72,26 +72,34 @@ public class XmlDom {
 	public List<BookModel> getBooklist(InputStream br) throws Exception,
 			SAXException, IOException {
 		Element root = makeDoc(br);
+		int totalResults = Integer.parseInt(getChildren(root, "totalResults"));
+		int startIndex = Integer.parseInt(getChildren(root, "startIndex"));
+		String keyword = getChildren(root, "query");
 		NodeList list = root.getElementsByTagName("item");
 		List<BookModel> bookList = new ArrayList<BookModel>();
-		for (int i = 0; i < list.getLength(); i++) {
-			BookModel book = new BookModel();
+		for (int j = 0; j < totalResults / 15; j++) {
+			for (int i = 0; i < list.getLength(); i++) {
+				BookModel book = new BookModel();
 
-			Element element = (Element) list.item(i);
-			book.setBookname(getChildren(element, "title"));
-			book.setLink(getChildren(element, "link"));
-			book.setImageurl(getChildren(element, "coverSmallUrl"));
-			book.setPriceSales(getChildren(element, "priceSales"));
-			book.setWriter(getChildren(element, "author"));
-			book.setIsbn(getChildren(element, "isbn"));
-			book.setGenre(getChildren(element, "categoryName"));
-			book.setPublisher(getChildren(element, "publisher"));
-			book.setSummary(getChildren(element, "description"));
-			
+				Element element = (Element) list.item(i);
+				book.setKeyword(keyword);
+				book.setTotalResults(totalResults);
 
-			bookList.add(book);
+				book.setBookname(getChildren(element, "title"));
+				book.setLink(getChildren(element, "link"));
+				book.setImageurl(getChildren(element, "coverSmallUrl"));
+				book.setPriceSales(getChildren(element, "priceSales"));
+				book.setWriter(getChildren(element, "author"));
+				book.setIsbn(getChildren(element, "isbn"));
+				book.setGenre(getChildren(element, "categoryName"));
+				book.setPublisher(getChildren(element, "publisher"));
+				book.setSummary(getChildren(element, "description"));
 
+				bookList.add(book);
+
+			}
 		}
+
 		return bookList;
 	}
 

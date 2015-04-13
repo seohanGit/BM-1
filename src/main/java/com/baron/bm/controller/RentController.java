@@ -83,7 +83,21 @@ public class RentController {
 		model.addAttribute("bookList", bookList);
 		return "borrowList";
 	}
-
+	
+	@RequestMapping("/extendBorrowBook")
+	public String extendBorrowBook(String bookCode){
+		rentservice.extendBorrowBook(bookCode);
+		
+		return "redirect:rentListAll";
+	}
+	
+	@RequestMapping("/cancleBorrowBook")
+	public String cancleBorrowBook(String bookCode){
+		rentservice.cancleBorrowBook(bookCode);
+		
+		return "redirect:borrowList";
+	}
+	
 	@RequestMapping("/rentListAll")
 	public String rentListAll(Model model) {
 		List<BookModel> bookList = new ArrayList<BookModel>();
@@ -116,8 +130,6 @@ public class RentController {
 
 		return "redirect:rentListAll";
 	}
-
-	
 
 	/*
 	 * @RequestMapping("/confirmReturnBook") public String

@@ -16,12 +16,14 @@ public interface BookService {
 
 	public String selectname(String booknum);
 
-	public List<BookModel> findBook(String keyword) throws Exception;
-
 	List<BookModel> getBestseller(String catogoryId) throws Exception;
 
 	List<BookModel> getNewbook() throws Exception;
 
 	BookModel selectBook(String bookCode);
+
+	List<BookModel> findBook(String keyword) throws Exception;
+
+	List<BookModel> pagenation(String keyword, String page) throws Exception;
 
 }

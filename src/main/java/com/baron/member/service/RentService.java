@@ -38,5 +38,9 @@ public interface RentService {
 
 	public void upPoint(String id);
 
+	public void extendBorrowBook(String bookCode);
+
+	public void cancleBorrowBook(String bookCode);
+
 
 }

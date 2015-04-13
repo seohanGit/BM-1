@@ -21,10 +21,10 @@ public class BookController {
 
 	@Autowired
 	private BookService bookservice;
-    
+
 	@Autowired
 	private RentService rentservice;
-	
+
 	@RequestMapping("/insertbookForm")
 	public String insertbook() {
 		return "book/insertbook";
@@ -43,19 +43,20 @@ public class BookController {
 	}
 
 	@RequestMapping("/searchBook")
-	public String searchBook(HttpServletRequest request, String keyword, Model model) {
+	public String searchBook(HttpServletRequest request, String keyword,
+			Model model) {
 		List<BookModel> bookList = bookservice.searchBook(keyword);
 		model.addAttribute("bookList", bookList);
 		String permission;
-		for(Cookie cookie : request.getCookies()){
-			if(cookie.getName().equals("bm_permission")){
-				permission=cookie.getValue();
-				if(permission.equals("0")){
+		for (Cookie cookie : request.getCookies()) {
+			if (cookie.getName().equals("bm_permission")) {
+				permission = cookie.getValue();
+				if (permission.equals("0")) {
 					return "book/bookSearch";
 				}
 			}
 		}
-		
+
 		return "book/bookSearchByAdmin";
 	}
 
@@ -65,29 +66,40 @@ public class BookController {
 		String permission;
 		List<BookModel> bookList = bookservice.searchBook(keyword);
 		model.addAttribute("bookList", bookList);
-		for(Cookie cookie : request.getCookies()){
-			if(cookie.getName().equals("bm_permission")){
-				permission=cookie.getValue();
-				if(permission.equals("0")){
+		for (Cookie cookie : request.getCookies()) {
+			if (cookie.getName().equals("bm_permission")) {
+				permission = cookie.getValue();
+				if (permission.equals("0")) {
 					return "book/bookSearch";
 				}
 			}
 		}
-		return  "book/bookSearchByAdmin";
+		return "book/bookSearchByAdmin";
 	}
 
 	@RequestMapping("/findBook")
-	public String findBook(String keyword, Model model) throws Exception {
-		List<BookModel> bookList = bookservice.findBook(keyword);
-
+	public String findBook(String keyword, String page, Model model)
+			throws Exception {
+		List<BookModel> bookList;
+		int totalPage ;
+		if (page == null) {
+			bookList = bookservice.findBook(keyword);
+		} else {
+			bookList = bookservice.pagenation(keyword, page);
+		}
+		
+		totalPage = bookList.get(0).getTotalResults()/15;
+		
 		model.addAttribute("bookList", bookList);
+		model.addAttribute("totalPage", totalPage);
+		model.addAttribute("keyword", keyword);
 		return "book/findBook";
 	}
 
 	@RequestMapping("/deletebook")
 	public String deleteBook(String bookCode, HttpServletRequest request) {
 		String permission;
-		
+
 		for (Cookie cookie : request.getCookies()) {
 			if (cookie.getName().equals("bm_permission")) {
 				permission = cookie.getValue();
@@ -105,10 +117,10 @@ public class BookController {
 	}
 
 	@RequestMapping("/modifyBookForm")
-	public String modifyBookForm(BookModel book, String bookCode, HttpServletRequest request,
-			Model model) {
+	public String modifyBookForm(BookModel book, String bookCode,
+			HttpServletRequest request, Model model) {
 		String permission;
-		
+
 		for (Cookie cookie : request.getCookies()) {
 			if (cookie.getName().equals("bm_permission")) {
 				permission = cookie.getValue();
@@ -117,7 +129,7 @@ public class BookController {
 					return "member/adminfail";
 			}
 		}
-		
+
 		model.addAttribute("book", book);
 		return "book/modifyBook";
 	}
@@ -129,14 +141,10 @@ public class BookController {
 		return "book/modifybookresult";
 	}
 
-
-	
-
 	/*
 	 * @RequestMapping("/requestOk") public String requestOk(BookModel model) {
 	 * System.out.println(model.getRequestid()); bookservice.requestBook(model);
 	 * return "requestBookResult"; }
 	 */
-	
 
 }

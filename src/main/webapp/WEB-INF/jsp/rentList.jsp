@@ -21,52 +21,60 @@
 
 	<div class="container">
 		<div class="row">
-			<!-- Blog Entries Column -->
-			<div class="col-md-8">
-				<div id="searchResultArea">
-					<h2>대여현황 목록</h2>
-					<table class="table table-striped table-bordered">
-						<thead>
-							<tr class="hidden-xs ">
-								<td width="80px">표지</td>
-								<td width="15%">도서명</td>
-								<td width="9%">대여일자</td>
-								<td width="6%">반납일자</td>
+			<div id="searchResultArea">
+				<hr>
+				<h2>대여현황 목록</h2>
+				<hr>
+				<table class="table table-striped table-bordered ">
+
+					<thead>
+						<tr class="hidden-xs title">
+
+							<td>도서명</td>
+							<td>대여일자</td>
+							<td>반납일자</td>
+
+							<td>대출자</td>
+							<td>연장</td>
+							<td>반납</td>
+						</tr>
+					</thead>
+
+					<c:forEach items="${bookList}" var="book" varStatus="loop">
+
+						<tbody>
+
+							<tr>
+								<td width="30%" align="left">${book.bookname }</td>
+								<td width="15%" align="left">${book.borrowdate }</td>
+								<td width="15%" align="left">${book.returndate }</td>
+
+								<td>ID : ${book.id}</td>
+
+								<td><button class="btn btn-default" type="button"
+										id="extendbook"
+										onClick="location.href='/extendBorrowBook?bookCode=${book.bookCode}'">연장</button>
+								</td>
+								<td><button class="btn btn-default" type="button"
+										id="reservebook"
+										onClick="location.href='/returnBook?bookCode=${book.bookCode}'">반납</button>
+								</td>
 							</tr>
-						</thead>
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
 
-						<c:forEach items="${bookList}" var="book" varStatus="loop">
-
-							<tbody>
-								<tr>
-									<td rowspan="4" style="max-width: 100px" align="left"><img
-										src="${book.imageurl}"></td>
-								</tr>
-								<tr>
-									<td width="40%" align="left">${book.bookname }</td>
-									<td width="30%" align="left">${book.borrowdate }</td>
-									<td width="20%" align="left">${book.returndate }</td>
-								</tr>
-								<tr>
-									<td>카테고리 : ${book.genre}</td>
-									<td>대출자 : ${book.id}</td>
-
-									<td><button class="btn btn-default" type="button"
-											id="extendbook"
-											onClick="location.href='/extendBorrowBook?bookCode=${book.bookCode}'">연장</button>
-									</td>
-									<td><button class="btn btn-default" type="button"
-											id="reservebook"
-											onClick="location.href='/returnBook?bookCode=${book.bookCode}'">반납</button>
-									</td>
-								</tr>
-
-							</tbody>
-						</c:forEach>
-					</table>
-				</div>
+						</tbody>
+					</c:forEach>
+				</table>
 			</div>
 		</div>
+	</div>
 	</div>
 	<hr>
 	<script src="/resources/js/jquery/jquery.js"></script>

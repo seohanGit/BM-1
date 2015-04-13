@@ -172,7 +172,8 @@
 	<select id="requestList" resultType="BookModel">
 		SELECT *
 		FROM
-		request
+		request AS A,
+		member AS B WHERE A.id=B.id
 	</select>
 
 
@@ -220,7 +221,8 @@
 	</update>
 
 	<update id="upPoint" parameterType="String">
-		UPDATE member SET numborrow = numborrow + 1 
+		UPDATE member SET numborrow =
+		numborrow + 1
 		WHERE id = #{id}
 	</update>
 
@@ -248,19 +250,28 @@
 		WHERE B.borrowcheck=3 AND A.bookCode=B.bookCode;
 	</select>
 
+	<update id="extendBorrowBook" parameterType="String">
+		UPDATE borrow
+		SET returndate = date_add(now(), interval +20 day)
+		WHERE
+		bookCode=#{bookCode} AND borrowcheck='2';
+	</update>
+	
+	<update id="cancelBorrowBook" parameterType="String">
+		UPDATE borrow
+		SET borrowcheck='0'
+		WHERE
+		bookCode=#{bookCode} AND borrowcheck='1';
+	</update>
+
 	<select id="rentListAll" parameterType="String" resultType="BookModel">
 		SELECT * FROM book AS A, borrow AS B
 		WHERE <![CDATA[B.returndate > NOW()]]>
 		AND A.bookCode=B.bookCode AND B.borrowcheck='2'
 	</select>
 
-<!-- 
-	<delete id="deleteRecord" parameterType="String">
-	DELETE ON borrow WHERE 
-	DELETE ON reserve
-		WHERE id=#{id} AND bookCode=#{bookCode}
-	</delete>
- -->	
+	<!-- <delete id="deleteRecord" parameterType="String"> DELETE ON borrow 
+		WHERE DELETE ON reserve WHERE id=#{id} AND bookCode=#{bookCode} </delete> -->
 	<select id="recordList" parameterType="String" resultType="BookModel">
 		SELECT * FROM book AS A, borrow AS B
 		WHERE <![CDATA[B.borrowdate < NOW()]]>

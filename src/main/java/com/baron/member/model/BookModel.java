@@ -5,6 +5,7 @@ import java.sql.Date;
 public class BookModel {
 	private String bookCode;
 	private String bookname;
+	private String name;
 	private String genre;
 	private int quantity;
 	private Date borrowdate;
@@ -22,15 +23,31 @@ public class BookModel {
 	private String isbn;
 	private String summary;
 	private int totalResults;
-	private String startindex;
+	private int startindex;
+	private String keyword;
 
-	
-	public String getStartindex() {
+	public String getKeyword() {
+		return keyword;
+	}
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getStartindex() {
 		return startindex;
 	}
 
-	public void setStartindex(String startindex) {
-		this.startindex = startindex;
+	public void setStartindex(int startIndex) {
+		this.startindex = startIndex;
 	}
 
 	public int getTotalResults() {
@@ -40,7 +57,6 @@ public class BookModel {
 	public void setTotalResults(int totalResults) {
 		this.totalResults = totalResults;
 	}
-
 
 	public Date getReservedate() {
 		return reservedate;

@@ -16,7 +16,6 @@
 <link href="/resources/css/common.css" rel="stylesheet">
 <script src="/resources/js/jquery/jquery.js"></script>
 <script src="/resources/js/bootstrap.min.js"></script>
-
 <style type="text/css">
 body {
 	padding-top: 70px;
@@ -35,39 +34,63 @@ body {
 	<jsp:include page="nav.jsp" />
 
 	<div class="container">
-		<div class="row">
-			<!-- Blog Entries Column -->
-			<div class="col-md-8">
-				<div id="searchResultArea">
-					<h2>대여요청 현황</h2>
-					<hr>
-					<c:forEach items="${bookList}" var="book" varStatus="loop">
-						<table class="table table-striped table-bordered">
-							<tbody>
-								<tr>
+		<div class="row col-md-8">
+			<h4>원하는 책이 없다면 인터넷에서 주문하세요 !</h4>
+			<div class="input-group" style="width: 90%">
+				<form action="/findBook" method="get">
+					<span class="input-group-btn"> <input type="text"
+						class="form-control" id="query" name="keyword"
+						placeholder="인터파크 검색">
+						<button class="btn btn-default" type="submit" id="btn_find">
+							<span class="glyphicon glyphicon-search"></span>
+						</button>
+					</span>
+				</form>
+			</div>
+			<hr>
+			<div id="searchResultArea">
+				<hr>
+				<h2>대여요청 목록</h2>
+				<hr>
 
-									<td class="goods_img"><span class="goods_cnt"></span> <img
-										src="${book.imageurl}" width="95px" height="170px"></td>
-									<td class="goods_infogrp">
-										<p>${book.isbn}|${book.bookname}</p>
-										<p>${book.writer}|${book.publisher}|</p>
-										<p>${book.genre}|${book.id}</p>
-										<p>${book.borrowdate}|${book.returndate}
-										<p>${book.borrowcheck}==1then대여요청 ==2 대여 중</p>
-									</td>
-								</tr>
-								<tr></tr>
-							</tbody>
-						</table>
+				<table class="table table-striped ">
+					<thead>
+						<tr class="hidden-xs title">
+							<td width="70px">표지</td>
+							<td width="15%">도서명</td>
+							<td width="13%">저자</td>
+							<td width="10%">장르</td>
+
+							<td width="16%">대여일자</td>
+							<td width="60px"></td>
+						</tr>
+					</thead>
+					<c:forEach items="${bookList}" var="book" varStatus="loop">
+						<tbody>
+							<tr>
+								<td rowspan="4" style="max-width: 70px" align="left"><img
+									src="${book.imageurl}"></td>
+							</tr>
+							<tr>
+								<td width="20%" align="left">${book.bookname }</td>
+								<td width="10%" align="left">${book.writer }</td>
+								<td width="10%" align="left">${book.genre}</td>
+
+
+								<td>${book.borrowdate}</td>
+								<td>
+									<button class="btn btn-default" type="button" id="reservebook"
+										onClick="location.href='/cancleBorrowBook?bookCode=${book.bookCode}'">취소</button>
+								</td>
+							</tr>
+						</tbody>
 					</c:forEach>
-				</div>
+				</table>
 			</div>
 		</div>
 	</div>
 	<hr>
-	<script src="/resources/js/jquery/jquery.js"></script>
-	<script src="/resources/js/bootstrap.min.js"></script>
-	
-	<script src="/resources/js/book.js"></script>
+
+	<script src="/resources/js/common.js"></script>
 </body>
 </html>

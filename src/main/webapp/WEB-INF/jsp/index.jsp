@@ -26,23 +26,28 @@
 						한줄 명언 <small>민상훈책방</small>
 					</h1>
 					<!-- First Blog Post -->
-					<select multiple class="form-control">
+					<select multiple class="form-control" size="6">
 						<c:forEach items="${contentList}" var="con" varStatus="status">
-							<option>${con.content}</option>
+							<option href="#">${con.content}</option>
 
 						</c:forEach>
 					</select>
+					
+<!-- 					공지사항메뉴로 변경 -->
+					
 				</div>
 				<hr>
 				<h4>원하는 책이 없다면 인터넷에서 주문하세요 !</h4>
-				<div class="input-group ">
-					<input type="text" class="form-control" id="query"
-						placeholder="인터파크 검색"> <span class="input-group-btn">
-						<button class="btn btn-default" type="button" id="btn_find">
-							<span class="glyphicon glyphicon-search"></span>
-						</button>
-					</span>
-
+				<div class="input-group" style="width:90%">
+					<form action="/findBook" method="get">
+						<span class="input-group-btn"> <input type="text"
+							class="form-control" id="query" name="keyword"
+							placeholder="인터파크 검색">
+							<button class="btn btn-default" type="submit" id="btn_find">
+								<span class="glyphicon glyphicon-search"></span>
+							</button>
+						</span>
+					</form>
 				</div>
 				<hr>
 				<img src="/resources/main.JPG" style="width: 100%" id="image1">
@@ -142,7 +147,7 @@
 						</div>
 						<hr>
 					</c:forEach>
-					
+
 				</div>
 
 			</div>
@@ -173,6 +178,7 @@
 		$("#logout").click(function() {
 			location.href = "/logout"
 		})
+
 		var array = [ "a0", "a1", "a2", "a3", "a4", "a5", "a6", "a7", "a8",
 				"a9" ];
 		function deletee() {
@@ -181,6 +187,7 @@
 			}
 
 		}
+
 		window.onload = function() {
 			deletee();
 

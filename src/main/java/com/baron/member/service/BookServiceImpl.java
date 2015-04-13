@@ -37,6 +37,19 @@ public class BookServiceImpl implements BookService {
 	}
 
 	@Override
+	public List<BookModel> pagenation(String keyword, String page)
+			throws Exception {
+		List<BookModel> bookList = new ArrayList<BookModel>();
+
+		URL url = getPageUrl(keyword, page);
+
+		XmlDom xmlDom = new XmlDom();
+		bookList = xmlDom.getBooklist(url.openStream());
+
+		return bookList;
+	}
+
+	@Override
 	public List<BookModel> findBook(String keyword)
 			throws Exception {
 		List<BookModel> bookList = new ArrayList<BookModel>();
@@ -45,7 +58,7 @@ public class BookServiceImpl implements BookService {
 
 		XmlDom xmlDom = new XmlDom();
 		bookList = xmlDom.getBooklist(url.openStream());
-		
+
 		return bookList;
 	}
 
@@ -128,22 +141,42 @@ public class BookServiceImpl implements BookService {
 		return url;
 	}
 
-	private URL getSearchUrl(String keyword)
-			throws UnsupportedEncodingException, MalformedURLException {
+	private URL getPageUrl(String keyword, String page) throws Exception {
 		String key = "B0F933E2847C6447203572CCC68F824A1054E7EF0D966C7B95245288CE95E300";
 		String addr = "http://book.interpark.com/api/search.api?";
 		String parameter = "";
+		String startIndex = "1";
+		startIndex = page;
 
 		key = URLEncoder.encode(key, "UTF-8");
 		keyword = URLEncoder.encode(keyword, "UTF-8");
 		parameter = parameter + "&" + "query=" + keyword;
 		parameter = parameter + "&" + "sort=salesPoint";
-		parameter = parameter + "&" + "maxResults=20";
-		parameter = parameter + "&" + "start=1";
-		
+		parameter = parameter + "&" + "maxResults=15";
+		parameter = parameter + "&" + "start=" + startIndex;
+
 		addr = addr + "key=" + key + parameter;
 
 		URL url = new URL(addr);
+		getApiTest(url);
+		return url;
+	}
+	
+	private URL getSearchUrl(String keyword) throws Exception {
+		String key = "B0F933E2847C6447203572CCC68F824A1054E7EF0D966C7B95245288CE95E300";
+		String addr = "http://book.interpark.com/api/search.api?";
+		String parameter = "";
+	
+		key = URLEncoder.encode(key, "UTF-8");
+		keyword = URLEncoder.encode(keyword, "UTF-8");
+		parameter = parameter + "&" + "query=" + keyword;
+		parameter = parameter + "&" + "sort=salesPoint";
+		parameter = parameter + "&" + "maxResults=15";
+
+		addr = addr + "key=" + key + parameter;
+
+		URL url = new URL(addr);
+		getApiTest(url);
 		return url;
 	}
 

@@ -17,16 +17,14 @@
 								class="goods_cnt"></span> <img src="${book.imageurl}"
 								width="95px" height="150px"></td>
 							<td class="goods_infogrp">
-								<p>${book.isbn}|${book.bookname}</p>
-								<p>${book.writer}|${book.publisher}|</p>
+								<p>${book.isbn}| ${book.bookname}</p>
+								<p>${book.writer}| ${book.publisher}|</p>
 								<p>${book.genre}
 									|
-									<%-- 
-						<c:choose>
-							<c:when test="${empty book.status}"> 예약 가능</c:when>
-							<c:otherwise> 예약 중</c:otherwise>
-						</c:choose>
- --%>
+									<c:choose>
+										<c:when test="${empty book.reservecheck}"> 예약 가능</c:when>
+										<c:otherwise> 예약 중</c:otherwise>
+									</c:choose>
 								<p>
 
 									<button class="btn btn-default" type="button" id="reservebook"

@@ -24,12 +24,12 @@ DROP TABLE IF EXISTS `blacklist`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `blacklist` (
   `listnum` int(11) NOT NULL,
-  `startday` date NOT NULL,
-  `endday` date DEFAULT NULL,
+  `startdate` date NOT NULL,
+  `enddate` date DEFAULT NULL,
   `id` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`listnum`),
   KEY `ID_idx` (`id`),
-  CONSTRAINT `ID` FOREIGN KEY (`id`) REFERENCES `member` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `ID` FOREIGN KEY (`id`) REFERENCES `member` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -51,26 +51,21 @@ DROP TABLE IF EXISTS `book`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `book` (
-  `booknum` varchar(40) NOT NULL,
+  `bookCode` varchar(40) NOT NULL,
   `bookname` varchar(50) NOT NULL,
   `genre` varchar(45) DEFAULT NULL,
-  `quantity` int(11) DEFAULT NULL,
-  `borrowday` date DEFAULT NULL,
-  `returnday` date DEFAULT NULL,
   `publisher` varchar(45) DEFAULT NULL,
-  `borrowcheck` int(11) unsigned DEFAULT NULL,
+  `borrowcheck` varchar(4) DEFAULT '0',
   `grade` int(11) DEFAULT NULL,
-  `resernum` varchar(45) DEFAULT NULL,
   `writer` varchar(45) DEFAULT NULL,
   `imageurl` varchar(150) DEFAULT NULL,
-  `ID` varchar(45) DEFAULT NULL,
   `isbn` char(14) DEFAULT NULL,
   `priceSales` int(10) DEFAULT NULL,
-  PRIMARY KEY (`booknum`),
-  KEY `resernum_idx` (`resernum`),
-  KEY `book_id_idx` (`ID`),
-  CONSTRAINT `book_id` FOREIGN KEY (`ID`) REFERENCES `member` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `resernum` FOREIGN KEY (`resernum`) REFERENCES `reservation` (`resernum`) ON DELETE SET NULL ON UPDATE SET NULL
+  `summary` varchar(1000) DEFAULT NULL,
+  `reservecheck` varchar(4) DEFAULT NULL,
+  PRIMARY KEY (`bookCode`),
+  KEY `reservecheck_idx` (`reservecheck`),
+  KEY `borrow_FK_idx` (`borrowcheck`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -80,7 +75,7 @@ CREATE TABLE `book` (
 
 LOCK TABLES `book` WRITE;
 /*!40000 ALTER TABLE `book` DISABLE KEYS */;
-INSERT INTO `book` VALUES ('9788932915661','유럽의 붓다, 니체','국내도서',0,NULL,NULL,'열린책들',0,0,'reser9788932915661','야니스 콩스탕티니데스,다미앙 막도날드','http://bimage.interpark.com/goods_image/7/8/0/4/210437804h.jpg',NULL,NULL,NULL),('9788958073222','한글로의 여행','국내도서',0,NULL,NULL,'뜨인돌',0,0,'reser9788958073222','이바라기 노리코','http://bimage.interpark.com/goods_image/3/8/1/1/206623811h.jpg',NULL,NULL,NULL),('9791155520338','한글 만다라 2 - 자음학습 2','국내도서',0,NULL,NULL,'루덴스',0,0,NULL,'루덴스.마시멜로','http://bimage.interpark.com/goods_image/0/2/9/7/218450297h.jpg',NULL,NULL,NULL),('9791155520369','한글 만다라 1~4권 세트','국내도서',0,NULL,NULL,'루덴스',0,0,NULL,'루덴스.마시멜로','http://bimage.interpark.com/goods_image/7/9/3/6/219207936h.jpg',NULL,NULL,NULL),('BS002','그 후에','소설',0,'2014-11-01','2014-12-01','밝은세상',1,9,'reserBS002','기욤 뮈','http://image.yes24.com/goods/3853238/95x0','k1',NULL,NULL),('CS001',' SAS 데이터분석','data',0,'2014-11-01','2014-12-01','21세기사',1,0,'reserCS001','김충련','http://image.yes24.com/goods/5947649/95x0','k2',NULL,NULL),('CS002',' R까기','데이터베이스',0,NULL,NULL,'느린생각',0,6,'reserCS002','서진수','http://image.yes24.com/goods/13434081/95x0',NULL,NULL,NULL),('CS005','Java의 정석','JAVA',0,NULL,NULL,'도우출판',0,12,'reserCS005','남궁성','http://image.yes24.com/goods/3688909/95x0',NULL,NULL,NULL),('CS006','JSP 2.2 웹 프로그래밍','JSP',0,NULL,NULL,'가메출판사',0,0,NULL,'최범균','http://image.yes24.com/goods/8348263/95x0',NULL,NULL,NULL),('CS007',' JSPStudy의JSP 웹프로그래밍','JSP',0,NULL,NULL,'앤써북',0,0,NULL,'정동진,김준형,정영석','http://image.yes24.com/goods/12049776/95x0',NULL,NULL,NULL),('CS008','뇌를 자극하는 JSP & Servlet ','JSP',0,NULL,NULL,'한빛미디어',0,0,NULL,'김윤명','http://image.yes24.com/goods/4468035/95x0',NULL,NULL,NULL);
+INSERT INTO `book` VALUES ('BS002','그 후에','소설','밝은세상','0',9,'기욤 뮈','http://image.yes24.com/goods/3853238/95x0',NULL,NULL,NULL,NULL),('BS021','한글 만다라 1~4권 세트','국내도서','루덴스','0',0,'루덴스.마시멜로','http://bimage.interpark.com/goods_image/7/9/3/6/219207936h.jpg',NULL,NULL,NULL,NULL),('BS032','한글 만다라 2 - 자음학습 2','국내도서','루덴스','1',0,'루덴스.마시멜로','http://bimage.interpark.com/goods_image/0/2/9/7/218450297h.jpg',NULL,NULL,NULL,NULL),('CS001',' SAS 데이터분석','data','21세기사','1',0,'김충련','http://image.yes24.com/goods/5947649/95x0',NULL,NULL,NULL,NULL),('CS002',' R까기','데이터베이스','느린생각','1',6,'서진수','http://image.yes24.com/goods/13434081/95x0',NULL,NULL,NULL,NULL),('CS005','Java의 정석','JAVA','도우출판','1',12,'남궁성','http://image.yes24.com/goods/3688909/95x0',NULL,NULL,NULL,NULL),('CS006','JSP 2.2 웹 프로그래밍','JSP','가메출판사','0',0,'최범균','http://image.yes24.com/goods/8348263/95x0',NULL,NULL,NULL,NULL),('CS007',' JSPStudy의JSP 웹프로그래밍','JSP','앤써북','0',0,'정동진,김준형,정영석','http://image.yes24.com/goods/12049776/95x0',NULL,NULL,NULL,NULL),('CS008','뇌를 자극하는 JSP & Servlet ','JSP','한빛미디어','1',0,'김윤명','http://image.yes24.com/goods/4468035/95x0',NULL,NULL,NULL,NULL),('CS009','유럽의 붓다, 니체','국내도서','열린책들','0',0,'야니스 콩스탕티니데스,다미앙 막도날드','http://bimage.interpark.com/goods_image/7/8/0/4/210437804h.jpg',NULL,NULL,NULL,NULL),('CS010','한글로의 여행','국내도서','뜨인돌','0',0,'이바라기 노리코','http://bimage.interpark.com/goods_image/3/8/1/1/206623811h.jpg',NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `book` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -92,14 +87,17 @@ DROP TABLE IF EXISTS `borrow`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `borrow` (
-  `booknum` varchar(40) NOT NULL,
+  `bookCode` varchar(40) NOT NULL,
   `borrowdate` date DEFAULT NULL,
-  `retrundate` date DEFAULT NULL,
-  `borrowid` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`booknum`),
-  KEY `borrow_id` (`borrowid`),
-  CONSTRAINT `book_num` FOREIGN KEY (`booknum`) REFERENCES `book` (`booknum`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `borrow_id` FOREIGN KEY (`borrowid`) REFERENCES `member` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  `returndate` date DEFAULT NULL,
+  `borrowcheck` varchar(4) DEFAULT NULL,
+  `id` varchar(45) DEFAULT NULL,
+  `borrowCode` varchar(45) DEFAULT NULL,
+  KEY `bookCode_idx` (`bookCode`),
+  KEY `status_idx` (`borrowcheck`),
+  KEY `ID_idx` (`id`),
+  CONSTRAINT `ID_borrow` FOREIGN KEY (`id`) REFERENCES `member` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `bookCode_borrow` FOREIGN KEY (`bookCode`) REFERENCES `book` (`bookCode`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -109,6 +107,7 @@ CREATE TABLE `borrow` (
 
 LOCK TABLES `borrow` WRITE;
 /*!40000 ALTER TABLE `borrow` DISABLE KEYS */;
+INSERT INTO `borrow` VALUES ('CS001','2015-04-08','2015-04-28','0','k1',NULL),('CS002','2015-04-08','2015-04-28','0','k1',NULL),('CS001','2015-04-08','2015-04-28','0','k1',NULL),('BS021','2015-04-08','2015-04-15','0','k1',NULL),('BS002','2015-04-08','2015-04-28','0','k1',NULL),('CS009','2015-04-10','2015-04-28','3','k1234',NULL),('BS002','2015-04-09','2015-04-29','0','k1',NULL),('BS021','2015-04-10','2015-04-15','3','k1234',NULL),('CS002','2015-04-10','2015-04-30','3','k1234',NULL),('CS006','2015-04-13','2015-05-03','3','k1234',NULL),('BS021','2015-04-10','2015-05-03','2','k1',NULL),('BS032','2015-04-10','2015-04-30','0','k1234',NULL),('CS002','2015-04-10','2015-04-30','0','k1234',NULL),('CS005','2015-04-10','2015-04-30','0','k1234',NULL),('CS008','2015-04-10','2015-04-30','1','k1234',NULL);
 /*!40000 ALTER TABLE `borrow` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -123,12 +122,12 @@ CREATE TABLE `bulletinboard` (
   `boardnum` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(500) DEFAULT NULL,
   `content` varchar(1000) DEFAULT NULL,
-  `registerday` timestamp NULL DEFAULT NULL,
-  `modifiday` timestamp NULL DEFAULT NULL,
+  `registerdate` timestamp NULL DEFAULT NULL,
+  `modifidate` timestamp NULL DEFAULT NULL,
   `id` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`boardnum`),
   KEY `ID_idx` (`id`),
-  CONSTRAINT `ID_board` FOREIGN KEY (`id`) REFERENCES `member` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `ID_board` FOREIGN KEY (`id`) REFERENCES `member` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -150,7 +149,7 @@ DROP TABLE IF EXISTS `member`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `member` (
-  `ID` varchar(45) NOT NULL,
+  `id` varchar(45) NOT NULL,
   `pass` varchar(20) NOT NULL,
   `name` varchar(45) NOT NULL,
   `email` varchar(45) DEFAULT NULL,
@@ -161,7 +160,9 @@ CREATE TABLE `member` (
   `permission` varchar(10) NOT NULL DEFAULT '0',
   `numborrow` int(11) DEFAULT NULL,
   `numarrear` int(11) DEFAULT NULL,
-  PRIMARY KEY (`ID`)
+  `team` varchar(45) DEFAULT NULL,
+  `class` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -171,7 +172,7 @@ CREATE TABLE `member` (
 
 LOCK TABLES `member` WRITE;
 /*!40000 ALTER TABLE `member` DISABLE KEYS */;
-INSERT INTO `member` VALUES ('k1','1234','민상훈','hihi@naver.com','인천시 서구','01067766160','0325646160',0,'1',0,0),('k1234','123','123','123@naver.com','123','123','123',0,'0',NULL,NULL),('k2','2','이빨','k2@naver.com','인천시남구','011','032',0,'0',2,0),('k3','3','김치','k3@naver.com','인천시부평구','010','032',0,'0',4,7),('k4','4','홍길동','k4@naver.com','인천시남구','010','032',0,'0',4,4),('k5','5','하하','k5@naver.com','인천시남동구','010','032',0,'0',6,6),('kim91','1234','김상현','kkk91@daum.net','원인재역','018','034',3,'0',10,0),('kk11','1234','깡냉','k22@daum.net','인천광역시남동구','042','032',0,'0',NULL,NULL),('ksh901016','1234','강성현','ksh901016@naver.com','인천시남동구','0105','032',5,'0',55,0),('lee','1234','이창신','lcs@naer.com','인천시부평구','010','032',4,'0',20,0),('root','1','root','root@root.com','하늘','010','032',NULL,'1',NULL,NULL),('seohan1','1234','서한','민상훈','서울','','',0,'0',NULL,NULL);
+INSERT INTO `member` VALUES ('k1','1234','민상훈','hihi@naver.com','인천시 서구','01067766160','0325646160',0,'1',2,0,NULL,NULL),('k1234','1234','123','','','','',0,'0',NULL,NULL,NULL,NULL),('k2','2','이빨','k2@naver.com','인천시남구','011','032',0,'0',2,0,NULL,NULL),('k3','3','김치','k3@naver.com','인천시부평구','010','032',0,'0',4,7,NULL,NULL),('k4','4','홍길동','k4@naver.com','인천시남구','010','032',0,'0',4,4,NULL,NULL),('k5','5','하하','k5@naver.com','인천시남동구','010','032',0,'0',6,6,NULL,NULL),('kim91','1234','김상현','kkk91@daum.net','원인재역','018','034',3,'0',10,0,NULL,NULL),('kk11','1234','깡냉','k22@daum.net','인천광역시남동구','042','032',0,'0',NULL,NULL,NULL,NULL),('ksh901016','1234','강성현','ksh901016@naver.com','인천시남동구','0105','032',5,'0',55,0,NULL,NULL),('lee','1234','이창신','lcs@naer.com','인천시부평구','010','032',4,'0',20,0,NULL,NULL),('root','1','root','root@root.com','하늘','010','032',NULL,'1',NULL,NULL,NULL,NULL),('seohan1','1234','서한','민상훈','서울','','',0,'0',NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `member` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -185,6 +186,9 @@ DROP TABLE IF EXISTS `notice`;
 CREATE TABLE `notice` (
   `noticenum` int(11) NOT NULL AUTO_INCREMENT,
   `content` varchar(100) DEFAULT NULL,
+  `noticedate` date DEFAULT NULL,
+  `priority` int(11) DEFAULT NULL,
+  `noticecol` varchar(45) DEFAULT '1',
   PRIMARY KEY (`noticenum`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -195,7 +199,7 @@ CREATE TABLE `notice` (
 
 LOCK TABLES `notice` WRITE;
 /*!40000 ALTER TABLE `notice` DISABLE KEYS */;
-INSERT INTO `notice` VALUES (1,'Love is merely madness.-윌리엄셰익스피어-'),(2,'Hate the sin, love the sinner.-마하트마 간디-'),(3,'If you would be loved, love and be lovable.-벤자민 프랭클린-'),(4,'We can only learn to love by loving.-아이리스 머독-'),(5,'To love is to receive a glimpse of heaven.-카렌선드-'),(6,'Well done is better than well said.-벤자민프랭클린-'),(7,'All Bibles are man-made.-토마스A.에디슨-'),(8,'Much learning does not teach understanding.-헤라클레이토스-'),(9,'Seek not every quality in one individual.-공자-'),(10,'Success is never final.-윈스터처칠-');
+INSERT INTO `notice` VALUES (1,'Love is merely madness.-윌리엄셰익스피어-',NULL,NULL,'1'),(2,'Hate the sin, love the sinner.-마하트마 간디-',NULL,NULL,'1'),(3,'If you would be loved, love and be lovable.-벤자민 프랭클린-',NULL,NULL,'1'),(4,'We can only learn to love by loving.-아이리스 머독-',NULL,NULL,'1'),(5,'To love is to receive a glimpse of heaven.-카렌선드-',NULL,NULL,'1'),(6,'Well done is better than well said.-벤자민프랭클린-',NULL,NULL,'1'),(7,'All Bibles are man-made.-토마스A.에디슨-',NULL,NULL,'1'),(8,'Much learning does not teach understanding.-헤라클레이토스-',NULL,NULL,'1'),(9,'Seek not every quality in one individual.-공자-',NULL,NULL,'1'),(10,'Success is never final.-윈스터처칠-',NULL,NULL,'1');
 /*!40000 ALTER TABLE `notice` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -214,7 +218,7 @@ CREATE TABLE `recommended` (
   KEY `booknum_idx` (`booknum`),
   KEY `boardnum_idx` (`boardnum`),
   CONSTRAINT `boardnum` FOREIGN KEY (`boardnum`) REFERENCES `bulletinboard` (`boardnum`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `booknum` FOREIGN KEY (`booknum`) REFERENCES `book` (`booknum`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `booknum` FOREIGN KEY (`booknum`) REFERENCES `book` (`bookCode`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -235,9 +239,9 @@ DROP TABLE IF EXISTS `request`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `request` (
-  `requestid` varchar(45) DEFAULT NULL,
+  `id` varchar(45) DEFAULT NULL,
   `requestdate` date DEFAULT NULL,
-  `booknum` varchar(45) NOT NULL DEFAULT '',
+  `bookCode` varchar(45) NOT NULL,
   `bookname` varchar(45) DEFAULT NULL,
   `writer` varchar(45) DEFAULT NULL,
   `publisher` varchar(45) DEFAULT NULL,
@@ -247,8 +251,13 @@ CREATE TABLE `request` (
   `isbn` char(14) DEFAULT NULL,
   `priceSales` int(10) DEFAULT NULL,
   `quantity` int(10) DEFAULT NULL,
-  PRIMARY KEY (`booknum`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `class` varchar(45) DEFAULT NULL,
+  `summary` varchar(1000) DEFAULT NULL,
+  `requestCode` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`requestCode`),
+  KEY `ID_res_idx` (`id`),
+  CONSTRAINT `ID(FK)` FOREIGN KEY (`id`) REFERENCES `member` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -257,7 +266,7 @@ CREATE TABLE `request` (
 
 LOCK TABLES `request` WRITE;
 /*!40000 ALTER TABLE `request` DISABLE KEYS */;
-INSERT INTO `request` VALUES ('k1','2015-04-06','9788901127521','고흐의 편지 1','빈센트 반 고흐(Vincent Van Gogh)','펭귄클래식코리아','국내도서','http://book.interpark.com/blog/integration/product/itemDetail.rdo?prdNo=208798283&refererType=8303&bookblockname=bpmain_in&booklinkname=wg_search_B0F933E2847C6447203572CCC68F824A1054E7EF0D966C7B95245288CE95E300','http://bimage.interpark.com/goods_image/8/2/8/3/208798283h.jpg',NULL,12233,NULL),('k1','2015-04-06','9788949112503','안녕, 폴','센우','비룡소','국내도서','http://book.interpark.com/blog/integration/product/itemDetail.rdo?prdNo=214128044&refererType=8303&bookblockname=bpmain_in&booklinkname=wg_search_B0F933E2847C6447203572CCC68F824A1054E7EF0D966C7B95245288CE95E300','http://bimage.interpark.com/goods_image/8/0/4/4/214128044h.jpg',NULL,23211,NULL),('k1','2015-04-06','9788971996171','이중섭 평전','최열','돌베개','국내도서','http://book.interpark.com/blog/integration/product/itemDetail.rdo?prdNo=223573833&refererType=8303&bookblockname=bpmain_in&booklinkname=wg_search_B0F933E2847C6447203572CCC68F824A1054E7EF0D966C7B95245288CE95E300','http://bimage.interpark.com/goods_image/3/8/3/3/223573833h.jpg',NULL,35000,NULL),('k1','2015-04-06','k19788901127538','고흐의 편지 2','빈센트 반 고흐(Vincent Van Gogh)','펭귄클래식코리아','국내도서','http://book.interpark.com/blog/integration/product/itemDetail.rdo?prdNo=208798315&refererType=8303&bookblockname=bpmain_in&booklinkname=wg_search_B0F933E2847C6447203572CCC68F824A1054E7EF0D966C7B95245288CE95E300','http://bimage.interpark.com/goods_image/8/3/1/5/208798315h.jpg','9788901127538',23000,NULL),('k1','2015-04-07','k19788970947969','달님 안녕 5종 특별 세트 (양장본)','하야시 아키코(Akiko Hayashi),하야시 아키코(Akiko Hayashi)',NULL,'국내도서','http://book.interpark.com/blog/integration/product/itemDetail.rdo?prdNo=224663022&refererType=8303&bookblockname=bpmain_in&booklinkname=wg_search_B0F933E2847C6447203572CCC68F824A1054E7EF0D966C7B95245288CE95E300','http://bimage.interpark.com/goods_image/3/0/2/2/224663022h.jpg','9788970947969',36500,1);
+INSERT INTO `request` VALUES (NULL,'2015-04-10','null9791195326426','역경의 행운','최재석',NULL,'국내도서','http://book.interpark.com/blog/integration/product/itemDetail.rdo?prdNo=236973706&refererType=8303&bookblockname=bpmain_in&booklinkname=wg_search_B0F933E2847C6447203572CCC68F824A1054E7EF0D966C7B95245288CE95E300','http://bimage.interpark.com/goods_image/3/7/0/6/236973706h.jpg','9791195326426',20000,2,NULL,NULL,17),(NULL,'2015-04-10','null9788965400219','열혈강의 서블릿/JSP 웹 프로그래밍 with HTML+CSS+XML+자바스크립트','김승현',NULL,'국내도서','http://book.interpark.com/blog/integration/product/itemDetail.rdo?prdNo=210432385&refererType=8303&bookblockname=bpmain_in&booklinkname=wg_search_B0F933E2847C6447203572CCC68F824A1054E7EF0D966C7B95245288CE95E300','http://bimage.interpark.com/goods_image/2/3/8/5/210432385h.jpg','9788965400219',32000,2,NULL,NULL,18),(NULL,'2015-04-13','null9788989313694','[위즈덤하우스] 어린이 자기계발시리즈 전30권세트','',NULL,'','http://book.interpark.com/blog/integration/product/itemDetail.rdo?prdNo=222569674&refererType=8303&bookblockname=bpmain_in&booklinkname=wg_search_B0F933E2847C6447203572CCC68F824A1054E7EF0D966C7B95245288CE95E300','http://bimage.interpark.com/goods_image/9/6/7/4/222569674h.jpg','9788989313694',205000,1,NULL,NULL,19),(NULL,'2015-04-13','null9788960861565','어린이를 위한 배려','전지은',NULL,'국내도서','http://book.interpark.com/blog/integration/product/itemDetail.rdo?prdNo=11399128&refererType=8303&bookblockname=bpmain_in&booklinkname=wg_search_B0F933E2847C6447203572CCC68F824A1054E7EF0D966C7B95245288CE95E300','http://bimage.interpark.com/goods_image/9/1/2/8/11399128s.jpg','9788960861565',9000,1,NULL,NULL,20),(NULL,'2015-04-13','null9788965744023','정글만리 1','조정래',NULL,'국내도서','http://book.interpark.com/blog/integration/product/itemDetail.rdo?prdNo=212675918&refererType=8303&bookblockname=bpmain_in&booklinkname=wg_search_B0F933E2847C6447203572CCC68F824A1054E7EF0D966C7B95245288CE95E300','http://bimage.interpark.com/goods_image/5/9/1/8/212675918h.jpg','9788965744023',13500,1,NULL,NULL,21),('k1','2015-04-13','k19788997162901','핫존 - 에볼라 바이러스 전쟁의 시작','리처드 프레스턴(Richard Preston)','청어람미디어','국내도서','http://book.interpark.com/blog/integration/product/itemDetail.rdo?prdNo=237152543&refererType=8303&bookblockname=bpmain_in&booklinkname=wg_search_B0F933E2847C6447203572CCC68F824A1054E7EF0D966C7B95245288CE95E300','http://bimage.interpark.com/goods_image/2/5/4/3/237152543h.jpg','9788997162901',15000,2,NULL,'뉴욕타임스 베스트셀러 32주간 1위 기록전 세계를 공포에 빠트린 에볼라 바이러스에 관한 최고의 논픽션!',22),('k1','2015-04-13','k19788937483943','스티브 잡스','월터 아이작슨(Walter Isaacson)','민음사','국내도서','http://book.interpark.com/blog/integration/product/itemDetail.rdo?prdNo=209034726&refererType=8303&bookblockname=bpmain_in&booklinkname=wg_search_B0F933E2847C6447203572CCC68F824A1054E7EF0D966C7B95245288CE95E300','http://bimage.interpark.com/goods_image/4/7/2/6/209034726h.jpg','9788937483943',25000,1,NULL,'스티브잡스가 인정한 유일한 공식 자서전 지난 10월 5일 스티브 잡스의 죽음으로 전세계가 술렁 거렸다. 그의 타계 소식과 함께 관련 서적들이 주목받고 있다. 그 중에서도. 스티브 잡스가 인정한 유일한  공식 전기가 출간 되었다.이 책의 저자 아이작슨은 2009년부터 2년간 잡스와 함께 어린 시절 집을 방문하거나 함께 산책을 하며 그를 40여 차례 인터뷰했고, 그의 친구, 가족, 동료뿐만 아니라 그에게 반감을 가진 인물이나 경쟁자까지 포함하여 100여 명의 인물들을 인터뷰하였다. 잡스를 둘러싼 모든 것이 집적된 이 전기에는 실리콘밸리에서 보낸 잡스의 어린 시절부터 애플의 창업 과정에 이르기까지 그의 전 생애가 담겨 있다.스티브잡스의 공식 전기를 통해 그의 성공을 배우고, 세계 IT 역사에 큰 \'혁신의 아이콘\'...',23);
 /*!40000 ALTER TABLE `request` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -269,17 +278,14 @@ DROP TABLE IF EXISTS `reservation`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `reservation` (
-  `resernum` varchar(45) NOT NULL,
-  `booknum` varchar(45) DEFAULT NULL,
-  `bookname` varchar(50) DEFAULT NULL,
-  `period` date DEFAULT NULL,
-  `ID` varchar(45) NOT NULL,
-  PRIMARY KEY (`resernum`),
-  UNIQUE KEY `booknum_UNIQUE` (`booknum`),
-  KEY `Reser_ID_idx` (`ID`),
-  KEY `Reser_booknum_idx` (`booknum`),
-  CONSTRAINT `ID_res` FOREIGN KEY (`ID`) REFERENCES `member` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `id` varchar(40) DEFAULT NULL,
+  `bookCode` varchar(45) DEFAULT NULL,
+  `reserveDate` date DEFAULT NULL,
+  `reservecheck` varchar(4) DEFAULT NULL,
+  KEY `bookCode_res` (`bookCode`),
+  KEY `ID_res` (`id`) COMMENT '	',
+  CONSTRAINT `bookCode_res` FOREIGN KEY (`bookCode`) REFERENCES `book` (`bookCode`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='		';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -288,7 +294,7 @@ CREATE TABLE `reservation` (
 
 LOCK TABLES `reservation` WRITE;
 /*!40000 ALTER TABLE `reservation` DISABLE KEYS */;
-INSERT INTO `reservation` VALUES ('reser9788932915661','9788932915661','유럽의 붓다, 니체','2015-04-08','k1'),('reser9788958073222','9788958073222','한글로의 여행','2015-04-10','k1'),('reserBS002','BS002','그 후에','2015-04-02','k1'),('reserCS001','CS001',' SAS 데이터분석','2015-04-07','k1'),('reserCS002','CS002',' R까기','2014-12-15','root'),('reserCS005','CS005','Java의 정석','2014-12-15','k1');
+INSERT INTO `reservation` VALUES ('k1','BS021','2015-04-17','1'),('k1','BS032','2015-04-20','1'),('k1','CS005','2015-04-20','1');
 /*!40000 ALTER TABLE `reservation` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -301,4 +307,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-04-07 14:16:10
+-- Dump completed on 2015-04-13 17:25:30

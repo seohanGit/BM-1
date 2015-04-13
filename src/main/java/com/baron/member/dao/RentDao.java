@@ -38,5 +38,9 @@ public interface RentDao {
 
 	void upPoint(String id);
 
+	void extendBorrowBook(String bookCode);
+
+	void cancleBorrowBook(String bookCode);
+
 
 }

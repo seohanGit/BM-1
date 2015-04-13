@@ -35,46 +35,50 @@ body {
 	<div class="container">
 		<div class="row">
 			<!-- Blog Entries Column -->
-			<div class="col-md-8">
-				<div id="searchResultArea">
-					<h2>대여요청 목록</h2>
-					<hr>
+			<div id="searchResultArea">
+				<hr>
+				<h2>대여요청 현황</h2>
+				<hr>
+				<table class="table table-striped table-bordered ">
+					<thead>
+						<tr class="hidden-xs title">
+							<td>도서명</td>
+							<td>대여일자</td>
+							<td>반납일자</td>
+							<td>카테고리</td>
+							<td>대출자</td>
+							<td>상태</td>
+						</tr>
+					</thead>
 					<c:forEach items="${bookList}" var="book" varStatus="loop">
 
-						<table>
+						<tbody>
+							<tr>
+								<td width="30%" align="left">${book.bookname }</td>
+								<td width="15%" align="left">${book.borrowdate }</td>
+								<td width="15%" align="left">${book.returndate }</td>
+								<td width="15%" align="left">${book.genre }</td>
 
-							<tbody>
+								<td>ID : ${book.id}</td>
 
-								<tr>
-									<td><input type="checkbox" name="bookCode"
-										value="${book.bookCode}"></td>
-									<td class="goods_img"><span class="goods_cnt"></span> <img
-										src="${book.imageurl}" width="95px" height="170px"></td>
-									<td class="goods_infogrp">
-										<p>${book.isbn}|${book.bookname}</p>
-										<p>${book.writer}|${book.publisher}|</p>
-										<p>${book.genre}|${book.id}</p>
-										<p>${book.borrowdate}|${book.returndate}
-										<p>${book.borrowcheck}
-											== 1 then 대여요청 ==2 대여 중
-											<button class="btn btn-default" type="button"
-												id="reservebook"
-												onClick="location.href='/confirmBorrowBook?bookCode=${book.bookCode}'">승인</button>
+								
+								<td><button class="btn btn-default" type="button"
+										id="reservebook"
+										onClick="location.href='/returnBook?bookCode=${book.bookCode}'">반납</button>
+								</td>
+							</tr>
 
-										</p>
-									</td>
-								</tr>
-							</tbody>
-
-						</table>
-
+						</tbody>
 					</c:forEach>
-				</div>
+				</table>
 			</div>
-			<hr>
-			<script src="/resources/js/jquery/jquery.js"></script>
-			<script src="/resources/js/bootstrap.min.js"></script>
-			<script src="/resources/js/common.js"></script>
-			<script src="/resources/js/book.js"></script>
+		</div>
+	</div>
+
+	<hr>
+	<script src="/resources/js/jquery/jquery.js"></script>
+	<script src="/resources/js/bootstrap.min.js"></script>
+	<script src="/resources/js/common.js"></script>
+	<script src="/resources/js/book.js"></script>
 </body>
 </html>

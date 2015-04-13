@@ -114,5 +114,17 @@ public class RentDaoImpl implements RentDao {
 		return session.selectList(NAMESPACE + "reservationListAll");
 	}
 
+	@Override
+	public void extendBorrowBook(String bookCode) {
+		session.update(NAMESPACE + "extendBorrowBook", bookCode);
+		
+	}
+
+	@Override
+	public void cancleBorrowBook(String bookCode) {
+		session.update(NAMESPACE + "cancelBorrowBook", bookCode);
+		
+	}
+
 	
 }

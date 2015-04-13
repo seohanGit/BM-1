@@ -26,18 +26,20 @@ body {
 <body>
 	<jsp:include page="nav.jsp" />
 	<div class="container">
-		<div class="col-md-8">
+		<div class="row">
 			<div id="searchResultArea">
+				<hr>
 				<h2>에약 현황</h2>
+				<hr>
 				<table class="table table-striped table-bordered">
 					<thead>
-						<tr class="hidden-xs ">
+						<tr class="hidden-xs title">
 
 							<td>도서명</td>
 							<td>예약일자</td>
 							<td>카테고리</td>
 							<td>예약신청자</td>
-							<td>기록삭제</td>
+							<td>알림</td>
 						</tr>
 					</thead>
 
@@ -47,16 +49,16 @@ body {
 
 							<tr>
 
-								<td width="25%" align="left">${book.bookname }</td>
+								<td width="30%" align="left">${book.bookname }</td>
 								<td width="15%" align="left">${book.reservedate }</td>
-								<td width="15%">${book.genre}</td>
-								<td width="10%">${book.id}</td>
-								<td width="10%">
-									<button class="btn btn-default" type="button"
-										onClick="location.href='deleteRecord?bookCode=${book.bookCode}'">알림</button>
-									<button class="btn btn-default" type="button"
-										onClick="location.href='deleteRecord?bookCode=${book.bookCode}'">승인</button>
+								<td width="15%" align="left">${book.genre }</td>
+								<td>ID : ${book.id}</td>
+
+								<td><button class="btn btn-default" type="button"
+										id="extendbook"
+										onClick="location.href='/extendBorrowBook?bookCode=${book.bookCode}'">알림</button>
 								</td>
+
 							</tr>
 							<tr>
 								<td></td>

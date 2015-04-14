@@ -34,60 +34,78 @@ body {
 	<jsp:include page="nav.jsp" />
 
 	<div class="container">
-		<div class="row col-md-8">
-			<h4>원하는 책이 없다면 인터넷에서 주문하세요 !</h4>
-			<div class="input-group" style="width: 90%">
-				<form action="/findBook" method="get">
-					<span class="input-group-btn"> <input type="text"
-						class="form-control" id="query" name="keyword"
-						placeholder="인터파크 검색">
-						<button class="btn btn-default" type="submit" id="btn_find">
-							<span class="glyphicon glyphicon-search"></span>
-						</button>
-					</span>
-				</form>
-			</div>
-			<hr>
-			<div id="searchResultArea">
-				<hr>
-				<h2>대여요청 목록</h2>
-				<hr>
+		<hr>
+		<div class="row panel panel-default">
+			<div class="col-xs-12 col-sm-9">
+				<h4>원하는 책이 없다면 인터넷에서 주문하세요 !</h4>
+				<div class="input-group" style="width: 90%">
+					<form action="/findBook" method="get">
+						<span class="input-group-btn"> <input type="text"
+							class="form-control" id="query" name="keyword"
+							placeholder="인터파크 검색">
+							<button class="btn btn-default" type="submit" id="btn_find">
+								<span class="glyphicon glyphicon-search"></span>
+							</button>
+						</span>
+					</form>
+				</div>
+				<div id="searchResultArea">
+					<hr>
+					<h2>사용자 대여 현황</h2>
+					<hr>
 
-				<table class="table table-striped ">
-					<thead>
-						<tr class="hidden-xs title">
-							<td width="70px">표지</td>
-							<td width="15%">도서명</td>
-							<td width="13%">저자</td>
-							<td width="10%">장르</td>
+					<table class="table table-striped table-bordered ">
+						<thead>
+							<tr class="hidden-xs title">
+								<td width="10%">표지</td>
+								<td width="15%">도서명</td>
+								<td width="13%">저자</td>
+								<td width="10%">장르</td>
 
-							<td width="16%">대여일자</td>
-							<td width="60px"></td>
-						</tr>
-					</thead>
-					<c:forEach items="${bookList}" var="book" varStatus="loop">
-						<tbody>
-							<tr>
-								<td rowspan="4" style="max-width: 70px" align="left"><img
-									src="${book.imageurl}"></td>
+								<td width="16%">대여일자</td>
+								<td width="18%">상태</td>
+								<td width="13%"></td>
 							</tr>
-							<tr>
-								<td width="20%" align="left">${book.bookname }</td>
-								<td width="10%" align="left">${book.writer }</td>
-								<td width="10%" align="left">${book.genre}</td>
+						</thead>
+						<c:forEach items="${bookList}" var="book" varStatus="loop">
+							<tbody>
+								<tr>
+									<td rowspan="4"><img src="${book.imageurl}"></td>
+								</tr>
+								<tr>
+									<td width="20%" align="left">${book.bookname }</td>
+									<td width="10%" align="left">${book.writer }</td>
+									<td width="10%" align="left">${book.genre}</td>
 
 
-								<td>${book.borrowdate}</td>
-								<td>
-									<button class="btn btn-default" type="button" id="reservebook"
-										onClick="location.href='/cancleBorrowBook?bookCode=${book.bookCode}'">취소</button>
-								</td>
-							</tr>
-						</tbody>
-					</c:forEach>
-				</table>
+									<td>${book.borrowdate}</td>
+									<c:choose>
+										<c:when test="${book.borrowcheck=='1'}">
+											<td>대여요청중</td>
+											<td>
+												<button class="btn btn-default" type="button"
+													id="reservebook"
+													onClick="location.href='/cancleBorrowBook?bookCode=${book.bookCode}'">취소</button>
+											</td>
+										</c:when>
+										<c:when test="${book.borrowcheck=='2'}">
+											<td>대출중</td>
+											<td>
+												<button class="btn btn-default" type="button"
+													id="reservebook"
+													onClick="location.href='/cancleBorrowBook?bookCode=${book.bookCode}'">반납</button>
+											</td>
+										</c:when>
+									</c:choose>
+
+								</tr>
+							</tbody>
+						</c:forEach>
+					</table>
+				</div>
 			</div>
 		</div>
+
 	</div>
 	<hr>
 

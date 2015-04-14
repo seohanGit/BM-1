@@ -152,7 +152,7 @@ public class BookServiceImpl implements BookService {
 		keyword = URLEncoder.encode(keyword, "UTF-8");
 		parameter = parameter + "&" + "query=" + keyword;
 		parameter = parameter + "&" + "sort=salesPoint";
-		parameter = parameter + "&" + "maxResults=15";
+		parameter = parameter + "&" + "maxResults=10";
 		parameter = parameter + "&" + "start=" + startIndex;
 
 		addr = addr + "key=" + key + parameter;
@@ -171,7 +171,7 @@ public class BookServiceImpl implements BookService {
 		keyword = URLEncoder.encode(keyword, "UTF-8");
 		parameter = parameter + "&" + "query=" + keyword;
 		parameter = parameter + "&" + "sort=salesPoint";
-		parameter = parameter + "&" + "maxResults=15";
+		parameter = parameter + "&" + "maxResults=10";
 
 		addr = addr + "key=" + key + parameter;
 

@@ -33,7 +33,19 @@ body {
 	<jsp:include page="nav.jsp" />
 
 	<div class="container">
-		<div class="row">
+		<hr>
+		<div class="row panel panel-default">
+			<div class="btn-group panel-heading" role="group" aria-label="..."
+				style="width: 100%;">
+				<button type="button" class="btn btn-default" id="requestList">구매요청
+				</button>
+				<button type="button" class="btn btn-default" id="borrowListAll">대여요청</button>
+				<button type="button" class="btn btn-default" id="rentListAll">대여현황</button>
+				<button type="button" class="btn btn-default"
+					id="reservationListAll">예약현황</button>
+				<button type="button" class="btn btn-default" id="recordListAll">대여기록</button>
+				<button type="button" class="btn btn-default" id="noticeList">공지사항</button>
+			</div>
 			<!-- Blog Entries Column -->
 			<div id="searchResultArea">
 				<hr>
@@ -61,13 +73,20 @@ body {
 
 								<td>ID : ${book.id}</td>
 
-								
+
 								<td><button class="btn btn-default" type="button"
 										id="reservebook"
-										onClick="location.href='/returnBook?bookCode=${book.bookCode}'">승인</button>
+										onClick="location.href='/confirmBorrowBook?bookCode=${book.bookCode}'">승인</button>
 								</td>
 							</tr>
-
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
 						</tbody>
 					</c:forEach>
 				</table>

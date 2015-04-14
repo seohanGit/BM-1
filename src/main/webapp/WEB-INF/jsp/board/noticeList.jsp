@@ -20,7 +20,19 @@
 	<jsp:include page="../nav.jsp"></jsp:include>
 
 	<div class="container">
-		<div class="row">
+		<hr>
+		<div class="row panel panel-default">
+			<div class="btn-group panel-heading" role="group" aria-label="..."
+				style="width: 100%;">
+				<button type="button" class="btn btn-default" id="requestList">구매요청
+				</button>
+				<button type="button" class="btn btn-default" id="borrowListAll">대여요청</button>
+				<button type="button" class="btn btn-default" id="rentListAll">대여현황</button>
+				<button type="button" class="btn btn-default"
+					id="reservationListAll">예약현황</button>
+				<button type="button" class="btn btn-default" id="recordListAll">대여기록</button>
+				<button type="button" class="btn btn-default" id="noticeList">공지사항</button>
+			</div>
 			<div id="searchResultArea">
 				<hr>
 				<h2>공지사항</h2>
@@ -29,30 +41,34 @@
 
 					<thead>
 						<tr class="hidden-xs title">
-							<td>대여일자</td>
+							<td>공지일자</td>
 							<td>공지사항 내용</td>
 							<td></td>
 							<td></td>
 						</tr>
 					</thead>
 
-					<c:forEach items="${nociceList}" var="notice" varStatus="loop">
 
-						<tbody>
+					<tbody>
+
+						<c:forEach items="${noticeList}" var="notice" varStatus="status">
 
 							<tr>
-								<td width="15%" align="left">${notice.noticedate}</td>
-								<td width="30%" align="left">${notice.content }</td>
+								<form action="/modifyNotice" method="post">
+								<td width="15%" align="left">${notice.registerdate}</td>
+								<td width="60%" align="left"><input class="form-control"
+									id="content" name="content" type="text"
+									placeholder="${notice.content}"><input type="hidden"
+									name="boardnum" value="${notice.boardnum }"></td>
 
-								<td><button class="btn btn-default" type="button"
-										id="extendbook"
-										onClick="location.href='/extendBorrowBook?bookCode=${book.bookCode}'">수정</button>
-								</td>
+								<td><button class="btn btn-default" type="submit"
+										id="modifyNotice">수정</button></td>
+								</form>
 								<td><button class="btn btn-default" type="button"
 										id="reservebook"
-										onClick="location.href='/returnBook?bookCode=${book.bookCode}'">삭제</button>
-								</td>
+										onClick="location.href='/deleteNotice?boardnum=${notice.boardnum}'">삭제</button></td>
 							</tr>
+
 							<tr>
 
 								<td></td>
@@ -61,12 +77,13 @@
 								<td></td>
 							</tr>
 
-						</tbody>
-					</c:forEach>
+						</c:forEach>
+
+					</tbody>
+
 				</table>
 			</div>
 		</div>
-	</div>
 	</div>
 	<hr>
 	<script src="/resources/js/jquery/jquery.js"></script>

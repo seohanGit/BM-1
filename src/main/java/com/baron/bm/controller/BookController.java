@@ -65,6 +65,7 @@ public class BookController {
 		String keyword = "";
 		String permission;
 		List<BookModel> bookList = bookservice.searchBook(keyword);
+
 		model.addAttribute("bookList", bookList);
 		for (Cookie cookie : request.getCookies()) {
 			if (cookie.getName().equals("bm_permission")) {
@@ -81,15 +82,15 @@ public class BookController {
 	public String findBook(String keyword, String page, Model model)
 			throws Exception {
 		List<BookModel> bookList;
-		int totalPage ;
+		int totalPage;
 		if (page == null) {
 			bookList = bookservice.findBook(keyword);
 		} else {
 			bookList = bookservice.pagenation(keyword, page);
 		}
-		
-		totalPage = bookList.get(0).getTotalResults()/15;
-		
+
+		totalPage = bookList.get(0).getTotalResults() / 15;
+
 		model.addAttribute("bookList", bookList);
 		model.addAttribute("totalPage", totalPage);
 		model.addAttribute("keyword", keyword);

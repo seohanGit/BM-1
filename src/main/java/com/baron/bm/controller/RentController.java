@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.baron.member.model.BookModel;
+import com.baron.member.service.BookService;
 import com.baron.member.service.RentService;
 
 @Controller
@@ -35,8 +36,14 @@ public class RentController {
 		book.setBookCode(bookCode);
 		book.setBorrowcheck("1");
 
-		rentservice.borrowBook(book);
-		return "redirect:borrowList";
+		if (rentservice.borrowCheck(book).equals("0")) {
+			System.out.println(book.getBorrowcheck());
+			rentservice.borrowBook(book);
+			return "redirect:borrowList";
+		} else {
+
+			return "borrowfail";
+		}
 	}
 
 	@RequestMapping("/confirmBorrowBook")
@@ -49,7 +56,7 @@ public class RentController {
 		}
 		rentservice.upPoint(id);
 		rentservice.confirmBorrowBook(bookCode);
-		return "member/admin";
+		return "redirect:borrowListAll";
 	}
 
 	@RequestMapping("/confirmBorrowBookList")
@@ -81,23 +88,30 @@ public class RentController {
 		List<BookModel> bookList = rentservice.borrowList(id);
 
 		model.addAttribute("bookList", bookList);
+		System.out.println(bookList.get(0).getBorrowcheck());
 		return "borrowList";
 	}
-	
+
 	@RequestMapping("/extendBorrowBook")
-	public String extendBorrowBook(String bookCode){
+	public String extendBorrowBook(String bookCode) {
 		rentservice.extendBorrowBook(bookCode);
-		
+
 		return "redirect:rentListAll";
 	}
-	
+
 	@RequestMapping("/cancleBorrowBook")
-	public String cancleBorrowBook(String bookCode){
-		rentservice.cancleBorrowBook(bookCode);
-		
+	public String cancleBorrowBook(String bookCode, BookModel bookmodel,
+			HttpServletRequest request) {
+		bookmodel = rentservice.selectBook(bookCode);
+		for (Cookie cookie : request.getCookies()) {
+			if (cookie.getName().equals("bm_id"))
+				bookmodel.setId(cookie.getValue());
+		}
+		rentservice.cancleBorrowBook(bookmodel);
+
 		return "redirect:borrowList";
 	}
-	
+
 	@RequestMapping("/rentListAll")
 	public String rentListAll(Model model) {
 		List<BookModel> bookList = new ArrayList<BookModel>();
@@ -125,8 +139,21 @@ public class RentController {
 	}
 
 	@RequestMapping("/returnBook")
-	public String returnBook(String bookCode) {
-		rentservice.returnBook(bookCode);
+	public String returnBook(String bookCode, BookModel book) {
+
+		if (rentservice.borrowCheck(book).equals("2")) {
+			System.out.println(book.getBorrowcheck());
+			rentservice.returnBook(bookCode);
+			return "redirect:borrowList";
+		} else {
+
+			return "returnfail";
+		}
+	}
+
+	@RequestMapping("stopBorrow")
+	public String stopBorrow(String bookCode) {
+		rentservice.stopBorrow(bookCode);
 
 		return "redirect:rentListAll";
 	}

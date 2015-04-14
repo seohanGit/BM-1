@@ -13,4 +13,10 @@ public interface BoardService {
 	public List<BoardModel> selectBoardregister();
 
 	public List<BoardModel> selecBoardtitle();
+
+	public List<BoardModel> noticeList();
+
+	public void deleteNotice(String boardnum);
+
+	public void modifyNotice(BoardModel content);
 }

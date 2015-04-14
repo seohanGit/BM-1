@@ -10,7 +10,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
-<title>Blog Home - Start Bootstrap Template</title>
+<title>인터파크 검색</title>
 <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="/resources/css/common.css" rel="stylesheet">
 <link href="/resources/css/index.css" rel="stylesheet">
@@ -21,17 +21,29 @@
 	function request() {
 		alert("구매요청되엇습니다.");
 	}
+	/* 
+	 function next() {
+	 var totalPage = "${totalPage}";
 
+	 if($('#next') ){
+	 for (var i = 10; i < 20; i++) {
+	 var page = "<b> <a href='findBook?keyword=${keyword}&page="
+	 + i + "''>" + i + "</a></b> &nbsp;";
+	 $('#page').append(page);
+	 }}
+	 });
+	 */
 	$(document).ready(
 			function() {
-				var totalPage = "${totalPage}";
-
-				for (var i = 1; i < totalPage; i++) {
+				var lastpage = "${totalPage}";
+				lastpage = "<b><a href='findBook?keyword=${keyword}&page="
+						+ lastpage + "'>" + lastpage + "</a></b>";
+				for (var i = 1; i < 11; i++) {
 					var page = "<b> <a href='findBook?keyword=${keyword}&page="
 							+ i + "''>" + i + "</a></b> &nbsp;";
 					$('#page').append(page);
-
 				}
+				$('#page').append(lastpage);
 			});
 </script>
 </head>
@@ -42,13 +54,15 @@
 		<div class="container">
 			<h4>원하는 책이 없다면 인터넷에서 주문하세요 !</h4>
 			<div class="input-group ">
-				<input type="text" class="form-control" id="query"
-					placeholder="인터파크 검색"> <span class="input-group-btn">
-					<button class="btn btn-default" type="button" id="btn_find">
-						<span class="glyphicon glyphicon-search"></span>
-					</button>
-				</span>
-
+				<form action="/findBook" method="get">
+					<span class="input-group-btn"> <input type="text"
+						class="form-control" id="query" name="keyword"
+						placeholder="인터파크 검색">
+						<button class="btn btn-default" type="submit" id="btn_find">
+							<span class="glyphicon glyphicon-search"></span>
+						</button>
+					</span>
+				</form>
 			</div>
 			<c:forEach items="${bookList}" var="book" varStatus="status">
 
@@ -100,7 +114,6 @@
 		</div>
 		<!-- /.row -->
 	</footer>
-	<script src="/resources/js/jquery/bootstrap.min.js"></script>
 	<script src="/resources/js/jquery/common.js"></script>
 </body>
 </html>

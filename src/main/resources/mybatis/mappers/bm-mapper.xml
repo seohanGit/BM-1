@@ -96,6 +96,27 @@
 		(#{title},#{content},NOW(),NOW(),#{id})
 	</insert>
 
+	<select id="noticeList" resultType="BoardModel">
+		SELECT *
+		FROM
+		notice
+		ORDER BY
+		registerdate DESC;
+	</select>
+
+	<delete id="deleteNotice" parameterType="String">
+		DELETE FROM notice
+		WHERE
+		boardnum=#{boardnum}
+	</delete>
+
+	<update id="modifyNotice" parameterType="BoardModel">
+		UPDATE notice
+		SET
+		content=#{content}
+		WHERE boardnum=#{boardnum}
+	</update>
+
 
 	<!-- Book 관련 쿼리 -->
 
@@ -119,8 +140,7 @@
 	</select>
 
 	<select id="searchBook" parameterType="String" resultType="BookModel">
-		SELECT bookCode, bookname, genre, publisher, writer
-		,imageurl FROM book
+		SELECT * FROM book
 		WHERE bookname LIKE
 		CONCAT('%',#{keyword},'%')
 
@@ -141,12 +161,6 @@
 		WHERE bookCode=#{bookCode}
 	</update>
 
-	<select id="selectname" parameterType="String" resultType="String">
-		SELECT bookname
-		FROM book
-		WHERE bookCode=#{bookCode}
-	</select>
-
 
 
 	<!-- 구매요청, 대여 관련 커리 -->
@@ -164,10 +178,11 @@
 		#{publisher}, #{summary})
 	</insert>
 
-	<delete id="deleteRequest" parameterType="String">
-		DELETE FROM request
+	<update id="deleteRequest" parameterType="BookModel">
+		UPDATE request
+		SET bookCode='0'
 		WHERE bookCode=#{bookCode}
-	</delete>
+	</update>
 
 	<select id="requestList" resultType="BookModel">
 		SELECT *
@@ -188,7 +203,7 @@
 		SELECT *
 		FROM book AS A, borrow AS B
 		WHERE B.id = #{id} AND
-		B.borrowcheck='1' AND
+		B.borrowcheck='1' OR B.borrowcheck='2' AND
 		A.bookCode=B.bookCode;
 	</select>
 
@@ -208,6 +223,18 @@
 		WHERE bookCode=#{bookCode}
 	</update>
 
+	<update id="stopBorrow" parameterType="String">
+		UPDATE book A INNER
+		JOIN
+		borrow B
+		ON A.borrowcheck = B.borrowcheck
+		SET
+		A.borrowcheck='4',
+		B.borrowcheck='4'
+		WHERE
+		A.bookCode=#{bookCode} AND
+		B.bookCode=#{bookCode}
+	</update>
 	<update id="confirmBorrowBook" parameterType="String">
 		UPDATE book A INNER
 		JOIN borrow B
@@ -252,17 +279,24 @@
 
 	<update id="extendBorrowBook" parameterType="String">
 		UPDATE borrow
-		SET returndate = date_add(now(), interval +20 day)
+		SET
+		returndate = date_add(now(), interval +20 day)
 		WHERE
 		bookCode=#{bookCode} AND borrowcheck='2';
 	</update>
-	
+
 	<update id="cancelBorrowBook" parameterType="String">
-		UPDATE borrow
-		SET borrowcheck='0'
+		UPDATE book
+		SET
+		borrowcheck='0'
 		WHERE
 		bookCode=#{bookCode} AND borrowcheck='1';
 	</update>
+
+	<delete id="deleteBorrowBook" parameterType="BookModel">
+		DELETE FROM borrow
+		WHERE bookCode=#{bookCode} AND id=#{id}
+	</delete>
 
 	<select id="rentListAll" parameterType="String" resultType="BookModel">
 		SELECT * FROM book AS A, borrow AS B

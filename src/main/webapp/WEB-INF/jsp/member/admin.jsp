@@ -33,7 +33,7 @@
 					<button type="button" class="btn btn-default"
 						id="reservationListAll">예약현황</button>
 					<button type="button" class="btn btn-default" id="recordListAll">대여기록</button>
-					<button type="button" class="btn btn-default" id="notice">공지사항</button>
+					<button type="button" class="btn btn-default" id="noticeList">공지사항</button>
 				</div>
 				<!-- First Blog Post -->
 
@@ -183,25 +183,6 @@
 	<!-- Bootstrap Core JavaScript -->
 	<script src="/resources/js/bootstrap.min.js"></script>
 	<script src="/resources/js/common.js"></script>
-	<script>
-		$("#insertBook").click(function() {
-			location.href = "/insertbookForm"
-		})
-		$("#recordListAll").click(function() {
-			location.href = "/recordListAll"
-		})
-		$("#rentListAll").click(function() {
-			location.href = "/rentListAll"
-		})
-		$("#reservationListAll").click(function() {
-			location.href = "/reservationListAll"
-		})
-		$("#borrowListAll").click(function() {
-			location.href = "/borrowListAll"
-		})
-		$("#logout").click(function() {
-			location.href = "/logout"
-		})
-	</script>
+	
 </body>
 </html>

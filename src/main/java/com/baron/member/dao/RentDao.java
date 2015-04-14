@@ -20,8 +20,6 @@ public interface RentDao {
 
 	void returnBook(String bookCode);
 
-	String selectname(String bookCode);
-
 	void confirmBorrowBook(String bookCode);
 
 	List<BookModel> returnListAll();
@@ -41,6 +39,12 @@ public interface RentDao {
 	void extendBorrowBook(String bookCode);
 
 	void cancleBorrowBook(String bookCode);
+
+	BookModel selectBook(String bookCode);
+
+	void stopBorrow(String bookCode);
+
+	void deleteBorrowBook(BookModel bookmodel);
 
 
 }

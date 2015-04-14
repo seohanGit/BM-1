@@ -18,8 +18,6 @@ public interface RentService {
 
 	public void returnManyBook(List<String> bookCodeList);
 
-	public String selectname(String bookCode);
-
 	public void insertReservation(BookModel bookmodel);
 
 	public void confirmBorrowBook(String bookCode);
@@ -40,7 +38,12 @@ public interface RentService {
 
 	public void extendBorrowBook(String bookCode);
 
-	public void cancleBorrowBook(String bookCode);
+	BookModel selectBook(String bookCode);
 
+	public void stopBorrow(String bookCode);
+
+	String borrowCheck(BookModel bookmodel);
+
+	void cancleBorrowBook(BookModel bookmodel);
 
 }

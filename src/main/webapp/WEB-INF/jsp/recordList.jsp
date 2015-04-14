@@ -26,7 +26,19 @@ body {
 <body>
 	<jsp:include page="nav.jsp" />
 	<div class="container">
-		<div class="row">
+		<hr>
+		<div class="row panel panel-default">
+			<div class="btn-group panel-heading" role="group" aria-label="..."
+				style="width: 100%;">
+				<button type="button" class="btn btn-default" id="requestList">구매요청
+				</button>
+				<button type="button" class="btn btn-default" id="borrowListAll">대여요청</button>
+				<button type="button" class="btn btn-default" id="rentListAll">대여현황</button>
+				<button type="button" class="btn btn-default"
+					id="reservationListAll">예약현황</button>
+				<button type="button" class="btn btn-default" id="recordListAll">대여기록</button>
+				<button type="button" class="btn btn-default" id="noticeList">공지사항</button>
+			</div>
 			<div id="searchResultArea">
 				<hr>
 				<h2>대여 기록</h2>
@@ -51,12 +63,14 @@ body {
 
 							<tr>
 
-								<td width="25%" align="left">${book.bookname }</td>
-								<td width="15%" align="left">${book.borrowdate }</td>
-								<td width="15%" align="left">${book.returndate }</td>
+								<td width="30%" align="left">${book.bookname }</td>
+								<td width="14%" align="left">${book.borrowdate }</td>
+								<td width="14%" align="left">${book.returndate }</td>
 								<td width="15%">${book.genre}</td>
-								<td width="10%">${book.id}</td>
-
+								<td width="13%">${book.id}</td>
+								<td><button class="btn btn-default" type="button"
+										id="extendbook"
+										onClick="location.href='/extendBorrowBook?bookCode=${book.bookCode}'">알림</button></td>
 							</tr>
 							<tr>
 								<td></td>
@@ -73,9 +87,10 @@ body {
 				</table>
 			</div>
 		</div>
-		<script src="/resources/js/jquery/jquery.js"></script>
-		<script src="/resources/js/bootstrap.min.js"></script>
-		<script src="/resources/js/common.js"></script>
-		<script src="/resources/js/book.js"></script>
+	</div>
+	<script src="/resources/js/jquery/jquery.js"></script>
+	<script src="/resources/js/bootstrap.min.js"></script>
+	<script src="/resources/js/common.js"></script>
+	<script src="/resources/js/book.js"></script>
 </body>
 </html>

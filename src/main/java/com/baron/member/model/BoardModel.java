@@ -11,6 +11,8 @@ public class BoardModel {
 	private Date modifidate;
 	private String id;
 	
+	
+	
 	public int getBoardnum() {
 		return boardnum;
 	}

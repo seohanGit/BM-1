@@ -17,9 +17,9 @@ public class RentServiceImpl implements RentService {
 	private RentDao rentDao;
 
 	@Override
-	public String selectname(String bookCode) {
+	public BookModel selectBook(String bookCode) {
 		// TODO Auto-generated method stub
-		return rentDao.selectname(bookCode);
+		return rentDao.selectBook(bookCode);
 	}
 
 	@Override
@@ -46,7 +46,15 @@ public class RentServiceImpl implements RentService {
 	}
 
 	@Override
+	public String borrowCheck(BookModel bookmodel) {
+		BookModel checkbook = rentDao.selectBook(bookmodel.getBookCode());
+		String borrowCheck=checkbook.getBorrowcheck();
+				return borrowCheck;
+		}
+	
+	@Override
 	public void borrowBook(BookModel bookmodel) {
+
 		rentDao.borrowBook(bookmodel);
 		rentDao.updateBookTable(bookmodel.getBookCode());
 
@@ -110,7 +118,7 @@ public class RentServiceImpl implements RentService {
 	@Override
 	public void upPoint(String id) {
 		rentDao.upPoint(id);
-		
+
 	}
 
 	@Override
@@ -119,9 +127,18 @@ public class RentServiceImpl implements RentService {
 	}
 
 	@Override
-	public void cancleBorrowBook(String bookCode) {
-		rentDao.cancleBorrowBook(bookCode);
+	public void cancleBorrowBook(BookModel bookmodel) {
+		rentDao.cancleBorrowBook(bookmodel.getBookCode());
+		rentDao.deleteBorrowBook(bookmodel);
 		
+
 	}
 
+	@Override
+	public void stopBorrow(String bookCode) {
+		rentDao.stopBorrow(bookCode);
+
+	}
+
+	
 }

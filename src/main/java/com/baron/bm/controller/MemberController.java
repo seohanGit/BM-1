@@ -176,11 +176,11 @@ public class MemberController {
 	@RequestMapping("/index")
 	public String index(Model model) throws Exception {
 		List<ContentModel> content = joinService.selectContent();
-		List<MemberModel> memberList = joinService.selectBest();
+		List<MemberModel> bestList = joinService.selectBest();
 		
 		List<BookModel> bestSeller = bookService.getBestseller("100");
 		List<BookModel> newBook = bookService.getNewbook();
-		model.addAttribute("bestList", memberList);
+		model.addAttribute("bestList", bestList);
 		model.addAttribute("contentList", content);
 		model.addAttribute("bestseller", bestSeller);
 		model.addAttribute("newbook", newBook);

@@ -37,4 +37,21 @@ public class BoardServiceImpl implements BoardService{
 		return boardDao.selectBoardtitle();
 	}
 
+	@Override
+	public List<BoardModel> noticeList() {
+		// TODO Auto-generated method stub
+		return boardDao.noticeList();
+	}
+
+	@Override
+	public void deleteNotice(String boardnum) {
+		boardDao.deleteNotice(boardnum);
+	}
+
+	@Override
+	public void modifyNotice(BoardModel content) {
+	boardDao.modifyNotice(content);
+		
+	}
+
 }

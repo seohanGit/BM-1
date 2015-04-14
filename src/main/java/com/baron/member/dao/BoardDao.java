@@ -13,4 +13,10 @@ public interface BoardDao {
 	public List<BoardModel> selectBoardregister();
 
 	public List<BoardModel> selectBoardtitle();
+
+	public List<BoardModel> noticeList();
+
+	public void deleteNotice(String boardnum);
+
+	public void modifyNotice(BoardModel content);
 }

@@ -60,13 +60,6 @@ public class RentDaoImpl implements RentDao {
 	}
 
 	@Override
-	public String selectname(String bookCode) {
-		return session.selectOne(NAMESPACE + "selectname", bookCode);
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public void confirmBorrowBook(String bookCode) {
 		session.update(NAMESPACE + "confirmBorrowBook", bookCode);
 
@@ -117,14 +110,32 @@ public class RentDaoImpl implements RentDao {
 	@Override
 	public void extendBorrowBook(String bookCode) {
 		session.update(NAMESPACE + "extendBorrowBook", bookCode);
-		
+
 	}
 
 	@Override
 	public void cancleBorrowBook(String bookCode) {
 		session.update(NAMESPACE + "cancelBorrowBook", bookCode);
-		
+
+	}
+
+	@Override
+	public void deleteBorrowBook(BookModel bookmodel) {
+		session.delete(NAMESPACE + "deleteBorrowBook", bookmodel);
+	}
+
+	@Override
+	public BookModel selectBook(String bookCode) {
+		// TODO Auto-generated method stub
+		return session.selectOne(NAMESPACE + "selectBook", bookCode);
+	}
+
+	@Override
+	public void stopBorrow(String bookCode) {
+		session.update(NAMESPACE + "stopBorrow", bookCode);
+
 	}
 
 	
+
 }

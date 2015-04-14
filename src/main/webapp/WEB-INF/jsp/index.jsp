@@ -23,22 +23,18 @@
 			<div class="col-md-8">
 				<div id="goodPhrase">
 					<h1 class="page-header">
-						한줄 명언 <small>민상훈책방</small>
+						공지사항 <small>민상훈책방</small>
 					</h1>
 					<!-- First Blog Post -->
-					<select multiple class="form-control" size="6">
-						<c:forEach items="${contentList}" var="con" varStatus="status">
-							<option href="#">${con.content}</option>
+					<c:forEach items="${contentList}" var="con" varStatus="status">
+						<h4 id="notice">${con.content}</h4>
 
-						</c:forEach>
-					</select>
-					
-<!-- 					공지사항메뉴로 변경 -->
-					
+					</c:forEach>
+
 				</div>
 				<hr>
 				<h4>원하는 책이 없다면 인터넷에서 주문하세요 !</h4>
-				<div class="input-group" style="width:90%">
+				<div class="input-group" style="width: 90%">
 					<form action="/findBook" method="get">
 						<span class="input-group-btn"> <input type="text"
 							class="form-control" id="query" name="keyword"
@@ -179,6 +175,14 @@
 			location.href = "/logout"
 		})
 
+		$document.ready(function() {
+			var date= "${con.registerdate}";
+			var newicon="<span class="label label-default">New</span></h3>";
+			if(date<now()){
+				$("#notice").append(newicon);
+			}
+
+		});
 		var array = [ "a0", "a1", "a2", "a3", "a4", "a5", "a6", "a7", "a8",
 				"a9" ];
 		function deletee() {

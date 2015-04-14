@@ -18,44 +18,64 @@ public class BoardController {
 
 	@Autowired
 	private BoardService boardService;
-	
+
 	@RequestMapping("/board")
 	public String board(Model model) {
-		List<BoardModel> boardList =boardService.selectBoard();
+		List<BoardModel> boardList = boardService.selectBoard();
 		model.addAttribute("boardList", boardList);
 		return "board/board";
 	}
-	
+
 	@RequestMapping("/boardwrite")
-	public String writeboard(){
+	public String writeboard() {
 		return "board/boardinsert";
 	}
-	
+
 	@RequestMapping("/boardsuccess")
-	public String boardsuccess(BoardModel model,HttpServletRequest request){
-		
-		for(Cookie cookie: request.getCookies()){
-			if(cookie.getName().equals("bm_id")){
+	public String boardsuccess(BoardModel model, HttpServletRequest request) {
+
+		for (Cookie cookie : request.getCookies()) {
+			if (cookie.getName().equals("bm_id")) {
 				model.setId(cookie.getValue());
 			}
 		}
 		boardService.insertBoard(model);
 		return "board/boardsuccess";
 	}
-	
+
 	@RequestMapping("/selectboard")
-	public String selectboard(String per,Model model){
-		if(per.equals("register")){
-			List<BoardModel> boardList= boardService.selectBoardregister();
-			model.addAttribute("boardList",boardList);
-			
+	public String selectboard(String per, Model model) {
+		if (per.equals("register")) {
+			List<BoardModel> boardList = boardService.selectBoardregister();
+			model.addAttribute("boardList", boardList);
+
+		} else if (per.equals("title")) {
+			List<BoardModel> boardList = boardService.selecBoardtitle();
+			model.addAttribute("boardList", boardList);
 		}
-		else if(per.equals("title")){
-			List<BoardModel> boardList=boardService.selecBoardtitle();
-			model.addAttribute("boardList",boardList);
-		}
-		
 		return "board/selectboard";
-			
+	}
+
+	@RequestMapping("/noticeList")
+	public String noticeList(Model model) {
+		List<BoardModel> noticeList = boardService.noticeList();
+		model.addAttribute("noticeList", noticeList);
+		System.out.println(noticeList.get(0).getContent());
+		System.out.println(noticeList.get(1).getBoardnum());
+		System.out.println(noticeList.get(2).getRegisterdate());
+		return "board/noticeList";
+
+	}
+
+	@RequestMapping("/deleteNotice")
+	public String writeboard(String boardnum) {
+		boardService.deleteNotice(boardnum);
+		return "redirect:noticeList";
+	}
+	
+	@RequestMapping("/modifyNotice")
+	public String modifyNotice(BoardModel content) {
+		boardService.modifyNotice(content);
+		return "redirect:noticeList";
 	}
 }

@@ -62,7 +62,7 @@ CREATE TABLE `book` (
   `isbn` char(14) DEFAULT NULL,
   `priceSales` int(10) DEFAULT NULL,
   `summary` varchar(1000) DEFAULT NULL,
-  `reservecheck` varchar(4) DEFAULT NULL,
+  `reservecheck` varchar(4) DEFAULT '0',
   PRIMARY KEY (`bookCode`),
   KEY `reservecheck_idx` (`reservecheck`),
   KEY `borrow_FK_idx` (`borrowcheck`)
@@ -75,7 +75,7 @@ CREATE TABLE `book` (
 
 LOCK TABLES `book` WRITE;
 /*!40000 ALTER TABLE `book` DISABLE KEYS */;
-INSERT INTO `book` VALUES ('BS002','그 후에','소설','밝은세상','0',9,'기욤 뮈','http://image.yes24.com/goods/3853238/95x0',NULL,NULL,NULL,NULL),('BS021','한글 만다라 1~4권 세트','국내도서','루덴스','0',0,'루덴스.마시멜로','http://bimage.interpark.com/goods_image/7/9/3/6/219207936h.jpg',NULL,NULL,NULL,NULL),('BS032','한글 만다라 2 - 자음학습 2','국내도서','루덴스','1',0,'루덴스.마시멜로','http://bimage.interpark.com/goods_image/0/2/9/7/218450297h.jpg',NULL,NULL,NULL,NULL),('CS001',' SAS 데이터분석','data','21세기사','1',0,'김충련','http://image.yes24.com/goods/5947649/95x0',NULL,NULL,NULL,NULL),('CS002',' R까기','데이터베이스','느린생각','1',6,'서진수','http://image.yes24.com/goods/13434081/95x0',NULL,NULL,NULL,NULL),('CS005','Java의 정석','JAVA','도우출판','1',12,'남궁성','http://image.yes24.com/goods/3688909/95x0',NULL,NULL,NULL,NULL),('CS006','JSP 2.2 웹 프로그래밍','JSP','가메출판사','0',0,'최범균','http://image.yes24.com/goods/8348263/95x0',NULL,NULL,NULL,NULL),('CS007',' JSPStudy의JSP 웹프로그래밍','JSP','앤써북','0',0,'정동진,김준형,정영석','http://image.yes24.com/goods/12049776/95x0',NULL,NULL,NULL,NULL),('CS008','뇌를 자극하는 JSP & Servlet ','JSP','한빛미디어','1',0,'김윤명','http://image.yes24.com/goods/4468035/95x0',NULL,NULL,NULL,NULL),('CS009','유럽의 붓다, 니체','국내도서','열린책들','0',0,'야니스 콩스탕티니데스,다미앙 막도날드','http://bimage.interpark.com/goods_image/7/8/0/4/210437804h.jpg',NULL,NULL,NULL,NULL),('CS010','한글로의 여행','국내도서','뜨인돌','0',0,'이바라기 노리코','http://bimage.interpark.com/goods_image/3/8/1/1/206623811h.jpg',NULL,NULL,NULL,NULL);
+INSERT INTO `book` VALUES ('BS002','그 후에','소설','밝은세상','1',9,'기욤 뮈','http://image.yes24.com/goods/3853238/95x0',NULL,NULL,NULL,NULL),('BS021','한글 만다라 1~4권 세트','국내도서','루덴스','0',0,'루덴스.마시멜로','http://bimage.interpark.com/goods_image/7/9/3/6/219207936h.jpg',NULL,NULL,NULL,''),('BS032','한글 만다라 2 - 자음학습 2','국내도서','루덴스','1',0,'루덴스.마시멜로','http://bimage.interpark.com/goods_image/0/2/9/7/218450297h.jpg',NULL,NULL,NULL,'1'),('CS001',' SAS 데이터분석','data','21세기사','4',0,'김충련','http://image.yes24.com/goods/5947649/95x0',NULL,NULL,NULL,'0'),('CS002',' R까기','데이터베이스','느린생각','0',6,'서진수','http://image.yes24.com/goods/13434081/95x0',NULL,NULL,NULL,'0'),('CS005','Java의 정석','JAVA','도우출판','0',12,'남궁성','http://image.yes24.com/goods/3688909/95x0',NULL,NULL,NULL,'1'),('CS006','JSP 2.2 웹 프로그래밍','JSP','가메출판사','1',0,'최범균','http://image.yes24.com/goods/8348263/95x0',NULL,NULL,NULL,'0'),('CS007',' JSPStudy의JSP 웹프로그래밍','JSP','앤써북','2',0,'정동진,김준형,정영석','http://image.yes24.com/goods/12049776/95x0',NULL,NULL,NULL,'0'),('CS008','뇌를 자극하는 JSP & Servlet ','JSP','한빛미디어','0',0,'김윤명','http://image.yes24.com/goods/4468035/95x0',NULL,NULL,NULL,'0'),('CS009','유럽의 붓다, 니체','국내도서','열린책들','0',0,'야니스 콩스탕티니데스,다미앙 막도날드','http://bimage.interpark.com/goods_image/7/8/0/4/210437804h.jpg',NULL,NULL,NULL,'0'),('CS010','한글로의 여행','국내도서','뜨인돌','1',0,'이바라기 노리코','http://bimage.interpark.com/goods_image/3/8/1/1/206623811h.jpg',NULL,NULL,NULL,'0');
 /*!40000 ALTER TABLE `book` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -107,7 +107,7 @@ CREATE TABLE `borrow` (
 
 LOCK TABLES `borrow` WRITE;
 /*!40000 ALTER TABLE `borrow` DISABLE KEYS */;
-INSERT INTO `borrow` VALUES ('CS001','2015-04-08','2015-04-28','0','k1',NULL),('CS002','2015-04-08','2015-04-28','0','k1',NULL),('CS001','2015-04-08','2015-04-28','0','k1',NULL),('BS021','2015-04-08','2015-04-15','0','k1',NULL),('BS002','2015-04-08','2015-04-28','0','k1',NULL),('CS009','2015-04-10','2015-04-28','3','k1234',NULL),('BS002','2015-04-09','2015-04-29','0','k1',NULL),('BS021','2015-04-10','2015-04-15','3','k1234',NULL),('CS002','2015-04-10','2015-04-30','3','k1234',NULL),('CS006','2015-04-13','2015-05-03','3','k1234',NULL),('BS021','2015-04-10','2015-05-03','2','k1',NULL),('BS032','2015-04-10','2015-04-30','0','k1234',NULL),('CS002','2015-04-10','2015-04-30','0','k1234',NULL),('CS005','2015-04-10','2015-04-30','0','k1234',NULL),('CS008','2015-04-10','2015-04-30','1','k1234',NULL);
+INSERT INTO `borrow` VALUES ('CS009','2015-04-10','2015-04-28','3','k1234',NULL),('CS007','2015-04-14','2015-05-05','2','k1234',NULL),('CS010','2015-04-15','2015-05-05','1','k1234',NULL);
 /*!40000 ALTER TABLE `borrow` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -172,7 +172,7 @@ CREATE TABLE `member` (
 
 LOCK TABLES `member` WRITE;
 /*!40000 ALTER TABLE `member` DISABLE KEYS */;
-INSERT INTO `member` VALUES ('k1','1234','민상훈','hihi@naver.com','인천시 서구','01067766160','0325646160',0,'1',2,0,NULL,NULL),('k1234','1234','123','','','','',0,'0',NULL,NULL,NULL,NULL),('k2','2','이빨','k2@naver.com','인천시남구','011','032',0,'0',2,0,NULL,NULL),('k3','3','김치','k3@naver.com','인천시부평구','010','032',0,'0',4,7,NULL,NULL),('k4','4','홍길동','k4@naver.com','인천시남구','010','032',0,'0',4,4,NULL,NULL),('k5','5','하하','k5@naver.com','인천시남동구','010','032',0,'0',6,6,NULL,NULL),('kim91','1234','김상현','kkk91@daum.net','원인재역','018','034',3,'0',10,0,NULL,NULL),('kk11','1234','깡냉','k22@daum.net','인천광역시남동구','042','032',0,'0',NULL,NULL,NULL,NULL),('ksh901016','1234','강성현','ksh901016@naver.com','인천시남동구','0105','032',5,'0',55,0,NULL,NULL),('lee','1234','이창신','lcs@naer.com','인천시부평구','010','032',4,'0',20,0,NULL,NULL),('root','1','root','root@root.com','하늘','010','032',NULL,'1',NULL,NULL,NULL,NULL),('seohan1','1234','서한','민상훈','서울','','',0,'0',NULL,NULL,NULL,NULL);
+INSERT INTO `member` VALUES ('k1','1234','민상훈','hihi@naver.com','인천시 서구','01067766160','0325646160',0,'1',5,0,NULL,NULL),('k1234','1234','123','tnvjakffkr@hotmail.com','','01067766160','0325646160',0,'0',NULL,NULL,NULL,NULL),('k2','2','이빨','k2@naver.com','인천시남구','011','032',0,'0',2,0,NULL,NULL),('k3','3','김치','k3@naver.com','인천시부평구','010','032',0,'0',4,7,NULL,NULL),('k4','4','홍길동','k4@naver.com','인천시남구','010','032',0,'0',4,4,NULL,NULL),('k5','5','하하','k5@naver.com','인천시남동구','010','032',0,'0',6,6,NULL,NULL),('kim91','1234','김상현','kkk91@daum.net','원인재역','018','034',3,'0',10,0,NULL,NULL),('kk11','1234','깡냉','k22@daum.net','인천광역시남동구','042','032',0,'0',NULL,NULL,NULL,NULL),('ksh901016','1234','강성현','ksh901016@naver.com','인천시남동구','0105','032',5,'0',55,0,NULL,NULL),('lee','1234','이창신','lcs@naer.com','인천시부평구','010','032',4,'0',20,0,NULL,NULL),('root','1','root','root@root.com','하늘','010','032',NULL,'1',NULL,NULL,NULL,NULL),('seohan1','1234','서한','민상훈','서울','','',0,'0',NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `member` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -184,13 +184,11 @@ DROP TABLE IF EXISTS `notice`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `notice` (
-  `noticenum` int(11) NOT NULL AUTO_INCREMENT,
-  `content` varchar(100) DEFAULT NULL,
-  `noticedate` date DEFAULT NULL,
-  `priority` int(11) DEFAULT NULL,
-  `noticecol` varchar(45) DEFAULT '1',
-  PRIMARY KEY (`noticenum`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+  `boardnum` int(20) NOT NULL AUTO_INCREMENT,
+  `content` varchar(200) DEFAULT NULL,
+  `registerdate` date DEFAULT NULL,
+  PRIMARY KEY (`boardnum`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -199,7 +197,7 @@ CREATE TABLE `notice` (
 
 LOCK TABLES `notice` WRITE;
 /*!40000 ALTER TABLE `notice` DISABLE KEYS */;
-INSERT INTO `notice` VALUES (1,'Love is merely madness.-윌리엄셰익스피어-',NULL,NULL,'1'),(2,'Hate the sin, love the sinner.-마하트마 간디-',NULL,NULL,'1'),(3,'If you would be loved, love and be lovable.-벤자민 프랭클린-',NULL,NULL,'1'),(4,'We can only learn to love by loving.-아이리스 머독-',NULL,NULL,'1'),(5,'To love is to receive a glimpse of heaven.-카렌선드-',NULL,NULL,'1'),(6,'Well done is better than well said.-벤자민프랭클린-',NULL,NULL,'1'),(7,'All Bibles are man-made.-토마스A.에디슨-',NULL,NULL,'1'),(8,'Much learning does not teach understanding.-헤라클레이토스-',NULL,NULL,'1'),(9,'Seek not every quality in one individual.-공자-',NULL,NULL,'1'),(10,'Success is never final.-윈스터처칠-',NULL,NULL,'1');
+INSERT INTO `notice` VALUES (7,'시간순서 체크','2015-04-15'),(8,'시간순서체크11','2015-04-15'),(9,'ㅎㅇㅎㅇ','2015-03-01'),(10,'ㅇㅇ','2015-02-10'),(11,'ㅋㅋㅋ','2015-01-06'),(12,'ㅎㅎㅎ','2015-05-06');
 /*!40000 ALTER TABLE `notice` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -294,7 +292,7 @@ CREATE TABLE `reservation` (
 
 LOCK TABLES `reservation` WRITE;
 /*!40000 ALTER TABLE `reservation` DISABLE KEYS */;
-INSERT INTO `reservation` VALUES ('k1','BS021','2015-04-17','1'),('k1','BS032','2015-04-20','1'),('k1','CS005','2015-04-20','1');
+INSERT INTO `reservation` VALUES ('k1','BS021','2015-04-17','1'),('k1','BS032','2015-04-20','1'),('k1','CS005','2015-04-20','1'),('k1','BS002','2015-04-21','1');
 /*!40000 ALTER TABLE `reservation` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -307,4 +305,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-04-13 17:25:30
+-- Dump completed on 2015-04-15 16:10:37

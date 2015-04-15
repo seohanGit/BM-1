@@ -45,6 +45,7 @@ $('#btn_find').click(function() {
 		return false;
 	}
 })
+
 $("#requestList").click(function() {
 	location.href = "/requestList"
 })
@@ -72,6 +73,10 @@ $("#noticeList").click(function() {
 $("#borrowList").click(function() {
 	location.href = "/borrowList"
 })
+$("#bookList").click(function() {
+	location.href = "/bookList"
+})
+
 $('#btn_bookList').click(function() {
 	$.ajax({
 		type : "GET", // GET or POST

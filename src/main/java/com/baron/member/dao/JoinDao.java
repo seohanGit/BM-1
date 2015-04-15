@@ -22,8 +22,6 @@ public interface JoinDao {
 
 	public List<MemberModel> selectBest();
 
-	public List<ContentModel> selectContent();
-
 	public int selectMaxGrade();
 
 	public List<BookModel> selectBestBook();

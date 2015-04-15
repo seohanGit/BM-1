@@ -26,67 +26,55 @@ body {
 <body>
 	<jsp:include page="nav.jsp" />
 	<div class="container">
-		<hr>
-		<div class="row panel panel-default">
-			<div class="btn-group panel-heading" role="group" aria-label="..."
-				style="width: 100%;">
-				<button type="button" class="btn btn-default" id="requestList">구매요청
-				</button>
-				<button type="button" class="btn btn-default" id="borrowListAll">대여요청</button>
-				<button type="button" class="btn btn-default" id="rentListAll">대여현황</button>
-				<button type="button" class="btn btn-default"
-					id="reservationListAll">예약현황</button>
-				<button type="button" class="btn btn-default" id="recordListAll">대여기록</button>
-				<button type="button" class="btn btn-default" id="noticeList">공지사항</button>
-			</div>
-			<div id="searchResultArea">
-				<hr>
-				<h2>대여 기록</h2>
-				<hr>
-				기록 검색
-				<table class="table table-striped table-bordered">
-					<thead>
-						<tr class="hidden-xs title">
+		<jsp:include page="menu.jsp" />
+		<div class="row" id="searchResultArea">
+			<hr>
+			<h2>대여 기록</h2>
+			<hr>
+			기록 검색
+			<table class="table table-striped table-bordered">
+				<thead>
+					<tr class="hidden-xs title">
 
-							<td>도서명</td>
-							<td>대여일자</td>
-							<td>반납일자</td>
-							<td>카테고리</td>
-							<td>대출자</td>
-							<td>기록삭제</td>
+						<td>도서명</td>
+						<td>대여일자</td>
+						<td>반납일자</td>
+						<td>카테고리</td>
+						<td>대출자</td>
+						<td>기록삭제</td>
+					</tr>
+				</thead>
+
+
+				<c:forEach items="${bookList}" var="book" varStatus="status">
+					<tbody>
+
+						<tr>
+
+							<td width="30%" align="left">${book.bookname }</td>
+							<td width="14%" align="left">${book.borrowdate }</td>
+							<td width="14%" align="left">${book.returndate }</td>
+							<td width="15%">${book.genre}</td>
+							<td width="13%">${book.id}</td>
+							<td><button class="btn btn-default" type="button"
+									id="extendbook"
+									onClick="location.href='/extendBorrowBook?bookCode=${book.bookCode}'">알림</button></td>
 						</tr>
-					</thead>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
 
+					</tbody>
 
-					<c:forEach items="${bookList}" var="book" varStatus="status">
-						<tbody>
-
-							<tr>
-
-								<td width="30%" align="left">${book.bookname }</td>
-								<td width="14%" align="left">${book.borrowdate }</td>
-								<td width="14%" align="left">${book.returndate }</td>
-								<td width="15%">${book.genre}</td>
-								<td width="13%">${book.id}</td>
-								<td><button class="btn btn-default" type="button"
-										id="extendbook"
-										onClick="location.href='/extendBorrowBook?bookCode=${book.bookCode}'">알림</button></td>
-							</tr>
-							<tr>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
-
-						</tbody>
-
-					</c:forEach>
-				</table>
-			</div>
+				</c:forEach>
+			</table>
 		</div>
+	</div>
 	</div>
 	<script src="/resources/js/jquery/jquery.js"></script>
 	<script src="/resources/js/bootstrap.min.js"></script>

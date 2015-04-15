@@ -104,6 +104,12 @@
 		registerdate DESC;
 	</select>
 
+	<insert id="insertNotice" parameterType="BoardModel">
+		INSERT INTO notice
+		(content, registerdate)
+		VALUES
+		(#{content}, DATE_FORMAT(NOW(), "%Y-%m-%d"))
+	</insert>
 	<delete id="deleteNotice" parameterType="String">
 		DELETE FROM notice
 		WHERE
@@ -180,7 +186,8 @@
 
 	<update id="deleteRequest" parameterType="BookModel">
 		UPDATE request
-		SET bookCode='0'
+		SET
+		bookCode='0'
 		WHERE bookCode=#{bookCode}
 	</update>
 
@@ -189,6 +196,8 @@
 		FROM
 		request AS A,
 		member AS B WHERE A.id=B.id
+		ORDER BY
+		A.requestdate DESC;
 	</select>
 
 
@@ -196,15 +205,20 @@
 	<!-- 대여관련 쿼리 -->
 	<select id="borrowListAll" resultType="BookModel">
 		SELECT * FROM book AS A,
-		borrow AS B WHERE B.borrowcheck=1 AND A.bookCode=B.bookCode;
+		borrow AS B 
+		WHERE B.borrowcheck=1 AND A.bookCode=B.bookCode
+		ORDER BY
+		B.borrowdate DESC;
 	</select>
 
 	<select id="borrowList" resultType="BookModel" parameterType="String">
 		SELECT *
 		FROM book AS A, borrow AS B
 		WHERE B.id = #{id} AND
-		B.borrowcheck='1' OR B.borrowcheck='2' AND
-		A.bookCode=B.bookCode;
+		(B.borrowcheck='1' OR B.borrowcheck='2') AND
+		A.bookCode=B.bookCode
+		ORDER BY
+		B.borrowdate DESC;
 	</select>
 
 	<insert id="borrowBook1" parameterType="BookModel">
@@ -229,8 +243,7 @@
 		borrow B
 		ON A.borrowcheck = B.borrowcheck
 		SET
-		A.borrowcheck='4',
-		B.borrowcheck='4'
+		A.borrowcheck='4'
 		WHERE
 		A.bookCode=#{bookCode} AND
 		B.bookCode=#{bookCode}
@@ -302,6 +315,8 @@
 		SELECT * FROM book AS A, borrow AS B
 		WHERE <![CDATA[B.returndate > NOW()]]>
 		AND A.bookCode=B.bookCode AND B.borrowcheck='2'
+		ORDER BY
+		B.borrowdate DESC;
 	</select>
 
 	<!-- <delete id="deleteRecord" parameterType="String"> DELETE ON borrow 
@@ -310,12 +325,16 @@
 		SELECT * FROM book AS A, borrow AS B
 		WHERE <![CDATA[B.borrowdate < NOW()]]>
 		AND B.id=#{id} AND A.bookCode=B.bookCode AND B.borrowcheck='3'
+		ORDER BY
+		B.borrowdate DESC;
 	</select>
 
 	<select id="recordListAll" resultType="BookModel">
 		SELECT * FROM book AS A, borrow AS B
 		WHERE <![CDATA[B.borrowdate < NOW()]]>
 		AND A.bookCode=B.bookCode AND B.borrowcheck='3'
+		ORDER BY
+		B.borrowdate DESC;
 	</select>
 
 
@@ -348,6 +367,8 @@
 		WHERE B.bookCode=#{bookCode}
 		AND
 		B.id=#{id}
+		ORDER BY
+		B.reservedate DESC;
 	</select>
 
 	<select id="reservationListAll" resultType="BookModel">
@@ -356,6 +377,8 @@
 		A, reservation AS B
 		WHERE A.bookCode=B.bookCode AND
 		B.reservecheck='1'
+		ORDER BY
+		B.reservedate DESC;
 	</select>
 
 	<delete id="deleteReservation" parameterType="BookModel">
@@ -367,9 +390,5 @@
 
 	<!-- 기타 쿼리 -->
 
-	<select id="selectContent" resultType="ContentModel">
-		SELECT *
-		FROM notice
-	</select>
-
+	
 </mapper>

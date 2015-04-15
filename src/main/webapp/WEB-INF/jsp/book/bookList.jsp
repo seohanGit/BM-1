@@ -1,68 +1,110 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>대여 요청 목록</title>
+<link href="/resources/css/bootstrap.min.css" rel="stylesheet">
+<link href="/resources/css/signin.css" rel="stylesheet">
+<link href="/resources/css/common.css" rel="stylesheet">
+<script src="/resources/js/jquery/jquery.js"></script>
+<script src="/resources/js/bootstrap.min.js"></script>
+<style type="text/css">
+body {
+	padding-top: 70px;
+}
+</style>
+<script>
+	function del() {
+		alert("승인되었습니다.");
+	}
+</script>
 
 
-<table class="table table-striped ">
-	<thead>
-		<tr>
-			<td width="12%">표지</td>
-			<td width="15%">도서명</td>
-			<td width="13%">저자</td>
-			<td width="10%">장르</td>
+</head>
 
-			<td width="16%">대여상태</td>
-			<td width="60px"></td>
-		</tr>
-	</thead>
-	<%-- 
+<body>
+	<jsp:include page="../nav.jsp" />
+
+	<div class="container">
+		<jsp:include page="../menu.jsp" />
+		<div class="row" id="searchResultArea">
+			<hr>
+			<h2>도서목록</h2>
+			<hr>
+
+			<table class="table table-striped table-bordered ">
+				<thead>
+					<tr>
+						<td id="tb-img">표지</td>
+						<td id="tb-title">도서명</td>
+						<td id="tb-author">저자</td>
+						<td id="tb-genre">장르</td>
+
+						<td id="tb-status">대여상태</td>
+						<td id="tb-empty"></td>
+					</tr>
+				</thead>
+				<%-- 
 						
  --%>
-	<c:forEach items="${bookList}" var="book" varStatus="loop">
-		<tbody>
+				<c:forEach items="${bookList}" var="book" varStatus="loop">
+					<tbody>
 
 
-			<tr>
-				<td rowspan="2" style="max-width: 80%" align="left"><img
-					src="${book.imageurl}"></td>
-			</tr>
-			<tr>
-				<td width="30%" align="left">${book.bookname }</td>
-				<td width="20" align="left">${book.writer }</td>
-				<td width="15%" align="left">${book.genre}</td>
-				<td width="15%" align="left"><c:choose>
-						<c:when test="${book.borrowcheck=='0'}">
+						<tr>
+							<td rowspan="3" style="width: 50px" align="left"><img
+								style="width: 50px" src="${book.imageurl}"></td>
+						</tr>
+						<tr>
+							<td align="left">${book.bookname }</td>
+							<td align="left">${book.writer }</td>
+							<td align="left">${book.genre}</td>
+							<td align="left"><c:choose>
+									<c:when test="${book.borrowcheck=='0'}">
 			대출가능</c:when>
 
-						<c:when test="${book.borrowcheck=='1'}">
+									<c:when test="${book.borrowcheck=='1'}">
 			대여요청중</c:when>
-						<c:when test="${book.borrowcheck=='2'}">
+									<c:when test="${book.borrowcheck=='2'}">
 			대출중</c:when>
-						<c:when test="${book.borrowcheck=='4'}">
+									<c:when test="${book.borrowcheck=='4'}">
 			대출정지</c:when>
-						<c:when test="${book.borrowcheck=='5'}">
+									<c:when test="${book.borrowcheck=='5'}">
 			예약중</c:when>
-					</c:choose></td>
-				<td>
-					<button class="btn btn-default" type="button" id="borrowbook"
-						onClick="location.href='/borrowbook?bookCode=${book.bookCode}'">대출</button>
-					<button class="btn btn-default" type="button" id="returnbook"
-						onClick="location.href='/returnbook?bookCode=${book.bookCode}'">반납</button>
-					<button class="btn btn-default" type="button" id="reservebook"
-						onClick="location.href='/reservation?bookCode=${book.bookCode}'">예약</button>
+								</c:choose></td>
+							<td>
+								<button class="btn btn-default" type="button" id="borrowbook"
+									onClick="location.href='/borrowbook?bookCode=${book.bookCode}'">대출</button>
+								<button class="btn btn-default" type="button" id="returnbook"
+									onClick="location.href='/returnbook?bookCode=${book.bookCode}'">반납</button>
+								<button class="btn btn-default" type="button" id="reservebook"
+									onClick="location.href='/reservation?bookCode=${book.bookCode}'">예약</button>
 
-				</td>
-			</tr>
-			<tr>
-				<td width="20%" align="left">${book.bookname }</td>
-				<td width="10%" align="left">${book.writer }</td>
-				<td width="10%" align="left">${book.genre}</td>
-				<td width="10%" align="left"></td>
-			</tr>
-		</tbody>
-	</c:forEach>
-</table>
-<script src="/resources/js/common.js"></script>
-<script>
-	
-</script>
+							</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							
+						</tr>
+					</tbody>
+				</c:forEach>
+			</table>
+		</div>
+	</div>
+	<script src="/resources/js/common.js"></script>
+	<script>
+		
+	</script>
+</body>
+</html>

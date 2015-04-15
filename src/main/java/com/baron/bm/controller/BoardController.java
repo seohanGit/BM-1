@@ -59,12 +59,22 @@ public class BoardController {
 	@RequestMapping("/noticeList")
 	public String noticeList(Model model) {
 		List<BoardModel> noticeList = boardService.noticeList();
+
 		model.addAttribute("noticeList", noticeList);
-		System.out.println(noticeList.get(0).getContent());
-		System.out.println(noticeList.get(1).getBoardnum());
-		System.out.println(noticeList.get(2).getRegisterdate());
+
 		return "board/noticeList";
 
+	}
+
+	@RequestMapping("/writeNotice")
+	public String writeNotice() {
+		return "board/insertNotice";
+	}
+
+	@RequestMapping("/insertNotice")
+	public String insertNotice(BoardModel boardmodel) {
+		boardService.insertNotice(boardmodel);
+		return "redirect:noticeList";
 	}
 
 	@RequestMapping("/deleteNotice")
@@ -72,7 +82,7 @@ public class BoardController {
 		boardService.deleteNotice(boardnum);
 		return "redirect:noticeList";
 	}
-	
+
 	@RequestMapping("/modifyNotice")
 	public String modifyNotice(BoardModel content) {
 		boardService.modifyNotice(content);

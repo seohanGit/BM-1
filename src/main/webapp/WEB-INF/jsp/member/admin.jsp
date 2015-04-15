@@ -21,41 +21,31 @@
 		<div class="row">
 			<!-- Blog Entries Column -->
 			<div class="col-md-8">
-				<h1 class="page-header">
-					관리자 페이지 <small>Admin</small>
-				</h1>
-				<div class="btn-group" role="group" aria-label="..."
-					style="width: 100%;">
-					<button type="button" class="btn btn-default" id="requestList">구매요청
-					</button>
-					<button type="button" class="btn btn-default" id="borrowListAll">대여요청</button>
-					<button type="button" class="btn btn-default" id="rentListAll">대여현황</button>
-					<button type="button" class="btn btn-default"
-						id="reservationListAll">예약현황</button>
-					<button type="button" class="btn btn-default" id="recordListAll">대여기록</button>
-					<button type="button" class="btn btn-default" id="noticeList">공지사항</button>
-				</div>
+
+				<jsp:include page="../menu.jsp" />
+
 				<!-- First Blog Post -->
 
 				<hr>
 
-				<div class="input-group">
-					<div style="width: 100%">
-						<form action="/findBook" method="get">
+				<div class="input-group" style="width: 80%">
+					<form action="/findBook" method="get">
+						<div style="width: 100%">
+
 							<span class="input-group-btn"> <input type="text"
 								class="form-control" id="query" name="keyword"
-								placeholder="원하는 책이 없다면 인터넷에서 주문하세요 !"></span>
-					</div>
+								style="width: 52%" placeholder="원하는 책이 없다면 인터넷에서 주문하세요 !">
 
-					<button class="btn btn-default" type="submit" id="btn_find"
-						style="width: 40%">
-						<span class="glyphicon glyphicon-search"></span>인터파크 검색
-					</button>
+
+								<button class="btn btn-default" type="submit" id="btn_find"
+									style="width: 30%">
+									<span class="glyphicon glyphicon-search"></span>인터파크 검색
+								</button>
+
+								<button type="button" class="btn btn-default" id="insertBook"
+									style="width: 18%">도서추가</button></span>
+						</div>
 					</form>
-					<button type="button" class="btn btn-default" id="insertBook">도서추가</button>
-					<button class="btn btn-default" type="button" id="btn_bookList">도서목록</button>
-
-
 				</div>
 
 				<hr>
@@ -183,6 +173,6 @@
 	<!-- Bootstrap Core JavaScript -->
 	<script src="/resources/js/bootstrap.min.js"></script>
 	<script src="/resources/js/common.js"></script>
-	
+
 </body>
 </html>

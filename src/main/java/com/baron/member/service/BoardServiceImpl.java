@@ -9,19 +9,19 @@ import com.baron.member.dao.BoardDao;
 import com.baron.member.model.BoardModel;
 
 @Service
-//입력을 받는 컨트롤러 클래스와 데이터베이스를 처리하는 다오 클래스 사이에 비즈니스 로직이나 트랜잭션을 처리하는 클래스
-public class BoardServiceImpl implements BoardService{
+// 입력을 받는 컨트롤러 클래스와 데이터베이스를 처리하는 다오 클래스 사이에 비즈니스 로직이나 트랜잭션을 처리하는 클래스
+public class BoardServiceImpl implements BoardService {
 
 	@Autowired
 	private BoardDao boardDao;
-	
+
 	@Override
-	public void insertBoard(BoardModel model){
+	public void insertBoard(BoardModel model) {
 		boardDao.insertBoard(model);
 	}
-	
+
 	@Override
-	public List<BoardModel> selectBoard(){
+	public List<BoardModel> selectBoard() {
 		return boardDao.selectBoard();
 	}
 
@@ -40,6 +40,7 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public List<BoardModel> noticeList() {
 		// TODO Auto-generated method stub
+
 		return boardDao.noticeList();
 	}
 
@@ -50,8 +51,14 @@ public class BoardServiceImpl implements BoardService{
 
 	@Override
 	public void modifyNotice(BoardModel content) {
-	boardDao.modifyNotice(content);
-		
+		boardDao.modifyNotice(content);
+
+	}
+
+	@Override
+	public void insertNotice(BoardModel boardmodel) {
+		boardDao.insertNotice(boardmodel);
+
 	}
 
 }

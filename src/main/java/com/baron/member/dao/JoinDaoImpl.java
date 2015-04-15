@@ -66,12 +66,6 @@ public class JoinDaoImpl implements JoinDao {
 	}
 
 	@Override
-	public List<ContentModel> selectContent() {
-		// TODO Auto-generated method stub
-		return session.selectList(NAMESPACE+"selectContent");
-	}
-
-	@Override
 	public int selectMaxGrade() {
 		// TODO Auto-generated method stub
 		return (int) session.selectOne(NAMESPACE+"selectMaxGrade");

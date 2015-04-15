@@ -55,4 +55,10 @@ public class BoardDaoImpl implements BoardDao {
 		session.update(NAMESPACE + "modifyNotice", content);
 		
 	}
+
+	@Override
+	public void insertNotice(BoardModel boardmodel) {
+		session.insert(NAMESPACE + "insertNotice", boardmodel);
+		
+	}
 }

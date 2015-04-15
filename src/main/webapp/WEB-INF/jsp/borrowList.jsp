@@ -55,30 +55,41 @@ body {
 					<hr>
 
 					<table class="table table-striped table-bordered ">
-						<thead>
-							<tr class="hidden-xs title">
-								<td width="10%">표지</td>
-								<td width="15%">도서명</td>
-								<td width="13%">저자</td>
-								<td width="10%">장르</td>
+						<c:choose>
+							<c:when test="${empty bookList}">
+								<h3>대여한 도서가 없습니다.</h3>
+							</c:when>
+							<c:otherwise>
+								<thead>
+									<tr class="hidden-xs title">
+										<td id="tb-img">표지</td>
+										<td id="tb-title">도서명</td>
+										<td id="tb-author">저자</td>
+										<td id="tb-genre">장르</td>
 
-								<td width="16%">대여일자</td>
-								<td width="18%">상태</td>
-								<td width="13%"></td>
-							</tr>
-						</thead>
+										<td id="tb-date">대여일자</td>
+										<td id="tb-date">반납일자</td>
+										<td id="tb-status">상태</td>
+										<td>비고</td>
+									</tr>
+								</thead>
+							</c:otherwise>
+						</c:choose>
 						<c:forEach items="${bookList}" var="book" varStatus="loop">
+
 							<tbody>
 								<tr>
-									<td rowspan="4"><img src="${book.imageurl}"></td>
+									<td style="width: 50px" align="left"><img
+										style="width: 50px" src="${book.imageurl}"></td>
 								</tr>
 								<tr>
-									<td width="20%" align="left">${book.bookname }</td>
-									<td width="10%" align="left">${book.writer }</td>
-									<td width="10%" align="left">${book.genre}</td>
+									<td align="left">${book.bookname }</td>
+									<td align="left">${book.writer }</td>
+									<td align="left">${book.genre}</td>
 
 
 									<td>${book.borrowdate}</td>
+									<td>${book.returndate}</td>
 									<c:choose>
 										<c:when test="${book.borrowcheck=='1'}">
 											<td>대여요청중</td>
@@ -90,17 +101,24 @@ body {
 										</c:when>
 										<c:when test="${book.borrowcheck=='2'}">
 											<td>대출중</td>
-											<td>
-												<button class="btn btn-default" type="button"
+											<td><button class="btn btn-default" type="button"
 													id="reservebook"
-													onClick="location.href='/cancleBorrowBook?bookCode=${book.bookCode}'">반납</button>
-											</td>
+													onClick="location.href='/extendBorrowBook?bookCode=${book.bookCode}'">연장</button></td>
 										</c:when>
 									</c:choose>
 
 								</tr>
+								<tr>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
 							</tbody>
 						</c:forEach>
+
 					</table>
 				</div>
 			</div>

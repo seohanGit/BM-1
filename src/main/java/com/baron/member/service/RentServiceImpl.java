@@ -48,10 +48,10 @@ public class RentServiceImpl implements RentService {
 	@Override
 	public String borrowCheck(BookModel bookmodel) {
 		BookModel checkbook = rentDao.selectBook(bookmodel.getBookCode());
-		String borrowCheck=checkbook.getBorrowcheck();
-				return borrowCheck;
-		}
-	
+		String borrowCheck = checkbook.getBorrowcheck();
+		return borrowCheck;
+	}
+
 	@Override
 	public void borrowBook(BookModel bookmodel) {
 
@@ -123,6 +123,7 @@ public class RentServiceImpl implements RentService {
 
 	@Override
 	public void extendBorrowBook(String bookCode) {
+
 		rentDao.extendBorrowBook(bookCode);
 	}
 
@@ -130,7 +131,6 @@ public class RentServiceImpl implements RentService {
 	public void cancleBorrowBook(BookModel bookmodel) {
 		rentDao.cancleBorrowBook(bookmodel.getBookCode());
 		rentDao.deleteBorrowBook(bookmodel);
-		
 
 	}
 
@@ -140,5 +140,4 @@ public class RentServiceImpl implements RentService {
 
 	}
 
-	
 }

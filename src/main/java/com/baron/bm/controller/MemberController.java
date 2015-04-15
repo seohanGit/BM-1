@@ -20,9 +20,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.baron.member.model.BoardModel;
 import com.baron.member.model.BookModel;
 import com.baron.member.model.ContentModel;
 import com.baron.member.model.MemberModel;
+import com.baron.member.service.BoardService;
 import com.baron.member.service.BookService;
 import com.baron.member.service.JoinService;
 
@@ -34,6 +36,9 @@ public class MemberController {
 
 	@Autowired
 	private BookService bookService;
+
+	@Autowired
+	private BoardService boardService;
 
 	@RequestMapping("/modify")
 	public String modifyidentity(String password, HttpServletRequest request,
@@ -175,7 +180,7 @@ public class MemberController {
 
 	@RequestMapping("/index")
 	public String index(Model model) throws Exception {
-		List<ContentModel> content = joinService.selectContent();
+		List<BoardModel> content = boardService.noticeList();
 		List<MemberModel> bestList = joinService.selectBest();
 		
 		List<BookModel> bestSeller = bookService.getBestseller("100");

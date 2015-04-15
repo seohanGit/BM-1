@@ -11,13 +11,13 @@
 			<table class="table table-striped ">
 				<thead>
 					<tr>
-						<td width="12%">표지</td>
-						<td width="15%">도서명</td>
-						<td width="13%">저자</td>
-						<td width="10%">장르</td>
+						<td id="tb-img">표지</td>
+						<td id="tb-title">도서명</td>
+						<td id="tb-author">저자</td>
+						<td id="tb-genre">장르</td>
 
-						<td width="16%">대여상태</td>
-						<td width="60px"></td>
+						<td id="tb-genre">대여상태</td>
+						<td></td>
 					</tr>
 				</thead>
 				<%-- 
@@ -28,14 +28,13 @@
 
 
 						<tr>
-							<td rowspan="2" style="max-width: 80%" align="left"><img
-								src="${book.imageurl}"></td>
+							<td rowspan="2" align="left"><img src="${book.imageurl}"></td>
 						</tr>
 						<tr>
-							<td width="20%" align="left">${book.bookname }</td>
-							<td width="10%" align="left">${book.writer }</td>
-							<td width="10%" align="left">${book.genre}</td>
-							<td width="10%" align="left"><c:choose>
+							<td align="left">${book.bookname }</td>
+							<td align="left">${book.writer }</td>
+							<td align="left">${book.genre}</td>
+							<td align="left"><c:choose>
 									<c:when test="${book.borrowcheck=='0'}">
 			대출가능</c:when>
 
@@ -56,6 +55,15 @@
 								<button class="btn btn-default" type="button" id="deletebook"
 									onClick="location.href='/deletebook?bookCode=${book.bookCode}'; del();">도서삭제</button>
 							</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
 					</tbody>
 				</c:forEach>
 			</table>

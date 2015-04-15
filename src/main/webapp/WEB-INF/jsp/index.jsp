@@ -26,10 +26,11 @@
 						공지사항 <small>민상훈책방</small>
 					</h1>
 					<!-- First Blog Post -->
-					<c:forEach items="${contentList}" var="con" varStatus="status">
-						<h4 id="notice">${con.content}</h4>
-
-					</c:forEach>
+					<ul class="list-group">
+						<c:forEach items="${contentList}" var="con" varStatus="status">
+							<li class="list-group-item"><h4>${con.content}</h4></li>
+						</c:forEach>
+					</ul>
 
 				</div>
 				<hr>
@@ -176,9 +177,9 @@
 		})
 
 		$document.ready(function() {
-			var date= "${con.registerdate}";
-			var newicon="<span class="label label-default">New</span></h3>";
-			if(date<now()){
+			var date = "${con.registerdate}";
+			var newicon = "<span class="label label-default">New</span></h3>";
+			if (date < now()) {
 				$("#notice").append(newicon);
 			}
 

@@ -88,15 +88,18 @@ public class RentController {
 		List<BookModel> bookList = rentservice.borrowList(id);
 
 		model.addAttribute("bookList", bookList);
-		System.out.println(bookList.get(0).getBorrowcheck());
 		return "borrowList";
 	}
 
 	@RequestMapping("/extendBorrowBook")
 	public String extendBorrowBook(String bookCode) {
-		rentservice.extendBorrowBook(bookCode);
 
-		return "redirect:rentListAll";
+		if (rentservice.selectReservation(bookCode).equals("0")) {
+			rentservice.extendBorrowBook(bookCode);
+			return "redirect:borrowList";
+		}else{
+			return "extendFail";
+		}
 	}
 
 	@RequestMapping("/cancleBorrowBook")
@@ -138,13 +141,13 @@ public class RentController {
 		return "rentList";
 	}
 
-	@RequestMapping("/returnBook")
+	@RequestMapping("/returnBookByAdmin")
 	public String returnBook(String bookCode, BookModel book) {
 
 		if (rentservice.borrowCheck(book).equals("2")) {
 			System.out.println(book.getBorrowcheck());
 			rentservice.returnBook(bookCode);
-			return "redirect:borrowList";
+			return "redirect:rentList";
 		} else {
 
 			return "returnfail";

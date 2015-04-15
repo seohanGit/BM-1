@@ -29,9 +29,11 @@ public class RequestController {
 
 	@RequestMapping("/requestList")
 	public String requestList(Model model) {
-		List<BookModel> BookList = new ArrayList<BookModel>();
-		BookList = requestservice.requestList();
-		model.addAttribute("bookList", BookList);
+		List<BookModel> bookList = new ArrayList<BookModel>();
+		bookList = requestservice.requestList();
+		model.addAttribute("bookList", bookList);
+
+		System.out.println(bookList.get(0).getRequestdate());
 		return "requestList";
 	}
 

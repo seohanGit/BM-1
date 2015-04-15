@@ -51,13 +51,14 @@ public class BookController {
 		for (Cookie cookie : request.getCookies()) {
 			if (cookie.getName().equals("bm_permission")) {
 				permission = cookie.getValue();
-				if (permission.equals("0")) {
-					return "book/bookSearch";
+				if (permission.equals("1")) {
+					return "book/bookSearchByAdmin";
+					
 				}
 			}
 		}
-
-		return "book/bookSearchByAdmin";
+		return "book/bookSearch";
+		
 	}
 
 	@RequestMapping("/bookList")
@@ -75,7 +76,7 @@ public class BookController {
 				}
 			}
 		}
-		return "book/bookSearchByAdmin";
+		return "book/bookList";
 	}
 
 	@RequestMapping("/findBook")

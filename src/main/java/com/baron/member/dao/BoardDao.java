@@ -19,4 +19,6 @@ public interface BoardDao {
 	public void deleteNotice(String boardnum);
 
 	public void modifyNotice(BoardModel content);
+
+	public void insertNotice(BoardModel boardmodel);
 }

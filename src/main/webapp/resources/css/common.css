@@ -22,6 +22,31 @@ footer {
 	vertical-align: middle;
 }
 
+table #td-title {
+	width: 25%
+}
+
+table #td-author {
+	width: 13%
+}
+
+table #td-img {
+	width: 7%;
+}
+
+table #td-genre {
+	width: 11%;
+}
+
+table #td-status {
+	width: 10%;
+	background-color: #aaa;
+}
+
+table #td-date{
+	width: 10%;
+}
+
 #btn_bookList {
 	width: 30%;
 }

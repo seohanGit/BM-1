@@ -3,7 +3,7 @@ HEAD /*!
  * Bootstrap v3.3.0 (http://getbootstrap.com)
  * Copyright 2011-2014 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
- */ /*! normalize.css v3.0.2 | MIT License | git.io/normalize */  
+ */ /*! normalize.css v3.0.2 | MIT License | git.io/normalize */     
 html {
 	font-family: sans-serif;
 	-webkit-text-size-adjust: 100%;
@@ -17,8 +17,6 @@ html {
 body {
 	margin: 0
 }
-
-
 
 article, aside, details, figcaption, figure, footer, header, hgroup,
 	main, menu, nav, section, summary {
@@ -35,10 +33,22 @@ audio
 
 
 
+
+
+
+
+
+
 :not
 
 
+
+
+
  
+
+
+
 
 
 (
@@ -47,7 +57,13 @@ controls
 ]
 
 
+
+
+
  
+
+
+
 
 
 ){
@@ -56,13 +72,31 @@ display
 
 
 
+
+
+
+
+
+
 :
+
+
+
 
 
  
 
 
+
+
+
 none
+
+
+
+
+
+
 
 
 
@@ -73,10 +107,22 @@ height
 
 
 
+
+
+
+
+
+
 :
 
 
+
+
+
  
+
+
+
 
 
 0
@@ -143,17 +189,35 @@ svg
 
 
 
+
+
+
+
+
+
 :not
 
 
+
+
+
  
+
+
+
 
 
 (
 :root
 
 
+
+
+
  
+
+
+
 
 
 ){
@@ -162,13 +226,31 @@ overflow
 
 
 
+
+
+
+
+
+
 :
+
+
+
 
 
  
 
 
+
+
+
 hidden
+
+
+
+
+
+
 
 
 
@@ -273,7 +355,8 @@ optgroup {
 
 table {
 	border-spacing: 5px;
-	border-collapse: collapse
+	border-collapse: collapse;
+	border-radius: 10px;
 }
 
 td, th {
@@ -2422,7 +2505,9 @@ th {
 .table {
 	width: 100%;
 	max-width: 100%;
-	margin-bottom: 20px
+	margin-bottom: 20px;
+	border-left: 1px solid #ccc;
+	border-right: 1px solid #ccc;
 }
 
 .table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td,
@@ -2460,13 +2545,17 @@ th {
 }
 
 .table-bordered {
-	border: 1px solid #ddd
+	border: 1px solid #ddd;
+	margin: 0 2px;
+	border-left: 1px solid #ccc;
+	border-right: 1px solid #ccc;
 }
 
 .table-bordered>thead>tr>th, .table-bordered>tbody>tr>th,
 	.table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td,
 	.table-bordered>tbody>tr>td, .table-bordered>tfoot>tr>td {
-	border: 1px solid #ddd
+	border: 1px solid #ddd;
+	border-radius: 15px;
 }
 
 .table-bordered>thead>tr>th, .table-bordered>thead>tr>td {
@@ -3664,38 +3753,74 @@ tbody.collapse.in {
 
 
 
+
+
+
+
+
+
 :not
 
 
+
+
+
  
+
+
+
 
 
 (
 :first-child
 
 
+
+
+
  
+
+
+
 
 
 )
 :not
 
 
+
+
+
  
+
+
+
 
 
 (
 :last-child
 
 
+
+
+
  
+
+
+
 
 
 )
 :not
 
 
+
+
+
  
+
+
+
 
 
 (
@@ -3703,7 +3828,13 @@ tbody.collapse.in {
 
 
 
+
+
+
 	
+
+
+
 
 
 ){
@@ -3712,10 +3843,22 @@ border-radius
 
 
 
+
+
+
+
+
+
 :
 
 
+
+
+
  
+
+
+
 
 
 0
@@ -3731,7 +3874,19 @@ border-radius
 
 
 
+
+
+
+
+
+
 :first-child
+
+
+
+
+
+
 
 
 
@@ -3739,28 +3894,52 @@ border-radius
 :not
 
 
+
+
+
  
+
+
+
 
 
 (
 :last-child
 
 
+
+
+
  
+
+
+
 
 
 )
 :not
 
 
+
+
+
  
+
+
+
 
 
 (
 .dropdown-toggle
 
 
+
+
+
  
+
+
+
 
 
 ){
@@ -3769,10 +3948,22 @@ border-top-right-radius
 
 
 
+
+
+
+
+
+
 :
 
 
+
+
+
  
+
+
+
 
 
 0;
@@ -3781,10 +3972,22 @@ border-bottom-right-radius
 
 
 
+
+
+
+
+
+
 :
 
 
+
+
+
  
+
+
+
 
 
 0
@@ -3796,7 +3999,19 @@ border-bottom-right-radius
 
 
 
+
+
+
+
+
+
 :last-child
+
+
+
+
+
+
 
 
 
@@ -3804,14 +4019,26 @@ border-bottom-right-radius
 :not
 
 
+
+
+
  
+
+
+
 
 
 (
 :first-child
 
 
+
+
+
  
+
+
+
 
 
 ),
@@ -3822,18 +4049,36 @@ border-bottom-right-radius
 
 
 
+
+
+
+
+
+
 :not
+
+
+
 
 
 
 	
 
 
+
+
+
 (
 :first-child
 
 
+
+
+
  
+
+
+
 
 
 ){
@@ -3842,10 +4087,22 @@ border-top-left-radius
 
 
 
+
+
+
+
+
+
 :
 
 
+
+
+
  
+
+
+
 
 
 0;
@@ -3854,10 +4111,22 @@ border-bottom-left-radius
 
 
 
+
+
+
+
+
+
 :
 
 
+
+
+
  
+
+
+
 
 
 0
@@ -3944,31 +4213,61 @@ border-bottom-left-radius
 
 
 
+
+
+
+
+
+
 :not
 
 
+
+
+
  
+
+
+
 
 
 (
 :first-child
 
 
+
+
+
  
+
+
+
 
 
 )
 :not
 
 
+
+
+
  
+
+
+
 
 
 (
 :last-child
 
 
+
+
+
  
+
+
+
 
 
 ){
@@ -3977,10 +4276,22 @@ border-radius
 
 
 
+
+
+
+
+
+
 :
 
 
+
+
+
  
+
+
+
 
 
 0
@@ -3992,7 +4303,19 @@ border-radius
 
 
 
+
+
+
+
+
+
 :first-child
+
+
+
+
+
+
 
 
 
@@ -4000,14 +4323,26 @@ border-radius
 :not
 
 
+
+
+
  
+
+
+
 
 
 (
 :last-child
 
 
+
+
+
  
+
+
+
 
 
 ){
@@ -4016,14 +4351,32 @@ border-top-right-radius
 
 
 
+
+
+
+
+
+
 :
+
+
+
 
 
  
 
 
+
+
+
 4
 px
+
+
+
+
+
+
 
 
 
@@ -4034,10 +4387,22 @@ border-bottom-right-radius
 
 
 
+
+
+
+
+
+
 :
 
 
+
+
+
  
+
+
+
 
 
 0;
@@ -4046,10 +4411,22 @@ border-bottom-left-radius
 
 
 
+
+
+
+
+
+
 :
 
 
+
+
+
  
+
+
+
 
 
 0
@@ -4061,7 +4438,19 @@ border-bottom-left-radius
 
 
 
+
+
+
+
+
+
 :last-child
+
+
+
+
+
+
 
 
 
@@ -4069,14 +4458,26 @@ border-bottom-left-radius
 :not
 
 
+
+
+
  
+
+
+
 
 
 (
 :first-child
 
 
+
+
+
  
+
+
+
 
 
 ){
@@ -4085,10 +4486,22 @@ border-top-left-radius
 
 
 
+
+
+
+
+
+
 :
 
 
+
+
+
  
+
+
+
 
 
 0;
@@ -4097,10 +4510,22 @@ border-top-right-radius
 
 
 
+
+
+
+
+
+
 :
 
 
+
+
+
  
+
+
+
 
 
 0;
@@ -4109,14 +4534,32 @@ border-bottom-left-radius
 
 
 
+
+
+
+
+
+
 :
+
+
+
 
 
  
 
 
+
+
+
 4
 px
+
+
+
+
+
+
 
 
 
@@ -4244,31 +4687,61 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 
 
 
+
+
+
+
+
+
 :not
 
 
+
+
+
  
+
+
+
 
 
 (
 :first-child
 
 
+
+
+
  
+
+
+
 
 
 )
 :not
 
 
+
+
+
  
+
+
+
 
 
 (
 :last-child
 
 
+
+
+
  
+
+
+
 
 
 ),
@@ -4277,38 +4750,74 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 
 
 
+
+
+
+
+
+
 :not
 
 
+
+
+
  
+
+
+
 
 
 (
 :first-child
 
 
+
+
+
  
+
+
+
 
 
 )
 :not
 
 
+
+
+
  
+
+
+
 
 
 (
 :last-child
 
 
+
+
+
  
+
+
+
 
 
 ),
 .input-group
 
 
+
+
+
  
+
+
+
 
 
 .form-control
@@ -4316,32 +4825,62 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 
 
 
+
+
+
+
+
+
 :not
+
+
+
 
 
 
 	
 
 
+
+
+
 (
 :first-child
 
 
+
+
+
  
+
+
+
 
 
 )
 :not
 
 
+
+
+
  
+
+
+
 
 
 (
 :last-child
 
 
+
+
+
  
+
+
+
 
 
 ){
@@ -4350,10 +4889,22 @@ border-radius
 
 
 
+
+
+
+
+
+
 :
 
 
+
+
+
  
+
+
+
 
 
 0
@@ -7498,35 +8049,83 @@ button.close {
 	audio
 	
 	
+	
+	
+	
+	
+	
+	
 	:not
 	
+	
+	
+	
 	 
+	
+	
+	
 	
 	(
 	[
 	controls
 	]
 	
+	
+	
+	
 	 
+	
+	
+	
 	
 	){
 	display
 	
 	
+	
+	
+	
+	
+	
+	
 	:
+	
+	
+	
 	
 	 
 	
+	
+	
+	
 	none
+	
+	
+	
+	
+	
+	
 	
 	
 	;
 	height
 	
 	
+	
+	
+	
+	
+	
+	
 	:
 	
+	
+	
+	
 	 
+	
+	
+	
 	
 	0
 }
@@ -7591,24 +8190,60 @@ img {
 svg
 
 
+
+
+
+
+
+
 :not
 
+
+
+
  
+
+
+
 
 (
 :root
 
+
+
+
  
+
+
+
 
 ){
 overflow
 
 
+
+
+
+
+
+
 :
+
+
+
 
  
 
+
+
+
 hidden
+
+
+
+
+
+
 
 
 
@@ -7771,13 +8406,17 @@ td, th {
 		border: 1px solid #000
 	}
 	.table {
-		border-collapse: collapse !important
+		border-collapse: collapse !important; border-top-left-radius : 8px;
+		border-top-right-radius: 8px;
+		border-top-left-radius: 8px;
 	}
 	.table td, .table th {
 		background-color: #fff !important
 	}
 	.table-bordered th, .table-bordered td {
-		border: 1px solid #ddd !important
+		border: 1px solid #ddd !important; border-top-left-radius : 8px;
+		border-top-right-radius: 8px;
+		border-top-left-radius: 8px;
 	}
 }
 
@@ -9860,7 +10499,9 @@ th {
 .table {
 	width: 100%;
 	max-width: 100%;
-	margin-bottom: 20px
+	margin-bottom: 20px; border-top-left-radius : 8px;
+	border-top-right-radius: 8px;
+	border-top-left-radius: 8px;
 }
 
 .table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td,
@@ -9888,7 +10529,9 @@ th {
 }
 
 .table .table {
-	background-color: #fff
+	background-color: #fff; border-top-left-radius : 8px;
+	border-top-right-radius: 8px;
+	border-top-left-radius: 8px;
 }
 
 .table-condensed>thead>tr>th, .table-condensed>tbody>tr>th,
@@ -9904,7 +10547,9 @@ th {
 .table-bordered>thead>tr>th, .table-bordered>tbody>tr>th,
 	.table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td,
 	.table-bordered>tbody>tr>td, .table-bordered>tfoot>tr>td {
-	border: 1px solid #ddd
+	border: 1px solid #ddd; border-top-left-radius : 8px;
+	border-top-right-radius: 8px;
+	border-top-left-radius: 8px;
 }
 
 .table-bordered>thead>tr>th, .table-bordered>thead>tr>td {
@@ -11104,43 +11749,97 @@ tbody.collapse.in {
 .btn
 
 
+
+
+
+
+
+
 :not
 
+
+
+
  
+
+
+
 
 (
 :first-child
 
+
+
+
  
+
+
+
 
 )
 :not
 
+
+
+
  
+
+
+
 
 (
 :last-child
 
+
+
+
  
+
+
+
 
 )
 :not
 
+
+
+
  
+
+
+
 
 (
 .dropdown-toggle
 
 
+
+
+
 	
+
+
+
 
 ){
 border-radius
 
 
+
+
+
+
+
+
 :
 
+
+
+
  
+
+
+
 
 0
 }
@@ -11153,43 +11852,103 @@ border-radius
 .btn
 
 
+
+
+
+
+
+
 :first-child
+
+
+
+
+
+
 
 
 :not
 
+
+
+
  
+
+
+
 
 (
 :last-child
 
+
+
+
  
+
+
+
 
 )
 :not
 
+
+
+
  
+
+
+
 
 (
 .dropdown-toggle
 
+
+
+
  
+
+
+
 
 ){
 border-top-right-radius
 
 
+
+
+
+
+
+
 :
 
+
+
+
  
+
+
+
 
 0;
 border-bottom-right-radius
 
 
+
+
+
+
+
+
 :
 
+
+
+
  
+
+
+
 
 0
 }
@@ -11198,17 +11957,41 @@ border-bottom-right-radius
 .btn
 
 
+
+
+
+
+
+
 :last-child
+
+
+
+
+
+
 
 
 :not
 
+
+
+
  
+
+
+
 
 (
 :first-child
 
+
+
+
  
+
+
+
 
 ),
 .btn-group
@@ -11216,31 +11999,73 @@ border-bottom-right-radius
 .dropdown-toggle
 
 
+
+
+
+
+
+
 :not
+
+
+
 
 
 	
 
+
+
+
 (
 :first-child
 
+
+
+
  
+
+
+
 
 ){
 border-top-left-radius
 
 
+
+
+
+
+
+
 :
 
+
+
+
  
+
+
+
 
 0;
 border-bottom-left-radius
 
 
+
+
+
+
+
+
 :
 
+
+
+
  
+
+
+
 
 0
 }
@@ -11324,32 +12149,74 @@ border-bottom-left-radius
 .btn
 
 
+
+
+
+
+
+
 :not
 
+
+
+
  
+
+
+
 
 (
 :first-child
 
+
+
+
  
+
+
+
 
 )
 :not
 
+
+
+
  
+
+
+
 
 (
 :last-child
 
+
+
+
  
+
+
+
 
 ){
 border-radius
 
 
+
+
+
+
+
+
 :
 
+
+
+
  
+
+
+
 
 0
 }
@@ -11358,45 +12225,111 @@ border-radius
 .btn
 
 
+
+
+
+
+
+
 :first-child
+
+
+
+
+
+
 
 
 :not
 
+
+
+
  
+
+
+
 
 (
 :last-child
 
+
+
+
  
+
+
+
 
 ){
 border-top-right-radius
 
 
+
+
+
+
+
+
 :
+
+
+
 
  
 
+
+
+
 4
 px
+
+
+
+
+
+
 
 
 ;
 border-bottom-right-radius
 
 
+
+
+
+
+
+
 :
 
+
+
+
  
+
+
+
 
 0;
 border-bottom-left-radius
 
 
+
+
+
+
+
+
 :
 
+
+
+
  
+
+
+
 
 0
 }
@@ -11405,44 +12338,110 @@ border-bottom-left-radius
 .btn
 
 
+
+
+
+
+
+
 :last-child
+
+
+
+
+
+
 
 
 :not
 
+
+
+
  
+
+
+
 
 (
 :first-child
 
+
+
+
  
+
+
+
 
 ){
 border-top-left-radius
 
 
+
+
+
+
+
+
 :
 
+
+
+
  
+
+
+
 
 0;
 border-top-right-radius
 
 
+
+
+
+
+
+
 :
 
+
+
+
  
+
+
+
 
 0;
 border-bottom-left-radius
 
 
+
+
+
+
+
+
 :
+
+
+
 
  
 
+
+
+
 4
 px
+
+
+
+
+
+
 
 
 
@@ -11566,83 +12565,191 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 .input-group-addon
 
 
+
+
+
+
+
+
 :not
 
+
+
+
  
+
+
+
 
 (
 :first-child
 
+
+
+
  
+
+
+
 
 )
 :not
 
+
+
+
  
+
+
+
 
 (
 :last-child
 
+
+
+
  
+
+
+
 
 ),
 .input-group-btn
 
 
+
+
+
+
+
+
 :not
 
+
+
+
  
+
+
+
 
 (
 :first-child
 
+
+
+
  
+
+
+
 
 )
 :not
 
+
+
+
  
+
+
+
 
 (
 :last-child
 
+
+
+
  
+
+
+
 
 ),
 .input-group
 
+
+
+
  
+
+
+
 
 .form-control
 
 
+
+
+
+
+
+
 :not
+
+
+
 
 
 	
 
+
+
+
 (
 :first-child
 
+
+
+
  
+
+
+
 
 )
 :not
 
+
+
+
  
+
+
+
 
 (
 :last-child
 
+
+
+
  
+
+
+
 
 ){
 border-radius
 
 
+
+
+
+
+
+
 :
 
+
+
+
  
+
+
+
 
 0
 }
@@ -14752,6 +15859,12 @@ button.close {
 	d6d996a04e3756f10010cd91de3dccfdc
 	
 	
+	
+	
+	
+
+
+
 
 
 }

@@ -43,11 +43,11 @@ body {
 				<thead>
 					<tr>
 						<td id="tb-img">표지</td>
-						<td id="tb-title">도서명</td>
+						<td id="tb-author">도서명</td>
 						<td id="tb-author">저자</td>
 						<td id="tb-genre">장르</td>
 
-						<td id="tb-status">대여상태</td>
+						<td width="13%">대여상태</td>
 						<td id="tb-empty"></td>
 					</tr>
 				</thead>
@@ -68,7 +68,8 @@ body {
 							<td align="left">${book.genre}</td>
 							<td align="left"><c:choose>
 									<c:when test="${book.borrowcheck=='0'}">
-			대출가능</c:when>
+										<mark>대출가능</mark>
+									</c:when>
 
 									<c:when test="${book.borrowcheck=='1'}">
 			대여요청중</c:when>
@@ -80,12 +81,12 @@ body {
 			예약중</c:when>
 								</c:choose></td>
 							<td>
-								<button class="btn btn-default" type="button" id="borrowbook"
-									onClick="location.href='/borrowbook?bookCode=${book.bookCode}'">대출</button>
-								<button class="btn btn-default" type="button" id="returnbook"
-									onClick="location.href='/returnbook?bookCode=${book.bookCode}'">반납</button>
 								<button class="btn btn-default" type="button" id="reservebook"
-									onClick="location.href='/reservation?bookCode=${book.bookCode}'">예약</button>
+									onClick="location.href='/stopBorrow?bookCode=${book.bookCode}'">대출정지</button>
+								<button class="btn btn-default" type="button" id="modifybook"
+									onClick="location.href='/modifyBookForm?bookCode=${book.bookCode}'">도서수정</button>
+								<button class="btn btn-default" type="button" id="deletebook"
+									onClick="location.href='/deletebook?bookCode=${book.bookCode}'; del();">도서삭제</button>
 
 							</td>
 						</tr>
@@ -95,7 +96,7 @@ body {
 							<td></td>
 							<td></td>
 							<td></td>
-							
+
 						</tr>
 					</tbody>
 				</c:forEach>

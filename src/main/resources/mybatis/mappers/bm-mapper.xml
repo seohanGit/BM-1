@@ -54,7 +54,7 @@
 		A.id=B.id;
 	</select>
 	<select id="selectBest" resultType="MemberModel">
-		SELECT name,score,id
+		SELECT name,score,id, numborrow
 		FROM
 		member
 		ORDER BY score DESC

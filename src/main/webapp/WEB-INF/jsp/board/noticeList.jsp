@@ -30,52 +30,29 @@
 			</h2>
 			<hr>
 
-			<table class="table table-striped table-bordered ">
 
-				<thead>
-					<tr class="hidden-xs title">
-						<td>공지일자</td>
-						<td>공지사항 내용</td>
-						<td></td>
-						<td></td>
-					</tr>
-				</thead>
+			<c:forEach items="${noticeList}" var="notice" varStatus="status">
+
+				<ul>
+					<form action="/modifyNotice" method="post">
+						<li width="15%" align="left"><fmt:formatDate
+								value="${notice.registerdate}" pattern="yyyy-MM-dd" /></li>
+						<li style="width: 90%; height: auto;" align="left"><textarea
+								class="form-control " id="content" name="content"
+								style="width: 100%; height: 110px;"
+								placeholder="${notice.content}"></textarea><input type="hidden"
+							name="boardnum" value="${notice.boardnum }"></li>
+
+						<button class="btn btn-default" type="submit" id="modifyNotice">수정</button>
+
+						<button class="btn btn-default" type="button" id="reservebook"
+							onClick="location.href='/deleteNotice?boardnum=${notice.boardnum}'">삭제</button>
+					</form>
+				</ul>
+
+			</c:forEach>
 
 
-				<tbody>
-
-					<c:forEach items="${noticeList}" var="notice" varStatus="status">
-
-						<tr>
-							<form action="/modifyNotice" method="post">
-								<td width="15%" align="left"><fmt:formatDate
-										value="${notice.registerdate}" pattern="yyyy-MM-dd" /></td>
-								<td width="60%" align="left"><input class="form-control"
-									id="content" name="content" type="text"
-									placeholder="${notice.content}"><input type="hidden"
-									name="boardnum" value="${notice.boardnum }"></td>
-
-								<td><button class="btn btn-default" type="submit"
-										id="modifyNotice">수정</button></td>
-							</form>
-							<td><button class="btn btn-default" type="button"
-									id="reservebook"
-									onClick="location.href='/deleteNotice?boardnum=${notice.boardnum}'">삭제</button></td>
-						</tr>
-
-						<tr>
-
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-
-					</c:forEach>
-
-				</tbody>
-
-			</table>
 		</div>
 
 	</div>

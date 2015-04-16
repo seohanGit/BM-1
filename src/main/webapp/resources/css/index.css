@@ -1,11 +1,12 @@
 .thumbnail {
 	width: 30%;
 	float: left;
+	margin-right: 15px;
 }
 
 .thumbnail .caption p {
 	max-height: 150px;
-	font-size: 60%;
+	font-size: 8px;
 	max-width: 100px;
 	font-family:sans-serif;
 }

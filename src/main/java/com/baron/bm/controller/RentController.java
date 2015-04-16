@@ -42,7 +42,7 @@ public class RentController {
 			return "redirect:borrowList";
 		} else {
 
-			return "borrowfail";
+			return "rent/borrowfail";
 		}
 	}
 
@@ -75,7 +75,7 @@ public class RentController {
 		List<BookModel> bookList = new ArrayList<BookModel>();
 		bookList = rentservice.borrowListAll();
 		model.addAttribute("bookList", bookList);
-		return "borrowListByAdmin";
+		return "rent/borrowListByAdmin";
 	}
 
 	@RequestMapping("/borrowList")
@@ -88,7 +88,7 @@ public class RentController {
 		List<BookModel> bookList = rentservice.borrowList(id);
 
 		model.addAttribute("bookList", bookList);
-		return "borrowList";
+		return "rent/borrowList";
 	}
 
 	@RequestMapping("/extendBorrowBook")
@@ -98,7 +98,7 @@ public class RentController {
 			rentservice.extendBorrowBook(bookCode);
 			return "redirect:borrowList";
 		}else{
-			return "extendFail";
+			return "redirect:extendFail";
 		}
 	}
 
@@ -120,7 +120,7 @@ public class RentController {
 		List<BookModel> bookList = new ArrayList<BookModel>();
 		bookList = rentservice.rentListAll();
 		model.addAttribute("bookList", bookList);
-		return "rentList";
+		return "rent/rentList";
 	}
 
 	@RequestMapping("/returnListAll")
@@ -128,7 +128,7 @@ public class RentController {
 		List<BookModel> bookList = new ArrayList<BookModel>();
 		bookList = rentservice.returnListAll();
 		model.addAttribute("bookList", bookList);
-		return "returnList";
+		return "rent/returnList";
 	}
 
 	@RequestMapping("/returnmanybook")
@@ -138,7 +138,7 @@ public class RentController {
 			String bookCode = bookCodeList.get(i);
 			rentservice.returnBook(bookCode);
 		}
-		return "rentList";
+		return "rent/rentList";
 	}
 
 	@RequestMapping("/returnBookByAdmin")
@@ -150,7 +150,7 @@ public class RentController {
 			return "redirect:rentList";
 		} else {
 
-			return "returnfail";
+			return "rent/returnfail";
 		}
 	}
 
@@ -187,7 +187,7 @@ public class RentController {
 			bookList.get(i).setId(id);
 		}
 		model.addAttribute("bookList", bookList);
-		return "recordList";
+		return "rent/recordList";
 	}
 
 	@RequestMapping("/recordListAll")
@@ -197,7 +197,7 @@ public class RentController {
 		bookList = rentservice.recordListAll();
 
 		model.addAttribute("bookList", bookList);
-		return "recordList";
+		return "rent/recordList";
 	}
 
 	@RequestMapping("/reservation")
@@ -205,7 +205,7 @@ public class RentController {
 			HttpServletRequest request) {
 
 		if (rentservice.selectReservation(bookCode) != null) {
-			return "reservationfail";
+			return "rent/reservationfail";
 		}
 
 		book.setBookCode(bookCode);
@@ -215,7 +215,7 @@ public class RentController {
 		}
 		rentservice.insertReservation(book);
 
-		return "reservationresult";
+		return "rent/reservationresult";
 	}
 
 	@RequestMapping("/reservationListAll")
@@ -225,6 +225,6 @@ public class RentController {
 		bookList = rentservice.reservationListAll();
 
 		model.addAttribute("bookList", bookList);
-		return "reservationListAll";
+		return "rent/reservationListAll";
 	}
 }

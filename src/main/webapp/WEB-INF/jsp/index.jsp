@@ -28,7 +28,8 @@
 					<!-- First Blog Post -->
 					<ul class="list-group">
 						<c:forEach items="${contentList}" var="con" varStatus="status">
-							<li class="list-group-item"><h4>${con.content}</h4></li>
+							<li class="list-group-item"><textarea
+									style="width: 100%; height: 110px" readonly>${con.content}</textarea></li>
 						</c:forEach>
 					</ul>
 
@@ -85,130 +86,72 @@
 					/.input-group
 				</div> -->
 				<!-- Blog Categories Well -->
-				<%-- 
+
 				<div class="well" align="center">
-					<h3>이달의 베스트 회원 Top 3</h3>
-					<br>
-					<div>
-
-						<div align="center">
-							<c:forEach items="${bestList}" var="best" begin="0" end="2"
-								step="1" varStatus="status">
-								<strong> ${best.id} </strong>
-								<br>
-								<strong>${best.name}</strong>  ${best.score}점
-								<br>
-							</c:forEach>
-						</div>
-
-						<!-- /.col-lg-6 -->
-					</div>
-					<!-- /.row -->
-				</div>
-				 --%>
-				<!-- Side Widget Well -->
-				<div class="well">
-
-					<h3>신간도서</h3>
-					<c:forEach items="${newbook}" var="newbook" begin="0" end="2"
-						step="1" varStatus="status">
-
-						<div onclick="location.href='${newbook.link}'" align="center">
-							<div class="thumbnail" align="left"
-								style="max-height: 90px; max-width: 60px">
-								<img src="${newbook.imageurl}" height="100%" width="100%">
-							</div>
-							<div align="left">
-								<p class="caption">${newbook.bookname}</p>
-								<p class="caption">${newbook.writer}</p>
-								<p class="caption">${newbook.genre}</p>
-							</div>
-						</div>
-						<hr>
-					</c:forEach>
-
-					<h3>베스트 셀러</h3>
-					<c:forEach items="${bestseller}" var="book" begin="0" end="2"
-						step="1" varStatus="status">
-
-						<div onclick="location.href='${book.link}'" align="center">
-							<div class="thumbnail" align="left"
-								style="max-height: 90px; max-width: 60px">
-								<img src="${book.imageurl}" height="100%" width="100%">
-							</div>
-							<div align="left">
-								<p class="caption">${book.bookname}</p>
-								<p class="caption">${book.writer}</p>
-								<p class="caption">${book.genre}</p>
-							</div>
-						</div>
-						<hr>
-					</c:forEach>
-
+					<jsp:include page="sidebar.jsp" />
 				</div>
 
 			</div>
-
-		</div>
-	</div>
-	<!-- /.row -->
-	<hr>
-	<!-- Footer -->
-	<footer>
-		<div class="row">
-			<div class="col-lg-12">
-				<p>Copyright &copy; Your Website 2014</p>
-			</div>
-			<!-- /.col-lg-12 -->
 		</div>
 		<!-- /.row -->
-	</footer>
+		<hr>
+		<!-- Footer -->
+		<footer>
+			<div class="row">
+				<div class="col-lg-12">
+					<p>Copyright &copy; Your Website 2014</p>
+				</div>
+				<!-- /.col-lg-12 -->
+			</div>
+			<!-- /.row -->
+		</footer>
 
-	<!-- /.container -->
-	<!-- jQuery -->
-	<script src="/resources/js/jquery/jquery.js"></script>
-	<!-- Bootstrap Core JavaScript -->
-	<script src="/resources/js/bootstrap.min.js"></script>
-	<script src="/resources/js/common.js"></script>
-	<script src="/resources/js/book.js"></script>
-	<script>
-		$("#logout").click(function() {
-			location.href = "/logout"
-		})
+		<!-- /.container -->
+		<!-- jQuery -->
+		<script src="/resources/js/jquery/jquery.js"></script>
+		<!-- Bootstrap Core JavaScript -->
+		<script src="/resources/js/bootstrap.min.js"></script>
+		<script src="/resources/js/common.js"></script>
+		<script src="/resources/js/book.js"></script>
+		<script>
+			$("#logout").click(function() {
+				location.href = "/logout"
+			})
 
-		$document.ready(function() {
-			var date = "${con.registerdate}";
-			var newicon = "<span class="label label-default">New</span></h3>";
-			if (date < now()) {
-				$("#notice").append(newicon);
+			$document
+					.ready(function() {
+						var date = "${con.registerdate}";
+						var newicon = "<span class="label label-default">New</span></h3>";
+						if (date < now()) {
+							$("#notice").append(newicon);
+						}
+
+					});
+			var array = [ "a0", "a1", "a2", "a3", "a4", "a5", "a6", "a7", "a8",
+					"a9" ];
+			function deletee() {
+				for ( var i in array) {
+					$("#array[i]").hide();
+				}
+
 			}
 
-		});
-		var array = [ "a0", "a1", "a2", "a3", "a4", "a5", "a6", "a7", "a8",
-				"a9" ];
-		function deletee() {
-			for ( var i in array) {
-				$("#array[i]").hide();
+			window.onload = function() {
+				deletee();
+
+			};
+
+			var cnt = 0;
+			function add() {
+				if (cnt == 10) {
+					clearInterval(timer);
+				}
+				$("#array[cnt]").show();
+
+				cnt++;
 			}
 
-		}
-
-		window.onload = function() {
-			deletee();
-
-		};
-
-		var cnt = 0;
-		function add() {
-			if (cnt == 10) {
-				clearInterval(timer);
-			}
-			$("#array[cnt]").show();
-
-			cnt++;
-		}
-
-		var timer = setInterval(add, 2000);
-	</script>
+			var timer = setInterval(add, 2000);
+		</script>
 </body>
 </html>

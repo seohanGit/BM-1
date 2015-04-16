@@ -23,27 +23,27 @@ footer {
 }
 
 table #td-title {
-	width: 25%
+	width: 25%;
 }
 
-table #td-author {
-	width: 13%
+table  #td-author {
+	width: 18%;
 }
 
-table #td-img {
+table thead #td-img {
 	width: 7%;
 }
 
-table #td-genre {
+table   #td-genre {
 	width: 11%;
 }
 
-table #td-status {
-	width: 10%;
+table  #td-status {
+	width: 18%;
 	background-color: #aaa;
 }
 
-table #td-date{
+table  #td-date {
 	width: 10%;
 }
 
@@ -53,6 +53,11 @@ table #td-date{
 
 #insertBook {
 	width: 30%;
+}
+
+.table .table-striped .table-bordered {
+	border-top-left-radius: 8px;
+	border-top-right-radius: 8px;
 }
 
 .row {

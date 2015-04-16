@@ -24,9 +24,9 @@ body {
 </head>
 
 <body>
-	<jsp:include page="nav.jsp" />
+	<jsp:include page="../nav.jsp" />
 	<div class="container">
-		<jsp:include page="menu.jsp" />
+		<jsp:include page="../menu.jsp" />
 		<div class="row" id="searchResultArea">
 			<hr>
 			<h2>대여 기록</h2>

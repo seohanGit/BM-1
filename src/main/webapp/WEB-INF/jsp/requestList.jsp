@@ -45,11 +45,10 @@ body {
 				<hr>
 				<table class="table table-striped table-bordered">
 					<thead>
-						<tr class="hidden-xs title">
+						<tr class="hidden-xs ">
 							<td id="tb-img">표지</td>
-							<td id="tb-title">도서명</td>
+							<td id="tb-author">도서명</td>
 							<td id="tb-author">저자</td>
-							<td id="tb-genre">장르</td>
 							<td id="tb-genre">가격</td>
 							<td id="tb-genre">수량</td>
 							<td id="tb-genre">신청자</td>
@@ -95,7 +94,7 @@ body {
 								<td><img style="width: 50px" src="${book.imageurl}"></td>
 								<td>${book.bookname }</td>
 								<td>${book.writer}</td>
-								<td>${book.genre}</td>
+
 								<td>${book.priceSales}원</td>
 								<td align="center">${book.quantity}</td>
 								<td>${book.id}</td>

@@ -39,8 +39,8 @@
 								value="${notice.registerdate}" pattern="yyyy-MM-dd" /></li>
 						<li style="width: 90%; height: auto;" align="left"><textarea
 								class="form-control " id="content" name="content"
-								style="width: 100%; height: 110px;"
-								placeholder="${notice.content}"></textarea><input type="hidden"
+								style="width: 100%;" rows="5" placeholder="${notice.content}"
+								onKeyDown="setLine( this )"></textarea><input type="hidden"
 							name="boardnum" value="${notice.boardnum }"></li>
 
 						<button class="btn btn-default" type="submit" id="modifyNotice">수정</button>
@@ -62,6 +62,15 @@
 	<script src="/resources/js/book.js"></script>
 	<script src="/resources/js/common.js"></script>
 	<script>
+		function setLine(txa) {
+			line = 5 //기본 줄 수
+
+			new_line = txa.value.split("\n").length + 1;
+			if (new_line < line)
+				new_line = line;
+
+			txa.rows = new_line;
+		}
 		function del() {
 			alert("승인되었습니다.");
 		}

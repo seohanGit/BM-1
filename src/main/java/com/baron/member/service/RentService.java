@@ -46,4 +46,6 @@ public interface RentService {
 
 	void cancleBorrowBook(BookModel bookmodel);
 
+	public void deleteRecord(BookModel book);
+
 }

@@ -46,5 +46,7 @@ public interface RentDao {
 
 	void deleteBorrowBook(BookModel bookmodel);
 
+	void deleteRecord(BookModel book);
+
 
 }

@@ -54,7 +54,8 @@
 		A.id=B.id;
 	</select>
 	<select id="selectBest" resultType="MemberModel">
-		SELECT name,score,id, numborrow
+		SELECT name,score,id,
+		numborrow
 		FROM
 		member
 		ORDER BY score DESC
@@ -108,7 +109,8 @@
 		INSERT INTO notice
 		(content, registerdate)
 		VALUES
-		(#{content}, DATE_FORMAT(NOW(), "%Y-%m-%d"))
+		(#{content}, DATE_FORMAT(NOW(),
+		"%Y-%m-%d"))
 	</insert>
 	<delete id="deleteNotice" parameterType="String">
 		DELETE FROM notice
@@ -149,6 +151,8 @@
 		SELECT * FROM book
 		WHERE bookname LIKE
 		CONCAT('%',#{keyword},'%')
+		ORDER
+		BY buydate
 
 	</select>
 
@@ -205,7 +209,7 @@
 	<!-- 대여관련 쿼리 -->
 	<select id="borrowListAll" resultType="BookModel">
 		SELECT * FROM book AS A,
-		borrow AS B 
+		borrow AS B
 		WHERE B.borrowcheck=1 AND A.bookCode=B.bookCode
 		ORDER BY
 		B.borrowdate DESC;
@@ -274,7 +278,7 @@
 		SET
 		A.borrowcheck='0',
 		B.borrowcheck='3',
-		B.borrowdate=NOW()
+		B.returndate=NOW()
 		WHERE
 		A.bookCode=#{bookCode} AND
 		B.bookCode=#{bookCode}
@@ -316,7 +320,8 @@
 		WHERE <![CDATA[B.returndate > NOW()]]>
 		AND A.bookCode=B.bookCode AND B.borrowcheck='2'
 		ORDER BY
-		B.borrowdate DESC;
+		B.borrowdate
+		DESC;
 	</select>
 
 	<!-- <delete id="deleteRecord" parameterType="String"> DELETE ON borrow 
@@ -334,10 +339,15 @@
 		WHERE <![CDATA[B.borrowdate < NOW()]]>
 		AND A.bookCode=B.bookCode AND B.borrowcheck='3'
 		ORDER BY
-		B.borrowdate DESC;
+		B.borrowdate
+		DESC;
 	</select>
 
-
+	<delete id="deleteRecord" parameterType="BookModel">
+		DELETE 1
+		FROM borrow
+		WHERE bookCode=#{bookCode} AND id=#{id} AND borrowcheck='3' 
+	</delete>
 
 	<!-- 에약관련 쿼리 -->
 
@@ -390,5 +400,5 @@
 
 	<!-- 기타 쿼리 -->
 
-	
+
 </mapper>

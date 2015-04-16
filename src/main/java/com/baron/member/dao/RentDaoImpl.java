@@ -136,6 +136,11 @@ public class RentDaoImpl implements RentDao {
 
 	}
 
+	@Override
+	public void deleteRecord(BookModel book) {
+		session.delete(NAMESPACE + "deleteRecord", book);
+	}
+
 	
 
 }

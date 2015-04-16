@@ -97,7 +97,7 @@ public class RentController {
 		if (rentservice.selectReservation(bookCode).equals("0")) {
 			rentservice.extendBorrowBook(bookCode);
 			return "redirect:borrowList";
-		}else{
+		} else {
 			return "redirect:extendFail";
 		}
 	}
@@ -123,15 +123,12 @@ public class RentController {
 		return "rent/rentList";
 	}
 
-	@RequestMapping("/returnListAll")
-	public String returnListAll(Model model) {
-		List<BookModel> bookList = new ArrayList<BookModel>();
-		bookList = rentservice.returnListAll();
-		model.addAttribute("bookList", bookList);
-		return "rent/returnList";
-	}
-
-	@RequestMapping("/returnmanybook")
+	/*
+	 * @RequestMapping("/returnListAll") public String returnListAll(Model
+	 * model) { List<BookModel> bookList = new ArrayList<BookModel>(); bookList
+	 * = rentservice.returnListAll(); model.addAttribute("bookList", bookList);
+	 * return "rent/returnList"; }
+	 */@RequestMapping("/returnmanybook")
 	public String returnManyBook(List<String> bookCodeList) {
 
 		for (int i = 0; i < bookCodeList.size(); i++) {
@@ -147,7 +144,7 @@ public class RentController {
 		if (rentservice.borrowCheck(book).equals("2")) {
 			System.out.println(book.getBorrowcheck());
 			rentservice.returnBook(bookCode);
-			return "redirect:rentList";
+			return "redirect:rentListAll";
 		} else {
 
 			return "rent/returnfail";
@@ -198,6 +195,16 @@ public class RentController {
 
 		model.addAttribute("bookList", bookList);
 		return "rent/recordList";
+	}
+
+	@RequestMapping("/deleteRecord")
+	public String deleteRecord(String id, String bookCode, Model model,
+			BookModel book) {
+		book.setBookCode(bookCode);
+		book.setId(id);
+		rentservice.deleteRecord(book);
+
+		return "redirect:recordList";
 	}
 
 	@RequestMapping("/reservation")

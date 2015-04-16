@@ -29,7 +29,8 @@
 					<ul class="list-group">
 						<c:forEach items="${contentList}" var="con" varStatus="status">
 							<li class="list-group-item"><textarea
-									style="width: 100%; height: 110px" readonly>${con.content}</textarea></li>
+									style="width: 100%; " readonly
+									rows="5">${con.content}</textarea></li>
 						</c:forEach>
 					</ul>
 
@@ -118,6 +119,7 @@
 				location.href = "/logout"
 			})
 
+		
 			$document
 					.ready(function() {
 						var date = "${con.registerdate}";

@@ -107,4 +107,11 @@ public class RequestServiceImpl implements RequestService {
 
 		br.close();
 	}
+
+	@Override
+	public BookModel selectBook(String bookCode) {
+		return requestDao.selectBook(bookCode);
+		
+		
+	}
 }

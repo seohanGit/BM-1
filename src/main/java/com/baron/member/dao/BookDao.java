@@ -17,5 +17,7 @@ public interface BookDao {
 
 	List<BookModel> searchBook(String keyword);
 
+	public List<BookModel> getNewbook();
+
 
 }

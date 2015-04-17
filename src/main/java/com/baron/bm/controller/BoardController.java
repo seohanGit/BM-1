@@ -31,6 +31,18 @@ public class BoardController {
 		return "board/boardinsert";
 	}
 
+	@RequestMapping("/deleteBoard")
+	public String deleteboard(String boardnum) {
+		boardService.deleteBoard(boardnum);
+		return "redirect:boardList";
+	}
+
+	@RequestMapping("/modifyBoard")
+	public String modifyBoard(BoardModel content) {
+		boardService.modifyBoard(content);
+		return "redirect:boardList";
+	}
+
 	@RequestMapping("/boardsuccess")
 	public String boardsuccess(BoardModel model, HttpServletRequest request) {
 
@@ -85,7 +97,7 @@ public class BoardController {
 	}
 
 	@RequestMapping("/deleteNotice")
-	public String writeboard(String boardnum) {
+	public String deleteNotice(String boardnum) {
 		boardService.deleteNotice(boardnum);
 		return "redirect:noticeList";
 	}

@@ -33,12 +33,14 @@
 	<c:forEach items="${newbook}" var="newbook" begin="0" end="2" step="1"
 		varStatus="status">
 		<hr>
-		<div align="center" onclick="location.href='${newbook.link}'">
+		<div align="center" >
 			<div class="thumbnail" align="left" style="height: 90px; width: 60px">
 				<img src="${newbook.imageurl}" height="100%" width="100%">
 			</div>
 			<div align="left">
-				<p class="caption">${newbook.bookname}</p>
+				<p class="caption">
+					<a href="${newbook.link}">${newbook.bookname}</a>
+				</p>
 				<p class="caption">${newbook.writer}</p>
 				<p class="caption">${newbook.genre}</p>
 			</div>
@@ -50,12 +52,14 @@
 	<c:forEach items="${bestseller}" var="book" begin="0" end="2" step="1"
 		varStatus="status">
 		<hr>
-		<div onclick="location.href='${book.link}'" align="center">
+		<div  align="center">
 			<div class="thumbnail" align="left" style="height: 90px; width: 60px">
 				<img src="${book.imageurl}" height="100%" width="100%">
 			</div>
 			<div align="left">
-				<p class="caption">${book.bookname}</p>
+				<p class="caption">
+					<a href="${book.link}">${book.bookname}</a>
+				</p>
 				<p class="caption">${book.writer}</p>
 				<p class="caption">${book.genre}</p>
 			</div>

@@ -3,6 +3,7 @@ package com.baron.member.dao;
 import java.util.List;
 
 
+
 import javax.annotation.Resource;
 
 import org.apache.ibatis.session.SqlSession;
@@ -34,5 +35,12 @@ public class RequestDaoImpl implements RequestDao{
 	public void deleteRequest(String bookCode) {
 		// TODO Auto-generated method stub
 		session.update(NAMESPACE + "deleteRequest", bookCode);
+	}
+
+	@Override
+	public BookModel selectBook(String bookCode) {
+		return session.selectOne(NAMESPACE + "selectRequest", bookCode);
+		
+		
 	}
 }

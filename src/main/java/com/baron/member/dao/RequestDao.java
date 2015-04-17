@@ -11,4 +11,6 @@ public interface RequestDao {
 	public List<BookModel> requestList();
 
 	public void deleteRequest(String bookCode);
+
+	public BookModel selectBook(String bookCode);
 }

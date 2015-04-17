@@ -22,7 +22,7 @@ public class BookServiceImpl implements BookService {
 
 	@Autowired
 	private BookDao bookDao;
-
+/*
 	@Override
 	public List<BookModel> getNewbook() throws Exception {
 		List<BookModel> bookList = new ArrayList<BookModel>();
@@ -33,6 +33,13 @@ public class BookServiceImpl implements BookService {
 		bookList = xmlDom.getBooklist(url.openStream());
 
 		return bookList;
+
+	}
+*/	
+	
+	@Override
+	public List<BookModel> getNewbook() throws Exception {
+		return bookDao.getNewbook();
 
 	}
 

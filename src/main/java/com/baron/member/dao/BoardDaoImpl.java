@@ -53,12 +53,24 @@ public class BoardDaoImpl implements BoardDao {
 	@Override
 	public void modifyNotice(BoardModel content) {
 		session.update(NAMESPACE + "modifyNotice", content);
-		
+
 	}
 
 	@Override
 	public void insertNotice(BoardModel boardmodel) {
 		session.insert(NAMESPACE + "insertNotice", boardmodel);
-		
+
+	}
+
+	@Override
+	public void modifyBoard(BoardModel content) {
+		session.update(NAMESPACE + "modifyBoard", content);
+
+	}
+
+	@Override
+	public void deleteBoard(String boardnum) {
+		session.delete(NAMESPACE + "deleteBoard", boardnum);
+
 	}
 }

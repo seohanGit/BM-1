@@ -29,7 +29,7 @@
 					onClick="location.href='/writeNotice'">추가</button>
 			</h2>
 			<hr>
-			
+
 			<table>
 				<thead>
 					<tr>
@@ -43,7 +43,7 @@
 				</thead>
 				<tbody>
 					<c:forEach items="${boardList}" var="board" varStatus="status">
-						<form action="/modifyNotice" method="post">
+						<form action="/modifyBoard" method="post">
 							<tr>
 								<td>${board.id}</td>
 
@@ -57,8 +57,8 @@
 								<td><fmt:formatDate value="${board.modifidate}"
 										pattern="yyyy-MM-dd" /></td>
 
-								<td>
-
+								<td><input type="hidden" name="boardnum"
+									value="${board.boardnum }">
 									<button class="btn btn-default" type="submit" id="modifyBoard">수정</button>
 
 									<button class="btn btn-default" type="button" id="deleteBoard"

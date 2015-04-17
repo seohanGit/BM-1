@@ -66,7 +66,7 @@ body {
 									style="width: 50px" src="${book.imageurl}"></td>
 							</tr>
 							<tr>
-								<td style="width: 40%" align="left">${book.bookname }</td>
+								<td style="width: 40%" align="left"><a href="${book.link}">${book.bookname }</a></td>
 								<td style="width: 40%" align="left">${book.writer }</td>
 								<td align="right"></td>
 							</tr>
@@ -75,7 +75,7 @@ body {
 								<td>요청자 : ${book.name}</td>
 								<td>
 									<button class="btn btn-default" type="button"
-										onClick="location.href='${book.link}'">구매</button>
+										onClick="location.href='buyRequest?bookCode=${book.bookCode}'">구매</button>
 								</td>
 							</tr>
 							<tr>
@@ -92,7 +92,7 @@ body {
 						<tbody>
 							<tr class="hidden-xs">
 								<td><img style="width: 50px" src="${book.imageurl}"></td>
-								<td>${book.bookname }</td>
+								<td><a href="${book.link}">${book.bookname }</a></td>
 								<td>${book.writer}</td>
 
 								<td>${book.priceSales}원</td>
@@ -100,7 +100,7 @@ body {
 								<td>${book.id}</td>
 								<td>${book.requestdate}</td>
 								<td><button class="btn btn-default" type="button"
-										id="buyBook" onClick="location.href='${book.link}'">구매</button>
+										id="buyBook" onClick="location.href='buyRequest?bookCode=${book.bookCode}'">구매</button>
 								</td>
 								<td>
 									<button class="btn btn-default" type="button"

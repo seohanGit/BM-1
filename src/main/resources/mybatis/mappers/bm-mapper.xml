@@ -50,10 +50,11 @@
 		A.id,A.name,A.email,A.address,A.cell,A.home, B.borrowdate,
 		B.returndate
 		FROM member as A ,borrow as B
-		WHERE NOW() > B.returndate AND B.borrowcheck ='2' and
+		WHERE NOW() > B.returndate
+		AND B.borrowcheck ='2' and
 		A.id=B.id;
 	</select>
-	
+
 	<select id="selectBest" resultType="MemberModel">
 		SELECT name,score,id,
 		numborrow
@@ -103,7 +104,20 @@
 		VALUES
 		(#{title},#{content},NOW(),NOW(),#{id})
 	</insert>
+	
+	<delete id="deleteBoard" parameterType="String">
+		DELETE FROM bulletinboard
+		WHERE
+		boardnum=#{boardnum}
+	</delete>
 
+	<update id="modifyBoard" parameterType="BoardModel">
+		UPDATE bulletinboard
+		SET
+		content=#{content}
+		WHERE boardnum=#{boardnum}
+	</update>
+	
 	<select id="noticeList" resultType="BoardModel">
 		SELECT *
 		FROM
@@ -137,9 +151,11 @@
 
 	<insert id="insertBook" parameterType="BookModel">
 		INSERT INTO book
-		(bookname,bookCode,damage,genre,publisher,writer,grade,borrowcheck,imageurl)
+		(bookname,bookCode,genre,publisher,writer,grade,borrowcheck,imageurl,
+		buydate, isbn, priceSales, summary)
 		VALUES
-		(#{bookname},#{bookCode},0,#{genre},#{publisher},#{writer},0,0,#{imageurl})
+		(#{bookname},#{bookCode},#{genre},#{publisher},#{writer},0,0,#{imageurl},
+		NOW(), #{isbn}, #{priceSales}, #{summary})
 	</insert>
 
 
@@ -178,6 +194,12 @@
 		WHERE bookCode=#{bookCode}
 	</update>
 
+	<select id="getNewbook" resultType="BookModel">
+		SELECT *
+		FROM book
+		ORDER BY
+		buydate DESC
+	</select>
 
 
 	<!-- 구매요청, 대여 관련 커리 -->
@@ -209,6 +231,13 @@
 		member AS B WHERE A.id=B.id
 		ORDER BY
 		A.requestdate DESC;
+	</select>
+
+	<select id="selectRequest" parameterType="String" resultType="BookModel">
+		SELECT *
+		FROM request
+		WHERE bookCode=#{bookCode}
+
 	</select>
 
 

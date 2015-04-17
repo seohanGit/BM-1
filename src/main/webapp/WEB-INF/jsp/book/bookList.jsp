@@ -68,17 +68,20 @@ body {
 							<td align="left">${book.genre}</td>
 							<td align="left"><c:choose>
 									<c:when test="${book.borrowcheck=='0'}">
-										<mark>대출가능</mark>
+										대출가능
 									</c:when>
 
 									<c:when test="${book.borrowcheck=='1'}">
-			대여요청중</c:when>
+										<mark>대여요청중</mark>
+									</c:when>
 									<c:when test="${book.borrowcheck=='2'}">
 			대출중</c:when>
 									<c:when test="${book.borrowcheck=='4'}">
-			대출정지</c:when>
+										<mark>대출정지</mark>
+									</c:when>
 									<c:when test="${book.borrowcheck=='5'}">
-			예약중</c:when>
+										<mark>예약중</mark>
+									</c:when>
 								</c:choose></td>
 							<td>
 								<button class="btn btn-default" type="button" id="reservebook"

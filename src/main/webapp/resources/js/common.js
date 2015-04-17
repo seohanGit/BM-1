@@ -26,7 +26,7 @@ function del() {
 }
 
 function borrow() {
-	if ("${book.borrowcheck}"=="0") {
+	if ("${book.borrowcheck}" == "0") {
 		alert("대출 요청되었습니다.");
 	} else
 		alert("대출이 불가합니다.");
@@ -75,6 +75,12 @@ $("#borrowList").click(function() {
 })
 $("#bookList").click(function() {
 	location.href = "/bookList"
+})
+$("#memberList").click(function() {
+	location.href = "/memberList"
+})
+$("#boardList").click(function() {
+	location.href = "/boardList"
 })
 
 $('#btn_bookList').click(function() {

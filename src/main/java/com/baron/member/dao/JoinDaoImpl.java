@@ -82,6 +82,12 @@ public class JoinDaoImpl implements JoinDao {
 		// TODO Auto-generated method stub
 		return (int)session.selectOne(NAMESPACE+"selectMemberById",id);
 	}
+
+	@Override
+	public List<MemberModel> selectMemberList() {
+		// TODO Auto-generated method stub
+		return session.selectList(NAMESPACE + "selectMemberList");
+	}
 	
 
 }

@@ -50,9 +50,10 @@
 		A.id,A.name,A.email,A.address,A.cell,A.home, B.borrowdate,
 		B.returndate
 		FROM member as A ,borrow as B
-		WHERE NOW() > returndate and
+		WHERE NOW() > B.returndate AND B.borrowcheck ='2' and
 		A.id=B.id;
 	</select>
+	
 	<select id="selectBest" resultType="MemberModel">
 		SELECT name,score,id,
 		numborrow
@@ -61,6 +62,12 @@
 		ORDER BY score DESC
 	</select>
 
+	<select id="selectMemberList" resultType="MemberModel">
+		SELECT *
+		FROM member
+		ORDER BY team, numborrow
+
+	</select>
 	<!-- Board 관련 쿼리 -->
 
 
@@ -346,7 +353,7 @@
 	<delete id="deleteRecord" parameterType="BookModel">
 		DELETE 1
 		FROM borrow
-		WHERE bookCode=#{bookCode} AND id=#{id} AND borrowcheck='3' 
+		WHERE bookCode=#{bookCode} AND id=#{id} AND borrowcheck='3'
 	</delete>
 
 	<!-- 에약관련 쿼리 -->

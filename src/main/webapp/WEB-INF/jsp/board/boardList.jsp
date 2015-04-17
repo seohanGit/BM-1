@@ -10,7 +10,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
-<title>공지사항</title>
+<title>게시판 관리</title>
 <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="/resources/css/signin.css" rel="stylesheet">
 <link href="/resources/css/common.css" rel="stylesheet">
@@ -24,33 +24,51 @@
 		<div id="searchResultArea" class="row">
 			<hr>
 			<h2>
-				공지사항
+				게시판 관리
 				<button class="btn btn-default" style="position: relative;"
 					onClick="location.href='/writeNotice'">추가</button>
 			</h2>
 			<hr>
+			
+			<table>
+				<thead>
+					<tr>
+						<td id="tb-status">ID</td>
+						<td id="tb-status">제목</td>
+						<td id="tb-title">내용</td>
+						<td id="tb-date">최종 수정일</td>
+						<td id="tb-status"></td>
 
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${boardList}" var="board" varStatus="status">
+						<form action="/modifyNotice" method="post">
+							<tr>
+								<td>${board.id}</td>
 
-			<c:forEach items="${noticeList}" var="notice" varStatus="status">
+								<td><input id="title" name="title" type="text"
+									placeholder="${board.title}" /></td>
+								<td><textarea class="form-control " id="content"
+										name="content" style="width: 100%;" rows="3"
+										placeholder="${board.content}" onKeyDown="setLine( this )"></textarea>
+								</td>
 
-				<ul>
-					<form action="/modifyNotice" method="post">
-						<li width="15%" align="left"><fmt:formatDate
-								value="${notice.registerdate}" pattern="yyyy-MM-dd" /></li>
-						<li style="width: 90%; height: auto;" align="left"><textarea
-								class="form-control " id="content" name="content"
-								style="width: 100%;" rows="5" placeholder="${notice.content}"
-								onKeyDown="setLine( this )"></textarea><input type="hidden"
-							name="boardnum" value="${notice.boardnum }"></li>
+								<td><fmt:formatDate value="${board.modifidate}"
+										pattern="yyyy-MM-dd" /></td>
 
-						<button class="btn btn-default" type="submit" id="modifyNotice">수정</button>
+								<td>
 
-						<button class="btn btn-default" type="button" id="deleteNotice"
-							onClick="location.href='/deleteNotice?boardnum=${notice.boardnum}'">삭제</button>
-					</form>
-				</ul>
+									<button class="btn btn-default" type="submit" id="modifyBoard">수정</button>
 
-			</c:forEach>
+									<button class="btn btn-default" type="button" id="deleteBoard"
+										onClick="location.href='/deleteBoard?boardnum=${board.boardnum}'">삭제</button>
+								</td>
+							</tr>
+						</form>
+					</c:forEach>
+				</tbody>
+			</table>
 
 
 		</div>

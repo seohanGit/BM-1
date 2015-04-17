@@ -27,16 +27,20 @@ public class RentController {
 	public String borrowBook(HttpServletRequest request, String bookCode,
 			BookModel book) {
 		String id = null;
+		String late = null;
 		for (Cookie cookie : request.getCookies()) {
 			if (cookie.getName().equals("bm_id")) {
 				id = cookie.getValue();
+			}
+			if (cookie.getName().equals("bm_late")) {
+				late = cookie.getValue();
 			}
 		}
 		book.setId(id);
 		book.setBookCode(bookCode);
 		book.setBorrowcheck("1");
 
-		if (rentservice.borrowCheck(book).equals("0")) {
+		if (rentservice.borrowCheck(book).equals("0") & late.equals("0")) {
 			System.out.println(book.getBorrowcheck());
 			rentservice.borrowBook(book);
 			return "redirect:borrowList";

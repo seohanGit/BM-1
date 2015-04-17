@@ -56,6 +56,13 @@ public class BoardController {
 		return "board/selectboard";
 	}
 
+	@RequestMapping("/boardList")
+	public String boardList(Model model) {
+		List<BoardModel> boardList = boardService.selectBoard();
+		model.addAttribute("boardList", boardList);
+		return "board/boardList";
+	}
+
 	@RequestMapping("/noticeList")
 	public String noticeList(Model model) {
 		List<BoardModel> noticeList = boardService.noticeList();

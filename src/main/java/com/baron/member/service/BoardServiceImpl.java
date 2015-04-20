@@ -61,4 +61,16 @@ public class BoardServiceImpl implements BoardService {
 
 	}
 
+	@Override
+	public void modifyBoard(BoardModel content) {
+		boardDao.modifyBoard(content);
+
+	}
+
+	@Override
+	public void deleteBoard(String boardnum) {
+		boardDao.deleteBoard(boardnum);
+
+	}
+
 }

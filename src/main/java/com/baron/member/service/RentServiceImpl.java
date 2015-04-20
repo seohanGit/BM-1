@@ -140,4 +140,10 @@ public class RentServiceImpl implements RentService {
 
 	}
 
+	@Override
+	public void deleteRecord(BookModel book) {
+		rentDao.deleteRecord(book);
+		
+	}
+
 }

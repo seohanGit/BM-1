@@ -23,16 +23,23 @@ public class BookServiceImpl implements BookService {
 	@Autowired
 	private BookDao bookDao;
 
+	/*
+	 * @Override public List<BookModel> getNewbook() throws Exception {
+	 * List<BookModel> bookList = new ArrayList<BookModel>();
+	 * 
+	 * URL url = getNewbookUrl();
+	 * 
+	 * XmlDom xmlDom = new XmlDom(); bookList =
+	 * xmlDom.getBooklist(url.openStream());
+	 * 
+	 * return bookList;
+	 * 
+	 * }
+	 */
+
 	@Override
 	public List<BookModel> getNewbook() throws Exception {
-		List<BookModel> bookList = new ArrayList<BookModel>();
-
-		URL url = getNewbookUrl();
-
-		XmlDom xmlDom = new XmlDom();
-		bookList = xmlDom.getBooklist(url.openStream());
-
-		return bookList;
+		return bookDao.getNewbook();
 
 	}
 
@@ -50,8 +57,7 @@ public class BookServiceImpl implements BookService {
 	}
 
 	@Override
-	public List<BookModel> findBook(String keyword)
-			throws Exception {
+	public List<BookModel> findBook(String keyword) throws Exception {
 		List<BookModel> bookList = new ArrayList<BookModel>();
 
 		URL url = getSearchUrl(keyword);
@@ -63,14 +69,8 @@ public class BookServiceImpl implements BookService {
 	}
 
 	@Override
-	public List<BookModel> getBestseller(String categoryId) throws Exception {
-		List<BookModel> bookList = new ArrayList<BookModel>();
-
-		URL url = getBestsellerUrl(categoryId);
-		XmlDom xmlDom = new XmlDom();
-		bookList = xmlDom.getBooklist(url.openStream());
-
-		return bookList;
+	public List<BookModel> getBestSeller() {
+		return bookDao.getBestSeller();
 	}
 
 	@Override
@@ -161,12 +161,12 @@ public class BookServiceImpl implements BookService {
 		getApiTest(url);
 		return url;
 	}
-	
+
 	private URL getSearchUrl(String keyword) throws Exception {
 		String key = "B0F933E2847C6447203572CCC68F824A1054E7EF0D966C7B95245288CE95E300";
 		String addr = "http://book.interpark.com/api/search.api?";
 		String parameter = "";
-	
+
 		key = URLEncoder.encode(key, "UTF-8");
 		keyword = URLEncoder.encode(keyword, "UTF-8");
 		parameter = parameter + "&" + "query=" + keyword;

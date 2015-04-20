@@ -27,4 +27,6 @@ public interface JoinService {
 	public List<BookModel> selectBestBook();
 
 	public int selectMemberById(String id);
+
+	public List<MemberModel> memberList();
 }

@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
-<title>대여현황 목록</title>
+<title>사원 목록</title>
 <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="/resources/css/signin.css" rel="stylesheet">
 <link href="/resources/css/common.css" rel="stylesheet">
@@ -23,52 +23,49 @@
 		<jsp:include page="../menu.jsp" />
 		<div class="row" id="searchResultArea">
 			<hr>
-			<h2>대여현황 목록</h2>
+			<h2>사원 목록</h2>
 			<hr>
 			<table class="table table-striped table-bordered ">
-				<c:choose>
-					<c:when test="${empty bookList}">
-						<h3>대여중인 도서가 없습니다.</h3>
-					</c:when>
-					<c:otherwise>
-						<thead>
-							<tr class="hidden-xs title">
 
-								<td id="tb-title">도서명</td>
-								<td id="tb-date">대여일자</td>
-								<td id="tb-date">반납일자</td>
-								<td id="tb-status">대출자</td>
-								<td id="tb-status">반납</td>
-								<td id="tb-status">연장</td>
-							</tr>
-						</thead>
-					</c:otherwise>
-				</c:choose>
+				<thead>
+					<tr class="hidden-xs title">
 
+						<td id="tb-title">부서명</td>
+						<td id="tb-date">성명</td>
+						<td id="tb-date">연체상태</td>
+						<td id="tb-date">대여권수</td>
+						<td id="tb-status">사원번호</td>
+						<td id="tb-status">Mobile</td>
+						<td id="tb-status">Email</td>
 
-				<c:forEach items="${bookList}" var="book" varStatus="loop">
+					</tr>
+				</thead>
+
+				<c:forEach items="${memberList}" var="member" varStatus="loop">
 
 					<tbody>
 
 						<tr>
-							<td align="left">${book.bookname }</td>
-							<td align="left">${book.borrowdate }</td>
-							<td align="left">${book.returndate }</td>
-
-							<td>ID : ${book.id}</td>
+							<td align="left">${member.team }</td>
+							<td align="left">${member.name }</td>
+							<c:choose>
+								<c:when test="${member.numarrear!='0'}">
+									<td align="left">연체자</td>
+								</c:when>
+								<c:otherwise>
+									<td align="left">정상사원</td>
+								</c:otherwise>
+							</c:choose>
+							<td align="left">총 ${member.numborrow}권 대여</td>
+							<td>ID : ${member.id}</td>
+							<td>${member.cell}</td>
+							<td>${member.email}</td>
 							<%-- 
 							<td><button class="btn btn-default" type="button"
 									id="extendbook"
 									onClick="location.href='/extendBorrowBook?bookCode=${book.bookCode}'">연장</button>
 							</td>
  --%>
-							<td><button class="btn btn-default btn-sm" type="button"
-									id="reservebook"
-									onClick="location.href='/returnBookByAdmin?bookCode=${book.bookCode}'; re_turn();">반납</button>
-							</td>
-							<td><button class="btn btn-default btn-sm" type="button"
-									id="reservebook"
-									onClick="location.href='/extendBorrowBook?bookCode=${book.bookCode}'; extend();">연장</button></td>
 
 						</tr>
 						<tr>
@@ -85,8 +82,7 @@
 			</table>
 		</div>
 	</div>
-	</div>
-	</div>
+
 	<hr>
 	<script src="/resources/js/jquery/jquery.js"></script>
 	<script src="/resources/js/bootstrap.min.js"></script>

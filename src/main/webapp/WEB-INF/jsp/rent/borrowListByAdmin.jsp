@@ -40,17 +40,25 @@ body {
 			<h2>대여요청 목록</h2>
 			<hr>
 			<table class="table table-striped table-bordered ">
-				<thead>
-					<tr class="hidden-xs title">
+				<c:choose>
+					<c:when test="${empty bookList}">
+						<h3>대여 요청한 도서가 없습니다.</h3>
+					</c:when>
+					<c:otherwise>
+						<thead>
+							<tr class="hidden-xs title">
 
-						<td id="tb-title">도서명</td>
-						<td id="tb-date">대여일자</td>
-						<td id="tb-date">반납일자</td>
-						<td id="tb-genre">장르</td>
-						<td id="tb-genre">대출자</td>
-						<td id="tb-status">상태</td>
-					</tr>
-				</thead>
+								<td id="tb-title">도서명</td>
+								<td id="tb-date">대여일자</td>
+								<td id="tb-date">반납일자</td>
+								<td id="tb-genre">장르</td>
+								<td id="tb-genre">대출자</td>
+								<td id="tb-status">상태</td>
+							</tr>
+						</thead>
+					</c:otherwise>
+				</c:choose>
+
 				<c:forEach items="${bookList}" var="book" varStatus="loop">
 
 					<tbody>
@@ -62,10 +70,9 @@ body {
 
 							<td>ID : ${book.id}</td>
 
-
-							<td><button class="btn btn-default" type="button"
+							<td><button class="btn btn-default btn-sm" type="button"
 									id="reservebook"
-									onClick="location.href='/confirmBorrowBook?bookCode=${book.bookCode}'">승인</button>
+									onClick="location.href='/confirmBorrowBook?bookCode=${book.bookCode}'; ok();">승인</button>
 							</td>
 						</tr>
 						<tr>

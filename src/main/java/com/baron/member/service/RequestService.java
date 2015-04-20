@@ -18,4 +18,6 @@ public interface RequestService {
 */
 	public BookModel findBookOne(String isbn)throws Exception ;
 
+	public BookModel selectBook(String bookCode);
+
 }

@@ -35,13 +35,13 @@ public class BookController {
 		bookservice.insertBook(model);
 		return "book/insertbookresult";
 	}
-
+/*
 	@RequestMapping("/national")
 	public String getNationalBest(BookModel model) throws Exception {
-		bookservice.getBestseller("200");
+		bookservice.getBestSeller();
 		return "book/nationalBest";
 	}
-
+*/
 	@RequestMapping("/searchBook")
 	public String searchBook(HttpServletRequest request, String keyword,
 			Model model) {

@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.baron.member.model.BookModel;
+import com.baron.member.service.BookService;
 import com.baron.member.service.RequestService;
 
 @Controller
@@ -19,6 +20,9 @@ public class RequestController {
 
 	@Autowired
 	private RequestService requestservice;
+
+	@Autowired
+	private BookService bookService;
 
 	@RequestMapping("/confirmRequest")
 	public String requestResult(BookModel model) {
@@ -33,7 +37,6 @@ public class RequestController {
 		bookList = requestservice.requestList();
 		model.addAttribute("bookList", bookList);
 
-		System.out.println(bookList.get(0).getRequestdate());
 		return "requestList";
 	}
 
@@ -54,6 +57,18 @@ public class RequestController {
 		return "confirmRequest";
 	}
 
+	@RequestMapping("/buyRequest")
+	public String buyRequest(String bookCode, Model model, BookModel book) {
+		book = requestservice.selectBook(bookCode);
+		model.addAttribute("book", book);
+		return "confirmBuy";
+	}
+
+	@RequestMapping("/confirmBuy")
+	public String confirmBuy(BookModel model) {
+		bookService.insertBook(model);
+		return "redirect:requestList";
+	}
 
 	@RequestMapping("/deleteRequest")
 	public String deleteRequest(String bookCode) {

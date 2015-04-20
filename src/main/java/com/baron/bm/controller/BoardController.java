@@ -31,6 +31,18 @@ public class BoardController {
 		return "board/boardinsert";
 	}
 
+	@RequestMapping("/deleteBoard")
+	public String deleteboard(String boardnum) {
+		boardService.deleteBoard(boardnum);
+		return "redirect:boardList";
+	}
+
+	@RequestMapping("/modifyBoard")
+	public String modifyBoard(BoardModel content) {
+		boardService.modifyBoard(content);
+		return "redirect:boardList";
+	}
+
 	@RequestMapping("/boardsuccess")
 	public String boardsuccess(BoardModel model, HttpServletRequest request) {
 
@@ -56,6 +68,23 @@ public class BoardController {
 		return "board/selectboard";
 	}
 
+	@RequestMapping("/boardList")
+	public String boardList(Model model) {
+		List<BoardModel> boardList = boardService.selectBoard();
+		model.addAttribute("boardList", boardList);
+		return "board/boardList";
+	}
+
+	@RequestMapping("/noticeListByAdmin")
+	public String noticeListByAdmin(Model model) {
+		List<BoardModel> noticeList = boardService.noticeList();
+
+		model.addAttribute("noticeList", noticeList);
+
+		return "board/noticeListByAdmin";
+
+	}
+
 	@RequestMapping("/noticeList")
 	public String noticeList(Model model) {
 		List<BoardModel> noticeList = boardService.noticeList();
@@ -74,18 +103,18 @@ public class BoardController {
 	@RequestMapping("/insertNotice")
 	public String insertNotice(BoardModel boardmodel) {
 		boardService.insertNotice(boardmodel);
-		return "redirect:noticeList";
+		return "redirect:noticeListByAdmin";
 	}
 
 	@RequestMapping("/deleteNotice")
-	public String writeboard(String boardnum) {
+	public String deleteNotice(String boardnum) {
 		boardService.deleteNotice(boardnum);
-		return "redirect:noticeList";
+		return "redirect:noticeListByAdmin";
 	}
 
 	@RequestMapping("/modifyNotice")
 	public String modifyNotice(BoardModel content) {
 		boardService.modifyNotice(content);
-		return "redirect:noticeList";
+		return "redirect:noticeListByAdmin";
 	}
 }

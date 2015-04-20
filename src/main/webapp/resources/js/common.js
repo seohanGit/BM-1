@@ -24,17 +24,24 @@ $('#btn_search').click(function() {
 function del() {
 	alert("삭제되었습니다.");
 }
-
+function rentStop() {
+	alert("대출정지 되었습니다.");
+}
 function borrow() {
-	if ("${book.borrowcheck}"=="0") {
-		alert("대출 요청되었습니다.");
-	} else
-		alert("대출이 불가합니다.");
+	alert("대출 요청되었습니다.");
+}
+function cancel() {
+	alert("취소되었습니다.");
+}
+function ok() {
+	alert("승인되었습니다.");
+}
+function re_turn() {
+	alert("반납되었습니다.");
 }
 
-function reserve() {
-	alert("예약되었습니다.");
-}
+/* 버튼 클릭 */
+
 $("#logout").click(function() {
 	location.href = "/logout"
 })
@@ -67,14 +74,20 @@ $("#borrowListAll").click(function() {
 $("#logout").click(function() {
 	location.href = "/logout"
 })
-$("#noticeList").click(function() {
-	location.href = "/noticeList"
+$("#noticeListByAdmin").click(function() {
+	location.href = "/noticeListByAdmin"
 })
 $("#borrowList").click(function() {
 	location.href = "/borrowList"
 })
 $("#bookList").click(function() {
 	location.href = "/bookList"
+})
+$("#memberList").click(function() {
+	location.href = "/memberList"
+})
+$("#boardList").click(function() {
+	location.href = "/boardList"
 })
 
 $('#btn_bookList').click(function() {

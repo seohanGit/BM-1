@@ -15,6 +15,7 @@ public class BookModel {
 	private String id;
 	private String publisher;
 	private String borrowcheck;
+	private String reservecheck;
 	private int grade;
 	private String writer;
 	private String imageurl;
@@ -25,6 +26,15 @@ public class BookModel {
 	private int totalResults;
 	private int startindex;
 	private String keyword;
+	private Date buydate;
+
+	public Date getBuydate() {
+		return buydate;
+	}
+
+	public void setBuydate(Date buydate) {
+		this.buydate = buydate;
+	}
 
 	public String getKeyword() {
 		return keyword;
@@ -65,8 +75,6 @@ public class BookModel {
 	public void setReservedate(Date reservedate) {
 		this.reservedate = reservedate;
 	}
-
-	private String reservecheck;
 
 	public String getReservecheck() {
 		return reservecheck;

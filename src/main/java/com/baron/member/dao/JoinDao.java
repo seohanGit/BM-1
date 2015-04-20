@@ -28,4 +28,6 @@ public interface JoinDao {
 
 	public int selectMemberById(String id);
 
+	public List<MemberModel> selectMemberList();
+
 }

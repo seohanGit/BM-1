@@ -8,16 +8,16 @@
 		<div class="col-md-8">
 			<h2>도서검색 목록</h2>
 			<hr>
-			<table class="table table-striped ">
+			<table class="table table-striped  table-bordered table-condensed">
 				<thead>
 					<tr>
 						<td id="tb-img">표지</td>
-						<td id="tb-title">도서명</td>
+						<td id="tb-author">도서명</td>
 						<td id="tb-author">저자</td>
 						<td id="tb-genre">장르</td>
 
-						<td id="tb-genre">대여상태</td>
-						<td></td>
+						<td width="13%">대여상태</td>
+						<td width="15%"></td>
 					</tr>
 				</thead>
 				<%-- 
@@ -28,7 +28,8 @@
 
 
 						<tr>
-							<td rowspan="2" align="left"><img src="${book.imageurl}"></td>
+							<td rowspan="2" style="width: 50px" align="left"><img
+								style="width: 50px" src="${book.imageurl}"></td>
 						</tr>
 						<tr>
 							<td align="left">${book.bookname }</td>
@@ -43,13 +44,15 @@
 									<c:when test="${book.borrowcheck=='2'}">
 			대출중</c:when>
 									<c:when test="${book.borrowcheck=='4'}">
-			대출정지</c:when>
+										<mark>대출정지</mark>
+									</c:when>
 									<c:when test="${book.borrowcheck=='5'}">
 			예약중</c:when>
+
 								</c:choose></td>
 							<td>
 								<button class="btn btn-default" type="button" id="reservebook"
-									onClick="location.href='/stopBorrow?bookCode=${book.bookCode}'">대출정지</button>
+									onClick="location.href='/stopBorrow?bookCode=${book.bookCode}'; rentStop();">대출정지</button>
 								<button class="btn btn-default" type="button" id="modifybook"
 									onClick="location.href='/modifyBookForm?bookCode=${book.bookCode}'">도서수정</button>
 								<button class="btn btn-default" type="button" id="deletebook"
@@ -72,3 +75,4 @@
 	</div>
 </div>
 <script src="/resources/js/common.js"></script>
+

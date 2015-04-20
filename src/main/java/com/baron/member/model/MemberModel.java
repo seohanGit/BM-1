@@ -20,6 +20,33 @@ public class MemberModel {
 	private int numarrear;
 	private int score;
 	private String content;
+	private String team;
+	private Date borrowdate;
+	private Date returndate;
+
+	public Date getBorrowdate() {
+		return borrowdate;
+	}
+
+	public void setBorrowdate(Date borrowdate) {
+		this.borrowdate = borrowdate;
+	}
+
+	public Date getReturndate() {
+		return returndate;
+	}
+
+	public void setReturndate(Date returndate) {
+		this.returndate = returndate;
+	}
+
+	public String getTeam() {
+		return team;
+	}
+
+	public void setTeam(String team) {
+		this.team = team;
+	}
 
 	public String getContent() {
 		return content;

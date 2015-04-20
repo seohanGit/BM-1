@@ -56,9 +56,9 @@ body {
 							<td width="14%" align="left">${book.returndate }</td>
 							<td width="15%">${book.genre}</td>
 							<td width="13%">${book.id}</td>
-							<td><button class="btn btn-default" type="button"
+							<td><button class="btn btn-default btn-sm" type="button"
 									id="extendbook"
-									onClick="location.href='/extendBorrowBook?bookCode=${book.bookCode}'">알림</button></td>
+									onClick="location.href='/deleteRecord?bookCode=${book.bookCode}&id=${book.id}'">삭제</button></td>
 						</tr>
 						<tr>
 							<td></td>

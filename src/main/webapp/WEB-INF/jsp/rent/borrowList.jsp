@@ -21,11 +21,7 @@ body {
 	padding-top: 70px;
 }
 </style>
-<script>
-	function del() {
-		alert("승인되었습니다.");
-	}
-</script>
+
 
 
 </head>
@@ -95,14 +91,12 @@ body {
 										<td>
 											<button class="btn btn-default" type="button"
 												id="reservebook"
-												onClick="location.href='/cancleBorrowBook?bookCode=${book.bookCode}'">취소</button>
+												onClick="location.href='/cancleBorrowBook?bookCode=${book.bookCode}'; cancel();">취소</button>
 										</td>
 									</c:when>
 									<c:when test="${book.borrowcheck=='2'}">
 										<td>대출중</td>
-										<td><button class="btn btn-default" type="button"
-												id="reservebook"
-												onClick="location.href='/extendBorrowBook?bookCode=${book.bookCode}'">연장</button></td>
+										
 									</c:when>
 								</c:choose>
 

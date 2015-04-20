@@ -85,4 +85,9 @@ public class JoinServiceImpl implements JoinService {
 		return joinDao.selectMemberById(id);
 	}
 
+	@Override
+	public List<MemberModel> memberList() {
+		return joinDao.selectMemberList();
+	}
+
 }

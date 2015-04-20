@@ -62,6 +62,7 @@ public class JoinDaoImpl implements JoinDao {
 	@Override
 	public List<MemberModel> selectBest() {
 		// TODO Auto-generated method stub
+		
 		return session.selectList(NAMESPACE+"selectBest");
 	}
 
@@ -81,6 +82,12 @@ public class JoinDaoImpl implements JoinDao {
 	public int selectMemberById(String id) {
 		// TODO Auto-generated method stub
 		return (int)session.selectOne(NAMESPACE+"selectMemberById",id);
+	}
+
+	@Override
+	public List<MemberModel> selectMemberList() {
+		// TODO Auto-generated method stub
+		return session.selectList(NAMESPACE + "selectMemberList");
 	}
 	
 

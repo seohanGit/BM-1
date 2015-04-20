@@ -27,16 +27,20 @@ public class RentController {
 	public String borrowBook(HttpServletRequest request, String bookCode,
 			BookModel book) {
 		String id = null;
+		String late = null;
 		for (Cookie cookie : request.getCookies()) {
 			if (cookie.getName().equals("bm_id")) {
 				id = cookie.getValue();
+			}
+			if (cookie.getName().equals("bm_late")) {
+				late = cookie.getValue();
 			}
 		}
 		book.setId(id);
 		book.setBookCode(bookCode);
 		book.setBorrowcheck("1");
 
-		if (rentservice.borrowCheck(book).equals("0")) {
+		if (rentservice.borrowCheck(book).equals("0") & late.equals("0")) {
 			System.out.println(book.getBorrowcheck());
 			rentservice.borrowBook(book);
 			return "redirect:borrowList";
@@ -96,8 +100,8 @@ public class RentController {
 
 		if (rentservice.selectReservation(bookCode).equals("0")) {
 			rentservice.extendBorrowBook(bookCode);
-			return "redirect:borrowList";
-		}else{
+			return "/rent/extendSuccess";
+		} else {
 			return "redirect:extendFail";
 		}
 	}
@@ -123,15 +127,12 @@ public class RentController {
 		return "rent/rentList";
 	}
 
-	@RequestMapping("/returnListAll")
-	public String returnListAll(Model model) {
-		List<BookModel> bookList = new ArrayList<BookModel>();
-		bookList = rentservice.returnListAll();
-		model.addAttribute("bookList", bookList);
-		return "rent/returnList";
-	}
-
-	@RequestMapping("/returnmanybook")
+	/*
+	 * @RequestMapping("/returnListAll") public String returnListAll(Model
+	 * model) { List<BookModel> bookList = new ArrayList<BookModel>(); bookList
+	 * = rentservice.returnListAll(); model.addAttribute("bookList", bookList);
+	 * return "rent/returnList"; }
+	 */@RequestMapping("/returnmanybook")
 	public String returnManyBook(List<String> bookCodeList) {
 
 		for (int i = 0; i < bookCodeList.size(); i++) {
@@ -147,7 +148,7 @@ public class RentController {
 		if (rentservice.borrowCheck(book).equals("2")) {
 			System.out.println(book.getBorrowcheck());
 			rentservice.returnBook(bookCode);
-			return "redirect:rentList";
+			return "redirect:rentListAll";
 		} else {
 
 			return "rent/returnfail";
@@ -200,11 +201,21 @@ public class RentController {
 		return "rent/recordList";
 	}
 
+	@RequestMapping("/deleteRecord")
+	public String deleteRecord(String id, String bookCode, Model model,
+			BookModel book) {
+		book.setBookCode(bookCode);
+		book.setId(id);
+		rentservice.deleteRecord(book);
+
+		return "redirect:recordList";
+	}
+
 	@RequestMapping("/reservation")
 	public String reservation(String bookCode, BookModel book,
 			HttpServletRequest request) {
 
-		if (rentservice.selectReservation(bookCode) != null) {
+		if (rentservice.selectReservation(bookCode).equals("1")) {
 			return "rent/reservationfail";
 		}
 

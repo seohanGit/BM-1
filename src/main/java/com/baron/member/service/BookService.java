@@ -16,8 +16,6 @@ public interface BookService {
 
 	public String selectname(String booknum);
 
-	List<BookModel> getBestseller(String catogoryId) throws Exception;
-
 	List<BookModel> getNewbook() throws Exception;
 
 	BookModel selectBook(String bookCode);
@@ -25,5 +23,7 @@ public interface BookService {
 	List<BookModel> findBook(String keyword) throws Exception;
 
 	List<BookModel> pagenation(String keyword, String page) throws Exception;
+
+	public List<BookModel> getBestSeller();
 
 }

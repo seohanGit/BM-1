@@ -25,8 +25,8 @@
             <td>${late.address}</td>
             <td>${late.cell}</td>
             <td>${late.home}</td>
-            <td>${late.borrowday}</td>
-            <td>${late.returnday}</td>
+            <td>${late.borrowdate}</td>
+            <td>${late.returndate}</td>
             </tr>
         </c:forEach>
     </tbody>

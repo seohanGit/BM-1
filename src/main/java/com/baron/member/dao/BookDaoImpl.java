@@ -52,5 +52,17 @@ public class BookDaoImpl implements BookDao {
 
 	}
 
+	@Override
+	public List<BookModel> getNewbook() {
+		// TODO Auto-generated method stub
+		return session.selectList(NAMESPACE + "getNewbook");
+	}
+
+	@Override
+	public List<BookModel> getBestSeller() {
+		// TODO Auto-generated method stub
+		return session.selectList(NAMESPACE + "getBestSeller");
+	}
+
 	
 }

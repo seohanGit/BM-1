@@ -62,6 +62,7 @@ public class JoinDaoImpl implements JoinDao {
 	@Override
 	public List<MemberModel> selectBest() {
 		// TODO Auto-generated method stub
+		
 		return session.selectList(NAMESPACE+"selectBest");
 	}
 

@@ -27,11 +27,11 @@ body {
 	<jsp:include page="../nav.jsp" />
 	<div class="container">
 		<jsp:include page="../menu.jsp" />
-		<div class="row" id="searchResultArea">
+		<div class="row" id="searchResultArea" style=" table-layout:auto;  ">
 			<hr>
 			<h2>예약현황 목록</h2>
 			<hr>
-			<table class="table table-striped table-bordered">
+			<table class="table table-striped table-bordered" style="width:95%; ">
 				<thead>
 					<tr class="hidden-xs title">
 
@@ -46,7 +46,7 @@ body {
 
 
 				<c:forEach items="${bookList}" var="book" varStatus="status">
-					<tbody>
+					<tbody >
 
 						<tr>
 
@@ -55,11 +55,12 @@ body {
 							<td align="left">${book.genre }</td>
 							<td>ID : ${book.id}</td>
 
-							<td><button class="btn btn-default" type="button"
+							<td><button class="btn btn-default btn-sm" type="button"
 									id="extendbook"
-									onClick="location.href='/extendBorrowBook?bookCode=${book.bookCode}'">알림</button><button class="btn btn-default" type="button"
+									onClick="location.href='/extendBorrowBook?bookCode=${book.bookCode}&id=${book.id}'">알림</button>
+								<button class="btn btn-default btn-sm" type="button"
 									id="extendbook"
-									onClick="location.href='/extendBorrowBook?bookCode=${book.bookCode}'">삭제</button>
+									onClick="location.href='/deleteReserve?bookCode=${book.bookCode}'">삭제</button>
 							</td>
 
 						</tr>

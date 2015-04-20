@@ -37,7 +37,6 @@ public class RequestController {
 		bookList = requestservice.requestList();
 		model.addAttribute("bookList", bookList);
 
-		System.out.println(bookList.get(0).getRequestdate());
 		return "requestList";
 	}
 
@@ -68,7 +67,7 @@ public class RequestController {
 	@RequestMapping("/confirmBuy")
 	public String confirmBuy(BookModel model) {
 		bookService.insertBook(model);
-		return "member/admin";
+		return "redirect:requestList";
 	}
 
 	@RequestMapping("/deleteRequest")

@@ -64,43 +64,58 @@
 					</span>
 				</form>
 			</div>
-			<c:forEach items="${bookList}" var="book" varStatus="status">
 
-				<table width="100%" border="10px" bordercolor="#fff">
 
+			<table style="width=:90%; bordercolor:#fff">
+
+				<thead>
+					<tr>
+						<td id="td-img">표지</td>
+						<td id="td-title">도서명</td>
+						<td id="td-author">저자</td>
+						<td id="td-genre">장르</td>
+						<td id="td-author">출판사</td>
+						<td id="td-date">가격</td>
+						<td id="td-date"></td>
+						<td></td>
+					</tr>
+				</thead>
+				<c:forEach items="${bookList}" var="book" varStatus="status">
 					<tbody>
 
 						<tr>
+							<td rowspan="3" style="width: 50px" align="left"><img
+								style="width: 50px" src="${book.imageurl}"></td>
+						</tr>
+						<tr>
+							<td align="left"><a href="${book.link}">${book.bookname}</a></td>
+							<td align="left">${book.writer }</td>
+							<td align="left">${book.genre}</td>
+							<td align="left">${book.publisher}</td>
+							<td align="left">${book.priceSales}원</td>
 
-							<td width="115px" style="margin: 10px"><span
-								class="goods_cnt"></span> <img src="${book.imageurl}"
-								width="95px" height="150px"></td>
-							<td class="goods_infogrp" align="left" style="margin-left: 10px">
-
-								<p>
-									<a href="${book.link}">${book.bookname}</a>
-								</p>
-
-								<p>${book.writer}|${book.priceSales}원</p>
-								<form action="/requestbook" method="get">
-									<input type="hidden" value="${book.isbn}" name="isbn">
-									<input type="number" name="quantity" placeholder="구매 수량">
+							<form action="/requestbook" method="get">
+								<td style="width: 20px"><input type="hidden"
+									value="${book.isbn}" name="isbn"> <input type="number"
+									name="quantity" placeholder="구매 수량" style="width: 90px"></td>
+								<td>
 									<button class="btn btn-default" type="submit" id="requestbook">구매요청</button>
 
-								</form> <%-- 
+
+									<%-- 
 					<button class="btn btn-default" type="button" id="requestbook"
 						onClick="location.href='/requestbook?isbn=${book.isbn}'">구매</button>
 					&writer=${book.writer}&publisher=${book.publisher}&imageurl=${book.imageurl}
  --%>
-
-							</td>
-
+								</td>
+							</form>
 						</tr>
 
 					</tbody>
-				</table>
+				</c:forEach>
+			</table>
 
-			</c:forEach>
+
 		</div>
 	</div>
 	<div id="page"></div>

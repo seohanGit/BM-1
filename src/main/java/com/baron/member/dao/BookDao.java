@@ -19,5 +19,7 @@ public interface BookDao {
 
 	public List<BookModel> getNewbook();
 
+	public List<BookModel> getBestSeller();
+
 
 }

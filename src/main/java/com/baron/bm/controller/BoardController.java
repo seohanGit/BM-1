@@ -75,6 +75,16 @@ public class BoardController {
 		return "board/boardList";
 	}
 
+	@RequestMapping("/noticeListByAdmin")
+	public String noticeListByAdmin(Model model) {
+		List<BoardModel> noticeList = boardService.noticeList();
+
+		model.addAttribute("noticeList", noticeList);
+
+		return "board/noticeListByAdmin";
+
+	}
+
 	@RequestMapping("/noticeList")
 	public String noticeList(Model model) {
 		List<BoardModel> noticeList = boardService.noticeList();
@@ -93,18 +103,18 @@ public class BoardController {
 	@RequestMapping("/insertNotice")
 	public String insertNotice(BoardModel boardmodel) {
 		boardService.insertNotice(boardmodel);
-		return "redirect:noticeList";
+		return "redirect:noticeListByAdmin";
 	}
 
 	@RequestMapping("/deleteNotice")
 	public String deleteNotice(String boardnum) {
 		boardService.deleteNotice(boardnum);
-		return "redirect:noticeList";
+		return "redirect:noticeListByAdmin";
 	}
 
 	@RequestMapping("/modifyNotice")
 	public String modifyNotice(BoardModel content) {
 		boardService.modifyNotice(content);
-		return "redirect:noticeList";
+		return "redirect:noticeListByAdmin";
 	}
 }

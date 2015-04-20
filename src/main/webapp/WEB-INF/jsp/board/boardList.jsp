@@ -23,51 +23,64 @@
 		<jsp:include page="../menu.jsp" />
 		<div id="searchResultArea" class="row">
 			<hr>
-			<h2>
-				게시판 관리
-				<button class="btn btn-default" style="position: relative;"
-					onClick="location.href='/writeNotice'">추가</button>
-			</h2>
-			<hr>
-
-			<table>
+			<h2>게시판 관리</h2>
+			
+			<table class="table  table-condensed">
 				<thead>
 					<tr>
 						<td id="tb-status">ID</td>
 						<td id="tb-status">제목</td>
-						<td id="tb-title">내용</td>
-						<td id="tb-date">최종 수정일</td>
-						<td id="tb-status"></td>
+						<td>내용</td>
+						<td>최종 수정일</td>
+						<td id="tb-date"></td>
 
 					</tr>
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
 				</thead>
-				<tbody>
-					<c:forEach items="${boardList}" var="board" varStatus="status">
+				<c:forEach items="${boardList}" var="board" varStatus="status">
+					<tbody>
+
 						<form action="/modifyBoard" method="post">
 							<tr>
-								<td>${board.id}</td>
+								<td style="vertical-align: top;">${board.id}</td>
+								<td style="vertical-align: top;"><input id="title"
+									name="title" type="text" style="width: 90%;"
+									value="${board.title}" /></td>
+								<td style="width: 60%; height: auto;" align="left"><textarea
+										autofocus="autofocus" class="form-control " id="content"
+										name="content" style="width: 90%;" rows="5"
+										onKeyDown="setLine( this )"> ${board.content}</textarea></td>
 
-								<td><input id="title" name="title" type="text"
-									placeholder="${board.title}" /></td>
-								<td><textarea class="form-control " id="content"
-										name="content" style="width: 100%;" rows="3"
-										placeholder="${board.content}" onKeyDown="setLine( this )"></textarea>
-								</td>
 
-								<td><fmt:formatDate value="${board.modifidate}"
-										pattern="yyyy-MM-dd" /></td>
+								<td style="width: 10%;"><fmt:formatDate
+										value="${board.modifidate}" pattern="yyyy-MM-dd" /></td>
 
 								<td><input type="hidden" name="boardnum"
 									value="${board.boardnum }">
-									<button class="btn btn-default" type="submit" id="modifyBoard">수정</button>
-
-									<button class="btn btn-default" type="button" id="deleteBoard"
+									<button class="btn btn-default btn-sm" type="submit"
+										id="modifyBoard">수정</button> <hr>
+									<button class="btn btn-default btn-sm" type="button"
+										id="deleteBoard"
 										onClick="location.href='/deleteBoard?boardnum=${board.boardnum}'">삭제</button>
 								</td>
 							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
 						</form>
-					</c:forEach>
-				</tbody>
+					</tbody>
+				</c:forEach>
+
 			</table>
 
 

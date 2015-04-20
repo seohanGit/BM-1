@@ -34,19 +34,19 @@ body {
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">e-mail변경</label> <input type="text"
-                        class="form-control" id="email" name ="email" placeholder="${Member.email}">
+                        class="form-control" id="email" name ="email" value="${Member.email}">
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">주소 변경</label> <input type="text"
-                        class="form-control" id="address" name ="address" placeholder="${Member.address}">
+                        class="form-control" id="address" name ="address" value="${Member.address}">
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">핸드폰변경</label> <input type="text"
-                        class="form-control" id="cell" name ="cell" placeholder="${Member.cell}">
+                        class="form-control" id="cell" name ="cell" value="${Member.cell}">
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">집전화 변경</label> <input type="text"
-                        class="form-control" id="cell" name ="home" placeholder="${Member.home}">
+                        class="form-control" id="cell" name ="home" value="${Member.home}">
                 </div>
                 <button type="submit" class="btn btn-default">확인</button>
             </form>

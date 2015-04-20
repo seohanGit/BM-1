@@ -16,7 +16,7 @@
 		<button type="button" class="btn btn-default" id="reservationListAll">예약현황</button>
 		<hr>
 		<button type="button" class="btn btn-default" id="recordListAll">대여기록</button>
-		<button type="button" class="btn btn-default" id="noticeList">공지사항</button>
+		<button type="button" class="btn btn-default" id="noticeListByAdmin">공지사항</button>
 		<button type="button" class="btn btn-default" id="memberList">사용자목록</button>
 		<button type="button" class="btn btn-default" id="boardList">게시판
 			관리</button>
@@ -26,8 +26,8 @@
 	style="width: 650px">
 	<div class="panel-heading" role="group" aria-label="..."
 		style="width: 100%;">
-		<button type="button" class="btn btn-default" id="noticeList"
-			onclick="location.href='noticeList'">공지사항</button>
+		<button type="button" class="btn btn-default" id="noticeListByAdmin"
+			onclick="location.href='noticeListByAdmin'">공지사항</button>
 		<button type="button" class="btn btn-default" id="memberList">사용자목록</button>
 		<button type="button" class="btn btn-default" id="boardList">게시판
 			관리</button>

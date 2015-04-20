@@ -26,18 +26,25 @@
 			<h2>대여현황 목록</h2>
 			<hr>
 			<table class="table table-striped table-bordered ">
+				<c:choose>
+					<c:when test="${empty bookList}">
+						<h3>대여중인 도서가 없습니다.</h3>
+					</c:when>
+					<c:otherwise>
+						<thead>
+							<tr class="hidden-xs title">
 
-				<thead>
-					<tr class="hidden-xs title">
+								<td id="tb-title">도서명</td>
+								<td id="tb-date">대여일자</td>
+								<td id="tb-date">반납일자</td>
+								<td id="tb-status">대출자</td>
+								<td id="tb-status">반납</td>
+								<td id="tb-status">연장</td>
+							</tr>
+						</thead>
+					</c:otherwise>
+				</c:choose>
 
-						<td id="tb-title">도서명</td>
-						<td id="tb-date">대여일자</td>
-						<td id="tb-date">반납일자</td>
-						<td id="tb-status">대출자</td>
-						<td id="tb-status">반납</td>
-
-					</tr>
-				</thead>
 
 				<c:forEach items="${bookList}" var="book" varStatus="loop">
 
@@ -55,10 +62,14 @@
 									onClick="location.href='/extendBorrowBook?bookCode=${book.bookCode}'">연장</button>
 							</td>
  --%>
-							<td><button class="btn btn-default" type="button"
+							<td><button class="btn btn-default btn-sm" type="button"
 									id="reservebook"
-									onClick="location.href='/returnBookByAdmin?bookCode=${book.bookCode}'">반납</button>
+									onClick="location.href='/returnBookByAdmin?bookCode=${book.bookCode}'; re_turn();">반납</button>
 							</td>
+							<td><button class="btn btn-default btn-sm" type="button"
+									id="reservebook"
+									onClick="location.href='/extendBorrowBook?bookCode=${book.bookCode}'; extend();">연장</button></td>
+
 						</tr>
 						<tr>
 							<td></td>

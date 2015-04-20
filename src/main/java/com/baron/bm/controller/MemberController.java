@@ -90,7 +90,8 @@ public class MemberController {
 			response.addCookie(new Cookie("bm_id", model.getId()));
 			response.addCookie(new Cookie("bm_permission", model
 					.getPermission()));
-			response.addCookie(new Cookie("bm_late", String.valueOf(model.getNumarrear())));
+			response.addCookie(new Cookie("bm_late", String.valueOf(model
+					.getNumarrear())));
 			mav.addObject("result", true);
 		} else {
 			mav.addObject("result", false);
@@ -113,8 +114,7 @@ public class MemberController {
 				if ("1".equals(cookie.getValue())) {
 
 					List<MemberModel> memberList = joinService.selectBest();
-					List<BookModel> bestSeller = bookService
-							.getBestseller("300");
+					List<BookModel> bestSeller = bookService.getBestSeller();
 					List<BookModel> newBook = bookService.getNewbook();
 
 					model.addAttribute("bestList", memberList);
@@ -183,13 +183,14 @@ public class MemberController {
 
 	@RequestMapping("/index")
 	public String index(Model model) throws Exception {
-		List<BoardModel> content = boardService.noticeList();
+		List<BoardModel> notice = boardService.noticeList();
 		List<MemberModel> bestList = joinService.selectBest();
 
-		List<BookModel> bestSeller = bookService.getBestseller("100");
 		List<BookModel> newBook = bookService.getNewbook();
+		List<BookModel> bestSeller = bookService.getBestSeller();
+
 		model.addAttribute("bestList", bestList);
-		model.addAttribute("contentList", content);
+		model.addAttribute("noticeList", notice);
 		model.addAttribute("bestseller", bestSeller);
 		model.addAttribute("newbook", newBook);
 		return "index";

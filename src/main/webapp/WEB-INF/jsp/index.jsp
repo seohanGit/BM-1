@@ -23,14 +23,14 @@
 			<div class="col-md-8">
 				<div id="goodPhrase">
 					<h1 class="page-header">
-						공지사항 <small>민상훈책방</small>
+						<a href="noticeList">공지사항</a> <small>민상훈책방</small>
 					</h1>
 					<!-- First Blog Post -->
 					<ul class="list-group">
-						<c:forEach items="${contentList}" var="con" varStatus="status">
-							<li class="list-group-item"><textarea
-									style="width: 100%; " readonly
-									rows="5">${con.content}</textarea></li>
+						<c:forEach items="${noticeList}" var="notice" varStatus="status"
+							begin="0" end="1" step="1">
+							<li class="list-group-item"><textarea style="width: 100%;"
+									readonly rows="5">${notice.content}</textarea></li>
 						</c:forEach>
 					</ul>
 
@@ -119,7 +119,6 @@
 				location.href = "/logout"
 			})
 
-		
 			$document
 					.ready(function() {
 						var date = "${con.registerdate}";

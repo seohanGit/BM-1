@@ -20,25 +20,36 @@
 	<jsp:include page="../nav.jsp"></jsp:include>
 
 	<div class="container">
-
+		<jsp:include page="../menu.jsp" />
 		<div id="searchResultArea" class="row">
 			<hr>
-			<h2>공지사항</h2>
+			<h2>
+				공지사항
+				<button class="btn btn-default" style="position: relative;"
+					onClick="location.href='/writeNotice'">추가</button>
+			</h2>
 			<hr>
 
 
 			<c:forEach items="${noticeList}" var="notice" varStatus="status">
-				
-					<ul>
+
+				<ul>
+					<form action="/modifyNotice" method="post">
 						<li width="15%" align="left"><fmt:formatDate
 								value="${notice.registerdate}" pattern="yyyy-MM-dd" /></li>
 						<li style="width: 90%; height: auto;" align="left"><textarea
-								class="content ellipsis" id="content" name="content"
-								style="width: 100%;" rows="2" readonly>${notice.content }</textarea></li>
+								class="form-control " id="content" name="content"
+								style="width: 100%;" rows="3" placeholder="${notice.content}"
+								onKeyDown="setLine( this )"></textarea><input type="hidden"
+							name="boardnum" value="${notice.boardnum }"></li>
 
+						<button class="btn btn-default btn-sm" type="submit" id="modifyNotice">수정</button>
 
-					</ul>
-				
+						<button class="btn btn-default btn-sm" type="button" id="deleteNotice"
+							onClick="location.href='/deleteNotice?boardnum=${notice.boardnum}'">삭제</button>
+					</form>
+				</ul>
+
 			</c:forEach>
 
 
@@ -50,6 +61,19 @@
 	<script src="/resources/js/bootstrap.min.js"></script>
 	<script src="/resources/js/book.js"></script>
 	<script src="/resources/js/common.js"></script>
+	<script>
+		function setLine(txa) {
+			line = 5 //기본 줄 수
 
+			new_line = txa.value.split("\n").length + 1;
+			if (new_line < line)
+				new_line = line;
+
+			txa.rows = new_line;
+		}
+		function del() {
+			alert("승인되었습니다.");
+		}
+	</script>
 </body>
 </html>

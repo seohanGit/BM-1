@@ -56,11 +56,14 @@
 	</select>
 
 	<select id="selectBest" resultType="MemberModel">
-		SELECT name,score,id,
-		numborrow
+		SELECT A.name, A.score, A.id,
+		A.numborrow
 		FROM
-		member
-		ORDER BY score DESC
+		member AS A, borrow AS B
+		WHERE B.borrowdate >
+		date_sub(NOW(), interval 30 day) AND A.id=B.id
+		ORDER BY A.score DESC
+
 	</select>
 
 	<select id="selectMemberList" resultType="MemberModel">
@@ -104,7 +107,7 @@
 		VALUES
 		(#{title},#{content},NOW(),NOW(),#{id})
 	</insert>
-	
+
 	<delete id="deleteBoard" parameterType="String">
 		DELETE FROM bulletinboard
 		WHERE
@@ -117,7 +120,7 @@
 		content=#{content}
 		WHERE boardnum=#{boardnum}
 	</update>
-	
+
 	<select id="noticeList" resultType="BoardModel">
 		SELECT *
 		FROM
@@ -159,13 +162,6 @@
 	</insert>
 
 
-	<select id="selectBestBook" resultType="BookModel">
-		SELECT *
-		FROM book
-		ORDER BY
-		grade DESC
-	</select>
-
 	<select id="selectBook" parameterType="String" resultType="BookModel">
 		SELECT * FROM book WHERE bookCode=#{bookCode}
 	</select>
@@ -175,7 +171,7 @@
 		WHERE bookname LIKE
 		CONCAT('%',#{keyword},'%')
 		ORDER
-		BY buydate
+		BY buydate DESC
 
 	</select>
 
@@ -201,7 +197,12 @@
 		buydate DESC
 	</select>
 
-
+	<select id="getBestSeller" resultType="BookModel">
+		SELECT *
+		FROM book
+		ORDER BY
+		grade DESC
+	</select>
 	<!-- 구매요청, 대여 관련 커리 -->
 
 	<insert id="requestBook" parameterType="BookModel">
@@ -228,7 +229,8 @@
 		SELECT *
 		FROM
 		request AS A,
-		member AS B WHERE A.id=B.id
+		member AS B 
+		WHERE A.id=B.id AND A.bookCode!='0'
 		ORDER BY
 		A.requestdate DESC;
 	</select>
@@ -294,7 +296,8 @@
 		ON A.borrowcheck = B.borrowcheck
 		SET
 		A.borrowcheck='2',
-		B.borrowcheck='2'
+		B.borrowcheck='2',
+		B.borrowdate=NOW()
 		WHERE
 		A.bookCode=#{bookCode} AND
 		B.bookCode=#{bookCode}

@@ -8,7 +8,7 @@
 		<div class="col-md-8">
 			<h2>도서검색 목록</h2>
 			<hr>
-			<table class="table table-striped  table-bordered">
+			<table class="table table-striped  table-bordered table-condensed">
 				<thead>
 					<tr>
 						<td id="tb-img">표지</td>
@@ -17,7 +17,7 @@
 						<td id="tb-genre">장르</td>
 
 						<td width="13%">대여상태</td>
-						<td id="tb-empty"></td>
+						<td width="15%"></td>
 					</tr>
 				</thead>
 				<%-- 
@@ -35,25 +35,24 @@
 							<td align="left">${book.bookname }</td>
 							<td align="left">${book.writer }</td>
 							<td align="left">${book.genre}</td>
-							<td align="left"><mark>
-									<c:choose>
-										<c:when test="${book.borrowcheck=='0'}">
+							<td align="left"><c:choose>
+									<c:when test="${book.borrowcheck=='0'}">
 			대출가능</c:when>
 
-										<c:when test="${book.borrowcheck=='1'}">
+									<c:when test="${book.borrowcheck=='1'}">
 			대여요청중</c:when>
-										<c:when test="${book.borrowcheck=='2'}">
+									<c:when test="${book.borrowcheck=='2'}">
 			대출중</c:when>
-										<c:when test="${book.borrowcheck=='4'}">
-			대출정지</c:when>
-										<c:when test="${book.borrowcheck=='5'}">
+									<c:when test="${book.borrowcheck=='4'}">
+										<mark>대출정지</mark>
+									</c:when>
+									<c:when test="${book.borrowcheck=='5'}">
 			예약중</c:when>
 
-									</c:choose>
-								</mark></td>
+								</c:choose></td>
 							<td>
 								<button class="btn btn-default" type="button" id="reservebook"
-									onClick="location.href='/stopBorrow?bookCode=${book.bookCode}'">대출정지</button>
+									onClick="location.href='/stopBorrow?bookCode=${book.bookCode}'; rentStop();">대출정지</button>
 								<button class="btn btn-default" type="button" id="modifybook"
 									onClick="location.href='/modifyBookForm?bookCode=${book.bookCode}'">도서수정</button>
 								<button class="btn btn-default" type="button" id="deletebook"
@@ -76,3 +75,4 @@
 	</div>
 </div>
 <script src="/resources/js/common.js"></script>
+

@@ -42,7 +42,7 @@
 					<a href="${newbook.link}">${newbook.bookname}</a>
 				</p>
 				<p class="caption">${newbook.writer}</p>
-				<p class="caption">${newbook.genre}</p>
+				<p class="caption">입고일 : ${newbook.buydate}</p>
 			</div>
 		</div>
 		<hr>
@@ -61,7 +61,7 @@
 					<a href="${book.link}">${book.bookname}</a>
 				</p>
 				<p class="caption">${book.writer}</p>
-				<p class="caption">${book.genre}</p>
+				<p class="caption">대출횟수 : ${book.grade}회</p>
 			</div>
 		</div>
 		<hr>

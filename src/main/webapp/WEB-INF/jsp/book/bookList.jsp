@@ -22,7 +22,8 @@ body {
 </style>
 <script>
 	function del() {
-		alert("승인되었습니다.");
+		alert("삭제되었습니다.");
+		
 	}
 </script>
 
@@ -39,16 +40,16 @@ body {
 			<h2>도서목록</h2>
 			<hr>
 
-			<table class="table table-striped table-bordered ">
+			<table class="table table-striped table-bordered table-condensed">
 				<thead>
 					<tr>
 						<td id="tb-img">표지</td>
 						<td id="tb-author">도서명</td>
 						<td id="tb-author">저자</td>
-						<td id="tb-genre">장르</td>
+						<td id="tb-status">장르</td>
 
-						<td width="13%">대여상태</td>
-						<td id="tb-empty"></td>
+						<td width="10%">대여상태</td>
+						<td width="25%"></td>
 					</tr>
 				</thead>
 				<%-- 
@@ -84,11 +85,11 @@ body {
 									</c:when>
 								</c:choose></td>
 							<td>
-								<button class="btn btn-default" type="button" id="reservebook"
+								<button class="btn btn-default btn-sm" type="button" id="reservebook"
 									onClick="location.href='/stopBorrow?bookCode=${book.bookCode}'">대출정지</button>
-								<button class="btn btn-default" type="button" id="modifybook"
+								<button class="btn btn-default btn-sm" type="button" id="modifybook"
 									onClick="location.href='/modifyBookForm?bookCode=${book.bookCode}'">도서수정</button>
-								<button class="btn btn-default" type="button" id="deletebook"
+								<button class="btn btn-default btn-sm" type="button" id="deletebook"
 									onClick="location.href='/deletebook?bookCode=${book.bookCode}'; del();">도서삭제</button>
 
 							</td>

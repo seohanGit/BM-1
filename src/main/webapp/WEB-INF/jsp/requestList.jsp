@@ -22,11 +22,6 @@ body {
 	padding-top: 70px;
 }
 </style>
-<script>
-	function del() {
-		alert("승인되었습니다.");
-	}
-</script>
 
 
 </head>
@@ -43,23 +38,32 @@ body {
 			<div>
 				<h2>구매요청 목록</h2>
 				<hr>
+
 				<table class="table table-striped table-bordered">
-					<thead>
-						<tr class="hidden-xs ">
-							<td id="tb-img">표지</td>
-							<td id="tb-author">도서명</td>
-							<td id="tb-author">저자</td>
-							<td id="tb-genre">가격</td>
-							<td id="tb-genre">수량</td>
-							<td id="tb-genre">신청자</td>
-							<td id="tb-date">요청일자</td>
-							<td width="60px"></td>
-							<td width="60px"></td>
-						</tr>
-					</thead>
+					<c:choose>
+						<c:when test="${empty bookList}">
+							<h3>구매 요청한 도서가 없습니다.</h3>
+						</c:when>
+						<c:otherwise>
+							<thead>
+								<tr class="hidden-xs ">
+									<td id="tb-img">표지</td>
+									<td id="tb-author">도서명</td>
+									<td id="tb-author">저자</td>
+									<td id="tb-genre">가격</td>
+									<td id="tb-genre">수량</td>
+									<td id="tb-genre">신청자</td>
+									<td id="tb-date">요청일자</td>
+									<td width="60px"></td>
+									<td width="60px"></td>
+								</tr>
+							</thead>
+						</c:otherwise>
+					</c:choose>
 
 
 					<c:forEach items="${bookList}" var="book" varStatus="status">
+
 						<tbody class="visible-xs-block" style="width: 100%">
 							<tr>
 								<td rowspan="4" style="width: 50px" align="left"><img
@@ -100,7 +104,8 @@ body {
 								<td>${book.id}</td>
 								<td>${book.requestdate}</td>
 								<td><button class="btn btn-default" type="button"
-										id="buyBook" onClick="location.href='buyRequest?bookCode=${book.bookCode}'">구매</button>
+										id="buyBook"
+										onClick="location.href='buyRequest?bookCode=${book.bookCode}'">구매</button>
 								</td>
 								<td>
 									<button class="btn btn-default" type="button"
@@ -117,8 +122,8 @@ body {
 								<td></td>
 							</tr>
 						</tbody>
-					</c:forEach>
 
+					</c:forEach>
 				</table>
 			</div>
 		</div>

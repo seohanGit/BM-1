@@ -100,7 +100,7 @@ public class RentController {
 
 		if (rentservice.selectReservation(bookCode).equals("0")) {
 			rentservice.extendBorrowBook(bookCode);
-			return "redirect:borrowList";
+			return "/rent/extendSuccess";
 		} else {
 			return "redirect:extendFail";
 		}
@@ -215,7 +215,7 @@ public class RentController {
 	public String reservation(String bookCode, BookModel book,
 			HttpServletRequest request) {
 
-		if (rentservice.selectReservation(bookCode) != null) {
+		if (rentservice.selectReservation(bookCode).equals("1")) {
 			return "rent/reservationfail";
 		}
 

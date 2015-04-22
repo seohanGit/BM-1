@@ -4,9 +4,9 @@
 	관리자 페이지 <small>Admin</small>
 </h1>
 <!-- First Blog Post -->
-<div class="row panel panel-default hidden-xs" style="width: 650px">
+<div class="row panel panel-default hidden-xs" style="width: 600px">
 	<div class="panel-heading" role="group" aria-label="..."
-		style="width: 100%;">
+		style="width: 95%;">
 		<button type="button" class="btn btn-default" id="bookList">
 			도서목록</button>
 		<button type="button" class="btn btn-default" id="requestList">구매요청
@@ -23,14 +23,15 @@
 	</div>
 </div>
 <div class="row panel panel-default visible-xs-block"
-	style="width: 650px">
+	style="width: 350px">
 	<div class="panel-heading" role="group" aria-label="..."
-		style="width: 100%;">
+		style="width: 95%;">
 		<button type="button" class="btn btn-default" id="noticeListByAdmin"
 			onclick="location.href='noticeListByAdmin'">공지사항</button>
-		<button type="button" class="btn btn-default" id="memberList">사용자목록</button>
-		<button type="button" class="btn btn-default" id="boardList">게시판
-			관리</button>
+		<button type="button" class="btn btn-default" id="memberList"
+			onclick="location.href='memberList'">사용자목록</button>
+		<button type="button" class="btn btn-default" id="boardList"
+			onclick="location.href='boardList'">게시판 관리</button>
 		<hr>
 		<button type="button" class="btn btn-default" id="bookList"
 			onclick="location.href='bookList'">도서목록</button>

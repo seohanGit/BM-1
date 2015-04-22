@@ -28,22 +28,21 @@
 
 				<hr>
 
-				<div class="input-group" style="width: 80%">
+				<div class="input-group" style="width: 95%">
 					<form action="/findBook" method="get">
 						<div style="width: 100%">
 
-							<span class="input-group-btn"> <input type="text"
+							 <input type="text"
 								class="form-control" id="query" name="keyword"
-								style="width: 52%" placeholder="원하는 책이 없다면 인터넷에서 주문하세요 !">
+								style="width: 62%" placeholder="원하는 책이 없다면 인터넷에서 주문하세요 !">
 
 
 								<button class="btn btn-default" type="submit" id="btn_find"
-									style="width: 30%">
+									style="width: 38%">
 									<span class="glyphicon glyphicon-search"></span>인터파크 검색
 								</button>
 
-								<button type="button" class="btn btn-default" id="insertBook"
-									style="width: 18%">도서추가</button></span>
+								
 						</div>
 					</form>
 				</div>

@@ -172,7 +172,7 @@ public class RentController {
 	public String stopBorrow(String bookCode) {
 		rentservice.stopBorrow(bookCode);
 
-		return "redirect:rentListAll";
+		return "redirect:bookList";
 	}
 
 	/*

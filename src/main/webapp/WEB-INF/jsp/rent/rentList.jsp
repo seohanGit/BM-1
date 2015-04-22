@@ -27,9 +27,10 @@
 			<div class="left">
 				<h2>대여현황 목록</h2>
 			</div>
+			<br>
 			<c:choose>
 				<c:when test="${empty bookList}">
-					<h3>대여중인 도서가 없습니다.</h3>
+					<div><h3>대여중인 도서가 없습니다.</h3></div>
 				</c:when>
 				<c:otherwise>
 					<form action="returnBookList" method="post">

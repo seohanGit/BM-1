@@ -2,5 +2,5 @@
     pageEncoding="UTF-8"%>
 <script>
 alert("도서가 성공적으로 추가되었습니다.")
-location.href="/admin";
+location.href="/redirect:bookList";
 </script>

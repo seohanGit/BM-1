@@ -144,7 +144,7 @@
 	<update id="modifyNotice" parameterType="BoardModel">
 		UPDATE notice
 		SET
-		content=#{content}
+		content=#{content}, registerdate=NOW()
 		WHERE boardnum=#{boardnum}
 	</update>
 
@@ -296,12 +296,9 @@
 	</update>
 
 	<update id="stopBorrow" parameterType="String">
-		UPDATE book A INNER
-		JOIN
-		borrow B
-		ON A.borrowcheck = B.borrowcheck
+		UPDATE book A ,borrow B
 		SET
-		A.borrowcheck='4'
+		A.borrowcheck='4' AND B.borrowcheck=if()
 		WHERE
 		A.bookCode=#{bookCode} AND
 		B.bookCode=#{bookCode}
@@ -397,7 +394,7 @@
 
 	<select id="recordListAll" resultType="BookModel">
 		SELECT * FROM book AS A, borrow AS B
-		WHERE <![CDATA[B.borrowdate < NOW()]]>
+		WHERE <![CDATA[B.returndate < NOW()]]>
 		AND A.bookCode=B.bookCode AND B.borrowcheck='3'
 		ORDER BY
 		B.borrowdate

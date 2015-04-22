@@ -40,24 +40,33 @@ body {
 		<div id="searchResultArea" class="row">
 			<form action="confirmBorrowBookList" method="post">
 				<hr>
-				<div>
-					<div class="left">
-						<h2>대여요청 목록</h2>
-					</div>
-					<div class="right right-end">
-						<button class="btn btn-default" type="submit">승인</button>
-					</div>
-				</div>
-				<table class="table table-striped table-bordered ">
 
-					<c:choose>
-						<c:when test="${empty bookList}">
+
+				<c:choose>
+					<c:when test="${empty bookList}">
+						<div>
+							<h2>대여요청 목록</h2>
+						</div>
+						<br>
+						<div>
 							<h3>대여 요청한 도서가 없습니다.</h3>
-						</c:when>
-						<c:otherwise>
+						</div>
+					</c:when>
+					<c:otherwise>
+						<div class="left">
+							<h2>대여요청 목록</h2>
+						</div>
+						<br>
+						<div class="right right-end">
+							<button class="btn btn-default" type="submit">승인</button>
+						</div>
+
+						<table class="table table-striped table-bordered ">
+
+
 							<thead>
 								<tr class="hidden-xs title">
-									<td><input type="checkbox" id="allCheck"></td>
+
 									<td id="tb-title">도서명</td>
 									<td id="tb-date">대여일자</td>
 									<td id="tb-date">반납일자</td>
@@ -66,41 +75,43 @@ body {
 
 								</tr>
 							</thead>
-						</c:otherwise>
-					</c:choose>
-
-					<c:forEach items="${bookList}" var="book" varStatus="loop">
-
-						<tbody>
-							<tr>
-								<td><input type="checkbox" name="bookCode" value="${book.bookCode}"></td>
-								<td align="left">${book.bookname }</td>
-								<td align="left">${book.borrowdate }</td>
-								<td align="left">${book.returndate }</td>
-								<td align="left">${book.genre }</td>
-
-								<td>ID : ${book.id}</td>
-
-								<td><button class="btn btn-default btn-sm" type="button"
-										id="reservebook"
-										onClick="location.href='/confirmBorrowBook?bookCode=${book.bookCode}&id=${book.id}'; ok();">승인</button>
-
-								</td>
-							</tr>
-							<tr>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
-						</tbody>
-
-					</c:forEach>
 
 
-				</table>
+							<c:forEach items="${bookList}" var="book" varStatus="loop">
+
+								<tbody>
+									<tr>
+										<td><input type="checkbox" name="bookCode"
+											value="${book.bookCode}"></td>
+										<td align="left">${book.bookname }</td>
+										<td align="left">${book.borrowdate }</td>
+										<td align="left">${book.returndate }</td>
+										<td align="left">${book.genre }</td>
+
+										<td>ID : ${book.id}</td>
+
+										<td><button class="btn btn-default btn-sm" type="button"
+												id="reservebook"
+												onClick="location.href='/confirmBorrowBook?bookCode=${book.bookCode}&id=${book.id}'; ok();">승인</button>
+
+										</td>
+									</tr>
+									<tr>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+									</tr>
+								</tbody>
+
+							</c:forEach>
+
+
+						</table>
+					</c:otherwise>
+				</c:choose>
 			</form>
 		</div>
 

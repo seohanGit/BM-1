@@ -34,14 +34,15 @@ body {
 			기록 검색
 			<table class="table table-striped table-bordered">
 				<thead>
-					<tr class="hidden-xs title">
+					<tr class=" title">
+						<td id="tb-title">도서명</td>
+						<td id="tb-date">대여일자</td>
+						<td id="tb-date">반납일자</td>
+						<td id="tb-status">대출자</td>
+						<td id="tb-status">기록삭제</td>
 
-						<td>도서명</td>
-						<td>대여일자</td>
-						<td>반납일자</td>
 
-						<td>대출자</td>
-						<td>기록삭제</td>
+
 					</tr>
 				</thead>
 
@@ -51,11 +52,11 @@ body {
 
 						<tr>
 
-							<td width="30%" align="left">${book.bookname }</td>
-							<td width="14%" align="left">${book.borrowdate }</td>
-							<td width="14%" align="left">${book.returndate }</td>
+							<td align="left">${book.bookname }</td>
+							<td align="left">${book.borrowdate }</td>
+							<td align="left">${book.returndate }</td>
 
-							<td width="13%">${book.id}</td>
+							<td>${book.id}</td>
 							<td><button class="btn btn-default btn-sm" type="button"
 									id="extendbook"
 									onClick="location.href='/deleteRecord?bookCode=${book.bookCode}&id=${book.id}'">삭제</button></td>
@@ -66,7 +67,7 @@ body {
 							<td></td>
 							<td></td>
 							<td></td>
-							<td></td>
+
 						</tr>
 
 					</tbody>
@@ -74,9 +75,9 @@ body {
 				</c:forEach>
 			</table>
 		</div>
-		
+
 	</div>
-	
+
 	<script src="/resources/js/jquery/jquery.js"></script>
 	<script src="/resources/js/bootstrap.min.js"></script>
 	<script src="/resources/js/common.js"></script>

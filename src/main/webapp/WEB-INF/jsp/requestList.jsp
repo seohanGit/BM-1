@@ -35,14 +35,25 @@ body {
 		<div class="row" id="searchResultArea">
 			<hr>
 			<!-- Blog Entries Column -->
-			<div class="left">
-				<h2>구매요청 목록</h2>
-			</div>
+
+
 			<c:choose>
 				<c:when test="${empty bookList}">
-					<h3>구매 요청한 도서가 없습니다.</h3>
+					<div>
+						<h2>구매요청 목록</h2>
+					</div>
+					<br>
+					<p></p>
+					<div>
+						<h3>구매 요청한 도서가 없습니다.</h3>
+					</div>
 				</c:when>
 				<c:otherwise>
+					<div class="left">
+						<h2>구매요청 목록</h2>
+					</div>
+					<br>
+					<p></p>
 					<form action="confirmBuyList" method="post">
 						<div class="right right-end">
 							<button class="btn btn-default" type="submit">구매</button>

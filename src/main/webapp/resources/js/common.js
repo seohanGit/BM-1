@@ -89,7 +89,14 @@ $("#memberList").click(function() {
 $("#boardList").click(function() {
 	location.href = "/boardList"
 })
+$("#allCheck").click(function() {
+	if ($("#allCheck").prop("checked")) {
+		$("input[type=checkbox]").prop("checked", true);
+	} else {
+		$("input[type=checkbox]").prop("checked", false);
+	}
 
+})
 $('#btn_bookList').click(function() {
 	$.ajax({
 		type : "GET", // GET or POST

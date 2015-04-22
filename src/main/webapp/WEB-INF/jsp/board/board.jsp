@@ -59,9 +59,7 @@
 		</div>
 		<!--/row-->
 		<hr>
-		<footer>
-			<p>© Company 2013</p>
-		</footer>
+		<footer> </footer>
 	</div>
 	<!-- /.container -->
 	<!-- jQuery -->

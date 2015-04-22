@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.baron.member.model.BookModel;
 import com.baron.member.service.BookService;
@@ -70,9 +71,26 @@ public class RequestController {
 			bookService.insertBook(model);
 			requestservice.deleteRequest(model.getBookCode());
 			return "redirect:requestList";
-		}else {
+		} else {
 			return "buyfail";
 		}
+	}
+
+	@RequestMapping("/confirmBuyList")
+	public String confirmBuyList(
+			@RequestParam(value = "bookCode") List<String> bookCodeList) {
+		for (String bookCode : bookCodeList) {
+			if (bookService.selectBook(bookCode) == null) {
+				bookService.insertBook(requestservice.selectBook(bookCode));
+				requestservice.deleteRequest(bookCode);
+
+			} else {
+				return "buyfail";
+
+			}
+
+		}
+		return "redirect:requestList";
 	}
 
 	@RequestMapping("/deleteRequest")

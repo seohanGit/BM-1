@@ -56,7 +56,7 @@
 									<td align="left">정상사원</td>
 								</c:otherwise>
 							</c:choose>
-							<td align="left">총 ${member.numborrow}권 대여</td>
+							<td align="left">총 <mark>${member.numborrow}</mark>권 </td>
 							<td>ID : ${member.id}</td>
 							<td>${member.cell}</td>
 							<td>${member.email}</td>

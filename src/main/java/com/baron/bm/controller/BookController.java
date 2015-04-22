@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
+import org.hamcrest.core.IsNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -62,15 +63,17 @@ public class BookController {
 	}
 
 	@RequestMapping("/bookList")
-	public String listBook(HttpServletRequest request, Model model) {
+	public String BookList(HttpServletRequest request, Model model) {
 		int a = 1;
-		String permission;
-		Dto dto = new Dto();
-		dto.setNum1(a);
-		dto.setNum2(a + 15);
-		List<BookModel> bookList = bookservice.listBook(dto);
 
+		String permission;
+		Dto page = new Dto();
+		page.setNum1(a);
+		page.setNum2(a + 15);
+		List<BookModel> bookList = bookservice.listBook(page);
+		int total = ((bookservice.listBook(page).get(0).getCount()) / 15) + 1;
 		model.addAttribute("bookList", bookList);
+		model.addAttribute("total", total);
 		for (Cookie cookie : request.getCookies()) {
 			if (cookie.getName().equals("bm_permission")) {
 				permission = cookie.getValue();
@@ -83,15 +86,17 @@ public class BookController {
 	}
 
 	@RequestMapping("/page")
-	public String listBook(HttpServletRequest request, Model model, int seq) {
+	public String listPage(HttpServletRequest request, Model model, int seq) {
 		String permission;
 		int total = 0;
 		Dto page = new Dto();
-		page.setNum1(((seq-1)+1)*15);
-		page.setNum2(seq*15);
+		page.setNum1((seq - 1) * 15);
+		page.setNum2((seq) * 15);
+		total = ((bookservice.listBook(page).get(0).getCount()) / 15) + 1;
 		page.setNum3(total);
 		List<BookModel> bookList = bookservice.listBook(page);
 
+		model.addAttribute("total", total);
 		model.addAttribute("bookList", bookList);
 		for (Cookie cookie : request.getCookies()) {
 			if (cookie.getName().equals("bm_permission")) {

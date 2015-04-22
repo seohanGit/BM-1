@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.baron.member.model.BookModel;
 import com.baron.member.service.BookService;
@@ -51,19 +52,17 @@ public class RentController {
 	}
 
 	@RequestMapping("/confirmBorrowBook")
-	public String confirmBorrowBook(HttpServletRequest request,
-			String bookCode, String id) {
+	public String confirmBorrowBook(HttpServletRequest request, String bookCode) {
 
-		rentservice.upPoint(id);
 		rentservice.confirmBorrowBook(bookCode);
 		return "redirect:borrowListAll";
 	}
 
 	@RequestMapping("/confirmBorrowBookList")
-	public String confirmBorrowBookList(List<String> bookCodeList) {
+	public String confirmBorrowBookList(
+			@RequestParam(value = "bookCode") List<String> bookCodeList) {
 
-		for (int i = 0; i < bookCodeList.size(); i++) {
-			String bookCode = bookCodeList.get(i);
+		for (String bookCode : bookCodeList) {
 			rentservice.confirmBorrowBook(bookCode);
 
 		}
@@ -102,6 +101,23 @@ public class RentController {
 		}
 	}
 
+	@RequestMapping("/extendBookList")
+	public String extendBookList(
+			@RequestParam(value = "bookCode") List<String> bookCodeList,
+			Model model) {
+
+		for (String bookCode : bookCodeList) {
+			if (rentservice.selectReservation(bookCode).equals("0")) {
+				rentservice.extendBorrowBook(bookCode);
+
+			} else {
+				return "redirect:extendFail";
+			}
+		}
+		return "/rent/extendSuccess";
+
+	}
+
 	@RequestMapping("/cancleBorrowBook")
 	public String cancleBorrowBook(String bookCode, BookModel bookmodel,
 			HttpServletRequest request) {
@@ -128,14 +144,15 @@ public class RentController {
 	 * model) { List<BookModel> bookList = new ArrayList<BookModel>(); bookList
 	 * = rentservice.returnListAll(); model.addAttribute("bookList", bookList);
 	 * return "rent/returnList"; }
-	 */@RequestMapping("/returnmanybook")
-	public String returnManyBook(List<String> bookCodeList) {
-
-		for (int i = 0; i < bookCodeList.size(); i++) {
-			String bookCode = bookCodeList.get(i);
+	 */@RequestMapping("/returnBookList")
+	public String returnManyBook(
+			@RequestParam(value = "bookCode") List<String> bookCodeList) {
+		for (String bookCode : bookCodeList) {
 			rentservice.returnBook(bookCode);
+
 		}
-		return "rent/rentList";
+
+		return "redirect:rentListAll";
 	}
 
 	@RequestMapping("/returnBookByAdmin")

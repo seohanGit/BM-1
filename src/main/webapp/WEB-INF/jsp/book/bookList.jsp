@@ -23,7 +23,7 @@ body {
 <script>
 	function del() {
 		alert("삭제되었습니다.");
-		
+
 	}
 </script>
 
@@ -36,78 +36,95 @@ body {
 	<div class="container">
 		<jsp:include page="../menu.jsp" />
 		<div class="row" id="searchResultArea">
-			<hr>
-			<h2>도서목록</h2>
-			<hr>
+			<form action="confirmBorrowBookList" method="post">
+				<div class="left">
+					<h2>도서목록</h2>
+				</div>
+				<div class="right right-end">
+					<button class="btn btn-default" type="submit">승인</button>
+				</div>
+				<hr>
 
-			<table class="table table-striped table-bordered table-condensed">
-				<thead>
-					<tr>
-						<td id="tb-img">표지</td>
-						<td id="tb-author">도서명</td>
-						<td id="tb-author">저자</td>
-						<td id="tb-status">장르</td>
+				<table class="table table-striped table-bordered table-condensed">
+					<thead>
+						<tr>
+							<td><input type="checkbox" id="allCheck"></td>
+							<td id="tb-img">표지</td>
+							<td id="tb-author">도서명</td>
+							<td id="tb-author">저자</td>
+							<td id="tb-status">장르</td>
 
-						<td width="10%">대여상태</td>
-						<td width="25%"></td>
-					</tr>
-				</thead>
-				<%-- 
+							<td width="10%">대여상태</td>
+							<td width="25%"></td>
+						</tr>
+					</thead>
+					<%-- 
 						
  --%>
-				<c:forEach items="${bookList}" var="book" varStatus="loop">
-					<tbody>
+					<c:forEach items="${bookList}" var="book" varStatus="loop">
+						<tbody>
 
 
-						<tr>
-							<td rowspan="3" style="width: 50px" align="left"><img
-								style="width: 50px" src="${book.imageurl}"></td>
-						</tr>
-						<tr>
-						
-							<td align="left">${book.bookname }</td>
-							<td align="left">${book.writer }</td>
-							<td align="left">${book.genre}</td>
-							<td align="left"><c:choose>
-									<c:when test="${book.borrowcheck=='0'}">
+							<tr>
+								<td><input type="checkbox" id="allCheck"></td>
+								<td rowspan="3" style="width: 50px" align="left"><img
+									style="width: 50px" src="${book.imageurl}"></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td align="left">${book.bookname }</td>
+								<td align="left">${book.writer }</td>
+								<td align="left">${book.genre}</td>
+								<td align="left"><c:choose>
+										<c:when test="${book.borrowcheck=='0'}">
 										대출가능
 									</c:when>
-									<c:when test="${book.borrowcheck=='1'}">
-										<mark>대여요청중</mark>
-									</c:when>
-									<c:when test="${book.borrowcheck=='2'}">
+										<c:when test="${book.borrowcheck=='1'}">
+											<mark>대여요청중</mark>
+										</c:when>
+										<c:when test="${book.borrowcheck=='2'}">
 			대출중</c:when>
-									<c:when test="${book.borrowcheck=='4'}">
-										<mark>대출정지</mark>
-									</c:when>
-									<c:when test="${book.borrowcheck=='5'}">
-										<mark>예약중</mark>
-									</c:when>
-								</c:choose></td>
-							<td>
-								<button class="btn btn-default btn-sm" type="button" id="reservebook"
-									onClick="location.href='/stopBorrow?bookCode=${book.bookCode}'">대출정지</button>
-								<button class="btn btn-default btn-sm" type="button" id="modifybook"
-									onClick="location.href='/modifyBookForm?bookCode=${book.bookCode}'">도서수정</button>
-								<button class="btn btn-default btn-sm" type="button" id="deletebook"
-									onClick="location.href='/deletebook?bookCode=${book.bookCode}'; del();">도서삭제</button>
+										<c:when test="${book.borrowcheck=='4'}">
+											<mark>대출정지</mark>
+										</c:when>
+										<c:when test="${book.borrowcheck=='5'}">
+											<mark>예약중</mark>
+										</c:when>
+									</c:choose></td>
+								<td>
+									<button class="btn btn-default btn-sm" type="button"
+										id="reservebook"
+										onClick="location.href='/stopBorrow?bookCode=${book.bookCode}'">대출정지</button>
+									<button class="btn btn-default btn-sm" type="button"
+										id="modifybook"
+										onClick="location.href='/modifyBookForm?bookCode=${book.bookCode}'">도서수정</button>
+									<button class="btn btn-default btn-sm" type="button"
+										id="deletebook"
+										onClick="location.href='/deletebook?bookCode=${book.bookCode}'; del();">도서삭제</button>
 
-							</td>
-						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
+								</td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
 
-						</tr>
-					</tbody>
-					
+							</tr>
+						</tbody>
+
+					</c:forEach>
+				</table>
+			</form>
+			<div align="center">
+				<c:forEach var="seq" begin="1" end="${total}" step="1">
+					<a class="page" href="/page?seq=${seq}">${seq} &nbsp;</a>
 				</c:forEach>
-			</table>
-			<p id="page"> <a href="/listBook?seq="></a>${seq}</p>
-			<p id="page"> <a href="/listBooqsk?seq=${count }}">${count }</a></p>
+
+				<a class="page" style="float: right;" href="/page?seq=${total}"><mark>${total}</mark></a>
+			</div>
 		</div>
 	</div>
 	<script src="/resources/js/common.js"></script>

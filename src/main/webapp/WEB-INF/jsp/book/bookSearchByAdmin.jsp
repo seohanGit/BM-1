@@ -8,7 +8,7 @@
 		<div class="col-md-8">
 			<h2>도서검색 목록</h2>
 			<hr>
-			<table class="table table-striped  table-bordered table-condensed">
+			<table class="table table-striped  table-bordered ">
 				<thead>
 					<tr>
 						<td id="tb-img">표지</td>
@@ -16,7 +16,7 @@
 						<td id="tb-author">저자</td>
 						<td id="tb-genre">장르</td>
 
-						<td width="13%">대여상태</td>
+						<td width="270px">대여상태</td>
 						
 					</tr>
 				</thead>
@@ -28,8 +28,8 @@
 
 
 						<tr>
-							<td rowspan="2" style="width: 50px" align="left"><img
-								style="width: 50px" src="${book.imageurl}"></td>
+							<td rowspan="2" style="width: 40px" align="left"><img
+								style="width: 40px" src="${book.imageurl}"></td>
 						</tr>
 						<tr>
 

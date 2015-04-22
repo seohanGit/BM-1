@@ -176,7 +176,7 @@
 
 	<select id="listBook" parameterType="Dto" resultType="BookModel">
 		SELECT
-		*
+		*, (SELECT COUNT(*) FROM book) AS count
 		FROM book
 		WHERE seq BETWEEN #{num1} AND #{num2}
 		ORDER BY

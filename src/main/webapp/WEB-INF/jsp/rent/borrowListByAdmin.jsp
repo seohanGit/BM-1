@@ -72,7 +72,7 @@ body {
 
 							<td><button class="btn btn-default btn-sm" type="button"
 									id="reservebook"
-									onClick="location.href='/confirmBorrowBook?bookCode=${book.bookCode}'; ok();">승인</button>
+									onClick="location.href='/confirmBorrowBook?bookCode=${book.bookCode}&id=${book.id}'; ok();">승인</button>
 							</td>
 						</tr>
 						<tr>

@@ -17,7 +17,7 @@
 						<td id="tb-genre">장르</td>
 
 						<td width="13%">대여상태</td>
-						<td width="15%"></td>
+						
 					</tr>
 				</thead>
 				<%-- 
@@ -32,9 +32,10 @@
 								style="width: 50px" src="${book.imageurl}"></td>
 						</tr>
 						<tr>
+
 							<td align="left">${book.bookname }</td>
 							<td align="left">${book.writer }</td>
-							<td align="left">${book.genre}</td>
+
 							<td align="left"><c:choose>
 									<c:when test="${book.borrowcheck=='0'}">
 			대출가능</c:when>
@@ -65,7 +66,7 @@
 							<td></td>
 							<td></td>
 							<td></td>
-							<td></td>
+							
 						</tr>
 					</tbody>
 				</c:forEach>

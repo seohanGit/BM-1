@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<div class="row row-offcanvas row-offcanvas-right ">
+<div class="row ">
 
 	<div id="searchResultArea">
 		<hr>
@@ -73,6 +73,7 @@
 								<c:when test="${book.borrowcheck=='5'}"> 예약중<td></td>
 								</c:when>
 							</c:choose>
+							
 					</tr>
 					<tr>
 						<td></td>

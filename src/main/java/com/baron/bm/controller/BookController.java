@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.baron.member.model.BookModel;
+import com.baron.member.model.Dto;
 import com.baron.member.service.BookService;
 import com.baron.member.service.RentService;
 
@@ -35,13 +36,12 @@ public class BookController {
 		bookservice.insertBook(model);
 		return "book/insertbookresult";
 	}
-/*
-	@RequestMapping("/national")
-	public String getNationalBest(BookModel model) throws Exception {
-		bookservice.getBestSeller();
-		return "book/nationalBest";
-	}
-*/
+
+	/*
+	 * @RequestMapping("/national") public String getNationalBest(BookModel
+	 * model) throws Exception { bookservice.getBestSeller(); return
+	 * "book/nationalBest"; }
+	 */
 	@RequestMapping("/searchBook")
 	public String searchBook(HttpServletRequest request, String keyword,
 			Model model) {
@@ -53,19 +53,44 @@ public class BookController {
 				permission = cookie.getValue();
 				if (permission.equals("1")) {
 					return "book/bookSearchByAdmin";
-					
+
 				}
 			}
 		}
 		return "book/bookSearch";
-		
+
 	}
 
 	@RequestMapping("/bookList")
 	public String listBook(HttpServletRequest request, Model model) {
-		String keyword = "";
+		int a = 1;
 		String permission;
-		List<BookModel> bookList = bookservice.searchBook(keyword);
+		Dto dto = new Dto();
+		dto.setNum1(a);
+		dto.setNum2(a + 15);
+		List<BookModel> bookList = bookservice.listBook(dto);
+
+		model.addAttribute("bookList", bookList);
+		for (Cookie cookie : request.getCookies()) {
+			if (cookie.getName().equals("bm_permission")) {
+				permission = cookie.getValue();
+				if (permission.equals("0")) {
+					return "book/bookSearch";
+				}
+			}
+		}
+		return "book/bookList";
+	}
+
+	@RequestMapping("/page")
+	public String listBook(HttpServletRequest request, Model model, int seq) {
+		String permission;
+		int total = 0;
+		Dto page = new Dto();
+		page.setNum1(((seq-1)+1)*15);
+		page.setNum2(seq*15);
+		page.setNum3(total);
+		List<BookModel> bookList = bookservice.listBook(page);
 
 		model.addAttribute("bookList", bookList);
 		for (Cookie cookie : request.getCookies()) {

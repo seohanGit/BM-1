@@ -38,12 +38,6 @@
 		#{password}
 	</select>
 
-	<select id="selectBlack" resultType="MemberModel">
-		SELECT
-		A.id,A.name,A.email,A.address,A.cell,A.Home,A.numborrow,A.numarrear
-		FROM member as A, blackList as B
-		WHERE A.id=B.id;
-	</select>
 
 	<select id="selectLate" resultType="MemberModel">
 		SELECT
@@ -57,19 +51,24 @@
 
 	<select id="selectBest" resultType="MemberModel">
 		SELECT A.name, A.score, A.id,
-		A.numborrow
+		(SELECT
+		COUNT(*) FROM borrow B WHERE B.borrowdate >
+		date_sub(NOW(),
+		interval 30
+		day) AND B.id=A.id ) AS numborrow
 		FROM
-		member AS A, borrow AS B
-		WHERE B.borrowdate >
-		date_sub(NOW(), interval 30 day) AND A.id=B.id
-		ORDER BY A.score DESC
+		member AS A 
+		ORDER BY numborrow DESC
 
 	</select>
 
 	<select id="selectMemberList" resultType="MemberModel">
-		SELECT *
-		FROM member
-		ORDER BY team, numborrow
+		SELECT *, (SELECT
+		COUNT(*) FROM borrow B WHERE B.borrowdate >
+		date_sub(NOW(), interval 30
+		day) AND B.id=A.id ) AS numborrow
+		FROM member A
+		ORDER BY team 
 
 	</select>
 	<!-- Board 관련 쿼리 -->
@@ -167,13 +166,23 @@
 	</select>
 
 	<select id="searchBook" parameterType="String" resultType="BookModel">
-		SELECT * FROM book
-		WHERE bookname LIKE
+		SELECT *, @SEQ := @SEQ+1 AS seq FROM book, (SELECT @SEQ :=0) A
+		WHERE
+		bookname LIKE
 		CONCAT('%',#{keyword},'%')
-		ORDER
-		BY buydate DESC
-
+		ORDER BY
+		buydate DESC
 	</select>
+
+	<select id="listBook" parameterType="Dto" resultType="BookModel">
+		SELECT
+		*
+		FROM book
+		WHERE seq BETWEEN #{num1} AND #{num2}
+		ORDER BY
+		buydate DESC
+	</select>
+
 
 	<delete id="deleteBook" parameterType="String">
 		DELETE FROM book
@@ -203,6 +212,12 @@
 		ORDER BY
 		grade DESC
 	</select>
+
+
+
+
+
+
 	<!-- 구매요청, 대여 관련 커리 -->
 
 	<insert id="requestBook" parameterType="BookModel">
@@ -229,10 +244,11 @@
 		SELECT *
 		FROM
 		request AS A,
-		member AS B 
+		member AS B
 		WHERE A.id=B.id AND A.bookCode!='0'
 		ORDER BY
-		A.requestdate DESC;
+		A.requestdate
+		DESC;
 	</select>
 
 	<select id="selectRequest" parameterType="String" resultType="BookModel">
@@ -290,6 +306,7 @@
 		A.bookCode=#{bookCode} AND
 		B.bookCode=#{bookCode}
 	</update>
+
 	<update id="confirmBorrowBook" parameterType="String">
 		UPDATE book A INNER
 		JOIN borrow B
@@ -301,6 +318,7 @@
 		WHERE
 		A.bookCode=#{bookCode} AND
 		B.bookCode=#{bookCode}
+
 	</update>
 
 	<update id="upPoint" parameterType="String">
@@ -356,12 +374,16 @@
 
 	<select id="rentListAll" parameterType="String" resultType="BookModel">
 		SELECT * FROM book AS A, borrow AS B
-		WHERE <![CDATA[B.returndate > NOW()]]>
-		AND A.bookCode=B.bookCode AND B.borrowcheck='2'
+		WHERE
+		A.bookCode=B.bookCode AND
+		B.borrowcheck='2'
 		ORDER BY
 		B.borrowdate
 		DESC;
 	</select>
+
+
+	<!-- <![CDATA[B.returndate > NOW()]]> -->
 
 	<!-- <delete id="deleteRecord" parameterType="String"> DELETE ON borrow 
 		WHERE DELETE ON reserve WHERE id=#{id} AND bookCode=#{bookCode} </delete> -->

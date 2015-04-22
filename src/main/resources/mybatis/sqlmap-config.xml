@@ -2,9 +2,10 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
-        <typeAlias type="com.baron.member.model.MemberModel" alias="MemberModel"/>
-        <typeAlias type="com.baron.member.model.BoardModel" alias="BoardModel"/>
-        <typeAlias type="com.baron.member.model.BookModel" alias="BookModel"/>
-        <typeAlias type="com.baron.member.model.ContentModel" alias="ContentModel"/>
+		<typeAlias type="com.baron.member.model.MemberModel" alias="MemberModel" />
+		<typeAlias type="com.baron.member.model.BoardModel" alias="BoardModel" />
+		<typeAlias type="com.baron.member.model.BookModel" alias="BookModel" />
+		<typeAlias type="com.baron.member.model.ContentModel" alias="ContentModel" />
+		<typeAlias type="com.baron.member.model.Dto" alias="Dto" />
 	</typeAliases>
 </configuration>

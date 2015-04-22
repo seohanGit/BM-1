@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,33 +45,62 @@
 						</thead>
 					</c:otherwise>
 				</c:choose>
-
+				<c:set var="now" value="<%=new java.util.Date()%>" />
 
 				<c:forEach items="${bookList}" var="book" varStatus="loop">
 
 					<tbody>
+						<c:choose>
+							<c:when test="${book.returndate < now}">
+								<tr >
+									<td align="left">${book.bookname }</td>
+									<td align="left">${book.borrowdate }</td>
 
-						<tr>
-							<td align="left">${book.bookname }</td>
-							<td align="left">${book.borrowdate }</td>
-							<td align="left">${book.returndate }</td>
+									<td align="left" style="text-decoration:underline; text-align: right; ; ">${book.returndate }</td>
 
-							<td>ID : ${book.id}</td>
-							<%-- 
+									<td>ID : ${book.id}</td>
+									<%-- 
 							<td><button class="btn btn-default" type="button"
 									id="extendbook"
 									onClick="location.href='/extendBorrowBook?bookCode=${book.bookCode}'">연장</button>
 							</td>
  --%>
-							<td><button class="btn btn-default btn-sm" type="button"
-									id="reservebook"
-									onClick="location.href='/returnBookByAdmin?bookCode=${book.bookCode}'; re_turn();">반납</button>
-							</td>
-							<td><button class="btn btn-default btn-sm" type="button"
-									id="reservebook"
-									onClick="location.href='/extendBorrowBook?bookCode=${book.bookCode}'; extend();">연장</button></td>
+									<td><button class="btn btn-default btn-sm" type="button"
+											id="reservebook"
+											onClick="location.href='/returnBookByAdmin?bookCode=${book.bookCode}'; re_turn();">반납</button>
+									</td>
+									<td><button class="btn btn-default btn-sm" type="button"
+											id="reservebook"
+											onClick="location.href='/extendBorrowBook?bookCode=${book.bookCode}'; extend();">연장</button></td>
 
-						</tr>
+								</tr>
+							</c:when>
+							<c:otherwise>
+								<tr>
+									<td align="left">${book.bookname }</td>
+									<td align="left">${book.borrowdate }</td>
+
+									<td align="left">${book.returndate }</td>
+
+									<td>ID : ${book.id}</td>
+									<%-- 
+							<td><button class="btn btn-default" type="button"
+									id="extendbook"
+									onClick="location.href='/extendBorrowBook?bookCode=${book.bookCode}'">연장</button>
+							</td>
+ --%>
+									<td><button class="btn btn-default btn-sm" type="button"
+											id="reservebook"
+											onClick="location.href='/returnBookByAdmin?bookCode=${book.bookCode}'; re_turn();">반납</button>
+									</td>
+									<td><button class="btn btn-default btn-sm" type="button"
+											id="reservebook"
+											onClick="location.href='/extendBorrowBook?bookCode=${book.bookCode}'; extend();">연장</button></td>
+								</tr>
+							</c:otherwise>
+
+						</c:choose>
+
 						<tr>
 							<td></td>
 							<td></td>

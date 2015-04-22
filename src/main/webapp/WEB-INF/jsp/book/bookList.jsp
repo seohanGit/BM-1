@@ -64,6 +64,7 @@ body {
 								style="width: 50px" src="${book.imageurl}"></td>
 						</tr>
 						<tr>
+						
 							<td align="left">${book.bookname }</td>
 							<td align="left">${book.writer }</td>
 							<td align="left">${book.genre}</td>
@@ -71,7 +72,6 @@ body {
 									<c:when test="${book.borrowcheck=='0'}">
 										대출가능
 									</c:when>
-
 									<c:when test="${book.borrowcheck=='1'}">
 										<mark>대여요청중</mark>
 									</c:when>
@@ -103,8 +103,11 @@ body {
 
 						</tr>
 					</tbody>
+					
 				</c:forEach>
 			</table>
+			<p id="page"> <a href="/listBook?seq="></a>${seq}</p>
+			<p id="page"> <a href="/listBooqsk?seq=${count }}">${count }</a></p>
 		</div>
 	</div>
 	<script src="/resources/js/common.js"></script>

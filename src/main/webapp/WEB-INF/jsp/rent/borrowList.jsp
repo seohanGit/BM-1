@@ -95,8 +95,9 @@ body {
 										</td>
 									</c:when>
 									<c:when test="${book.borrowcheck=='2'}">
+
 										<td>대출중</td>
-										
+										<td></td>
 									</c:when>
 								</c:choose>
 

@@ -51,13 +51,9 @@ public class RentController {
 	}
 
 	@RequestMapping("/confirmBorrowBook")
-	public String confirmBorrowBook(HttpServletRequest request, String bookCode) {
-		String id = null;
-		for (Cookie cookie : request.getCookies()) {
-			if (cookie.getName().equals("bm_id")) {
-				id = cookie.getValue();
-			}
-		}
+	public String confirmBorrowBook(HttpServletRequest request,
+			String bookCode, String id) {
+
 		rentservice.upPoint(id);
 		rentservice.confirmBorrowBook(bookCode);
 		return "redirect:borrowListAll";

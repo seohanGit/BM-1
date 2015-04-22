@@ -26,7 +26,7 @@
 			<td>${black.address}</td>
 		    <td>${black.cell}</td>
 		    <td>${black.home}</td>
-		    <td>${black.numborrow}권</td>
+		    <td>권</td>
 		    <td>${black.numarrear}권</td>
 		    <td>${black.endday}</td>
 			</tr>

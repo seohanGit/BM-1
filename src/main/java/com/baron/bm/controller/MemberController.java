@@ -90,8 +90,6 @@ public class MemberController {
 			response.addCookie(new Cookie("bm_id", model.getId()));
 			response.addCookie(new Cookie("bm_permission", model
 					.getPermission()));
-			response.addCookie(new Cookie("bm_late", String.valueOf(model
-					.getNumarrear())));
 			mav.addObject("result", true);
 		} else {
 			mav.addObject("result", false);
@@ -167,13 +165,6 @@ public class MemberController {
 		return "/member/adminfail";
 	}
 
-	@RequestMapping("/searchBlack")
-	public String searchBlack(Model model) {
-		List<MemberModel> memberList = joinService.selectBlack();
-		model.addAttribute("blackList", memberList);
-		return "/member/black";
-	}
-
 	@RequestMapping("/searchLate")
 	public String searchLate(Model model) {
 		List<MemberModel> memberList = joinService.selectLate();
@@ -185,7 +176,6 @@ public class MemberController {
 	public String index(Model model) throws Exception {
 		List<BoardModel> notice = boardService.noticeList();
 		List<MemberModel> bestList = joinService.selectBest();
-
 		List<BookModel> newBook = bookService.getNewbook();
 		List<BookModel> bestSeller = bookService.getBestSeller();
 

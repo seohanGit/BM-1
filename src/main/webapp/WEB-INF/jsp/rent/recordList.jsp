@@ -27,7 +27,7 @@ body {
 	<jsp:include page="../nav.jsp" />
 	<div class="container">
 		<jsp:include page="../menu.jsp" />
-		<div class="row" id="searchResultArea">
+		<div class="row col-12" id="searchResultArea">
 			<hr>
 			<h2>대여 기록</h2>
 			<hr>
@@ -39,7 +39,7 @@ body {
 						<td>도서명</td>
 						<td>대여일자</td>
 						<td>반납일자</td>
-						<td>카테고리</td>
+
 						<td>대출자</td>
 						<td>기록삭제</td>
 					</tr>
@@ -54,7 +54,7 @@ body {
 							<td width="30%" align="left">${book.bookname }</td>
 							<td width="14%" align="left">${book.borrowdate }</td>
 							<td width="14%" align="left">${book.returndate }</td>
-							<td width="15%">${book.genre}</td>
+
 							<td width="13%">${book.id}</td>
 							<td><button class="btn btn-default btn-sm" type="button"
 									id="extendbook"
@@ -74,8 +74,9 @@ body {
 				</c:forEach>
 			</table>
 		</div>
+		
 	</div>
-	</div>
+	
 	<script src="/resources/js/jquery/jquery.js"></script>
 	<script src="/resources/js/bootstrap.min.js"></script>
 	<script src="/resources/js/common.js"></script>

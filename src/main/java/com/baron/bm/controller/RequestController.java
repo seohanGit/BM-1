@@ -66,8 +66,13 @@ public class RequestController {
 
 	@RequestMapping("/confirmBuy")
 	public String confirmBuy(BookModel model) {
-		bookService.insertBook(model);
-		return "redirect:requestList";
+		if (bookService.selectBook(model.getBookCode()) == null) {
+			bookService.insertBook(model);
+			requestservice.deleteRequest(model.getBookCode());
+			return "redirect:requestList";
+		}else {
+			return "buyfail";
+		}
 	}
 
 	@RequestMapping("/deleteRequest")

@@ -27,6 +27,24 @@ public class BookModel {
 	private int startindex;
 	private String keyword;
 	private Date buydate;
+	private int seq;
+	private int count;
+	
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
+	}
+
+	public int getSeq() {
+		return seq;
+	}
+
+	public void setSeq(int seq) {
+		this.seq = seq;
+	}
 
 	public Date getBuydate() {
 		return buydate;

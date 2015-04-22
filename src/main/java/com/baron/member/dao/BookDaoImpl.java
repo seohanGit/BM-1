@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.baron.member.model.BookModel;
+import com.baron.member.model.Dto;
 
 @Repository
 public class BookDaoImpl implements BookDao {
@@ -62,6 +63,12 @@ public class BookDaoImpl implements BookDao {
 	public List<BookModel> getBestSeller() {
 		// TODO Auto-generated method stub
 		return session.selectList(NAMESPACE + "getBestSeller");
+	}
+
+	@Override
+	public List<BookModel> listBook(Dto dto) {
+		// TODO Auto-generated method stub
+		return session.selectList(NAMESPACE + "listBook", dto);
 	}
 
 	

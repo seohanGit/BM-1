@@ -22,6 +22,14 @@ footer {
 	vertical-align: middle;
 }
 
+div .left {
+	float: left;
+}
+
+div .right {
+	float: right;
+}
+
 table #td-title {
 	width: 25%;
 }

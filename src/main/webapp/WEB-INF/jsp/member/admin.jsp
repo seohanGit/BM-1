@@ -64,8 +64,7 @@
 				</p>
 				<button type="button" class="btn btn-default" role="button"
 					id="late">연체자 보기</button>
-				<button type="button" class="btn btn-default" role="button"
-					id="blackList">블랙리스트 보기</button>
+
 				<hr>
 				<img src="/resources/lava4.JPG" style="width: 100%" id="image3">
 

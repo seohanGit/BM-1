@@ -65,7 +65,7 @@
 				</form>
 			</div>
 
-
+<hr>
 			<table style="width=:90%; bordercolor:#fff">
 
 				<thead>

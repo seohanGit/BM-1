@@ -33,12 +33,49 @@ public class RequestController {
 	}
 
 	@RequestMapping("/requestList")
-	public String requestList(Model model) {
+	public String requestList(HttpServletRequest request, Model model, String id) {
 		List<BookModel> bookList = new ArrayList<BookModel>();
-		bookList = requestservice.requestList();
-		model.addAttribute("bookList", bookList);
 
-		return "requestList";
+		for (Cookie cookie : request.getCookies()) {
+			if (cookie.getName().equals("bm_id")) {
+				id = (cookie.getValue());
+			} else if (cookie.getName().equals("bm_permission")) {
+				if ("1".equals(cookie.getValue())) {
+					bookList = requestservice.requestList();
+					model.addAttribute("bookList", bookList);
+					return "requestList";
+				} else {
+					bookList = requestservice.requestRecord(id);
+					model.addAttribute("bookList", bookList);
+					return "request";
+				}
+			}
+
+		}
+		return null;
+	}
+
+	@RequestMapping("/request")
+	public String request(HttpServletRequest request, Model model, String id) {
+		List<BookModel> bookList = new ArrayList<BookModel>();
+
+		for (Cookie cookie : request.getCookies()) {
+			if (cookie.getName().equals("bm_id")) {
+				id = (cookie.getValue());
+			} else if (cookie.getName().equals("bm_permission")) {
+				if ("1".equals(cookie.getValue())) {
+					bookList = requestservice.requestList();
+					model.addAttribute("bookList", bookList);
+					return "redirect:requestList";
+				} else {
+					bookList = requestservice.requestRecord(id);
+					model.addAttribute("bookList", bookList);
+					return "request";
+				}
+			}
+
+		}
+		return null;
 	}
 
 	@RequestMapping("/requestbook")

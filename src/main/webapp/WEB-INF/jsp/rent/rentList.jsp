@@ -71,7 +71,7 @@
 												<td align="left">${book.returndate }</td>
 											</c:otherwise>
 										</c:choose>
-										<td>ID : ${book.id}</td>
+										<td>${book.id}</td>
 										<%-- 
 							<td><button class="btn btn-default" type="button"
 									id="extendbook"

@@ -57,8 +57,9 @@
 		interval 30
 		day) AND B.id=A.id ) AS numborrow
 		FROM
-		member AS A 
-		ORDER BY numborrow DESC
+		member AS A
+		ORDER BY
+		numborrow DESC
 
 	</select>
 
@@ -68,7 +69,7 @@
 		date_sub(NOW(), interval 30
 		day) AND B.id=A.id ) AS numborrow
 		FROM member A
-		ORDER BY team 
+		ORDER BY team
 
 	</select>
 	<!-- Board 관련 쿼리 -->
@@ -78,6 +79,7 @@
 	<select id="selectBoard" resultType="BoardModel">
 		SELECT *
 		FROM bulletinboard
+		ORDER BY registerdate;
 	</select>
 
 	<select id="selectBoardregister" resultType="BoardModel">
@@ -100,6 +102,13 @@
 		ORDER BY title;
 	</select>
 
+	<select id="selectBoardnum" parameterType="String" resultType="BoardModel">
+		SELECT *
+		FROM
+		bulletinboard
+		WHERE boardnum=#{boardnum}
+
+	</select>
 	<insert id="insertBoard" parameterType="BoardModel">
 		INSERT INTO bulletinboard
 		(title,content,registerdate,modifidate,id)
@@ -116,8 +125,9 @@
 	<update id="modifyBoard" parameterType="BoardModel">
 		UPDATE bulletinboard
 		SET
-		content=#{content}
-		WHERE boardnum=#{boardnum}
+		content=#{content}, title=#{title}, modifidate=NOW()
+		WHERE
+		boardnum=#{boardnum}
 	</update>
 
 	<select id="noticeList" resultType="BoardModel">
@@ -176,9 +186,11 @@
 
 	<select id="listBook" parameterType="Dto" resultType="BookModel">
 		SELECT
-		*, (SELECT COUNT(*) FROM book) AS count
+		*,
+		(SELECT COUNT(*) FROM book) AS count
 		FROM book
-		WHERE seq BETWEEN #{num1} AND #{num2}
+		WHERE seq BETWEEN #{num1}
+		AND #{num2}
 		ORDER BY
 		buydate DESC
 	</select>
@@ -251,6 +263,23 @@
 		DESC;
 	</select>
 
+	<select id="requestRecord" parameterType="String" resultType="BookModel">
+		SELECT *
+		FROM
+		request AS A
+
+		WHERE A.id=#{id} AND A.bookCode='0' AND
+		(A.requestdate
+		BETWEEN
+		date_sub(NOW(),
+		interval 365
+		day) AND NOW())
+		ORDER
+		BY
+		A.requestdate
+		DESC;
+	</select>
+
 	<select id="selectRequest" parameterType="String" resultType="BookModel">
 		SELECT *
 		FROM request
@@ -298,12 +327,21 @@
 	<update id="stopBorrow" parameterType="String">
 		UPDATE book A ,borrow B
 		SET
-		A.borrowcheck='4' AND B.borrowcheck=if()
+		A.borrowcheck='4' 
 		WHERE
 		A.bookCode=#{bookCode} AND
 		B.bookCode=#{bookCode}
 	</update>
 
+	<update id="recoverBook" parameterType="String">
+		UPDATE book A ,borrow B
+		SET
+		A.borrowcheck='0' 
+		WHERE
+		A.bookCode=#{bookCode} AND
+		B.bookCode=#{bookCode}
+
+	</update>
 	<update id="confirmBorrowBook" parameterType="String">
 		UPDATE book A INNER
 		JOIN borrow B
@@ -386,15 +424,23 @@
 		WHERE DELETE ON reserve WHERE id=#{id} AND bookCode=#{bookCode} </delete> -->
 	<select id="recordList" parameterType="String" resultType="BookModel">
 		SELECT * FROM book AS A, borrow AS B
-		WHERE <![CDATA[B.borrowdate < NOW()]]>
-		AND B.id=#{id} AND A.bookCode=B.bookCode AND B.borrowcheck='3'
+		WHERE (B.returndate BETWEEN
+		date_sub(NOW(),
+		interval 90
+		day) AND NOW())
+		AND B.id=#{id} AND
+		A.bookCode=B.bookCode AND B.borrowcheck='3'
 		ORDER BY
-		B.borrowdate DESC;
+		B.returndate DESC;
 	</select>
 
 	<select id="recordListAll" resultType="BookModel">
-		SELECT * FROM book AS A, borrow AS B
-		WHERE <![CDATA[B.returndate < NOW()]]>
+		SELECT * FROM book AS A,
+		borrow AS B
+		WHERE (B.returndate BETWEEN date_sub(NOW(),
+		interval 90
+		day)
+		AND NOW())
 		AND A.bookCode=B.bookCode AND B.borrowcheck='3'
 		ORDER BY
 		B.borrowdate

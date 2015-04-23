@@ -6,7 +6,7 @@
 <head>
 <link href="/resources/css/index.css" rel="stylesheet">
 </head>
-<body>
+<body >
 
 	<br>
 	<div>

@@ -31,15 +31,24 @@ public class BoardController {
 		return "board/boardinsert";
 	}
 
+	
 	@RequestMapping("/deleteBoard")
 	public String deleteboard(String boardnum) {
 		boardService.deleteBoard(boardnum);
 		return "redirect:boardList";
 	}
 
+	@RequestMapping("/selectBoardnum")
+	public String selectBoardnum(String boardnum, Model model, BoardModel board) {
+		board = boardService.selectBoardnum(boardnum);
+		model.addAttribute("board", board );
+		return "board/modifyBoard";
+	}
+	
 	@RequestMapping("/modifyBoard")
-	public String modifyBoard(BoardModel content) {
-		boardService.modifyBoard(content);
+	public String modifyBoard(BoardModel board) {
+		boardService.modifyBoard(board);
+		
 		return "redirect:boardList";
 	}
 

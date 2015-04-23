@@ -66,12 +66,13 @@ body {
 
 							<thead>
 								<tr class="hidden-xs title">
-
+									<td><input type="checkbox" id="allCheck"></td>
 									<td id="tb-title">도서명</td>
 									<td id="tb-date">대여일자</td>
 									<td id="tb-date">반납일자</td>
 									<td id="tb-genre">장르</td>
 									<td id="tb-genre">대출자</td>
+									<td></td>
 
 								</tr>
 							</thead>
@@ -88,7 +89,7 @@ body {
 										<td align="left">${book.returndate }</td>
 										<td align="left">${book.genre }</td>
 
-										<td>ID : ${book.id}</td>
+										<td>${book.id}</td>
 
 										<td><button class="btn btn-default btn-sm" type="button"
 												id="reservebook"
@@ -97,6 +98,7 @@ body {
 										</td>
 									</tr>
 									<tr>
+										<td></td>
 										<td></td>
 										<td></td>
 										<td></td>

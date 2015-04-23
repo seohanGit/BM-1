@@ -56,6 +56,10 @@ $('#btn_find').click(function() {
 $("#requestList").click(function() {
 	location.href = "/requestList"
 })
+$("#request").click(function() {
+	location.href = "/request"
+})
+
 $("#insertBook").click(function() {
 	location.href = "/insertbookForm"
 })
@@ -68,8 +72,11 @@ $("#rentListAll").click(function() {
 $("#reservationListAll").click(function() {
 	location.href = "/reservationListAll"
 })
-$("#borrowListAll").click(function() {
-	location.href = "/borrowListAll"
+$("#borrowList").click(function() {
+	location.href = "/borrowList"
+})
+$("#borrowList2").click(function() {
+	location.href = "/borrowList"
 })
 $("#logout").click(function() {
 	location.href = "/logout"
@@ -85,6 +92,9 @@ $("#bookList").click(function() {
 })
 $("#memberList").click(function() {
 	location.href = "/memberList"
+})
+$("#boardList").click(function() {
+	location.href = "/boardList"
 })
 $("#boardList").click(function() {
 	location.href = "/boardList"

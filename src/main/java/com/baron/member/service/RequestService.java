@@ -20,4 +20,6 @@ public interface RequestService {
 
 	public BookModel selectBook(String bookCode);
 
+	public List<BookModel> requestRecord(String id);
+
 }

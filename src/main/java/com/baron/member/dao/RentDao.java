@@ -48,5 +48,7 @@ public interface RentDao {
 
 	void deleteRecord(BookModel book);
 
+	void recoverBook(String bookCode);
+
 
 }

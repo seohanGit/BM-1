@@ -38,6 +38,13 @@ public class BookController {
 		return "book/insertbookresult";
 	}
 
+	@RequestMapping("/bookInfo")
+	public String bookInfo(String bookCode, Model model, BookModel book) {
+		model.addAttribute("book", bookservice.selectBook(bookCode));
+
+		return "book/bookInfo";
+	}
+
 	/*
 	 * @RequestMapping("/national") public String getNationalBest(BookModel
 	 * model) throws Exception { bookservice.getBestSeller(); return

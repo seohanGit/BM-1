@@ -62,8 +62,9 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public void modifyBoard(BoardModel content) {
-		boardDao.modifyBoard(content);
+	public void modifyBoard(BoardModel boardmodel) {
+		
+		boardDao.modifyBoard(boardmodel);
 
 	}
 
@@ -71,6 +72,12 @@ public class BoardServiceImpl implements BoardService {
 	public void deleteBoard(String boardnum) {
 		boardDao.deleteBoard(boardnum);
 
+	}
+
+	@Override
+	public BoardModel selectBoardnum(String boardnum) {
+		// TODO Auto-generated method stub
+		return boardDao.selectBoardnum(boardnum);
 	}
 
 }

@@ -22,7 +22,9 @@ public interface BoardService {
 
 	public void insertNotice(BoardModel boardmodel);
 
-	public void modifyBoard(BoardModel content);
+	public void modifyBoard(BoardModel boardmodel);
 
 	public void deleteBoard(String boardnum);
+
+	public BoardModel selectBoardnum(String boardnum);
 }

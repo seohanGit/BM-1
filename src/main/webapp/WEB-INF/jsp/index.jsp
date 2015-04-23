@@ -64,7 +64,7 @@
 
 			</div>
 			<!-- Blog Sidebar Widgets Column -->
-			<div class="col-md-4">
+			<div class="col-md-4" >
 				<!-- Blog Search Well -->
 				<!-- 
 				<div class="well">
@@ -99,9 +99,7 @@
 		<!-- Footer -->
 		<footer>
 			<div class="row">
-				<div class="col-lg-12">
-					
-				</div>
+				<div class="col-lg-12"></div>
 				<!-- /.col-lg-12 -->
 			</div>
 			<!-- /.row -->

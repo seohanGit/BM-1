@@ -35,8 +35,8 @@
 						<span class="caret"></span>
 				</a>
 					<ul class="dropdown-menu" role="menu">
-
 						<li><a href="#" id="borrowList">대여현항</a></li>
+						<li><a href="#" id="request">구매요청목록</a></li>
 						<li><a href="#" data-toggle="modal" data-target="#myModal">사용자정보수정</a></li>
 						<li class="divider"></li>
 

@@ -69,25 +69,32 @@ public class RentController {
 		return "redirect:borrowListAll";
 	}
 
-	@RequestMapping("/borrowListAll")
-	public String borrowListAll(Model model) {
-		List<BookModel> bookList = new ArrayList<BookModel>();
-		bookList = rentservice.borrowListAll();
-		model.addAttribute("bookList", bookList);
-		return "rent/borrowListByAdmin";
-	}
-
 	@RequestMapping("/borrowList")
 	public String borrowList(HttpServletRequest request, Model model) {
-		String id = null;
 		for (Cookie cookie : request.getCookies()) {
-			if (cookie.getName().equals("bm_id"))
-				id = cookie.getValue();
-		}
-		List<BookModel> bookList = rentservice.borrowList(id);
+			if (cookie.getName().equals("bm_permission")) {
+				if (cookie.getValue().equals("1")) {
+					List<BookModel> bookList = new ArrayList<BookModel>();
+					bookList = rentservice.borrowListAll();
+					model.addAttribute("bookList", bookList);
+					return "rent/borrowListByAdmin";
+				} else {
+					String id = null;
+					if (cookie.getName().equals("bm_id")) {
+						id = cookie.getValue();
+					}
+					List<BookModel> bookList = rentservice.borrowList(id);
+					List<BookModel> record = rentservice.recordList(id);
 
-		model.addAttribute("bookList", bookList);
-		return "rent/borrowList";
+					model.addAttribute("bookList", bookList);
+					model.addAttribute("record", record);
+					return "rent/borrowList";
+				}
+			}
+
+		}
+		return null;
+
 	}
 
 	@RequestMapping("/extendBorrowBook")
@@ -168,11 +175,29 @@ public class RentController {
 		}
 	}
 
+	@RequestMapping("recoverBook")
+	public String recoverBook(String bookCode) {
+		rentservice.recoverBook(bookCode);
+
+		return "redirect:bookList";
+	}
+
 	@RequestMapping("stopBorrow")
 	public String stopBorrow(String bookCode) {
 		rentservice.stopBorrow(bookCode);
 
 		return "redirect:bookList";
+	}
+
+	@RequestMapping("/stopBorrowList")
+	public String stopBorrowList(
+			@RequestParam(value = "bookCode") List<String> bookCodeList) {
+		for (String bookCode : bookCodeList) {
+			rentservice.stopBorrow(bookCode);
+
+		}
+
+		return "redirect:rentListAll";
 	}
 
 	/*

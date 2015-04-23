@@ -48,4 +48,6 @@ public interface RentService {
 
 	public void deleteRecord(BookModel book);
 
+	public void recoverBook(String bookCode);
+
 }

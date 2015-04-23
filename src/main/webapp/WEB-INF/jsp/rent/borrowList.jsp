@@ -95,8 +95,9 @@ body {
 										</td>
 									</c:when>
 									<c:when test="${book.borrowcheck=='2'}">
+
 										<td>대출중</td>
-										
+										<td></td>
 									</c:when>
 								</c:choose>
 
@@ -113,11 +114,58 @@ body {
 					</c:forEach>
 
 				</table>
+				<c:choose>
+					<c:when test="${empty bookList}">
+					</c:when>
+					<c:otherwise>
+						<table class="table table-striped table-bordered">
+							<thead>
+								<tr class=" title">
+									<td id="tb-title">도서명</td>
+									<td id="tb-date">대여일자</td>
+									<td id="tb-date">반납일자</td>
+									<td id="tb-status">대출자</td>
+									<td id="tb-status">기록삭제</td>
+
+
+
+								</tr>
+							</thead>
+
+
+							<c:forEach items="${record}" var="record" varStatus="status">
+								<tbody>
+
+									<tr>
+
+										<td align="left">${record.bookname }</td>
+										<td align="left">${record.borrowdate }</td>
+										<td align="left">${record.returndate }</td>
+
+										<td>${record.id}</td>
+										<td><button class="btn btn-default btn-sm" type="button"
+												id="extendbook"
+												onClick="location.href='/deleteRecord?bookCode=${record.bookCode}&id=${record.id}'">삭제</button></td>
+									</tr>
+									<tr>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+
+									</tr>
+
+								</tbody>
+
+							</c:forEach>
+						</table>
+					</c:otherwise>
+				</c:choose>
 			</div>
 		</div>
 	</div>
 
-	</div>
 	<hr>
 
 	<script src="/resources/js/common.js"></script>

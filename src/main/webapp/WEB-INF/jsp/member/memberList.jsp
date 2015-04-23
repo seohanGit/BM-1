@@ -50,13 +50,13 @@
 							<td align="left">${member.name }</td>
 							<c:choose>
 								<c:when test="${member.numarrear!='0'}">
-									<td align="left">연체자</td>
+									<td align="left">연체</td>
 								</c:when>
 								<c:otherwise>
-									<td align="left">정상사원</td>
+									<td align="left">정상</td>
 								</c:otherwise>
 							</c:choose>
-							<td align="left">총 ${member.numborrow}권 대여</td>
+							<td align="left">총 <mark>${member.numborrow}</mark>권 </td>
 							<td>ID : ${member.id}</td>
 							<td>${member.cell}</td>
 							<td>${member.email}</td>

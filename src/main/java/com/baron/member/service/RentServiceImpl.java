@@ -146,4 +146,10 @@ public class RentServiceImpl implements RentService {
 		
 	}
 
+	@Override
+	public void recoverBook(String bookCode) {
+		rentDao.recoverBook(bookCode);
+		
+	}
+
 }

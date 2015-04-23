@@ -24,15 +24,15 @@
 		<div id="searchResultArea" class="row">
 			<hr>
 			<h2>게시판 관리</h2>
-			
-			<table class="table  table-condensed">
+			<hr>
+			<table class="table  table-striped table-bordered">
 				<thead>
 					<tr>
-						<td id="tb-status">ID</td>
-						<td id="tb-status">제목</td>
-						<td>내용</td>
-						<td>최종 수정일</td>
-						<td id="tb-date"></td>
+						<td></td>
+						<td style="width: 15%;">작성자</td>
+						<td style="width: 55%;">제목</td>
+						<td style="width: 15%;">최종 수정일</td>
+						<td style="width: 15%;"></td>
 
 					</tr>
 					<tr>
@@ -46,38 +46,32 @@
 				<c:forEach items="${boardList}" var="board" varStatus="status">
 					<tbody>
 
-						<form action="/modifyBoard" method="post">
-							<tr>
-								<td style="vertical-align: top;">${board.id}</td>
-								<td style="vertical-align: top;"><input id="title"
-									name="title" type="text" style="width: 90%;"
-									value="${board.title}" /></td>
-								<td style="width: 60%; height: auto;" align="left"><textarea
-										autofocus="autofocus" class="form-control " id="content"
-										name="content" style="width: 90%;" rows="5"
-										onKeyDown="setLine( this )"> ${board.content}</textarea></td>
+						<tr>
+							<td></td>
+							<td style="vertical-align: top;">${board.id}</td>
+							<td style="vertical-align: top;">${board.title}</td>
+							<td ><fmt:formatDate
+									value="${board.modifidate}" pattern="yyyy-MM-dd" /></td>
 
+							<td><input type="hidden" name="boardnum"
+								value="${board.boardnum }">
+								<button class="btn btn-default btn-sm" type="submit"
+									id="modifyBoard"
+									onClick="location.href='/selectBoardnum?boardnum=${board.boardnum}'">수정</button>
 
-								<td style="width: 10%;"><fmt:formatDate
-										value="${board.modifidate}" pattern="yyyy-MM-dd" /></td>
+								<button class="btn btn-default btn-sm" type="button"
+									id="deleteBoard"
+									onClick="location.href='/deleteBoard?boardnum=${board.boardnum}'">삭제</button>
+							</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
 
-								<td><input type="hidden" name="boardnum"
-									value="${board.boardnum }">
-									<button class="btn btn-default btn-sm" type="submit"
-										id="modifyBoard">수정</button> <hr>
-									<button class="btn btn-default btn-sm" type="button"
-										id="deleteBoard"
-										onClick="location.href='/deleteBoard?boardnum=${board.boardnum}'">삭제</button>
-								</td>
-							</tr>
-							<tr>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
-						</form>
 					</tbody>
 				</c:forEach>
 

@@ -22,7 +22,9 @@ public interface BoardDao {
 
 	public void insertNotice(BoardModel boardmodel);
 
-	public void modifyBoard(BoardModel content);
-
 	public void deleteBoard(String boardnum);
+
+	public void modifyBoard(BoardModel boardmodel);
+
+	public BoardModel selectBoardnum(String boardnum);
 }

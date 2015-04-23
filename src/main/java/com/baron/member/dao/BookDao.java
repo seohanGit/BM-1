@@ -3,6 +3,7 @@ package com.baron.member.dao;
 import java.util.List;
 
 import com.baron.member.model.BookModel;
+import com.baron.member.model.Dto;
 
 public interface BookDao {
 	public void insertBook(BookModel model);
@@ -20,6 +21,8 @@ public interface BookDao {
 	public List<BookModel> getNewbook();
 
 	public List<BookModel> getBestSeller();
+
+	public List<BookModel> listBook(Dto dto);
 
 
 }

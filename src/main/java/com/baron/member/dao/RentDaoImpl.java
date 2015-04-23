@@ -141,6 +141,12 @@ public class RentDaoImpl implements RentDao {
 		session.delete(NAMESPACE + "deleteRecord", book);
 	}
 
+	@Override
+	public void recoverBook(String bookCode) {
+		session.update(NAMESPACE + "recoverBook", bookCode);
+		
+	}
+
 	
 
 }

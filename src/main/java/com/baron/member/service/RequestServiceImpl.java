@@ -114,4 +114,10 @@ public class RequestServiceImpl implements RequestService {
 		
 		
 	}
+
+	@Override
+	public List<BookModel> requestRecord(String id) {
+		// TODO Auto-generated method stub
+		return requestDao.requestRecord(id);
+	}
 }

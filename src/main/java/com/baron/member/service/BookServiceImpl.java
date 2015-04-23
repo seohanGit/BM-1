@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import com.baron.member.dao.BookDao;
 import com.baron.member.model.BookModel;
+import com.baron.member.model.Dto;
 
 //입력을 받는 컨트롤러 클래스와 데이터베이스를 처리하는 다오 클래스 사아에 비지니스 로직이나 트랜잭션을 처리하는 클래스
 @Service
@@ -213,5 +214,11 @@ public class BookServiceImpl implements BookService {
 	 * 
 	 * }
 	 */
+
+	@Override
+	public List<BookModel> listBook(Dto dto) {
+		// TODO Auto-generated method stub
+		return bookDao.listBook(dto);
+	}
 
 }

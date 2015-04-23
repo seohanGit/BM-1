@@ -53,7 +53,7 @@ body {
 							<td align="left">${book.bookname }</td>
 							<td align="left">${book.reservedate }</td>
 							<td align="left">${book.genre }</td>
-							<td>ID : ${book.id}</td>
+							<td>${book.id}</td>
 
 							<td><button class="btn btn-default btn-sm" type="button"
 									id="extendbook"

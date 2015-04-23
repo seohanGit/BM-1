@@ -4,6 +4,7 @@ import java.util.List;
 
 
 
+
 import javax.annotation.Resource;
 
 import org.apache.ibatis.session.SqlSession;
@@ -42,5 +43,11 @@ public class RequestDaoImpl implements RequestDao{
 		return session.selectOne(NAMESPACE + "selectRequest", bookCode);
 		
 		
+	}
+
+	@Override
+	public List<BookModel> requestRecord(String id) {
+		// TODO Auto-generated method stub
+		return session.selectList(NAMESPACE + "requestRecord", id);
 	}
 }

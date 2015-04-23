@@ -23,39 +23,51 @@
 		<jsp:include page="../menu.jsp" />
 		<div id="searchResultArea" class="row">
 			<hr>
-			<h2>
-				공지사항
-				<button class="btn btn-default" style="position: relative;"
-					onClick="location.href='/writeNotice'">추가</button>
-			</h2>
-			<hr>
+
+			<div >
+				<h2>공지사항</h2>
 
 
+				<p align="right">
+					<button class="btn btn-default" type="button"
+						onClick="location.href='/writeNotice'">추가</button>
+			</div>
+
+
+			<p></p>
+
+			<br>
 			<c:forEach items="${noticeList}" var="notice" varStatus="status">
+				<form action="/modifyNotice" method="post">
 
-				<ul>
-					<form action="/modifyNotice" method="post">
-						<li width="15%" align="left"><fmt:formatDate
-								value="${notice.registerdate}" pattern="yyyy-MM-dd" /></li>
-						<li style="width: 90%; height: auto;" align="left"><textarea
-								class="form-control " id="content" name="content"
-								style="width: 100%;" rows="3" placeholder="${notice.content}"
-								onKeyDown="setLine( this )"></textarea><input type="hidden"
-							name="boardnum" value="${notice.boardnum }"></li>
+					<div>
 
-						<button class="btn btn-default btn-sm" type="submit" id="modifyNotice">수정</button>
+						<ul class="list-unstyled">
 
-						<button class="btn btn-default btn-sm" type="button" id="deleteNotice"
-							onClick="location.href='/deleteNotice?boardnum=${notice.boardnum}'">삭제</button>
-					</form>
-				</ul>
+							<li style="text-align: left;"><fmt:formatDate
+									value="${notice.registerdate}" pattern="yyyy-MM-dd" /></li>
+							<li style="width: 98%; height: auto;"><textarea
+									class="form-control " id="content" name="content"
+									style="width: 100%;" rows="3" 
+									onKeyDown="setLine( this )">${notice.content}</textarea><input type="hidden"
+								name="boardnum" value="${notice.boardnum }"></li>
+
+							<button class="btn btn-default btn-sm" type="submit"
+								id="modifyNotice">수정</button>
+
+							<button class="btn btn-default btn-sm" type="button"
+								id="deleteNotice"
+								onClick="location.href='/deleteNotice?boardnum=${notice.boardnum}'">삭제</button>
+
+						</ul>
+					</div>
+				</form>
 
 			</c:forEach>
-
-
 		</div>
-
 	</div>
+
+
 	<hr>
 	<script src="/resources/js/jquery/jquery.js"></script>
 	<script src="/resources/js/bootstrap.min.js"></script>

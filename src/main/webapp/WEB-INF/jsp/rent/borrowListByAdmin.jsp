@@ -14,7 +14,9 @@
 <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="/resources/css/signin.css" rel="stylesheet">
 <link href="/resources/css/common.css" rel="stylesheet">
-
+<script src="/resources/js/jquery/jquery.js"></script>
+<script src="/resources/js/bootstrap.min.js"></script>
+<script src="/resources/js/common.js"></script>
 <style type="text/css">
 body {
 	padding-top: 70px;
@@ -36,60 +38,88 @@ body {
 		<jsp:include page="../menu.jsp" />
 		<!-- Blog Entries Column -->
 		<div id="searchResultArea" class="row">
-			<hr>
-			<h2>대여요청 목록</h2>
-			<hr>
-			<table class="table table-striped table-bordered ">
+			<form action="confirmBorrowBookList" method="post">
+				<hr>
+
+
 				<c:choose>
 					<c:when test="${empty bookList}">
-						<h3>대여 요청한 도서가 없습니다.</h3>
+						<div>
+							<h2>대여요청 목록</h2>
+						</div>
+						<br>
+						<div>
+							<h3>대여 요청한 도서가 없습니다.</h3>
+						</div>
 					</c:when>
 					<c:otherwise>
-						<thead>
-							<tr class="hidden-xs title">
+						<div class="left">
+							<h2>대여요청 목록</h2>
+						</div>
+						<br>
+						<div class="right right-end">
+							<button class="btn btn-default" type="submit">승인</button>
+						</div>
 
-								<td id="tb-title">도서명</td>
-								<td id="tb-date">대여일자</td>
-								<td id="tb-date">반납일자</td>
-								<td id="tb-genre">장르</td>
-								<td id="tb-genre">대출자</td>
-								<td id="tb-status">상태</td>
-							</tr>
-						</thead>
+						<table class="table table-striped table-bordered ">
+
+
+							<thead>
+								<tr class="hidden-xs title">
+									<td><input type="checkbox" id="allCheck"></td>
+									<td id="tb-title">도서명</td>
+									<td id="tb-date">대여일자</td>
+									<td id="tb-date">반납일자</td>
+									<td id="tb-genre">장르</td>
+									<td id="tb-genre">대출자</td>
+									<td></td>
+
+								</tr>
+							</thead>
+
+
+							<c:forEach items="${bookList}" var="book" varStatus="loop">
+
+								<tbody>
+									<tr>
+										<td><input type="checkbox" name="bookCode"
+											value="${book.bookCode}"></td>
+										<td align="left">${book.bookname }</td>
+										<td align="left">${book.borrowdate }</td>
+										<td align="left">${book.returndate }</td>
+										<td align="left">${book.genre }</td>
+
+										<td>${book.id}</td>
+
+										<td><button class="btn btn-default btn-sm" type="button"
+												id="reservebook"
+												onClick="location.href='/confirmBorrowBook?bookCode=${book.bookCode}&id=${book.id}'; ok();">승인</button>
+
+										</td>
+									</tr>
+									<tr>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+									</tr>
+								</tbody>
+
+							</c:forEach>
+
+
+						</table>
 					</c:otherwise>
 				</c:choose>
-
-				<c:forEach items="${bookList}" var="book" varStatus="loop">
-
-					<tbody>
-						<tr>
-							<td align="left">${book.bookname }</td>
-							<td align="left">${book.borrowdate }</td>
-							<td align="left">${book.returndate }</td>
-							<td align="left">${book.genre }</td>
-
-							<td>ID : ${book.id}</td>
-
-							<td><button class="btn btn-default btn-sm" type="button"
-									id="reservebook"
-									onClick="location.href='/confirmBorrowBook?bookCode=${book.bookCode}'; ok();">승인</button>
-							</td>
-						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-					</tbody>
-				</c:forEach>
-			</table>
+			</form>
 		</div>
-	</div>
-	</div>
 
+	</div>
+	<%-- 
+ --%>
 	<hr>
 	<script src="/resources/js/jquery/jquery.js"></script>
 	<script src="/resources/js/bootstrap.min.js"></script>

@@ -3,6 +3,7 @@ package com.baron.member.service;
 import java.util.List;
 
 import com.baron.member.model.BookModel;
+import com.baron.member.model.Dto;
 
 public interface BookService {
 
@@ -25,5 +26,9 @@ public interface BookService {
 	List<BookModel> pagenation(String keyword, String page) throws Exception;
 
 	public List<BookModel> getBestSeller();
+
+
+
+	public List<BookModel> listBook(Dto dto);
 
 }

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,78 +24,92 @@
 		<jsp:include page="../menu.jsp" />
 		<div class="row" id="searchResultArea">
 			<hr>
-			<h2>대여현황 목록</h2>
-			<hr>
-			<table class="table table-striped table-bordered ">
-				<c:choose>
-					<c:when test="${empty bookList}">
-						<h3>대여중인 도서가 없습니다.</h3>
-					</c:when>
-					<c:otherwise>
-						<thead>
-							<tr class="hidden-xs title">
+			<div class="left">
+				<h2>대여현황 목록</h2>
+			</div>
+			<br>
+			<c:choose>
+				<c:when test="${empty bookList}">
+					<div><h3>대여중인 도서가 없습니다.</h3></div>
+				</c:when>
+				<c:otherwise>
+					<form action="returnBookList" method="post">
+						<div class="right right-end">
+							<button class="btn btn-default" type="submit">반납</button>
+						</div>
 
-								<td id="tb-title">도서명</td>
-								<td id="tb-date">대여일자</td>
-								<td id="tb-date">반납일자</td>
-								<td id="tb-status">대출자</td>
-								<td id="tb-status">반납</td>
-								<td id="tb-status">연장</td>
-							</tr>
-						</thead>
-					</c:otherwise>
-				</c:choose>
+						<table class="table table-striped table-bordered ">
+							<thead>
+								<tr class="hidden-xs title">
+									<td><input type="checkbox" id="allCheck"></td>
+									<td id="tb-title">도서명</td>
+									<td id="tb-date">대여일자</td>
+									<td id="tb-date">반납일자</td>
+									<td id="tb-status">대출자</td>
+									<td id="tb-status">반납</td>
+									<td id="tb-status">연장</td>
+								</tr>
+							</thead>
 
+							<c:set var="now" value="<%=new java.util.Date()%>" />
 
-				<c:forEach items="${bookList}" var="book" varStatus="loop">
+							<c:forEach items="${bookList}" var="book" varStatus="loop">
 
-					<tbody>
+								<tbody>
 
-						<tr>
-							<td align="left">${book.bookname }</td>
-							<td align="left">${book.borrowdate }</td>
-							<td align="left">${book.returndate }</td>
-
-							<td>ID : ${book.id}</td>
-							<%-- 
+									<tr>
+										<td><input type="checkbox" name="bookCode"
+											value="${book.bookCode}"></td>
+										<td align="left">${book.bookname }</td>
+										<td align="left">${book.borrowdate }</td>
+										<c:choose>
+											<c:when test="${book.returndate < now}">
+												<td align="left"
+													style="text-decoration: underline; text-align: right;">${book.returndate }</td>
+											</c:when>
+											<c:otherwise>
+												<td align="left">${book.returndate }</td>
+											</c:otherwise>
+										</c:choose>
+										<td>${book.id}</td>
+										<%-- 
 							<td><button class="btn btn-default" type="button"
 									id="extendbook"
 									onClick="location.href='/extendBorrowBook?bookCode=${book.bookCode}'">연장</button>
 							</td>
  --%>
-							<td><button class="btn btn-default btn-sm" type="button"
-									id="reservebook"
-									onClick="location.href='/returnBookByAdmin?bookCode=${book.bookCode}'; re_turn();">반납</button>
-							</td>
-							<td><button class="btn btn-default btn-sm" type="button"
-									id="reservebook"
-									onClick="location.href='/extendBorrowBook?bookCode=${book.bookCode}'; extend();">연장</button></td>
+										<td><button class="btn btn-default btn-sm" type="button"
+												id="reservebook"
+												onClick="location.href='/returnBookByAdmin?bookCode=${book.bookCode}'; re_turn();">반납</button>
+										</td>
+										<td><button class="btn btn-default btn-sm" type="button"
+												id="reservebook"
+												onClick="location.href='/extendBorrowBook?bookCode=${book.bookCode}'; extend();">연장</button></td>
+									</tr>
 
-						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
+									<tr>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+									</tr>
 
-					</tbody>
-				</c:forEach>
-			</table>
+								</tbody>
+
+							</c:forEach>
+						</table>
+					</form>
+				</c:otherwise>
+			</c:choose>
 		</div>
 	</div>
-	</div>
-	</div>
+
 	<hr>
 	<script src="/resources/js/jquery/jquery.js"></script>
 	<script src="/resources/js/bootstrap.min.js"></script>
 	<script src="/resources/js/common.js"></script>
-	<script>
-		function del() {
-			alert("승인되었습니다.");
-		}
-	</script>
+
 </body>
 </html>

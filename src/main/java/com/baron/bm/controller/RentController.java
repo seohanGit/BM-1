@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.baron.member.model.BookModel;
 import com.baron.member.service.BookService;
@@ -52,47 +53,48 @@ public class RentController {
 
 	@RequestMapping("/confirmBorrowBook")
 	public String confirmBorrowBook(HttpServletRequest request, String bookCode) {
-		String id = null;
-		for (Cookie cookie : request.getCookies()) {
-			if (cookie.getName().equals("bm_id")) {
-				id = cookie.getValue();
-			}
-		}
-		rentservice.upPoint(id);
+
 		rentservice.confirmBorrowBook(bookCode);
 		return "redirect:borrowListAll";
 	}
 
 	@RequestMapping("/confirmBorrowBookList")
-	public String confirmBorrowBookList(List<String> bookCodeList) {
+	public String confirmBorrowBookList(
+			@RequestParam(value = "bookCode") List<String> bookCodeList) {
 
-		for (int i = 0; i < bookCodeList.size(); i++) {
-			String bookCode = bookCodeList.get(i);
+		for (String bookCode : bookCodeList) {
 			rentservice.confirmBorrowBook(bookCode);
 
 		}
 		return "redirect:borrowListAll";
 	}
 
-	@RequestMapping("/borrowListAll")
-	public String borrowListAll(Model model) {
-		List<BookModel> bookList = new ArrayList<BookModel>();
-		bookList = rentservice.borrowListAll();
-		model.addAttribute("bookList", bookList);
-		return "rent/borrowListByAdmin";
-	}
-
 	@RequestMapping("/borrowList")
 	public String borrowList(HttpServletRequest request, Model model) {
-		String id = null;
 		for (Cookie cookie : request.getCookies()) {
-			if (cookie.getName().equals("bm_id"))
-				id = cookie.getValue();
-		}
-		List<BookModel> bookList = rentservice.borrowList(id);
+			if (cookie.getName().equals("bm_permission")) {
+				if (cookie.getValue().equals("1")) {
+					List<BookModel> bookList = new ArrayList<BookModel>();
+					bookList = rentservice.borrowListAll();
+					model.addAttribute("bookList", bookList);
+					return "rent/borrowListByAdmin";
+				} else {
+					String id = null;
+					if (cookie.getName().equals("bm_id")) {
+						id = cookie.getValue();
+					}
+					List<BookModel> bookList = rentservice.borrowList(id);
+					List<BookModel> record = rentservice.recordList(id);
 
-		model.addAttribute("bookList", bookList);
-		return "rent/borrowList";
+					model.addAttribute("bookList", bookList);
+					model.addAttribute("record", record);
+					return "rent/borrowList";
+				}
+			}
+
+		}
+		return null;
+
 	}
 
 	@RequestMapping("/extendBorrowBook")
@@ -104,6 +106,23 @@ public class RentController {
 		} else {
 			return "redirect:extendFail";
 		}
+	}
+
+	@RequestMapping("/extendBookList")
+	public String extendBookList(
+			@RequestParam(value = "bookCode") List<String> bookCodeList,
+			Model model) {
+
+		for (String bookCode : bookCodeList) {
+			if (rentservice.selectReservation(bookCode).equals("0")) {
+				rentservice.extendBorrowBook(bookCode);
+
+			} else {
+				return "redirect:extendFail";
+			}
+		}
+		return "/rent/extendSuccess";
+
 	}
 
 	@RequestMapping("/cancleBorrowBook")
@@ -132,14 +151,15 @@ public class RentController {
 	 * model) { List<BookModel> bookList = new ArrayList<BookModel>(); bookList
 	 * = rentservice.returnListAll(); model.addAttribute("bookList", bookList);
 	 * return "rent/returnList"; }
-	 */@RequestMapping("/returnmanybook")
-	public String returnManyBook(List<String> bookCodeList) {
-
-		for (int i = 0; i < bookCodeList.size(); i++) {
-			String bookCode = bookCodeList.get(i);
+	 */@RequestMapping("/returnBookList")
+	public String returnManyBook(
+			@RequestParam(value = "bookCode") List<String> bookCodeList) {
+		for (String bookCode : bookCodeList) {
 			rentservice.returnBook(bookCode);
+
 		}
-		return "rent/rentList";
+
+		return "redirect:rentListAll";
 	}
 
 	@RequestMapping("/returnBookByAdmin")
@@ -155,9 +175,27 @@ public class RentController {
 		}
 	}
 
+	@RequestMapping("recoverBook")
+	public String recoverBook(String bookCode) {
+		rentservice.recoverBook(bookCode);
+
+		return "redirect:bookList";
+	}
+
 	@RequestMapping("stopBorrow")
 	public String stopBorrow(String bookCode) {
 		rentservice.stopBorrow(bookCode);
+
+		return "redirect:bookList";
+	}
+
+	@RequestMapping("/stopBorrowList")
+	public String stopBorrowList(
+			@RequestParam(value = "bookCode") List<String> bookCodeList) {
+		for (String bookCode : bookCodeList) {
+			rentservice.stopBorrow(bookCode);
+
+		}
 
 		return "redirect:rentListAll";
 	}

@@ -17,7 +17,7 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="index">민상훈 책방</a>
+			<a class="navbar-brand" href="index">기술 자료실</a>
 		</div>
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse"
@@ -36,6 +36,7 @@
 				</a>
 					<ul class="dropdown-menu" role="menu">
 						<li><a href="#" id="borrowList">대여현항</a></li>
+						<li><a href="#" id="request">구매요청목록</a></li>
 						<li><a href="#" data-toggle="modal" data-target="#myModal">사용자정보수정</a></li>
 						<li class="divider"></li>
 
@@ -46,6 +47,7 @@
 
 
 				<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+
 				<li style="font-size: 10px"><a href="admin">관리자페이지</a></li>
 			</ul>
 

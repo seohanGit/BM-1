@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.baron.member.model.BookModel;
 import com.baron.member.service.BookService;
@@ -32,12 +33,49 @@ public class RequestController {
 	}
 
 	@RequestMapping("/requestList")
-	public String requestList(Model model) {
+	public String requestList(HttpServletRequest request, Model model, String id) {
 		List<BookModel> bookList = new ArrayList<BookModel>();
-		bookList = requestservice.requestList();
-		model.addAttribute("bookList", bookList);
 
-		return "requestList";
+		for (Cookie cookie : request.getCookies()) {
+			if (cookie.getName().equals("bm_id")) {
+				id = (cookie.getValue());
+			} else if (cookie.getName().equals("bm_permission")) {
+				if ("1".equals(cookie.getValue())) {
+					bookList = requestservice.requestList();
+					model.addAttribute("bookList", bookList);
+					return "requestList";
+				} else {
+					bookList = requestservice.requestRecord(id);
+					model.addAttribute("bookList", bookList);
+					return "request";
+				}
+			}
+
+		}
+		return null;
+	}
+
+	@RequestMapping("/request")
+	public String request(HttpServletRequest request, Model model, String id) {
+		List<BookModel> bookList = new ArrayList<BookModel>();
+
+		for (Cookie cookie : request.getCookies()) {
+			if (cookie.getName().equals("bm_id")) {
+				id = (cookie.getValue());
+			} else if (cookie.getName().equals("bm_permission")) {
+				if ("1".equals(cookie.getValue())) {
+					bookList = requestservice.requestList();
+					model.addAttribute("bookList", bookList);
+					return "redirect:requestList";
+				} else {
+					bookList = requestservice.requestRecord(id);
+					model.addAttribute("bookList", bookList);
+					return "request";
+				}
+			}
+
+		}
+		return null;
 	}
 
 	@RequestMapping("/requestbook")
@@ -66,7 +104,29 @@ public class RequestController {
 
 	@RequestMapping("/confirmBuy")
 	public String confirmBuy(BookModel model) {
-		bookService.insertBook(model);
+		if (bookService.selectBook(model.getBookCode()) == null) {
+			bookService.insertBook(model);
+			requestservice.deleteRequest(model.getBookCode());
+			return "redirect:requestList";
+		} else {
+			return "buyfail";
+		}
+	}
+
+	@RequestMapping("/confirmBuyList")
+	public String confirmBuyList(
+			@RequestParam(value = "bookCode") List<String> bookCodeList) {
+		for (String bookCode : bookCodeList) {
+			if (bookService.selectBook(bookCode) == null) {
+				bookService.insertBook(requestservice.selectBook(bookCode));
+				requestservice.deleteRequest(bookCode);
+
+			} else {
+				return "buyfail";
+
+			}
+
+		}
 		return "redirect:requestList";
 	}
 

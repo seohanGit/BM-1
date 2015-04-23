@@ -56,6 +56,10 @@ $('#btn_find').click(function() {
 $("#requestList").click(function() {
 	location.href = "/requestList"
 })
+$("#request").click(function() {
+	location.href = "/request"
+})
+
 $("#insertBook").click(function() {
 	location.href = "/insertbookForm"
 })
@@ -68,8 +72,11 @@ $("#rentListAll").click(function() {
 $("#reservationListAll").click(function() {
 	location.href = "/reservationListAll"
 })
-$("#borrowListAll").click(function() {
-	location.href = "/borrowListAll"
+$("#borrowList").click(function() {
+	location.href = "/borrowList"
+})
+$("#borrowList2").click(function() {
+	location.href = "/borrowList"
 })
 $("#logout").click(function() {
 	location.href = "/logout"
@@ -89,7 +96,17 @@ $("#memberList").click(function() {
 $("#boardList").click(function() {
 	location.href = "/boardList"
 })
+$("#boardList").click(function() {
+	location.href = "/boardList"
+})
+$("#allCheck").click(function() {
+	if ($("#allCheck").prop("checked")) {
+		$("input[type=checkbox]").prop("checked", true);
+	} else {
+		$("input[type=checkbox]").prop("checked", false);
+	}
 
+})
 $('#btn_bookList').click(function() {
 	$.ajax({
 		type : "GET", // GET or POST

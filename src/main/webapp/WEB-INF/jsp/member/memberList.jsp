@@ -25,7 +25,7 @@
 			<hr>
 			<h2>사원 목록</h2>
 			<hr>
-			<table class="table table-striped table-bordered ">
+			<table class="table table-striped table-bordered" id="dataTable">
 
 				<thead>
 					<tr class="hidden-xs title">
@@ -41,9 +41,9 @@
 					</tr>
 				</thead>
 
-				<c:forEach items="${memberList}" var="member" varStatus="loop">
+				<tbody>
 
-					<tbody>
+					<c:forEach items="${memberList}" var="member" varStatus="loop">
 
 						<tr>
 							<td align="left">${member.team }</td>
@@ -56,7 +56,8 @@
 									<td align="left">정상</td>
 								</c:otherwise>
 							</c:choose>
-							<td align="left">총 <mark>${member.numborrow}</mark>권 </td>
+							<td align="left">총 <mark>${member.numborrow}</mark>권
+							</td>
 							<td>ID : ${member.id}</td>
 							<td>${member.cell}</td>
 							<td>${member.email}</td>
@@ -68,17 +69,10 @@
  --%>
 
 						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
 
-					</tbody>
-				</c:forEach>
+					</c:forEach>
+				</tbody>
+
 			</table>
 		</div>
 	</div>
@@ -87,10 +81,29 @@
 	<script src="/resources/js/jquery/jquery.js"></script>
 	<script src="/resources/js/bootstrap.min.js"></script>
 	<script src="/resources/js/common.js"></script>
+
+	<script src="/resources/js/jquery.dataTables.min.js"></script>
+	<script src="/resources/js/dataTables.bootstrap.min.js"></script>
 	<script>
 		function del() {
 			alert("승인되었습니다.");
 		}
+		$(document).ready(function() {
+
+			$('#dataTable').DataTable({
+				"pageLength" : 50,
+				paging : true,
+				ordering : true,
+				"columns" : [ {
+					"searchable" : false
+				}, null, {
+					"searchable" : false
+				}, {
+					"searchable" : false
+				}, null, null, null ]
+
+			});
+		});
 	</script>
 </body>
 </html>

@@ -10,28 +10,27 @@
 		<hr>
 
 		<div class="dataTable_wrapper">
-			<table class="table table-striped table-bordered table-hover"
-				id="dataTables-example">
+			<table class="table table-striped table-bordered "
+				id="dataTable">
 
 
 				<thead>
 					<tr>
-						<td id="td-img">표지</td>
-						<td id="td-title">도서명</td>
-						<td id="td-author">저자</td>
-						<td id="td-date">장르</td>
-						<td id="td-author">출판사</td>
-						<td id="td-author">대여상태</td>
-						<td id="td-empty"></td>
+						<th id="td-img">표지</th>
+						<th id="td-title">도서명</th>
+						<th id="td-author">저자</th>
+						<th id="td-date">장르</th>
+						<th id="td-author">출판사</th>
+						<th id="td-author">대여상태</th>
+						<th id="td-empty"></th>
 					</tr>
 				</thead>
 				<%-- 
 						
  --%>
-				<c:forEach items="${bookList}" var="book" begin="0" end="49"
-					step="1" varStatus="loop">
-					<tbody>
+				<tbody>
 
+					<c:forEach items="${bookList}" var="book" >
 
 						<tr>
 							<td rowspan="3" style="width: 50px" align="left"><img
@@ -78,19 +77,11 @@
 									</c:when>
 								</c:choose>
 						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
 
 
-					</tbody>
+					</c:forEach>
 
-				</c:forEach>
+				</tbody>
 			</table>
 		</div>
 	</div>
@@ -99,6 +90,27 @@
 <script src="/resources/js/metisMenu.min.js"></script>
 <script src="/resources/js/jquery.dataTables.min.js"></script>
 <script src="/resources/js/dataTables.bootstrap.min.js"></script>
+<script>
+	$(document).ready(function() {
 
+		$('#dataTable').DataTable({
+			"pageLength" : 10,
+			paging : true,
+			ordering : true,
+			"columns" : [ {
+				"searchable" : false
+			}, {
+				"searchable" : false
+			}, null, null, {
+				"searchable" : false
+			}, {
+				"searchable" : false
+			}, {
+				"searchable" : false
+			} ],
+
+		});
+	});
+</script>
 </body>
 </html>

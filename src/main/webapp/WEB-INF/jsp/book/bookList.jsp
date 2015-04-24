@@ -55,7 +55,7 @@ body {
 						<div class="panel-body">
 							<div class="dataTable_wrapper">
 								<table class="table table-striped table-bordered "
-									id="bookList">
+									id="dataTable">
 									<thead>
 										<tr>
 											<th><input type="checkbox" id="allCheck"></th>
@@ -181,7 +181,9 @@ body {
 	<script src="/resources/js/dataTables.bootstrap.min.js"></script>
 	<script>
 		$(document).ready(function() {
-			$('#bookList').DataTable();
+			$('#dataTable').dataTable({
+				  "order": [[ 3, "desc" ]]
+			});
 		});
 	</script>
 </body>

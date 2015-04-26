@@ -16,7 +16,7 @@
 						<td id="tb-author">저자</td>
 
 
-						<td>대여상태</td>
+						<td width="90px">대여상태</td>
 						<td width="230px">
 						</td>
 					</tr>

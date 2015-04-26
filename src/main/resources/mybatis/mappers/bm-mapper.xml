@@ -329,17 +329,16 @@
 		SET
 		A.borrowcheck='4' 
 		WHERE
-		A.bookCode=#{bookCode} AND
-		B.bookCode=#{bookCode}
+		A.bookCode=#{bookCode} AND A.borrowcheck='0'
+		
 	</update>
 
 	<update id="recoverBook" parameterType="String">
-		UPDATE book A ,borrow B
+		UPDATE book A
 		SET
 		A.borrowcheck='0' 
 		WHERE
-		A.bookCode=#{bookCode} AND
-		B.bookCode=#{bookCode}
+		A.bookCode=#{bookCode} AND A.borrowcheck='4'
 
 	</update>
 	<update id="confirmBorrowBook" parameterType="String">

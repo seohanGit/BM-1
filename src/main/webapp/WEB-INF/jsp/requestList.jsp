@@ -58,21 +58,21 @@ body {
 						<div class="right right-end">
 							<button class="btn btn-default" type="submit">구매</button>
 						</div>
-						<table class="table table-striped table-bordered">
+						<table class="table table-striped table-bordered" id="dataTable">
 
 							<thead>
 								<tr class="hidden-xs ">
-									<td><input type="checkbox" id="allCheck"></td>
-									<td id="tb-img">표지</td>
+									<th><input type="checkbox" id="allCheck"></th>
+									<th id="td-img">표지</th>
 
-									<td id="tb-author">도서명</td>
-									<td id="tb-author">저자</td>
-									<td id="tb-genre">가격</td>
-									<td id="tb-genre">수량</td>
-									<td id="tb-genre">신청자</td>
-									<td id="tb-date">요청일자</td>
-									<td width="60px"></td>
-									<td width="60px"></td>
+									<th id="td-author">도서명</th>
+									<th id="td-author">저자</th>
+									<th id="td-genre">가격</th>
+									<th id="td-genre">수량</th>
+									<th id="td-genre">신청자</th>
+									<th id="td-date">요청일자</th>
+									<th width="60px"></th>
+									<th width="60px"></th>
 								</tr>
 							</thead>
 
@@ -133,14 +133,7 @@ body {
 										</td>
 
 									</tr>
-									<tr>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-									</tr>
+
 								</tbody>
 
 							</c:forEach>

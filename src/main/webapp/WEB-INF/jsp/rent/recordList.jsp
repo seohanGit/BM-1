@@ -32,14 +32,14 @@ body {
 			<h2>대여 기록</h2>
 			<hr>
 			기록 검색
-			<table class="table table-striped table-bordered">
+			<table class="table table-striped table-bordered" id="dataTable">
 				<thead>
 					<tr class=" title">
-						<td id="tb-title">도서명</td>
-						<td id="tb-date">대여일자</td>
-						<td id="tb-date">반납일자</td>
-						<td id="tb-status">대출자</td>
-						<td id="tb-status">기록삭제</td>
+						<th id="tb-title">도서명</th>
+						<th id="tb-date">대여일자</th>
+						<th id="tb-date">반납일자</th>
+						<th id="tb-status">대출자</th>
+						<th id="tb-status">기록삭제</th>
 
 
 
@@ -47,8 +47,8 @@ body {
 				</thead>
 
 
-				<c:forEach items="${bookList}" var="book" varStatus="status">
-					<tbody>
+				<tbody>
+					<c:forEach items="${bookList}" var="book" varStatus="status">
 
 						<tr>
 
@@ -61,18 +61,9 @@ body {
 									id="extendbook"
 									onClick="location.href='/deleteRecord?bookCode=${book.bookCode}&id=${book.id}'">삭제</button></td>
 						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
 
-						</tr>
-
-					</tbody>
-
-				</c:forEach>
+					</c:forEach>
+				</tbody>
 			</table>
 		</div>
 
@@ -81,6 +72,29 @@ body {
 	<script src="/resources/js/jquery/jquery.js"></script>
 	<script src="/resources/js/bootstrap.min.js"></script>
 	<script src="/resources/js/common.js"></script>
-	<script src="/resources/js/book.js"></script>
+	<script src="/resources/js/book.js"></script>	<script src="/resources/js/jquery.dataTables.min.js"></script>
+	<script src="/resources/js/dataTables.bootstrap.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+
+			$('#dataTable').DataTable({
+				"pageLength" : 30,
+				paging : true,
+				ordering : true,
+				"columns" : [ {
+					"searchable" : true
+				}, {
+					"searchable" : false
+				},  {
+					"searchable" : false
+				}, {
+					"searchable" : true
+				}, {
+					"searchable" : false
+				}]
+
+			});
+		});
+	</script>
 </body>
 </html>

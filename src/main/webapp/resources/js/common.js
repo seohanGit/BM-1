@@ -107,6 +107,8 @@ $("#allCheck").click(function() {
 	}
 
 })
+
+
 $('#btn_bookList').click(function() {
 	$.ajax({
 		type : "GET", // GET or POST

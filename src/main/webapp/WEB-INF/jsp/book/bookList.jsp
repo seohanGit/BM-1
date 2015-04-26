@@ -55,7 +55,7 @@ body {
 						<div class="panel-body">
 							<div class="dataTable_wrapper">
 								<table class="table table-striped table-bordered "
-									id="bookList">
+									id="dataTable">
 									<thead>
 										<tr>
 											<th><input type="checkbox" id="allCheck"></th>
@@ -71,23 +71,15 @@ body {
 									<%-- 
 						
  --%>
-									<c:forEach items="${bookList}" var="book" varStatus="loop">
-										<tbody>
 
+									<tbody>
+										<c:forEach items="${bookList}" var="book" varStatus="loop">
 
 											<tr>
-												<td><input type="checkbox" id="allCheck"></td>
-												<td rowspan="2" style="width: 50px" align="left"><img
+												<td><input type="checkbox" name="bookCode"
+													value="${book.bookCode}"></td>
+												<td style="width: 50px" align="left"><img
 													style="width: 50px" src="${book.imageurl}"></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-
-											</tr>
-											<tr>
-												<td></td>
 												<td align="left">${book.bookname }</td>
 												<td align="left">${book.writer }</td>
 												<td align="left">${book.genre}</td>
@@ -146,19 +138,10 @@ body {
 
 
 											</tr>
-											<tr>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
 
-											</tr>
-										</tbody>
+										</c:forEach>
+									</tbody>
 
-									</c:forEach>
 								</table>
 							</div>
 						</div>
@@ -166,13 +149,7 @@ body {
 				</div>
 			</form>
 			<br>
-			<div align="center">
-				<c:forEach var="seq" begin="1" end="${total}" step="1">
-					<a class="page" href="/page?seq=${seq}">${seq} &nbsp;</a>
-				</c:forEach>
 
-				<a class="page" style="float: right;" href="/page?seq=${total}"><mark>Last</mark></a>
-			</div>
 		</div>
 	</div>
 	<script src="/resources/js/common.js"></script>
@@ -181,7 +158,24 @@ body {
 	<script src="/resources/js/dataTables.bootstrap.min.js"></script>
 	<script>
 		$(document).ready(function() {
-			$('#bookList').DataTable();
+
+			$('#dataTable').DataTable({
+				"pageLength" : 10,
+				paging : true,
+				ordering : true,
+				"columns" : [ {
+					"searchable" : false
+				}, {
+					"searchable" : false
+				}, null, null, {
+					"searchable" : false
+				}, {
+					"searchable" : false
+				}, {
+					"searchable" : false
+				} ],
+
+			});
 		});
 	</script>
 </body>

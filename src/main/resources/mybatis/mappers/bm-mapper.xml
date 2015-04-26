@@ -176,7 +176,7 @@
 	</select>
 
 	<select id="searchBook" parameterType="String" resultType="BookModel">
-		SELECT *, @SEQ := @SEQ+1 AS seq FROM book, (SELECT @SEQ :=0) A
+		SELECT *
 		WHERE
 		bookname LIKE
 		CONCAT('%',#{keyword},'%')
@@ -189,8 +189,6 @@
 		*,
 		(SELECT COUNT(*) FROM book) AS count
 		FROM book
-		WHERE seq BETWEEN #{num1}
-		AND #{num2}
 		ORDER BY
 		buydate DESC
 	</select>

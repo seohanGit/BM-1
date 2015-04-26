@@ -50,7 +50,7 @@ body {
 				<h2>사용자 대여 현황</h2>
 				<hr>
 
-				<table class="table table-striped table-bordered ">
+				<table class="table table-striped table-bordered " id="dataTable">
 					<c:choose>
 						<c:when test="${empty bookList}">
 							<h3>대여한 도서가 없습니다.</h3>
@@ -169,5 +169,8 @@ body {
 	<hr>
 
 	<script src="/resources/js/common.js"></script>
+	<script type="text/javascript">
+		var table = $('#example').DataTable();
+	</script>
 </body>
 </html>

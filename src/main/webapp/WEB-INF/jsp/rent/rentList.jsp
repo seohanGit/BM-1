@@ -30,7 +30,9 @@
 			<br>
 			<c:choose>
 				<c:when test="${empty bookList}">
-					<div><h3>대여중인 도서가 없습니다.</h3></div>
+					<div>
+						<h3>대여중인 도서가 없습니다.</h3>
+					</div>
 				</c:when>
 				<c:otherwise>
 					<form action="returnBookList" method="post">
@@ -38,24 +40,24 @@
 							<button class="btn btn-default" type="submit">반납</button>
 						</div>
 
-						<table class="table table-striped table-bordered ">
+						<table class="table table-striped table-bordered " id="dataTable">
 							<thead>
 								<tr class="hidden-xs title">
-									<td><input type="checkbox" id="allCheck"></td>
-									<td id="tb-title">도서명</td>
-									<td id="tb-date">대여일자</td>
-									<td id="tb-date">반납일자</td>
-									<td id="tb-status">대출자</td>
-									<td id="tb-status">반납</td>
-									<td id="tb-status">연장</td>
+									<th><input type="checkbox" id="allCheck"></th>
+									<th id="tb-title">도서명</th>
+									<th id="tb-date">대여일자</th>
+									<th id="tb-date">반납일자</th>
+									<th id="tb-status">대출자</th>
+									<th id="tb-status">반납</th>
+									<th id="tb-status">연장</th>
 								</tr>
 							</thead>
 
 							<c:set var="now" value="<%=new java.util.Date()%>" />
 
-							<c:forEach items="${bookList}" var="book" varStatus="loop">
 
-								<tbody>
+							<tbody>
+								<c:forEach items="${bookList}" var="book" varStatus="loop">
 
 									<tr>
 										<td><input type="checkbox" name="bookCode"
@@ -87,18 +89,11 @@
 												onClick="location.href='/extendBorrowBook?bookCode=${book.bookCode}'; extend();">연장</button></td>
 									</tr>
 
-									<tr>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-									</tr>
 
-								</tbody>
 
-							</c:forEach>
+								</c:forEach>
+							</tbody>
+
 						</table>
 					</form>
 				</c:otherwise>
@@ -110,6 +105,23 @@
 	<script src="/resources/js/jquery/jquery.js"></script>
 	<script src="/resources/js/bootstrap.min.js"></script>
 	<script src="/resources/js/common.js"></script>
+	<script src="/resources/js/jquery.dataTables.min.js"></script>
+	<script src="/resources/js/dataTables.bootstrap.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
 
+			$('#dataTable').DataTable({
+				"pageLength" : 30,
+				paging : true,
+				ordering : true,
+				"columns" : [  null, {
+					"searchable" : false
+				}, {
+					"searchable" : false
+				}, null]
+
+			});
+		});
+	</script>
 </body>
 </html>

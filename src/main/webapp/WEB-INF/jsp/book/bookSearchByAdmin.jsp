@@ -8,31 +8,26 @@
 		<div class="col-md-8">
 			<h2>도서검색 목록</h2>
 			<hr>
-			<table class="table table-striped  table-bordered ">
+			<table class="table table-striped  table-bordered " id="dataTable">
 				<thead>
 					<tr>
-						<td id="tb-img">표지</td>
-						<td id="tb-author">도서명</td>
-						<td id="tb-author">저자</td>
-
-
-						<td>대여상태</td>
-						<td width="230px">
-						</td>
+						<th id="td-img">표지</th>
+						<th id="td-author">도서명</th>
+						<th id="td-author">저자</th>
+						<th>대여상태</th>
+						<th width="230px"></th>
 					</tr>
 				</thead>
 				<%-- 
 						
  --%>
-				<c:forEach items="${bookList}" var="book" varStatus="loop">
-					<tbody>
-
-
+				<tbody>
+					<c:forEach items="${bookList}" var="book" varStatus="loop">
 						<tr>
-							<td rowspan="2" style="width: 40px" align="left"><img
+
+							<td style="width: 40px" align="left"><img
 								style="width: 40px" src="${book.imageurl}"></td>
-						</tr>
-						<tr>
+
 
 							<td align="left">${book.bookname }</td>
 							<td align="left">${book.writer }</td>
@@ -90,20 +85,31 @@
 								</c:when>
 							</c:choose>
 						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-
-						</tr>
-					</tbody>
-				</c:forEach>
+					</c:forEach>
+				</tbody>
 			</table>
 
 		</div>
 	</div>
 </div>
 <script src="/resources/js/common.js"></script>
+<script src="/resources/js/jquery.dataTables.min.js"></script>
+<script src="/resources/js/dataTables.bootstrap.min.js"></script>
+<script>
+$(document).ready(function() {
 
+	$('#dataTable').DataTable({
+		"pageLength" : 10,
+		paging : true,
+		ordering : true,
+		"columns" : [ {
+			"searchable" : false
+		}, null, null, {
+			"searchable" : false
+		}, {
+			"searchable" : false
+		} ],
+
+	});
+});
+</script>

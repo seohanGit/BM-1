@@ -196,7 +196,6 @@ public class RentController {
 			rentservice.stopBorrow(bookCode);
 
 		}
-
 		return "redirect:rentListAll";
 	}
 

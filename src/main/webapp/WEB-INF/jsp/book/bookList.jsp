@@ -64,7 +64,7 @@ body {
 											<th id="tb-author">저자</th>
 											<th id="tb-status">장르</th>
 
-											<th width="70px">대여상태</th>
+											<th width="80px">대여상태</th>
 											<th width="30%"></th>
 										</tr>
 									</thead>

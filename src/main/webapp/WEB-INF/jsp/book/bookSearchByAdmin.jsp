@@ -11,11 +11,22 @@
 			<table class="table table-striped  table-bordered " id="dataTable">
 				<thead>
 					<tr>
+<<<<<<< HEAD
 						<th id="td-img">표지</th>
 						<th id="td-author">도서명</th>
 						<th id="td-author">저자</th>
 						<th>대여상태</th>
 						<th width="230px"></th>
+=======
+						<td id="tb-img">표지</td>
+						<td id="tb-author">도서명</td>
+						<td id="tb-author">저자</td>
+
+
+						<td width="90px">대여상태</td>
+						<td width="230px">
+						</td>
+>>>>>>> feature/#14
 					</tr>
 				</thead>
 				<%-- 

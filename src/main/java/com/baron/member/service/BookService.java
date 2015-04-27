@@ -22,9 +22,9 @@ public interface BookService {
 	BookModel selectBook(String bookCode);
 
 	List<BookModel> findBook(String keyword) throws Exception;
-
+/*
 	List<BookModel> pagenation(String keyword, String page) throws Exception;
-
+*/
 	public List<BookModel> getBestSeller();
 
 

@@ -26,6 +26,17 @@
 			<name>JBoss Public Maven Repository Group</name>
 			<url>https://repository.jboss.org/nexus/content/groups/public/</url>
 		</repository>
+		<repository>
+			<id>lib</id>
+			<releases>
+				<enabled>true</enabled>
+				<checksumPolicy>ignore</checksumPolicy>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<url>file://${project.basedir}/lib</url>
+		</repository>
 	</repositories>
 
 	<properties>
@@ -54,7 +65,7 @@
 			<artifactId>com.springsource.javax.inject</artifactId>
 			<version>1.0.0</version>
 		</dependency>
-<!-- xmlPullParser -->
+		<!-- xmlPullParser -->
 		<dependency>
 			<groupId>xmlpull</groupId>
 			<artifactId>xmlpull</artifactId>
@@ -121,6 +132,12 @@
 			<groupId>postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<version>8.2-507.jdbc3</version>
+		</dependency>
+		<!-- DB2 connection -->
+		<dependency>
+			<groupId>net.sf.squirrel-sql.plugins</groupId>
+			<artifactId>db2</artifactId>
+			<version>3.5.0</version>
 		</dependency>
 		<!-- Logging depedencies -->
 		<!-- <dependency> <groupId>commons-logging</groupId> <artifactId>commons-logging</artifactId> 

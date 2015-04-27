@@ -121,11 +121,7 @@ public class BookController {
 			throws Exception {
 		List<BookModel> bookList;
 		int totalPage;
-		if (page == null) {
-			bookList = bookservice.findBook(keyword);
-		} else {
-			bookList = bookservice.pagenation(keyword, page);
-		}
+		bookList = bookservice.findBook(keyword);
 
 		totalPage = bookList.get(0).getTotalResults() / 15;
 

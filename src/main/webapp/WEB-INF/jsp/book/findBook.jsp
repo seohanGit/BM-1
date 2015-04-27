@@ -17,7 +17,7 @@
 
 <script src="/resources/js/jquery/jquery.js"></script>
 <script src="/resources/js/jquery/book.js"></script>
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 	function request() {
 		alert("구매요청되엇습니다.");
 	}
@@ -46,6 +46,7 @@
 				$('#page').append(lastpage);
 			});
 </script>
+ -->
 </head>
 <body onload="pagenation()">
 	<jsp:include page="../nav.jsp" />
@@ -65,36 +66,37 @@
 				</form>
 			</div>
 
-<hr>
-			<table style="width=:90%; bordercolor:#fff">
+			<hr>
+			<form action="/requestbook" method="get">
+				<table class="table table-striped table-bordered"
+					style="width =: 90%; bordercolor: #fff" id="dataTable">
 
-				<thead>
-					<tr>
-						<td id="td-img">표지</td>
-						<td id="td-title">도서명</td>
-						<td id="td-author">저자</td>
-						<td id="td-genre">장르</td>
-						<td id="td-author">출판사</td>
-						<td id="td-date">가격</td>
-						<td id="td-date"></td>
-						<td></td>
-					</tr>
-				</thead>
-				<c:forEach items="${bookList}" var="book" varStatus="status">
-					<tbody>
-
+					<thead>
 						<tr>
-							<td rowspan="3" style="width: 50px" align="left"><img
-								style="width: 50px" src="${book.imageurl}"></td>
+							<td id="td-img">표지</td>
+							<td width="20%">도서명</td>
+							<td class="hidden-xs" >저자</td>
+							<td class="hidden-xs" id="td-genre">장르</td>
+							<td class="hidden-xs" id="td-genre">출판사</td>
+							<td id="td-genre">가격</td>
+							<td >수량</td>
+							<td>구매요청</td>
 						</tr>
-						<tr>
-							<td align="left"><a href="${book.link}">${book.bookname}</a></td>
-							<td align="left">${book.writer }</td>
-							<td align="left">${book.genre}</td>
-							<td align="left">${book.publisher}</td>
-							<td align="left">${book.priceSales}원</td>
+					</thead>
 
-							<form action="/requestbook" method="get">
+					<tbody>
+						<c:forEach items="${bookList}" var="book" varStatus="status">
+							<tr>
+								<td style="width: 50px" align="left"><img
+									style="width: 50px" src="${book.imageurl}"></td>
+
+								<td align="left"><a href="${book.link}">${book.bookname}</a></td>
+								<td class="hidden-xs" align="left">${book.writer }</td>
+								<td class="hidden-xs" align="left">${book.genre}</td>
+								<td class="hidden-xs" align="left">${book.publisher}</td>
+								<td align="left">${book.priceSales}원</td>
+
+
 								<td style="width: 20px"><input type="hidden"
 									value="${book.isbn}" name="isbn"> <input type="number"
 									name="quantity" placeholder="구매 수량" style="width: 90px"></td>
@@ -108,27 +110,44 @@
 					&writer=${book.writer}&publisher=${book.publisher}&imageurl=${book.imageurl}
  --%>
 								</td>
-							</form>
-						</tr>
 
+							</tr>
+						</c:forEach>
 					</tbody>
-				</c:forEach>
-			</table>
 
-
+				</table>
+			</form>
 		</div>
 	</div>
-	<div id="page"></div>
 
-	<footer>
-		<div class="row">
-			<div class="col-lg-12">
-				<p>Copyright &copy; Your Website 2014</p>
-			</div>
-			<!-- /.col-lg-12 -->
-		</div>
-		<!-- /.row -->
-	</footer>
+
 	<script src="/resources/js/jquery/common.js"></script>
+	<script src="/resources/js/jquery.dataTables.min.js"></script>
+	<script src="/resources/js/dataTables.bootstrap.min.js"></script>
+	<script>
+		$(document).ready(function() {
+
+			$('#dataTable').DataTable({
+				"pageLength" : 10,
+				paging : true,
+				startSave : true,
+				ordering : true,
+				info : false,
+
+				"columns" : [ {
+					"searchable" : false
+				}, null, null, , {
+					"searchable" : false
+				}, {
+					"searchable" : false
+				}, {
+					"searchable" : false
+				}, {
+					"searchable" : false
+				} ]
+
+			});
+		});
+	</script>
 </body>
 </html>

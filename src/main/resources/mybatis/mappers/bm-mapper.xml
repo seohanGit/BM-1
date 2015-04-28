@@ -179,7 +179,7 @@
 		SELECT *
 		WHERE
 		bookname LIKE
-		CONCAT('%',#{keyword},'%')
+		CONCAT('%', #{keyword}, '%') 
 		ORDER BY
 		buydate DESC
 	</select>

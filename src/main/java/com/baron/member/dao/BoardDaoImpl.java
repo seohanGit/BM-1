@@ -11,7 +11,7 @@ import com.baron.member.model.BoardModel;
 
 @Repository
 public class BoardDaoImpl implements BoardDao {
-	private static final String NAMESPACE = "com.baron.member.MemberModel.";
+	private static final String NAMESPACE = "com.baron.member.sqlModel.";
 
 	@Resource(name = "sqlSession")
 	private SqlSession session;

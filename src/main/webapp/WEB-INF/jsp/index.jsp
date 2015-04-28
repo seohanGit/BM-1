@@ -64,7 +64,12 @@
 
 			</div>
 			<!-- Blog Sidebar Widgets Column -->
-			<div class="col-md-4" >
+			<div class="col-md-4">
+
+				<c:forEach items="${team}" var="team" begin="0" end="2">
+
+					<div>${team}</div>
+				</c:forEach>
 				<!-- Blog Search Well -->
 				<!-- 
 				<div class="well">

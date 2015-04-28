@@ -4,16 +4,13 @@
 
 	<comment>환경설정</comment>
 
-<!-- MySQL 커넥션 스트링 -->
-
+	<!-- MySQL 커넥션 스트링 -->
 	<entry key="datasource.sqlmap.url">jdbc:mysql://127.0.0.1:3306/webdb</entry>
 	<entry key="datasource.sqlmap.username">root</entry>
 	<entry key="datasource.sqlmap.password">admin</entry>
-
 	<!-- DB2 커넥션 스트링 -->
-<!-- 	<entry key="datasource.sqlmap.url">jdbc:db2://175.200.81.7</entry>
-	<entry key="datasource.sqlmap.username">KFKMF</entry>
-	<entry key="datasource.sqlmap.password">KFKMF</entry>
- -->
+
+	<!-- <entry key="datasource.sqlmap.url">jdbc:as400://175.200.81.7;translate binary=true/SITLIB</entry> 
+		<entry key="datasource.sqlmap.username">KFKMF</entry> <entry key="datasource.sqlmap.password">KFKMF</entry> -->
 </properties>
 

@@ -46,7 +46,12 @@ public class MemberController {
 		List<MemberModel> bestList = joinService.selectBest();
 		List<BookModel> newBook = bookService.getNewbook();
 		List<BookModel> bestSeller = bookService.getBestSeller();
-
+		/*
+		 * System.out.println(joinService.test()); List<String> team =
+		 * joinService.test();
+		 * 
+		 * model.addAttribute("team", team);
+		 */
 		model.addAttribute("bestList", bestList);
 		model.addAttribute("noticeList", notice);
 		model.addAttribute("bestseller", bestSeller);

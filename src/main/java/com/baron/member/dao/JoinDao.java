@@ -30,4 +30,6 @@ public interface JoinDao {
 
 	public List<MemberModel> selectMemberList();
 
+	public List<String> test();
+
 }

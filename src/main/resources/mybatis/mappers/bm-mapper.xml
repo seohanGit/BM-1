@@ -181,7 +181,7 @@
 		bookname LIKE
 		CONCAT('%', #{keyword}, '%') 
 		ORDER BY
-		buydate DESC
+		buydate DESC  
 	</select>
 
 	<select id="listBook" parameterType="Dto" resultType="BookModel">

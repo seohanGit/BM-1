@@ -29,7 +29,16 @@ public class BookModel {
 	private Date buydate;
 	private int seq;
 	private int count;
+	private int sunbo;
 	
+	public int getSunbo() {
+		return sunbo;
+	}
+
+	public void setSunbo(int sunbo) {
+		this.sunbo = sunbo;
+	}
+
 	public int getCount() {
 		return count;
 	}

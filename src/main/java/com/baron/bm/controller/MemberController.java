@@ -42,16 +42,16 @@ public class MemberController {
 
 	@RequestMapping("/index")
 	public String index(Model model) throws Exception {
+		System.out.println(joinService.test());
+		List<String> team = joinService.test();
+
+		model.addAttribute("team", team);
+
 		List<BoardModel> notice = boardService.noticeList();
 		List<MemberModel> bestList = joinService.selectBest();
 		List<BookModel> newBook = bookService.getNewbook();
 		List<BookModel> bestSeller = bookService.getBestSeller();
-		/*
-		 * System.out.println(joinService.test()); List<String> team =
-		 * joinService.test();
-		 * 
-		 * model.addAttribute("team", team);
-		 */
+
 		model.addAttribute("bestList", bestList);
 		model.addAttribute("noticeList", notice);
 		model.addAttribute("bestseller", bestSeller);

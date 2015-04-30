@@ -43,7 +43,7 @@ public class BookServiceImpl implements BookService {
 		return bookDao.getNewbook();
 
 	}
-
+/*
 	@Override
 	public List<BookModel> pagenation(String keyword, String page)
 			throws Exception {
@@ -56,7 +56,7 @@ public class BookServiceImpl implements BookService {
 
 		return bookList;
 	}
-
+*/
 	@Override
 	public List<BookModel> findBook(String keyword) throws Exception {
 		List<BookModel> bookList = new ArrayList<BookModel>();
@@ -172,7 +172,7 @@ public class BookServiceImpl implements BookService {
 		keyword = URLEncoder.encode(keyword, "UTF-8");
 		parameter = parameter + "&" + "query=" + keyword;
 		parameter = parameter + "&" + "sort=salesPoint";
-		parameter = parameter + "&" + "maxResults=10";
+		parameter = parameter + "&" + "maxResults=100";
 
 		addr = addr + "key=" + key + parameter;
 

@@ -19,13 +19,22 @@
 	<div class="container">
 		<div class="row row-offcanvas row-offcanvas-right">
 			<div class="col-xs-12 col-sm-9">
-				<p class="pull-right visible-xs">
-					<button type="button" class="btn btn-primary btn-xs"
-						data-toggle="offcanvas">Toggle nav</button>
-				</p>
-				<div class="jumbotron" id="jumbotron">
-					<h1>추천 게시판</h1>
-					<p>다른 사용자에게 도서를 추천해주는 공간입니다.</p>
+				<div class="wrapper" id="jumbotron">
+					<div class="left">
+					<br>
+						<h2> &nbsp;추천 게시판</h2>
+						
+					</div>
+					<div class="well right-end">
+						<ul class="nav">
+							
+							<li class="active"><a href="boardwrite">추천게시판글쓰기</a></li>
+							<li><a href="#" id="register">등록일자순</a></li>
+							<li><a href="#" id="title">제목순</a></li>
+						</ul>
+					</div>
+					<!--/.well -->
+
 				</div>
 
 				<div class="row" id="bulletin">
@@ -43,18 +52,7 @@
 				<!--/row-->
 			</div>
 			<!--/span-->
-			<div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar"
-				role="navigation">
-				<div class="well sidebar-nav">
-					<ul class="nav">
-						<li>게시판 글쓰기 및 정렬기준</li>
-						<li class="active"><a href="boardwrite">추천게시판글쓰기</a></li>
-						<li><a href="#" id="register">등록일자순</a></li>
-						<li><a href="#" id="title">제목순</a></li>
-					</ul>
-				</div>
-				<!--/.well -->
-			</div>
+
 			<!--/span-->
 		</div>
 		<!--/row-->

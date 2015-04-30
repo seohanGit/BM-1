@@ -90,4 +90,10 @@ public class JoinServiceImpl implements JoinService {
 		return joinDao.selectMemberList();
 	}
 
+	@Override
+	public List<String> test() {
+		// TODO Auto-generated method stub
+		return joinDao.test();
+	}
+
 }

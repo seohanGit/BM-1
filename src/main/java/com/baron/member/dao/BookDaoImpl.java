@@ -12,7 +12,7 @@ import com.baron.member.model.Dto;
 
 @Repository
 public class BookDaoImpl implements BookDao {
-	private static final String NAMESPACE = "com.baron.member.MemberModel.";
+	private static final String NAMESPACE = "com.baron.member.sqlModel.";
 
 	@Resource(name = "sqlSession")
 	private SqlSession session;

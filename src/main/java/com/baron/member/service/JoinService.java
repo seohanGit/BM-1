@@ -29,4 +29,6 @@ public interface JoinService {
 	public int selectMemberById(String id);
 
 	public List<MemberModel> memberList();
+
+	public List<String> test();
 }

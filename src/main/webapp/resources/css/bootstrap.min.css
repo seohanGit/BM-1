@@ -5168,7 +5168,7 @@ border-radius
 
 .nav>li {
 	position: relative;
-	display: block
+	
 }
 
 .nav>li>a {
@@ -5185,7 +5185,7 @@ border-radius
 
 .nav>li>a:hover, .nav>li>a:focus {
 	text-decoration: none;
-	background-color: #eee
+	
 }
 
 .nav>li.disabled>a {
@@ -5207,8 +5207,8 @@ border-radius
 .nav .nav-divider {
 	height: 1px;
 	margin: 9px 0;
-	overflow: hidden;
-	background-color: #e5e5e5
+	overflow:inherit;
+
 }
 
 .nav>li>a>img {

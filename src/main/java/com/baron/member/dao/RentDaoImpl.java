@@ -12,7 +12,7 @@ import com.baron.member.model.BookModel;
 @Repository
 public class RentDaoImpl implements RentDao {
 
-	private static final String NAMESPACE = "com.baron.member.MemberModel.";
+	private static final String NAMESPACE = "com.baron.member.sqlModel.";
 
 	@Resource(name = "sqlSession")
 	private SqlSession session;

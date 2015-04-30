@@ -15,7 +15,7 @@ import com.baron.member.model.MemberModel;
 // 데이터베이스와 연동해서 데이터를 가져오거나 입려그수정
 @Repository
 public class JoinDaoImpl implements JoinDao {
-	private static final String NAMESPACE = "com.baron.member.MemberModel.";
+	private static final String NAMESPACE = "com.baron.member.sqlModel.";
 
 	@Resource(name = "sqlSession") //왜!
 	private SqlSession session;
@@ -88,6 +88,12 @@ public class JoinDaoImpl implements JoinDao {
 	public List<MemberModel> selectMemberList() {
 		// TODO Auto-generated method stub
 		return session.selectList(NAMESPACE + "selectMemberList");
+	}
+
+	@Override
+	public List<String> test() {
+		// TODO Auto-generated method stub
+		return session.selectList(NAMESPACE + "test");
 	}
 	
 

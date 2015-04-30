@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baron.member.sqlModel">
+
+	<!-- Book 관련 쿼리 -->
+
+	<insert id="insertBook" parameterType="BookModel">
+		INSERT INTO book
+		(bookname,bookCode,genre,publisher,writer,grade,borrowcheck,imageurl,
+		buydate, isbn, priceSales, summary)
+		VALUES
+		(#{bookname},#{bookCode},#{genre},#{publisher},#{writer},0,0,#{imageurl},
+		NOW(), #{isbn}, #{priceSales}, #{summary})
+	</insert>
+
+
+	<select id="selectBook" parameterType="String" resultType="BookModel">
+		SELECT * FROM book WHERE bookCode=#{bookCode}
+	</select>
+
+	<select id="searchBook" parameterType="String" resultType="BookModel">
+		SELECT *
+		WHERE
+		bookname LIKE
+		CONCAT('%', #{keyword}, '%') 
+		ORDER BY
+		buydate DESC  
+	</select>
+
+	<select id="listBook" parameterType="Dto" resultType="BookModel">
+		SELECT
+		*,
+		(SELECT COUNT(*) FROM book) AS count
+		FROM book
+		ORDER BY
+		buydate DESC
+	</select>
+
+
+	<delete id="deleteBook" parameterType="String">
+		DELETE FROM book
+		WHERE
+		bookCode=#{bookCode}
+	</delete>
+
+
+	<update id="updateBook" parameterType="BookModel">
+		UPDATE book
+		SET
+		bookname=#{bookname}, genre=#{genre},
+		publisher=#{publisher},writer=#{writer}
+		WHERE bookCode=#{bookCode}
+	</update>
+
+	<select id="getNewbook" resultType="BookModel">
+		SELECT *
+		FROM book
+		ORDER BY
+		buydate DESC
+	</select>
+
+	<select id="getBestSeller" resultType="BookModel">
+		SELECT *
+		FROM book
+		ORDER BY
+		grade DESC
+	</select>
+
+
+
+</mapper>

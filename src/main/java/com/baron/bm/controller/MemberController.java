@@ -40,12 +40,18 @@ public class MemberController {
 	@Autowired
 	private BoardService boardService;
 
-	@RequestMapping("/index")
-	public String index(Model model) throws Exception {
+	@RequestMapping("/")
+	public String test(Model model) {
 		System.out.println(joinService.test());
 		List<String> team = joinService.test();
 
 		model.addAttribute("team", team);
+		return "test";
+
+	}
+
+	@RequestMapping("/index")
+	public String index(Model model) throws Exception {
 
 		List<BoardModel> notice = boardService.noticeList();
 		List<MemberModel> bestList = joinService.selectBest();

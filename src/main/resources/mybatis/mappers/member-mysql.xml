@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baron.member.sqlModel">
+
+	<select id="selectMemberById" resultType="int" parameterType="string">
+		SELECT COUNT(*)
+		FROM member
+		WHERE id = #{id}
+	</select>
+
+	<insert id="insertMember" parameterType="MemberModel">
+		INSERT INTO member(id,
+		pass, name,email,address,cell,home)
+		VALUES (#{id}, #{password},
+		#{name},#{email},#{address},#{cell},#{home})
+	</insert>
+	<select id="selectPass" resultType="String" parameterType="String">
+		SELECT pass
+		FROM member
+		WHERE id = #{id}
+	</select>
+
+	<update id="updateMember" parameterType="MemberModel">
+		UPDATE member
+		SET pass =
+		#{password},email = #{email},address = #{address},cell =
+		#{cell},home =
+		#{home}
+		WHERE id = #{id}
+	</update>
+
+	<select id="selectMember" resultType="MemberModel"
+		parameterType="MemberModel">
+		SELECT *
+		FROM member
+		WHERE id = #{id}
+		AND pass =
+		#{password}
+	</select>
+
+
+	<select id="selectLate" resultType="MemberModel">
+		SELECT
+		A.id,A.name,A.email,A.address,A.cell,A.home, B.borrowdate,
+		B.returndate
+		FROM member as A ,borrow as B
+		WHERE NOW() > B.returndate
+		AND B.borrowcheck ='2' and
+		A.id=B.id;
+	</select>
+
+	<select id="selectBest" resultType="MemberModel">
+		SELECT A.name, A.score, A.id,
+		(SELECT
+		COUNT(*) FROM borrow B WHERE B.borrowdate >
+		date_sub(NOW(),
+		interval 30
+		day) AND B.id=A.id ) AS numborrow
+		FROM
+		member AS A
+		ORDER BY
+		numborrow DESC
+
+	</select>
+
+	<select id="selectMemberList" resultType="MemberModel">
+		SELECT *, (SELECT
+		COUNT(*) FROM borrow B WHERE B.borrowdate >
+		date_sub(NOW(), interval 30
+		day) AND B.id=A.id ) AS numborrow
+		FROM member A
+		ORDER BY team
+
+	</select>
+	
+
+	<!-- 에약관련 쿼리 -->
+
+	<insert id="insertReservation" parameterType="BookModel">
+		INSERT INTO
+		reservation(id, bookCode, reserveDate, reservecheck)
+		VALUES(#{id},
+		#{bookCode}, date_add(now(), interval 7
+		day), 1)
+	</insert>
+
+	<update id="updateReservation" parameterType="String">
+		UPDATE book SET
+		borrowcheck='1', reservecheck='0' WHERE bookCode=#{bookCode}
+	</update>
+
+	<select id="selectReservation" parameterType="String"
+		resultType="String">
+		SELECT reservecheck
+		FROM book
+		WHERE bookCode=#{bookCode}
+	</select>
+
+	<select id="reservationList" parameterType="String" resultType="BookModel">
+		SELECT *
+		FROM book AS A, reservation AS B
+		WHERE B.bookCode=#{bookCode}
+		AND
+		B.id=#{id}
+		ORDER BY
+		B.reservedate DESC;
+	</select>
+
+	<select id="reservationListAll" resultType="BookModel">
+		SELECT *
+		FROM book AS
+		A, reservation AS B
+		WHERE A.bookCode=B.bookCode AND
+		B.reservecheck='1'
+		ORDER BY
+		B.reservedate DESC;
+	</select>
+
+	<delete id="deleteReservation" parameterType="BookModel">
+		DELETE ON reserve
+		WHERE id=#{id} AND bookCode=#{bookCode}
+	</delete>
+
+
+
+	<!-- 기타 쿼리 -->
+	<select id="test" resultType="String">
+		SELECT DEPT_NO
+		FROM BOOKREQ
+	</select>
+
+</mapper>

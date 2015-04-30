@@ -10,8 +10,8 @@
 
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
-		<property name="driverClassName" value="com.ibm.as400.access.AS400JDBCDriver" />
-		<!-- <property name="driverClassName" value="com.mysql.jdbc.Driver" /> -->
+		<property name="driverClassName" value="#{common['datasource.sqlmap.driver']}" />
+		
 		<property name="url" value="#{common['datasource.sqlmap.url']}" />
 		<property name="username" value="#{common['datasource.sqlmap.username']}" />
 		<property name="password" value="#{common['datasource.sqlmap.password']}" />
@@ -25,9 +25,9 @@
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="configLocation" value="classpath:mybatis/sqlmap-config.xml" />
-		<!-- <property name="mapperLocations" value="classpath:mybatis/mappers/bm-mapper.xml" 
+		<!-- <property name="mapperLocations" value="classpath:mybatis/mappers/*-mysql.xml" 
 			/> -->
-		<property name="mapperLocations" value="classpath:mybatis/mappers/db2-mapper.xml" />
+		<property name="mapperLocations" value="classpath:mybatis/mappers/*-db2.xml" />
 
 	</bean>
 

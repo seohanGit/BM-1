@@ -24,5 +24,8 @@ public interface BookDao {
 
 	public List<BookModel> listBook(Dto dto);
 
+	public  List<BookModel> selectBookAll();
+	
+
 
 }

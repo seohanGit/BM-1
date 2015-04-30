@@ -7,6 +7,7 @@ import com.baron.member.model.Dto;
 
 public interface BookService {
 
+
 	public void insertBook(BookModel model);
 
 	public List<BookModel> searchBook(String keyword);
@@ -30,5 +31,7 @@ public interface BookService {
 
 
 	public List<BookModel> listBook(Dto dto);
+
+	public List<BookModel> selectBookAll();
 
 }

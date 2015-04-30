@@ -220,5 +220,10 @@ public class BookServiceImpl implements BookService {
 		// TODO Auto-generated method stub
 		return bookDao.listBook(dto);
 	}
+	@Override
+	public List<BookModel> selectBookAll() {
+		// TODO Auto-generated method stub
+		return bookDao.selectBookAll();
+	}
 
 }

@@ -55,14 +55,14 @@ public class XmlDom {
 		for (int i = 0; i < list.getLength(); i++) {
 
 			Element element = (Element) list.item(0);
-			book.setBookname(getChildren(element, "title"));
+			book.setTitle(getChildren(element, "title"));
 			book.setLink(getChildren(element, "link"));
 			book.setImageurl(getChildren(element, "coverSmallUrl"));
-			book.setPriceSales(getChildren(element, "priceSales"));
-			book.setWriter(getChildren(element, "author"));
+			book.setPrice(getChildren(element, "priceSales"));
+			book.setAuthor(getChildren(element, "author"));
 			book.setIsbn(getChildren(element, "isbn"));
-			book.setGenre(getChildren(element, "categoryName"));
-			book.setPublisher(getChildren(element, "publisher"));
+			book.setB_group(getChildren(element, "categoryName"));
+			book.setPublish(getChildren(element, "publisher"));
 			book.setSummary(getChildren(element, "description"));
 
 		}
@@ -85,14 +85,14 @@ public class XmlDom {
 			book.setKeyword(keyword);
 			book.setTotalResults(totalResults);
 
-			book.setBookname(getChildren(element, "title"));
+			book.setTitle(getChildren(element, "title"));
 			book.setLink(getChildren(element, "link"));
 			book.setImageurl(getChildren(element, "coverSmallUrl"));
-			book.setPriceSales(getChildren(element, "priceSales"));
-			book.setWriter(getChildren(element, "author"));
+			book.setPrice(getChildren(element, "priceSales"));
+			book.setAuthor(getChildren(element, "author"));
 			book.setIsbn(getChildren(element, "isbn"));
-			book.setGenre(getChildren(element, "categoryName"));
-			book.setPublisher(getChildren(element, "publisher"));
+			book.setB_group(getChildren(element, "categoryName"));
+			book.setPublish(getChildren(element, "publisher"));
 			book.setSummary(getChildren(element, "description"));
 
 			bookList.add(book);

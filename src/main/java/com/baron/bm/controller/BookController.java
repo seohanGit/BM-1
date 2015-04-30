@@ -171,7 +171,7 @@ public class BookController {
 
 	@RequestMapping("/modifybook1")
 	public String modifybookresult(BookModel bookmodel) {
-		bookmodel.setBookCode(bookCode1);
+		bookmodel.setBook_cd(bookCode1);
 		bookservice.updateBook(bookmodel);
 		return "book/modifybookresult";
 	}

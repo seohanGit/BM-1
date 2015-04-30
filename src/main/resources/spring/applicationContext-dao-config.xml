@@ -27,7 +27,7 @@
 		<property name="configLocation" value="classpath:mybatis/sqlmap-config.xml" />
 		<!-- <property name="mapperLocations" value="classpath:mybatis/mappers/*-mysql.xml" 
 			/> -->
-		<property name="mapperLocations" value="classpath:mybatis/mappers/*-db2.xml" />
+		<property name="mapperLocations" value="classpath:mybatis/mappers/db2-*.xml" />
 
 	</bean>
 

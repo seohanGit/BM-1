@@ -21,7 +21,7 @@ public class RequestDaoImpl implements RequestDao{
 
 	@Override
 	public void requestBook(BookModel model) {
-		System.out.println(model.getBookname());
+		System.out.println(model.getTitle());
 		// TODO Auto-generated method stub
 		session.insert(NAMESPACE + "requestBook", model);
 

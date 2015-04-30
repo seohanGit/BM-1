@@ -3,34 +3,90 @@ package com.baron.member.model;
 import java.sql.Date;
 
 public class BookModel {
-	private String bookCode;
-	private String bookname;
-	private String name;
-	private String genre;
+	private String book_cd;
+	private String title;
+	
+	private String b_group;
 	private int quantity;
 	private Date borrowdate;
 	private Date returndate;
 	private Date reservedate;
 	private Date requestdate;
 	private String id;
-	private String publisher;
+	private String publish;
 	private String borrowcheck;
 	private String reservecheck;
 	private int grade;
-	private String writer;
+	private String author;
 	private String imageurl;
-	private String priceSales;
+	private String price;
 	private String link;
 	private String isbn;
 	private String summary;
 	private int totalResults;
 	private int startindex;
 	private String keyword;
-	private Date buydate;
+	private String rece_ymd;
 	private int seq;
 	private int count;
 	private int sunbo;
-	
+
+	public String getBook_cd() {
+		return book_cd;
+	}
+
+	public void setBook_cd(String book_cd) {
+		this.book_cd = book_cd;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getB_group() {
+		return b_group;
+	}
+
+	public void setB_group(String b_group) {
+		this.b_group = b_group;
+	}
+
+	public String getPublish() {
+		return publish;
+	}
+
+	public void setPublish(String publish) {
+		this.publish = publish;
+	}
+
+	public String getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+
+	public String getPrice() {
+		return price;
+	}
+
+	public void setPrice(String price) {
+		this.price = price;
+	}
+
+	public String getRece_ymd() {
+		return rece_ymd;
+	}
+
+	public void setRece_ymd(String rece_ymd) {
+		this.rece_ymd = rece_ymd;
+	}
+
 	public int getSunbo() {
 		return sunbo;
 	}
@@ -55,28 +111,12 @@ public class BookModel {
 		this.seq = seq;
 	}
 
-	public Date getBuydate() {
-		return buydate;
-	}
-
-	public void setBuydate(Date buydate) {
-		this.buydate = buydate;
-	}
-
 	public String getKeyword() {
 		return keyword;
 	}
 
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public int getStartindex() {
@@ -155,14 +195,6 @@ public class BookModel {
 		this.returndate = returndate;
 	}
 
-	public String getPriceSales() {
-		return priceSales;
-	}
-
-	public void setPriceSales(String priceSales) {
-		this.priceSales = priceSales;
-	}
-
 	public String getLink() {
 		return link;
 	}
@@ -185,38 +217,6 @@ public class BookModel {
 
 	public void setImageurl(String imageurl) {
 		this.imageurl = imageurl;
-	}
-
-	public String getBookCode() {
-		return bookCode;
-	}
-
-	public void setBookCode(String bookCode) {
-		this.bookCode = bookCode;
-	}
-
-	public String getPublisher() {
-		return publisher;
-	}
-
-	public void setPublisher(String publisher) {
-		this.publisher = publisher;
-	}
-
-	public String getBookname() {
-		return bookname;
-	}
-
-	public void setBookname(String bookname) {
-		this.bookname = bookname;
-	}
-
-	public String getGenre() {
-		return genre;
-	}
-
-	public void setGenre(String genre) {
-		this.genre = genre;
 	}
 
 	public Date getBorrowdate() {
@@ -251,12 +251,5 @@ public class BookModel {
 		this.grade = grade;
 	}
 
-	public String getWriter() {
-		return writer;
-	}
-
-	public void setWriter(String writer) {
-		this.writer = writer;
-	}
-
+	
 }

@@ -36,11 +36,11 @@ public class BookDaoImplTest {
 	@Ignore
 	public void insertBook()throws Exception{
 		BookModel model = new BookModel();
-		model.setBookCode("mj1111");
-		model.setBookname("안드로이드 프로그래밍 정복1");
-		model.setGenre("JAVA");
-		model.setPublisher("한빛미디어");
-		model.setWriter("강성현");
+		model.setBook_cd("mj1111");
+		model.setTitle("안드로이드 프로그래밍 정복1");
+		model.setB_group("JAVA");
+		model.setPublish("한빛미디어");
+		model.setAuthor("민상훈");
 		
 		bookDao.insertBook(model);
 		

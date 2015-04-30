@@ -34,10 +34,10 @@ public class RequestServiceImpl implements RequestService {
 
 	@Override
 	public void requestBook(BookModel model) {
-		model.setBookCode(model.getId() + model.getIsbn());
-		System.out.println(model.getBookname());
+		model.setBook_cd(model.getId() + model.getIsbn());
+		System.out.println(model.getTitle());
 		System.out.println(model.getIsbn());
-		System.out.println(model.getBookname());
+		System.out.println(model.getTitle());
 		requestDao.requestBook(model);
 	}
 /*

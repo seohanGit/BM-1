@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baron.member.sqlModel">
+
+	<!-- 구매요청, 대여 관련 커리 -->
+
+	<insert id="requestBook" parameterType="BookModel">
+		INSERT INTO BOOK_REQUEST
+		(id,
+		requestdate,
+		bookname,bookCode,
+		pricesales,writer,quantity,genre,link,
+		imageurl, isbn, publisher,
+		summary)
+		VALUES
+		(#{id},
+		now(),#{bookname},#{bookCode},#{priceSales},#{writer},#{quantity},#{genre},#{link},#{imageurl},#{isbn},
+		#{publisher}, #{summary})
+	</insert>
+
+	<update id="deleteRequest" parameterType="BookModel">
+		UPDATE BOOK_REQUEST
+		SET
+		bookCode='0'
+		WHERE bookCode=#{bookCode}
+	</update>
+
+	<select id="requestList" resultType="BookModel">
+		SELECT *
+		FROM
+		BOOK_REQUEST AS
+		A,
+		BOOK_MEMBER AS B
+		WHERE A.id=B.id AND A.bookCode!='0'
+		ORDER BY
+		A.requestdate
+		DESC;
+	</select>
+
+	<select id="requestRecord" parameterType="String" resultType="BookModel">
+		SELECT *
+		FROM
+		BOOK_REQUEST AS A
+
+		WHERE A.id=#{id} AND A.bookCode='0' AND
+		(A.requestdate
+		BETWEEN
+		date_sub(NOW(),
+		interval 365
+		day) AND NOW())
+		ORDER
+		BY
+		A.requestdate
+		DESC;
+	</select>
+
+	<select id="selectRequest" parameterType="String" resultType="BookModel">
+		SELECT *
+		FROM BOOK_REQUEST
+		WHERE bookCode=#{bookCode}
+
+	</select>
+
+
+
+	<!-- 대여관련 쿼리 -->
+	<select id="borrowListAll" resultType="BookModel">
+		SELECT * FROM BOOKMST AS
+		A,
+		BOOK_BORROW AS B
+		WHERE B.borrowcheck=1 AND A.bookCode=B.bookCode
+		ORDER BY
+		B.borrowdate DESC;
+	</select>
+
+	<select id="borrowList" resultType="BookModel" parameterType="String">
+		SELECT *
+		FROM BOOKMST AS A, BOOK_BORROW AS B
+		WHERE B.id = #{id} AND
+		(B.borrowcheck='1' OR B.borrowcheck='2') AND
+		A.bookCode=B.bookCode
+		ORDER BY
+		B.borrowdate DESC;
+	</select>
+
+	<insert id="borrowBook1" parameterType="BookModel">
+		INSERT INTO
+		BOOK_BORROW
+		(bookCode, borrowdate, returndate, borrowcheck, id)
+		VALUES(#{bookCode}, now(), date_add(now(), interval +20 day),
+		1, #{id})
+	</insert>
+
+	<update id="borrowBook2" parameterType="String">
+		UPDATE
+		BOOKMST
+		SET
+		borrowcheck='1'
+		WHERE bookCode=#{bookCode}
+	</update>
+
+	<update id="stopBorrow" parameterType="String">
+		UPDATE BOOKMST A
+		,BOOK_BORROW B
+		SET
+		A.borrowcheck='4'
+		WHERE
+		A.bookCode=#{bookCode} AND A.borrowcheck='0'
+
+	</update>
+
+	<update id="recoverBook" parameterType="String">
+		UPDATE BOOKMST A
+		SET
+		A.borrowcheck='0'
+		WHERE
+		A.bookCode=#{bookCode} AND A.borrowcheck='4'
+
+	</update>
+	<update id="confirmBorrowBook" parameterType="String">
+		UPDATE BOOKMST A
+		INNER
+		JOIN BOOK_BORROW B
+		ON A.borrowcheck = B.borrowcheck
+		SET
+		A.borrowcheck='2',
+		B.borrowcheck='2',
+		B.borrowdate=NOW()
+		WHERE
+		A.bookCode=#{bookCode} AND
+		B.bookCode=#{bookCode}
+
+	</update>
+
+	<update id="upPoint" parameterType="String">
+		UPDATE BOOK_MEMBER SET
+		numborrow =
+		numborrow + 1
+		WHERE id = #{id}
+	</update>
+
+	<update id="returnBook" parameterType="String">
+		UPDATE BOOKMST A INNER
+		JOIN
+		BOOK_BORROW B
+		ON A.borrowcheck = B.borrowcheck
+		SET
+		A.borrowcheck='0',
+		B.borrowcheck='3',
+		B.returndate=NOW()
+		WHERE
+		A.bookCode=#{bookCode} AND
+		B.bookCode=#{bookCode}
+	</update>
+	<!-- <update id="confirmReturnBook" parameterType="String"> UPDATE BOOKMST 
+		A INNER JOIN BOOK_BORROW B ON A.borrowcheck = B.borrowcheck SET A.borrowcheck='0', 
+		B.borrowcheck='0' WHERE A.bookCode=#{bookCode} AND B.bookCode=#{bookCode} 
+		</update> -->
+	<select id="returnListAll" resultType="BookModel">
+		SELECT *
+		FROM BOOKMST AS A,
+		BOOK_BORROW AS B
+		WHERE B.borrowcheck=3 AND A.bookCode=B.bookCode;
+	</select>
+
+	<update id="extendBorrowBook" parameterType="String">
+		UPDATE BOOK_BORROW
+		SET
+		returndate = date_add(now(), interval +20 day)
+		WHERE
+		bookCode=#{bookCode} AND borrowcheck='2';
+	</update>
+
+	<update id="cancelBorrowBook" parameterType="String">
+		UPDATE BOOKMST
+		SET
+		borrowcheck='0'
+		WHERE
+		bookCode=#{bookCode} AND borrowcheck='1';
+	</update>
+
+	<delete id="deleteBorrowBook" parameterType="BookModel">
+		DELETE FROM
+		BOOK_BORROW
+		WHERE bookCode=#{bookCode} AND id=#{id}
+	</delete>
+
+	<select id="rentListAll" parameterType="String" resultType="BookModel">
+		SELECT * FROM BOOKMST AS A, BOOK_BORROW AS B
+		WHERE
+		A.bookCode=B.bookCode AND
+		B.borrowcheck='2'
+		ORDER BY
+		B.borrowdate
+		DESC;
+	</select>
+
+
+	<!-- <![CDATA[B.returndate > NOW()]]> -->
+
+	<!-- <delete id="deleteRecord" parameterType="String"> DELETE ON BOOK_BORROW 
+		WHERE DELETE ON reserve WHERE id=#{id} AND bookCode=#{bookCode} </delete> -->
+	<select id="recordList" parameterType="String" resultType="BookModel">
+		SELECT * FROM BOOKMST AS A, BOOK_BORROW AS B
+		WHERE (B.returndate
+		BETWEEN
+		date_sub(NOW(),
+		interval 90
+		day) AND NOW())
+		AND B.id=#{id} AND
+		A.bookCode=B.bookCode AND B.borrowcheck='3'
+		ORDER BY
+		B.returndate DESC;
+	</select>
+
+	<select id="recordListAll" resultType="BookModel">
+		SELECT * FROM BOOKMST AS
+		A,
+		BOOK_BORROW AS B
+		WHERE (B.returndate BETWEEN date_sub(NOW(),
+		interval
+		90
+		day)
+		AND NOW())
+		AND A.bookCode=B.bookCode AND B.borrowcheck='3'
+		ORDER
+		BY
+		B.borrowdate
+		DESC;
+	</select>
+
+	<delete id="deleteRecord" parameterType="BookModel">
+		DELETE 1
+		FROM BOOK_BORROW
+		WHERE bookCode=#{bookCode} AND id=#{id} AND borrowcheck='3'
+	</delete>
+
+</mapper>

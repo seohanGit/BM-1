@@ -45,10 +45,10 @@
 				</div>
 				<div align="left">
 					<p class="caption">
-						<a href="${newbook.link}">${newbook.bookname}</a>
+						<a href="${newbook.link}">${newbook.title}</a>
 					</p>
-					<p class="caption">${newbook.writer}</p>
-					<p class="caption">입고일 : ${newbook.buydate}</p>
+					<p class="caption">${newbook.author}</p>
+					<p class="caption">입고일 : ${newbook.rece_ymd}</p>
 				</div>
 			</div>
 			<hr>
@@ -65,9 +65,9 @@
 				</div>
 				<div align="left">
 					<p class="caption">
-						<a href="${book.link}">${book.bookname}</a>
+						<a href="${book.link}">${book.title}</a>
 					</p>
-					<p class="caption">${book.writer}</p>
+					<p class="caption">${book.author}</p>
 					<p class="caption">대출횟수 : ${book.grade}회</p>
 				</div>
 			</div>

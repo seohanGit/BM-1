@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baron.member.sqlModel">
+
+	<!-- Board 관련 쿼리 -->
+
+
+
+	<select id="selectBoard" resultType="BoardModel">
+		SELECT ALL
+		FROM BOOK_BOARD
+		ORDER BY registerdate;
+	</select>
+
+	<select id="selectBoardregister" resultType="BoardModel">
+		SELECT *
+		FROM
+		BOOK_BOARD
+		ORDER BY registerdate;
+	</select>
+
+	<select id="selectMaxGrade" resultType="int">
+		SELECT MAX(grade)
+		FROM
+		BOOKMST;
+	</select>
+
+	<select id="selectBoardtitle" resultType="BoardModel">
+		SELECT *
+		FROM
+		BOOK_BOARD
+		ORDER BY title;
+	</select>
+
+	<select id="selectBoardnum" parameterType="String" resultType="BoardModel">
+		SELECT *
+		FROM
+		BOOK_BOARD
+		WHERE boardnum=#{boardnum}
+
+	</select>
+	<insert id="insertBoard" parameterType="BoardModel">
+		INSERT INTO BOOK_BOARD
+		(title,content,registerdate,modifidate,id)
+		VALUES
+		(#{title},#{content},NOW(),NOW(),#{id})
+	</insert>
+
+	<delete id="deleteBoard" parameterType="String">
+		DELETE FROM BOOK_BOARD
+		WHERE
+		boardnum=#{boardnum}
+	</delete>
+
+	<update id="modifyBoard" parameterType="BoardModel">
+		UPDATE BOOK_BOARD
+		SET
+		content=#{content}, title=#{title}, modifidate=NOW()
+		WHERE
+		boardnum=#{boardnum}
+	</update>
+
+	<select id="noticeList" resultType="BoardModel">
+		SELECT *
+		FROM
+		BOOK_NOTICE
+		ORDER BY
+		regisdate desc
+	</select>
+
+	<insert id="insertNotice" parameterType="BoardModel">
+		INSERT INTO BOOK_NOTICE
+		(content, registerdate)
+		VALUES
+		(#{content}, DATE_FORMAT(NOW(),
+		"%Y-%m-%d"))
+	</insert>
+	<delete id="deleteNotice" parameterType="String">
+		DELETE FROM BOOK_NOTICE
+		WHERE
+		boardnum=#{boardnum}
+	</delete>
+
+	<update id="modifyNotice" parameterType="BoardModel">
+		UPDATE BOOK_NOTICE
+		SET
+		content=#{content}, registerdate=NOW()
+		WHERE boardnum=#{boardnum}
+	</update>
+
+
+
+
+
+
+
+</mapper>

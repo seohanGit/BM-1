@@ -40,11 +40,12 @@ public class MemberController {
 	@Autowired
 	private BoardService boardService;
 
-	@RequestMapping("/")
+	@RequestMapping("/test")
 	public String test(Model model) {
 		System.out.println(joinService.test());
 		List<String> team = joinService.test();
-
+		List<BookModel> bookList = bookService.selectBookAll();
+		model.addAttribute("bookList", bookList);
 		model.addAttribute("team", team);
 		return "test";
 
@@ -54,11 +55,11 @@ public class MemberController {
 	public String index(Model model) throws Exception {
 
 		List<BoardModel> notice = boardService.noticeList();
-		List<MemberModel> bestList = joinService.selectBest();
+		// List<MemberModel> bestList = joinService.selectBest();
 		List<BookModel> newBook = bookService.getNewbook();
 		List<BookModel> bestSeller = bookService.getBestSeller();
 
-		model.addAttribute("bestList", bestList);
+		// model.addAttribute("bestList", bestList);
 		model.addAttribute("noticeList", notice);
 		model.addAttribute("bestseller", bestSeller);
 		model.addAttribute("newbook", newBook);

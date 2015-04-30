@@ -38,7 +38,7 @@ public class RentController {
 			}
 		}
 		book.setId(id);
-		book.setBookCode(bookCode);
+		book.setBook_cd(bookCode);
 		book.setBorrowcheck("1");
 
 		if (rentservice.borrowCheck(book).equals("0") & late.equals("0")) {
@@ -241,7 +241,7 @@ public class RentController {
 	@RequestMapping("/deleteRecord")
 	public String deleteRecord(String id, String bookCode, Model model,
 			BookModel book) {
-		book.setBookCode(bookCode);
+		book.setBook_cd(bookCode);
 		book.setId(id);
 		rentservice.deleteRecord(book);
 
@@ -256,7 +256,7 @@ public class RentController {
 			return "rent/reservationfail";
 		}
 
-		book.setBookCode(bookCode);
+		book.setBook_cd(bookCode);
 		for (Cookie cookie : request.getCookies()) {
 			if (cookie.getName().equals("bm_id"))
 				book.setId(cookie.getValue());

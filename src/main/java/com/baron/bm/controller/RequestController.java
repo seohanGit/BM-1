@@ -104,9 +104,9 @@ public class RequestController {
 
 	@RequestMapping("/confirmBuy")
 	public String confirmBuy(BookModel model) {
-		if (bookService.selectBook(model.getBookCode()) == null) {
+		if (bookService.selectBook(model.getBook_cd()) == null) {
 			bookService.insertBook(model);
-			requestservice.deleteRequest(model.getBookCode());
+			requestservice.deleteRequest(model.getBook_cd());
 			return "redirect:requestList";
 		} else {
 			return "buyfail";

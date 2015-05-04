@@ -147,6 +147,12 @@ public class RentDaoImpl implements RentDao {
 		
 	}
 
+	@Override
+	public void backupRecord(BookModel bookmodel) {
+		session.insert(NAMESPACE + "backupRecord", bookmodel);
+		
+	}
+
 	
 
 }

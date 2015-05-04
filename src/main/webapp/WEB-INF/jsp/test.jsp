@@ -21,11 +21,6 @@
 		<!-- Blog Entries Column -->
 		<!-- Blog Sidebar Widgets Column -->
 
-
-		<c:forEach items="${team}" var="team" begin="0" end="30">
-
-			<div>${team}</div>
-		</c:forEach>
 		<div class="panel panel-default">
 
 			<!-- /.panel-heading -->

@@ -171,13 +171,15 @@ public class MemberController {
 				System.out.println(cookie.getValue());
 				if ("1".equals(cookie.getValue())) {
 
-					List<MemberModel> memberList = joinService.selectBest();
-					List<BookModel> bestSeller = bookService.getBestSeller();
-					List<BookModel> newBook = bookService.getNewbook();
-
-					model.addAttribute("bestList", memberList);
-					model.addAttribute("bestseller", bestSeller);
-					model.addAttribute("newbook", newBook);
+					/*
+					 * List<MemberModel> memberList = joinService.selectBest();
+					 * List<BookModel> bestSeller = bookService.getBestSeller();
+					 * List<BookModel> newBook = bookService.getNewbook();
+					 * 
+					 * model.addAttribute("bestList", memberList);
+					 * model.addAttribute("bestseller", bestSeller);
+					 * model.addAttribute("newbook", newBook);
+					 */
 					return "/member/admin";
 				} else
 					return "/member/adminfail";

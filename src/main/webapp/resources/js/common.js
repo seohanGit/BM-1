@@ -5,18 +5,12 @@ $('#btn_search').click(function() {
 		datatype : "xml", // html, xml, json, jsonp, script, text
 		data : {
 			keyword : $('#keyword').val()
+		},
+		success : function(data, status) { // Ajax complete handelr
+			goUrl(url);
 		}, // parameters as plain object
 		error : function() { // Ajax error handler
 			alert('ajax failed');
-		},
-		success : function(data, status) { // Ajax complete handelr
-			$('#goodPhrase').fadeOut();
-			$('#image1').fadeOut();
-			$('#image2').fadeOut();
-			$('#jumbotron').fadeOut();
-			$('#searchResultArea').empty().append(data);
-			$('#bulletin').empty().append(data);
-
 		}
 	});
 });
@@ -107,7 +101,6 @@ $("#allCheck").click(function() {
 	}
 
 })
-
 
 $('#btn_bookList').click(function() {
 	$.ajax({

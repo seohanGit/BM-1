@@ -10,8 +10,8 @@
 	
 	<insert id="insertBook" parameterType="BookModel">
 		INSERT INTO BOOKMST
-		(bookname,BOOK_CD,genre,publisher,writer,grade,borrowcheck,imageurl,
-		buydate, isbn, priceSales, summary)
+		(title,BOOK_CD,b_group,publish,author,grade,borrowcheck,imageurl,
+		rece_ymd, isbn, price, summary)
 		VALUES
 		(#{bookname},#{bookCode},#{genre},#{publisher},#{writer},0,0,#{imageurl},
 		NOW(), #{isbn}, #{priceSales}, #{summary})
@@ -24,11 +24,12 @@
 
 	<select id="searchBook" parameterType="String" resultType="BookModel">
 		SELECT *
+		FROM BOOKMST
 		WHERE
-		bookname LIKE
-		CONCAT('%',#{keyword},'%')
+		title LIKE
+		'#{keyword}%'
 		ORDER BY
-		buydate DESC
+		rece_ymd DESC
 	</select>
 
 	<select id="listBook" parameterType="Dto" resultType="BookModel">
@@ -51,8 +52,8 @@
 	<update id="updateBook" parameterType="BookModel">
 		UPDATE BOOKMST
 		SET
-		TITLE=#{bookname}, genre=#{genre},
-		publisher=#{publisher},writer=#{writer}
+		TITLE=#{bookname}, b_group=#{genre},
+		publish=#{publisher}, author=#{writer}
 		WHERE BOOK_CD=#{bookCode}
 	</update>
 

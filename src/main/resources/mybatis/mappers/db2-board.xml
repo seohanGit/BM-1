@@ -7,53 +7,53 @@
 
 
 	<select id="selectBoard" resultType="BoardModel">
-		SELECT ALL
-		FROM BOOK_BOARD
-		ORDER BY registerdate;
+		SELECT *
+		FROM BOOKBOARD
+		ORDER BY REGISDATE
 	</select>
 
 	<select id="selectBoardregister" resultType="BoardModel">
 		SELECT *
 		FROM
-		BOOK_BOARD
-		ORDER BY registerdate;
+		BOOKBOARD
+		ORDER BY REGISDATE
 	</select>
 
 	<select id="selectMaxGrade" resultType="int">
 		SELECT MAX(grade)
 		FROM
-		BOOKMST;
+		BOOKMST
 	</select>
 
 	<select id="selectBoardtitle" resultType="BoardModel">
 		SELECT *
 		FROM
-		BOOK_BOARD
-		ORDER BY title;
+		BOOKBOARD
+		ORDER BY title
 	</select>
 
 	<select id="selectBoardnum" parameterType="String" resultType="BoardModel">
 		SELECT *
 		FROM
-		BOOK_BOARD
+		BOOKBOARD
 		WHERE boardnum=#{boardnum}
 
 	</select>
 	<insert id="insertBoard" parameterType="BoardModel">
-		INSERT INTO BOOK_BOARD
-		(title,content,registerdate,modifidate,id)
+		INSERT INTO BOOKBOARD
+		(title,content,REGISDATE,modifidate,id)
 		VALUES
 		(#{title},#{content},NOW(),NOW(),#{id})
 	</insert>
 
 	<delete id="deleteBoard" parameterType="String">
-		DELETE FROM BOOK_BOARD
+		DELETE FROM BOOKBOARD
 		WHERE
 		boardnum=#{boardnum}
 	</delete>
 
 	<update id="modifyBoard" parameterType="BoardModel">
-		UPDATE BOOK_BOARD
+		UPDATE BOOKBOARD
 		SET
 		content=#{content}, title=#{title}, modifidate=NOW()
 		WHERE
@@ -63,28 +63,28 @@
 	<select id="noticeList" resultType="BoardModel">
 		SELECT *
 		FROM
-		BOOK_NOTICE
+		BOOKNOTICE
 		ORDER BY
-		regisdate desc
+		REGISDATE desc
 	</select>
 
 	<insert id="insertNotice" parameterType="BoardModel">
-		INSERT INTO BOOK_NOTICE
-		(content, registerdate)
+		INSERT INTO BOOKNOTICE
+		(content, REGISDATE)
 		VALUES
 		(#{content}, DATE_FORMAT(NOW(),
 		"%Y-%m-%d"))
 	</insert>
 	<delete id="deleteNotice" parameterType="String">
-		DELETE FROM BOOK_NOTICE
+		DELETE FROM BOOKNOTICE
 		WHERE
 		boardnum=#{boardnum}
 	</delete>
 
 	<update id="modifyNotice" parameterType="BoardModel">
-		UPDATE BOOK_NOTICE
+		UPDATE BOOKNOTICE
 		SET
-		content=#{content}, registerdate=NOW()
+		content=#{content}, REGISDATE=NOW()
 		WHERE boardnum=#{boardnum}
 	</update>
 

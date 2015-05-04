@@ -31,7 +31,7 @@ body {
 			<hr>
 			<h2>대여 기록</h2>
 			<hr>
-			기록 검색
+			기록 검색<button type="button" onclick="location.href='/insertRecord'">삽입</button>
 			<table class="table table-striped table-bordered" id="dataTable">
 				<thead>
 					<tr class=" title">
@@ -52,14 +52,14 @@ body {
 
 						<tr>
 
-							<td align="left">${book.bookname }</td>
-							<td align="left">${book.borrowdate }</td>
-							<td align="left">${book.returndate }</td>
-
-							<td>${book.id}</td>
+							<td align="left">${book.title }</td>
+							<td align="left">${book.req_ymd }</td>
+							<td align="left">${book.retu_ymd }</td>
+						
+							<td>${book.sabun}</td>
 							<td><button class="btn btn-default btn-sm" type="button"
 									id="extendbook"
-									onClick="location.href='/deleteRecord?bookCode=${book.bookCode}&id=${book.id}'">삭제</button></td>
+									onClick="location.href='/deleteRecord?bookCode=${book.book_cd}&id=${book.sabun}'">삭제</button></td>
 						</tr>
 
 					</c:forEach>
@@ -72,7 +72,8 @@ body {
 	<script src="/resources/js/jquery/jquery.js"></script>
 	<script src="/resources/js/bootstrap.min.js"></script>
 	<script src="/resources/js/common.js"></script>
-	<script src="/resources/js/book.js"></script>	<script src="/resources/js/jquery.dataTables.min.js"></script>
+	<script src="/resources/js/book.js"></script>
+	<script src="/resources/js/jquery.dataTables.min.js"></script>
 	<script src="/resources/js/dataTables.bootstrap.min.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
@@ -85,13 +86,13 @@ body {
 					"searchable" : true
 				}, {
 					"searchable" : false
-				},  {
+				}, {
 					"searchable" : false
 				}, {
 					"searchable" : true
 				}, {
 					"searchable" : false
-				}]
+				} ]
 
 			});
 		});

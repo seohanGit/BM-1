@@ -1,21 +1,22 @@
 package com.baron.member.model;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class BookModel {
 	private String book_cd;
 	private String title;
-	
+
 	private String b_group;
 	private int quantity;
-	private Date borrowdate;
-	private Date returndate;
-	private Date reservedate;
-	private Date requestdate;
+
+	private java.util.Date rentdate;
+	private java.util.Date returndate;
+	private Date reserdate;
+	private Date reqdate;
 	private String id;
 	private String publish;
-	private String borrowcheck;
-	private String reservecheck;
+	private String borrowchk;
+	private String reservechk;
 	private int grade;
 	private String author;
 	private String imageurl;
@@ -30,6 +31,74 @@ public class BookModel {
 	private int seq;
 	private int count;
 	private int sunbo;
+	private String req_ymd;
+	private String retu_ymd;
+	private String sabun;
+	
+
+	public String getReq_ymd() {
+		return req_ymd;
+	}
+
+	public void setReq_ymd(String req_ymd) {
+		this.req_ymd = req_ymd;
+	}
+
+	public String getRetu_ymd() {
+		return retu_ymd;
+	}
+
+	public void setRetu_ymd(String retu_ymd) {
+		this.retu_ymd = retu_ymd;
+	}
+
+	public String getSabun() {
+		return sabun;
+	}
+
+	public void setSabun(String sabun) {
+		this.sabun = sabun;
+	}
+
+	public java.util.Date getRentdate() {
+		return rentdate;
+	}
+
+	public void setRentdate(java.util.Date date) {
+		this.rentdate = date;
+	}
+
+	public Date getReserdate() {
+		return reserdate;
+	}
+
+	public void setReserdate(Date reserdate) {
+		this.reserdate = reserdate;
+	}
+
+	public Date getReqdate() {
+		return reqdate;
+	}
+
+	public void setReqdate(Date reqdate) {
+		this.reqdate = reqdate;
+	}
+
+	public String getBorrowchk() {
+		return borrowchk;
+	}
+
+	public void setBorrowchk(String borrowchk) {
+		this.borrowchk = borrowchk;
+	}
+
+	public String getReservechk() {
+		return reservechk;
+	}
+
+	public void setReservechk(String reservechk) {
+		this.reservechk = reservechk;
+	}
 
 	public String getBook_cd() {
 		return book_cd;
@@ -135,22 +204,6 @@ public class BookModel {
 		this.totalResults = totalResults;
 	}
 
-	public Date getReservedate() {
-		return reservedate;
-	}
-
-	public void setReservedate(Date reservedate) {
-		this.reservedate = reservedate;
-	}
-
-	public String getReservecheck() {
-		return reservecheck;
-	}
-
-	public void setReservecheck(String reservecheck) {
-		this.reservecheck = reservecheck;
-	}
-
 	public String getSummary() {
 		return summary;
 	}
@@ -175,14 +228,6 @@ public class BookModel {
 		this.isbn = isbn;
 	}
 
-	public Date getRequestdate() {
-		return requestdate;
-	}
-
-	public void setRequestdate(Date requestdate) {
-		this.requestdate = requestdate;
-	}
-
 	public String getId() {
 		return id;
 	}
@@ -191,8 +236,8 @@ public class BookModel {
 		this.id = id;
 	}
 
-	public void setReturndate(Date returndate) {
-		this.returndate = returndate;
+	public void setReturndate(java.util.Date date) {
+		this.returndate = date;
 	}
 
 	public String getLink() {
@@ -219,28 +264,12 @@ public class BookModel {
 		this.imageurl = imageurl;
 	}
 
-	public Date getBorrowdate() {
-		return borrowdate;
-	}
-
-	public void setBorrowdate(Date borrowdate) {
-		this.borrowdate = borrowdate;
-	}
-
-	public Date getReturndate() {
+	public java.util.Date getReturndate() {
 		return returndate;
 	}
 
 	public void setRetrundate(Date returndate) {
 		this.returndate = returndate;
-	}
-
-	public String getBorrowcheck() {
-		return borrowcheck;
-	}
-
-	public void setBorrowcheck(String borrowcheck) {
-		this.borrowcheck = borrowcheck;
 	}
 
 	public int getGrade() {
@@ -251,5 +280,4 @@ public class BookModel {
 		this.grade = grade;
 	}
 
-	
 }

@@ -4,24 +4,24 @@
 
 	<select id="selectMemberById" resultType="int" parameterType="string">
 		SELECT COUNT(*)
-		FROM BOOK_MEMBER
+		FROM BOOKMEMBER
 		WHERE id = #{id}
 	</select>
 
 	<insert id="insertMember" parameterType="MemberModel">
-		INSERT INTO BOOK_MEMBER (id,
-		pass, name,email,address,cell,home)
+		INSERT INTO BOOKMEMBER (id,
+		pass, name,email,team,cell)
 		VALUES (#{id}, #{password},
-		#{name},#{email},#{address},#{cell},#{home})
+		#{name},#{email},#{team},#{cell})
 	</insert>
 	<select id="selectPass" resultType="String" parameterType="String">
 		SELECT pass
-		FROM BOOK_MEMBER
+		FROM BOOKMEMBER
 		WHERE id = #{id}
 	</select>
 
 	<update id="updateMember" parameterType="MemberModel">
-		UPDATE BOOK_MEMBER
+		UPDATE BOOKMEMBER
 		SET pass =
 		#{password},email = #{email},address = #{address},cell =
 		#{cell},home =
@@ -32,7 +32,7 @@
 	<select id="selectMember" resultType="MemberModel"
 		parameterType="MemberModel">
 		SELECT *
-		FROM BOOK_MEMBER
+		FROM BOOKMEMBER
 		WHERE id = #{id}
 		AND pass =
 		#{password}
@@ -43,7 +43,7 @@
 		SELECT
 		A.id,A.name,A.email,A.address,A.cell,A.home, B.borrowdate,
 		B.returndate
-		FROM BOOK_MEMBER as A ,BOOK_BORROW as B
+		FROM BOOKMEMBER as A ,BOOKRENT as B
 		WHERE NOW() > B.returndate
 		AND B.borrowcheck ='2' and
 		A.id=B.id;
@@ -52,12 +52,12 @@
 	<select id="selectBest" resultType="MemberModel">
 		SELECT A.name, A.score, A.id,
 		(SELECT
-		COUNT(*) FROM BOOK_BORROW B WHERE B.borrowdate >
+		COUNT(*) FROM BOOKRENT B WHERE B.borrowdate >
 		date_sub(NOW(),
 		interval 30
 		day) AND B.id=A.id ) AS numborrow
 		FROM
-		BOOK_MEMBER AS A
+		BOOKMEMBER AS A
 		ORDER BY
 		numborrow DESC
 
@@ -65,10 +65,10 @@
 
 	<select id="selectMemberList" resultType="MemberModel">
 		SELECT *, (SELECT
-		COUNT(*) FROM BOOK_BORROW B WHERE B.borrowdate >
+		COUNT(*) FROM BOOKRENT B WHERE B.borrowdate >
 		date_sub(NOW(), interval 30
 		day) AND B.id=A.id ) AS numborrow
-		FROM BOOK_MEMBER A
+		FROM BOOKMEMBER A
 		ORDER BY team
 
 	</select>

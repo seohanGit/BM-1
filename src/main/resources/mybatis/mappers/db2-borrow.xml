@@ -5,44 +5,44 @@
 	<!-- 구매요청, 대여 관련 커리 -->
 
 	<insert id="requestBook" parameterType="BookModel">
-		INSERT INTO BOOK_REQUEST
+		INSERT INTO BOOKREQ
 		(id,
 		requestdate,
-		bookname,bookCode,
+		bookname,book_cd,
 		pricesales,writer,quantity,genre,link,
 		imageurl, isbn, publisher,
 		summary)
 		VALUES
 		(#{id},
-		now(),#{bookname},#{bookCode},#{priceSales},#{writer},#{quantity},#{genre},#{link},#{imageurl},#{isbn},
+		now(),#{bookname},#{book_cd},#{priceSales},#{writer},#{quantity},#{genre},#{link},#{imageurl},#{isbn},
 		#{publisher}, #{summary})
 	</insert>
 
 	<update id="deleteRequest" parameterType="BookModel">
-		UPDATE BOOK_REQUEST
+		UPDATE BOOKREQ
 		SET
-		bookCode='0'
-		WHERE bookCode=#{bookCode}
+		book_cd='0'
+		WHERE book_cd=#{book_cd}
 	</update>
 
 	<select id="requestList" resultType="BookModel">
 		SELECT *
 		FROM
-		BOOK_REQUEST AS
+		BOOKREQ AS
 		A,
-		BOOK_MEMBER AS B
-		WHERE A.id=B.id AND A.bookCode!='0'
+		BOOKMEMBER AS B
+		WHERE A.id=B.id AND A.book_cd!='0'
 		ORDER BY
 		A.requestdate
-		DESC;
+		DESC
 	</select>
 
 	<select id="requestRecord" parameterType="String" resultType="BookModel">
 		SELECT *
 		FROM
-		BOOK_REQUEST AS A
+		BOOKREQ AS A
 
-		WHERE A.id=#{id} AND A.bookCode='0' AND
+		WHERE A.id=#{id} AND A.book_cd='0' AND
 		(A.requestdate
 		BETWEEN
 		date_sub(NOW(),
@@ -51,13 +51,13 @@
 		ORDER
 		BY
 		A.requestdate
-		DESC;
+		DESC
 	</select>
 
 	<select id="selectRequest" parameterType="String" resultType="BookModel">
 		SELECT *
-		FROM BOOK_REQUEST
-		WHERE bookCode=#{bookCode}
+		FROM BOOKREQ
+		WHERE book_cd=#{book_cd}
 
 	</select>
 
@@ -67,27 +67,28 @@
 	<select id="borrowListAll" resultType="BookModel">
 		SELECT * FROM BOOKMST AS
 		A,
-		BOOK_BORROW AS B
-		WHERE B.borrowcheck=1 AND A.bookCode=B.bookCode
+		BOOKRENT AS B
+		WHERE B.rentchk=1 AND A.book_cd=B.book_cd
 		ORDER BY
-		B.borrowdate DESC;
+		B.rentdate DESC
 	</select>
 
 	<select id="borrowList" resultType="BookModel" parameterType="String">
 		SELECT *
-		FROM BOOKMST AS A, BOOK_BORROW AS B
+		FROM BOOKMST AS A, BOOKRENT AS B
 		WHERE B.id = #{id} AND
-		(B.borrowcheck='1' OR B.borrowcheck='2') AND
-		A.bookCode=B.bookCode
+		(B.rentchk='1' OR B.rentchk='2') AND
+		A.book_cd=B.book_cd
 		ORDER BY
-		B.borrowdate DESC;
+		B.rentdate DESC
 	</select>
 
 	<insert id="borrowBook1" parameterType="BookModel">
 		INSERT INTO
-		BOOK_BORROW
-		(bookCode, borrowdate, returndate, borrowcheck, id)
-		VALUES(#{bookCode}, now(), date_add(now(), interval +20 day),
+		BOOKRENT
+		(book_cd, rentdate, returndate, rentchk, id)
+		VALUES(#{book_cd}, now(),
+		date_add(now(), interval +20 day),
 		1, #{id})
 	</insert>
 
@@ -95,45 +96,46 @@
 		UPDATE
 		BOOKMST
 		SET
-		borrowcheck='1'
-		WHERE bookCode=#{bookCode}
+		rentchk='1'
+		WHERE book_cd=#{book_cd}
 	</update>
 
 	<update id="stopBorrow" parameterType="String">
 		UPDATE BOOKMST A
-		,BOOK_BORROW B
+		,BOOKRENT
+		B
 		SET
-		A.borrowcheck='4'
+		A.rentchk='4'
 		WHERE
-		A.bookCode=#{bookCode} AND A.borrowcheck='0'
+		A.book_cd=#{book_cd} AND A.rentchk='0'
 
 	</update>
 
 	<update id="recoverBook" parameterType="String">
 		UPDATE BOOKMST A
 		SET
-		A.borrowcheck='0'
+		A.rentchk='0'
 		WHERE
-		A.bookCode=#{bookCode} AND A.borrowcheck='4'
+		A.book_cd=#{book_cd} AND A.rentchk='4'
 
 	</update>
 	<update id="confirmBorrowBook" parameterType="String">
 		UPDATE BOOKMST A
 		INNER
-		JOIN BOOK_BORROW B
-		ON A.borrowcheck = B.borrowcheck
+		JOIN BOOKRENT B
+		ON A.rentchk = B.rentchk
 		SET
-		A.borrowcheck='2',
-		B.borrowcheck='2',
-		B.borrowdate=NOW()
+		A.rentchk='2',
+		B.rentchk='2',
+		B.rentdate=NOW()
 		WHERE
-		A.bookCode=#{bookCode} AND
-		B.bookCode=#{bookCode}
+		A.book_cd=#{book_cd} AND
+		B.book_cd=#{book_cd}
 
 	</update>
 
 	<update id="upPoint" parameterType="String">
-		UPDATE BOOK_MEMBER SET
+		UPDATE BOOKMEMBER SET
 		numborrow =
 		numborrow + 1
 		WHERE id = #{id}
@@ -142,97 +144,98 @@
 	<update id="returnBook" parameterType="String">
 		UPDATE BOOKMST A INNER
 		JOIN
-		BOOK_BORROW B
-		ON A.borrowcheck = B.borrowcheck
+		BOOKRENT B
+		ON A.rentchk = B.rentchk
 		SET
-		A.borrowcheck='0',
-		B.borrowcheck='3',
+		A.rentchk='0',
+		B.rentchk='3',
 		B.returndate=NOW()
 		WHERE
-		A.bookCode=#{bookCode} AND
-		B.bookCode=#{bookCode}
+		A.book_cd=#{book_cd} AND
+		B.book_cd=#{book_cd}
 	</update>
 	<!-- <update id="confirmReturnBook" parameterType="String"> UPDATE BOOKMST 
-		A INNER JOIN BOOK_BORROW B ON A.borrowcheck = B.borrowcheck SET A.borrowcheck='0', 
-		B.borrowcheck='0' WHERE A.bookCode=#{bookCode} AND B.bookCode=#{bookCode} 
-		</update> -->
+		A INNER JOIN BOOKRENT B ON A.rentchk = B.rentchk SET A.rentchk='0', B.rentchk='0' 
+		WHERE A.book_cd=#{book_cd} AND B.book_cd=#{book_cd} </update> -->
 	<select id="returnListAll" resultType="BookModel">
 		SELECT *
 		FROM BOOKMST AS A,
-		BOOK_BORROW AS B
-		WHERE B.borrowcheck=3 AND A.bookCode=B.bookCode;
+		BOOKRENT AS B
+		WHERE B.rentchk=3 AND A.book_cd=B.book_cd
 	</select>
 
 	<update id="extendBorrowBook" parameterType="String">
-		UPDATE BOOK_BORROW
+		UPDATE BOOKRENT
 		SET
 		returndate = date_add(now(), interval +20 day)
 		WHERE
-		bookCode=#{bookCode} AND borrowcheck='2';
+		book_cd=#{book_cd}
+		AND rentchk='2'
 	</update>
 
 	<update id="cancelBorrowBook" parameterType="String">
 		UPDATE BOOKMST
 		SET
-		borrowcheck='0'
+		rentchk='0'
 		WHERE
-		bookCode=#{bookCode} AND borrowcheck='1';
+		book_cd=#{book_cd} AND rentchk='1'
 	</update>
 
 	<delete id="deleteBorrowBook" parameterType="BookModel">
 		DELETE FROM
-		BOOK_BORROW
-		WHERE bookCode=#{bookCode} AND id=#{id}
+		BOOKRENT
+		WHERE book_cd=#{book_cd} AND id=#{id}
 	</delete>
 
 	<select id="rentListAll" parameterType="String" resultType="BookModel">
-		SELECT * FROM BOOKMST AS A, BOOK_BORROW AS B
+		SELECT * FROM BOOKMST AS A, BOOKRENT AS B
 		WHERE
-		A.bookCode=B.bookCode AND
-		B.borrowcheck='2'
+		A.book_cd=B.book_cd AND
+		B.rentchk='2'
 		ORDER BY
-		B.borrowdate
-		DESC;
+		B.rentdate
+		DESC
 	</select>
 
 
 	<!-- <![CDATA[B.returndate > NOW()]]> -->
 
-	<!-- <delete id="deleteRecord" parameterType="String"> DELETE ON BOOK_BORROW 
-		WHERE DELETE ON reserve WHERE id=#{id} AND bookCode=#{bookCode} </delete> -->
+	<!-- <delete id="deleteRecord" parameterType="String"> DELETE ON BOOKRENT 
+		WHERE DELETE ON reserve WHERE id=#{id} AND book_cd=#{book_cd} </delete> -->
 	<select id="recordList" parameterType="String" resultType="BookModel">
-		SELECT * FROM BOOKMST AS A, BOOK_BORROW AS B
-		WHERE (B.returndate
+		SELECT * FROM BOOKMST AS A, BOOKRENT AS B
+		WHERE <!-- (B.returndate
 		BETWEEN
 		date_sub(NOW(),
 		interval 90
 		day) AND NOW())
-		AND B.id=#{id} AND
-		A.bookCode=B.bookCode AND B.borrowcheck='3'
+		AND --> B.id=#{id} AND
+		A.book_cd=B.book_cd AND B.rentchk='3'
 		ORDER BY
-		B.returndate DESC;
+		B.returndate DESC
 	</select>
 
+	<insert id="backupRecord" parameterType="BookModel">
+		INSERT INTO BOOKRENT (ID, RENTDATE, BOOK_CD, RETURNDATE)
+		VALUES(#{id}, #{rentdate}, #{book_cd}, #{returndate})
+	</insert>
+
 	<select id="recordListAll" resultType="BookModel">
-		SELECT * FROM BOOKMST AS
-		A,
-		BOOK_BORROW AS B
-		WHERE (B.returndate BETWEEN date_sub(NOW(),
-		interval
-		90
-		day)
-		AND NOW())
-		AND A.bookCode=B.bookCode AND B.borrowcheck='3'
-		ORDER
-		BY
-		B.borrowdate
-		DESC;
+			SELECT * FROM bookmst AS A, bookrent AS B
+		WHERE <!-- (B.returndate BETWEEN
+		date_sub(NOW(),
+		interval 90
+		day) AND NOW())
+		AND  -->B.id=#{id} AND
+		A.book_cd=B.book_cd AND B.rentchk='3'
+		ORDER BY
+		B.returndate DESC
 	</select>
 
 	<delete id="deleteRecord" parameterType="BookModel">
 		DELETE 1
-		FROM BOOK_BORROW
-		WHERE bookCode=#{bookCode} AND id=#{id} AND borrowcheck='3'
+		FROM BOOKRENT
+		WHERE book_cd=#{book_cd} AND id=#{id} AND rentchk='3'
 	</delete>
 
 </mapper>

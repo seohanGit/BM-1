@@ -50,4 +50,6 @@ public interface RentService {
 
 	public void recoverBook(String bookCode);
 
+	public void backupRecord(BookModel bookmodel);
+
 }

@@ -50,5 +50,7 @@ public interface RentDao {
 
 	void recoverBook(String bookCode);
 
+	void backupRecord(BookModel bookmodel);
+
 
 }

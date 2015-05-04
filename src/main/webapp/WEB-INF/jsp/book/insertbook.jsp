@@ -29,7 +29,7 @@ body {
 				<form action="/insertbook" method="post" class="panel-body">
 					<div class="form-group">
 						<label for="exampleInputEmail1">도서번호</label> <input type="text"
-							class="form-control" id="booknum" name="booknum"
+							class="form-control" id="bookCode" name="bookCode"
 							placeholder="도서번호">
 					</div>
 					<div class="form-group">

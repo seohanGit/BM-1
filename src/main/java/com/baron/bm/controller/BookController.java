@@ -53,7 +53,12 @@ public class BookController {
 	@RequestMapping("/searchBook")
 	public String searchBook(HttpServletRequest request, String keyword,
 			Model model) {
+		System.out.println(keyword);
 		List<BookModel> bookList = bookservice.searchBook(keyword);
+		System.out.println(keyword);
+		System.out.println(keyword);
+		System.out.println(keyword);
+		
 		model.addAttribute("bookList", bookList);
 		String permission;
 		for (Cookie cookie : request.getCookies()) {

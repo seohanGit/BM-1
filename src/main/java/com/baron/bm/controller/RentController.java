@@ -1,8 +1,11 @@
 package com.baron.bm.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -39,10 +42,10 @@ public class RentController {
 		}
 		book.setId(id);
 		book.setBook_cd(bookCode);
-		book.setBorrowcheck("1");
+		book.setBorrowchk("1");
 
 		if (rentservice.borrowCheck(book).equals("0") & late.equals("0")) {
-			System.out.println(book.getBorrowcheck());
+			System.out.println(book.getBorrowchk());
 			rentservice.borrowBook(book);
 			return "redirect:borrowList";
 		} else {
@@ -166,7 +169,7 @@ public class RentController {
 	public String returnBook(String bookCode, BookModel book) {
 
 		if (rentservice.borrowCheck(book).equals("2")) {
-			System.out.println(book.getBorrowcheck());
+			System.out.println(book.getBorrowchk());
 			rentservice.returnBook(bookCode);
 			return "redirect:rentListAll";
 		} else {
@@ -275,4 +278,29 @@ public class RentController {
 		model.addAttribute("bookList", bookList);
 		return "rent/reservationListAll";
 	}
+	/*
+기존 대여기록 새로운 테이블로 옮기기
+	
+	@RequestMapping("/backupRecord")
+	public String backupRecord(HttpServletRequest request) throws Exception {
+		List <BookModel> bookList = new ArrayList<BookModel>();
+		List <BookModel> bookList1 = new ArrayList<BookModel>();
+		
+		bookList = rentservice.recordListAll();
+		
+		SimpleDateFormat format = new SimpleDateFormat("yyyymmdd", Locale.KOREAN);
+		
+		for (BookModel bookModel2 : bookList) {
+			BookModel bookmodel = new BookModel();
+			bookmodel.setRentdate( format.parse(bookModel2.getReq_ymd()));
+			bookmodel.setReturndate( format.parse(bookModel2.getRetu_ymd()));
+			bookmodel.setId(bookModel2.getSabun());
+			bookmodel.setBook_cd(bookModel2.getBook_cd());
+			bookList1.add(bookmodel);
+			rentservice.insertRecord(bookmodel);
+		}
+		
+		return "recordListAll";
+	}
+	*/
 }

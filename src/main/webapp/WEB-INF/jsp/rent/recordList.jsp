@@ -53,10 +53,10 @@ body {
 						<tr>
 
 							<td align="left">${book.title }</td>
-							<td align="left">${book.req_ymd }</td>
-							<td align="left">${book.retu_ymd }</td>
+							<td align="left">${book.rentdate }</td>
+							<td align="left">${book.returndate }</td>
 						
-							<td>${book.sabun}</td>
+							<td>${book.id}</td>
 							<td><button class="btn btn-default btn-sm" type="button"
 									id="extendbook"
 									onClick="location.href='/deleteRecord?bookCode=${book.book_cd}&id=${book.sabun}'">삭제</button></td>

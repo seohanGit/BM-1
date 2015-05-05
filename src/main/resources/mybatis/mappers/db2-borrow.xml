@@ -226,7 +226,7 @@
 		date_sub(NOW(),
 		interval 90
 		day) AND NOW())
-		AND  -->B.id=#{id} AND
+		AND  -->
 		A.book_cd=B.book_cd AND B.rentchk='3'
 		ORDER BY
 		B.returndate DESC

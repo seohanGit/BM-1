@@ -1,0 +1,110 @@
+<DATA>
+
+	<ROW>
+		<boardnum>1</boardnum>
+		<title>미생 </title>
+		<content></content>
+		<registerdate>2014-11-23 00:00:00</registerdate>
+		<modifidate>2014-11-23 00:00:00</modifidate>
+		<id>root</id>
+	</ROW>
+
+	<ROW>
+		<boardnum>2</boardnum>
+		<title>ㅎㅎㅎㅎㅎ</title>
+		<content>ㅎㅎㅎㅎㅎ</content>
+		<registerdate>2014-11-23 00:00:00</registerdate>
+		<modifidate>2015-04-23 10:48:58</modifidate>
+		<id>root</id>
+	</ROW>
+
+	<ROW>
+		<boardnum>3</boardnum>
+		<title>데이터배이스 배움</title>
+		<content>터대학에서 데이터베이스 과목을 가르친 지 20여 년의 세월 동안 외국의 유명한 원서들 또는 이들의 번역서를 교재로 선택하여 강의를 해왔다. 또한 저명한 원서 2판과 3판을 여러 교수들과 공동으로 직접 번역을 해보기도 하였다. 그런데 이런 교재들은 대개 700페이지 이상의 분량이어서 한 학기 동안 가르치는 것이 불가능했다. </content>
+		<registerdate>2014-12-08 00:00:00</registerdate>
+		<modifidate>2014-12-08 00:00:00</modifidate>
+		<id>root</id>
+	</ROW>
+
+	<ROW>
+		<boardnum>4</boardnum>
+		<title>7년 후에</title>
+		<content>후독자들이 좋아하는 작가의 신작에서 기대하는 사항은 크게 두 가지로 압축할 수 있을 것이다. 그 첫 번째는 해당 작가의 작품에서만 볼 수 있는 매력, 두 번째는 한곳에 고정되지 않고 늘 변화를 모색하는 노력을 보고자 할 것이다. </content>
+		<registerdate>2014-12-04 00:00:00</registerdate>
+		<modifidate>2014-12-04 00:00:00</modifidate>
+		<id>root</id>
+	</ROW>
+
+	<ROW>
+		<boardnum>5</boardnum>
+		<title>종이여자</title>
+		<content>로스앤젤레스의 빈민가 맥아더파크에서 나고 자란 톰 보이드는 어린 시절 겪은 강렬하고 순탄치 않았던 경험을 살려 집필한 소설 《천사 3부작》으로 일약 베스트셀러 작가가 된다. 그에게는 어린 시절부터 돈독한 우정을 나눈 친구들이 있다. 현재 LA경찰로 근무하는 여경 캐롤, 톰의 매니저로 일하는 밀로가 바로 그들이다. 맥아더파크에서의 어린 시절 경험을 공유하고 있는 그들은 서로 떼어놓고 생각할 수 없을 만큼 사이가 각별한 존재들이다. 죽음의 위험이 상존하는 마을에서 또래의 친구들은 대개 갱단에 가입하거나 마약딜러가 되어 하루살이 같은 목숨을 이어간다. 톰과 두 친구는 더 이상 비극적인 생을 이어갈 수 없다는 결연한 각오로 마을을 떠나올 수 있었다. 갱단의 일원이었던 밀로에게는 목숨을 건 탈주였다. 이제 어느 정도의 성공과 안정된 삶을 찾았지만 어린 시절의 암울하고 끔찍한 기억은 그들에게 오랜 세월 동안 지울 수 없는 상처로 남는다. </content>
+		<registerdate>2014-12-03 00:00:00</registerdate>
+		<modifidate>2014-12-03 00:00:00</modifidate>
+		<id>root</id>
+	</ROW>
+
+	<ROW>
+		<boardnum>6</boardnum>
+		<title>구해줘</title>
+		<content>아내를 잃은 후 좌절감에 휩싸여 살아가는 젊은 의사 샘 갤러웨이와 여배우의 꿈을 안고 뉴욕에 온 줄리에트 보몽. 브로드웨이 무대에 서겠다는 일념으로 뉴욕에 오지만 생활비를 벌기에도 벅찬 생활에 염증을 느낀 줄리에트 보몽은 프랑스로 돌아갈 결심을 굳힌다. 무대보다는 카페 웨이트리스가 직업이 되다시피 한 줄리에트에게 뉴욕은 패배와 무력감을 일깨워준 냉혹한 도시일 뿐이었다.ㅎㅎㅎㅎㅎㅎ</content>
+		<registerdate>2014-11-30 00:00:00</registerdate>
+		<modifidate>2015-04-23 10:48:50</modifidate>
+		<id>root</id>
+	</ROW>
+
+	<ROW>
+		<boardnum>17</boardnum>
+		<title>열혈 C 프로그래밍</title>
+		<content>자료구조 학습의 올바른 방법과 목표를 말하고자 합니다! 자료구조는 어렵다고 알려져 있습니다.하지만 문제는 어렵다는데 있는 것이 아닙니다.어려워도 끝까지 공부할 수 있다면 문제가 되지 않습니다.문제는 끝까지 공부하지 못하는데 있습니다.설명이 이치에 맞고 학습의 방법이 올바르다면,내용이 어려워도 끝까지 공부할 수 있습니다.그래서 저자는 말합니다.자료구조를 잘 아는 사람에게 배워야 할 것은 자료구조의 학습방법이다!그리고 저자는 본서를 통해서 자료구조를 어떠한 방법으로 어떠한 수준까지 공부해야 하는지를 선배의 입장에서 이야기합니다.</content>
+		<registerdate>2014-12-03 14:42:46</registerdate>
+		<modifidate>2014-12-03 14:42:46</modifidate>
+		<id>root</id>
+	</ROW>
+
+	<ROW>
+		<boardnum>22</boardnum>
+		<title>자바</title>
+		<content>dd</content>
+		<registerdate>2014-12-08 19:01:17</registerdate>
+		<modifidate>2014-12-08 19:01:17</modifidate>
+		<id>k1</id>
+	</ROW>
+
+	<ROW>
+		<boardnum>23</boardnum>
+		<title>좋습니다</title>
+		<content>좋ㅅ브니다</content>
+		<registerdate>2015-03-25 16:47:35</registerdate>
+		<modifidate>2015-03-25 16:47:35</modifidate>
+		<id>k1</id>
+	</ROW>
+
+	<ROW>
+		<boardnum>24</boardnum>
+		<title>괴테가 읽어주는 인생</title>
+		<content>중산층의 조건이 교양과 자신만의 주관이 있어야 한다는 조건이 있다. 괴테는 그 교양있는 사람들이 따를만큼 삶에 있어서 통찰력이 있고, 시대를 이끌어갔다. 지금 자본주의시대에도 철학과 문학, 통찰력이 있는 사람들이 시대를 주도하고 사람들을 따르게 만든다. 이 책은 삶을 주도적으로 살아가도록 한다.</content>
+		<registerdate>2015-03-31 09:33:31</registerdate>
+		<modifidate>2015-03-31 09:33:31</modifidate>
+		<id>k1</id>
+	</ROW>
+
+	<ROW>
+		<boardnum>25</boardnum>
+		<title>하이</title>
+		<content>하이</content>
+		<registerdate>2015-04-02 15:27:48</registerdate>
+		<modifidate>2015-04-02 15:27:48</modifidate>
+		<id>k1234</id>
+	</ROW>
+
+	<ROW>
+		<boardnum>26</boardnum>
+		<title>안녕하십니까</title>
+		<content>반갑습니다</content>
+		<registerdate>2015-04-03 10:48:28</registerdate>
+		<modifidate>2015-04-03 10:48:28</modifidate>
+		<id>seohan1</id>
+	</ROW>
+</DATA>

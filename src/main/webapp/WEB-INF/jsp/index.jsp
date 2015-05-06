@@ -124,7 +124,7 @@
 
 			$document
 					.ready(function() {
-						var date = "${con.registerdate}";
+						var date = "${con.regisdate}";
 						var newicon = "<span class="label label-default">New</span></h3>";
 						if (date < now()) {
 							$("#notice").append(newicon);

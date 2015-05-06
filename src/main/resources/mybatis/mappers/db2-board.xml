@@ -43,7 +43,7 @@
 		INSERT INTO BOOKBOARD
 		(title,content,REGISDATE,modifidate,id)
 		VALUES
-		(#{title},#{content},NOW(),NOW(),#{id})
+		(#{title},#{content},CURRENT DATE,CURRENT DATE,#{id})
 	</insert>
 
 	<delete id="deleteBoard" parameterType="String">
@@ -55,7 +55,7 @@
 	<update id="modifyBoard" parameterType="BoardModel">
 		UPDATE BOOKBOARD
 		SET
-		content=#{content}, title=#{title}, modifidate=NOW()
+		content=#{content}, title=#{title}, modifidate=CURRENT DATE
 		WHERE
 		boardnum=#{boardnum}
 	</update>
@@ -72,8 +72,7 @@
 		INSERT INTO BOOKNOTICE
 		(content, REGISDATE)
 		VALUES
-		(#{content}, DATE_FORMAT(NOW(),
-		"%Y-%m-%d"))
+		(#{content}, CURRENT DATE)
 	</insert>
 	<delete id="deleteNotice" parameterType="String">
 		DELETE FROM BOOKNOTICE
@@ -84,7 +83,7 @@
 	<update id="modifyNotice" parameterType="BoardModel">
 		UPDATE BOOKNOTICE
 		SET
-		content=#{content}, REGISDATE=NOW()
+		content=#{content}, REGISDATE=CURRENT DATE
 		WHERE boardnum=#{boardnum}
 	</update>
 

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.baron.member.model.BookModel;
 import com.baron.member.model.Dto;
+import com.baron.member.model.SearchResult;
 
 @Repository
 public class BookDaoImpl implements BookDao {
@@ -23,19 +24,19 @@ public class BookDaoImpl implements BookDao {
 	}
 
 	@Override
-	public List<BookModel> searchBook(String keyword) {
+	public List<SearchResult> searchBook(String keyword) {
 		return session.selectList(NAMESPACE + "searchBook", keyword);
 	}
 
 	@Override
-	public BookModel selectBook(String bookCode) {
-		return session.selectOne(NAMESPACE + "selectBook", bookCode);
+	public BookModel selectBook(String book_cd) {
+		return session.selectOne(NAMESPACE + "selectBook", book_cd);
 	}
 
 	@Override
-	public void deleteBook(String bookCode) {
+	public void deleteBook(String book_cd) {
 
-		session.delete(NAMESPACE + "deleteBook", bookCode);
+		session.delete(NAMESPACE + "deleteBook", book_cd);
 		// TODO Auto-generated method stub
 
 	}
@@ -47,8 +48,8 @@ public class BookDaoImpl implements BookDao {
 	}
 
 	@Override
-	public String selectname(String bookCode) {
-		return session.selectOne(NAMESPACE + "selectname", bookCode);
+	public String selectname(String book_cd) {
+		return session.selectOne(NAMESPACE + "selectname", book_cd);
 		// TODO Auto-generated method stub
 
 	}

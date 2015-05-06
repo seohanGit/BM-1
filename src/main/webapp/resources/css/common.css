@@ -7,6 +7,10 @@ footer {
 	margin: 50px 0;
 }
 
+.noborder {
+border-width: 0px;	
+}
+
 .ellipsis {
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -24,19 +28,22 @@ footer {
 
 div .left {
 	float: left;
-	width: 50%;
+	width: 40%;
 	margin-bottom: 10px;
 }
-.page{
-	font-size:large;
+
+.page {
+	font-size: large;
 }
+
 div .right {
 	float: right;
-	width: 50%;
+	width: 30%;
 	margin-bottom: 10px;
 }
-div .right-end{
-	margin-top:20px;
+
+div .right-end {
+	margin-top: 20px;
 	text-align: right;
 	vertical-align: bottom;
 	height: 100%;
@@ -75,19 +82,17 @@ table  #td-date {
 	width: 30%;
 }
 
-div .right>h4{
+div .right>h4 {
 	text-indent: 12px;
 }
 
 .table .table-striped .table-bordered {
 	border-top-left-radius: 8px;
 	border-top-right-radius: 8px;
-	
 }
 
 .row {
 	background-color: #fff;
-	
 	padding: 15px;
 }
 
@@ -109,4 +114,12 @@ table .title {
 #nav-input {
 	margin-top: 5px;
 	vertical-align: middle;
+}
+
+.big {
+	font-size: xx-large;
+}
+
+.middle {
+	font-size: large;
 }

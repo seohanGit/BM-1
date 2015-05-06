@@ -96,8 +96,8 @@ public class RequestController {
 	}
 
 	@RequestMapping("/buyRequest")
-	public String buyRequest(String bookCode, Model model, BookModel book) {
-		book = requestservice.selectBook(bookCode);
+	public String buyRequest(String book_cd, Model model, BookModel book) {
+		book = requestservice.selectBook(book_cd);
 		model.addAttribute("book", book);
 		return "confirmBuy";
 	}
@@ -115,11 +115,11 @@ public class RequestController {
 
 	@RequestMapping("/confirmBuyList")
 	public String confirmBuyList(
-			@RequestParam(value = "bookCode") List<String> bookCodeList) {
-		for (String bookCode : bookCodeList) {
-			if (bookService.selectBook(bookCode) == null) {
-				bookService.insertBook(requestservice.selectBook(bookCode));
-				requestservice.deleteRequest(bookCode);
+			@RequestParam(value = "book_cd") List<String> book_cdList) {
+		for (String book_cd : book_cdList) {
+			if (bookService.selectBook(book_cd) == null) {
+				bookService.insertBook(requestservice.selectBook(book_cd));
+				requestservice.deleteRequest(book_cd);
 
 			} else {
 				return "buyfail";
@@ -131,13 +131,13 @@ public class RequestController {
 	}
 
 	@RequestMapping("/deleteRequest")
-	public String deleteRequest(String bookCode) {
-		System.out.println(bookCode);
-		System.out.println(bookCode);
-		System.out.println(bookCode);
-		System.out.println(bookCode);
+	public String deleteRequest(String book_cd) {
+		System.out.println(book_cd);
+		System.out.println(book_cd);
+		System.out.println(book_cd);
+		System.out.println(book_cd);
 
-		requestservice.deleteRequest(bookCode);
+		requestservice.deleteRequest(book_cd);
 		return "redirect:requestList";
 	}
 }

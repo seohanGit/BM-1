@@ -34,6 +34,7 @@ public class RentDaoImpl implements RentDao {
 	@Override
 	public List<BookModel> borrowList(String id) {
 		// TODO Auto-generated method stub
+		System.out.println(id+"dao");
 		return session.selectList(NAMESPACE + "borrowList", id);
 	}
 

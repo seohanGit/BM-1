@@ -67,56 +67,56 @@
 			</div>
 
 			<hr>
-			<form action="/requestbook" method="get">
-				<table class="table table-striped table-bordered"
-					style="width =: 90%; bordercolor: #fff" id="dataTable">
 
-					<thead>
+			<table class="table table-striped table-bordered"
+				style="width =: 90%; bordercolor: #fff" id="dataTable">
+
+				<thead>
+					<tr>
+						<td id="td-img">표지</td>
+						<td width="20%">도서명</td>
+						<td class="hidden-xs">저자</td>
+						<td class="hidden-xs" id="td-genre">장르</td>
+						<td class="hidden-xs" id="td-genre">출판사</td>
+						<td id="td-genre">가격</td>
+						<td>수량</td>
+						<td>구매요청</td>
+					</tr>
+				</thead>
+
+				<tbody>
+					<c:forEach items="${bookList}" var="book" varStatus="status">
 						<tr>
-							<td id="td-img">표지</td>
-							<td width="20%">도서명</td>
-							<td class="hidden-xs" >저자</td>
-							<td class="hidden-xs" id="td-genre">장르</td>
-							<td class="hidden-xs" id="td-genre">출판사</td>
-							<td id="td-genre">가격</td>
-							<td >수량</td>
-							<td>구매요청</td>
-						</tr>
-					</thead>
+							<td style="width: 50px" align="left"><img
+								style="width: 50px" src="${book.imageurl}"></td>
 
-					<tbody>
-						<c:forEach items="${bookList}" var="book" varStatus="status">
-							<tr>
-								<td style="width: 50px" align="left"><img
-									style="width: 50px" src="${book.imageurl}"></td>
+							<td align="left"><a href="${book.link}">${book.title}</a></td>
+							<td class="hidden-xs" align="left">${book.author }</td>
+							<td class="hidden-xs" align="left">${book.b_group}</td>
+							<td class="hidden-xs" align="left">${book.publish}</td>
+							<td align="left">${book.price}원</td>
 
-								<td align="left"><a href="${book.link}">${book.bookname}</a></td>
-								<td class="hidden-xs" align="left">${book.writer }</td>
-								<td class="hidden-xs" align="left">${book.genre}</td>
-								<td class="hidden-xs" align="left">${book.publisher}</td>
-								<td align="left">${book.priceSales}원</td>
+							<form action="/requestbook" method="get">
+							<td style="width: 20px"><input type="hidden"
+								value="${book.isbn}" name="isbn"> <input type="number"
+								name="quantity" placeholder="구매 수량" style="width: 90px"></td>
+							<td>
+								<button class="btn btn-default" type="submit" id="requestbook">구매요청</button>
 
 
-								<td style="width: 20px"><input type="hidden"
-									value="${book.isbn}" name="isbn"> <input type="number"
-									name="quantity" placeholder="구매 수량" style="width: 90px"></td>
-								<td>
-									<button class="btn btn-default" type="submit" id="requestbook">구매요청</button>
-
-
-									<%-- 
+								<%-- 
 					<button class="btn btn-default" type="button" id="requestbook"
 						onClick="location.href='/requestbook?isbn=${book.isbn}'">구매</button>
 					&writer=${book.writer}&publisher=${book.publisher}&imageurl=${book.imageurl}
  --%>
-								</td>
+							</td>
+							</form>
+						</tr>
+					</c:forEach>
+				</tbody>
 
-							</tr>
-						</c:forEach>
-					</tbody>
+			</table>
 
-				</table>
-			</form>
 		</div>
 	</div>
 

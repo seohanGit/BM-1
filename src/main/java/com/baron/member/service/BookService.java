@@ -4,13 +4,14 @@ import java.util.List;
 
 import com.baron.member.model.BookModel;
 import com.baron.member.model.Dto;
+import com.baron.member.model.SearchResult;
 
 public interface BookService {
 
 
 	public void insertBook(BookModel model);
 
-	public List<BookModel> searchBook(String keyword);
+	public List<SearchResult> searchBook(String keyword);
 
 	public void deleteBook(String booknum);
 

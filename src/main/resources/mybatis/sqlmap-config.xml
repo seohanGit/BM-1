@@ -7,5 +7,6 @@
 		<typeAlias type="com.baron.member.model.BookModel" alias="BookModel" />
 		<typeAlias type="com.baron.member.model.ContentModel" alias="ContentModel" />
 		<typeAlias type="com.baron.member.model.Dto" alias="Dto" />
+		<typeAlias type="com.baron.member.model.SearchResult" alias="SearchResult"/>
 	</typeAliases>
 </configuration>

@@ -3,71 +3,134 @@
 <mapper namespace="com.baron.member.sqlModel">
 	<!-- BOOKMST 관련 쿼리 -->
 
-	
+
 	<select id="selectBookAll" resultType="BookModel">
 		SELECT * FROM BOOKMST
 	</select>
-	
+
 	<insert id="insertBook" parameterType="BookModel">
 		INSERT INTO BOOKMST
-		(title,BOOK_CD,b_group,publish,author,grade,borrowcheck,imageurl,
-		rece_ymd, isbn, price, summary)
+		(title,BOOK_CD,b_group,publish,author,grade,rentchk,imageurl,
+		rcv_date, isbn, price, summary)
 		VALUES
-		(#{bookname},#{bookCode},#{genre},#{publisher},#{writer},0,0,#{imageurl},
-		NOW(), #{isbn}, #{priceSales}, #{summary})
+		(#{title},#{book_cd},#{b_group},#{publish},#{author},0,0,#{imageurl},
+		NOW(), #{isbn}, #{price}, #{summary})
 	</insert>
 
 
 	<select id="selectBook" parameterType="String" resultType="BookModel">
-		SELECT * FROM BOOKMST WHERE BOOK_CD=#{bookCode}
+
+		SELECT * FROM BOOKMST WHERE BOOK_CD=#{book_cd}
 	</select>
 
-	<select id="searchBook" parameterType="String" resultType="BookModel">
+	<select id="searchBook" parameterType="String" resultType="SearchResult">
+		<bind name="keyword" value="'%' + _parameter + '%'" />
 		SELECT *
 		FROM BOOKMST
 		WHERE
-		title LIKE
-		'#{keyword}%'
-		ORDER BY
-		rece_ymd DESC
+		TITLE like #{keyword}
+
 	</select>
 
 	<select id="listBook" parameterType="Dto" resultType="BookModel">
-		SELECT
-		*,
-		(SELECT COUNT(*) FROM BOOKMST) AS count
+		SELECT *
 		FROM BOOKMST
 		ORDER BY
-		buydate DESC
+		rcv_date DESC
 	</select>
 
 
 	<delete id="deleteBook" parameterType="String">
 		DELETE FROM BOOKMST
 		WHERE
-		BOOK_CD=#{bookCode}
+		BOOK_CD=#{book_cd}
 	</delete>
 
 
 	<update id="updateBook" parameterType="BookModel">
 		UPDATE BOOKMST
 		SET
-		TITLE=#{bookname}, b_group=#{genre},
-		publish=#{publisher}, author=#{writer}
-		WHERE BOOK_CD=#{bookCode}
+		TITLE=#{title}, b_group=#{b_group},
+		publish=#{publish},
+		author=#{author}
+		WHERE BOOK_CD=#{book_cd}
 	</update>
 
 	<select id="getNewbook" resultType="BookModel">
 		SELECT *
 		FROM BOOKMST
 		ORDER BY
-		rece_ymd DESC
+		rcv_date DESC
 	</select>
 
 	<select id="getBestSeller" resultType="BookModel">
 		SELECT *
 		FROM BOOKMST
-		ORDER BY
+		ORDER
+		BY
 		sunbo DESC
 	</select>
+
+	<!-- 구매요청, 대여 관련 커리 -->
+
+	<insert id="requestBook" parameterType="BookModel">
+		INSERT INTO BOOKREQ
+		(id,
+		reqdate,
+		title,book_cd,
+		price,author,quantity,b_group,link,
+		imageurl,
+		isbn, publish,
+		summary)
+		VALUES
+		(#{id},
+		current
+		date,#{title},#{book_cd},#{price},#{author},#{quantity},#{b_group},#{link},#{imageurl},#{isbn},
+		#{publish}, #{summary})
+	</insert>
+
+	<update id="deleteRequest" parameterType="BookModel">
+		UPDATE BOOKREQ
+		SET
+		book_cd='0'
+		WHERE book_cd=#{book_cd}
+	</update>
+
+	<select id="requestList" resultType="BookModel">
+		SELECT *
+		FROM
+		BOOKREQ AS
+		A,
+		BOOKMEMBER AS B
+		WHERE A.id=B.id AND A.book_cd!='0'
+		ORDER BY
+		A.reqdate
+		DESC
+	</select>
+
+	<select id="requestRecord" parameterType="String" resultType="BookModel">
+		SELECT *
+		FROM
+		BOOKREQ A
+
+		WHERE A.id=#{id} AND
+		(A.reqdate
+		>
+		current date - 1
+		year
+		AND <![CDATA[A.reqdate <= current
+		date]]>)
+		ORDER
+		BY
+		A.reqdate
+		DESC
+	</select>
+
+	<select id="selectRequest" parameterType="String" resultType="BookModel">
+		SELECT *
+		FROM BOOKREQ
+		WHERE book_cd=#{book_cd}
+
+	</select>
+
 </mapper>

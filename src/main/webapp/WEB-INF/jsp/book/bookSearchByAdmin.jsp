@@ -39,58 +39,58 @@
 								style="width: 40px" src="${book.imageurl}"></td>
 
 
-							<td align="left">${book.bookname }</td>
-							<td align="left">${book.writer }</td>
+							<td align="left">${book.title }</td>
+							<td align="left">${book.author }</td>
 
 							<c:choose>
-								<c:when test="${book.borrowcheck=='0'}">
+								<c:when test="${book.borrowchk=='0'}">
 									<td align="left">대출가능</td>
 									<td>
 										<button class="btn btn-default btn-sm" type="button"
 											id="reservebook"
-											onClick="location.href='/stopBorrow?bookCode=${book.bookCode}'">대출정지</button>
+											onClick="location.href='/stopBorrow?bookCode=${book.book_cd}'">대출정지</button>
 										<button class="btn btn-default btn-sm" type="button"
 											id="modifybook"
-											onClick="location.href='/modifyBookForm?bookCode=${book.bookCode}'">도서수정</button>
+											onClick="location.href='/modifyBookForm?book_cd=${book.book_cd}'">도서수정</button>
 										<button class="btn btn-default btn-sm" type="button"
 											id="deletebook"
-											onClick="location.href='/deletebook?bookCode=${book.bookCode}'; del();">도서삭제</button>
+											onClick="location.href='/deletebook?book_cd=${book.book_cd}'; del();">도서삭제</button>
 									</td>
 								</c:when>
 								<c:when test="${book.borrowcheck=='1'}">
 									<td><mark>대여요청중</mark></td>
 									<td><button class="btn btn-default btn-sm" type="button"
 											id="modifybook"
-											onClick="location.href='/modifyBookForm?bookCode=${book.bookCode}'">도서수정</button>
+											onClick="location.href='/modifyBookForm?book_cd=${book.book_cd}'">도서수정</button>
 										<button class="btn btn-default btn-sm" type="button"
 											id="deletebook"
-											onClick="location.href='/deletebook?bookCode=${book.bookCode}'; del();">도서삭제</button>
+											onClick="location.href='/deletebook?book_cd=${book.book_cd}'; del();">도서삭제</button>
 									</td>
 								</c:when>
 								<c:when test="${book.borrowcheck=='2'}">
 									<td>대출중</td>
 									<td><button class="btn btn-default btn-sm" type="button"
 											id="modifybook"
-											onClick="location.href='/modifyBookForm?bookCode=${book.bookCode}'">도서수정</button>
+											onClick="location.href='/modifyBookForm?book_cd=${book.book_cd}'">도서수정</button>
 										<button class="btn btn-default btn-sm" type="button"
 											id="deletebook"
-											onClick="location.href='/deletebook?bookCode=${book.bookCode}'; del();">도서삭제</button>
+											onClick="location.href='/deletebook?book_cd=${book.book_cd}'; del();">도서삭제</button>
 									</td>
 								</c:when>
 								<c:when test="${book.borrowcheck=='4'}">
 									<td><mark>대출정지</mark></td>
 									<td><button class="btn btn-default btn-sm" type="button"
 											id="modifybook"
-											onClick="location.href='/recoverBook?bookCode=${book.bookCode}'">대출재개</button></td>
+											onClick="location.href='/recoverBook?book_cd=${book.book_cd}'">대출재개</button></td>
 								</c:when>
 								<c:when test="${book.borrowcheck=='5'}">
 									<td><mark>예약중</mark></td>
 									<td><button class="btn btn-default btn-sm" type="button"
 											id="modifybook"
-											onClick="location.href='/modifyBookForm?bookCode=${book.bookCode}'">도서수정</button>
+											onClick="location.href='/modifyBookForm?book_cd=${book.book_cd}'">도서수정</button>
 										<button class="btn btn-default btn-sm" type="button"
 											id="deletebook"
-											onClick="location.href='/deletebook?bookCode=${book.bookCode}'; del();">도서삭제</button>
+											onClick="location.href='/deletebook?book_cd=${book.book_cd}'; del();">도서삭제</button>
 									</td>
 								</c:when>
 							</c:choose>

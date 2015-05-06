@@ -56,13 +56,14 @@ public class MemberController {
 
 		List<BoardModel> notice = boardService.noticeList();
 		// List<MemberModel> bestList = joinService.selectBest();
-		List<BookModel> newBook = bookService.getNewbook();
-		List<BookModel> bestSeller = bookService.getBestSeller();
-
-		// model.addAttribute("bestList", bestList);
+		// List<BookModel> newBook = bookService.getNewbook();
+		// List<BookModel> bestSeller = bookService.getBestSeller();
+		
 		model.addAttribute("noticeList", notice);
-		model.addAttribute("bestseller", bestSeller);
-		model.addAttribute("newbook", newBook);
+		// model.addAttribute("bestList", bestList);
+
+		// model.addAttribute("bestseller", bestSeller);
+		// model.addAttribute("newbook", newBook);
 		return "index";
 	}
 
@@ -79,6 +80,8 @@ public class MemberController {
 		if (model != null) {
 			System.out.println(model.getId() + model.getPermission());
 			response.addCookie(new Cookie("bm_id", model.getId()));
+			System.out.println(model.getId()+"login Success");
+			
 			response.addCookie(new Cookie("bm_permission", model
 					.getPermission()));
 			mav.addObject("result", true);
@@ -135,6 +138,7 @@ public class MemberController {
 
 		for (Cookie cookie : request.getCookies()) {
 			if (cookie.getName().equals("bm_id")) {
+				System.out.println(cookie.getValue()+"modify");
 				pass = joinService.identify(cookie.getValue());
 				MemberModel memberModel = new MemberModel();
 				memberModel.setId(cookie.getValue());

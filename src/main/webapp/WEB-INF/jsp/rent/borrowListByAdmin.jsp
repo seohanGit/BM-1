@@ -61,54 +61,46 @@ body {
 							<button class="btn btn-default" type="submit">승인</button>
 						</div>
 
-						<table class="table table-striped table-bordered ">
+						<table class="table table-striped table-bordered">
 
 
 							<thead>
 								<tr class="hidden-xs title">
-									<td><input type="checkbox" id="allCheck"></td>
-									<td id="tb-title">도서명</td>
-									<td id="tb-date">대여일자</td>
-									<td id="tb-date">반납일자</td>
-									<td id="tb-genre">장르</td>
-									<td id="tb-genre">대출자</td>
-									<td></td>
+									<th><input type="checkbox" id="allCheck"></th>
+									<th id="tb-title">도서명</th>
+									<th id="tb-date">대여일자</th>
+									<th id="tb-date">반납일자</th>
+									<th id="tb-genre">장르</th>
+									<th id="tb-genre">대출자</th>
+									<th></th>
 
 								</tr>
 							</thead>
 
 
-							<c:forEach items="${bookList}" var="book" varStatus="loop">
 
-								<tbody>
+
+							<tbody>
+								<c:forEach items="${bookList}" var="book" varStatus="loop">
 									<tr>
 										<td><input type="checkbox" name="bookCode"
-											value="${book.bookCode}"></td>
-										<td align="left">${book.bookname }</td>
-										<td align="left">${book.borrowdate }</td>
+											value="${book.book_cd}"></td>
+										<td align="left">${book.title}</td>
+										<td align="left">${book.rentdate }</td>
 										<td align="left">${book.returndate }</td>
-										<td align="left">${book.genre }</td>
+										<td align="left">${book.b_group }</td>
 
 										<td>${book.id}</td>
 
 										<td><button class="btn btn-default btn-sm" type="button"
 												id="reservebook"
-												onClick="location.href='/confirmBorrowBook?bookCode=${book.bookCode}&id=${book.id}'; ok();">승인</button>
+												onClick="location.href='/confirmBorrowBook?book_cd=${book.book_cd}&id=${book.id}'; ok();">승인</button>
 
 										</td>
 									</tr>
-									<tr>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-									</tr>
-								</tbody>
+								</c:forEach>
+							</tbody>
 
-							</c:forEach>
 
 
 						</table>

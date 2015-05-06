@@ -58,15 +58,15 @@ body {
 						<c:otherwise>
 							<thead>
 								<tr class="hidden-xs title">
-									<td id="tb-img">표지</td>
-									<td id="tb-title">도서명</td>
-									<td id="tb-author">저자</td>
-									<td id="tb-genre">장르</td>
+									<th id="tb-img">표지</th>
+									<th id="tb-title">도서명</th>
+									<th id="tb-author">저자</th>
+									<th id="tb-genre">장르</th>
 
-									<td id="tb-date">대여일자</td>
-									<td id="tb-date">반납일자</td>
-									<td id="tb-status">상태</td>
-									<td>비고</td>
+									<th id="tb-date">대여일자</th>
+									<th id="tb-date">반납일자</th>
+									<th id="tb-status">상태</th>
+									<th>비고</th>
 								</tr>
 							</thead>
 						</c:otherwise>
@@ -78,54 +78,47 @@ body {
 								<td style="width: 50px" align="left"><img
 									style="width: 50px" src="${book.imageurl}"></td>
 
-								<td align="left">${book.bookname }</td>
-								<td align="left">${book.writer }</td>
-								<td align="left">${book.genre}</td>
+								<td align="left">${book.title }</td>
+								<td align="left">${book.author }</td>
+								<td align="left">${book.b_group}</td>
 
 
-								<td>${book.borrowdate}</td>
+								<td>${book.rentdate}</td>
 								<td>${book.returndate}</td>
 								<c:choose>
-									<c:when test="${book.borrowcheck=='1'}">
+									<c:when test="${book.rentchk=='1'}">
 										<td>대여요청중</td>
 										<td>
 											<button class="btn btn-default" type="button"
 												id="reservebook"
-												onClick="location.href='/cancleBorrowBook?bookCode=${book.bookCode}'; cancel();">취소</button>
+												onClick="location.href='/cancleBorrowBook?book_cd=${book.book_cd}'; cancel();">취소</button>
 										</td>
 									</c:when>
-									<c:when test="${book.borrowcheck=='2'}">
+									<c:when test="${book.rentchk=='2'}">
 
 										<td>대출중</td>
 										<td></td>
 									</c:when>
 								</c:choose>
 
-							</tr>
-							<tr>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
+
 							</tr>
 						</tbody>
 					</c:forEach>
 
 				</table>
 				<c:choose>
-					<c:when test="${empty bookList}">
+					<c:when test="${empty record}">
 					</c:when>
 					<c:otherwise>
-						<table class="table table-striped table-bordered">
+						<table class="table table-striped table-bordered" id="dataTable">
 							<thead>
 								<tr class=" title">
-									<td id="tb-title">도서명</td>
-									<td id="tb-date">대여일자</td>
-									<td id="tb-date">반납일자</td>
-									<td id="tb-status">대출자</td>
-									<td id="tb-status">기록삭제</td>
+									<th id="tb-title">도서명</th>
+									<th id="tb-date">대여일자</th>
+									<th id="tb-date">반납일자</th>
+									<th id="tb-status">대출자</th>
+									<th id="tb-status">기록삭제</th>
 
 
 
@@ -138,21 +131,15 @@ body {
 
 									<tr>
 
-										<td align="left">${record.bookname }</td>
-										<td align="left">${record.borrowdate }</td>
+										<td align="left">${record.title }</td>
+										<td align="left">${record.rentdate }</td>
 										<td align="left">${record.returndate }</td>
 
 										<td>${record.id}</td>
 										<td><button class="btn btn-default btn-sm" type="button"
 												id="extendbook"
-												onClick="location.href='/deleteRecord?bookCode=${record.bookCode}&id=${record.id}'">삭제</button></td>
-									</tr>
-									<tr>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
+												onClick="location.href='/deleteRecord?book_cd=${record.book_cd}&id=${record.id}'">삭제</button></td>
+
 
 									</tr>
 
@@ -169,8 +156,10 @@ body {
 	<hr>
 
 	<script src="/resources/js/common.js"></script>
+	<script src="/resources/js/jquery.dataTables.min.js"></script>
+	<script src="/resources/js/dataTables.bootstrap.min.js"></script>
 	<script type="text/javascript">
-		var table = $('#example').DataTable();
+		var table = $('#dataTable').DataTable();
 	</script>
 </body>
 </html>

@@ -63,9 +63,9 @@ body {
 
 								<td id="tb-author">도서명</td>
 								<td id="tb-author">저자</td>
-								<td id="tb-genre">가격</td>
-								<td id="tb-genre">수량</td>
-								<td id="tb-genre">신청자</td>
+								<td id="tb-b_group">가격</td>
+								<td id="tb-b_group">수량</td>
+								<td id="tb-b_group">신청자</td>
 								<td id="tb-date">요청일자</td>
 								
 							</tr>
@@ -81,17 +81,17 @@ body {
 
 								</tr>
 								<tr>
-									<td style="width: 40%" align="left"><a href="${book.link}">${book.bookname }</a></td>
-									<td style="width: 40%" align="left">${book.writer }</td>
+									<td style="width: 40%" align="left"><a href="${book.link}">${book.title }</a></td>
+									<td style="width: 40%" align="left">${book.author }</td>
 
 								</tr>
 								<tr>
-									<td>${book.genre}</td>
-									<td>요청자 : ${book.name}</td>
+									<td>${book.b_group}</td>
+									<td>요청자 : ${book.id}</td>
 
 								</tr>
 								<tr>
-									<td>${book.priceSales}원</td>
+									<td>${book.price}원</td>
 									<td>수량 : ${book.quantity}</td>
 
 								</tr>
@@ -102,13 +102,13 @@ body {
 								<tr class="hidden-xs">
 									
 									<td><img style="width: 50px" src="${book.imageurl}"></td>
-									<td><a href="${book.link}">${book.bookname }</a></td>
-									<td>${book.writer}</td>
+									<td><a href="${book.link}">${book.title }</a></td>
+									<td>${book.author}</td>
 
-									<td>${book.priceSales}원</td>
+									<td>${book.price}원</td>
 									<td align="center">${book.quantity}</td>
 									<td>${book.id}</td>
-									<td>${book.requestdate}</td>
+									<td>${book.reqdate}</td>
 
 								</tr>
 								<tr>

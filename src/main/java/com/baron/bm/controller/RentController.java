@@ -28,24 +28,25 @@ public class RentController {
 	RentService rentservice;
 
 	@RequestMapping("/borrowbook")
-	public String borrowBook(HttpServletRequest request, String bookCode,
+	public String borrowBook(HttpServletRequest request, String book_cd,
 			BookModel book) {
 		String id = null;
-		String late = null;
+		// String late = null;
 		for (Cookie cookie : request.getCookies()) {
 			if (cookie.getName().equals("bm_id")) {
 				id = cookie.getValue();
 			}
-			if (cookie.getName().equals("bm_late")) {
-				late = cookie.getValue();
-			}
+			/*
+			 * if (cookie.getName().equals("bm_late")) { late =
+			 * cookie.getValue(); }
+			 */
 		}
 		book.setId(id);
-		book.setBook_cd(bookCode);
-		book.setBorrowchk("1");
+		book.setBook_cd(book_cd);
+		book.setRentchk("1");
 
-		if (rentservice.borrowCheck(book).equals("0") & late.equals("0")) {
-			System.out.println(book.getBorrowchk());
+		if (rentservice.selectBook(book_cd).getRentchk().equals("0")) {
+			System.out.println(book.getRentchk());
 			rentservice.borrowBook(book);
 			return "redirect:borrowList";
 		} else {
@@ -55,18 +56,18 @@ public class RentController {
 	}
 
 	@RequestMapping("/confirmBorrowBook")
-	public String confirmBorrowBook(HttpServletRequest request, String bookCode) {
+	public String confirmBorrowBook(HttpServletRequest request, String book_cd) {
 
-		rentservice.confirmBorrowBook(bookCode);
+		rentservice.confirmBorrowBook(book_cd);
 		return "redirect:borrowListAll";
 	}
 
 	@RequestMapping("/confirmBorrowBookList")
 	public String confirmBorrowBookList(
-			@RequestParam(value = "bookCode") List<String> bookCodeList) {
+			@RequestParam(value = "book_cd") List<String> book_cdList) {
 
-		for (String bookCode : bookCodeList) {
-			rentservice.confirmBorrowBook(bookCode);
+		for (String book_cd : book_cdList) {
+			rentservice.confirmBorrowBook(book_cd);
 
 		}
 		return "redirect:borrowListAll";
@@ -81,30 +82,37 @@ public class RentController {
 					bookList = rentservice.borrowListAll();
 					model.addAttribute("bookList", bookList);
 					return "rent/borrowListByAdmin";
-				} else {
-					String id = null;
-					if (cookie.getName().equals("bm_id")) {
-						id = cookie.getValue();
-					}
-					List<BookModel> bookList = rentservice.borrowList(id);
-					List<BookModel> record = rentservice.recordList(id);
 
-					model.addAttribute("bookList", bookList);
-					model.addAttribute("record", record);
-					return "rent/borrowList";
+				} else if (cookie.getValue().equals("0")) {
+
+					if (cookie.getName().equals("bm_id")) {
+
+						String id = null;
+
+						id = cookie.getValue();
+						System.out.println(id);
+
+						System.out.println(id + "ctrl");
+						List<BookModel> bookList = rentservice.borrowList(id);
+						List<BookModel> record = rentservice.recordList(id);
+
+						model.addAttribute("bookList", bookList);
+						model.addAttribute("record", record);
+						return "rent/borrowList";
+					}
 				}
 			}
 
 		}
-		return null;
 
+		return null;
 	}
 
 	@RequestMapping("/extendBorrowBook")
-	public String extendBorrowBook(String bookCode) {
+	public String extendBorrowBook(String book_cd) {
 
-		if (rentservice.selectReservation(bookCode).equals("0")) {
-			rentservice.extendBorrowBook(bookCode);
+		if (rentservice.selectReservation(book_cd).equals("0")) {
+			rentservice.extendBorrowBook(book_cd);
 			return "/rent/extendSuccess";
 		} else {
 			return "redirect:extendFail";
@@ -113,12 +121,12 @@ public class RentController {
 
 	@RequestMapping("/extendBookList")
 	public String extendBookList(
-			@RequestParam(value = "bookCode") List<String> bookCodeList,
+			@RequestParam(value = "book_cd") List<String> book_cdList,
 			Model model) {
 
-		for (String bookCode : bookCodeList) {
-			if (rentservice.selectReservation(bookCode).equals("0")) {
-				rentservice.extendBorrowBook(bookCode);
+		for (String book_cd : book_cdList) {
+			if (rentservice.selectReservation(book_cd).equals("0")) {
+				rentservice.extendBorrowBook(book_cd);
 
 			} else {
 				return "redirect:extendFail";
@@ -129,9 +137,9 @@ public class RentController {
 	}
 
 	@RequestMapping("/cancleBorrowBook")
-	public String cancleBorrowBook(String bookCode, BookModel bookmodel,
+	public String cancleBorrowBook(String book_cd, BookModel bookmodel,
 			HttpServletRequest request) {
-		bookmodel = rentservice.selectBook(bookCode);
+		bookmodel = rentservice.selectBook(book_cd);
 		for (Cookie cookie : request.getCookies()) {
 			if (cookie.getName().equals("bm_id"))
 				bookmodel.setId(cookie.getValue());
@@ -156,9 +164,9 @@ public class RentController {
 	 * return "rent/returnList"; }
 	 */@RequestMapping("/returnBookList")
 	public String returnManyBook(
-			@RequestParam(value = "bookCode") List<String> bookCodeList) {
-		for (String bookCode : bookCodeList) {
-			rentservice.returnBook(bookCode);
+			@RequestParam(value = "book_cd") List<String> book_cdList) {
+		for (String book_cd : book_cdList) {
+			rentservice.returnBook(book_cd);
 
 		}
 
@@ -166,11 +174,11 @@ public class RentController {
 	}
 
 	@RequestMapping("/returnBookByAdmin")
-	public String returnBook(String bookCode, BookModel book) {
+	public String returnBook(String book_cd, BookModel book) {
 
-		if (rentservice.borrowCheck(book).equals("2")) {
-			System.out.println(book.getBorrowchk());
-			rentservice.returnBook(bookCode);
+		if (rentservice.selectBook(book_cd).getRentchk().equals("2")) {
+			System.out.println(book.getRentchk());
+			rentservice.returnBook(book_cd);
 			return "redirect:rentListAll";
 		} else {
 
@@ -179,24 +187,24 @@ public class RentController {
 	}
 
 	@RequestMapping("recoverBook")
-	public String recoverBook(String bookCode) {
-		rentservice.recoverBook(bookCode);
+	public String recoverBook(String book_cd) {
+		rentservice.recoverBook(book_cd);
 
 		return "redirect:bookList";
 	}
 
 	@RequestMapping("stopBorrow")
-	public String stopBorrow(String bookCode) {
-		rentservice.stopBorrow(bookCode);
+	public String stopBorrow(String book_cd) {
+		rentservice.stopBorrow(book_cd);
 
 		return "redirect:bookList";
 	}
 
 	@RequestMapping("/stopBorrowList")
 	public String stopBorrowList(
-			@RequestParam(value = "bookCode") List<String> bookCodeList) {
-		for (String bookCode : bookCodeList) {
-			rentservice.stopBorrow(bookCode);
+			@RequestParam(value = "book_cd") List<String> book_cdList) {
+		for (String book_cd : book_cdList) {
+			rentservice.stopBorrow(book_cd);
 
 		}
 		return "redirect:rentListAll";
@@ -204,15 +212,15 @@ public class RentController {
 
 	/*
 	 * @RequestMapping("/confirmReturnBook") public String
-	 * confirmReturnBook(String bookCode) {
+	 * confirmReturnBook(String book_cd) {
 	 * 
-	 * rentservice.confirmReturnBook(bookCode); return "member/admin"; }
+	 * rentservice.confirmReturnBook(book_cd); return "member/admin"; }
 	 * 
 	 * @RequestMapping("/confirmReturnBookList") public String
-	 * confirmReturnBookList(List<String> bookCodeList) {
+	 * confirmReturnBookList(List<String> book_cdList) {
 	 * 
-	 * for (int i = 0; i < bookCodeList.size(); i++) { String bookCode =
-	 * bookCodeList.get(i); rentservice.returnBook(bookCode); } return
+	 * for (int i = 0; i < book_cdList.size(); i++) { String book_cd =
+	 * book_cdList.get(i); rentservice.returnBook(book_cd); } return
 	 * "member/admin"; }
 	 */
 	@RequestMapping("/recordList")
@@ -242,9 +250,9 @@ public class RentController {
 	}
 
 	@RequestMapping("/deleteRecord")
-	public String deleteRecord(String id, String bookCode, Model model,
+	public String deleteRecord(String id, String book_cd, Model model,
 			BookModel book) {
-		book.setBook_cd(bookCode);
+		book.setBook_cd(book_cd);
 		book.setId(id);
 		rentservice.deleteRecord(book);
 
@@ -252,14 +260,14 @@ public class RentController {
 	}
 
 	@RequestMapping("/reservation")
-	public String reservation(String bookCode, BookModel book,
+	public String reservation(String book_cd, BookModel book,
 			HttpServletRequest request) {
 
-		if (rentservice.selectReservation(bookCode).equals("1")) {
+		if (rentservice.selectReservation(book_cd).equals("1")) {
 			return "rent/reservationfail";
 		}
 
-		book.setBook_cd(bookCode);
+		book.setBook_cd(book_cd);
 		for (Cookie cookie : request.getCookies()) {
 			if (cookie.getName().equals("bm_id"))
 				book.setId(cookie.getValue());
@@ -279,28 +287,26 @@ public class RentController {
 		return "rent/reservationListAll";
 	}
 	/*
-기존 대여기록 새로운 테이블로 옮기기
-	
-	@RequestMapping("/backupRecord")
-	public String backupRecord(HttpServletRequest request) throws Exception {
-		List <BookModel> bookList = new ArrayList<BookModel>();
-		List <BookModel> bookList1 = new ArrayList<BookModel>();
-		
-		bookList = rentservice.recordListAll();
-		
-		SimpleDateFormat format = new SimpleDateFormat("yyyymmdd", Locale.KOREAN);
-		
-		for (BookModel bookModel2 : bookList) {
-			BookModel bookmodel = new BookModel();
-			bookmodel.setRentdate( format.parse(bookModel2.getReq_ymd()));
-			bookmodel.setReturndate( format.parse(bookModel2.getRetu_ymd()));
-			bookmodel.setId(bookModel2.getSabun());
-			bookmodel.setBook_cd(bookModel2.getBook_cd());
-			bookList1.add(bookmodel);
-			rentservice.insertRecord(bookmodel);
-		}
-		
-		return "recordListAll";
-	}
-	*/
+	 * 기존 대여기록 새로운 테이블로 옮기기
+	 * 
+	 * @RequestMapping("/backupRecord") public String
+	 * backupRecord(HttpServletRequest request) throws Exception { List
+	 * <BookModel> bookList = new ArrayList<BookModel>(); List <BookModel>
+	 * bookList1 = new ArrayList<BookModel>();
+	 * 
+	 * bookList = rentservice.recordListAll();
+	 * 
+	 * SimpleDateFormat format = new SimpleDateFormat("yyyymmdd",
+	 * Locale.KOREAN);
+	 * 
+	 * for (BookModel bookModel2 : bookList) { BookModel bookmodel = new
+	 * BookModel(); bookmodel.setRentdate(
+	 * format.parse(bookModel2.getReq_ymd())); bookmodel.setReturndate(
+	 * format.parse(bookModel2.getRetu_ymd()));
+	 * bookmodel.setId(bookModel2.getSabun());
+	 * bookmodel.setBook_cd(bookModel2.getBook_cd()); bookList1.add(bookmodel);
+	 * rentservice.insertRecord(bookmodel); }
+	 * 
+	 * return "recordListAll"; }
+	 */
 }

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.baron.member.model.BookModel;
 import com.baron.member.model.Dto;
+import com.baron.member.model.SearchResult;
 import com.baron.member.service.BookService;
 import com.baron.member.service.RentService;
 
@@ -53,8 +54,10 @@ public class BookController {
 	@RequestMapping("/searchBook")
 	public String searchBook(HttpServletRequest request, String keyword,
 			Model model) {
-		System.out.println(keyword);
-		List<BookModel> bookList = bookservice.searchBook(keyword);
+		if(keyword==null){
+			keyword="";
+		}
+		List<SearchResult> bookList = bookservice.searchBook(keyword);
 		System.out.println(keyword);
 		System.out.println(keyword);
 		System.out.println(keyword);

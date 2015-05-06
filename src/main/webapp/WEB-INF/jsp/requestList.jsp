@@ -67,9 +67,9 @@ body {
 
 									<th id="td-author">도서명</th>
 									<th id="td-author">저자</th>
-									<th id="td-genre">가격</th>
-									<th id="td-genre">수량</th>
-									<th id="td-genre">신청자</th>
+									<th id="td-b_group">가격</th>
+									<th id="td-b_group">수량</th>
+									<th id="td-b_group">신청자</th>
 									<th id="td-date">요청일자</th>
 									<th width="60px"></th>
 									<th width="60px"></th>
@@ -81,31 +81,31 @@ body {
 								<tbody class="visible-xs-block" style="width: 100%">
 									<tr>
 										<td><input type="checkbox" name="bookCode"
-											value="${book.bookCode}"></td>
+											value="${book.book_cd}"></td>
 										<td rowspan="4" style="width: 50px" align="left"><img
 											style="width: 50px" src="${book.imageurl}"></td>
 
 									</tr>
 									<tr>
 										<td style="width: 40%" align="left"><a
-											href="${book.link}">${book.bookname }</a></td>
-										<td style="width: 40%" align="left">${book.writer }</td>
+											href="${book.link}">${book.title }</a></td>
+										<td style="width: 40%" align="left">${book.author }</td>
 										<td align="right"></td>
 									</tr>
 									<tr>
-										<td>${book.genre}</td>
-										<td>요청자 : ${book.name}</td>
+										<td>${book.b_group}</td>
+										<td>요청자 : ${book.id}</td>
 										<td>
 											<button class="btn btn-default" type="button"
-												onClick="location.href='buyRequest?bookCode=${book.bookCode}'">구매</button>
+												onClick="location.href='buyRequest?book_cd=${book.book_cd}'">구매</button>
 										</td>
 									</tr>
 									<tr>
-										<td>${book.priceSales}원</td>
+										<td>${book.price}원</td>
 										<td>수량 : ${book.quantity}</td>
 										<td>
 											<button class="btn btn-default" type="button"
-												onClick="location.href='deleteRequest?bookCode=${book.bookCode}'; del();">삭제</button>
+												onClick="location.href='deleteRequest?book_cd=${book.book_cd}'; del();">삭제</button>
 										</td>
 									</tr>
 								</tbody>
@@ -113,23 +113,23 @@ body {
 
 								<tbody>
 									<tr class="hidden-xs">
-										<td><input type="checkbox" name="bookCode"
-											value="${book.bookCode}"></td>
+										<td><input type="checkbox" name="book_cd"
+											value="${book.book_cd}"></td>
 										<td><img style="width: 50px" src="${book.imageurl}"></td>
-										<td><a href="${book.link}">${book.bookname }</a></td>
-										<td>${book.writer}</td>
+										<td><a href="${book.link}">${book.title }</a></td>
+										<td>${book.author}</td>
 
-										<td>${book.priceSales}원</td>
+										<td>${book.price}원</td>
 										<td align="center">${book.quantity}</td>
 										<td>${book.id}</td>
-										<td>${book.requestdate}</td>
+										<td>${book.reqdate}</td>
 										<td><button class="btn btn-default" type="button"
 												id="buyBook"
-												onClick="location.href='buyRequest?bookCode=${book.bookCode}'">구매</button>
+												onClick="location.href='buyRequest?book_cd=${book.book_cd}'">구매</button>
 										</td>
 										<td>
 											<button class="btn btn-default" type="button"
-												onClick="location.href='deleteRequest?bookCode=${book.bookCode}'; del();">삭제</button>
+												onClick="location.href='deleteRequest?book_cd=${book.book_cd}'; del();">삭제</button>
 										</td>
 
 									</tr>

@@ -48,7 +48,24 @@ body {
 					<button style="width: 100px" class="btn btn-default" type="submit">대출정지</button>
 				</div>
 				<hr>
-				<div class="col-lg-12">
+				<div id="loadingBar"
+					style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; text-align: center; margin: 0 auto; z-index: 100000;">
+					<table width="100%" height="100%" border="0" bgcolor="#000000">
+						<tr>
+							<td align="center">
+								<div style="text-align: center;">
+									<IMG SRC="resources/img/loading_map.gif">
+								</div>
+								<div
+									style="margin-top: 20px; color: #FFF; text-align: center; font-weight: bold;">L
+									o a d i n g . . .</div>
+							</td>
+						</tr>
+					</table>
+
+				</div>
+
+				<div id="divLoadBody" style="display:none;" "class="col-lg-12">
 					<div class="panel panel-default">
 
 						<!-- /.panel-heading -->
@@ -59,12 +76,12 @@ body {
 									<thead>
 										<tr>
 											<th><input type="checkbox" id="allCheck"></th>
-											<th id="tb-img">표지</th>
-											<th id="tb-author">도서명</th>
-											<th id="tb-author">저자</th>
-											<th id="tb-status">장르</th>
+											<th id="td-img">표지</th>
+											<th id="td-author">도서명</th>
+											<th id="td-author">저자</th>
+											<th id="td-author">분류</th>
 
-											<th width="80px">대여상태</th>
+											<th width="100px">대여상태</th>
 											<th width="30%"></th>
 										</tr>
 									</thead>
@@ -76,62 +93,62 @@ body {
 										<c:forEach items="${bookList}" var="book" varStatus="loop">
 
 											<tr>
-												<td><input type="checkbox" name="bookCode"
-													value="${book.bookCode}"></td>
+												<td><input type="checkbox" name="book_cd"
+													value="${book.book_cd}"></td>
 												<td style="width: 50px" align="left"><img
 													style="width: 50px" src="${book.imageurl}"></td>
-												<td align="left">${book.bookname }</td>
-												<td align="left">${book.writer }</td>
-												<td align="left">${book.genre}</td>
+												<td align="left">${book.title }</td>
+												<td align="left">${book.author }</td>
+												<td align="left">${book.b_group}</td>
 												<c:choose>
-													<c:when test="${book.borrowcheck=='0'}">
+													<c:when test="${book.rentchk=='0'}">
 														<td align="left">대출가능</td>
 														<td>
 															<button class="btn btn-default btn-sm" type="button"
 																id="reservebook"
-																onClick="location.href='/stopBorrow?bookCode=${book.bookCode}'">대출정지</button>
+																onClick="location.href='/stopBorrow?book_cd=${book.book_cd}'">대출정지</button>
 															<button class="btn btn-default btn-sm" type="button"
 																id="modifybook"
-																onClick="location.href='/modifyBookForm?bookCode=${book.bookCode}'">도서수정</button>
+																onClick="location.href='/modifyBookForm?book_cd=${book.book_cd}'">도서수정</button>
 															<button class="btn btn-default btn-sm" type="button"
 																id="deletebook"
-																onClick="location.href='/deletebook?bookCode=${book.bookCode}'; del();">도서삭제</button>
+																onClick="location.href='/deletebook?book_cd=${book.book_cd}'; del();">도서삭제</button>
 														</td>
 													</c:when>
-													<c:when test="${book.borrowcheck=='1'}">
+													<c:when test="${book.rentchk=='1'}">
 														<td><mark>대여요청중</mark></td>
 														<td><button class="btn btn-default btn-sm"
 																type="button" id="modifybook"
-																onClick="location.href='/modifyBookForm?bookCode=${book.bookCode}'">도서수정</button>
+																onClick="location.href='/modifyBookForm?book_cd=${book.book_cd}'">도서수정</button>
 															<button class="btn btn-default btn-sm" type="button"
 																id="deletebook"
-																onClick="location.href='/deletebook?bookCode=${book.bookCode}'; del();">도서삭제</button>
+																onClick="location.href='/deletebook?book_cd=${book.book_cd}'; del();">도서삭제</button>
 														</td>
 													</c:when>
-													<c:when test="${book.borrowcheck=='2'}">
+													<c:when test="${book.rentchk=='2'}">
 														<td>대출중</td>
 														<td><button class="btn btn-default btn-sm"
 																type="button" id="modifybook"
-																onClick="location.href='/modifyBookForm?bookCode=${book.bookCode}'">도서수정</button>
+																onClick="location.href='/modifyBookForm?book_cd=${book.book_cd}'">도서수정</button>
 															<button class="btn btn-default btn-sm" type="button"
 																id="deletebook"
-																onClick="location.href='/deletebook?bookCode=${book.bookCode}'; del();">도서삭제</button>
+																onClick="location.href='/deletebook?book_cd=${book.book_cd}'; del();">도서삭제</button>
 														</td>
 													</c:when>
-													<c:when test="${book.borrowcheck=='4'}">
+													<c:when test="${book.rentchk=='4'}">
 														<td><mark>대출정지</mark></td>
 														<td><button class="btn btn-default btn-sm"
 																type="button" id="modifybook"
-																onClick="location.href='/recoverBook?bookCode=${book.bookCode}'">대출재개</button></td>
+																onClick="location.href='/recoverBook?book_cd=${book.book_cd}'">대출재개</button></td>
 													</c:when>
-													<c:when test="${book.borrowcheck=='5'}">
+													<c:when test="${book.rentchk=='5'}">
 														<td><mark>예약중</mark></td>
 														<td><button class="btn btn-default btn-sm"
 																type="button" id="modifybook"
-																onClick="location.href='/modifyBookForm?bookCode=${book.bookCode}'">도서수정</button>
+																onClick="location.href='/modifyBookForm?book_cd=${book.book_cd}'">도서수정</button>
 															<button class="btn btn-default btn-sm" type="button"
 																id="deletebook"
-																onClick="location.href='/deletebook?bookCode=${book.bookCode}'; del();">도서삭제</button>
+																onClick="location.href='/deletebook?book_cd=${book.book_cd}'; del();">도서삭제</button>
 														</td>
 													</c:when>
 												</c:choose>
@@ -177,6 +194,13 @@ body {
 
 			});
 		});
+
+		var loadingBar = document.getElementById("loadingBar");
+		var divLoadBody = document.getElementById("divLoadBody");
+		
+		divLoadBody.style.display = "";
+		loadingBar.style.display = "none";
+		
 	</script>
 </body>
 </html>

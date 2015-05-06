@@ -29,26 +29,26 @@ body {
 				<form action="/insertbook" method="post" class="panel-body">
 					<div class="form-group">
 						<label for="exampleInputEmail1">도서번호</label> <input type="text"
-							class="form-control" id="bookCode" name="bookCode"
+							class="form-control" id="book_cd" name="book_cd"
 							placeholder="도서번호">
 					</div>
 					<div class="form-group">
 						<label for="exampleInputPassword1">도서명</label> <input type="text"
-							class="form-control" id="bookname" name="bookname"
+							class="form-control" id="title" name="title"
 							placeholder="도서명">
 					</div>
 					<div class="form-group">
 						<label for="exampleInputPassword1">장르</label> <input type="text"
-							class="form-control" id="genre" name="genre" placeholder="장르">
+							class="form-control" id="b_group" name="b_group" placeholder="장르">
 					</div>
 					<div class="form-group">
 						<label for="exampleInputPassword1">출판사</label> <input type="text"
-							class="form-control" id="publisher" name="publisher"
+							class="form-control" id="publish" name="publish"
 							placeholder="출판사">
 					</div>
 					<div class="form-group">
 						<label for="exampleInputPassword1">저자</label> <input type="text"
-							class="form-control" id="writer" name="writer" placeholder="저자">
+							class="form-control" id="author" name="author" placeholder="저자">
 					</div>
 					<button type="submit" class="btn btn-default">확인</button>
 				</form>

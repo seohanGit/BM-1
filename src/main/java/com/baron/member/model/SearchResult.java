@@ -2,17 +2,24 @@ package com.baron.member.model;
 
 import java.util.Date;
 
-public class BookModel {
+public class SearchResult {
+
 	private String book_cd;
 	private String title;
 
 	private String b_group;
+	private String c_group;
+
+	public String getC_group() {
+		return c_group;
+	}
+
+	public void setC_group(String c_group) {
+		this.c_group = c_group;
+	}
+
 	private int quantity;
 
-	private java.util.Date rentdate;
-	private java.util.Date returndate;
-	private Date reserdate;
-	private Date reqdate;
 	private String id;
 	private String publish;
 	private String rentchk;
@@ -24,65 +31,7 @@ public class BookModel {
 	private String link;
 	private String isbn;
 	private String summary;
-	private int totalResults;
-	private int startindex;
-	private String keyword;
 	private String rcv_date;
-	private int seq;
-	private int count;
-	private int sunbo;
-	private String req_ymd;
-	private String retu_ymd;
-	private String sabun;
-	
-
-	public String getReq_ymd() {
-		return req_ymd;
-	}
-
-	public void setReq_ymd(String req_ymd) {
-		this.req_ymd = req_ymd;
-	}
-
-	public String getRetu_ymd() {
-		return retu_ymd;
-	}
-
-	public void setRetu_ymd(String retu_ymd) {
-		this.retu_ymd = retu_ymd;
-	}
-
-	public String getSabun() {
-		return sabun;
-	}
-
-	public void setSabun(String sabun) {
-		this.sabun = sabun;
-	}
-
-	public java.util.Date getRentdate() {
-		return rentdate;
-	}
-
-	public void setRentdate(java.util.Date date) {
-		this.rentdate = date;
-	}
-
-	public Date getReserdate() {
-		return reserdate;
-	}
-
-	public void setReserdate(Date reserdate) {
-		this.reserdate = reserdate;
-	}
-
-	public Date getReqdate() {
-		return reqdate;
-	}
-
-	public void setReqdate(Date reqdate) {
-		this.reqdate = reqdate;
-	}
 
 	public String getRentchk() {
 		return rentchk;
@@ -156,54 +105,6 @@ public class BookModel {
 		this.rcv_date = rcv_date;
 	}
 
-	public int getSunbo() {
-		return sunbo;
-	}
-
-	public void setSunbo(int sunbo) {
-		this.sunbo = sunbo;
-	}
-
-	public int getCount() {
-		return count;
-	}
-
-	public void setCount(int count) {
-		this.count = count;
-	}
-
-	public int getSeq() {
-		return seq;
-	}
-
-	public void setSeq(int seq) {
-		this.seq = seq;
-	}
-
-	public String getKeyword() {
-		return keyword;
-	}
-
-	public void setKeyword(String keyword) {
-		this.keyword = keyword;
-	}
-
-	public int getStartindex() {
-		return startindex;
-	}
-
-	public void setStartindex(int startIndex) {
-		this.startindex = startIndex;
-	}
-
-	public int getTotalResults() {
-		return totalResults;
-	}
-
-	public void setTotalResults(int totalResults) {
-		this.totalResults = totalResults;
-	}
-
 	public String getSummary() {
 		return summary;
 	}
@@ -236,10 +137,6 @@ public class BookModel {
 		this.id = id;
 	}
 
-	public void setReturndate(java.util.Date date) {
-		this.returndate = date;
-	}
-
 	public String getLink() {
 		return link;
 	}
@@ -262,14 +159,6 @@ public class BookModel {
 
 	public void setImageurl(String imageurl) {
 		this.imageurl = imageurl;
-	}
-
-	public java.util.Date getReturndate() {
-		return returndate;
-	}
-
-	public void setRetrundate(Date returndate) {
-		this.returndate = returndate;
 	}
 
 	public int getGrade() {

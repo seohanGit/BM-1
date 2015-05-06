@@ -42,8 +42,6 @@ public interface RentService {
 
 	public void stopBorrow(String bookCode);
 
-	String borrowCheck(BookModel bookmodel);
-
 	void cancleBorrowBook(BookModel bookmodel);
 
 	public void deleteRecord(BookModel book);

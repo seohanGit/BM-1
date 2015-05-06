@@ -41,19 +41,19 @@
 
 	<select id="selectLate" resultType="MemberModel">
 		SELECT
-		A.id,A.name,A.email,A.address,A.cell,A.home, B.borrowdate,
+		A.id,A.name,A.email,A.address,A.cell,A.home, B.rentdate,
 		B.returndate
 		FROM BOOKMEMBER as A ,BOOKRENT as B
-		WHERE NOW() > B.returndate
-		AND B.borrowcheck ='2' and
-		A.id=B.id;
+		WHERE current date > B.returndate
+		AND B.rentchk ='2' and
+		A.id=B.id
 	</select>
 
 	<select id="selectBest" resultType="MemberModel">
 		SELECT A.name, A.score, A.id,
 		(SELECT
-		COUNT(*) FROM BOOKRENT B WHERE B.borrowdate >
-		date_sub(NOW(),
+		COUNT(*) FROM BOOKRENT B WHERE B.rentdate >
+		date_sub(current date,
 		interval 30
 		day) AND B.id=A.id ) AS numborrow
 		FROM
@@ -65,8 +65,8 @@
 
 	<select id="selectMemberList" resultType="MemberModel">
 		SELECT *, (SELECT
-		COUNT(*) FROM BOOKRENT B WHERE B.borrowdate >
-		date_sub(NOW(), interval 30
+		COUNT(*) FROM BOOKRENT B WHERE B.rentdate >
+		date_sub(current date, interval 30
 		day) AND B.id=A.id ) AS numborrow
 		FROM BOOKMEMBER A
 		ORDER BY team
@@ -78,47 +78,47 @@
 
 	<insert id="insertReservation" parameterType="BookModel">
 		INSERT INTO
-		reservation(id, bookCode, reserveDate, reservecheck)
+		bookreser(id, book_cd, reser_date, reservechk)
 		VALUES(#{id},
-		#{bookCode}, date_add(now(), interval 7
+		#{book_cd}, date_add(current date, interval 7
 		day), 1)
 	</insert>
 
 	<update id="updateReservation" parameterType="String">
 		UPDATE BOOKMST SET
-		borrowcheck='1', reservecheck='0' WHERE bookCode=#{bookCode}
+		rentchk='1', reservechk='0' WHERE book_cd=#{book_cd}
 	</update>
 
 	<select id="selectReservation" parameterType="String"
 		resultType="String">
-		SELECT reservecheck
+		SELECT reservechk
 		FROM BOOKMST
-		WHERE bookCode=#{bookCode}
+		WHERE book_cd=#{book_cd}
 	</select>
 
 	<select id="reservationList" parameterType="String" resultType="BookModel">
 		SELECT *
-		FROM BOOKMST AS A, reservation AS B
-		WHERE B.bookCode=#{bookCode}
+		FROM BOOKMST AS A, bookreser AS B
+		WHERE B.book_cd=#{book_cd}
 		AND
 		B.id=#{id}
 		ORDER BY
-		B.reservedate DESC;
+		B.reser_date DESC
 	</select>
 
 	<select id="reservationListAll" resultType="BookModel">
 		SELECT *
 		FROM BOOKMST AS
-		A, reservation AS B
-		WHERE A.bookCode=B.bookCode AND
-		B.reservecheck='1'
+		A, bookreser AS B
+		WHERE A.book_cd=B.book_cd AND
+		B.reservechk='1'
 		ORDER BY
-		B.reservedate DESC;
+		B.reser_date DESC
 	</select>
 
 	<delete id="deleteReservation" parameterType="BookModel">
 		DELETE ON reserve
-		WHERE id=#{id} AND bookCode=#{bookCode}
+		WHERE id=#{id} AND book_cd=#{book_cd}
 	</delete>
 
 

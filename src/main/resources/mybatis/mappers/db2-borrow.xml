@@ -2,72 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.baron.member.sqlModel">
 
-	<!-- 구매요청, 대여 관련 커리 -->
-
-	<insert id="requestBook" parameterType="BookModel">
-		INSERT INTO BOOKREQ
-		(id,
-		requestdate,
-		bookname,book_cd,
-		pricesales,writer,quantity,genre,link,
-		imageurl, isbn, publisher,
-		summary)
-		VALUES
-		(#{id},
-		now(),#{bookname},#{book_cd},#{priceSales},#{writer},#{quantity},#{genre},#{link},#{imageurl},#{isbn},
-		#{publisher}, #{summary})
-	</insert>
-
-	<update id="deleteRequest" parameterType="BookModel">
-		UPDATE BOOKREQ
-		SET
-		book_cd='0'
-		WHERE book_cd=#{book_cd}
-	</update>
-
-	<select id="requestList" resultType="BookModel">
-		SELECT *
-		FROM
-		BOOKREQ AS
-		A,
-		BOOKMEMBER AS B
-		WHERE A.id=B.id AND A.book_cd!='0'
-		ORDER BY
-		A.requestdate
-		DESC
-	</select>
-
-	<select id="requestRecord" parameterType="String" resultType="BookModel">
-		SELECT *
-		FROM
-		BOOKREQ AS A
-
-		WHERE A.id=#{id} AND A.book_cd='0' AND
-		(A.requestdate
-		BETWEEN
-		date_sub(NOW(),
-		interval 365
-		day) AND NOW())
-		ORDER
-		BY
-		A.requestdate
-		DESC
-	</select>
-
-	<select id="selectRequest" parameterType="String" resultType="BookModel">
-		SELECT *
-		FROM BOOKREQ
-		WHERE book_cd=#{book_cd}
-
-	</select>
-
+	
 
 
 	<!-- 대여관련 쿼리 -->
 	<select id="borrowListAll" resultType="BookModel">
-		SELECT * FROM BOOKMST AS
+		SELECT * FROM BOOKMST 
 		A,
-		BOOKRENT AS B
+		BOOKRENT  B
 		WHERE B.rentchk=1 AND A.book_cd=B.book_cd
 		ORDER BY
 		B.rentdate DESC
@@ -75,7 +17,7 @@
 
 	<select id="borrowList" resultType="BookModel" parameterType="String">
 		SELECT *
-		FROM BOOKMST AS A, BOOKRENT AS B
+		FROM BOOKMST A, BOOKRENT B
 		WHERE B.id = #{id} AND
 		(B.rentchk='1' OR B.rentchk='2') AND
 		A.book_cd=B.book_cd
@@ -87,8 +29,8 @@
 		INSERT INTO
 		BOOKRENT
 		(book_cd, rentdate, returndate, rentchk, id)
-		VALUES(#{book_cd}, now(),
-		date_add(now(), interval +20 day),
+		VALUES(#{book_cd}, current date,
+		current date + 20 day,
 		1, #{id})
 	</insert>
 
@@ -127,20 +69,20 @@
 		SET
 		A.rentchk='2',
 		B.rentchk='2',
-		B.rentdate=NOW()
+		B.rentdate=current date
 		WHERE
 		A.book_cd=#{book_cd} AND
 		B.book_cd=#{book_cd}
 
 	</update>
-
+<!-- 
 	<update id="upPoint" parameterType="String">
 		UPDATE BOOKMEMBER SET
 		numborrow =
 		numborrow + 1
 		WHERE id = #{id}
 	</update>
-
+ -->
 	<update id="returnBook" parameterType="String">
 		UPDATE BOOKMST A INNER
 		JOIN
@@ -149,7 +91,7 @@
 		SET
 		A.rentchk='0',
 		B.rentchk='3',
-		B.returndate=NOW()
+		B.returndate=current date
 		WHERE
 		A.book_cd=#{book_cd} AND
 		B.book_cd=#{book_cd}
@@ -159,15 +101,15 @@
 		WHERE A.book_cd=#{book_cd} AND B.book_cd=#{book_cd} </update> -->
 	<select id="returnListAll" resultType="BookModel">
 		SELECT *
-		FROM BOOKMST AS A,
-		BOOKRENT AS B
+		FROM BOOKMST  A,
+		BOOKRENT  B
 		WHERE B.rentchk=3 AND A.book_cd=B.book_cd
 	</select>
 
 	<update id="extendBorrowBook" parameterType="String">
 		UPDATE BOOKRENT
 		SET
-		returndate = date_add(now(), interval +20 day)
+		returndate = current date +20 day)
 		WHERE
 		book_cd=#{book_cd}
 		AND rentchk='2'
@@ -188,7 +130,7 @@
 	</delete>
 
 	<select id="rentListAll" parameterType="String" resultType="BookModel">
-		SELECT * FROM BOOKMST AS A, BOOKRENT AS B
+		SELECT * FROM BOOKMST  A, BOOKRENT  B
 		WHERE
 		A.book_cd=B.book_cd AND
 		B.rentchk='2'
@@ -198,17 +140,17 @@
 	</select>
 
 
-	<!-- <![CDATA[B.returndate > NOW()]]> -->
+	<!-- <![CDATA[B.returndate > current date]]> -->
 
 	<!-- <delete id="deleteRecord" parameterType="String"> DELETE ON BOOKRENT 
 		WHERE DELETE ON reserve WHERE id=#{id} AND book_cd=#{book_cd} </delete> -->
 	<select id="recordList" parameterType="String" resultType="BookModel">
-		SELECT * FROM BOOKMST AS A, BOOKRENT AS B
+		SELECT * FROM BOOKMST  A, BOOKRENT  B
 		WHERE <!-- (B.returndate
 		BETWEEN
-		date_sub(NOW(),
+		date_sub(current date,
 		interval 90
-		day) AND NOW())
+		day) AND current date)
 		AND --> B.id=#{id} AND
 		A.book_cd=B.book_cd AND B.rentchk='3'
 		ORDER BY
@@ -221,11 +163,11 @@
 	</insert>
 
 	<select id="recordListAll" resultType="BookModel">
-			SELECT * FROM bookmst AS A, bookrent AS B
+			SELECT * FROM bookmst  A, bookrent  B
 		WHERE <!-- (B.returndate BETWEEN
-		date_sub(NOW(),
+		date_sub(current date,
 		interval 90
-		day) AND NOW())
+		day) AND current date)
 		AND  -->
 		A.book_cd=B.book_cd AND B.rentchk='3'
 		ORDER BY

@@ -65,7 +65,7 @@ body {
 						<div class="left">
 							<h2>도서목록</h2>
 						</div>
-						<div class="right-end">
+						<div class="right-end" style="margin-right: 20px">
 							<button style="width: 100px" class="btn btn-default"
 								type="button" id="insertBook">도서추가</button>
 
@@ -78,10 +78,10 @@ body {
 								<thead>
 									<tr>
 										<th style="width:20px"><input type="checkbox" id="allCheck"></th>
-										<th id="td-img">표지</th>
+										<th class="hidden-sm hidden-xs "id="td-img">표지</th>
 										<th id="td-author">도서명</th>
-										<th id="td-author">저자</th>
-										<th id="td-author">분류</th>
+										<th class=" hidden-xs "id="td-author">저자</th>
+										<th class="hidden-sm hidden-xs hidden-md " id="td-author">분류</th>
 
 										<th style="width:100px">대여상태</th>
 										
@@ -98,11 +98,11 @@ body {
 										<tr>
 											<td><input type="checkbox" name="book_cd"
 												value="${book.book_cd}"></td>
-											<td style="width: 50px" align="left"><img
+											<td class="hidden-sm hidden-xs" style="width: 50px" align="left"><img
 												style="width: 50px" src="${book.imageurl}"></td>
 											<td align="left">${book.title }</td>
-											<td align="left">${book.author }</td>
-											<td align="left">${book.b_group}</td>
+											<td class=" hidden-xs " align="left">${book.author }</td>
+											<td class="hidden-sm hidden-xs hidden-md " align="left">${book.b_group}</td>
 											<c:choose>
 												<c:when test="${book.rentchk=='0'}">
 													<td align="left">대출가능</td>

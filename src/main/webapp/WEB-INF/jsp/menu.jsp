@@ -4,7 +4,7 @@
 	관리자 페이지 <small>Admin</small>
 </h1>
 <!-- First Blog Post -->
-<div align="center">
+<div align="left" style="padding-left: 30px; margin:20px">
 	<div class="row panel panel-default hidden-xs" style="width: 80%;">
 		<div class="nav nav-tabs nav-justified" role="group" aria-label="..."
 			>

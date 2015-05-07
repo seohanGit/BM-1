@@ -54,12 +54,12 @@ body {
 			 -->
 					<table class="table table-striped table-bordered" id="dataTable">
 						<thead>
-							<tr class="hidden-xs  title">
+							<tr class="  title">
 								<th id="td-title">도서명</th>
-								<th id="td-author">대여일자</th>
-								<th id="td-author">반납일자</th>
-								<th id="td-date">대출자</th>
-								<th id="td-genre">기록삭제</th>
+								<th class="hidden-xs" id="td-author">대여일</th>
+								<th id="td-author">반납일</th>
+								<th id="td-date">대여자</th>
+								<th id="td-genre">삭제</th>
 
 
 
@@ -73,8 +73,8 @@ body {
 								<tr>
 
 									<td align="left">${book.title }</td>
-									<td align="left"><fmt:formatDate type="date"
-											pattern="yyyy-MM-dd" value="${book.rentdate }" /></td>
+									<td class="hidden-xs" align="left"><fmt:formatDate
+											type="date" pattern="yyyy-MM-dd" value="${book.rentdate }" /></td>
 									<td align="left"><fmt:formatDate type="date"
 											pattern="yyyy-MM-dd" value="${book.returndate }" /></td>
 

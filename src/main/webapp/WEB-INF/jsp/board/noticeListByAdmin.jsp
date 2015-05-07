@@ -27,45 +27,57 @@
 					<div class="left">
 						<h2>공지사항</h2>
 					</div>
-					<div class="right">
+					<div class="right title">
 						<p align="right">
 							<button class="btn btn-default" type="button"
 								onClick="location.href='/writeNotice'">추가</button>
 					</div>
 
 
-					<p></p>
 
-					<br>
-					<c:forEach items="${noticeList}" var="notice" varStatus="status">
-						<form action="/modifyNotice" method="post">
 
-							<div>
 
-								<ul class="list-unstyled">
+					<table class="table table-bordered" id="dataTable">
+						<thead class="title">
+							<tr>
+								<td class="hidden-xs">등록일</td>
+								<td>내용</td>
+								<td></td>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${noticeList}" var="notice" varStatus="status">
+								<form action="/modifyNotice" method="post">
+								<tr style="padding-bottom: 10px">
+									<td class="hidden-xs" width="15%" align="left"><fmt:formatDate
+											value="${notice.regisdate}" pattern="yyyy-MM-dd" /></td>
 
-									<li style="text-align: left;"><fmt:formatDate
-											value="${notice.registerdate}" pattern="yyyy-MM-dd" /></li>
-									<li style="width: 98%; height: auto;"><textarea
-											class="form-control " id="content" name="content"
-											style="width: 100%;" rows="5" onKeyDown="setLine( this )">${notice.content}</textarea><input
-										type="hidden" name="boardnum" value="${notice.boardnum }"></li>
+									<td style="width: 80%; height: auto; padding-left: 10px"><textarea
+											class="content ellipsis" id="content" name="content"
+											style="width: 100%;" rows="5" readonly>${notice.content }</textarea>
+									</td>
+									<td><button class="btn btn-default btn-sm" type="submit"
+											id="modifyNotice">수정</button>
 
-									<button class="btn btn-default btn-sm" type="submit"
-										id="modifyNotice">수정</button>
+										<button class="btn btn-default btn-sm" type="button"
+											id="deleteNotice"
+											onClick="location.href='/deleteNotice?boardnum=${notice.boardnum}'">삭제</button>
+									</td>
+								</tr>
+								</form>
 
-									<button class="btn btn-default btn-sm" type="button"
-										id="deleteNotice"
-										onClick="location.href='/deleteNotice?boardnum=${notice.boardnum}'">삭제</button>
 
-								</ul>
-							</div>
-						</form>
 
-					</c:forEach>
+							</c:forEach>
+						</tbody>
+					</table>
 				</div>
+
+
 			</div>
 		</div>
+	</div>
+	</div>
 	</div>
 
 

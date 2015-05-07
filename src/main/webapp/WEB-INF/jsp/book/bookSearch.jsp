@@ -51,10 +51,10 @@
 						<tr>
 							<th id="td-img">표지</th>
 							<th id="td-title">도서명</th>
-							<th id="td-author">저자</th>
-							<th id="td-author">분류</th>
+							<th id="td-genre">저자</th>
+							<th id="td-genre">분류</th>
 							<th id="td-author">출판사</th>
-							<th id="td-author">대여상태</th>
+							<th id="td-genre">대여상태</th>
 							<th id="td-empty"></th>
 						</tr>
 					</thead>

@@ -37,7 +37,7 @@ public class RentServiceImpl implements RentService {
 	@Override
 	public List<BookModel> borrowList(String id) {
 		// TODO Auto-generated method stub
-		System.out.println(id+"service");
+		System.out.println(id + "service");
 		return rentDao.borrowList(id);
 	}
 
@@ -61,16 +61,20 @@ public class RentServiceImpl implements RentService {
 	}
 
 	@Override
+	public void confirmBorrowBook1(String book_cd) {
+		rentDao.confirmBorrowBook1(book_cd);
+	}
+
+	@Override
 	public void returnBook(String bookCode) {
 		rentDao.returnBook(bookCode);
 
 	}
 
 	@Override
-	public void returnManyBook(List<String> bookCodeList) {
-		for (String bookCode : bookCodeList) {
-			rentDao.returnBook(bookCode);
-		}
+	public void returnBook1(String book_cd) {
+		rentDao.returnBook1(book_cd);
+
 	}
 
 	@Override

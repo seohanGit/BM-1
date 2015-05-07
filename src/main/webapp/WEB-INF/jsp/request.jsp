@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -57,7 +57,7 @@ body {
 					<table class="table table-striped table-bordered">
 
 						<thead>
-							<tr class="hidden-xs ">
+							<tr class="hidden-xs title">
 
 								<td id="tb-img">표지</td>
 
@@ -108,17 +108,11 @@ body {
 									<td>${book.price}원</td>
 									<td align="center">${book.quantity}</td>
 									<td>${book.id}</td>
-									<td>${book.reqdate}</td>
+									<td><fmt:formatDate type="date"
+									pattern="yyyy-MM-dd" value="${book.reqdate}"/></td>
 
 								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-								</tr>
+							
 							</tbody>
 
 						</c:forEach>

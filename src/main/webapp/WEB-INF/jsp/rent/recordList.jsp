@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,15 +31,17 @@ body {
 			<hr>
 			<h2>대여 기록</h2>
 			<hr>
+			<!-- 
 			기록 검색<button type="button" onclick="location.href='/insertRecord'">삽입</button>
+			 -->
 			<table class="table table-striped table-bordered" id="dataTable">
 				<thead>
-					<tr class=" title">
-						<th id="tb-title">도서명</th>
-						<th id="tb-date">대여일자</th>
-						<th id="tb-date">반납일자</th>
-						<th id="tb-status">대출자</th>
-						<th id="tb-status">기록삭제</th>
+					<tr class="hidden-xs  title">
+						<th id="td-title">도서명</th>
+						<th id="td-author">대여일자</th>
+						<th id="td-author">반납일자</th>
+						<th id="td-date">대출자</th>
+						<th id="td-genre">기록삭제</th>
 
 
 
@@ -53,9 +55,11 @@ body {
 						<tr>
 
 							<td align="left">${book.title }</td>
-							<td align="left">${book.rentdate }</td>
-							<td align="left">${book.returndate }</td>
-						
+							<td align="left"><fmt:formatDate type="date"
+									pattern="yyyy-MM-dd" value="${book.rentdate }" /></td>
+							<td align="left"><fmt:formatDate type="date"
+									pattern="yyyy-MM-dd" value="${book.returndate }" /></td>
+
 							<td>${book.id}</td>
 							<td><button class="btn btn-default btn-sm" type="button"
 									id="extendbook"

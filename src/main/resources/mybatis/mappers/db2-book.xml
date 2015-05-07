@@ -5,7 +5,7 @@
 
 
 	<select id="selectBookAll" resultType="BookModel">
-		SELECT * FROM BOOKMST
+		SELECT * FROM BOOKMST A
 	</select>
 
 	<insert id="insertBook" parameterType="BookModel">

@@ -34,7 +34,7 @@ public class RentDaoImpl implements RentDao {
 	@Override
 	public List<BookModel> borrowList(String id) {
 		// TODO Auto-generated method stub
-		System.out.println(id+"dao");
+		System.out.println(id + "dao");
 		return session.selectList(NAMESPACE + "borrowList", id);
 	}
 
@@ -61,8 +61,20 @@ public class RentDaoImpl implements RentDao {
 	}
 
 	@Override
+	public void returnBook1(String book_cd) {
+		session.update(NAMESPACE + "returnBook1", book_cd);
+
+	}
+
+	@Override
 	public void confirmBorrowBook(String bookCode) {
 		session.update(NAMESPACE + "confirmBorrowBook", bookCode);
+
+	}
+
+	@Override
+	public void confirmBorrowBook1(String book_cd) {
+		session.update(NAMESPACE + "confirmBorrowBook1", book_cd);
 
 	}
 
@@ -145,15 +157,13 @@ public class RentDaoImpl implements RentDao {
 	@Override
 	public void recoverBook(String bookCode) {
 		session.update(NAMESPACE + "recoverBook", bookCode);
-		
+
 	}
 
 	@Override
 	public void backupRecord(BookModel bookmodel) {
 		session.insert(NAMESPACE + "backupRecord", bookmodel);
-		
-	}
 
-	
+	}
 
 }

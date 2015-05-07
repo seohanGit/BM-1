@@ -63,37 +63,39 @@
 		A.book_cd=#{book_cd} AND A.rentchk='4'
 
 	</update>
+
 	<update id="confirmBorrowBook" parameterType="String">
-		UPDATE BOOKMST A
-dskljfoqu 093qu4019u5012u59032u
+		UPDATE BOOKRENT
 		SET
-		A.rentchk='2',
-		B.rentchk='2',
-		B.rentdate=current date
-		WHERE EXISTS (
-		SELECT *
-		FROM BOOKMST A
-		INNER JOIN BOOKRENT B
-		ON A.rentchk = B.rentchk
-		WHERE
-		A.book_cd=#{book_cd} AND
-		B.book_cd=#{book_cd}
-		)
+		RENTCHK = '2'
+		WHERE BOOK_CD = #{book_cd} AND
+		RENTCHK='1'
+	</update>
+
+	<update id="confirmBorrowBook1" parameterType="String">
+		UPDATE
+		BOOKMST
+		SET
+		rentchk='2'
+		WHERE book_cd=#{book_cd}
 	</update>
 	<!-- <update id="upPoint" parameterType="String"> UPDATE BOOKMEMBER SET 
 		numborrow = numborrow + 1 WHERE id = #{id} </update> -->
 	<update id="returnBook" parameterType="String">
-		UPDATE BOOKMST A INNER
-		JOIN
-		BOOKRENT B
-		ON A.rentchk = B.rentchk
+		UPDATE 
+		BOOKRENT 
 		SET
-		A.rentchk='0',
-		B.rentchk='3',
-		B.returndate=current date
+		rentchk='3',
+		returndate=current date
 		WHERE
-		A.book_cd=#{book_cd} AND
-		B.book_cd=#{book_cd}
+		book_cd=#{book_cd} AND RENTCHK='2'
+	</update>
+	<update id="returnBook1" parameterType="String">
+		UPDATE BOOKMST
+		SET
+		rentchk='0'
+		WHERE
+		A.book_cd=#{book_cd}
 	</update>
 	<!-- <update id="confirmReturnBook" parameterType="String"> UPDATE BOOKMST 
 		A INNER JOIN BOOKRENT B ON A.rentchk = B.rentchk SET A.rentchk='0', B.rentchk='0' 

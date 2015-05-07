@@ -28,7 +28,7 @@ border-width: 0px;
 
 div .left {
 	float: left;
-	width: 40%;
+	width: 60%;
 	margin-bottom: 10px;
 }
 
@@ -50,11 +50,11 @@ div .right-end {
 }
 
 table #td-title {
-	width: 25%;
+	width: 30%;
 }
 
 table  #td-author {
-	width: 18%;
+	width: 14%;
 }
 
 table thead #td-img {
@@ -62,17 +62,14 @@ table thead #td-img {
 }
 
 table   #td-genre {
-	width: 11%;
+	width: 13%;
 }
 
-table  #td-status {
-	width: 18%;
-	background-color: #aaa;
-}
 
 table  #td-date {
 	width: 10%;
 }
+
 
 #btn_bookList {
 	width: 30%;
@@ -107,7 +104,7 @@ table .table .table-bordered {
 }
 
 table .title {
-	font-size: 20px;
+	font-size: 15px;
 	font-weight: bold;
 }
 

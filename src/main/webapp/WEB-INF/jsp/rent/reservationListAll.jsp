@@ -27,57 +27,69 @@ body {
 	<jsp:include page="../nav.jsp" />
 	<div class="container">
 		<jsp:include page="../menu.jsp" />
-		<div class="row" id="searchResultArea" style=" table-layout:auto;  ">
-			<hr>
-			<h2>예약현황 목록</h2>
-			<hr>
-			<table class="table table-striped table-bordered" style="width:95%; ">
-				<thead>
-					<tr class="hidden-xs title">
+		<div class="row" id="searchResultArea" style="table-layout: auto;">
+			<div>
+				<h2>예약현황 목록</h2>
+			</div>
+			<br>
+			<c:choose>
+				<c:when test="${empty bookList}">
+					<div>
+						<h3>대여 요청한 도서가 없습니다.</h3>
+					</div>
+				</c:when>
+				<c:otherwise>
+					<table class="table table-striped table-bordered"
+						style="width: 95%;">
+						<thead>
+							<tr class="hidden-xs title">
 
-						<td id="tb-title">도서명</td>
-						<td id="tb-date">예약일자</td>
-						<td id="tb-genre">카테고리</td>
-						<td id="tb-status">신청자</td>
-						<td id="tb-status">알림</td>
+								<td id="tb-title">도서명</td>
+								<td id="tb-date">예약일자</td>
+								<td id="tb-genre">카테고리</td>
+								<td id="tb-status">신청자</td>
+								<td id="tb-status">알림</td>
 
-					</tr>
-				</thead>
+							</tr>
+						</thead>
 
 
-				<c:forEach items="${bookList}" var="book" varStatus="status">
-					<tbody >
+						<c:forEach items="${bookList}" var="book" varStatus="status">
+							<tbody>
 
-						<tr>
+								<tr>
 
-							<td align="left">${book.bookname }</td>
-							<td align="left">${book.reservedate }</td>
-							<td align="left">${book.genre }</td>
-							<td>${book.id}</td>
+									<td align="left">${book.bookname }</td>
+									<td align="left">${book.reservedate }</td>
+									<td align="left">${book.genre }</td>
+									<td>${book.id}</td>
 
-							<td><button class="btn btn-default btn-sm" type="button"
-									id="extendbook"
-									onClick="location.href='/extendBorrowBook?bookCode=${book.bookCode}&id=${book.id}'">알림</button>
-								<button class="btn btn-default btn-sm" type="button"
-									id="extendbook"
-									onClick="location.href='/deleteReserve?bookCode=${book.bookCode}'">삭제</button>
-							</td>
+									<td><button class="btn btn-default btn-sm" type="button"
+											id="extendbook"
+											onClick="location.href='/extendBorrowBook?bookCode=${book.bookCode}&id=${book.id}'">알림</button>
+										<button class="btn btn-default btn-sm" type="button"
+											id="extendbook"
+											onClick="location.href='/deleteReserve?bookCode=${book.bookCode}'">삭제</button>
+									</td>
 
-						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-					</tbody>
+								</tr>
+								<tr>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+							</tbody>
 
-				</c:forEach>
-			</table>
+						</c:forEach>
+					</table>
+				</c:otherwise>
+			</c:choose>
 		</div>
 
-	</div>
+
+
 	</div>
 	<script src="/resources/js/jquery/jquery.js"></script>
 	<script src="/resources/js/bootstrap.min.js"></script>

@@ -59,6 +59,7 @@ public class RentController {
 	public String confirmBorrowBook(HttpServletRequest request, String book_cd) {
 
 		rentservice.confirmBorrowBook(book_cd);
+		rentservice.confirmBorrowBook1(book_cd);
 		return "redirect:borrowListAll";
 	}
 
@@ -68,13 +69,23 @@ public class RentController {
 
 		for (String book_cd : book_cdList) {
 			rentservice.confirmBorrowBook(book_cd);
-
+			rentservice.confirmBorrowBook1(book_cd);
 		}
 		return "redirect:borrowListAll";
 	}
 
 	@RequestMapping("/borrowList")
 	public String borrowList(HttpServletRequest request, Model model) {
+		String id = null;
+		for (Cookie cookie : request.getCookies()) {
+
+			if (cookie.getName().equals("bm_id")) {
+
+				id = cookie.getValue();
+				System.out.println(id);
+
+			}
+		}
 		for (Cookie cookie : request.getCookies()) {
 			if (cookie.getName().equals("bm_permission")) {
 				if (cookie.getValue().equals("1")) {
@@ -85,21 +96,13 @@ public class RentController {
 
 				} else if (cookie.getValue().equals("0")) {
 
-					if (cookie.getName().equals("bm_id")) {
+					System.out.println(id + "ctrl");
+					List<BookModel> bookList = rentservice.borrowList(id);
+					List<BookModel> record = rentservice.recordList(id);
 
-						String id = null;
-
-						id = cookie.getValue();
-						System.out.println(id);
-
-						System.out.println(id + "ctrl");
-						List<BookModel> bookList = rentservice.borrowList(id);
-						List<BookModel> record = rentservice.recordList(id);
-
-						model.addAttribute("bookList", bookList);
-						model.addAttribute("record", record);
-						return "rent/borrowList";
-					}
+					model.addAttribute("bookList", bookList);
+					model.addAttribute("record", record);
+					return "rent/borrowList";
 				}
 			}
 
@@ -167,6 +170,7 @@ public class RentController {
 			@RequestParam(value = "book_cd") List<String> book_cdList) {
 		for (String book_cd : book_cdList) {
 			rentservice.returnBook(book_cd);
+			rentservice.returnBook1(book_cd);
 
 		}
 
@@ -179,6 +183,7 @@ public class RentController {
 		if (rentservice.selectBook(book_cd).getRentchk().equals("2")) {
 			System.out.println(book.getRentchk());
 			rentservice.returnBook(book_cd);
+			rentservice.returnBook1(book_cd);
 			return "redirect:rentListAll";
 		} else {
 

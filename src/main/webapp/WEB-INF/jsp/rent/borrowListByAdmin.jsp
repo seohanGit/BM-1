@@ -16,7 +16,8 @@
 <link href="/resources/css/common.css" rel="stylesheet">
 <script src="/resources/js/jquery/jquery.js"></script>
 <script src="/resources/js/bootstrap.min.js"></script>
-<script src="/resources/js/common.js"></script>
+	<script src="/resources/js/common.js"></script>
+	<script src="/resources/js/book.js"></script>
 <style type="text/css">
 body {
 	padding-top: 70px;
@@ -41,22 +42,20 @@ body {
 			<form action="confirmBorrowBookList" method="post">
 				<hr>
 
-
+				<div>
+					<h2>대여요청 목록</h2>
+				</div>
+				<br>
 				<c:choose>
 					<c:when test="${empty bookList}">
-						<div>
-							<h2>대여요청 목록</h2>
-						</div>
-						<br>
+
+
 						<div>
 							<h3>대여 요청한 도서가 없습니다.</h3>
 						</div>
 					</c:when>
 					<c:otherwise>
-						<div class="left">
-							<h2>대여요청 목록</h2>
-						</div>
-						<br>
+
 						<div class="right right-end">
 							<button class="btn btn-default" type="submit">승인</button>
 						</div>
@@ -113,9 +112,6 @@ body {
 	<%-- 
  --%>
 	<hr>
-	<script src="/resources/js/jquery/jquery.js"></script>
-	<script src="/resources/js/bootstrap.min.js"></script>
-	<script src="/resources/js/common.js"></script>
-	<script src="/resources/js/book.js"></script>
+	
 </body>
 </html>

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,7 +50,7 @@ body {
 				<h2>사용자 대여 현황</h2>
 				<hr>
 
-				<table class="table table-striped table-bordered " id="dataTable">
+				<table class="table table-striped table-bordered ">
 					<c:choose>
 						<c:when test="${empty bookList}">
 							<h3>대여한 도서가 없습니다.</h3>
@@ -58,15 +58,15 @@ body {
 						<c:otherwise>
 							<thead>
 								<tr class="hidden-xs title">
-									<th id="tb-img">표지</th>
-									<th id="tb-title">도서명</th>
-									<th id="tb-author">저자</th>
-									<th id="tb-genre">장르</th>
+									<th id="td-img">표지</th>
+									<th id="td-title">도서명</th>
+									<th id="td-author">저자</th>
+									<th id="td-date">장르</th>
 
-									<th id="tb-date">대여일자</th>
-									<th id="tb-date">반납일자</th>
-									<th id="tb-status">상태</th>
-									<th>비고</th>
+									<th id="td-author">대여일자</th>
+									<th id="td-author">반납일자</th>
+									<th id="td-date">상태</th>
+									<th></th>
 								</tr>
 							</thead>
 						</c:otherwise>
@@ -83,8 +83,10 @@ body {
 								<td align="left">${book.b_group}</td>
 
 
-								<td>${book.rentdate}</td>
-								<td>${book.returndate}</td>
+								<td><fmt:formatDate type="date" pattern="yyyy-MM-dd"
+										value="${book.rentdate}" /></td>
+								<td style="width:inherit; "><fmt:formatDate type="date"
+										pattern="yyyy-MM-dd" value="${book.returndate}" /></td>
 								<c:choose>
 									<c:when test="${book.rentchk=='1'}">
 										<td>대여요청중</td>
@@ -107,6 +109,8 @@ body {
 					</c:forEach>
 
 				</table>
+
+				<hr>
 				<c:choose>
 					<c:when test="${empty record}">
 					</c:when>
@@ -118,7 +122,6 @@ body {
 									<th id="tb-date">대여일자</th>
 									<th id="tb-date">반납일자</th>
 									<th id="tb-status">대출자</th>
-									<th id="tb-status">기록삭제</th>
 
 
 
@@ -132,13 +135,11 @@ body {
 									<tr>
 
 										<td align="left">${record.title }</td>
-										<td align="left">${record.rentdate }</td>
-										<td align="left">${record.returndate }</td>
-
+										<td align="left"><fmt:formatDate type="date"
+												pattern="yyyy-MM-dd" value="${record.rentdate }" /></td>
+										<td align="left"><fmt:formatDate type="date"
+												pattern="yyyy-MM-dd" value="${record.returndate }" /></td>
 										<td>${record.id}</td>
-										<td><button class="btn btn-default btn-sm" type="button"
-												id="extendbook"
-												onClick="location.href='/deleteRecord?book_cd=${record.book_cd}&id=${record.id}'">삭제</button></td>
 
 
 									</tr>

@@ -55,7 +55,7 @@
 		<div class="container">
 			<h4>원하는 책이 없다면 인터넷에서 주문하세요 !</h4>
 			<div class="input-group ">
-				<form action="/findBook" method="get">
+				<form action="/findBook" method="post">
 					<span class="input-group-btn"> <input type="text"
 						class="form-control" id="query" name="keyword"
 						placeholder="인터파크 검색">

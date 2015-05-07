@@ -168,7 +168,7 @@ public class BookServiceImpl implements BookService {
 		String key = "B0F933E2847C6447203572CCC68F824A1054E7EF0D966C7B95245288CE95E300";
 		String addr = "http://book.interpark.com/api/search.api?";
 		String parameter = "";
-
+System.out.println(keyword);
 		key = URLEncoder.encode(key, "UTF-8");
 		keyword = URLEncoder.encode(keyword, "UTF-8");
 		parameter = parameter + "&" + "query=" + keyword;

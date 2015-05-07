@@ -52,7 +52,11 @@
 							<th class="hidden-xs" id="td-genre">저자</th>
 							<th style="width:90px" class="hidden-xs hidden-sm" id="td-genre">분류</th>
 							<th class="hidden-xs hidden-sm" id="td-date">출판사</th>
+
 							<th style="width:80px" id="td-genre">대여상태</th>
+
+							<th id="td-genre">대여상태</th>
+
 							<th style="width: 30px"></th>
 						</tr>
 					</thead>
@@ -64,8 +68,8 @@
 						<c:forEach items="${bookList}" var="book">
 
 							<tr>
-								<td style="width: 20px"><input type="checkbox" name="book_cd"
-									value="${book.book_cd}"></td>
+								<td style="width: 20px"><input type="checkbox"
+									name="book_cd" value="${book.book_cd}"></td>
 								<td class="hidden-xs" style="width: 50px" align="left"><img
 									style="width: 50px" src="${book.imageurl}"></td>
 								<td align="left"><a
@@ -73,36 +77,59 @@
 								<td class="hidden-xs" align="left">${book.author }</td>
 								<td class="hidden-xs hidden-sm" align="left">${book.b_group}</td>
 								<td class="hidden-xs hidden-sm" align="left">${book.publish}</td>
-								<td align="left"><c:choose>
-										<c:when test="${book.rentchk=='0'}">
-											<mark>가능</mark>
-											<td align="left"><button class="btn btn-default"
-													type="button" id="borrowbook"
-													onClick="location.href='/borrowbook?book_cd=${book.book_cd}'; borrow();">대출</button></td>
-										</c:when>
+								<c:choose>
+									<c:when test="${book.rentchk=='0'}">
+										<td align="left">대출가능</td>
+										<td>
+											<button class="btn btn-default btn-sm" type="button"
+												id="reservebook"
+												onClick="location.href='/stopBorrow?book_cd=${book.book_cd}'">대출정지</button>
+											<button class="btn btn-default btn-sm" type="button"
+												id="modifybook"
+												onClick="location.href='/modifyBookForm?book_cd=${book.book_cd}'">도서수정</button>
+											<button class="btn btn-default btn-sm" type="button"
+												id="deletebook"
+												onClick="location.href='/deletebook?book_cd=${book.book_cd}'; del();">도서삭제</button>
+										</td>
+									</c:when>
+									<c:when test="${book.rentchk=='1'}">
+										<td><mark>대여요청중</mark></td>
+										<td><button class="btn btn-default btn-sm" type="button"
+												id="modifybook"
+												onClick="location.href='/modifyBookForm?book_cd=${book.book_cd}'">도서수정</button>
+											<button class="btn btn-default btn-sm" type="button"
+												id="deletebook"
+												onClick="location.href='/deletebook?book_cd=${book.book_cd}'; del();">도서삭제</button>
+										</td>
+									</c:when>
+									<c:when test="${book.rentchk=='2'}">
+										<td>대출중</td>
+										<td><button class="btn btn-default btn-sm" type="button"
+												id="modifybook"
+												onClick="location.href='/modifyBookForm?book_cd=${book.book_cd}'">도서수정</button>
+											<button class="btn btn-default btn-sm" type="button"
+												id="deletebook"
+												onClick="location.href='/deletebook?book_cd=${book.book_cd}'; del();">도서삭제</button>
+										</td>
+									</c:when>
+									<c:when test="${book.rentchk=='4'}">
+										<td><mark>대출정지</mark></td>
+										<td><button class="btn btn-default btn-sm" type="button"
+												id="modifybook"
+												onClick="location.href='/recoverBook?book_cd=${book.book_cd}'">대출재개</button></td>
+									</c:when>
+									<c:when test="${book.rentchk=='5'}">
+										<td><mark>예약중</mark></td>
+										<td><button class="btn btn-default btn-sm" type="button"
+												id="modifybook"
+												onClick="location.href='/modifyBookForm?book_cd=${book.book_cd}'">도서수정</button>
+											<button class="btn btn-default btn-sm" type="button"
+												id="deletebook"
+												onClick="location.href='/deletebook?book_cd=${book.book_cd}'; del();">도서삭제</button>
+										</td>
+									</c:when>
+								</c:choose>
 
-										<c:when test="${book.rentchk=='1' and book.reservechk=='1'}">	예약중 <td></td>
-										</c:when>
-										<c:when test="${book.rentchk=='1' and book.reservechk=='0'}"> 대여중
-									<td><button class="btn btn-default" type="button"
-													id="reservebook"
-													onClick="location.href='/reservation?book_cd=${book.book_cd}'">예약</button></td>
-										</c:when>
-
-										<c:when test="${book.rentchk=='2' and book.reservechk=='1'}">	예약중 	
-								<td></td>
-										</c:when>
-										<c:when test="${book.rentchk=='2' and book.reservechk=='0'}"> 대출중 	
-								<td><button class="btn btn-default" type="button"
-													id="reservebook"
-													onClick="location.href='/reservation?book_cd=${book.book_cd}'">예약</button></td>
-										</c:when>
-
-										<c:when test="${book.rentchk=='4'}">정지<td></td>
-										</c:when>
-										<c:when test="${book.rentchk=='5'}"> 예약중<td></td>
-										</c:when>
-									</c:choose>
 							</tr>
 
 

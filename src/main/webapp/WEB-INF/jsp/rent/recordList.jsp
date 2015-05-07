@@ -81,7 +81,7 @@ body {
 									<td>${book.id}</td>
 									<td><button class="btn btn-default btn-sm" type="button"
 											id="extendbook"
-											onClick="location.href='/deleteRecord?bookCode=${book.book_cd}&id=${book.sabun}'">삭제</button></td>
+											onClick="location.href='/deleteRecord?book_cd=${book.book_cd}&id=${book.id}'">삭제</button></td>
 								</tr>
 
 							</c:forEach>

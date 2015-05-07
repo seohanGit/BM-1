@@ -49,9 +49,9 @@ body {
 
 										<th id="td-title">도서명</th>
 
-										<th id="td-genre">카테고리</th>
+										<th id="td-genre">분류</th>
 										<th id="td-genre">신청자</th>
-										<th id="td-date">예약일자</th>
+										<th id="td-date">예약일</th>
 										<th id="td-date">알림</th>
 
 									</tr>

@@ -61,8 +61,8 @@ body {
 
 									<thead>
 										<tr class="title ">
-											<th style="width:20px"><input type="checkbox" id="allCheck"></th>
-											<th id="td-img">표지</th>
+											<th id="td-img"><input type="checkbox" id="allCheck"></th>
+											<th class="hidden-xs" id="td-img">표지</th>
 
 											<th id="td-title">도서명</th>
 											<th class="hidden-sm hidden-xs hidden-md " id="td-author">저자</th>
@@ -72,8 +72,8 @@ body {
 
 											<th class="hidden-sm hidden-xs hidden-md " id="td-date">요청일자</th>
 											<th id="td-img">상태</th>
-											<th style="width:30px"></th>
-											<th style="width:30px"></th>
+											<th id="td-date"></th>
+											<th id="td-date"></th>
 										</tr>
 									</thead>
 
@@ -83,7 +83,7 @@ body {
 											<tr>
 												<td><input type="checkbox" name="bookCode"
 													value="${book.book_cd}"></td>
-												<td rowspan="4" style="width: 50px" align="left"><img
+												<td  style="width: 50px" align="left"><img
 													style="width: 50px" src="${book.imageurl}"></td>
 
 											</tr>
@@ -113,10 +113,10 @@ body {
 
 
 										<tbody>
-											<tr >
+											<tr>
 												<td><input type="checkbox" name="book_cd"
 													value="${book.book_cd}"></td>
-												<td><img style="width: 50px" src="${book.imageurl}"></td>
+												<td class="hidden-xs"><img style="width: 50px" src="${book.imageurl}"></td>
 												<td><a href="${book.link}">${book.title }</a></td>
 												<td class="hidden-sm hidden-xs hidden-md ">${book.author}</td>
 
@@ -124,8 +124,8 @@ body {
 												<td align="center">${book.quantity}</td>
 												<td>${book.id}</td>
 
-												<td class="hidden-sm hidden-xs hidden-md "><fmt:formatDate type="date"
-														pattern="yyyy-MM-dd" value="${book.reqdate}" /></td>
+												<td class="hidden-sm hidden-xs hidden-md "><fmt:formatDate
+														type="date" pattern="yyyy-MM-dd" value="${book.reqdate}" /></td>
 
 												<c:choose>
 													<c:when test="${book.reqstatus =='0'}">

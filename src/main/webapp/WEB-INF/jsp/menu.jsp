@@ -30,7 +30,7 @@
 			<!-- 	<button class="btn btn-default  noborder" 
 			onclick="location.href='memberList'">사원목록</button> -->
 			<button class="btn btn-default  noborder"
-				onclick="location.href='boardList'">게시판 관리</button>
+				onclick="location.href='boardList'">게시판</button>
 		</div>
 	</div>
 	<div class="row panel panel-default visible-xs-block "
@@ -44,7 +44,7 @@
 			<!-- 	<button class="btn btn-default btn-sm noborder" 
 			onclick="location.href='memberList'">사원목록</button> -->
 			<button class="btn btn-default btn-sm noborder"
-				onclick="location.href='boardList'">게시판 관리</button>
+				onclick="location.href='boardList'">게시판</button>
 
 			<button class="btn btn-default btn-sm noborder"
 				onclick="location.href='bookList'">도서목록</button>

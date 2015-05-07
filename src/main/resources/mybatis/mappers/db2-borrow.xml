@@ -100,7 +100,7 @@
 		SET
 		rentchk='0'
 		WHERE
-		A.book_cd=#{book_cd}
+		book_cd=#{book_cd}
 	</update>
 	<!-- <update id="confirmReturnBook" parameterType="String"> UPDATE BOOKMST 
 		A INNER JOIN BOOKRENT B ON A.rentchk = B.rentchk SET A.rentchk='0', B.rentchk='0' 
@@ -115,7 +115,7 @@
 	<update id="extendBorrowBook" parameterType="String">
 		UPDATE BOOKRENT
 		SET
-		returndate = current date +20 day)
+		returndate = current date +20 day
 		WHERE
 		book_cd=#{book_cd}
 		AND
@@ -152,9 +152,10 @@
 	<!-- <delete id="deleteRecord" parameterType="String"> DELETE ON BOOKRENT 
 		WHERE DELETE ON reserve WHERE id=#{id} AND book_cd=#{book_cd} </delete> -->
 	<select id="recordList" parameterType="String" resultType="BookModel">
-		SELECT A.title, B.rentdate, B.id, B.returndate  FROM BOOKMST A, BOOKRENT B
-		WHERE <!-- (B.returndate BETWEEN date_sub(current 
-			date, interval 90 day) AND current date) AND -->
+		SELECT A.title, B.rentdate, B.id, B.returndate, A.book_cd FROM BOOKMST A,
+		BOOKRENT B
+		WHERE <!-- (B.returndate BETWEEN date_sub(current date, interval 
+			90 day) AND current date) AND -->
 		B.id=#{id} AND
 		A.book_cd=B.book_cd AND B.rentchk='3'
 		ORDER BY
@@ -177,10 +178,9 @@
 		B.returndate DESC
 	</select>
 
-	<delete id="deleteRecord" parameterType="BookModel">
-		DELETE 1
-		FROM BOOKRENT
+	<update id="deleteRecord" parameterType="BookModel">
+		UPDATE BOOKRENT SET RENTCHK='6'
 		WHERE book_cd=#{book_cd} AND id=#{id} AND rentchk='3'
-	</delete>
+	</update>
 
 </mapper>

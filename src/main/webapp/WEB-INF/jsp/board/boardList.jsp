@@ -29,7 +29,7 @@
 					</div>
 					<table class="table  table-striped table-bordered">
 						<thead>
-							<tr>
+							<tr  class="title">
 
 								<th style="width: 15%;">작성자</th>
 								<th style="width: 55%;">제목</th>

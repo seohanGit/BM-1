@@ -54,7 +54,7 @@
 
 									<td style="width: 80%; height: auto; padding-left: 10px"><textarea
 											class="content ellipsis" id="content" name="content"
-											style="width: 100%;" rows="5" readonly>${notice.content }</textarea>
+											style="width: 100%;" rows="5">${notice.content }</textarea>
 									</td>
 									<td><button class="btn btn-default btn-sm" type="submit"
 											id="modifyNotice">수정</button>

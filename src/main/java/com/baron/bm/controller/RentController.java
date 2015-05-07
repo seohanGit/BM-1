@@ -263,7 +263,7 @@ public class RentController {
 		book.setId(id);
 		rentservice.deleteRecord(book);
 
-		return "redirect:recordList";
+		return "redirect:recordListAll";
 	}
 
 	@RequestMapping("/reservation")

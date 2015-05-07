@@ -61,11 +61,11 @@ body {
 									<thead>
 										<tr class="hidden-xs title">
 											<th><input type="checkbox" id="allCheck"></th>
-											<th id="tb-title">도서명</th>
-											<th id="tb-date">대여일자</th>
-											<th id="tb-date">반납일자</th>
-											<th id="tb-genre">장르</th>
-											<th id="tb-genre">대출자</th>
+											<th id="td-title">도서명</th>
+											<th id="td-genre">대여일</th>
+											<th id="td-genre">반납일</th>
+											<th id="td-genre">분류</th>
+											<th id="td-date">대여자</th>
 											<th></th>
 
 										</tr>

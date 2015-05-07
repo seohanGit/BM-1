@@ -26,7 +26,7 @@
 
 	<select id="searchBook" parameterType="String" resultType="SearchResult">
 		<bind name="keyword" value="'%' + _parameter + '%'" />
-		SELECT *
+		SELECT imageurl, title, author, b_group, publish, rentchk
 		FROM BOOKMST
 		WHERE
 		TITLE like #{keyword}
@@ -35,7 +35,7 @@
 	</select>
 
 	<select id="listBook" parameterType="Dto" resultType="BookModel">
-		SELECT *
+		SELECT  imageurl, title, author, b_group, publish, rentchk
 		FROM BOOKMST
 		ORDER BY RENTCHK DESC
 	</select>
@@ -83,10 +83,10 @@
 		#{imageurl},#{isbn}, #{publish})
 	</insert>
 
-	<update id="deleteRequest" parameterType="BookModel">
+	<update id="deleteRequest" parameterType="String">
 		UPDATE BOOKREQ
 		SET
-		book_cd='1'
+		reqstatus='2'
 		WHERE book_cd=#{book_cd}
 	</update>
 

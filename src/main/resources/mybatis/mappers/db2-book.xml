@@ -6,15 +6,16 @@
 
 	<select id="selectBookAll" resultType="BookModel">
 		SELECT * FROM BOOKMST A
+		ORDER BY RENTCHK
 	</select>
 
 	<insert id="insertBook" parameterType="BookModel">
 		INSERT INTO BOOKMST
-		(title,BOOK_CD,b_group,publish,author,grade,rentchk,imageurl,
+		(title,BOOK_CD,b_group,publish,author,rentchk,imageurl,
 		rcv_date, isbn, price, summary)
 		VALUES
-		(#{title},#{book_cd},#{b_group},#{publish},#{author},0,0,#{imageurl},
-		NOW(), #{isbn}, #{price}, #{summary})
+		(#{title},#{book_cd},#{b_group},#{publish},#{author},0,#{imageurl},
+		current date, #{isbn}, #{price}, #{summary})
 	</insert>
 
 
@@ -29,14 +30,14 @@
 		FROM BOOKMST
 		WHERE
 		TITLE like #{keyword}
+		ORDER BY RENTCHK DESC
 
 	</select>
 
 	<select id="listBook" parameterType="Dto" resultType="BookModel">
 		SELECT *
 		FROM BOOKMST
-		ORDER BY
-		rcv_date DESC
+		ORDER BY RENTCHK DESC
 	</select>
 
 
@@ -75,18 +76,11 @@
 
 	<insert id="requestBook" parameterType="BookModel">
 		INSERT INTO BOOKREQ
-		(id,
-		reqdate,
-		title,book_cd,
-		price,author,quantity,b_group,link,
-		imageurl,
-		isbn, publish,
-		summary)
+		(id,reqdate,title,book_cd,price,author,quantity,b_group,link,
+		imageurl,isbn, publish)
 		VALUES
-		(#{id},
-		current
-		date,#{title},#{book_cd},#{price},#{author},#{quantity},#{b_group},#{link},#{imageurl},#{isbn},
-		#{publish}, #{summary})
+		(#{id}, current	date, #{title},#{book_cd},#{price},#{author},#{quantity},#{b_group},#{link},
+		#{imageurl},#{isbn}, #{publish})
 	</insert>
 
 	<update id="deleteRequest" parameterType="BookModel">

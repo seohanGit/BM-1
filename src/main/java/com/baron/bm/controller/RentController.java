@@ -60,7 +60,7 @@ public class RentController {
 
 		rentservice.confirmBorrowBook(book_cd);
 		rentservice.confirmBorrowBook1(book_cd);
-		return "redirect:borrowListAll";
+		return "redirect:borrowList";
 	}
 
 	@RequestMapping("/confirmBorrowBookList")
@@ -71,7 +71,7 @@ public class RentController {
 			rentservice.confirmBorrowBook(book_cd);
 			rentservice.confirmBorrowBook1(book_cd);
 		}
-		return "redirect:borrowListAll";
+		return "redirect:borrowList";
 	}
 
 	@RequestMapping("/borrowList")

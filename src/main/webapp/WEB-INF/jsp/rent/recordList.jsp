@@ -25,52 +25,71 @@ body {
 
 <body>
 	<jsp:include page="../nav.jsp" />
-	<div class="container">
+	<div id="loadingBar"
+		style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; text-align: center; margin: 0 auto; z-index: 100000;">
+		<table width="100%" height="100%" border="0" bgcolor="#000000">
+			<tr>
+				<td align="center">
+					<div style="text-align: center;">
+						<IMG SRC="resources/img/loading_map.gif">
+					</div>
+					<div
+						style="margin-top: 20px; color: #FFF; text-align: center; font-weight: bold;">L
+						o a d i n g . . .</div>
+				</td>
+			</tr>
+		</table>
+
+	</div>
+	<div id="divLoadBody" style="display: none;" class="container">
 		<jsp:include page="../menu.jsp" />
-		<div class="row col-12" id="searchResultArea">
-			<hr>
-			<h2>대여 기록</h2>
-			<hr>
-			<!-- 
+		<div class="col-lg-12">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<div>
+						<h2>대여 기록</h2>
+					</div>
+					<!-- 
 			기록 검색<button type="button" onclick="location.href='/insertRecord'">삽입</button>
 			 -->
-			<table class="table table-striped table-bordered" id="dataTable">
-				<thead>
-					<tr class="hidden-xs  title">
-						<th id="td-title">도서명</th>
-						<th id="td-author">대여일자</th>
-						<th id="td-author">반납일자</th>
-						<th id="td-date">대출자</th>
-						<th id="td-genre">기록삭제</th>
+					<table class="table table-striped table-bordered" id="dataTable">
+						<thead>
+							<tr class="hidden-xs  title">
+								<th id="td-title">도서명</th>
+								<th id="td-author">대여일자</th>
+								<th id="td-author">반납일자</th>
+								<th id="td-date">대출자</th>
+								<th id="td-genre">기록삭제</th>
 
 
 
-					</tr>
-				</thead>
+							</tr>
+						</thead>
 
 
-				<tbody>
-					<c:forEach items="${bookList}" var="book" varStatus="status">
+						<tbody>
+							<c:forEach items="${bookList}" var="book" varStatus="status">
 
-						<tr>
+								<tr>
 
-							<td align="left">${book.title }</td>
-							<td align="left"><fmt:formatDate type="date"
-									pattern="yyyy-MM-dd" value="${book.rentdate }" /></td>
-							<td align="left"><fmt:formatDate type="date"
-									pattern="yyyy-MM-dd" value="${book.returndate }" /></td>
+									<td align="left">${book.title }</td>
+									<td align="left"><fmt:formatDate type="date"
+											pattern="yyyy-MM-dd" value="${book.rentdate }" /></td>
+									<td align="left"><fmt:formatDate type="date"
+											pattern="yyyy-MM-dd" value="${book.returndate }" /></td>
 
-							<td>${book.id}</td>
-							<td><button class="btn btn-default btn-sm" type="button"
-									id="extendbook"
-									onClick="location.href='/deleteRecord?bookCode=${book.book_cd}&id=${book.sabun}'">삭제</button></td>
-						</tr>
+									<td>${book.id}</td>
+									<td><button class="btn btn-default btn-sm" type="button"
+											id="extendbook"
+											onClick="location.href='/deleteRecord?bookCode=${book.book_cd}&id=${book.sabun}'">삭제</button></td>
+								</tr>
 
-					</c:forEach>
-				</tbody>
-			</table>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
+			</div>
 		</div>
-
 	</div>
 
 	<script src="/resources/js/jquery/jquery.js"></script>
@@ -83,7 +102,6 @@ body {
 		$(document).ready(function() {
 
 			$('#dataTable').DataTable({
-				"pageLength" : 30,
 				paging : true,
 				ordering : true,
 				"columns" : [ {
@@ -100,6 +118,11 @@ body {
 
 			});
 		});
+		var loadingBar = document.getElementById("loadingBar");
+		var divLoadBody = document.getElementById("divLoadBody");
+
+		divLoadBody.style.display = "";
+		loadingBar.style.display = "none";
 	</script>
 </body>
 </html>

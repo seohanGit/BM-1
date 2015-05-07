@@ -14,9 +14,7 @@
 <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="/resources/css/signin.css" rel="stylesheet">
 <link href="/resources/css/common.css" rel="stylesheet">
-<script src="/resources/js/jquery/jquery.js"></script>
-<script src="/resources/js/bootstrap.min.js"></script>
-<script src="/resources/js/common.js"></script>
+
 <style type="text/css">
 body {
 	padding-top: 70px;
@@ -67,7 +65,7 @@ body {
 								<td id="tb-b_group">수량</td>
 								<td id="tb-b_group">신청자</td>
 								<td id="tb-date">요청일자</td>
-								
+
 							</tr>
 						</thead>
 
@@ -75,7 +73,7 @@ body {
 
 							<tbody class="visible-xs-block" style="width: 100%">
 								<tr>
-									
+
 									<td rowspan="4" style="width: 50px" align="left"><img
 										style="width: 50px" src="${book.imageurl}"></td>
 
@@ -100,7 +98,7 @@ body {
 
 							<tbody>
 								<tr class="hidden-xs">
-									
+
 									<td><img style="width: 50px" src="${book.imageurl}"></td>
 									<td><a href="${book.link}">${book.title }</a></td>
 									<td>${book.author}</td>
@@ -108,11 +106,11 @@ body {
 									<td>${book.price}원</td>
 									<td align="center">${book.quantity}</td>
 									<td>${book.id}</td>
-									<td><fmt:formatDate type="date"
-									pattern="yyyy-MM-dd" value="${book.reqdate}"/></td>
+									<td><fmt:formatDate type="date" pattern="yyyy-MM-dd"
+											value="${book.reqdate}" /></td>
 
 								</tr>
-							
+
 							</tbody>
 
 						</c:forEach>
@@ -124,11 +122,13 @@ body {
 
 		</div>
 	</div>
-
-
+	<script src="/resources/js/jquery/jquery.js"></script>
+	<script src="/resources/js/bootstrap.min.js"></script>
 	<script src="/resources/js/common.js"></script>
 	<script>
 		function del() {
 			alert("삭제되었습니다.");
 		}
 	</script>
+</body>
+</html>

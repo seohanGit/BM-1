@@ -48,7 +48,7 @@
 						<a href="${newbook.link}">${newbook.title}</a>
 					</p>
 					<p class="caption">${newbook.author}</p>
-					<p class="caption">입고일 : ${newbook.rece_ymd}</p>
+					<p class="caption">입고일 : ${newbook.rcv_date}</p>
 				</div>
 			</div>
 			<hr>

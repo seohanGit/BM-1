@@ -17,55 +17,57 @@
 
 </head>
 <body>
-	<jsp:include page="../nav.jsp"></jsp:include>
-
+	<jsp:include page="../nav.jsp" />
 	<div class="container">
 		<jsp:include page="../menu.jsp" />
-		<div id="searchResultArea" class="row">
-			<hr>
+		<div class="col-lg-12">
+			<div class="panel panel-default">
+				<div class="panel-body">
 
-			<div >
-				<h2>공지사항</h2>
-
-
-				<p align="right">
-					<button class="btn btn-default" type="button"
-						onClick="location.href='/writeNotice'">추가</button>
-			</div>
-
-
-			<p></p>
-
-			<br>
-			<c:forEach items="${noticeList}" var="notice" varStatus="status">
-				<form action="/modifyNotice" method="post">
-
-					<div>
-
-						<ul class="list-unstyled">
-
-							<li style="text-align: left;"><fmt:formatDate
-									value="${notice.registerdate}" pattern="yyyy-MM-dd" /></li>
-							<li style="width: 98%; height: auto;"><textarea
-									class="form-control " id="content" name="content"
-									style="width: 100%;" rows="3" 
-									onKeyDown="setLine( this )">${notice.content}</textarea><input type="hidden"
-								name="boardnum" value="${notice.boardnum }"></li>
-
-							<button class="btn btn-default btn-sm" type="submit"
-								id="modifyNotice">수정</button>
-
-							<button class="btn btn-default btn-sm" type="button"
-								id="deleteNotice"
-								onClick="location.href='/deleteNotice?boardnum=${notice.boardnum}'">삭제</button>
-
-						</ul>
+					<div class="left">
+						<h2>공지사항</h2>
 					</div>
-				</form>
+					<div class="right">
+						<p align="right">
+							<button class="btn btn-default" type="button"
+								onClick="location.href='/writeNotice'">추가</button>
+					</div>
 
-			</c:forEach>
+
+					<p></p>
+
+					<br>
+					<c:forEach items="${noticeList}" var="notice" varStatus="status">
+						<form action="/modifyNotice" method="post">
+
+							<div>
+
+								<ul class="list-unstyled">
+
+									<li style="text-align: left;"><fmt:formatDate
+											value="${notice.registerdate}" pattern="yyyy-MM-dd" /></li>
+									<li style="width: 98%; height: auto;"><textarea
+											class="form-control " id="content" name="content"
+											style="width: 100%;" rows="5" onKeyDown="setLine( this )">${notice.content}</textarea><input
+										type="hidden" name="boardnum" value="${notice.boardnum }"></li>
+
+									<button class="btn btn-default btn-sm" type="submit"
+										id="modifyNotice">수정</button>
+
+									<button class="btn btn-default btn-sm" type="button"
+										id="deleteNotice"
+										onClick="location.href='/deleteNotice?boardnum=${notice.boardnum}'">삭제</button>
+
+								</ul>
+							</div>
+						</form>
+
+					</c:forEach>
+				</div>
+			</div>
 		</div>
 	</div>
+
 
 
 	<hr>

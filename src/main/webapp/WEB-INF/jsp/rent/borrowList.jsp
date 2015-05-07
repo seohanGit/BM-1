@@ -14,8 +14,7 @@
 <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="/resources/css/signin.css" rel="stylesheet">
 <link href="/resources/css/common.css" rel="stylesheet">
-<script src="/resources/js/jquery/jquery.js"></script>
-<script src="/resources/js/bootstrap.min.js"></script>
+
 <style type="text/css">
 body {
 	padding-top: 70px;
@@ -85,7 +84,7 @@ body {
 
 								<td><fmt:formatDate type="date" pattern="yyyy-MM-dd"
 										value="${book.rentdate}" /></td>
-								<td style="width:inherit; "><fmt:formatDate type="date"
+								<td style="width: inherit;"><fmt:formatDate type="date"
 										pattern="yyyy-MM-dd" value="${book.returndate}" /></td>
 								<c:choose>
 									<c:when test="${book.rentchk=='1'}">
@@ -155,7 +154,8 @@ body {
 	</div>
 
 	<hr>
-
+	<script src="/resources/js/jquery/jquery.js"></script>
+	<script src="/resources/js/bootstrap.min.js"></script>
 	<script src="/resources/js/common.js"></script>
 	<script src="/resources/js/jquery.dataTables.min.js"></script>
 	<script src="/resources/js/dataTables.bootstrap.min.js"></script>

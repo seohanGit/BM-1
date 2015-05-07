@@ -20,7 +20,7 @@ import com.baron.member.service.RentService;
 @Controller
 public class BookController {
 
-	String bookCode1;
+	String book_cd1;
 
 	@Autowired
 	private BookService bookservice;
@@ -40,8 +40,8 @@ public class BookController {
 	}
 
 	@RequestMapping("/bookInfo")
-	public String bookInfo(String bookCode, Model model, BookModel book) {
-		model.addAttribute("book", bookservice.selectBook(bookCode));
+	public String bookInfo(String book_cd, Model model, BookModel book) {
+		model.addAttribute("book", bookservice.selectBook(book_cd));
 
 		return "book/bookInfo";
 	}
@@ -140,7 +140,7 @@ public class BookController {
 	}
 
 	@RequestMapping("/deletebook")
-	public String deleteBook(String bookCode, HttpServletRequest request) {
+	public String deleteBook(String book_cd, HttpServletRequest request) {
 		String permission;
 
 		for (Cookie cookie : request.getCookies()) {
@@ -150,24 +150,24 @@ public class BookController {
 					return "member/adminfail";
 			}
 		}
-		if (rentservice.selectReservation(bookCode) != null) {
+		if (rentservice.selectReservation(book_cd) != null) {
 			return "reservationfail";
 		}
 
-		bookservice.deleteBook(bookCode);
+		bookservice.deleteBook(book_cd);
 		return "member/admin";
 
 	}
 
 	@RequestMapping("/modifyBookForm")
-	public String modifyBookForm(BookModel book, String bookCode,
+	public String modifyBookForm(BookModel book, String book_cd,
 			HttpServletRequest request, Model model) {
 		String permission;
 
 		for (Cookie cookie : request.getCookies()) {
 			if (cookie.getName().equals("bm_permission")) {
 				permission = cookie.getValue();
-				book = bookservice.selectBook(bookCode);
+				book = bookservice.selectBook(book_cd);
 				if (permission.equals("0"))
 					return "member/adminfail";
 			}
@@ -179,7 +179,7 @@ public class BookController {
 
 	@RequestMapping("/modifybook1")
 	public String modifybookresult(BookModel bookmodel) {
-		bookmodel.setBook_cd(bookCode1);
+		bookmodel.setBook_cd(book_cd1);
 		bookservice.updateBook(bookmodel);
 		return "book/modifybookresult";
 	}

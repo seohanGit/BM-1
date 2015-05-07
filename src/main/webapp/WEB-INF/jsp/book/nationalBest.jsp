@@ -11,9 +11,9 @@
 			<img src="${book.imageurl}" height="100%" width="100%">
 		</div>
 		<div align="left">
-			<p class="caption">${book.bookname}</p>
-			<p class="caption">${book.writer}</p>
-			<p class="caption">${book.genre}</p>
+			<p class="caption">${book.title}</p>
+			<p class="caption">${book.author}</p>
+			<p class="caption">${book.b_group}</p>
 		</div>
 	</div>
 	<hr>

@@ -99,7 +99,7 @@
 							<form action="/requestbook" method="get">
 							<td style="width: 20px"><input type="hidden"
 								value="${book.isbn}" name="isbn"> <input type="number"
-								name="quantity" placeholder="구매 수량" style="width: 90px"></td>
+								name="quantity" min="0" placeholder="구매 수량" style="width: 90px"></td>
 							<td>
 								<button class="btn btn-default" type="submit" id="requestbook">구매요청</button>
 

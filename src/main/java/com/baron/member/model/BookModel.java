@@ -31,26 +31,11 @@ public class BookModel {
 	private int seq;
 	private int count;
 	private int sunbo;
-	private String req_ymd;
-	private String retu_ymd;
+
 	private String sabun;
 	
 
-	public String getReq_ymd() {
-		return req_ymd;
-	}
-
-	public void setReq_ymd(String req_ymd) {
-		this.req_ymd = req_ymd;
-	}
-
-	public String getRetu_ymd() {
-		return retu_ymd;
-	}
-
-	public void setRetu_ymd(String retu_ymd) {
-		this.retu_ymd = retu_ymd;
-	}
+	
 
 	public String getSabun() {
 		return sabun;

@@ -45,14 +45,18 @@
 	</update>
 
 	<update id="stopBorrow" parameterType="String">
-		UPDATE BOOKMST A
-		,BOOKRENT
-		B
+		UPDATE BOOKMST
 		SET
-		A.rentchk='4'
+		rentchk='4'
 		WHERE
-		A.book_cd=#{book_cd} AND A.rentchk='0'
-
+		book_cd=#{book_cd}
+	</update>
+	<update id="stopBorrow1" parameterType="String">
+		UPDATE BOOKRENT
+		SET
+		rentchk='4'
+		WHERE
+		book_cd=#{book_cd}
 	</update>
 
 	<update id="recoverBook" parameterType="String">
@@ -82,13 +86,14 @@
 	<!-- <update id="upPoint" parameterType="String"> UPDATE BOOKMEMBER SET 
 		numborrow = numborrow + 1 WHERE id = #{id} </update> -->
 	<update id="returnBook" parameterType="String">
-		UPDATE 
-		BOOKRENT 
+		UPDATE
+		BOOKRENT
 		SET
 		rentchk='3',
 		returndate=current date
 		WHERE
-		book_cd=#{book_cd} AND RENTCHK='2'
+		book_cd=#{book_cd} AND
+		RENTCHK='2'
 	</update>
 	<update id="returnBook1" parameterType="String">
 		UPDATE BOOKMST
@@ -137,7 +142,7 @@
 		A.book_cd=B.book_cd AND
 		B.rentchk='2'
 		ORDER BY
-		B.rentdate
+		B.rentchk
 		DESC
 	</select>
 

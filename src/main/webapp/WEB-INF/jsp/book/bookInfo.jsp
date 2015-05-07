@@ -35,55 +35,55 @@ body {
 					<hr>
 					<div class="right form-group">
 						<label for="exampleInputEmail1">도서번호</label>
-						<h4>${ book.bookCode }</h4>
+						<h4>${ book.book_cd }</h4>
 					</div>
 
 					<div class="right form-group">
 						<label for="exampleInputPassword1">도서명</label>
-						<h4>${book.bookname }</h4>
+						<h4>${book.title}</h4>
 					</div>
 					<div class="right form-group">
-						<label for="exampleInputPassword1">장르</label>
-						<h4>${book.genre}</h4>
+						<label for="exampleInputPassword1">분류</label>
+						<h4>${book.b_group}</h4>
 					</div>
 					<div class="right form-group">
 						<label for="exampleInputPassword1">출판사</label>
-						<h4>${book.publisher}</h4>
+						<h4>${book.publish}</h4>
 					</div>
 					<div class="right form-group">
 						<label for="exampleInputPassword1">저자</label>
-						<h4>${book.writer }</h4>
+						<h4>${book.author }</h4>
 					</div>
 					<div class="left">
 						<c:choose>
-							<c:when test="${book.borrowcheck=='0'}">
+							<c:when test="${book.rentchk=='0'}">
 								<mark>대출가능</mark>
 								<button class="btn btn-default" type="button" id="borrowbook"
-									onClick="location.href='/borrowbook?bookCode=${book.bookCode}'; borrow();">대출</button>
+									onClick="location.href='/borrowbook?book_cd=${book.book_cd}'; borrow();">대출</button>
 							</c:when>
 
 							<c:when
-								test="${book.borrowcheck=='1' and book.reservecheck=='1'}">	예약중
+								test="${book.rentchk=='1' and book.reservechk=='1'}">	예약중
 						</c:when>
 							<c:when
-								test="${book.borrowcheck=='1' and book.reservecheck=='0'}"> 대여요청중<button
+								test="${book.rentchk=='1' and book.reservechk=='0'}"> 대여요청중<button
 									class="btn btn-default" type="button" id="reservebook"
-									onClick="location.href='/reservation?bookCode=${book.bookCode}'">예약</button>
+									onClick="location.href='/reservation?book_cd=${book.book_cd}'">예약</button>
 							</c:when>
 
 							<c:when
-								test="${book.borrowcheck=='2' and book.reservecheck=='1'}">	예약중 	
+								test="${book.rentchk=='2' and book.reservechk=='1'}">	예약중 	
 								
 						</c:when>
 							<c:when
-								test="${book.borrowcheck=='2' and book.reservecheck=='0'}"> 대출중 <button
+								test="${book.rentchk=='2' and book.reservechk=='0'}"> 대출중 <button
 									class="btn btn-default" type="button" id="reservebook"
-									onClick="location.href='/reservation?bookCode=${book.bookCode}'">예약</button>
+									onClick="location.href='/reservation?book_cd=${book.book_cd}'">예약</button>
 							</c:when>
 
-							<c:when test="${book.borrowcheck=='4'}">대출정지
+							<c:when test="${book.rentchk=='4'}">대출정지
 						</c:when>
-							<c:when test="${book.borrowcheck=='5'}"> 예약중
+							<c:when test="${book.rentchk=='5'}"> 예약중
 						</c:when>
 						</c:choose>
 					</div>

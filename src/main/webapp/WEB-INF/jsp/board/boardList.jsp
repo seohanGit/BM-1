@@ -17,70 +17,63 @@
 
 </head>
 <body>
-	<jsp:include page="../nav.jsp"></jsp:include>
-
+	<jsp:include page="../nav.jsp" />
 	<div class="container">
 		<jsp:include page="../menu.jsp" />
-		<div id="searchResultArea" class="row">
-			<hr>
-			<h2>게시판 관리</h2>
-			<hr>
-			<table class="table  table-striped table-bordered">
-				<thead>
-					<tr>
-						<td></td>
-						<td style="width: 15%;">작성자</td>
-						<td style="width: 55%;">제목</td>
-						<td style="width: 15%;">최종 수정일</td>
-						<td style="width: 15%;"></td>
+		<div class="col-lg-12">
+			<div class="panel panel-default">
+				<div class="panel-body">
 
-					</tr>
-					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-				</thead>
-				<c:forEach items="${boardList}" var="board" varStatus="status">
-					<tbody>
+					<div>
+						<h2>게시판 관리</h2>
+					</div>
+					<table class="table  table-striped table-bordered">
+						<thead>
+							<tr>
 
-						<tr>
-							<td></td>
-							<td style="vertical-align: top;">${board.id}</td>
-							<td style="vertical-align: top;">${board.title}</td>
-							<td ><fmt:formatDate
-									value="${board.modifidate}" pattern="yyyy-MM-dd" /></td>
+								<th style="width: 15%;">작성자</th>
+								<th style="width: 55%;">제목</th>
+								<th style="width: 15%;">최종 수정일</th>
+								<th style="width: 15%;"></th>
 
-							<td><input type="hidden" name="boardnum"
-								value="${board.boardnum }">
-								<button class="btn btn-default btn-sm" type="submit"
-									id="modifyBoard"
-									onClick="location.href='/selectBoardnum?boardnum=${board.boardnum}'">수정</button>
+							</tr>
 
-								<button class="btn btn-default btn-sm" type="button"
-									id="deleteBoard"
-									onClick="location.href='/deleteBoard?boardnum=${board.boardnum}'">삭제</button>
-							</td>
-						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${boardList}" var="board" varStatus="status">
 
-					</tbody>
-				</c:forEach>
+								<tr>
 
-			</table>
+									<td style="vertical-align: top;">${board.id}</td>
+									<td style="vertical-align: top;">${board.title}</td>
+									<td><fmt:formatDate value="${board.modifidate}"
+											pattern="yyyy-MM-dd" /></td>
+
+									<td><input type="hidden" name="boardnum"
+										value="${board.boardnum }">
+										<button class="btn btn-default btn-sm" type="submit"
+											id="modifyBoard"
+											onClick="location.href='/selectBoardnum?boardnum=${board.boardnum}'">수정</button>
+
+										<button class="btn btn-default btn-sm" type="button"
+											id="deleteBoard"
+											onClick="location.href='/deleteBoard?boardnum=${board.boardnum}'">삭제</button>
+									</td>
+								</tr>
+
+							</c:forEach>
+						</tbody>
 
 
+					</table>
+
+
+				</div>
+
+			</div>
 		</div>
-
 	</div>
+
 	<hr>
 	<script src="/resources/js/jquery/jquery.js"></script>
 	<script src="/resources/js/bootstrap.min.js"></script>

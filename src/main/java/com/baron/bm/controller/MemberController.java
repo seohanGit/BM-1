@@ -58,7 +58,7 @@ public class MemberController {
 		// List<MemberModel> bestList = joinService.selectBest();
 		// List<BookModel> newBook = bookService.getNewbook();
 		// List<BookModel> bestSeller = bookService.getBestSeller();
-		
+
 		model.addAttribute("noticeList", notice);
 		// model.addAttribute("bestList", bestList);
 
@@ -72,24 +72,42 @@ public class MemberController {
 		return "/member/login";
 	}
 
-	@RequestMapping("/login")
-	public ModelAndView login(HttpServletResponse response, MemberModel model) {
+	
+	 @RequestMapping("/login") public ModelAndView login(HttpServletResponse
+	  response, MemberModel model) {
+	  
+	  ModelAndView mav = new ModelAndView("/member/loginResult"); model =
+	  joinService.login(model); if (model != null) {
+	  System.out.println(model.getId() + model.getPermission());
+	  response.addCookie(new Cookie("bm_id", model.getId()));
+	  System.out.println(model.getId() + "login Success");
+	  
+	  response.addCookie(new Cookie("bm_permission", model .getPermission()));
+	  mav.addObject("result", true); } else { mav.addObject("result", false); }
+	  return mav; }
+	 
+	// 서한 주소용 서버
+	// MEMBER TABLE (사번, 권한) 에서 사번, 권한 대조 후 로그인
+	/*
+	 @RequestMapping("/login")
+	public String login2(HttpServletResponse response, String id) {
 
-		ModelAndView mav = new ModelAndView("/member/loginResult");
-		model = joinService.login(model);
-		if (model != null) {
-			System.out.println(model.getId() + model.getPermission());
-			response.addCookie(new Cookie("bm_id", model.getId()));
-			System.out.println(model.getId()+"login Success");
-			
-			response.addCookie(new Cookie("bm_permission", model
-					.getPermission()));
-			mav.addObject("result", true);
-		} else {
-			mav.addObject("result", false);
+		// ModelAndView mav = new ModelAndView("/index");
+		System.out.println(id);
+		if (id != null) {
+			response.addCookie(new Cookie("bm_id", id));
+			System.out.println(id + "login Success");
+			if (id.equals("4150149")) {
+
+				response.addCookie(new Cookie("bm_permission", "1"));
+			} else {
+				response.addCookie(new Cookie("bm_permission", "0"));
+			}
+
 		}
-		return mav;
+		return "redirect:index";
 	}
+	*/
 
 	@RequestMapping("/logout")
 	// 쿠키 삭제
@@ -138,7 +156,7 @@ public class MemberController {
 
 		for (Cookie cookie : request.getCookies()) {
 			if (cookie.getName().equals("bm_id")) {
-				System.out.println(cookie.getValue()+"modify");
+				System.out.println(cookie.getValue() + "modify");
 				pass = joinService.identify(cookie.getValue());
 				MemberModel memberModel = new MemberModel();
 				memberModel.setId(cookie.getValue());

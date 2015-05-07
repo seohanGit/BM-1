@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
-<title>Blog Home - Start Bootstrap Template</title>
+<title>서한 기술 자료실</title>
 <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="/resources/css/common.css" rel="stylesheet">
 <link href="/resources/css/index.css" rel="stylesheet">
@@ -23,7 +23,7 @@
 			<div class="col-md-8">
 				<div id="goodPhrase">
 					<h1 class="page-header">
-						<a href="noticeList">공지사항</a> <small>민상훈책방</small>
+						<a href="noticeList">공지사항</a> <small>기술 자료실</small>
 					</h1>
 					<!-- First Blog Post -->
 					<ul class="list-group">
@@ -56,12 +56,7 @@
 				<hr>
 				<p>잠은 인생의 사치입니다! 저는 하루 네 시간만 자면 충분하다고 생각해요.</p>
 				<hr>
-				<!-- Pager -->
-				<ul class="pager">
-					<li class="previous"><a href="#">&larr; Older</a></li>
-					<li class="next"><a href="#">Newer &rarr;</a></li>
-				</ul>
-
+			
 			</div>
 			<!-- Blog Sidebar Widgets Column -->
 			<div class="col-md-4">

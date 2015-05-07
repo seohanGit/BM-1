@@ -29,28 +29,28 @@ body {
 				<img src="${book.imageurl}">
 				<div class="form-group">
 					<label for="exampleInputPassword1">도서코드</label> <input type="text"
-						class="form-control" id="bookCode" name="bookCode"
-						placeholder="${book.bookCode}">
+						class="form-control" id="book_cd" name="book_cd"
+						value="${book.book_cd}">
 				</div>
 				<div>
 					<label for="exampleInputPassword1">도서명</label> <input type="text"
-						class="form-control" id="bookname" name="bookname"
-						placeholder="${book.bookname}">
+						class="form-control" id="title" name="title"
+						value="${book.title}">
 				</div>
 				<div class="form-group">
 					<label for="exampleInputPassword1">카테고리</label> <input type="text"
-						class="form-control" id="genre" name="genre"
-						placeholder="${book.genre}">
+						class="form-control" id="b_group" name="b_group"
+						value="${book.b_group}">
 				</div>
 				<div class="form-group">
 					<label for="exampleInputPassword1">출판사</label> <input type="text"
-						class="form-control" id="publisher" name="publisher"
-						placeholder="${book.publisher}">
+						class="form-control" id="publish" name="publish"
+						value="${book.publish}">
 				</div>
 				<div class="form-group">
 					<label for="exampleInputPassword1">저자</label> <input type="text"
-						class="form-control" id="writer" name="writer"
-						placeholder="${book.writer}">
+						class="form-control" id="author" name="author"
+						value="${book.author}">
 				</div>
 
 				<button type="submit" class="btn btn-default">확인</button>

@@ -15,7 +15,7 @@
 <link href="/resources/css/common.css" rel="stylesheet">
 <script src="/resources/js/jquery/jquery.js"></script>
 <script src="/resources/js/bootstrap.min.js"></script>
-
+<script src="/resources/js/common.js"></script>
 </head>
 <body>
 	<jsp:include page="../nav.jsp" />
@@ -113,7 +113,7 @@
 			</div>
 		</div>
 	</div>
-	<script src="/resources/js/common.js"></script>
+	
 	<script src="/resources/js/metisMenu.min.js"></script>
 	<script src="/resources/js/jquery.dataTables.min.js"></script>
 	<script src="/resources/js/dataTables.bootstrap.min.js"></script>

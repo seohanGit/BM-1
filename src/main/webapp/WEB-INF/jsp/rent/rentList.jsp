@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,88 +18,98 @@
 
 </head>
 <body>
-	<jsp:include page="../nav.jsp"></jsp:include>
-
+	<jsp:include page="../nav.jsp" />
 	<div class="container">
 		<jsp:include page="../menu.jsp" />
-		<div class="row" id="searchResultArea">
-			<hr>
-			<div class="left">
-				<h2>대여현황 목록</h2>
-			</div>
-			<br>
-			<c:choose>
-				<c:when test="${empty bookList}">
+		<div class="col-lg-12">
+			<div class="panel panel-default">
+				<div class="panel-body">
+
 					<div>
-						<h3>대여중인 도서가 없습니다.</h3>
+						<h2>대여현황 목록</h2>
 					</div>
-				</c:when>
-				<c:otherwise>
-					<form action="returnBookList" method="post">
-						<div class="right right-end">
-							<button class="btn btn-default" type="submit">반납</button>
-						</div>
+					<br>
+					<p></p>
+					<c:choose>
+						<c:when test="${empty bookList}">
+							<div>
+								<h3>대여중인 도서가 없습니다.</h3>
+							</div>
+						</c:when>
+						<c:otherwise>
+							<form action="returnBookList" method="post">
+								<div class="right right-end">
+									<button class="btn btn-default" type="submit">반납</button>
+								</div>
 
-						<table class="table table-striped table-bordered " id="dataTable">
-							<thead>
-								<tr class="hidden-xs title">
-									<th><input type="checkbox" id="allCheck"></th>
-									<th id="tb-title">도서명</th>
-									<th id="tb-date">대여일자</th>
-									<th id="tb-date">반납일자</th>
-									<th id="tb-status">대출자</th>
-									<th id="tb-status">반납</th>
-									<th id="tb-status">연장</th>
-								</tr>
-							</thead>
+								<table class="table table-striped table-bordered "
+									id="dataTable">
+									<thead>
+										<tr class="hidden-xs title">
+											<th><input type="checkbox" id="allCheck"></th>
+											<th id="tb-title">도서명</th>
+											<th id="tb-date">대여일자</th>
+											<th id="tb-date">반납일자</th>
+											<th id="tb-status">대출자</th>
+											<th id="tb-status">반납</th>
+											<th id="tb-status">연장</th>
+										</tr>
+									</thead>
 
-							<c:set var="now" value="<%=new java.util.Date()%>" />
+									<c:set var="now" value="<%=new java.util.Date()%>" />
 
 
-							<tbody>
-								<c:forEach items="${bookList}" var="book" varStatus="loop">
+									<tbody>
+										<c:forEach items="${bookList}" var="book" varStatus="loop">
 
-									<tr>
-										<td><input type="checkbox" name="bookCode"
-											value="${book.bookCode}"></td>
-										<td align="left">${book.bookname }</td>
-										<td align="left">${book.borrowdate }</td>
-										<c:choose>
-											<c:when test="${book.returndate < now}">
-												<td align="left"
-													style="text-decoration: underline; text-align: right;">${book.returndate }</td>
-											</c:when>
-											<c:otherwise>
-												<td align="left">${book.returndate }</td>
-											</c:otherwise>
-										</c:choose>
-										<td>${book.id}</td>
-										<%-- 
+											<tr>
+												<td><input type="checkbox" name="bookCode"
+													value="${book.book_cd}"></td>
+												<td align="left">${book.title }</td>
+												<td align="left"><fmt:formatDate type="date"
+														pattern="yyyy-MM-dd" value="${book.rentdate }" /></td>
+												<c:choose>
+													<c:when test="${book.returndate < now}">
+														<td align="left"
+															style="text-decoration: underline; text-align: right;"><fmt:formatDate
+																type="date" pattern="yyyy-MM-dd"
+																value="${book.returndate }" /></td>
+													</c:when>
+													<c:otherwise>
+														<td align="left"><fmt:formatDate type="date"
+																pattern="yyyy-MM-dd" value="${book.returndate }" /></td>
+													</c:otherwise>
+												</c:choose>
+												<td>${book.id}</td>
+												<%-- 
 							<td><button class="btn btn-default" type="button"
 									id="extendbook"
-									onClick="location.href='/extendBorrowBook?bookCode=${book.bookCode}'">연장</button>
+									onClick="location.href='/extendBorrowBook?book_cd=${book.book_cd}'">연장</button>
 							</td>
  --%>
-										<td><button class="btn btn-default btn-sm" type="button"
-												id="reservebook"
-												onClick="location.href='/returnBookByAdmin?bookCode=${book.bookCode}'; re_turn();">반납</button>
-										</td>
-										<td><button class="btn btn-default btn-sm" type="button"
-												id="reservebook"
-												onClick="location.href='/extendBorrowBook?bookCode=${book.bookCode}'; extend();">연장</button></td>
-									</tr>
+												<td><button class="btn btn-default btn-sm"
+														type="button" id="reservebook"
+														onClick="location.href='/returnBookByAdmin?book_cd=${book.book_cd}'; re_turn();">반납</button>
+												</td>
+												<td><button class="btn btn-default btn-sm"
+														type="button" id="reservebook"
+														onClick="location.href='/extendBorrowBook?book_cd=${book.book_cd}'; extend();">연장</button></td>
+											</tr>
 
 
 
-								</c:forEach>
-							</tbody>
+										</c:forEach>
+									</tbody>
 
-						</table>
-					</form>
-				</c:otherwise>
-			</c:choose>
+								</table>
+							</form>
+						</c:otherwise>
+					</c:choose>
+				</div>
+			</div>
 		</div>
 	</div>
+
 
 	<hr>
 	<script src="/resources/js/jquery/jquery.js"></script>
@@ -114,11 +124,11 @@
 				"pageLength" : 30,
 				paging : true,
 				ordering : true,
-				"columns" : [  null, {
+				"columns" : [ null, {
 					"searchable" : false
 				}, {
 					"searchable" : false
-				}, null]
+				}, null ]
 
 			});
 		});

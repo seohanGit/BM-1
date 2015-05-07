@@ -78,9 +78,7 @@ $("#logout").click(function() {
 $("#noticeListByAdmin").click(function() {
 	location.href = "/noticeListByAdmin"
 })
-$("#borrowList").click(function() {
-	location.href = "/borrowList"
-})
+
 $("#bookList").click(function() {
 	location.href = "/bookList"
 })

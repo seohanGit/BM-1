@@ -81,11 +81,11 @@ body {
 										<th class="hidden-sm hidden-xs "id="td-img">표지</th>
 										<th id="td-author">도서명</th>
 										<th class=" hidden-xs "id="td-author">저자</th>
-										<th class="hidden-sm hidden-xs hidden-md " id="td-author">분류</th>
+										<th style="width:90px" class="hidden-sm hidden-xs hidden-md " id="td-author">분류</th>
 
-										<th style="width:100px">대여상태</th>
+										<th style="width:80px">대여상태</th>
 										
-										<th style="width:240px"></th>
+										<th style="width:200px"></th>
 									</tr>
 								</thead>
 								<%-- 

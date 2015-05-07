@@ -152,7 +152,7 @@
 	<!-- <delete id="deleteRecord" parameterType="String"> DELETE ON BOOKRENT 
 		WHERE DELETE ON reserve WHERE id=#{id} AND book_cd=#{book_cd} </delete> -->
 	<select id="recordList" parameterType="String" resultType="BookModel">
-		SELECT * FROM BOOKMST A, BOOKRENT B
+		SELECT A.title, B.rentdate, B.id, B.returndate  FROM BOOKMST A, BOOKRENT B
 		WHERE <!-- (B.returndate BETWEEN date_sub(current 
 			date, interval 90 day) AND current date) AND -->
 		B.id=#{id} AND

@@ -50,9 +50,9 @@
 							<th class="hidden-xs" id="td-img">표지</th>
 							<th id="td-title">도서명</th>
 							<th class="hidden-xs" id="td-genre">저자</th>
-							<th class="hidden-xs hidden-sm" id="td-genre">분류</th>
+							<th style="width:90px" class="hidden-xs hidden-sm" id="td-genre">분류</th>
 							<th class="hidden-xs hidden-sm" id="td-date">출판사</th>
-							<th  id="td-genre">대여상태</th>
+							<th style="width:80px" id="td-genre">대여상태</th>
 							<th style="width: 30px"></th>
 						</tr>
 					</thead>

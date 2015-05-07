@@ -26,21 +26,31 @@
 			<h2>공지사항</h2>
 			<hr>
 
+			<table class="table table-bordered" id="dataTable">
+				<thead class="title">
+					<tr>
+						<td>등록일</td>
+						<td>내용</td>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${noticeList}" var="notice" varStatus="status">
+						<tr style="padding-bottom: 10px">
+							<td width="15%" align="left"><fmt:formatDate
+									value="${notice.regisdate}" pattern="yyyy-MM-dd" /></td>
 
-			<c:forEach items="${noticeList}" var="notice" varStatus="status">
-				
-					<ul>
-						<li width="15%" align="left"><fmt:formatDate
-								value="${notice.registerdate}" pattern="yyyy-MM-dd" /></li>
-						<li style="width: 90%; height: auto;" align="left"><textarea
-								class="content ellipsis" id="content" name="content"
-								style="width: 100%;" rows="2" readonly>${notice.content }</textarea></li>
+							<td style="width: 80%; height: auto; padding-left: 10px"><textarea
+									class="content ellipsis" id="content" name="content"
+									style="width: 100%;" rows="5" readonly>${notice.content }</textarea>
+							</td>
+
+						</tr>
 
 
-					</ul>
-				
-			</c:forEach>
 
+					</c:forEach>
+				</tbody>
+			</table>
 
 		</div>
 
@@ -50,6 +60,17 @@
 	<script src="/resources/js/bootstrap.min.js"></script>
 	<script src="/resources/js/book.js"></script>
 	<script src="/resources/js/common.js"></script>
+	<script src="/resources/js/jquery.dataTables.min.js"></script>
+	<script src="/resources/js/dataTables.bootstrap.min.js"></script>
+	<script>
+		$(document).ready(function() {
 
+			$('#dataTable').DataTable({
+				"pageLength" : 10,
+				paging : true,
+				ordering : true,
+			});
+		});
+	</script>
 </body>
 </html>

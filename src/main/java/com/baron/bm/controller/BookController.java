@@ -131,10 +131,9 @@ public class BookController {
 		int totalPage;
 		bookList = bookservice.findBook(keyword);
 
-		totalPage = bookList.get(0).getTotalResults() / 15;
-
+	
 		model.addAttribute("bookList", bookList);
-		model.addAttribute("totalPage", totalPage);
+		
 		model.addAttribute("keyword", keyword);
 		return "book/findBook";
 	}

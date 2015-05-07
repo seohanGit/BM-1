@@ -54,8 +54,7 @@
 				<div id="searchResultArea"></div>
 
 				<hr>
-				<p>잠은 인생의 사치입니다! 저는 하루 네 시간만 자면 충분하다고 생각해요.</p>
-				<hr>
+				
 			
 			</div>
 			<!-- Blog Sidebar Widgets Column -->

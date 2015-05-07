@@ -11,7 +11,7 @@ public class BookModel {
 
 	private java.util.Date rentdate;
 	private java.util.Date returndate;
-	private Date reserdate;
+	private Date reser_date;
 	private Date reqdate;
 	private String id;
 	private String publish;
@@ -28,7 +28,7 @@ public class BookModel {
 	private int startindex;
 	private String keyword;
 	private String rcv_date;
-	private int seq;
+	private int reqstatus;
 	private int count;
 	private int sunbo;
 
@@ -53,12 +53,12 @@ public class BookModel {
 		this.rentdate = date;
 	}
 
-	public Date getReserdate() {
-		return reserdate;
+	public Date getReser_date() {
+		return reser_date;
 	}
 
-	public void setReserdate(Date reserdate) {
-		this.reserdate = reserdate;
+	public void setReser_date(Date reser_date) {
+		this.reser_date = reser_date;
 	}
 
 	public Date getReqdate() {
@@ -157,12 +157,12 @@ public class BookModel {
 		this.count = count;
 	}
 
-	public int getSeq() {
-		return seq;
+	public int getReqstatus() {
+		return reqstatus;
 	}
 
-	public void setSeq(int seq) {
-		this.seq = seq;
+	public void setReqstatus(int reqstatus) {
+		this.reqstatus = reqstatus;
 	}
 
 	public String getKeyword() {

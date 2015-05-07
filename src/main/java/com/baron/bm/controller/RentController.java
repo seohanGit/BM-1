@@ -99,7 +99,9 @@ public class RentController {
 					System.out.println(id + "ctrl");
 					List<BookModel> bookList = rentservice.borrowList(id);
 					List<BookModel> record = rentservice.recordList(id);
-
+					List<BookModel> reserve = rentservice.reservationList(id);
+					
+					model.addAttribute("reserveList", reserve);
 					model.addAttribute("bookList", bookList);
 					model.addAttribute("record", record);
 					return "rent/borrowList";

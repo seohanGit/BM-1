@@ -56,13 +56,12 @@ body {
 						</c:when>
 						<c:otherwise>
 							<thead>
-								<tr class="hidden-xs title">
-									<th id="td-img">표지</th>
+								<tr class="title">
+									<th class="hidden-xs" id="td-img">표지</th>
 									<th id="td-title">도서명</th>
-									<th id="td-author">저자</th>
-									<th id="td-date">장르</th>
-
-									<th id="td-author">대여일자</th>
+									<th class="hidden-xs" id="td-genre">저자</th>
+									<th class="hidden-xs hidden-sm" id="td-genre">분류</th>
+									<th class="hidden-xs" id="td-author">대여일자</th>
 									<th id="td-author">반납일자</th>
 									<th id="td-date">상태</th>
 									<th></th>
@@ -74,16 +73,16 @@ body {
 
 						<tbody>
 							<tr>
-								<td style="width: 50px" align="left"><img
+								<td class="hidden-xs" style="width: 50px" align="left"><img
 									style="width: 50px" src="${book.imageurl}"></td>
 
 								<td align="left">${book.title }</td>
-								<td align="left">${book.author }</td>
-								<td align="left">${book.b_group}</td>
+								<td class="hidden-xs" align="left">${book.author }</td>
+								<td class="hidden-xs hidden-sm" align="left">${book.b_group}</td>
 
 
-								<td><fmt:formatDate type="date" pattern="yyyy-MM-dd"
-										value="${book.rentdate}" /></td>
+								<td class="hidden-xs"><fmt:formatDate type="date"
+										pattern="yyyy-MM-dd" value="${book.rentdate}" /></td>
 								<td style="width: inherit;"><fmt:formatDate type="date"
 										pattern="yyyy-MM-dd" value="${book.returndate}" /></td>
 								<c:choose>
@@ -139,6 +138,50 @@ body {
 										<td align="left"><fmt:formatDate type="date"
 												pattern="yyyy-MM-dd" value="${record.returndate }" /></td>
 										<td>${record.id}</td>
+										<td><c:choose>
+												<c:when test="${book.reservechk=='0'}">대기</c:when>
+												<c:when test="${book.reservechk=='1'}">승인</c:when>
+												<c:when test="${book.reservechk=='2'}">반려</c:when>
+											</c:choose></td>
+
+									</tr>
+
+								</tbody>
+
+							</c:forEach>
+						</table>
+					</c:otherwise>
+				</c:choose>
+				<c:choose>
+					<c:when test="${empty reserveList}">
+					</c:when>
+					<c:otherwise>
+						<table class="table table-striped table-bordered">
+							<thead>
+								<tr class=" title">
+									<th id="tb-title">도서명</th>
+									<th id="tb-date">대여일자</th>
+									<th id="tb-date">분류</th>
+									<th id="tb-date">반납일자</th>
+									<th id="tb-status">대출자</th>
+
+
+
+								</tr>
+							</thead>
+
+
+							<c:forEach items="${reserveList}" var="reser" varStatus="status">
+								<tbody>
+
+									<tr>
+
+										<td align="left">${reser.title }</td>
+										<td align="left"><fmt:formatDate type="date"
+												pattern="yyyy-MM-dd" value="${reser.reser_date }" /></td>
+										<td class="hidden-xs hidden-sm" align="left">${book.b_group}</td>
+										<td align="left">value="${reser.reser_date }"</td>
+										<td></td>
 
 
 									</tr>

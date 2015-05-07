@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,10 +48,11 @@ body {
 									<tr class="hidden-xs title">
 
 										<th id="td-title">도서명</th>
-										<th id="td-date">예약일자</th>
+
 										<th id="td-genre">카테고리</th>
-										<th id="td-status">신청자</th>
-										<th id="td-status">알림</th>
+										<th id="td-genre">신청자</th>
+										<th id="td-date">예약일자</th>
+										<th id="td-date">알림</th>
 
 									</tr>
 								</thead>
@@ -62,17 +63,18 @@ body {
 									<c:forEach items="${bookList}" var="book" varStatus="status">
 										<tr>
 
-											<td align="left">${book.bookname }</td>
-											<td align="left">${book.reservedate }</td>
-											<td align="left">${book.genre }</td>
-											<td>${book.id}</td>
+											<td align="left">${book.title }</td>
 
+											<td align="left">${book.b_group }</td>
+											<td>${book.id}</td>
+											<td align="left"><fmt:formatDate type="date"
+													pattern="yyyy-MM-dd" value="${book.reser_date }" /></td>
 											<td><button class="btn btn-default btn-sm" type="button"
 													id="extendbook"
-													onClick="location.href='/extendBorrowBook?bookCode=${book.bookCode}&id=${book.id}'">알림</button>
+													onClick="location.href='/extendBorrowBook?book_cd=${book.book_cd}&id=${book.id}'">알림</button>
 												<button class="btn btn-default btn-sm" type="button"
 													id="extendbook"
-													onClick="location.href='/deleteReserve?bookCode=${book.bookCode}'">삭제</button>
+													onClick="location.href='/deleteReserve?book_cd=${book.book_cd}'">삭제</button>
 											</td>
 
 										</tr>

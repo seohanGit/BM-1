@@ -77,14 +77,15 @@ body {
 							<table class="table table-striped table-bordered " id="dataTable">
 								<thead>
 									<tr>
-										<th><input type="checkbox" id="allCheck"></th>
+										<th style="width:20px"><input type="checkbox" id="allCheck"></th>
 										<th id="td-img">표지</th>
 										<th id="td-author">도서명</th>
 										<th id="td-author">저자</th>
 										<th id="td-author">분류</th>
 
-										<th width="100px">대여상태</th>
-										<th width="240px"></th>
+										<th style="width:100px">대여상태</th>
+										
+										<th style="width:240px"></th>
 									</tr>
 								</thead>
 								<%-- 

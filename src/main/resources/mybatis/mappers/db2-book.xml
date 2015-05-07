@@ -86,7 +86,7 @@
 	<update id="deleteRequest" parameterType="BookModel">
 		UPDATE BOOKREQ
 		SET
-		book_cd='0'
+		book_cd='1'
 		WHERE book_cd=#{book_cd}
 	</update>
 

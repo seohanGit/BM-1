@@ -52,4 +52,6 @@ public interface RentService {
 
 	public void returnBook1(String book_cd);
 
+	public List<BookModel> reservationList(String id);
+
 }

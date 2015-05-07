@@ -156,4 +156,11 @@ public class RentServiceImpl implements RentService {
 
 	}
 
+	@Override
+	public List<BookModel> reservationList(String id) {
+		// TODO Auto-generated method stub
+		return rentDao.reservationList(id);
+
+	}
+
 }

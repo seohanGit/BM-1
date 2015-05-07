@@ -13,9 +13,7 @@
 <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="/resources/css/signin.css" rel="stylesheet">
 <link href="/resources/css/common.css" rel="stylesheet">
-<script src="/resources/js/jquery/jquery.js"></script>
-<script src="/resources/js/bootstrap.min.js"></script>
-<script src="/resources/js/common.js"></script>
+
 </head>
 <body>
 	<jsp:include page="../nav.jsp" />
@@ -28,7 +26,7 @@
 						<IMG SRC="resources/img/loading_map.gif">
 					</div>
 					<div
-						style="margin-top: 20px; color: #FFF; text-align: center; font-weight: bold; font-size:40px">L
+						style="margin-top: 20px; color: #FFF; text-align: center; font-weight: bold; font-size: 40px">L
 						o a d i n g . . .</div>
 				</td>
 			</tr>
@@ -42,20 +40,20 @@
 			<h2>도서검색 목록</h2>
 			<hr>
 
-			<div 
-				class="dataTable_wrapper">
+			<div class="dataTable_wrapper">
 				<table class="table table-striped table-bordered " id="dataTable">
 
 
 					<thead>
 						<tr>
-							<th id="td-img">표지</th>
+							<th></th>
+							<th class="hidden-xs" id="td-img">표지</th>
 							<th id="td-title">도서명</th>
-							<th id="td-genre">저자</th>
-							<th id="td-genre">분류</th>
-							<th id="td-author">출판사</th>
-							<th id="td-genre">대여상태</th>
-							<th id="td-empty"></th>
+							<th class="hidden-xs" id="td-genre">저자</th>
+							<th class="hidden-xs hidden-sm" id="td-genre">분류</th>
+							<th class="hidden-xs hidden-sm" id="td-date">출판사</th>
+							<th  id="td-genre">대여상태</th>
+							<th style="width: 30px"></th>
 						</tr>
 					</thead>
 					<%-- 
@@ -66,16 +64,18 @@
 						<c:forEach items="${bookList}" var="book">
 
 							<tr>
-								<td style="width: 50px" align="left"><img
+								<td style="width: 20px"><input type="checkbox" name="book_cd"
+									value="${book.book_cd}"></td>
+								<td class="hidden-xs" style="width: 50px" align="left"><img
 									style="width: 50px" src="${book.imageurl}"></td>
 								<td align="left"><a
 									href="/bookInfo?book_cd=${book.book_cd}"> ${book.title }</a></td>
-								<td align="left">${book.author }</td>
-								<td align="left">${book.b_group}</td>
-								<td align="left">${book.publish}</td>
+								<td class="hidden-xs" align="left">${book.author }</td>
+								<td class="hidden-xs hidden-sm" align="left">${book.b_group}</td>
+								<td class="hidden-xs hidden-sm" align="left">${book.publish}</td>
 								<td align="left"><c:choose>
 										<c:when test="${book.rentchk=='0'}">
-											<mark>대출가능</mark>
+											<mark>가능</mark>
 											<td align="left"><button class="btn btn-default"
 													type="button" id="borrowbook"
 													onClick="location.href='/borrowbook?book_cd=${book.book_cd}'; borrow();">대출</button></td>
@@ -83,7 +83,7 @@
 
 										<c:when test="${book.rentchk=='1' and book.reservechk=='1'}">	예약중 <td></td>
 										</c:when>
-										<c:when test="${book.rentchk=='1' and book.reservechk=='0'}"> 대여요청중
+										<c:when test="${book.rentchk=='1' and book.reservechk=='0'}"> 대여중
 									<td><button class="btn btn-default" type="button"
 													id="reservebook"
 													onClick="location.href='/reservation?book_cd=${book.book_cd}'">예약</button></td>
@@ -98,7 +98,7 @@
 													onClick="location.href='/reservation?book_cd=${book.book_cd}'">예약</button></td>
 										</c:when>
 
-										<c:when test="${book.rentchk=='4'}">대출정지<td></td>
+										<c:when test="${book.rentchk=='4'}">정지<td></td>
 										</c:when>
 										<c:when test="${book.rentchk=='5'}"> 예약중<td></td>
 										</c:when>
@@ -113,7 +113,9 @@
 			</div>
 		</div>
 	</div>
-	
+	<script src="/resources/js/jquery/jquery.js"></script>
+	<script src="/resources/js/bootstrap.min.js"></script>
+	<script src="/resources/js/common.js"></script>
 	<script src="/resources/js/metisMenu.min.js"></script>
 	<script src="/resources/js/jquery.dataTables.min.js"></script>
 	<script src="/resources/js/dataTables.bootstrap.min.js"></script>
@@ -129,6 +131,8 @@
 				}, {
 					"searchable" : false
 				}, null, null, {
+					"searchable" : false
+				}, {
 					"searchable" : false
 				}, {
 					"searchable" : false

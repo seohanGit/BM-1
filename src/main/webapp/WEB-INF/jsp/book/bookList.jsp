@@ -78,9 +78,9 @@ body {
 							<table class="table table-striped table-bordered " id="dataTable">
 								<thead>
 									<tr>
-										<th><input type="checkbox" id="allCheck"></th>
+										<th style="width:20px"><input type="checkbox" id="allCheck"></th>
 										<th id="td-img">표지</th>
-										<th id="td-author">도서명</th>
+										<th id="td-title">도서명</th>
 										<th id="td-author">저자</th>
 										<th id="td-author">분류</th>
 

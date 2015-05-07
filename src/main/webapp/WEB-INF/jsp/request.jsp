@@ -65,6 +65,7 @@ body {
 								<td id="tb-b_group">수량</td>
 								<td id="tb-b_group">신청자</td>
 								<td id="tb-date">요청일자</td>
+								<td id="td-date">상태</td>
 
 							</tr>
 						</thead>
@@ -108,7 +109,11 @@ body {
 									<td>${book.id}</td>
 									<td><fmt:formatDate type="date" pattern="yyyy-MM-dd"
 											value="${book.reqdate}" /></td>
-
+									<td><c:choose>
+											<c:when test="${book.reqstatus=='0'}">대기</c:when>
+											<c:when test="${book.reqstatus=='1'}">승인</c:when>
+											<c:when test="${book.reqstatus=='2'}">반려</c:when>
+										</c:choose></td>
 								</tr>
 
 							</tbody>

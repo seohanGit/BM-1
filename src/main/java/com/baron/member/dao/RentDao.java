@@ -56,5 +56,7 @@ public interface RentDao {
 
 	void returnBook1(String book_cd);
 
+	List<BookModel> reservationList(String id);
+
 
 }

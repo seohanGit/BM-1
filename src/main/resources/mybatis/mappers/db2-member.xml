@@ -9,7 +9,8 @@
 	</select>
 
 	<insert id="insertMember" parameterType="MemberModel">
-		INSERT INTO BOOKMEMBER (id,
+		INSERT INTO BOOKMEMBER
+		(id,
 		pass, name,email,team,cell)
 		VALUES (#{id}, #{password},
 		#{name},#{email},#{team},#{cell})
@@ -22,7 +23,8 @@
 
 	<update id="updateMember" parameterType="MemberModel">
 		UPDATE BOOKMEMBER
-		SET pass =
+		SET
+		pass =
 		#{password},email = #{email},address = #{address},cell =
 		#{cell},home =
 		#{home}
@@ -53,7 +55,8 @@
 		SELECT A.name, A.score, A.id,
 		(SELECT
 		COUNT(*) FROM BOOKRENT B WHERE B.rentdate >
-		date_sub(current date,
+		date_sub(current
+		date,
 		interval 30
 		day) AND B.id=A.id ) AS numborrow
 		FROM
@@ -66,13 +69,14 @@
 	<select id="selectMemberList" resultType="MemberModel">
 		SELECT *, (SELECT
 		COUNT(*) FROM BOOKRENT B WHERE B.rentdate >
-		date_sub(current date, interval 30
+		date_sub(current date,
+		interval 30
 		day) AND B.id=A.id ) AS numborrow
 		FROM BOOKMEMBER A
-		ORDER BY team
+		ORDER BY
+		team
 
 	</select>
-
 
 	<!-- 에약관련 쿼리 -->
 
@@ -80,8 +84,8 @@
 		INSERT INTO
 		bookreser(id, book_cd, reser_date, reservechk)
 		VALUES(#{id},
-		#{book_cd}, date_add(current date, interval 7
-		day), 1)
+		#{book_cd}, (select returndate from bookrent where
+		book_cd=#{book_cd}), 1)
 	</insert>
 
 	<update id="updateReservation" parameterType="String">
@@ -98,8 +102,8 @@
 
 	<select id="reservationList" parameterType="String" resultType="BookModel">
 		SELECT *
-		FROM BOOKMST AS A, bookreser AS B
-		WHERE B.book_cd=#{book_cd}
+		FROM BOOKMST A, bookreser B
+		WHERE B.reservechk='0'
 		AND
 		B.id=#{id}
 		ORDER BY
@@ -108,11 +112,13 @@
 
 	<select id="reservationListAll" resultType="BookModel">
 		SELECT *
-		FROM BOOKMST AS
+		FROM BOOKMST
+		AS
 		A, bookreser AS B
 		WHERE A.book_cd=B.book_cd AND
 		B.reservechk='1'
-		ORDER BY
+		ORDER
+		BY
 		B.reser_date DESC
 	</select>
 

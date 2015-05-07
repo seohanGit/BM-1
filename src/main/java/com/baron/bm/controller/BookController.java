@@ -128,7 +128,7 @@ public class BookController {
 	public String findBook(String keyword, String page, Model model)
 			throws Exception {
 		List<BookModel> bookList;
-		int totalPage;
+		System.out.println(keyword);
 		bookList = bookservice.findBook(keyword);
 
 	

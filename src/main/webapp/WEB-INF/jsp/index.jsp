@@ -38,7 +38,7 @@
 				<hr>
 				<h4>원하는 책이 없다면 인터넷에서 주문하세요 !</h4>
 				<div class="input-group" style="width: 90%">
-					<form action="/findBook" method="get">
+					<form action="/findBook" method="post">
 						<span class="input-group-btn"> <input type="text"
 							class="form-control" id="query" name="keyword"
 							placeholder="인터파크 검색">
@@ -54,8 +54,8 @@
 				<div id="searchResultArea"></div>
 
 				<hr>
-				
-			
+
+
 			</div>
 			<!-- Blog Sidebar Widgets Column -->
 			<div class="col-md-4">
@@ -93,63 +93,63 @@
 
 			</div>
 		</div>
+	</div>
+	<!-- /.row -->
+	<hr>
+	<!-- Footer -->
+	<footer>
+		<div class="row">
+			<div class="col-lg-12"></div>
+			<!-- /.col-lg-12 -->
+		</div>
 		<!-- /.row -->
-		<hr>
-		<!-- Footer -->
-		<footer>
-			<div class="row">
-				<div class="col-lg-12"></div>
-				<!-- /.col-lg-12 -->
-			</div>
-			<!-- /.row -->
-		</footer>
+	</footer>
 
-		<!-- /.container -->
-		<!-- jQuery -->
-		<script src="/resources/js/jquery/jquery.js"></script>
-		<!-- Bootstrap Core JavaScript -->
-		<script src="/resources/js/bootstrap.min.js"></script>
-		<script src="/resources/js/common.js"></script>
-		<script src="/resources/js/book.js"></script>
-		<script>
-			$("#logout").click(function() {
-				location.href = "/logout"
-			})
+	<!-- /.container -->
+	<!-- jQuery -->
+	<script src="/resources/js/jquery/jquery.js"></script>
+	<!-- Bootstrap Core JavaScript -->
+	<script src="/resources/js/bootstrap.min.js"></script>
+	<script src="/resources/js/common.js"></script>
+	<script src="/resources/js/book.js"></script>
+	<script>
+		$("#logout").click(function() {
+			location.href = "/logout"
+		})
 
-			$document
-					.ready(function() {
-						var date = "${con.regisdate}";
-						var newicon = "<span class="label label-default">New</span></h3>";
-						if (date < now()) {
-							$("#notice").append(newicon);
-						}
-
-					});
-			var array = [ "a0", "a1", "a2", "a3", "a4", "a5", "a6", "a7", "a8",
-					"a9" ];
-			function deletee() {
-				for ( var i in array) {
-					$("#array[i]").hide();
-				}
-
+		$document.ready(function() {
+			var date = "${con.regisdate}";
+			var newicon = "<span class="label label-default">New</span></h3>";
+			if (date < now()) {
+				$("#notice").append(newicon);
 			}
 
-			window.onload = function() {
-				deletee();
-
-			};
-
-			var cnt = 0;
-			function add() {
-				if (cnt == 10) {
-					clearInterval(timer);
-				}
-				$("#array[cnt]").show();
-
-				cnt++;
+		});
+		var array = [ "a0", "a1", "a2", "a3", "a4", "a5", "a6", "a7", "a8",
+				"a9" ];
+		function deletee() {
+			for ( var i in array) {
+				$("#array[i]").hide();
 			}
 
-			var timer = setInterval(add, 2000);
-		</script>
+		}
+
+		window.onload = function() {
+			deletee();
+
+		};
+
+		var cnt = 0;
+		function add() {
+			if (cnt == 10) {
+				clearInterval(timer);
+			}
+			$("#array[cnt]").show();
+
+			cnt++;
+		}
+
+		var timer = setInterval(add, 2000);
+	</script>
 </body>
 </html>

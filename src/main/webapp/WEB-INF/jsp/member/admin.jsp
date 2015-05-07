@@ -29,7 +29,7 @@
 				<hr>
 
 				<div class="input-group" style="width: 95%">
-					<form action="/findBook" method="get">
+					<form action="/findBook" method="post">
 						<div style="width: 100%">
 
 							 <input type="text"

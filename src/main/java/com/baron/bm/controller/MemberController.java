@@ -7,8 +7,13 @@
 
 package com.baron.bm.controller;
 
+import java.util.Hashtable;
 import java.util.List;
 
+import javax.naming.Context;
+import javax.naming.NamingException;
+import javax.naming.directory.DirContext;
+import javax.naming.directory.InitialDirContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,7 +27,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.baron.member.model.BoardModel;
 import com.baron.member.model.BookModel;
-import com.baron.member.model.ContentModel;
 import com.baron.member.model.MemberModel;
 import com.baron.member.service.BoardService;
 import com.baron.member.service.BookService;
@@ -66,30 +70,59 @@ public class MemberController {
 		// model.addAttribute("newbook", newBook);
 		return "index";
 	}
-/*
+
 	@RequestMapping("/")
 	public String loginForm() {
 		return "/member/login";
 	}
 
-	
-	 @RequestMapping("/login") public ModelAndView login(HttpServletResponse
-	  response, MemberModel model) {
-	  
-	  ModelAndView mav = new ModelAndView("/member/loginResult"); model =
-	  joinService.login(model); if (model != null) {
-	  System.out.println(model.getId() + model.getPermission());
-	  response.addCookie(new Cookie("bm_id", model.getId()));
-	  System.out.println(model.getId() + "login Success");
-	  
-	  response.addCookie(new Cookie("bm_permission", model .getPermission()));
-	  mav.addObject("result", true); } else { mav.addObject("result", false); }
-	  return mav; }
-	 */
+	@RequestMapping("/login")
+	public ModelAndView login(HttpServletResponse response, MemberModel model) {
+
+		// LDAP Context
+		String url = "LDAP://gw.taeyoung.co.kr:389";
+		Hashtable<String, String> env = new Hashtable<String, String>();
+		env.put(Context.INITIAL_CONTEXT_FACTORY,
+				"com.sun.jndi.ldap.LdapCtxFactory");
+		env.put(Context.PROVIDER_URL, url);
+		env.put(Context.SECURITY_AUTHENTICATION, "none");
+
+		env.put(Context.SECURITY_PRINCIPAL, "ISEOHAN\\" + model.getId());
+		env.put(Context.SECURITY_CREDENTIALS, model.getPassword());
+
+		try {
+			DirContext ctx = new InitialDirContext(env);
+			Object obj = new Object();
+			// want to print all users from the LDAP server
+			System.out.println(obj.toString());
+			ctx.close();
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+
+		ModelAndView mav = new ModelAndView("/member/loginResult");
+
+		model = joinService.login(model);
+		if (model != null) {
+			System.out.println(model.getId() + model.getPermission());
+			response.addCookie(new Cookie("bm_id", model.getId()));
+			System.out.println(model.getId() + "login Success");
+
+			response.addCookie(new Cookie("bm_permission", model
+					.getPermission()));
+			mav.addObject("result", true);
+		} else {
+			mav.addObject("result", false);
+		}
+
+		return mav;
+	}
+
 	// 서한 주소용 서버
 	// MEMBER TABLE (사번, 권한) 에서 사번, 권한 대조 후 로그인
-	//login?id="id"
-	 @RequestMapping("/login")
+	// login?id="id"
+
+	@RequestMapping("/autologin")
 	public String login2(HttpServletResponse response, String id) {
 
 		// ModelAndView mav = new ModelAndView("/index");
@@ -107,7 +140,6 @@ public class MemberController {
 		}
 		return "redirect:index";
 	}
-	
 
 	@RequestMapping("/logout")
 	// 쿠키 삭제

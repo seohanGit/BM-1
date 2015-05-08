@@ -45,6 +45,8 @@
 	</properties>
 
 	<dependencies>
+		<!-- LDAP 인증 -->
+		
 		<!-- common-dbcp -->
 		<dependency>
 			<groupId>commons-dbcp</groupId>
@@ -147,7 +149,7 @@
 			<version>8.2-507.jdbc3</version>
 		</dependency>
 		<!-- DB2 connection -->
-	
+
 
 		<!-- Logging depedencies -->
 		<!-- <dependency> <groupId>commons-logging</groupId> <artifactId>commons-logging</artifactId> 

@@ -41,7 +41,8 @@ public class BookController {
 
 	@RequestMapping("/bookInfo")
 	public String bookInfo(String book_cd, Model model, BookModel book) {
-		model.addAttribute("book", bookservice.selectBook(book_cd));
+		book = bookservice.selectBook(book_cd);
+		model.addAttribute("book", book);
 
 		return "book/bookInfo";
 	}
@@ -150,7 +151,7 @@ public class BookController {
 			}
 		}
 		if (rentservice.selectReservation(book_cd) != null) {
-			return "reservationfail";
+			return "rent/reservationfail";
 		}
 
 		bookservice.deleteBook(book_cd);

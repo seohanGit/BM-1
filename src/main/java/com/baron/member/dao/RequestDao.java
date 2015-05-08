@@ -10,7 +10,7 @@ public interface RequestDao {
 
 	public List<BookModel> requestList();
 
-	public void deleteRequest(String bookCode);
+	public void deleteRequest(String req_cd);
 
 	public BookModel selectBook(String bookCode);
 

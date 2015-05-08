@@ -14,6 +14,10 @@
 <link href="/resources/css/common.css" rel="stylesheet">
 <link href="/resources/css/index.css" rel="stylesheet">
 </head>
+<%
+	String id = null;
+	session.setAttribute("id", id);
+%>
 <body>
 	<jsp:include page="nav.jsp" />
 	<!-- Page Content -->

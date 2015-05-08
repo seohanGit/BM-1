@@ -80,7 +80,6 @@ body {
 									<tr>
 										<th style="width: 15px"><input type="checkbox"
 											id="allCheck"></th>
-										<th class="hidden-sm hidden-xs " id="td-img">표지</th>
 										<th id="td-title">도서명</th>
 										<th class=" hidden-xs " id="td-author">저자</th>
 										<th style="width: 90px" class="hidden-sm hidden-xs hidden-md "
@@ -101,10 +100,9 @@ body {
 										<tr>
 											<td><input type="checkbox" name="book_cd"
 												value="${book.book_cd}"></td>
-											<td class="hidden-sm hidden-xs" style="width: 50px"
-												align="left"><img style="width: 50px"
-												src="${book.imageurl}"></td>
-											<td align="left">${book.title }</td>
+											<td align="left"><a href="#"
+												onclick="window.open('/bookInfo?book_cd=${book.book_cd}','new','resizeble=yes scrollbars=yes');">
+													${book.title }</a></td>
 											<td class=" hidden-xs " align="left">${book.author }</td>
 											<td class="hidden-sm hidden-xs hidden-md " align="left">${book.b_group}</td>
 											<c:choose>
@@ -189,8 +187,6 @@ body {
 				paging : true,
 				ordering : true,
 				"columns" : [ {
-					"searchable" : false
-				}, {
 					"searchable" : false
 				}, null, null, {
 					"searchable" : false

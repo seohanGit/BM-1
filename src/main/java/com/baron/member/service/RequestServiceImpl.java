@@ -28,8 +28,8 @@ public class RequestServiceImpl implements RequestService {
 	}
 
 	@Override
-	public void deleteRequest(String bookCode) {
-		requestDao.deleteRequest(bookCode);
+	public void deleteRequest(String req_cd) {
+		requestDao.deleteRequest(req_cd);
 	}
 
 	@Override

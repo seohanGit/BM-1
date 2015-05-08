@@ -6,7 +6,7 @@
 <!-- First Blog Post -->
 <div align="left" >
 	<div class="row panel panel-default hidden-xs"
-		style="width: 80%; padding-left: 30px; ">
+		style="width: 80%; margin-left: 30px; ">
 		<div class="nav nav-tabs nav-justified" role="group" aria-label="...">
 
 

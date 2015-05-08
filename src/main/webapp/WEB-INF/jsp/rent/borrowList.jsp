@@ -67,45 +67,45 @@ body {
 									<th id="td-img"></th>
 								</tr>
 							</thead>
+
+							<c:forEach items="${bookList}" var="book" varStatus="loop">
+
+								<tbody>
+									<tr>
+										<td class="hidden-xs" style="width: 50px" align="left"><img
+											style="width: 50px" src="${book.imageurl}"></td>
+
+										<td align="left">${book.title }</td>
+										<td class="hidden-xs" align="left">${book.author }</td>
+										<td class="hidden-xs hidden-sm" align="left">${book.b_group}</td>
+
+
+										<td class="hidden-xs"><fmt:formatDate type="date"
+												pattern="yyyy-MM-dd" value="${book.rentdate}" /></td>
+										<td style="width: inherit;"><fmt:formatDate type="date"
+												pattern="yyyy-MM-dd" value="${book.returndate}" /></td>
+										<c:choose>
+											<c:when test="${book.rentchk=='1'}">
+												<td>요청중</td>
+												<td>
+													<button class="btn btn-sm btn-default" type="button"
+														id="reservebook"
+														onClick="location.href='/cancleBorrowBook?book_cd=${book.book_cd}'; cancel();">취소</button>
+												</td>
+											</c:when>
+											<c:when test="${book.rentchk=='2'}">
+
+												<td>대여중</td>
+												<td></td>
+											</c:when>
+										</c:choose>
+
+
+									</tr>
+								</tbody>
+							</c:forEach>
 						</c:otherwise>
 					</c:choose>
-					<c:forEach items="${bookList}" var="book" varStatus="loop">
-
-						<tbody>
-							<tr>
-								<td class="hidden-xs" style="width: 50px" align="left"><img
-									style="width: 50px" src="${book.imageurl}"></td>
-
-								<td align="left">${book.title }</td>
-								<td class="hidden-xs" align="left">${book.author }</td>
-								<td class="hidden-xs hidden-sm" align="left">${book.b_group}</td>
-
-
-								<td class="hidden-xs"><fmt:formatDate type="date"
-										pattern="yyyy-MM-dd" value="${book.rentdate}" /></td>
-								<td style="width: inherit;"><fmt:formatDate type="date"
-										pattern="yyyy-MM-dd" value="${book.returndate}" /></td>
-								<c:choose>
-									<c:when test="${book.rentchk=='1'}">
-										<td>요청중</td>
-										<td>
-											<button class="btn btn-sm btn-default" type="button"
-												id="reservebook"
-												onClick="location.href='/cancleBorrowBook?book_cd=${book.book_cd}'; cancel();">취소</button>
-										</td>
-									</c:when>
-									<c:when test="${book.rentchk=='2'}">
-
-										<td>대여중</td>
-										<td></td>
-									</c:when>
-								</c:choose>
-
-
-							</tr>
-						</tbody>
-					</c:forEach>
-
 				</table>
 
 				<hr>
@@ -185,7 +185,6 @@ body {
 		</div>
 	</div>
 
-	<hr>
 	<script src="/resources/js/jquery/jquery.js"></script>
 	<script src="/resources/js/bootstrap.min.js"></script>
 	<script src="/resources/js/common.js"></script>

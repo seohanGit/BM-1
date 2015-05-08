@@ -2,7 +2,6 @@ body {
 	padding-top: 70px;
 	/* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
 }
-
 footer {
 	margin: 50px 0;
 }
@@ -38,7 +37,7 @@ div .left {
 
 div .right {
 	float: right;
-	width: 30%;
+	width: 40%;
 	margin-bottom: 10px;
 }
 
@@ -89,7 +88,7 @@ div .right>h4 {
 }
 
 .row {
-	background-color: #fff;
+	
 	padding: 15px;
 }
 

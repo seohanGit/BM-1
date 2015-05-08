@@ -33,9 +33,17 @@ public class BookModel {
 	private int sunbo;
 
 	private String sabun;
-	
+private String req_cd;	
 
 	
+
+	public String getReq_cd() {
+	return req_cd;
+}
+
+public void setReq_cd(String req_cd) {
+	this.req_cd = req_cd;
+}
 
 	public String getSabun() {
 		return sabun;

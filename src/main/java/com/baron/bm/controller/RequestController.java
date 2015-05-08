@@ -27,9 +27,9 @@ public class RequestController {
 
 	@RequestMapping("/confirmRequest")
 	public String requestResult(BookModel model) {
-		System.out.println(model.getId());
+		System.out.println(model.getSummary());
 		requestservice.requestBook(model);
-		return "requestBookResult";
+		return "redirect:requestList";
 	}
 
 	@RequestMapping("/requestList")
@@ -91,6 +91,7 @@ public class RequestController {
 		}
 		model.addAttribute("book", book);
 		System.out.println(book.getId());
+		System.out.println(book.getSummary());
 
 		return "confirmRequest";
 	}
@@ -106,7 +107,7 @@ public class RequestController {
 	public String confirmBuy(BookModel model) {
 		if (bookService.selectBook(model.getBook_cd()) == null) {
 			bookService.insertBook(model);
-			requestservice.deleteRequest(model.getBook_cd());
+			requestservice.deleteRequest(model.getReq_cd());
 			return "redirect:requestList";
 		} else {
 			return "buyfail";

@@ -23,10 +23,10 @@
 			<tr>
 				<td align="center">
 					<div style="text-align: center;">
-						<IMG SRC="resources/img/loading_map.gif">
+						<IMG SRC="resources/img/loading_map.gif" >
 					</div>
 					<div
-						style="margin-top: 20px; color: #FFF; text-align: center; font-weight: bold; font-size: 40px">L
+						style="margin-top: 20px; color: #000; text-align: center; font-weight: bold; font-size: 40px">L
 						o a d i n g . . .</div>
 				</td>
 			</tr>
@@ -46,11 +46,10 @@
 
 					<thead>
 						<tr>
-							<th id="td-img">표지</th>
+							
 							<th id="td-title">도서명</th>
 							<th id="td-genre">저자</th>
 							<th id="td-genre">분류</th>
-							<th id="td-author">출판사</th>
 							<th id="td-genre">대여상태</th>
 							<th id="td-empty"></th>
 						</tr>
@@ -63,13 +62,11 @@
 						<c:forEach items="${bookList}" var="book">
 
 							<tr>
-								<td style="width: 50px" align="left"><img
-									style="width: 50px" src="${book.imageurl}"></td>
+								
 								<td align="left"><a
-									href="/bookInfo?book_cd=${book.book_cd}"> ${book.title }</a></td>
+									href="#" onclick="window.open('/bookInfo?book_cd=${book.book_cd}','new','resizeble=yes scrollbars=yes');"> ${book.title }</a></td>
 								<td align="left">${book.author }</td>
 								<td align="left">${book.b_group}</td>
-								<td align="left">${book.publish}</td>
 								<c:choose>
 									<c:when test="${book.rentchk=='0'}">
 										<td align="left"><mark>대출가능</mark></td>
@@ -135,11 +132,7 @@
 				"pageLength" : 10,
 				paging : true,
 				ordering : true,
-				"columns" : [ {
-					"searchable" : false
-				}, {
-					"searchable" : false
-				}, null, null, {
+				"columns" : [ null, null, {
 					"searchable" : false
 				}, {
 					"searchable" : false

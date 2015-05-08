@@ -33,9 +33,9 @@ public class RequestDaoImpl implements RequestDao{
 	}
 
 	@Override
-	public void deleteRequest(String bookCode) {
+	public void deleteRequest(String req_cd) {
 		// TODO Auto-generated method stub
-		session.update(NAMESPACE + "deleteRequest", bookCode);
+		session.update(NAMESPACE + "deleteRequest", req_cd);
 	}
 
 	@Override

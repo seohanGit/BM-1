@@ -12,7 +12,8 @@
 	<insert id="insertBook" parameterType="BookModel">
 		INSERT INTO BOOKMST
 		(title,BOOK_CD,b_group,publish,author,rentchk,imageurl,
-		rcv_date, isbn, price, summary)
+		rcv_date, isbn,
+		price, summary)
 		VALUES
 		(#{title},#{book_cd},#{b_group},#{publish},#{author},0,#{imageurl},
 		current date, #{isbn}, #{price}, #{summary})
@@ -20,14 +21,14 @@
 
 
 	<select id="selectBook" parameterType="String" resultType="BookModel">
-
 		SELECT * FROM BOOKMST WHERE BOOK_CD=#{book_cd}
 	</select>
 
 	<select id="searchBook" parameterType="String" resultType="SearchResult">
 		<bind name="keyword" value="'%' + _parameter + '%'" />
-		SELECT imageurl, title, author, b_group, publish, rentchk, reservechk
-		FROM BOOKMST 
+		SELECT title, author, b_group, rentchk, reservechk, book_cd
+		FROM
+		BOOKMST
 		WHERE
 		TITLE like #{keyword}
 		ORDER BY RENTCHK DESC
@@ -35,9 +36,11 @@
 	</select>
 
 	<select id="listBook" parameterType="Dto" resultType="BookModel">
-		SELECT  imageurl, title, author, b_group, publish, rentchk
+		SELECT
+		title, author, b_group, rentchk, reservechk, book_cd
 		FROM BOOKMST
-		ORDER BY RENTCHK DESC
+		ORDER
+		BY RENTCHK DESC
 	</select>
 
 
@@ -77,28 +80,28 @@
 	<insert id="requestBook" parameterType="BookModel">
 		INSERT INTO BOOKREQ
 		(id,reqdate,title,book_cd,price,author,quantity,b_group,link,
-		imageurl,isbn, publish)
+		imageurl,isbn, publish, summary)
 		VALUES
-		(#{id}, current	date, #{title},#{book_cd},#{price},#{author},#{quantity},#{b_group},#{link},
-		#{imageurl},#{isbn}, #{publish})
+		(#{id}, current date,
+		#{title},#{book_cd},#{price},#{author},#{quantity},#{b_group},#{link},
+		#{imageurl},#{isbn}, #{publish}, #{summary})
 	</insert>
 
 	<update id="deleteRequest" parameterType="String">
 		UPDATE BOOKREQ
 		SET
 		reqstatus='2'
-		WHERE book_cd=#{book_cd}
+		WHERE req_cd=#{req_cd}
 	</update>
 
 	<select id="requestList" resultType="BookModel">
 		SELECT *
 		FROM
-		BOOKREQ AS
-		A,
-		BOOKMEMBER AS B
-		WHERE A.id=B.id AND A.book_cd!='0'
+		BOOKREQ
+		WHERE reqdate <![CDATA[ > current date -1 year]]>
+		
 		ORDER BY
-		A.reqdate
+		reqstatus
 		DESC
 	</select>
 

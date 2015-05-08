@@ -26,114 +26,115 @@ body {
 
 <body>
 	<jsp:include page="nav.jsp" />
-
-
 	<div class="container">
-		<div class="row" id="searchResultArea">
-			<hr>
+
+		<hr>
+		<div class="row panel panel-default">
 			<!-- Blog Entries Column -->
+			<h4>원하는 책이 없다면 인터넷에서 주문하세요 !</h4>
+			<div class="input-group" style="width: 90%">
+				<form action="/findBook" method="get">
+					<span class="input-group-btn"> <input type="text"
+						class="form-control" id="query" name="keyword"
+						placeholder="인터파크 검색">
+						<button class="btn btn-default" type="submit" id="btn_find">
+							<span class="glyphicon glyphicon-search"></span>
+						</button>
+					</span>
+				</form>
+			</div>
+			<div>
+				<hr>
+				<h2>구매요청 목록</h2>
 
+				<table class="table table-striped table-bordered">
 
-			<c:choose>
-				<c:when test="${empty bookList}">
-					<div>
-						<h2>구매요청 목록</h2>
-					</div>
-					<br>
-					<p></p>
-					<div>
-						<h3>구매 요청한 도서가 없습니다.</h3>
-					</div>
-				</c:when>
-				<c:otherwise>
-					<div class="left">
-						<h2>구매요청 목록</h2>
-					</div>
-					<br>
-					<p></p>
+					<c:choose>
+						<c:when test="${empty bookList}">
 
-					<table class="table table-striped table-bordered">
+							<h3>구매 요청한 도서가 없습니다.</h3>
+						</c:when>
+						<c:otherwise>
+							<thead>
+								<tr class=" title">
 
-						<thead>
-							<tr class=" title">
-
-								<td id="td-img">표지</td>
-
-								<td id="td-title">도서명</td>
-								<td class="hidden-xs" id="td-author">저자</td>
-								<td id="td-date">가격</td>
-								<td id="td-img">수량</td>
-								
-								<td class="hidden-xs" id="td-genre">요청일자</td>
-								<td id="td-img">상태</td>
-
-							</tr>
-						</thead>
-
-						<c:forEach items="${bookList}" var="book" varStatus="status">
-
-							<tbody class="hidden" style="width: 100%">
-								<tr>
-
-									<td rowspan="4" style="width: 50px" align="left"><img
-										style="width: 50px" src="${book.imageurl}"></td>
+									<td id="td-img">표지</td>
+									<td id="td-title">도서명</td>
+									<td class="hidden-xs" id="td-author">저자</td>
+									<td id="td-date">가격</td>
+									<td id="td-img">수량</td>
+									<td class="hidden-xs" id="td-genre">요청일자</td>
+									<td id="td-img">상태</td>
 
 								</tr>
-								<tr>
-									<td style="width: 40%" align="left"><a href="${book.link}">${book.title }</a></td>
-									<td style="width: 40%" align="left">${book.author }</td>
+							</thead>
 
-								</tr>
-								<tr>
-									<td>${book.b_group}</td>
-									<td>요청자 : ${book.id}</td>
+							<c:forEach items="${bookList}" var="book" varStatus="status">
 
-								</tr>
-								<tr>
-									<td>${book.price}원</td>
-									<td>수량 : ${book.quantity}</td>
+								<tbody class="hidden" style="width: 100%">
+									<tr>
 
-								</tr>
-							</tbody>
+										<td rowspan="4" style="width: 50px" align="left"><img
+											style="width: 50px" src="${book.imageurl}"></td>
 
+									</tr>
+									<tr>
+										<td style="width: 40%" align="left"><a
+											href="${book.link}">${book.title }</a></td>
+										<td style="width: 40%" align="left">${book.author }</td>
 
-							<tbody>
-								<tr >
+									</tr>
+									<tr>
+										<td>${book.b_group}</td>
+										<td>요청자 : ${book.id}</td>
 
-									<td><img style="width: 50px" src="${book.imageurl}"></td>
-									<td><a href="${book.link}">${book.title }</a></td>
-									<td class="hidden-xs">${book.author}</td>
+									</tr>
+									<tr>
+										<td>${book.price}원</td>
+										<td>수량 : ${book.quantity}</td>
 
-									<td>${book.price}원</td>
-									<td align="center">${book.quantity}</td>
-									
-									<td class="hidden-xs"><fmt:formatDate type="date" pattern="yyyy-MM-dd"
-											value="${book.reqdate}" /></td>
-									<td ><c:choose>
-											<c:when test="${book.reqstatus=='0'}">대기</c:when>
-											<c:when test="${book.reqstatus=='1'}">승인</c:when>
-											<c:when test="${book.reqstatus=='2'}">반려</c:when>
-										</c:choose></td>
-								</tr>
-
-							</tbody>
-
-						</c:forEach>
-					</table>
-
-				</c:otherwise>
-			</c:choose>
+									</tr>
+								</tbody>
 
 
+								<tbody>
+									<tr>
+
+										<td><img style="width: 50px" src="${book.imageurl}"></td>
+										<td><a href="${book.link}">${book.title }</a></td>
+										<td class="hidden-xs">${book.author}</td>
+
+										<td>${book.price}원</td>
+										<td align="center">${book.quantity}</td>
+
+										<td class="hidden-xs"><fmt:formatDate type="date"
+												pattern="yyyy-MM-dd" value="${book.reqdate}" /></td>
+										<td><c:choose>
+												<c:when test="${book.reqstatus=='0'}">대기</c:when>
+												<c:when test="${book.reqstatus=='1'}">승인</c:when>
+												<c:when test="${book.reqstatus=='2'}">반려</c:when>
+											</c:choose></td>
+									</tr>
+
+								</tbody>
+
+							</c:forEach>
+
+						</c:otherwise>
+					</c:choose>
+				</table>
+
+				<hr>
+			</div>
 		</div>
-	</div>
-	<script src="/resources/js/jquery/jquery.js"></script>
-	<script src="/resources/js/bootstrap.min.js"></script>
-	<script src="/resources/js/common.js"></script>
-	<script>
-		function del() {
-			alert("삭제되었습니다.");
-		}
-	</script>
+
+		<script src="/resources/js/jquery/jquery.js"></script>
+		<script src="/resources/js/bootstrap.min.js"></script>
+		<script src="/resources/js/common.js"></script>
+		<script>
+			function del() {
+				alert("삭제되었습니다.");
+			}
+		</script>
 </body>
 </html>

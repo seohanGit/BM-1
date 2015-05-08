@@ -66,7 +66,7 @@ public class MemberController {
 		// model.addAttribute("newbook", newBook);
 		return "index";
 	}
-
+/*
 	@RequestMapping("/")
 	public String loginForm() {
 		return "/member/login";
@@ -85,10 +85,10 @@ public class MemberController {
 	  response.addCookie(new Cookie("bm_permission", model .getPermission()));
 	  mav.addObject("result", true); } else { mav.addObject("result", false); }
 	  return mav; }
-	 
+	 */
 	// 서한 주소용 서버
 	// MEMBER TABLE (사번, 권한) 에서 사번, 권한 대조 후 로그인
-	/*
+	//login?id="id"
 	 @RequestMapping("/login")
 	public String login2(HttpServletResponse response, String id) {
 
@@ -107,7 +107,7 @@ public class MemberController {
 		}
 		return "redirect:index";
 	}
-	*/
+	
 
 	@RequestMapping("/logout")
 	// 쿠키 삭제

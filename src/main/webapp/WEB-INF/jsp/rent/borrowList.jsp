@@ -46,8 +46,8 @@ body {
 			</div>
 			<div id="searchResultArea">
 				<hr>
-				<h2>사용자 대여 현황</h2>
-				<hr>
+				<h2>대여 현황</h2>
+
 
 				<table class="table table-striped table-bordered ">
 					<c:choose>
@@ -61,10 +61,10 @@ body {
 									<th id="td-title">도서명</th>
 									<th class="hidden-xs" id="td-genre">저자</th>
 									<th class="hidden-xs hidden-sm" id="td-genre">분류</th>
-									<th class="hidden-xs" id="td-author">대여일자</th>
-									<th id="td-author">반납일자</th>
-									<th id="td-date">상태</th>
-									<th></th>
+									<th class="hidden-xs" id="td-genre">대여일</th>
+									<th id="td-genre">반납일</th>
+									<th id="td-genre">상태</th>
+									<th id="td-img"></th>
 								</tr>
 							</thead>
 						</c:otherwise>
@@ -87,16 +87,16 @@ body {
 										pattern="yyyy-MM-dd" value="${book.returndate}" /></td>
 								<c:choose>
 									<c:when test="${book.rentchk=='1'}">
-										<td>대여요청중</td>
+										<td>요청중</td>
 										<td>
-											<button class="btn btn-default" type="button"
+											<button class="btn btn-sm btn-default" type="button"
 												id="reservebook"
 												onClick="location.href='/cancleBorrowBook?book_cd=${book.book_cd}'; cancel();">취소</button>
 										</td>
 									</c:when>
 									<c:when test="${book.rentchk=='2'}">
 
-										<td>대출중</td>
+										<td>대여중</td>
 										<td></td>
 									</c:when>
 								</c:choose>
@@ -113,16 +113,14 @@ body {
 					<c:when test="${empty record}">
 					</c:when>
 					<c:otherwise>
-						<table class="table table-striped table-bordered" id="dataTable">
+						<hr>
+						<h2>대여 기록</h2>
+						<table class="table table-striped table-bordered">
 							<thead>
 								<tr class=" title">
 									<th id="tb-title">도서명</th>
-									<th id="tb-date">대여일자</th>
-									<th id="tb-date">반납일자</th>
-									<th id="tb-status">대출자</th>
-
-
-
+									<th id="tb-date">대여일</th>
+									<th id="tb-date">반납일</th>
 								</tr>
 							</thead>
 
@@ -137,12 +135,8 @@ body {
 												pattern="yyyy-MM-dd" value="${record.rentdate }" /></td>
 										<td align="left"><fmt:formatDate type="date"
 												pattern="yyyy-MM-dd" value="${record.returndate }" /></td>
-										<td>${record.id}</td>
-										<td><c:choose>
-												<c:when test="${book.reservechk=='0'}">대기</c:when>
-												<c:when test="${book.reservechk=='1'}">승인</c:when>
-												<c:when test="${book.reservechk=='2'}">반려</c:when>
-											</c:choose></td>
+
+
 
 									</tr>
 
@@ -156,17 +150,14 @@ body {
 					<c:when test="${empty reserveList}">
 					</c:when>
 					<c:otherwise>
+						<hr>
+						<h2>대여 현황</h2>
 						<table class="table table-striped table-bordered">
 							<thead>
 								<tr class=" title">
 									<th id="tb-title">도서명</th>
-									<th id="tb-date">대여일자</th>
 									<th id="tb-date">분류</th>
-									<th id="tb-date">반납일자</th>
-									<th id="tb-status">대출자</th>
-
-
-
+									<th id="tb-date">예약일</th>
 								</tr>
 							</thead>
 
@@ -177,11 +168,9 @@ body {
 									<tr>
 
 										<td align="left">${reser.title }</td>
+										<td class="hidden-xs hidden-sm" align="left">${book.b_group}</td>
 										<td align="left"><fmt:formatDate type="date"
 												pattern="yyyy-MM-dd" value="${reser.reser_date }" /></td>
-										<td class="hidden-xs hidden-sm" align="left">${book.b_group}</td>
-										<td align="left">value="${reser.reser_date }"</td>
-										<td></td>
 
 
 									</tr>

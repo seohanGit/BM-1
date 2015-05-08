@@ -113,7 +113,6 @@ body {
 	<script src="/resources/js/common.js"></script>
 	<script src="/resources/js/jquery/jquery.js"></script>
 	<script src="/resources/js/bootstrap.min.js"></script>
-
 	<script src="/resources/js/book.js"></script>
 </body>
 </html>

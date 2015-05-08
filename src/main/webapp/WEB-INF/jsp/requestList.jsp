@@ -68,12 +68,12 @@ body {
 											<th class="hidden-sm hidden-xs hidden-md " id="td-author">저자</th>
 											<th class="hidden-sm hidden-xs " id="td-date">가격</th>
 											<th id="td-img">수량</th>
-											<th id="td-date">신청자</th>
+											<th id="td-date">신청</th>
 
 											<th class="hidden-sm hidden-xs hidden-md " id="td-date">요청일자</th>
 											<th id="td-img">상태</th>
 											<th id="td-date"></th>
-											<th id="td-date"></th>
+											
 										</tr>
 									</thead>
 
@@ -130,24 +130,22 @@ body {
 												<c:choose>
 													<c:when test="${book.reqstatus =='0'}">
 														<td>대기</td>
-														<td><button class="btn btn-default" type="button"
+														<td><button class="btn btn-sm btn-default" type="button"
 																id="buyBook"
 																onClick="location.href='buyRequest?book_cd=${book.book_cd}'">구매</button>
-														</td>
-														<td>
-															<button class="btn btn-default" type="button"
+															<button class="btn btn-sm btn-default" type="button"
 																onClick="location.href='deleteRequest?book_cd=${book.book_cd}'; del();">삭제</button>
 														</td>
 													</c:when>
 													<c:when test="${book.reqstatus =='1'}">
 														<td align="left">승인</td>
 														<td></td>
-														<td></td>
+														
 													</c:when>
 													<c:when test="${book.reqstatus =='2'}">
 														<td>반려</td>
 														<td></td>
-														<td></td>
+														
 													</c:when>
 												</c:choose>
 

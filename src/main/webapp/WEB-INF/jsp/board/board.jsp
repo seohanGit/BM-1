@@ -28,7 +28,7 @@
 					<div class="well right-end">
 						<ul class="nav">
 							
-							<li class="active"><a href="boardwrite">추천게시판글쓰기</a></li>
+							<li class="active"><a href="boardwrite">추천 글쓰기</a></li>
 							<li><a href="#" id="register">등록일자순</a></li>
 							<li><a href="#" id="title">제목순</a></li>
 						</ul>

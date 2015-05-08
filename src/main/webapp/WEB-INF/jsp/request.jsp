@@ -55,24 +55,24 @@ body {
 					<table class="table table-striped table-bordered">
 
 						<thead>
-							<tr class="hidden-xs title">
+							<tr class=" title">
 
-								<td id="tb-img">표지</td>
+								<td id="td-img">표지</td>
 
-								<td id="tb-author">도서명</td>
-								<td id="tb-author">저자</td>
-								<td id="tb-b_group">가격</td>
-								<td id="tb-b_group">수량</td>
-								<td id="tb-b_group">신청자</td>
-								<td id="tb-date">요청일자</td>
-								<td id="td-date">상태</td>
+								<td id="td-title">도서명</td>
+								<td class="hidden-xs" id="td-author">저자</td>
+								<td id="td-date">가격</td>
+								<td id="td-img">수량</td>
+								
+								<td class="hidden-xs" id="td-genre">요청일자</td>
+								<td id="td-img">상태</td>
 
 							</tr>
 						</thead>
 
 						<c:forEach items="${bookList}" var="book" varStatus="status">
 
-							<tbody class="visible-xs-block" style="width: 100%">
+							<tbody class="hidden" style="width: 100%">
 								<tr>
 
 									<td rowspan="4" style="width: 50px" align="left"><img
@@ -98,18 +98,18 @@ body {
 
 
 							<tbody>
-								<tr class="hidden-xs">
+								<tr >
 
 									<td><img style="width: 50px" src="${book.imageurl}"></td>
 									<td><a href="${book.link}">${book.title }</a></td>
-									<td>${book.author}</td>
+									<td class="hidden-xs">${book.author}</td>
 
 									<td>${book.price}원</td>
 									<td align="center">${book.quantity}</td>
-									<td>${book.id}</td>
-									<td><fmt:formatDate type="date" pattern="yyyy-MM-dd"
+									
+									<td class="hidden-xs"><fmt:formatDate type="date" pattern="yyyy-MM-dd"
 											value="${book.reqdate}" /></td>
-									<td><c:choose>
+									<td ><c:choose>
 											<c:when test="${book.reqstatus=='0'}">대기</c:when>
 											<c:when test="${book.reqstatus=='1'}">승인</c:when>
 											<c:when test="${book.reqstatus=='2'}">반려</c:when>

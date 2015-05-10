@@ -51,7 +51,7 @@
 							<th id="td-genre">저자</th>
 							<th id="td-genre">분류</th>
 							<th id="td-genre">대여상태</th>
-							<th id="td-empty"></th>
+							<th id="td-img"></th>
 						</tr>
 					</thead>
 					<%-- 

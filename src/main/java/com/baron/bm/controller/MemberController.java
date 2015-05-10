@@ -87,7 +87,7 @@ public class MemberController {
 		env.put(Context.PROVIDER_URL, url);
 		env.put(Context.SECURITY_AUTHENTICATION, "none");
 
-		env.put(Context.SECURITY_PRINCIPAL, "ISEOHAN\\" + model.getId());
+		env.put(Context.SECURITY_PRINCIPAL, model.getId());
 		env.put(Context.SECURITY_CREDENTIALS, model.getPassword());
 
 		try {
@@ -101,7 +101,7 @@ public class MemberController {
 		}
 
 		ModelAndView mav = new ModelAndView("/member/loginResult");
-
+/*
 		model = joinService.login(model);
 		if (model != null) {
 			System.out.println(model.getId() + model.getPermission());
@@ -114,7 +114,7 @@ public class MemberController {
 		} else {
 			mav.addObject("result", false);
 		}
-
+*/
 		return mav;
 	}
 

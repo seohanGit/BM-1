@@ -28,6 +28,7 @@ public class RequestController {
 	@RequestMapping("/confirmRequest")
 	public String requestResult(BookModel model) {
 		System.out.println(model.getSummary());
+		model.setReq_cd(model.getId() + model.getIsbn() + model.getQuantity());
 		requestservice.requestBook(model);
 		return "redirect:requestList";
 	}
@@ -42,6 +43,7 @@ public class RequestController {
 			} else if (cookie.getName().equals("bm_permission")) {
 				if ("1".equals(cookie.getValue())) {
 					bookList = requestservice.requestList();
+					System.out.println(bookList.get(0).getReq_cd());
 					model.addAttribute("bookList", bookList);
 					return "requestList";
 				} else {
@@ -89,6 +91,7 @@ public class RequestController {
 			if (cookie.getName().equals("bm_id"))
 				book.setId(cookie.getValue());
 		}
+
 		model.addAttribute("book", book);
 		System.out.println(book.getId());
 		System.out.println(book.getSummary());
@@ -97,8 +100,8 @@ public class RequestController {
 	}
 
 	@RequestMapping("/buyRequest")
-	public String buyRequest(String book_cd, Model model, BookModel book) {
-		book = requestservice.selectBook(book_cd);
+	public String buyRequest(String req_cd, Model model, BookModel book) {
+		book = requestservice.selectBook(req_cd);
 		model.addAttribute("book", book);
 		return "confirmBuy";
 	}
@@ -132,13 +135,9 @@ public class RequestController {
 	}
 
 	@RequestMapping("/deleteRequest")
-	public String deleteRequest(String book_cd) {
-		System.out.println(book_cd);
-		System.out.println(book_cd);
-		System.out.println(book_cd);
-		System.out.println(book_cd);
-
-		requestservice.deleteRequest(book_cd);
+	public String deleteRequest(String req_cd) {
+		System.out.println(req_cd);
+		requestservice.deleteRequest(req_cd);
 		return "redirect:requestList";
 	}
 }

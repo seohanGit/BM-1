@@ -59,15 +59,14 @@
 						<tr>
 
 							<th id="td-title">도서명</th>
-<<<<<<< HEAD
-							<th id="td-genre">저자</th>
-							<th id="td-genre">분류</th>
-							<th id="td-genre">대여상태</th>
-=======
+
 							<th class="hidden-xs" id="td-genre">저자</th>
+							<th class="hidden-xs" id="td-genre">출판사</th>
 							<th class="hidden-xs" id="td-genre">분류</th>
-							<th id="td-genre">대여 상태</th>
->>>>>>> 855aa46589b36538442bfa1cd0488cce2e8ccf4d
+							<th id="td-genre">대여상태</th>
+
+
+
 							<th id="td-img"></th>
 						</tr>
 					</thead>
@@ -84,6 +83,7 @@
 									onclick="window.open('/bookInfo?book_cd=${book.book_cd}','new','resizeble=yes scrollbars=yes');">
 										${book.title }</a></td>
 								<td class="hidden-xs" align="left">${book.author }</td>
+								<td class="hidden-xs" align="left">${book.publish}</td>
 								<td class="hidden-xs" align="left">${book.b_group}</td>
 								<c:choose>
 									<c:when test="${book.rentchk=='0'}">
@@ -150,7 +150,7 @@
 				"pageLength" : 10,
 				paging : true,
 				ordering : true,
-				"columns" : [ null, null, {
+				"columns" : [ null, null, null, {
 					"searchable" : false
 				}, {
 					"searchable" : false

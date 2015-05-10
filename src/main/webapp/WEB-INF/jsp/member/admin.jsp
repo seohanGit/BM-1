@@ -48,25 +48,8 @@
 				</div>
 
 				<hr>
-				<img src="/resources/lava3.JPG" style="width: 100%" id="image2">
-
-				<div id="searchResultArea"></div>
+			
 				<hr>
-				<hr>
-				<!-- Second Blog Post -->
-				<h2>
-					<a href="#">사용자 관리</a>
-				</h2>
-
-				<p>
-					<span class=></span>
-				</p>
-				<button type="button" class="btn btn-default" role="button"
-					id="late">연체자 보기</button>
-
-				<hr>
-				<img src="/resources/lava4.JPG" style="width: 100%" id="image3">
-
 				<div id="personResultArea"></div>
 				<hr>
 				<hr>

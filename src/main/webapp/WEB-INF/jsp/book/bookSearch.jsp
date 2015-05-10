@@ -18,12 +18,12 @@
 <body>
 	<jsp:include page="../nav.jsp" />
 	<div id="loadingBar"
-		style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; text-align: center; margin: 0 auto; z-index: 100000;">
-		<table width="100%" height="100%" border="0" bgcolor="#000000">
+		style="background-color: #fff; position: absolute; top: 0; left: 0; width: 100%; height: 100%; text-align: center; margin: 0 auto; z-index: 100000;">
+		<table width="100%" height="100%" border="0" bgcolor="#fff">
 			<tr>
 				<td align="center">
 					<div style="text-align: center;">
-						<IMG SRC="resources/img/loading_map.gif" >
+						<IMG SRC="resources/img/loading_map.gif">
 					</div>
 					<div
 						style="margin-top: 20px; color: #000; text-align: center; font-weight: bold; font-size: 40px">L
@@ -38,20 +38,31 @@
 		<div id="searchResultArea">
 			<hr>
 			<h2>도서검색 목록</h2>
-			<hr>
 
+			<h4>원하는 책이 없다면 인터넷에서 주문하세요 !</h4>
+			<div class="input-group ">
+				<form action="/findBook" method="post">
+					<span class="input-group-btn"> <input type="text"
+						class="form-control" id="query" name="keyword"
+						placeholder="인터파크 검색">
+						<button class="btn btn-default" type="submit" id="btn_find">
+							<span class="glyphicon glyphicon-search"></span>
+						</button>
+					</span>
+				</form>
+			</div>
 			<div class="dataTable_wrapper">
 				<table class="table table-striped table-bordered " id="dataTable">
 
 
 					<thead>
 						<tr>
-							
+
 							<th id="td-title">도서명</th>
-							<th id="td-genre">저자</th>
-							<th id="td-genre">분류</th>
-							<th id="td-genre">대여상태</th>
-							<th id="td-empty"></th>
+							<th class="hidden-xs" id="td-genre">저자</th>
+							<th class="hidden-xs" id="td-genre">분류</th>
+							<th id="td-genre">대여 상태</th>
+							<th id="td-img"></th>
 						</tr>
 					</thead>
 					<%-- 
@@ -62,11 +73,12 @@
 						<c:forEach items="${bookList}" var="book">
 
 							<tr>
-								
-								<td align="left"><a
-									href="#" onclick="window.open('/bookInfo?book_cd=${book.book_cd}','new','resizeble=yes scrollbars=yes');"> ${book.title }</a></td>
-								<td align="left">${book.author }</td>
-								<td align="left">${book.b_group}</td>
+
+								<td align="left"><a href="#"
+									onclick="window.open('/bookInfo?book_cd=${book.book_cd}','new','resizeble=yes scrollbars=yes');">
+										${book.title }</a></td>
+								<td class="hidden-xs" align="left">${book.author }</td>
+								<td class="hidden-xs" align="left">${book.b_group}</td>
 								<c:choose>
 									<c:when test="${book.rentchk=='0'}">
 										<td align="left"><mark>대출가능</mark></td>
@@ -80,7 +92,7 @@
 										<td></td>
 									</c:when>
 									<c:when test="${book.rentchk=='1' and book.reservechk=='0'}">
-										<td>대여요청중</td>
+										<td>대여중</td>
 										<td><button class="btn btn-default" type="button"
 												id="reservebook"
 												onClick="location.href='/reservation?book_cd=${book.book_cd}'">예약</button></td>
@@ -91,14 +103,14 @@
 										<td></td>
 									</c:when>
 									<c:when test="${book.rentchk=='2' and book.reservechk=='0'}">
-										<td>대출중</td>
+										<td>대여중</td>
 										<td><button class="btn btn-default" type="button"
 												id="reservebook"
 												onClick="location.href='/reservation?book_cd=${book.book_cd}'">예약</button></td>
 									</c:when>
 
 									<c:when test="${book.rentchk=='4'}">
-										<td>대출정지</td>
+										<td>대출 정지</td>
 										<td></td>
 
 

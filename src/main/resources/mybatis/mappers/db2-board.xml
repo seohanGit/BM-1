@@ -9,13 +9,16 @@
 	<select id="selectBoard" resultType="BoardModel">
 		SELECT *
 		FROM BOOKBOARD
-		ORDER BY REGISDATE
+		WHERE boardtype='0'
+		ORDER
+		BY REGISDATE
 	</select>
 
 	<select id="selectBoardregister" resultType="BoardModel">
 		SELECT *
 		FROM
 		BOOKBOARD
+		WHERE boardtype='0'
 		ORDER BY REGISDATE
 	</select>
 
@@ -29,6 +32,7 @@
 		SELECT *
 		FROM
 		BOOKBOARD
+		WHERE boardtype='0'
 		ORDER BY title
 	</select>
 
@@ -63,27 +67,29 @@
 	<select id="noticeList" resultType="BoardModel">
 		SELECT *
 		FROM
-		BOOKNOTICE
+		bookboard
+		WHERE
+		boardtype='1'
 		ORDER BY
 		REGISDATE desc
 	</select>
 
 	<insert id="insertNotice" parameterType="BoardModel">
-		INSERT INTO BOOKNOTICE
+		INSERT INTO bookboard
 		(content, REGISDATE)
 		VALUES
 		(#{content}, CURRENT DATE)
 	</insert>
 	<delete id="deleteNotice" parameterType="String">
-		DELETE FROM BOOKNOTICE
+		DELETE FROM bookboard
 		WHERE
 		boardnum=#{boardnum}
 	</delete>
 
 	<update id="modifyNotice" parameterType="BoardModel">
-		UPDATE BOOKNOTICE
+		UPDATE bookboard
 		SET
-		content=#{content}, REGISDATE=CURRENT DATE
+		content=#{content}, MODIFYDATE=CURRENT DATE
 		WHERE boardnum=#{boardnum}
 	</update>
 

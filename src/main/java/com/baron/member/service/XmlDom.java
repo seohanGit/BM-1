@@ -31,6 +31,40 @@ public class XmlDom {
 	 * return page; }
 	 */
 
+	private String getCategoryName(String string) {
+		String categoryName;
+		switch (string) {
+		case "300":
+			categoryName = "기타매체";
+			break;
+		case "400":
+			categoryName = "기타매체";
+			break;
+		case "107":
+			categoryName = "정기간행물";
+			break;
+		case "209":
+			categoryName = "정기간행물";
+			break;
+		case "115":
+			categoryName = "규격/사전";
+			break;
+		case "203":
+			categoryName = "규격/사전";
+			break;
+
+		case "125":
+			categoryName = "논문";
+
+			break;
+		default:
+			categoryName = "도서(단행본)";
+			break;
+		}
+		return categoryName;
+
+	}
+
 	private Element makeDoc(InputStream br)
 			throws ParserConfigurationException, SAXException, IOException {
 		// 팩토리 생성
@@ -61,7 +95,7 @@ public class XmlDom {
 			book.setPrice(getChildren(element, "priceSales"));
 			book.setAuthor(getChildren(element, "author"));
 			book.setIsbn(getChildren(element, "isbn"));
-			book.setB_group(getChildren(element, "categoryName"));
+			book.setB_group(getCategoryName(getChildren(element, "categoryId")));
 			book.setPublish(getChildren(element, "publisher"));
 			book.setSummary(getChildren(element, "description"));
 
@@ -91,7 +125,7 @@ public class XmlDom {
 			book.setPrice(getChildren(element, "priceSales"));
 			book.setAuthor(getChildren(element, "author"));
 			book.setIsbn(getChildren(element, "isbn"));
-			book.setB_group(getChildren(element, "categoryName"));
+			book.setB_group(getCategoryName(getChildren(element, "categoryId")));
 			book.setPublish(getChildren(element, "publisher"));
 			book.setSummary(getChildren(element, "description"));
 

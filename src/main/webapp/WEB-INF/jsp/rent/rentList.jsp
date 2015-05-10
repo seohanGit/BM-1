@@ -92,9 +92,16 @@
 														type="button" id="reservebook"
 														onClick="location.href='/returnBookByAdmin?book_cd=${book.book_cd}'; re_turn();">반납</button>
 												</td>
-												<td><button class="btn btn-default btn-sm"
-														type="button" id="reservebook"
-														onClick="location.href='/extendBorrowBook?book_cd=${book.book_cd}'; extend();">연장</button></td>
+												<c:choose>
+													<c:when test="${book.reservechk==1} ">
+														<td></td>
+													</c:when>
+													<c:otherwise>
+														<td><button class="btn btn-default btn-sm"
+																type="button" id="reservebook"
+																onClick="location.href='/extendBorrowBook?book_cd=${book.book_cd}'; extend();">연장</button></td>
+													</c:otherwise>
+												</c:choose>
 											</tr>
 
 

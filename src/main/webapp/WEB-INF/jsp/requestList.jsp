@@ -73,7 +73,7 @@ body {
 											<th class="hidden-sm hidden-xs hidden-md " id="td-date">요청일자</th>
 											<th id="td-img">상태</th>
 											<th id="td-date"></th>
-											
+
 										</tr>
 									</thead>
 
@@ -83,7 +83,7 @@ body {
 											<tr>
 												<td><input type="checkbox" name="bookCode"
 													value="${book.book_cd}"></td>
-												<td  style="width: 50px" align="left"><img
+												<td style="width: 50px" align="left"><img
 													style="width: 50px" src="${book.imageurl}"></td>
 
 											</tr>
@@ -98,15 +98,15 @@ body {
 												<td>요청자 : ${book.id}</td>
 												<td>
 													<button class="btn btn-default" type="button"
-														onClick="location.href='buyRequest?book_cd=${book.book_cd}'">구매</button>
+														onClick="location.href='buyRequest?req_cd=${book.req_cd}'">구매</button>
 												</td>
 											</tr>
 											<tr>
 												<td>${book.price}원</td>
-												<td>수량 : ${book.quantity}</td>
+												<td>수량 : ${book.quantity} </td>
 												<td>
 													<button class="btn btn-default" type="button"
-														onClick="location.href='deleteRequest?book_cd=${book.book_cd}'; del();">삭제</button>
+														onClick="location.href='deleteRequest?req_cd=${book.req_cd}'; del();">삭제</button>
 												</td>
 											</tr>
 										</tbody>
@@ -116,7 +116,8 @@ body {
 											<tr>
 												<td><input type="checkbox" name="book_cd"
 													value="${book.book_cd}"></td>
-												<td class="hidden-xs"><img style="width: 50px" src="${book.imageurl}"></td>
+												<td class="hidden-xs"><img style="width: 50px"
+													src="${book.imageurl}"></td>
 												<td><a href="${book.link}">${book.title }</a></td>
 												<td class="hidden-sm hidden-xs hidden-md ">${book.author}</td>
 
@@ -130,22 +131,22 @@ body {
 												<c:choose>
 													<c:when test="${book.reqstatus =='0'}">
 														<td>대기</td>
-														<td><button class="btn btn-sm btn-default" type="button"
-																id="buyBook"
-																onClick="location.href='buyRequest?book_cd=${book.book_cd}'">구매</button>
+														<td><button class="btn btn-sm btn-default"
+																type="button" id="buyBook"
+																onClick="location.href='buyRequest?req_cd=${book.req_cd}'">구매</button>
 															<button class="btn btn-sm btn-default" type="button"
-																onClick="location.href='deleteRequest?book_cd=${book.book_cd}'; del();">삭제</button>
+																onClick="location.href='deleteRequest?req_cd=${book.req_cd}'; del();">반려</button>
 														</td>
 													</c:when>
 													<c:when test="${book.reqstatus =='1'}">
 														<td align="left">승인</td>
 														<td></td>
-														
+
 													</c:when>
 													<c:when test="${book.reqstatus =='2'}">
 														<td>반려</td>
 														<td></td>
-														
+
 													</c:when>
 												</c:choose>
 

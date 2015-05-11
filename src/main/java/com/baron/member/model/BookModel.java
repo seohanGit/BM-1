@@ -28,22 +28,20 @@ public class BookModel {
 	private int startindex;
 	private String keyword;
 	private String rcv_date;
-	private int reqstatus;
+	private String reqstatus;
 	private int count;
 	private int sunbo;
 
 	private String sabun;
-private String req_cd;	
-
-	
+	private String req_cd;
 
 	public String getReq_cd() {
-	return req_cd;
-}
+		return req_cd;
+	}
 
-public void setReq_cd(String req_cd) {
-	this.req_cd = req_cd;
-}
+	public void setReq_cd(String req_cd) {
+		this.req_cd = req_cd;
+	}
 
 	public String getSabun() {
 		return sabun;
@@ -165,11 +163,11 @@ public void setReq_cd(String req_cd) {
 		this.count = count;
 	}
 
-	public int getReqstatus() {
+	public String getReqstatus() {
 		return reqstatus;
 	}
 
-	public void setReqstatus(int reqstatus) {
+	public void setReqstatus(String reqstatus) {
 		this.reqstatus = reqstatus;
 	}
 

@@ -39,8 +39,8 @@ public class RequestDaoImpl implements RequestDao{
 	}
 
 	@Override
-	public BookModel selectBook(String bookCode) {
-		return session.selectOne(NAMESPACE + "selectRequest", bookCode);
+	public BookModel selectBook(String book_cd) {
+		return session.selectOne(NAMESPACE + "selectRequest", book_cd);
 		
 		
 	}

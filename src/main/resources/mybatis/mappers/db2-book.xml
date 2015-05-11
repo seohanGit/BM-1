@@ -26,7 +26,7 @@
 
 	<select id="searchBook" parameterType="String" resultType="SearchResult">
 		<bind name="keyword" value="'%' + _parameter + '%'" />
-		SELECT title, author, b_group, rentchk, reservechk, book_cd
+		SELECT title, author, publish, b_group, rentchk, reservechk, book_cd
 		FROM
 		BOOKMST
 		WHERE
@@ -80,11 +80,11 @@
 	<insert id="requestBook" parameterType="BookModel">
 		INSERT INTO BOOKREQ
 		(id,reqdate,title,book_cd,price,author,quantity,b_group,link,
-		imageurl,isbn, publish, summary)
+		imageurl,isbn, publish, summary, req_cd)
 		VALUES
 		(#{id}, current date,
 		#{title},#{book_cd},#{price},#{author},#{quantity},#{b_group},#{link},
-		#{imageurl},#{isbn}, #{publish}, #{summary})
+		#{imageurl},#{isbn}, #{publish}, #{summary}, #{req_cd})
 	</insert>
 
 	<update id="deleteRequest" parameterType="String">
@@ -126,7 +126,7 @@
 	<select id="selectRequest" parameterType="String" resultType="BookModel">
 		SELECT *
 		FROM BOOKREQ
-		WHERE book_cd=#{book_cd}
+		WHERE req_cd=#{req_cd}
 
 	</select>
 

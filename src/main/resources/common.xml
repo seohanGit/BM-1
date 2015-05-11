@@ -12,7 +12,7 @@
 	<!-- DB2 커넥션 스트링 -->
 	<entry key="datasource.sqlmap.driver">com.ibm.as400.access.AS400JDBCDriver</entry>
 	<entry key="datasource.sqlmap.url">jdbc:as400://175.200.81.7;Translate 
-										Binary=true;libraries=TESTLIB</entry>
+										Binary=true;</entry>
 	<entry key="datasource.sqlmap.username">QSECOFR</entry>
 	<entry key="datasource.sqlmap.password">goddns</entry>
 </properties>

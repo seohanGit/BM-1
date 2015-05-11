@@ -8,7 +8,7 @@
 
 	<select id="selectBoard" resultType="BoardModel">
 		SELECT *
-		FROM BOOKBOARD
+		FROM TESTLIB.BOOKBOARD
 		WHERE boardtype='0'
 		ORDER
 		BY REGISDATE
@@ -17,7 +17,7 @@
 	<select id="selectBoardregister" resultType="BoardModel">
 		SELECT *
 		FROM
-		BOOKBOARD
+		TESTLIB.BOOKBOARD
 		WHERE boardtype='0'
 		ORDER BY REGISDATE
 	</select>
@@ -31,7 +31,7 @@
 	<select id="selectBoardtitle" resultType="BoardModel">
 		SELECT *
 		FROM
-		BOOKBOARD
+		TESTLIB.BOOKBOARD
 		WHERE boardtype='0'
 		ORDER BY title
 	</select>
@@ -39,25 +39,25 @@
 	<select id="selectBoardnum" parameterType="String" resultType="BoardModel">
 		SELECT *
 		FROM
-		BOOKBOARD
+		TESTLIB.BOOKBOARD
 		WHERE boardnum=#{boardnum}
 
 	</select>
 	<insert id="insertBoard" parameterType="BoardModel">
-		INSERT INTO BOOKBOARD
+		INSERT INTO TESTLIB.BOOKBOARD
 		(title,content,REGISDATE,modifidate,id)
 		VALUES
 		(#{title},#{content},CURRENT DATE,CURRENT DATE,#{id})
 	</insert>
 
 	<delete id="deleteBoard" parameterType="String">
-		DELETE FROM BOOKBOARD
+		DELETE FROM TESTLIB.BOOKBOARD
 		WHERE
 		boardnum=#{boardnum}
 	</delete>
 
 	<update id="modifyBoard" parameterType="BoardModel">
-		UPDATE BOOKBOARD
+		UPDATE TESTLIB.BOOKBOARD
 		SET
 		content=#{content}, title=#{title}, modifidate=CURRENT DATE
 		WHERE
@@ -67,7 +67,7 @@
 	<select id="noticeList" resultType="BoardModel">
 		SELECT *
 		FROM
-		bookboard
+		TESTLIB.BOOKBOARD
 		WHERE
 		boardtype='1'
 		ORDER BY
@@ -75,19 +75,19 @@
 	</select>
 
 	<insert id="insertNotice" parameterType="BoardModel">
-		INSERT INTO bookboard
+		INSERT INTO TESTLIB.BOOKBOARD
 		(content, REGISDATE)
 		VALUES
 		(#{content}, CURRENT DATE)
 	</insert>
 	<delete id="deleteNotice" parameterType="String">
-		DELETE FROM bookboard
+		DELETE FROM TESTLIB.BOOKBOARD
 		WHERE
 		boardnum=#{boardnum}
 	</delete>
 
 	<update id="modifyNotice" parameterType="BoardModel">
-		UPDATE bookboard
+		UPDATE TESTLIB.BOOKBOARD
 		SET
 		content=#{content}, MODIFYDATE=CURRENT DATE
 		WHERE boardnum=#{boardnum}

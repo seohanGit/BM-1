@@ -17,12 +17,14 @@ import javax.naming.directory.InitialDirContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.baron.member.model.BoardModel;
@@ -101,34 +103,37 @@ public class MemberController {
 		}
 
 		ModelAndView mav = new ModelAndView("/member/loginResult");
-/*
-		model = joinService.login(model);
-		if (model != null) {
-			System.out.println(model.getId() + model.getPermission());
-			response.addCookie(new Cookie("bm_id", model.getId()));
-			System.out.println(model.getId() + "login Success");
-
-			response.addCookie(new Cookie("bm_permission", model
-					.getPermission()));
-			mav.addObject("result", true);
-		} else {
-			mav.addObject("result", false);
-		}
-*/
+		/*
+		 * model = joinService.login(model); if (model != null) {
+		 * System.out.println(model.getId() + model.getPermission());
+		 * response.addCookie(new Cookie("bm_id", model.getId()));
+		 * System.out.println(model.getId() + "login Success");
+		 * 
+		 * response.addCookie(new Cookie("bm_permission", model
+		 * .getPermission())); mav.addObject("result", true); } else {
+		 * mav.addObject("result", false); }
+		 */
 		return mav;
 	}
 
 	// 서한 주소용 서버
 	// MEMBER TABLE (사번, 권한) 에서 사번, 권한 대조 후 로그인
 	// login?id="id"
-
+	
 	@RequestMapping("/autologin")
-	public String login2(HttpServletResponse response, String id) {
+	public String login2(HttpServletResponse response, HttpServletRequest request, String id, Model model) {
 
 		// ModelAndView mav = new ModelAndView("/index");
 		System.out.println(id);
-		if (id != null) {
-			response.addCookie(new Cookie("bm_id", id));
+		MemberModel membermodel = new MemberModel();
+		membermodel = joinService.login(id);
+		if (membermodel != null) {
+			HttpSession session = request.getSession();
+			
+			session.setAttribute("name", membermodel.getKname());
+			session.setAttribute("class", membermodel.getJikb());
+			session.setAttribute("team", membermodel.getTeam_nm());
+			response.addCookie(new Cookie("bm_id", membermodel.getId()));
 			System.out.println(id + "login Success");
 			if (id.equals("4150149")) {
 
@@ -138,6 +143,7 @@ public class MemberController {
 			}
 
 		}
+		model.addAttribute(membermodel);
 		return "redirect:searchBook";
 	}
 
@@ -193,7 +199,7 @@ public class MemberController {
 				MemberModel memberModel = new MemberModel();
 				memberModel.setId(cookie.getValue());
 				memberModel.setPassword(pass);
-				memberModel = joinService.login(memberModel);
+				memberModel = joinService.login(memberModel.getId());
 				model.addAttribute("Member", memberModel);
 			}
 		}

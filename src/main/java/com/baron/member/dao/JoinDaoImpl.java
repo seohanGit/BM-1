@@ -31,9 +31,9 @@ public class JoinDaoImpl implements JoinDao {
 	}
 
 	@Override
-	public MemberModel selectMember(MemberModel model) {
+	public MemberModel selectMember(String id) {
 		
-		return session.selectOne(NAMESPACE + "selectMember", model);
+		return session.selectOne(NAMESPACE + "selectMember", id);
 	}
 
 	@Override

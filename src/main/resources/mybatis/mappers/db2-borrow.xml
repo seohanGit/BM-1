@@ -7,9 +7,9 @@
 
 	<!-- 대여관련 쿼리 -->
 	<select id="borrowListAll" resultType="BookModel">
-		SELECT * FROM BOOKMST
+		SELECT * FROM TESTLIB.BOOKMST
 		A,
-		BOOKRENT B
+		TESTLIB.BOOKRENT B
 		WHERE B.rentchk=1 AND A.book_cd=B.book_cd
 		ORDER BY
 		B.rentdate
@@ -18,7 +18,7 @@
 
 	<select id="borrowList" resultType="BookModel" parameterType="String">
 		SELECT *
-		FROM BOOKMST A, BOOKRENT B
+		FROM TESTLIB.BOOKMST A, TESTLIB.BOOKRENT B
 		WHERE B.id = #{id} AND
 		(B.rentchk='1' OR B.rentchk='2') AND
 		A.book_cd=B.book_cd
@@ -28,7 +28,7 @@
 
 	<insert id="borrowBook1" parameterType="BookModel">
 		INSERT INTO
-		BOOKRENT
+		TESTLIB.BOOKRENT
 		(book_cd, rentdate, returndate, rentchk, id)
 		VALUES(#{book_cd}, current
 		date,
@@ -38,21 +38,21 @@
 
 	<update id="borrowBook2" parameterType="String">
 		UPDATE
-		BOOKMST
+		TESTLIB.BOOKMST
 		SET
 		rentchk='1'
 		WHERE book_cd=#{book_cd}
 	</update>
 
 	<update id="stopBorrow" parameterType="String">
-		UPDATE BOOKMST
+		UPDATE TESTLIB.BOOKMST
 		SET
 		rentchk='4'
 		WHERE
 		book_cd=#{book_cd}
 	</update>
 	<update id="stopBorrow1" parameterType="String">
-		UPDATE BOOKRENT
+		UPDATE TESTLIB.BOOKRENT
 		SET
 		rentchk='4'
 		WHERE
@@ -60,7 +60,7 @@
 	</update>
 
 	<update id="recoverBook" parameterType="String">
-		UPDATE BOOKMST A
+		UPDATE TESTLIB.BOOKMST A
 		SET
 		A.rentchk='0'
 		WHERE
@@ -69,7 +69,7 @@
 	</update>
 
 	<update id="confirmBorrowBook" parameterType="String">
-		UPDATE BOOKRENT
+		UPDATE TESTLIB.BOOKRENT
 		SET
 		RENTCHK = '2'
 		WHERE BOOK_CD = #{book_cd} AND
@@ -78,7 +78,7 @@
 
 	<update id="confirmBorrowBook1" parameterType="String">
 		UPDATE
-		BOOKMST
+		TESTLIB.BOOKMST
 		SET
 		rentchk='2'
 		WHERE book_cd=#{book_cd}
@@ -87,7 +87,7 @@
 		numborrow = numborrow + 1 WHERE id = #{id} </update> -->
 	<update id="returnBook" parameterType="String">
 		UPDATE
-		BOOKRENT
+		TESTLIB.BOOKRENT
 		SET
 		rentchk='3',
 		returndate=current date
@@ -96,24 +96,24 @@
 		RENTCHK='2'
 	</update>
 	<update id="returnBook1" parameterType="String">
-		UPDATE BOOKMST
+		UPDATE TESTLIB.BOOKMST
 		SET
 		rentchk='0'
 		WHERE
 		book_cd=#{book_cd}
 	</update>
-	<!-- <update id="confirmReturnBook" parameterType="String"> UPDATE BOOKMST 
-		A INNER JOIN BOOKRENT B ON A.rentchk = B.rentchk SET A.rentchk='0', B.rentchk='0' 
+	<!-- <update id="confirmReturnBook" parameterType="String"> UPDATE TESTLIB.BOOKMST 
+		A INNER JOIN TESTLIB.BOOKRENT B ON A.rentchk = B.rentchk SET A.rentchk='0', B.rentchk='0' 
 		WHERE A.book_cd=#{book_cd} AND B.book_cd=#{book_cd} </update> -->
 	<select id="returnListAll" resultType="BookModel">
 		SELECT *
-		FROM BOOKMST A,
-		BOOKRENT B
+		FROM TESTLIB.BOOKMST A,
+		TESTLIB.BOOKRENT B
 		WHERE B.rentchk=3 AND A.book_cd=B.book_cd
 	</select>
 
 	<update id="extendBorrowBook" parameterType="String">
-		UPDATE BOOKRENT
+		UPDATE TESTLIB.BOOKRENT
 		SET
 		returndate = current date +20 day
 		WHERE
@@ -123,7 +123,7 @@
 	</update>
 
 	<update id="cancelBorrowBook" parameterType="String">
-		UPDATE BOOKMST
+		UPDATE TESTLIB.BOOKMST
 		SET
 		rentchk='0'
 		WHERE
@@ -132,12 +132,12 @@
 
 	<delete id="deleteBorrowBook" parameterType="BookModel">
 		DELETE FROM
-		BOOKRENT
+		TESTLIB.BOOKRENT
 		WHERE book_cd=#{book_cd} AND id=#{id}
 	</delete>
 
 	<select id="rentListAll" parameterType="String" resultType="BookModel">
-		SELECT * FROM BOOKMST A, BOOKRENT B
+		SELECT * FROM TESTLIB.BOOKMST A, TESTLIB.BOOKRENT B
 		WHERE
 		A.book_cd=B.book_cd AND
 		B.rentchk='2'
@@ -149,11 +149,11 @@
 
 	<!-- <![CDATA[B.returndate > current date]]> -->
 
-	<!-- <delete id="deleteRecord" parameterType="String"> DELETE ON BOOKRENT 
+	<!-- <delete id="deleteRecord" parameterType="String"> DELETE ON TESTLIB.BOOKRENT 
 		WHERE DELETE ON reserve WHERE id=#{id} AND book_cd=#{book_cd} </delete> -->
 	<select id="recordList" parameterType="String" resultType="BookModel">
-		SELECT A.title, B.rentdate, B.id, B.returndate, A.book_cd FROM BOOKMST A,
-		BOOKRENT B
+		SELECT A.title, B.rentdate, B.id, B.returndate, A.book_cd FROM TESTLIB.BOOKMST A,
+		TESTLIB.BOOKRENT B
 		WHERE <!-- (B.returndate BETWEEN date_sub(current date, interval 
 			90 day) AND current date) AND -->
 		B.id=#{id} AND
@@ -163,14 +163,14 @@
 	</select>
 
 	<insert id="backupRecord" parameterType="BookModel">
-		INSERT INTO BOOKRENT
+		INSERT INTO TESTLIB.BOOKRENT
 		(ID, RENTDATE, BOOK_CD, RETURNDATE)
 		VALUES(#{id}, #{rentdate},
 		#{book_cd}, #{returndate})
 	</insert>
 
 	<select id="recordListAll" resultType="BookModel">
-		SELECT * FROM bookmst A, bookrent B
+		SELECT * FROM TESTLIB.BOOKMST A, TESTLIB.BOOKRENT B
 		WHERE <!-- (B.returndate BETWEEN date_sub(current 
 			date, interval 90 day) AND current date) AND -->
 		A.book_cd=B.book_cd AND B.rentchk='3'
@@ -179,7 +179,7 @@
 	</select>
 
 	<update id="deleteRecord" parameterType="BookModel">
-		UPDATE BOOKRENT SET RENTCHK='6'
+		UPDATE TESTLIB.BOOKRENT SET RENTCHK='6'
 		WHERE book_cd=#{book_cd} AND id=#{id} AND rentchk='3'
 	</update>
 

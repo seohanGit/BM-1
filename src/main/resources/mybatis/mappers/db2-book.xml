@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.baron.member.sqlModel">
-	<!-- BOOKMST 관련 쿼리 -->
+	<!-- TESTLIB.BOOKMST 관련 쿼리 -->
 
 
 	<select id="selectBookAll" resultType="BookModel">
-		SELECT * FROM BOOKMST A
+		SELECT * FROM TESTLIB.BOOKMST A
 		ORDER BY RENTCHK
 	</select>
 
 	<insert id="insertBook" parameterType="BookModel">
-		INSERT INTO BOOKMST
+		INSERT INTO TESTLIB.BOOKMST
 		(title,BOOK_CD,b_group,publish,author,rentchk,imageurl,
 		rcv_date, isbn,
 		price, summary)
@@ -21,14 +21,14 @@
 
 
 	<select id="selectBook" parameterType="String" resultType="BookModel">
-		SELECT * FROM BOOKMST WHERE BOOK_CD=#{book_cd}
+		SELECT * FROM TESTLIB.BOOKMST WHERE BOOK_CD=#{book_cd}
 	</select>
 
 	<select id="searchBook" parameterType="String" resultType="SearchResult">
 		<bind name="keyword" value="'%' + _parameter + '%'" />
 		SELECT title, author, publish, b_group, rentchk, reservechk, book_cd
 		FROM
-		BOOKMST
+		TESTLIB.BOOKMST
 		WHERE
 		TITLE like #{keyword}
 		ORDER BY RENTCHK DESC, RCV_DATE DESC
@@ -38,21 +38,21 @@
 	<select id="listBook" parameterType="Dto" resultType="BookModel">
 		SELECT
 		title, author, b_group, rentchk, reservechk, book_cd
-		FROM BOOKMST
+		FROM TESTLIB.BOOKMST
 		ORDER
 		BY RENTCHK DESC
 	</select>
 
 
 	<delete id="deleteBook" parameterType="String">
-		DELETE FROM BOOKMST
+		DELETE FROM TESTLIB.BOOKMST
 		WHERE
 		BOOK_CD=#{book_cd}
 	</delete>
 
 
 	<update id="updateBook" parameterType="BookModel">
-		UPDATE BOOKMST
+		UPDATE TESTLIB.BOOKMST
 		SET
 		TITLE=#{title}, b_group=#{b_group},
 		publish=#{publish},
@@ -62,14 +62,14 @@
 
 	<select id="getNewbook" resultType="BookModel">
 		SELECT *
-		FROM BOOKMST
+		FROM TESTLIB.BOOKMST
 		ORDER BY
 		rcv_date DESC
 	</select>
 
 	<select id="getBestSeller" resultType="BookModel">
 		SELECT *
-		FROM BOOKMST
+		FROM TESTLIB.BOOKMST
 		ORDER
 		BY
 		sunbo DESC
@@ -78,7 +78,7 @@
 	<!-- 구매요청, 대여 관련 커리 -->
 
 	<insert id="requestBook" parameterType="BookModel">
-		INSERT INTO BOOKREQ
+		INSERT INTO TESTLIB.BOOKREQ
 		(id,reqdate,title,book_cd,price,author,quantity,b_group,link,
 		imageurl,isbn, publish, summary, req_cd)
 		VALUES
@@ -88,7 +88,7 @@
 	</insert>
 
 	<update id="deleteRequest" parameterType="String">
-		UPDATE BOOKREQ
+		UPDATE TESTLIB.BOOKREQ
 		SET
 		reqstatus='2'
 		WHERE req_cd=#{req_cd}
@@ -97,7 +97,7 @@
 	<select id="requestList" resultType="BookModel">
 		SELECT *
 		FROM
-		BOOKREQ
+		TESTLIB.BOOKREQ
 		WHERE reqdate <![CDATA[ > current date -1 year]]>
 		
 		ORDER BY
@@ -108,7 +108,7 @@
 	<select id="requestRecord" parameterType="String" resultType="BookModel">
 		SELECT *
 		FROM
-		BOOKREQ A
+		TESTLIB.BOOKREQ A
 
 		WHERE A.id=#{id} AND
 		(A.reqdate
@@ -125,7 +125,7 @@
 
 	<select id="selectRequest" parameterType="String" resultType="BookModel">
 		SELECT *
-		FROM BOOKREQ
+		FROM TESTLIB.BOOKREQ
 		WHERE req_cd=#{req_cd}
 
 	</select>

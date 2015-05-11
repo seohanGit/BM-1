@@ -33,9 +33,9 @@ public class JoinServiceImpl implements JoinService {
 	}
 
 	@Override
-	public MemberModel login(MemberModel MemberModel) {
+	public MemberModel login(String id) {
 
-		return joinDao.selectMember(MemberModel);
+		return joinDao.selectMember(id);
 
 	}
 

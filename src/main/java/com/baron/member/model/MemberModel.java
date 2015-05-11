@@ -9,7 +9,7 @@ public class MemberModel {
 	private String id;
 	@NotBlank(message = "패스워드를 입력하세요.")
 	private String password;
-	private String name;
+	private String kname;
 	private String email;
 	private String address;
 	private String cell;
@@ -20,9 +20,27 @@ public class MemberModel {
 	private int numarrear;
 	private int score;
 	private String content;
-	private String team;
+	private String team_nm;
 	private Date borrowdate;
 	private Date returndate;
+	private String jikb;
+	private String co_gb;
+
+	public String getCo_gb() {
+		return co_gb;
+	}
+
+	public void setCo_gb(String co_gb) {
+		this.co_gb = co_gb;
+	}
+
+	public String getJikb() {
+		return jikb;
+	}
+
+	public void setJikb(String jikb) {
+		this.jikb = jikb;
+	}
 
 	public Date getBorrowdate() {
 		return borrowdate;
@@ -40,12 +58,12 @@ public class MemberModel {
 		this.returndate = returndate;
 	}
 
-	public String getTeam() {
-		return team;
+	public String getTeam_nm() {
+		return team_nm;
 	}
 
-	public void setTeam(String team) {
-		this.team = team;
+	public void setTeam_nm(String team_nm) {
+		this.team_nm = team_nm;
 	}
 
 	public String getContent() {
@@ -128,12 +146,12 @@ public class MemberModel {
 		this.address = address;
 	}
 
-	public String getName() {
-		return name;
+	public String getKname() {
+		return kname;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setKname(String kname) {
+		this.kname = kname;
 	}
 
 	public String getCell() {

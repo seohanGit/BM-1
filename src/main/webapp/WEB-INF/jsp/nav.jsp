@@ -51,6 +51,9 @@
 				<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
 
 				<li style="font-size: 10px"><a href="admin">관리자페이지</a></li>
+				
+				
+				<li><%session.getAttribute("team");%> <%session.getAttribute("class"); %> <% session.getAttribute("name");%>
 			</ul>
 
 		</div>

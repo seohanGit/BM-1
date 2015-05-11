@@ -4,40 +4,43 @@
 
 	<select id="selectMemberById" resultType="int" parameterType="string">
 		SELECT COUNT(*)
-		FROM BOOKMEMBER
+		FROM testlib.bookmember
 		WHERE id = #{id}
 	</select>
 
 	<insert id="insertMember" parameterType="MemberModel">
-		INSERT INTO BOOKMEMBER
+		INSERT INTO
+		testlib.bookmember
 		(id,
 		pass, name,email,team,cell)
-		VALUES (#{id}, #{password},
+		VALUES (#{id},
+		#{password},
 		#{name},#{email},#{team},#{cell})
 	</insert>
 	<select id="selectPass" resultType="String" parameterType="String">
 		SELECT pass
-		FROM BOOKMEMBER
+		FROM testlib.bookmember
 		WHERE id = #{id}
 	</select>
 
 	<update id="updateMember" parameterType="MemberModel">
-		UPDATE BOOKMEMBER
+		UPDATE
+		testlib.bookmember
 		SET
 		pass =
-		#{password},email = #{email},address = #{address},cell =
+		#{password},email = #{email},address =
+		#{address},cell =
 		#{cell},home =
 		#{home}
 		WHERE id = #{id}
 	</update>
 
 	<select id="selectMember" resultType="MemberModel"
-		parameterType="MemberModel">
+		parameterType="String">
 		SELECT *
-		FROM BOOKMEMBER
-		WHERE id = #{id}
-		AND pass =
-		#{password}
+		FROM TPRLIB.GR_INSA
+		WHERE ASABN = #{id}
+		
 	</select>
 
 
@@ -45,8 +48,9 @@
 		SELECT
 		A.id,A.name,A.email,A.address,A.cell,A.home, B.rentdate,
 		B.returndate
-		FROM BOOKMEMBER as A ,BOOKRENT as B
-		WHERE current date > B.returndate
+		FROM testlib.bookmember as A ,BOOKRENT as B
+		WHERE current date >
+		B.returndate
 		AND B.rentchk ='2' and
 		A.id=B.id
 	</select>
@@ -56,9 +60,10 @@
 		(SELECT
 		COUNT(*) FROM BOOKRENT B WHERE B.rentdate >
 		current
-		date -30day GROUP BY id) numborrow
+		date -30day GROUP BY
+		id) numborrow
 		FROM
-		BOOKMEMBER AS A
+		testlib.bookmember AS A
 		ORDER BY
 		numborrow DESC
 
@@ -70,7 +75,7 @@
 		date_sub(current date,
 		interval 30
 		day) AND B.id=A.id ) AS numborrow
-		FROM BOOKMEMBER A
+		FROM testlib.bookmember A
 		ORDER BY
 		team
 
@@ -80,35 +85,40 @@
 
 	<insert id="insertReservation" parameterType="BookModel">
 		INSERT INTO
-		bookreser(id, book_cd, reser_date, reservechk)
+		testlib.bookreser(id, book_cd, reser_date, reservechk)
 		VALUES(#{id},
 		#{book_cd}, (select returndate from bookrent where
 		book_cd=#{book_cd}), 1)
 	</insert>
-	
+
 	<insert id="insertReservation1" parameterType="String">
-		UPDATE BOOKMST
-		SET 
+		UPDATE
+		testlib.bookmst
+		SET
 		reservechk='1'
 		WHERE book_cd=#{book_cd}
 	</insert>
 
 	<update id="updateReservation" parameterType="String">
-		UPDATE BOOKMST SET
-		rentchk='1', reservechk='0' WHERE book_cd=#{book_cd}
+		UPDATE
+		testlib.bookmst SET
+		rentchk='1', reservechk='0' WHERE
+		book_cd=#{book_cd}
 	</update>
 
 	<select id="selectReservation" parameterType="String"
 		resultType="String">
 		SELECT reservechk
-		FROM BOOKMST
-		WHERE book_cd=#{book_cd}
+		FROM testlib.bookmst
+		WHERE
+		book_cd=#{book_cd}
 	</select>
 
 	<select id="reservationList" parameterType="String" resultType="BookModel">
 		SELECT *
-		FROM BOOKMST A, bookreser B
-		WHERE B.reservechk='0'
+		FROM testlib.bookmst A, testlib.bookreser B
+		WHERE
+		B.reservechk='0'
 		AND
 		B.id=#{id}
 		ORDER BY
@@ -117,27 +127,26 @@
 
 	<select id="reservationListAll" resultType="BookModel">
 		SELECT *
-		FROM BOOKMST
+		FROM
+		testlib.bookmst
 		AS
-		A, bookreser AS B
-		WHERE A.book_cd=B.book_cd AND
+		A, testlib.bookreser AS B
+		WHERE A.book_cd=B.book_cd
+		AND
 		B.reservechk='1'
 		ORDER
 		BY
 		B.reser_date DESC
 	</select>
 
-	<delete id="deleteReservation" parameterType="BookModel">
-		DELETE ON reserve
-		WHERE id=#{id} AND book_cd=#{book_cd}
-	</delete>
+
 
 
 
 	<!-- 기타 쿼리 -->
 	<select id="test" resultType="String">
 		SELECT TITLe
-		FROM BOOKMST
+		FROM testlib.bookmst
 	</select>
 
 </mapper>

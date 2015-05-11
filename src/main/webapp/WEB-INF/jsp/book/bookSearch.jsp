@@ -151,6 +151,13 @@
 				}, {
 					"searchable" : false
 				} ],
+				"columnDefs" : [ {
+					type : "b_group",
+					targets : 3
+				}, {
+					type : "rentchk",
+					targets : 4
+				} ],
 
 			});
 		});

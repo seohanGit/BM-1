@@ -21,7 +21,7 @@ public class RentDaoImpl implements RentDao {
 	public void insertReservation(BookModel bookmodel) {
 		// TODO Auto-generated method stub
 		session.insert(NAMESPACE + "insertReservation", bookmodel);
-
+		session.update(NAMESPACE + "insertReservation1", bookmodel.getBook_cd());
 	}
 
 	@Override

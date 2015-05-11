@@ -138,7 +138,7 @@ public class MemberController {
 			}
 
 		}
-		return "redirect:index";
+		return "redirect:searchBook";
 	}
 
 	@RequestMapping("/logout")

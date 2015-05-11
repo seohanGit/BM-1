@@ -31,7 +31,7 @@
 		BOOKMST
 		WHERE
 		TITLE like #{keyword}
-		ORDER BY RENTCHK DESC
+		ORDER BY RENTCHK DESC, RCV_DATE DESC
 
 	</select>
 

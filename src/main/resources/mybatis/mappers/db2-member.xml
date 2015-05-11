@@ -87,6 +87,13 @@
 		#{book_cd}, (select returndate from bookrent where
 		book_cd=#{book_cd}), 1)
 	</insert>
+	
+	<insert id="insertReservation1" parameterType="String">
+		UPDATE BOOKMST
+		SET 
+		reservechk='1'
+		WHERE book_cd=#{book_cd}
+	</insert>
 
 	<update id="updateReservation" parameterType="String">
 		UPDATE BOOKMST SET

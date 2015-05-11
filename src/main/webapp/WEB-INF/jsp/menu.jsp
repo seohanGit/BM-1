@@ -26,7 +26,7 @@
 			<button class="btn btn-default  noborder"
 				onclick="location.href='noticeListByAdmin'">공지사항</button>
 			<button class="btn btn-default  noborder"
-				onclick="location.href='bookList'">도서목록</button>
+				onclick="location.href='searchbook'">도서목록</button>
 			<!-- 	<button class="btn btn-default  noborder" 
 			onclick="location.href='memberList'">사원목록</button> -->
 			<button class="btn btn-default  noborder"
@@ -46,7 +46,7 @@
 				onclick="location.href='boardList'">게시판</button>
 
 			<button class="btn btn-default btn-sm noborder"
-				onclick="location.href='bookList'">도서목록</button>
+				onclick="location.href='searchbook'">도서목록</button>
 			<button class="btn btn-default btn-sm noborder"
 				onclick="location.href='recordListAll'">대여기록</button>
 

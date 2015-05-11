@@ -52,11 +52,12 @@ body {
 					<!-- 
 			기록 검색<button type="button" onclick="location.href='/insertRecord'">삽입</button>
 			 -->
+					<p id="dateFilter"></p>
 					<table class="table table-striped table-bordered" id="dataTable">
 						<thead>
 							<tr class="  title">
 								<th id="td-title">도서명</th>
-								<th class="hidden-xs" id="td-author">대여일</th>
+								<th class="hidden-xs">대여일</th>
 								<th id="td-author">반납일</th>
 								<th id="td-date">대여자</th>
 								<th id="td-genre">삭제</th>
@@ -65,7 +66,18 @@ body {
 
 							</tr>
 						</thead>
+						<tfoot>
+							<tr class="  title">
+								<th></th>
+								<th>대여일</th>
+								<th>반납일</th>
+								<th>대여자</th>
+								<th></th>
 
+
+
+							</tr>
+						</tfoot>
 
 						<tbody>
 							<c:forEach items="${bookList}" var="book" varStatus="status">
@@ -98,10 +110,10 @@ body {
 	<script src="/resources/js/book.js"></script>
 	<script src="/resources/js/jquery.dataTables.min.js"></script>
 	<script src="/resources/js/dataTables.bootstrap.min.js"></script>
+	<script src="/resources/js/jquery.dataTables.columnFilter.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
-
-			$('#dataTable').DataTable({
+			$('#dataTable').dataTable({
 				paging : true,
 				ordering : true,
 				"columns" : [ {
@@ -116,7 +128,15 @@ body {
 					"searchable" : false
 				} ]
 
+			}).columnFilter({
+
+				aoColumns : [ null, null, null, {
+					type : "text",
+					bRegex : true,
+					bSmart : true
+				}, null ]
 			});
+
 		});
 		var loadingBar = document.getElementById("loadingBar");
 		var divLoadBody = document.getElementById("divLoadBody");

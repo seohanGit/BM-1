@@ -89,6 +89,19 @@ body {
 										<th style="width: 140px"></th>
 									</tr>
 								</thead>
+								<tfoot>
+									<tr>
+										<th style="width: 15px"></th>
+										<th id="td-title"></th>
+										<th class=" hidden-xs " id="td-author"></th>
+										<th style="width: 90px" class="hidden-sm hidden-xs hidden-md "
+											id="td-author">분류</th>
+
+										<th style="width: 80px">대여상태</th>
+
+										<th style="width: 140px"></th>
+									</tr>
+								</tfoot>
 								<%-- 
 						
  --%>
@@ -103,7 +116,7 @@ body {
 												onclick="window.open('/bookInfo?book_cd=${book.book_cd}','new','resizeble=yes scrollbars=yes');">
 													${book.title }</a></td>
 											<td class=" hidden-xs " align="left">${book.author }</td>
-											<td class="hidden-sm hidden-xs hidden-md " align="left">${book.b_group}</td>
+											<td class="hidden-sm hidden-xs hidden-md " align="left">${book.b_group }</td>
 											<c:choose>
 												<c:when test="${book.rentchk=='0'}">
 													<td align="left">대출가능</td>
@@ -178,14 +191,15 @@ body {
 	<script src="/resources/js/metisMenu.min.js"></script>
 	<script src="/resources/js/jquery.dataTables.min.js"></script>
 	<script src="/resources/js/dataTables.bootstrap.min.js"></script>
-	<script>
+	<script src="/resources/js/jquery.dataTables.columnFilter.js"></script>
+	<script type="text/javascript">
 		$(document).ready(function() {
 
-			$('#dataTable').DataTable({
+			$('#dataTable').dataTable({
 				"pageLength" : 10,
 				paging : true,
 				ordering : true,
-				"columns" : [  {
+				"columns" : [ {
 					"searchable" : false
 				}, null, null, {
 					"searchable" : false
@@ -193,8 +207,14 @@ body {
 					"searchable" : false
 				}, {
 					"searchable" : false
-				} ],
+				} ]
 
+			}).columnFilter({
+				aoColumns : [ null, null, null, {
+					type : "select"
+				}, {
+					type : "select"
+				}, null ]
 			});
 		});
 

@@ -52,13 +52,11 @@
 	</select>
 
 	<select id="selectBest" resultType="MemberModel">
-		SELECT A.name, A.score, A.id,
+		SELECT A.name, A.id,
 		(SELECT
 		COUNT(*) FROM BOOKRENT B WHERE B.rentdate >
-		date_sub(current
-		date,
-		interval 30
-		day) AND B.id=A.id ) AS numborrow
+		current
+		date -30day GROUP BY id) numborrow
 		FROM
 		BOOKMEMBER AS A
 		ORDER BY

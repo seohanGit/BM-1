@@ -52,6 +52,8 @@ body {
 
 		<form action="stopBorrow" method="post">
 
+
+
 			<hr>
 
 
@@ -63,17 +65,14 @@ body {
 						<div class="left">
 							<h2>도서목록</h2>
 						</div>
-
-						<div class="right-end">
-							<button style="width: 100px" class="btn btn-default btn-sm"
+						<div class="right-end" style="margin-right: 20px">
+							<button style="width: 100px" class="btn btn-default"
 								type="button" id="insertBook">도서추가</button>
-							<button style="width: 100px" class="btn btn-default btn-sm"
-								type="submit">대출정지</button>
 
+							<button style="width: 100px" class="btn btn-default"
+								type="submit">대출정지</button>
 						</div>
 						<div class="dataTable_wrapper">
-
-
 
 							<table class="table table-striped table-bordered " id="dataTable">
 								<thead>
@@ -90,6 +89,19 @@ body {
 										<th style="width: 140px"></th>
 									</tr>
 								</thead>
+								<tfoot>
+									<tr>
+										<th style="width: 15px"></th>
+										<th id="td-title"></th>
+										<th class=" hidden-xs " id="td-author"></th>
+										<th style="width: 90px" class="hidden-sm hidden-xs hidden-md "
+											id="td-author">분류</th>
+
+										<th style="width: 80px">대여상태</th>
+
+										<th style="width: 140px"></th>
+									</tr>
+								</tfoot>
 								<%-- 
 						
  --%>
@@ -179,10 +191,14 @@ body {
 	<script src="/resources/js/metisMenu.min.js"></script>
 	<script src="/resources/js/jquery.dataTables.min.js"></script>
 	<script src="/resources/js/dataTables.bootstrap.min.js"></script>
-	<script>
+	<script src="/resources/js/jquery.dataTables.columnFilter.js"></script>
+	<script type="text/javascript">
 		$(document).ready(function() {
 
-			$('#dataTable').DataTable({
+			$('#dataTable').dataTable({
+				"language" : {
+					"url" : "dataTables.korean.lang"
+				},
 				"pageLength" : 10,
 				paging : true,
 				ordering : true,
@@ -194,8 +210,14 @@ body {
 					"searchable" : false
 				}, {
 					"searchable" : false
-				} ],
+				} ]
 
+			}).columnFilter({
+				aoColumns : [ null, null, null, {
+					type : "select"
+				}, {
+					type : "select"
+				}, null ]
 			});
 		});
 

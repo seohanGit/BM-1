@@ -14,6 +14,7 @@
 <link href="/resources/css/signin.css" rel="stylesheet">
 <link href="/resources/css/common.css" rel="stylesheet">
 
+
 </head>
 <body>
 	<jsp:include page="../nav.jsp" />
@@ -62,7 +63,7 @@
 
 							<th class="hidden-xs" id="td-genre">저자</th>
 							<th class="hidden-xs" id="td-genre">출판사</th>
-							<th class="hidden-xs" id="td-genre">분류</th>
+							<th class="hidden-xs" id="td-author">분류</th>
 							<th id="td-genre">대여상태</th>
 
 
@@ -70,9 +71,23 @@
 							<th id="td-img"></th>
 						</tr>
 					</thead>
-					<%-- 
-						
- --%>
+					<tfoot>
+						<tr>
+
+							<th>도서명</th>
+
+							<th class="hidden-xs">저자</th>
+							<th class="hidden-xs">출판사</th>
+							<th class="hidden-xs">분류</th>
+							<th>대여상태</th>
+
+
+
+							<th></th>
+						</tr>
+
+
+					</tfoot>
 					<tbody>
 
 						<c:forEach items="${bookList}" var="book">
@@ -84,7 +99,7 @@
 										${book.title }</a></td>
 								<td class="hidden-xs" align="left">${book.author }</td>
 								<td class="hidden-xs" align="left">${book.publish}</td>
-								<td class="hidden-xs" align="left">${book.b_group}</td>
+								<td class="hidden-xs" align="left">${book.b_group }</td>
 								<c:choose>
 									<c:when test="${book.rentchk=='0'}">
 										<td align="left"><mark>대출가능</mark></td>
@@ -136,35 +151,39 @@
 			</div>
 		</div>
 	</div>
-
 	<script src="/resources/js/jquery/jquery.js"></script>
 	<script src="/resources/js/bootstrap.min.js"></script>
 	<script src="/resources/js/common.js"></script>
 	<script src="/resources/js/metisMenu.min.js"></script>
 	<script src="/resources/js/jquery.dataTables.min.js"></script>
 	<script src="/resources/js/dataTables.bootstrap.min.js"></script>
-	<script>
+	<script src="/resources/js/jquery.dataTables.columnFilter.js"></script>
+	<script type="text/javascript">
 		$(document).ready(function() {
-
-			$('#dataTable').DataTable({
+			$('#dataTable').dataTable({
+				"language" : {
+					"url" : "dataTables.korean.lang"
+				},
 				"pageLength" : 10,
 				paging : true,
 				ordering : true,
+
 				"columns" : [ null, null, null, {
 					"searchable" : false
 				}, {
 					"searchable" : false
 				}, {
 					"searchable" : false
-				} ],
-				"columnDefs" : [ {
-					type : "b_group",
-					targets : 3
-				}, {
-					type : "rentchk",
-					targets : 4
-				} ],
+				} ]
 
+			}).columnFilter({
+
+				aoColumns : [ null, null, null, {
+					type : "select"
+				}, {
+					type : "select",
+					values : [ '대여요청중', '대출', '대출' ]
+				}, null ]
 			});
 		});
 
@@ -174,5 +193,7 @@
 		divLoadBody.style.display = "";
 		loadingBar.style.display = "none";
 	</script>
+
+
 </body>
 </html>

@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.baron.member.model.BookModel;
@@ -14,22 +15,13 @@ public class RentDaoImpl implements RentDao {
 
 	private static final String NAMESPACE = "com.baron.member.sqlModel.";
 
+	@Autowired
 	@Resource(name = "sqlSession")
 	private SqlSession session;
 
-	@Override
-	public void insertReservation(BookModel bookmodel) {
-		// TODO Auto-generated method stub
-		session.insert(NAMESPACE + "insertReservation", bookmodel);
-		session.update(NAMESPACE + "insertReservation1", bookmodel.getBook_cd());
-	}
-
-	@Override
-	public String selectReservation(String bookCode) {
-		return session.selectOne(NAMESPACE + "selectReservation", bookCode);
-		// TODO Auto-generated method stub
-
-	}
+	@Autowired
+	@Resource(name = "smsSession")
+	private SqlSession smsSession;
 
 	@Override
 	public List<BookModel> borrowList(String id) {
@@ -167,9 +159,27 @@ public class RentDaoImpl implements RentDao {
 	}
 
 	@Override
+	public void insertReservation(BookModel bookmodel) {
+		// TODO Auto-generated method stub
+		session.insert(NAMESPACE + "insertReservation", bookmodel);
+		session.update(NAMESPACE + "insertReservation1", bookmodel.getBook_cd());
+	}
+
+	@Override
+	public String selectReservation(String bookCode) {
+		return session.selectOne(NAMESPACE + "selectReservation", bookCode);
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
 	public List<BookModel> reservationList(String id) {
 		// TODO Auto-generated method stub
 		return session.selectList(NAMESPACE + "reservationList", id);
 	}
 
+	@Override
+	public void notifiReser(String id) {
+		smsSession.insert(NAMESPACE + "notifiReser", id);
+	}
 }

@@ -1,14 +1,14 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	
+
 <!-- Navigation -->
 
 <!--
 
 //-->
 
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" >
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 	<div class="container">
 		<!-- Brand and toggle get grouped for better mobile display -->
 		<div class="navbar-header">
@@ -30,10 +30,11 @@
 						type="button" id="btn_search" style="height: 40px; align: center;">
 						<span class="glyphicon glyphicon-search"></span>
 					</button></li> -->
+
 				<li><a href="board">게시판</a></li>
 				<li><a href="searchBook">도서목록</a></li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown" role="button" aria-expanded="false">내 정보
+					data-toggle="dropdown" role="button" aria-expanded="false">${sessionScope.info}
 						<span class="caret"></span>
 				</a>
 					<ul class="dropdown-menu" role="menu">
@@ -42,18 +43,17 @@
 						<li><a href="#" data-toggle="modal" data-target="#myModal">사용자정보수정</a></li>
 						<li class="divider"></li>
 
-						<li><a href="#" id="logout" name="logout">로그 아웃 <span
+						<li><a href="#" id="logout" name="logout">종료 <span
 								class="glyphicon glyphicon-chevron-right"></span>
 						</a></li>
 					</ul></li>
 
+				<li style="padding-right: 40px">&nbsp;&nbsp;</li>
 
-				<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+				<li style="font-size: 9px"><a href="admin">관리자페이지</a></li>
 
-				<li style="font-size: 10px"><a href="admin">관리자페이지</a></li>
-				
-				
-				<li><%session.getAttribute("team");%> <%session.getAttribute("class"); %> <% session.getAttribute("name");%>
+
+
 			</ul>
 
 		</div>

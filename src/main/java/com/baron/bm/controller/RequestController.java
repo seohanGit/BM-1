@@ -28,7 +28,7 @@ public class RequestController {
 	@RequestMapping("/confirmRequest")
 	public String requestResult(BookModel model) {
 		System.out.println(model.getSummary());
-		model.setReq_cd(model.getId() + model.getIsbn() + model.getQuantity());
+		model.setReq_cd(model.getB_group() + model.getIsbn());
 		requestservice.requestBook(model);
 		return "redirect:requestList";
 	}

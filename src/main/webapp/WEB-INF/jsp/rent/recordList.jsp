@@ -114,6 +114,7 @@ body {
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$('#dataTable').dataTable({
+				bFilter: true,
 				paging : true,
 				ordering : true,
 				"columns" : [ {

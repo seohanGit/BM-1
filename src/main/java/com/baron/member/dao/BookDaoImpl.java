@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.baron.member.model.BookModel;
@@ -15,8 +16,12 @@ import com.baron.member.model.SearchResult;
 public class BookDaoImpl implements BookDao {
 	private static final String NAMESPACE = "com.baron.member.sqlModel.";
 
+	@Autowired
 	@Resource(name = "sqlSession")
 	private SqlSession session;
+	@Autowired
+	@Resource(name = "smsSession")
+	private SqlSession smsSession;
 
 	@Override
 	public void insertBook(BookModel model) {
@@ -78,5 +83,4 @@ public class BookDaoImpl implements BookDao {
 		return session.selectList(NAMESPACE + "selectBookAll");
 	}
 
-	
 }

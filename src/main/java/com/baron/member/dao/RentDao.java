@@ -58,5 +58,7 @@ public interface RentDao {
 
 	List<BookModel> reservationList(String id);
 
+	void notifiReser(String id);
+
 
 }

@@ -40,7 +40,7 @@
 		SELECT *
 		FROM TPRLIB.GR_INSA
 		WHERE ASABN = #{id}
-		
+		 FETCH first 1 rows only
 	</select>
 
 
@@ -139,14 +139,8 @@
 		B.reser_date DESC
 	</select>
 
-
-
-
-
 	<!-- 기타 쿼리 -->
-	<select id="test" resultType="String">
-		SELECT TITLe
-		FROM testlib.bookmst
-	</select>
+
+
 
 </mapper>

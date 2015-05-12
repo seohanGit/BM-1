@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.baron.member.model.BoardModel;
@@ -13,9 +14,12 @@ import com.baron.member.model.BoardModel;
 public class BoardDaoImpl implements BoardDao {
 	private static final String NAMESPACE = "com.baron.member.sqlModel.";
 
+	@Autowired
 	@Resource(name = "sqlSession")
 	private SqlSession session;
-
+	@Autowired
+	@Resource(name = "smsSession")
+	private SqlSession smsSession;
 	@Override
 	public List<BoardModel> selectBoard() {
 		return session.selectList(NAMESPACE + "selectBoard");

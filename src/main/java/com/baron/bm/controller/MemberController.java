@@ -17,7 +17,6 @@ import javax.naming.directory.InitialDirContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +33,7 @@ import com.baron.member.service.BoardService;
 import com.baron.member.service.BookService;
 import com.baron.member.service.JoinService;
 
+@SessionAttributes("info")
 @Controller
 public class MemberController {
 
@@ -64,7 +64,7 @@ public class MemberController {
 		// List<MemberModel> bestList = joinService.selectBest();
 		// List<BookModel> newBook = bookService.getNewbook();
 		// List<BookModel> bestSeller = bookService.getBestSeller();
-
+		
 		model.addAttribute("noticeList", notice);
 		// model.addAttribute("bestList", bestList);
 
@@ -82,7 +82,7 @@ public class MemberController {
 	public ModelAndView login(HttpServletResponse response, MemberModel model) {
 
 		// LDAP Context
-		String url = "LDAP://gw.taeyoung.co.kr:389";
+		String url = "LDAP://iseohan.com:389";
 		Hashtable<String, String> env = new Hashtable<String, String>();
 		env.put(Context.INITIAL_CONTEXT_FACTORY,
 				"com.sun.jndi.ldap.LdapCtxFactory");
@@ -119,32 +119,35 @@ public class MemberController {
 	// 서한 주소용 서버
 	// MEMBER TABLE (사번, 권한) 에서 사번, 권한 대조 후 로그인
 	// login?id="id"
-	
+
 	@RequestMapping("/autologin")
-	public String login2(HttpServletResponse response, HttpServletRequest request, String id, Model model) {
+	public ModelAndView login2(HttpServletResponse response, ModelAndView mav,
+			String id) {
 
 		// ModelAndView mav = new ModelAndView("/index");
 		System.out.println(id);
+
 		MemberModel membermodel = new MemberModel();
 		membermodel = joinService.login(id);
+		mav.setViewName("member/login");
+		String info = membermodel.getTeam_nm() + membermodel.getJikb()
+				+ membermodel.getKname();
 		if (membermodel != null) {
-			HttpSession session = request.getSession();
-			
-			session.setAttribute("name", membermodel.getKname());
-			session.setAttribute("class", membermodel.getJikb());
-			session.setAttribute("team", membermodel.getTeam_nm());
+			mav.setViewName("redirect:searchBook");
 			response.addCookie(new Cookie("bm_id", membermodel.getId()));
+			mav.addObject("info", info);
+
 			System.out.println(id + "login Success");
 			if (id.equals("4150149")) {
-
 				response.addCookie(new Cookie("bm_permission", "1"));
+				mav.setViewName("redirect:admin");
+				return mav;
 			} else {
 				response.addCookie(new Cookie("bm_permission", "0"));
 			}
 
 		}
-		model.addAttribute(membermodel);
-		return "redirect:searchBook";
+		return mav;
 	}
 
 	@RequestMapping("/logout")

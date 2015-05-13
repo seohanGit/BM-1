@@ -19,8 +19,8 @@
 <body>
 	<jsp:include page="../nav.jsp" />
 	<div class="container">
-		<jsp:include page="../menu.jsp" />
-		<div class="col-lg-12">
+		<div class="col-md-12"><jsp:include page="../menu.jsp" />
+
 			<div class="panel panel-default">
 				<div class="panel-body">
 
@@ -48,22 +48,22 @@
 						<tbody>
 							<c:forEach items="${noticeList}" var="notice" varStatus="status">
 								<form action="/modifyNotice" method="post">
-								<tr style="padding-bottom: 10px">
-									<td class="hidden-xs" width="15%" align="left"><fmt:formatDate
-											value="${notice.regisdate}" pattern="yyyy-MM-dd" /></td>
+									<tr style="padding-bottom: 10px">
+										<td class="hidden-xs" width="15%" align="left"><fmt:formatDate
+												value="${notice.regisdate}" pattern="yyyy-MM-dd" /></td>
 
-									<td style="width: 80%; height: auto; padding-left: 10px"><textarea
-											class="content ellipsis" id="content" name="content"
-											style="width: 100%;" rows="5">${notice.content }</textarea>
-									</td>
-									<td><button class="btn btn-default btn-sm" type="submit"
-											id="modifyNotice">수정</button>
+										<td style="width: 80%; height: auto; padding-left: 10px"><textarea
+												class="content ellipsis" id="content" name="content"
+												style="width: 100%;" rows="5">${notice.content }</textarea>
+										</td>
+										<td><button class="btn btn-default btn-sm" type="submit"
+												id="modifyNotice">수정</button>
 
-										<button class="btn btn-default btn-sm" type="button"
-											id="deleteNotice"
-											onClick="location.href='/deleteNotice?boardnum=${notice.boardnum}'">삭제</button>
-									</td>
-								</tr>
+											<button class="btn btn-default btn-sm" type="button"
+												id="deleteNotice"
+												onClick="location.href='/deleteNotice?boardnum=${notice.boardnum}'">삭제</button>
+										</td>
+									</tr>
 								</form>
 
 

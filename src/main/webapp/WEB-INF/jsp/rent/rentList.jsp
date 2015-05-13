@@ -21,8 +21,8 @@
 <body>
 	<jsp:include page="../nav.jsp" />
 	<div class="container">
-		<jsp:include page="../menu.jsp" />
-		<div class="col-lg-12">
+
+		<div class="col-md-12"><jsp:include page="../menu.jsp" />
 			<div class="panel panel-default">
 				<div class="panel-body">
 
@@ -47,13 +47,13 @@
 									id="dataTable">
 									<thead>
 										<tr class="hidden-xs title">
-											<th><input type="checkbox" id="allCheck"></th>
-											<th id="tb-title">도서명</th>
-											<th id="tb-date">대여일</th>
-											<th id="tb-date">반납일</th>
-											<th id="tb-status">대여자</th>
-											<th id="tb-status">반납</th>
-											<th id="tb-status">연장</th>
+											<th><input type="checkbox" id="allCheck" class="td-chk"></th>
+											<th>도서명</th>
+											<th class="td-date">대여일</th>
+											<th class="td-date">반납일</th>
+											<th class="td-date">대여자</th>
+											<th class="td-img">반납</th>
+											<th class="td-img">연장</th>
 										</tr>
 									</thead>
 

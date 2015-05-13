@@ -28,8 +28,8 @@ body {
 <body>
 	<jsp:include page="nav.jsp" />
 	<div class="container">
-		<jsp:include page="menu.jsp" />
-		<div class="col-lg-12">
+
+		<div class="col-md-12"><jsp:include page="menu.jsp" />
 			<div class="panel panel-default">
 				<div class="panel-body">
 
@@ -61,18 +61,18 @@ body {
 
 									<thead>
 										<tr class="title ">
-											<th id="td-img"><input type="checkbox" id="allCheck"></th>
-											<th class="hidden-xs" id="td-img">표지</th>
+											<th class="td-chk"><input type="checkbox" id="allCheck"></th>
+											<th class="hidden-xs td-img">표지</th>
 
-											<th id="td-title">도서명</th>
-											<th class="hidden-sm hidden-xs hidden-md " id="td-author">저자</th>
-											<th class="hidden-sm hidden-xs " id="td-date">가격</th>
-											<th id="td-img">수량</th>
-											<th id="td-date">신청</th>
+											<th>도서명</th>
+											<th class="hidden-sm hidden-xs hidden-md td-author">저자</th>
+											<th class="hidden-sm hidden-xs td-date">가격</th>
+											<th class="td-img">수량</th>
+											<th class="td-date">신청</th>
 
-											<th class="hidden-sm hidden-xs hidden-md " id="td-date">요청일자</th>
-											<th id="td-img">상태</th>
-											<th id="td-date"></th>
+											<th class="hidden-sm hidden-xs hidden-md td-date">요청일자</th>
+											<th class="td-img">상태</th>
+											<th class="td-img"></th>
 
 										</tr>
 									</thead>
@@ -103,7 +103,7 @@ body {
 											</tr>
 											<tr>
 												<td>${book.price}원</td>
-												<td>수량 : ${book.quantity} </td>
+												<td>수량 : ${book.quantity}</td>
 												<td>
 													<button class="btn btn-default" type="button"
 														onClick="location.href='deleteRequest?req_cd=${book.req_cd}'; del();">삭제</button>

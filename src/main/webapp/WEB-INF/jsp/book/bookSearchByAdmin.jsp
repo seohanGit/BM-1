@@ -48,7 +48,6 @@ body {
 
 	</div>
 	<div id="divLoadBody" style="display: none;" class="container">
-		<jsp:include page="../menu.jsp" />
 
 		<form action="stopBorrow" method="post">
 
@@ -56,8 +55,9 @@ body {
 
 			<hr>
 
+			<jsp:include page="../menu.jsp" />
+			<div class="col-md-10">
 
-			<div class="col-lg-12">
 				<div class="panel panel-default">
 
 					<!-- /.panel-heading -->

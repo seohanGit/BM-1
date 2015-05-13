@@ -20,7 +20,7 @@
 	<div class="container">
 		<div class="row">
 			<!-- Blog Entries Column -->
-			<div class="col-md-8">
+			<div class="col-md-6">
 
 				<jsp:include page="../menu.jsp" />
 
@@ -32,37 +32,29 @@
 					<form action="/findBook" method="post">
 						<div style="width: 100%">
 
-							 <input type="text"
-								class="form-control" id="query" name="keyword"
+							<input type="text" class="form-control" id="query" name="keyword"
 								style="width: 62%" placeholder="원하는 책이 없다면 인터넷에서 주문하세요 !">
 
 
-								<button class="btn btn-default" type="submit" id="btn_find"
-									style="width: 38%">
-									<span class="glyphicon glyphicon-search"></span>인터파크 검색
-								</button>
+							<button class="btn btn-default" type="submit" id="btn_find"
+								style="width: 38%">
+								<span class="glyphicon glyphicon-search"></span>인터파크 검색
+							</button>
 
-								
+
 						</div>
 					</form>
 				</div>
 
-				<hr>
-			
-				<hr>
-				<div id="personResultArea"></div>
-				<hr>
-				<hr>
 			</div>
+
 			<!-- Blog Sidebar Widgets Column -->
-			<div class="col-md-4">
+			<div class="col-md-6">
 				<!-- Blog Search Well -->
 
 				<!-- Side Widget Well -->
-				<div class="well" align="center">
-					<jsp:include page="../sidebar.jsp" />
+				<jsp:include page="../sidebar.jsp" />
 
-				</div>
 			</div>
 		</div>
 	</div>

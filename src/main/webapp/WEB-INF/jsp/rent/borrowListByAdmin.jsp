@@ -32,8 +32,8 @@ body {
 <body>
 	<jsp:include page="../nav.jsp" />
 	<div class="container">
-		<jsp:include page="../menu.jsp" />
-		<div class="col-lg-12">
+
+		<div class="col-md-12"><jsp:include page="../menu.jsp" />
 			<div class="panel panel-default">
 				<div class="panel-body">
 					<form action="confirmBorrowBookList" method="post">
@@ -59,14 +59,15 @@ body {
 
 
 									<thead>
-										<tr class="hidden-xs title">
-											<th><input type="checkbox" id="allCheck"></th>
-											<th id="td-title">도서명</th>
-											<th id="td-genre">대여일</th>
-											<th id="td-genre">반납일</th>
-											<th id="td-genre">분류</th>
-											<th id="td-date">대여자</th>
-											<th></th>
+										<tr class="title">
+											<th><input type="checkbox" id="allCheck" class="td-chk"></th>
+											<th>도서명</th>
+											<th class="td-genre">대여일</th>
+											<th class="td-genre hidden-xs">반납일</th>
+											<th class="td-genre hidden-xs">분류</th>
+											<th class="td-date">대여자</th>
+											<th class="td-img"></th>
+
 
 										</tr>
 									</thead>
@@ -82,9 +83,10 @@ body {
 												<td align="left">${book.title}</td>
 												<td align="left"><fmt:formatDate type="date"
 														pattern="yyyy-MM-dd" value="${book.rentdate}" /></td>
-												<td style="width: inherit;"><fmt:formatDate type="date"
-														pattern="yyyy-MM-dd" value="${book.returndate}" /></td>
-												<td align="left">${book.b_group }</td>
+												<td class="hidden-xs" style="width: inherit;"><fmt:formatDate
+														type="date" pattern="yyyy-MM-dd"
+														value="${book.returndate}" /></td>
+												<td class="hidden-xs" align="left">${book.b_group }</td>
 
 												<td>${book.id}</td>
 

@@ -19,8 +19,9 @@
 <body>
 	<jsp:include page="../nav.jsp" />
 	<div class="container">
-		<jsp:include page="../menu.jsp" />
-		<div class="col-lg-12">
+
+		<div class="col-md-12"><jsp:include page="../menu.jsp" />
+
 			<div class="panel panel-default">
 				<div class="panel-body">
 
@@ -29,12 +30,12 @@
 					</div>
 					<table class="table  table-striped table-bordered">
 						<thead>
-							<tr  class="title">
+							<tr class="title">
 
-								<th style="width: 15%;">작성자</th>
+								<th class="td-genre">작성자</th>
 								<th style="width: 55%;">제목</th>
-								<th style="width: 15%;">최종 수정일</th>
-								<th style="width: 15%;"></th>
+								<th class="td-date hidden-xs">최종 수정일</th>
+								<th class="td-date"></th>
 
 							</tr>
 
@@ -46,8 +47,8 @@
 
 									<td style="vertical-align: top;">${board.id}</td>
 									<td style="vertical-align: top;">${board.title}</td>
-									<td><fmt:formatDate value="${board.modifidate}"
-											pattern="yyyy-MM-dd" /></td>
+									<td class=" hidden-xs"><fmt:formatDate
+											value="${board.modifidate}" pattern="yyyy-MM-dd" /></td>
 
 									<td><input type="hidden" name="boardnum"
 										value="${board.boardnum }">

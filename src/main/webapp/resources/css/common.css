@@ -2,12 +2,13 @@ body {
 	padding-top: 70px;
 	/* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
 }
+
 footer {
 	margin: 50px 0;
 }
 
 .noborder {
-border-width: 0px;	
+	border-width: 0px;
 }
 
 .ellipsis {
@@ -48,27 +49,29 @@ div .right-end {
 	height: 100%;
 }
 
-table #td-title {
+table thead .td-title {
 	width: 30%;
 }
 
-table  #td-author {
+table  thead .td-author {
 	width: 14%;
 }
 
-table thead #td-img {
+table thead .td-img {
 	width: 7%;
 }
 
-table   #td-genre {
+table   thead .td-genre {
 	width: 13%;
 }
 
-
-table  #td-date {
-	width: 10%;
+table  thead .td-date {
+	width: 80px;
 }
 
+table thead .td-chk {
+	width: 20px;
+}
 
 #btn_bookList {
 	width: 30%;
@@ -88,7 +91,6 @@ div .right>h4 {
 }
 
 .row {
-	
 	padding: 15px;
 }
 
@@ -118,3 +120,4 @@ table .title {
 
 .middle {
 	font-size: large;
+}

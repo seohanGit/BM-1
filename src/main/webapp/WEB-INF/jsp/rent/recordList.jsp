@@ -42,8 +42,7 @@ body {
 
 	</div>
 	<div id="divLoadBody" style="display: none;" class="container">
-		<jsp:include page="../menu.jsp" />
-		<div class="col-lg-12">
+		<div class="col-md-12"><jsp:include page="../menu.jsp" />
 			<div class="panel panel-default">
 				<div class="panel-body">
 					<div>
@@ -52,26 +51,31 @@ body {
 					<!-- 
 			기록 검색<button type="button" onclick="location.href='/insertRecord'">삽입</button>
 			 -->
-					<p id="dateFilter"></p>
+
 					<table class="table table-striped table-bordered" id="dataTable">
 						<thead>
 							<tr class="  title">
-								<th id="td-title">도서명</th>
-								<th class="hidden-xs">대여일</th>
-								<th id="td-author">반납일</th>
-								<th id="td-date">대여자</th>
-								<th id="td-genre">삭제</th>
+								<th>도서명</th>
+								<th class="td-date">대여자</th>
+								<th class="td-author hidden-xs">대여일</th>
+								<th class="td-author">반납일</th>
+
+
+								<th class="td-img">삭제</th>
+
+
 
 
 
 							</tr>
 						</thead>
 						<tfoot>
-							<tr class="  title">
+							<tr class="title">
 								<th></th>
+								<th>대여자</th>
 								<th>대여일</th>
 								<th>반납일</th>
-								<th>대여자</th>
+
 								<th></th>
 
 
@@ -85,12 +89,13 @@ body {
 								<tr>
 
 									<td align="left">${book.title }</td>
+									<td style="width: 100px">${book.id}</td>
 									<td class="hidden-xs" align="left"><fmt:formatDate
 											type="date" pattern="yyyy-MM-dd" value="${book.rentdate }" /></td>
 									<td align="left"><fmt:formatDate type="date"
 											pattern="yyyy-MM-dd" value="${book.returndate }" /></td>
 
-									<td>${book.id}</td>
+
 									<td><button class="btn btn-default btn-sm" type="button"
 											id="extendbook"
 											onClick="location.href='/deleteRecord?book_cd=${book.book_cd}&id=${book.id}'">삭제</button></td>
@@ -114,7 +119,7 @@ body {
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$('#dataTable').dataTable({
-				bFilter: true,
+
 				paging : true,
 				ordering : true,
 				"columns" : [ {
@@ -129,13 +134,6 @@ body {
 					"searchable" : false
 				} ]
 
-			}).columnFilter({
-
-				aoColumns : [ null, null, null, {
-					type : "text",
-					bRegex : true,
-					bSmart : true
-				}, null ]
 			});
 
 		});

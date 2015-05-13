@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baron.member.sqlModel">
+
+	<!-- Board 관련 쿼리 -->
+
+
+
+	<select id="selectdinner" resultType="String">
+		SELECT MENU
+		FROM
+		SITLIB.SFOODTABLE
+		WHERE GDATE = VARCHAR_FORMAT(CURRENT
+		TIMESTAMP,
+		'YYYYMMDD') AND GUBN = 'C'
+	</select>
+	<select id="selectlunch" resultType="String">
+		SELECT MENU
+		FROM
+		SITLIB.SFOODTABLE
+		WHERE GDATE = VARCHAR_FORMAT(CURRENT
+		TIMESTAMP,
+		'YYYYMMDD') AND GUBN = 'B'
+	</select>
+	<select id="selectbreakfast" resultType="String">
+		SELECT MENU
+		FROM
+		SITLIB.SFOODTABLE
+		WHERE GDATE = VARCHAR_FORMAT(CURRENT
+		TIMESTAMP,
+		'YYYYMMDD') AND GUBN = 'A'
+	</select>
+
+
+
+
+
+
+</mapper>

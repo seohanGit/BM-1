@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
-<h1 class="page-header">
+<h2 class="page-header">
 	관리자 페이지 <small>Admin</small>
-</h1>
+</h2>
 <!-- First Blog Post -->
 <div align="left" >
 	<div class="row panel panel-default hidden-xs"
-		style="width: 80%; margin-left: 30px; ">
+		style="width: 85%; margin-left: 10px; ">
 		<div class="nav nav-tabs nav-justified" role="group" aria-label="...">
 
 
@@ -26,7 +26,7 @@
 			<button class="btn btn-default  noborder"
 				onclick="location.href='noticeListByAdmin'">공지사항</button>
 			<button class="btn btn-default  noborder"
-				onclick="location.href='searchbook'">도서목록</button>
+				onclick="location.href='searchBook'">도서목록</button>
 			<!-- 	<button class="btn btn-default  noborder" 
 			onclick="location.href='memberList'">사원목록</button> -->
 			<button class="btn btn-default  noborder"
@@ -46,7 +46,7 @@
 				onclick="location.href='boardList'">게시판</button>
 
 			<button class="btn btn-default btn-sm noborder"
-				onclick="location.href='searchbook'">도서목록</button>
+				onclick="location.href='searchBook'">도서목록</button>
 			<button class="btn btn-default btn-sm noborder"
 				onclick="location.href='recordListAll'">대여기록</button>
 

@@ -26,8 +26,7 @@ body {
 <body>
 	<jsp:include page="../nav.jsp" />
 	<div class="container">
-		<jsp:include page="../menu.jsp" />
-		<div class="col-lg-12">
+		<div class="col-md-12"><jsp:include page="../menu.jsp" />
 			<div class="panel panel-default">
 				<div class="panel-body">
 
@@ -42,17 +41,16 @@ body {
 							</div>
 						</c:when>
 						<c:otherwise>
-							<table class="table table-striped table-bordered"
-								style="width: 95%;">
+							<table class="table table-striped table-bordered">
 								<thead>
 									<tr class="hidden-xs title">
 
-										<th id="td-title">도서명</th>
+										<th class="td-title">도서명</th>
 
-										<th id="td-genre">분류</th>
-										<th id="td-genre">신청자</th>
-										<th id="td-date">예약일</th>
-										<th id="td-date">알림</th>
+										<th class="td-genre">분류</th>
+										<th class="td-date">신청자</th>
+										<th class="td-date">예약일</th>
+										<th class="td-date">알림</th>
 
 									</tr>
 								</thead>

@@ -2,30 +2,47 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.baron.member.sqlModel">
 
-
+	<!-- rentchk = '0' 대여가능 '1' 대여요청중 '2' 대여중 '3' 반납된 도서 '4' 대출정지 reservechk 
+		= '0' 예약 X '1' 예약중 -->
 
 
 	<!-- 대여관련 쿼리 -->
 	<select id="borrowListAll" resultType="BookModel">
-		SELECT * FROM TESTLIB.BOOKMST
-		A,
-		TESTLIB.BOOKRENT B
-		WHERE B.rentchk=1 AND A.book_cd=B.book_cd
+		SELECT A.title,
+		B.rentdate, B.returndate, A.b_group, B.id, B.book_cd, (SELECT C.KNAME
+		FROM
+		TPRLIB.GR_INSA C WHERE B.id=C.ASABN FETCH
+		first 1 rows only) kname
+		FROM
+		TESTLIB.BOOKMST A INNER JOIN TESTLIB.BOOKRENT B
+		ON
+		A.book_cd=B.book_cd
+		WHERE
+		B.rentchk='1'
 		ORDER BY
-		B.rentdate
+		B.rentchk
 		DESC
 	</select>
 
 	<select id="borrowList" resultType="BookModel" parameterType="String">
 		SELECT *
 		FROM TESTLIB.BOOKMST A, TESTLIB.BOOKRENT B
-		WHERE B.id = #{id} AND
+		WHERE B.id = #{id}
+		AND
 		(B.rentchk='1' OR B.rentchk='2') AND
 		A.book_cd=B.book_cd
 		ORDER BY
 		B.rentdate DESC
 	</select>
-
+	<select id="selectBorrow" resultType="BookModel" parameterType="String">
+		SELECT *
+		FROM TESTLIB.BOOKRENT
+		WHERE book_cd = #{book_cd}
+		AND rentchk='1'
+		FETCH
+		first 1 rows only
+		
+	</select>
 	<insert id="borrowBook1" parameterType="BookModel">
 		INSERT INTO
 		TESTLIB.BOOKRENT
@@ -69,7 +86,8 @@
 	</update>
 
 	<update id="confirmBorrowBook" parameterType="String">
-		UPDATE TESTLIB.BOOKRENT
+		UPDATE
+		TESTLIB.BOOKRENT
 		SET
 		RENTCHK = '2'
 		WHERE BOOK_CD = #{book_cd} AND
@@ -103,17 +121,21 @@
 		book_cd=#{book_cd}
 	</update>
 	<!-- <update id="confirmReturnBook" parameterType="String"> UPDATE TESTLIB.BOOKMST 
-		A INNER JOIN TESTLIB.BOOKRENT B ON A.rentchk = B.rentchk SET A.rentchk='0', B.rentchk='0' 
-		WHERE A.book_cd=#{book_cd} AND B.book_cd=#{book_cd} </update> -->
+		A INNER JOIN TESTLIB.BOOKRENT B ON A.rentchk = B.rentchk SET A.rentchk='0', 
+		B.rentchk='0' WHERE A.book_cd=#{book_cd} AND B.book_cd=#{book_cd} </update> -->
 	<select id="returnListAll" resultType="BookModel">
 		SELECT *
-		FROM TESTLIB.BOOKMST A,
+		FROM
+		TESTLIB.BOOKMST A INNER JOIN
 		TESTLIB.BOOKRENT B
-		WHERE B.rentchk=3 AND A.book_cd=B.book_cd
+		ON A.book_cd=B.book_cd
+		WHERE B.rentchk='2' AND
+		days(B.returndate) - days(current date)=5
 	</select>
 
 	<update id="extendBorrowBook" parameterType="String">
-		UPDATE TESTLIB.BOOKRENT
+		UPDATE
+		TESTLIB.BOOKRENT
 		SET
 		returndate = current date +20 day
 		WHERE
@@ -123,7 +145,8 @@
 	</update>
 
 	<update id="cancelBorrowBook" parameterType="String">
-		UPDATE TESTLIB.BOOKMST
+		UPDATE
+		TESTLIB.BOOKMST
 		SET
 		rentchk='0'
 		WHERE
@@ -137,7 +160,10 @@
 	</delete>
 
 	<select id="rentListAll" parameterType="String" resultType="BookModel">
-		SELECT * FROM TESTLIB.BOOKMST A, TESTLIB.BOOKRENT B
+		SELECT A.title, B.rentdate, B.returndate, B.id, (SELECT C.KNAME FROM
+		TPRLIB.GR_INSA C WHERE B.id=C.ASABN FETCH
+		first 1 rows only) kname FROM
+		TESTLIB.BOOKMST A, TESTLIB.BOOKRENT B
 		WHERE
 		A.book_cd=B.book_cd AND
 		B.rentchk='2'
@@ -152,34 +178,40 @@
 	<!-- <delete id="deleteRecord" parameterType="String"> DELETE ON TESTLIB.BOOKRENT 
 		WHERE DELETE ON reserve WHERE id=#{id} AND book_cd=#{book_cd} </delete> -->
 	<select id="recordList" parameterType="String" resultType="BookModel">
-		SELECT A.title, B.rentdate, B.id, B.returndate, A.book_cd FROM TESTLIB.BOOKMST A,
-		TESTLIB.BOOKRENT B
-		WHERE <!-- (B.returndate BETWEEN date_sub(current date, interval 
-			90 day) AND current date) AND -->
+		SELECT A.title, B.rentdate, B.id, B.returndate, A.book_cd FROM
+		TESTLIB.BOOKMST A INNER JOIN TESTLIB.BOOKRENT B ON A.book_cd=B.book_cd
+		WHERE <!-- (B.returndate BETWEEN date_sub(current date, interval 90 day) 
+			AND current date) AND -->
 		B.id=#{id} AND
-		A.book_cd=B.book_cd AND B.rentchk='3'
+		B.rentchk='3'
 		ORDER BY
 		B.returndate DESC
 	</select>
 
 	<insert id="backupRecord" parameterType="BookModel">
-		INSERT INTO TESTLIB.BOOKRENT
+		INSERT INTO
+		TESTLIB.BOOKRENT
 		(ID, RENTDATE, BOOK_CD, RETURNDATE)
-		VALUES(#{id}, #{rentdate},
+		VALUES(#{id},
+		#{rentdate},
 		#{book_cd}, #{returndate})
 	</insert>
 
 	<select id="recordListAll" resultType="BookModel">
-		SELECT * FROM TESTLIB.BOOKMST A, TESTLIB.BOOKRENT B
-		WHERE <!-- (B.returndate BETWEEN date_sub(current 
-			date, interval 90 day) AND current date) AND -->
-		A.book_cd=B.book_cd AND B.rentchk='3'
+		SELECT A.title, B.rentdate, B.returndate, (SELECT C.KNAME FROM
+		TPRLIB.GR_INSA C WHERE B.id=C.ASABN FETCH
+		first 1 rows only) kname FROM
+		TESTLIB.BOOKMST A INNER JOIN TESTLIB.BOOKRENT B ON A.book_cd=B.book_cd
+		WHERE <!-- (B.returndate BETWEEN date_sub(current date, interval 90 day) 
+			AND current date) AND -->
+		B.rentchk='3'
 		ORDER BY
 		B.returndate DESC
 	</select>
 
 	<update id="deleteRecord" parameterType="BookModel">
-		UPDATE TESTLIB.BOOKRENT SET RENTCHK='6'
+		UPDATE TESTLIB.BOOKRENT
+		SET RENTCHK='6'
 		WHERE book_cd=#{book_cd} AND id=#{id} AND rentchk='3'
 	</update>
 

@@ -9,6 +9,15 @@ public class BoardModel {
 	private Date regisdate;
 	private Date modifidate;
 	private String id;
+	private String kname;
+
+	public String getKname() {
+		return kname;
+	}
+
+	public void setKname(String kname) {
+		this.kname = kname;
+	}
 
 	public int getBoardnum() {
 		return boardnum;

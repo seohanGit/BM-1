@@ -59,16 +59,16 @@
 					<thead>
 						<tr>
 
-							<th id="td-title">도서명</th>
+							<th >도서명</th>
 
-							<th class="hidden-xs" id="td-genre">저자</th>
-							<th class="hidden-xs" id="td-genre">출판사</th>
-							<th class="hidden-xs" id="td-author">분류</th>
-							<th id="td-genre">대여상태</th>
+							<th class="hidden-xs" class="td-genre">저자</th>
+							<th class="hidden-xs" class="td-genre">출판사</th>
+							<th class="hidden-xs" class="td-date">분류</th>
+							<th class="td-genre">대여상태</th>
 
 
 
-							<th id="td-img"></th>
+							<th class="td-img"></th>
 						</tr>
 					</thead>
 					<tfoot>

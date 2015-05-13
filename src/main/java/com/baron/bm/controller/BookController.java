@@ -87,9 +87,9 @@ public class BookController {
 		page.setNum1(a);
 		page.setNum2(a + 15);
 		List<BookModel> bookList = bookservice.listBook(page);
-		int total = ((bookservice.listBook(page).get(0).getCount()) / 15) + 1;
+		//int total = ((bookservice.listBook(page).get(0).getCount()) / 15) + 1;
 		model.addAttribute("bookList", bookList);
-		model.addAttribute("total", total);
+		//model.addAttribute("total", total);
 		for (Cookie cookie : request.getCookies()) {
 			if (cookie.getName().equals("bm_permission")) {
 				permission = cookie.getValue();
@@ -108,11 +108,11 @@ public class BookController {
 		Dto page = new Dto();
 		page.setNum1((seq - 1) * 15);
 		page.setNum2((seq) * 15);
-		total = ((bookservice.listBook(page).get(0).getCount()) / 15) + 1;
+		//total = ((bookservice.listBook(page).get(0).getCount()) / 15) + 1;
 		page.setNum3(total);
 		List<BookModel> bookList = bookservice.listBook(page);
 
-		model.addAttribute("total", total);
+		//model.addAttribute("total", total);
 		model.addAttribute("bookList", bookList);
 		for (Cookie cookie : request.getCookies()) {
 			if (cookie.getName().equals("bm_permission")) {

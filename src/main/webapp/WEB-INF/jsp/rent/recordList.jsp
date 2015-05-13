@@ -61,7 +61,7 @@ body {
 								<th class="td-author">반납일</th>
 
 
-								<th class="td-img">삭제</th>
+								<!-- <th class="td-img">삭제</th> -->
 
 
 
@@ -69,19 +69,7 @@ body {
 
 							</tr>
 						</thead>
-						<tfoot>
-							<tr class="title">
-								<th></th>
-								<th>대여자</th>
-								<th>대여일</th>
-								<th>반납일</th>
 
-								<th></th>
-
-
-
-							</tr>
-						</tfoot>
 
 						<tbody>
 							<c:forEach items="${bookList}" var="book" varStatus="status">
@@ -89,16 +77,20 @@ body {
 								<tr>
 
 									<td align="left">${book.title }</td>
-									<td style="width: 100px">${book.id}</td>
+									<td><c:choose>
+											<c:when test="${empty book.kname}">${book.id}</c:when>
+											<c:otherwise>${book.kname}</c:otherwise>
+										</c:choose></td>
 									<td class="hidden-xs" align="left"><fmt:formatDate
 											type="date" pattern="yyyy-MM-dd" value="${book.rentdate }" /></td>
 									<td align="left"><fmt:formatDate type="date"
 											pattern="yyyy-MM-dd" value="${book.returndate }" /></td>
 
 
-									<td><button class="btn btn-default btn-sm" type="button"
+									<%-- <td><button class="btn btn-default btn-sm" type="button"
 											id="extendbook"
 											onClick="location.href='/deleteRecord?book_cd=${book.book_cd}&id=${book.id}'">삭제</button></td>
+								 --%>
 								</tr>
 
 							</c:forEach>
@@ -118,24 +110,23 @@ body {
 	<script src="/resources/js/jquery.dataTables.columnFilter.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$('#dataTable').dataTable({
+			var table = $('#dataTable').DataTable({
 
 				paging : true,
 				ordering : true,
 				"columns" : [ {
 					"searchable" : true
 				}, {
-					"searchable" : false
-				}, {
-					"searchable" : false
-				}, {
 					"searchable" : true
+				}, {
+					"searchable" : false
 				}, {
 					"searchable" : false
 				} ]
 
 			});
 
+			new $.fn.dataTable.FixedHeader(table);
 		});
 		var loadingBar = document.getElementById("loadingBar");
 		var divLoadBody = document.getElementById("divLoadBody");

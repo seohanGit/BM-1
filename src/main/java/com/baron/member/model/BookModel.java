@@ -4,6 +4,12 @@ import java.util.Date;
 
 public class BookModel {
 	private String book_cd;
+	private String book_cd1;
+
+	public String getBook_cd1() {
+		return book_cd1;
+	}
+
 	private String title;
 
 	private String b_group;
@@ -24,16 +30,28 @@ public class BookModel {
 	private String link;
 	private String isbn;
 	private String summary;
-	private int totalResults;
-	private int startindex;
-	private String keyword;
 	private String rcv_date;
 	private String reqstatus;
-	private int count;
-	private int sunbo;
-
 	private String sabun;
 	private String req_cd;
+	private String kname;
+	private String team_nm;
+
+	public String getTeam_nm() {
+		return team_nm;
+	}
+
+	public void setTeam_nm(String team_nm) {
+		this.team_nm = team_nm;
+	}
+
+	public String getKname() {
+		return kname;
+	}
+
+	public void setKname(String kname) {
+		this.kname = kname;
+	}
 
 	public String getReq_cd() {
 		return req_cd;
@@ -97,6 +115,7 @@ public class BookModel {
 
 	public void setBook_cd(String book_cd) {
 		this.book_cd = book_cd;
+		this.book_cd1 = book_cd;
 	}
 
 	public String getTitle() {
@@ -147,52 +166,12 @@ public class BookModel {
 		this.rcv_date = rcv_date;
 	}
 
-	public int getSunbo() {
-		return sunbo;
-	}
-
-	public void setSunbo(int sunbo) {
-		this.sunbo = sunbo;
-	}
-
-	public int getCount() {
-		return count;
-	}
-
-	public void setCount(int count) {
-		this.count = count;
-	}
-
 	public String getReqstatus() {
 		return reqstatus;
 	}
 
 	public void setReqstatus(String reqstatus) {
 		this.reqstatus = reqstatus;
-	}
-
-	public String getKeyword() {
-		return keyword;
-	}
-
-	public void setKeyword(String keyword) {
-		this.keyword = keyword;
-	}
-
-	public int getStartindex() {
-		return startindex;
-	}
-
-	public void setStartindex(int startIndex) {
-		this.startindex = startIndex;
-	}
-
-	public int getTotalResults() {
-		return totalResults;
-	}
-
-	public void setTotalResults(int totalResults) {
-		this.totalResults = totalResults;
 	}
 
 	public String getSummary() {

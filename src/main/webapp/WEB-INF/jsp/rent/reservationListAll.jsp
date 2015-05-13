@@ -45,13 +45,13 @@ body {
 								<thead>
 									<tr class="hidden-xs title">
 
-										<th class="td-title">도서명</th>
+										<th>도서명</th>
 
 										<th class="td-genre">분류</th>
 										<th class="td-date">신청자</th>
-										<th class="td-date">예약일</th>
-										<th class="td-date">알림</th>
-
+										<th class="td-genre">예약일</th>
+										<th class="td-img">알림</th>
+										<th class="td-img">대여</th>
 									</tr>
 								</thead>
 
@@ -64,17 +64,23 @@ body {
 											<td align="left">${book.title }</td>
 
 											<td align="left">${book.b_group }</td>
-											<td>${book.id}</td>
+											<td><c:choose>
+													<c:when test="${empty book.kname}">${book.id}</c:when>
+													<c:otherwise>${book.kname}</c:otherwise>
+												</c:choose></td>
 											<td align="left"><fmt:formatDate type="date"
 													pattern="yyyy-MM-dd" value="${book.reser_date }" /></td>
 											<td><button class="btn btn-default btn-sm" type="button"
 													id="extendbook"
 													onClick="location.href='/extendBorrowBook?book_cd=${book.book_cd}&id=${book.id}'">알림</button>
-												<button class="btn btn-default btn-sm" type="button"
-													id="extendbook"
-													onClick="location.href='/deleteReserve?book_cd=${book.book_cd}'">삭제</button>
 											</td>
-
+											<td><c:choose>
+													<c:when test="${book.rentchk=='0' }">
+														<button class="btn btn-default btn-sm" type="button"
+															id="extendbook"
+															onClick="location.href='/deleteReserve?book_cd=${book.book_cd}'">대여</button>
+													</c:when>
+												</c:choose></td>
 										</tr>
 
 									</c:forEach>

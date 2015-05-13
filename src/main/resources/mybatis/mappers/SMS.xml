@@ -2,11 +2,41 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.baron.member.sqlModel">
 
-	<insert id="sendSMS" parameterType="MemberModel">
-		INSERT INTO SHSERVER3.SC_TRAN
-		(TR_SENDDATE , TR_SENDSTAT ,TR_MSGTYPE ,TR_PHONE ,TR_CALLBACK ,
+	<insert id="notifiRent" parameterType="SmsModel">
+		INSERT INTO
+		SHSERVER3.SC_TRAN
+		(TR_SENDDATE , TR_SENDSTAT ,TR_MSGTYPE ,TR_PHONE
+		,TR_CALLBACK ,
 		TR_MSG)
-		VALUES(GETDATE(), '0', '0', #{phone}, '4030', '반납일이 3일 남았습니다' )
+		VALUES(GETDATE(), '0', '0', #{phone}, '4030',
+		'도서
+		' + #{title} + '의 대여요청이 승인되었습니다' )
+
+	</insert>
+
+	<insert id="notifiReser" parameterType="SmsModel">
+		INSERT INTO
+		SHSERVER3.SC_TRAN
+		(TR_SENDDATE , TR_SENDSTAT ,TR_MSGTYPE ,TR_PHONE
+		,TR_CALLBACK ,
+		TR_MSG)
+		VALUES(GETDATE(), '0', '0', #{phone}, '4030',
+		'예약하신 도서 ['+#{title}+'] 가 반납되었습니다.' )
+
+	</insert>
+
+	<insert id="notifiReturn" parameterType="SmsModel">
+		INSERT INTO
+		SHSERVER3.SC_TRAN
+		(TR_SENDDATE , TR_SENDSTAT ,TR_MSGTYPE ,TR_PHONE
+		,TR_CALLBACK ,
+		TR_MSG)
+		VALUES(GETDATE(), '0', '0', #{phone},
+		'4030', '대여한
+		도서 ['+#{title}+'] 의 반납일은 '+ CONVERT(CHAR(10), DATEADD(DAY, 5,
+		GETDATE()),
+		23) + ' 입니다.' )
+		
 
 	</insert>
 </mapper>

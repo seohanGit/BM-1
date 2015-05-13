@@ -8,5 +8,6 @@
 		<typeAlias type="com.baron.member.model.ContentModel" alias="ContentModel" />
 		<typeAlias type="com.baron.member.model.Dto" alias="Dto" />
 		<typeAlias type="com.baron.member.model.SearchResult" alias="SearchResult"/>
+		<typeAlias type="com.baron.member.model.SmsModel" alias="SmsModel"/>
 	</typeAliases>
 </configuration>

@@ -5,8 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.baron.member.dao.JoinDao;
 import com.baron.member.dao.RentDao;
 import com.baron.member.model.BookModel;
+import com.baron.member.model.MemberModel;
+import com.baron.member.model.SmsModel;
 
 @Service
 public class RentServiceImpl implements RentService {
@@ -16,10 +19,13 @@ public class RentServiceImpl implements RentService {
 	@Autowired
 	private RentDao rentDao;
 
+	@Autowired
+	private JoinDao joinDao;
+
 	@Override
-	public BookModel selectBook(String bookCode) {
+	public BookModel selectBook(String book_cd) {
 		// TODO Auto-generated method stub
-		return rentDao.selectBook(bookCode);
+		return rentDao.selectBook(book_cd);
 	}
 
 	@Override
@@ -29,9 +35,9 @@ public class RentServiceImpl implements RentService {
 	}
 
 	@Override
-	public String selectReservation(String bookCode) {
+	public BookModel selectReservation(String id) {
 		// TODO Auto-generated method stub
-		return rentDao.selectReservation(bookCode);
+		return rentDao.selectReservation(id);
 	}
 
 	@Override
@@ -50,43 +56,26 @@ public class RentServiceImpl implements RentService {
 	public void borrowBook(BookModel bookmodel) {
 
 		rentDao.borrowBook(bookmodel);
-		rentDao.updateBookTable(bookmodel.getBook_cd());
 
 	}
 
 	@Override
-	public void confirmBorrowBook(String bookCode) {
-		rentDao.confirmBorrowBook(bookCode);
+	public void confirmBorrowBook(String book_cd) {
 
+		SmsModel sms = new SmsModel();
+		String title = rentDao.selectBook(book_cd).getTitle();
+		String id = rentDao.selectBorrow(book_cd).getId();
+		System.out.println(id);
+		sms.setTitle(title);
+		sms.setPhone(joinDao.selectMember(id).getMobi_no().substring(1));
+		rentDao.notifiRent(sms);
+		rentDao.confirmBorrowBook(book_cd);
 	}
 
 	@Override
-	public void confirmBorrowBook1(String book_cd) {
-		rentDao.confirmBorrowBook1(book_cd);
-	}
+	public void returnBook(String book_cd) {
+		rentDao.returnBook(book_cd);
 
-	@Override
-	public void returnBook(String bookCode) {
-		rentDao.returnBook(bookCode);
-
-	}
-
-	@Override
-	public void returnBook1(String book_cd) {
-		rentDao.returnBook1(book_cd);
-
-	}
-
-	@Override
-	public void confirmReturnBook(String bookCode) {
-		rentDao.confirmReturnBook(bookCode);
-
-	}
-
-	@Override
-	public List<BookModel> returnListAll() {
-		// TODO Auto-generated method stub
-		return rentDao.returnListAll();
 	}
 
 	@Override
@@ -114,15 +103,9 @@ public class RentServiceImpl implements RentService {
 	}
 
 	@Override
-	public void upPoint(String id) {
-		rentDao.upPoint(id);
+	public void extendBorrowBook(String book_cd) {
 
-	}
-
-	@Override
-	public void extendBorrowBook(String bookCode) {
-
-		rentDao.extendBorrowBook(bookCode);
+		rentDao.extendBorrowBook(book_cd);
 	}
 
 	@Override
@@ -133,20 +116,14 @@ public class RentServiceImpl implements RentService {
 	}
 
 	@Override
-	public void stopBorrow(String bookCode) {
-		rentDao.stopBorrow(bookCode);
+	public void stopBorrow(String book_cd) {
+		rentDao.stopBorrow(book_cd);
 
 	}
 
 	@Override
-	public void deleteRecord(BookModel book) {
-		rentDao.deleteRecord(book);
-
-	}
-
-	@Override
-	public void recoverBook(String bookCode) {
-		rentDao.recoverBook(bookCode);
+	public void recoverBook(String book_cd) {
+		rentDao.recoverBook(book_cd);
 
 	}
 
@@ -160,6 +137,18 @@ public class RentServiceImpl implements RentService {
 	public List<BookModel> reservationList(String id) {
 		// TODO Auto-generated method stub
 		return rentDao.reservationList(id);
+
+	}
+
+	@Override
+	public MemberModel selectMember(String id) {
+		// TODO Auto-generated method stub
+		return selectMember(id);
+	}
+
+	@Override
+	public void notifiReser(SmsModel sms) {
+		rentDao.notifiReser(sms);
 
 	}
 

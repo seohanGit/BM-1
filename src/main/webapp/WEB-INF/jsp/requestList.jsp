@@ -70,7 +70,7 @@ body {
 											<th class="td-img">수량</th>
 											<th class="td-date">신청</th>
 
-											<th class="hidden-sm hidden-xs hidden-md td-date">요청일자</th>
+											<th class="hidden-sm hidden-xs hidden-md td-genre">요청일자</th>
 											<th class="td-img">상태</th>
 											<th class="td-img"></th>
 
@@ -123,8 +123,10 @@ body {
 
 												<td class="hidden-sm hidden-xs  ">${book.price}원</td>
 												<td align="center">${book.quantity}</td>
-												<td>${book.id}</td>
-
+												<td><c:choose>
+														<c:when test="${empty book.kname}">${book.id}</c:when>
+														<c:otherwise>${book.kname}</c:otherwise>
+													</c:choose></td>
 												<td class="hidden-sm hidden-xs hidden-md "><fmt:formatDate
 														type="date" pattern="yyyy-MM-dd" value="${book.reqdate}" /></td>
 

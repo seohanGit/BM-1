@@ -12,48 +12,51 @@
 <meta name="author" content="">
 <title>공지사항</title>
 <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
-<link href="/resources/css/signin.css" rel="stylesheet">
 <link href="/resources/css/common.css" rel="stylesheet">
 
 </head>
 <body>
-	<jsp:include page="../nav.jsp"></jsp:include>
-
 	<div class="container">
-
-		<div id="searchResultArea" class="row">
-			<hr>
-			<h2>공지사항</h2>
-			<hr>
-
-			<table class="table table-bordered" id="dataTable">
-				<thead class="title">
-					<tr>
-						<td>등록일</td>
-						<td>내용</td>
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach items="${noticeList}" var="notice" varStatus="status">
-						<tr style="padding-bottom: 10px">
-							<td width="15%" align="left"><fmt:formatDate
-									value="${notice.regisdate}" pattern="yyyy-MM-dd" /></td>
-
-							<td style="width: 80%; height: auto; padding-left: 10px"><textarea
-									class="content ellipsis" id="content" name="content"
-									style="width: 100%;" rows="5" readonly>${notice.content }</textarea>
-							</td>
-
-						</tr>
+		<jsp:include page="../nav.jsp"></jsp:include>
+		<div class="row row-offcanvas row-offcanvas-right">
+			<div class="col-xs-12 col-sm-9">
+				<div class="wrapper" id="jumbotron">
+					
+						<br>
+						<h2>&nbsp;공지사항</h2>
 
 
+				</div>
+				<div class="row" id="bulletin">
+					<table class="table table-bordered" id="dataTable">
+						<thead class="title">
+							<tr>
+								<td>등록일</td>
+								<td>내용</td>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${noticeList}" var="notice" varStatus="status">
+								<tr style="padding-bottom: 10px">
+									<td width="15%" align="left"><fmt:formatDate
+											value="${notice.regisdate}" pattern="yyyy-MM-dd" /></td>
 
-					</c:forEach>
-				</tbody>
-			</table>
+									<td style="width: 80%; height: auto; padding-left: 10px"><textarea
+											class="content ellipsis" id="content" name="content"
+											style="width: 100%;" rows="5" readonly>${notice.content }</textarea>
+									</td>
 
+								</tr>
+
+
+
+							</c:forEach>
+						</tbody>
+					</table>
+
+				</div>
+			</div>
 		</div>
-
 	</div>
 	<hr>
 	<script src="/resources/js/jquery/jquery.js"></script>

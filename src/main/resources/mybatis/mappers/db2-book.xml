@@ -5,12 +5,14 @@
 
 
 	<select id="selectBookAll" resultType="BookModel">
-		SELECT * FROM TESTLIB.BOOKMST A
+		SELECT * FROM
+		TESTLIB.BOOKMST A
 		ORDER BY RENTCHK
 	</select>
 
 	<insert id="insertBook" parameterType="BookModel">
-		INSERT INTO TESTLIB.BOOKMST
+		INSERT INTO
+		TESTLIB.BOOKMST
 		(title,BOOK_CD,b_group,publish,author,rentchk,imageurl,
 		rcv_date, isbn,
 		price, summary)
@@ -21,7 +23,7 @@
 
 
 	<select id="selectBook" parameterType="String" resultType="BookModel">
-		SELECT * FROM TESTLIB.BOOKMST WHERE BOOK_CD=#{book_cd}
+		SELECT * FROM TESTLIB.BOOKMST WHERE book_cd=#{book_cd}
 	</select>
 
 	<select id="searchBook" parameterType="String" resultType="SearchResult">
@@ -31,21 +33,24 @@
 		TESTLIB.BOOKMST
 		WHERE
 		TITLE like #{keyword}
-		ORDER BY RENTCHK DESC, RCV_DATE DESC
+		ORDER BY RENTCHK DESC,
+		RCV_DATE DESC
 
 	</select>
 
 	<select id="listBook" parameterType="Dto" resultType="BookModel">
 		SELECT
 		title, author, b_group, rentchk, reservechk, book_cd
-		FROM TESTLIB.BOOKMST
+		FROM
+		TESTLIB.BOOKMST
 		ORDER
 		BY RENTCHK DESC
 	</select>
 
 
 	<delete id="deleteBook" parameterType="String">
-		DELETE FROM TESTLIB.BOOKMST
+		DELETE FROM
+		TESTLIB.BOOKMST
 		WHERE
 		BOOK_CD=#{book_cd}
 	</delete>
@@ -69,7 +74,8 @@
 
 	<select id="getBestSeller" resultType="BookModel">
 		SELECT *
-		FROM TESTLIB.BOOKMST
+		FROM
+		TESTLIB.BOOKMST
 		ORDER
 		BY
 		sunbo DESC
@@ -78,7 +84,8 @@
 	<!-- 구매요청, 대여 관련 커리 -->
 
 	<insert id="requestBook" parameterType="BookModel">
-		INSERT INTO TESTLIB.BOOKREQ
+		INSERT INTO
+		TESTLIB.BOOKREQ
 		(id,reqdate,title,book_cd,price,author,quantity,b_group,link,
 		imageurl,isbn, publish, summary, req_cd)
 		VALUES
@@ -91,15 +98,18 @@
 		UPDATE TESTLIB.BOOKREQ
 		SET
 		reqstatus='2'
-		WHERE req_cd=#{req_cd}
+		WHERE book_cd=#{book_cd}
 	</update>
 
 	<select id="requestList" resultType="BookModel">
-		SELECT *
+		SELECT B.title, B.imageurl, B.author, B.price, b.quantity, B.reqdate, B.reqstatus, B.id, (SELECT C.KNAME FROM
+		TPRLIB.GR_INSA C WHERE B.id=C.ASABN
+		FETCH
+		first 1 rows only) kname
 		FROM
-		TESTLIB.BOOKREQ
+		TESTLIB.BOOKREQ B
 		WHERE reqdate <![CDATA[ > current date -1 year]]>
-		
+
 		ORDER BY
 		reqstatus
 		DESC
@@ -113,7 +123,8 @@
 		WHERE A.id=#{id} AND
 		(A.reqdate
 		>
-		current date - 1
+		current
+		date - 1
 		year
 		AND <![CDATA[A.reqdate <= current
 		date]]>)

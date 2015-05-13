@@ -2,15 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.baron.member.sqlModel">
 
+
+
 	<select id="selectMemberById" resultType="int" parameterType="string">
 		SELECT COUNT(*)
-		FROM testlib.bookmember
+		FROM tprlib.gr_insa
 		WHERE id = #{id}
 	</select>
 
 	<insert id="insertMember" parameterType="MemberModel">
 		INSERT INTO
-		testlib.bookmember
+		tprlib.gr_insa
 		(id,
 		pass, name,email,team,cell)
 		VALUES (#{id},
@@ -19,13 +21,13 @@
 	</insert>
 	<select id="selectPass" resultType="String" parameterType="String">
 		SELECT pass
-		FROM testlib.bookmember
+		FROM tprlib.gr_insa
 		WHERE id = #{id}
 	</select>
 
 	<update id="updateMember" parameterType="MemberModel">
 		UPDATE
-		testlib.bookmember
+		tprlib.gr_insa
 		SET
 		pass =
 		#{password},email = #{email},address =
@@ -40,7 +42,8 @@
 		SELECT *
 		FROM TPRLIB.GR_INSA
 		WHERE ASABN = #{id}
-		 FETCH first 1 rows only
+		FETCH
+		first 1 rows only
 	</select>
 
 
@@ -48,7 +51,7 @@
 		SELECT
 		A.id,A.name,A.email,A.address,A.cell,A.home, B.rentdate,
 		B.returndate
-		FROM testlib.bookmember as A ,BOOKRENT as B
+		FROM tprlib.gr_insa as A ,BOOKRENT as B
 		WHERE current date >
 		B.returndate
 		AND B.rentchk ='2' and
@@ -63,7 +66,7 @@
 		date -30day GROUP BY
 		id) numborrow
 		FROM
-		testlib.bookmember AS A
+		tprlib.gr_insa AS A
 		ORDER BY
 		numborrow DESC
 
@@ -75,14 +78,14 @@
 		date_sub(current date,
 		interval 30
 		day) AND B.id=A.id ) AS numborrow
-		FROM testlib.bookmember A
+		FROM tprlib.gr_insa A
 		ORDER BY
 		team
 
 	</select>
 
 	<!-- 에약관련 쿼리 -->
-
+	<!-- 예약상태 '1' = 예약 -->
 	<insert id="insertReservation" parameterType="BookModel">
 		INSERT INTO
 		testlib.bookreser(id, book_cd, reser_date, reservechk)
@@ -106,14 +109,16 @@
 		book_cd=#{book_cd}
 	</update>
 
+
+
 	<select id="selectReservation" parameterType="String"
-		resultType="String">
-		SELECT reservechk
-		FROM testlib.bookmst
+		resultType="BookModel">
+		SELECT *
+		FROM testlib.bookreser
 		WHERE
 		book_cd=#{book_cd}
 	</select>
-
+	
 	<select id="reservationList" parameterType="String" resultType="BookModel">
 		SELECT *
 		FROM testlib.bookmst A, testlib.bookreser B
@@ -128,15 +133,15 @@
 	<select id="reservationListAll" resultType="BookModel">
 		SELECT *
 		FROM
-		testlib.bookmst
-		AS
-		A, testlib.bookreser AS B
-		WHERE A.book_cd=B.book_cd
-		AND
+		testlib.bookmst A INNER JOIN testlib.bookreser B
+		ON A.book_cd=B.book_cd
+		AND A.reservechk=B.reservechk
+		WHERE
 		B.reservechk='1'
 		ORDER
 		BY
-		B.reser_date DESC
+		B.reser_date
+		DESC
 	</select>
 
 	<!-- 기타 쿼리 -->

@@ -3,62 +3,54 @@ package com.baron.member.dao;
 import java.util.List;
 
 import com.baron.member.model.BookModel;
+import com.baron.member.model.SmsModel;
 
 public interface RentDao {
 
+	BookModel selectBorrow(String book_cd);
+
+	BookModel selectBook(String book_cd);
+
 	void insertReservation(BookModel bookmodel);
 
-	String selectReservation(String bookCode);
+	BookModel selectReservation(String bookCode);
+
+	List<BookModel> reservationList(String id);
+
+	List<BookModel> reservationListAll();
 
 	List<BookModel> borrowList(String id);
 
 	List<BookModel> borrowListAll();
 
-	void borrowBook(BookModel bookmodel);
-
-	void updateBookTable(String bookCode);
-
-	void returnBook(String bookCode);
-
-	void confirmBorrowBook(String bookCode);
-
-	List<BookModel> returnListAll();
-
 	List<BookModel> rentListAll();
-
-	void confirmReturnBook(String bookCode);
 
 	List<BookModel> recordList(String id);
 
 	List<BookModel> recordListAll();
 
-	List<BookModel> reservationListAll();
+	void borrowBook(BookModel bookmodel);
 
-	void upPoint(String id);
+	void returnBook(String bookCode);
+
+	void confirmBorrowBook(String bookCode);
 
 	void extendBorrowBook(String bookCode);
 
 	void cancleBorrowBook(String bookCode);
 
-	BookModel selectBook(String bookCode);
-
 	void stopBorrow(String bookCode);
 
 	void deleteBorrowBook(BookModel bookmodel);
-
-	void deleteRecord(BookModel book);
 
 	void recoverBook(String bookCode);
 
 	void backupRecord(BookModel bookmodel);
 
-	void confirmBorrowBook1(String book_cd);
+	void notifiReser(SmsModel sms);
 
-	void returnBook1(String book_cd);
+	void notifiRent(SmsModel sms);
 
-	List<BookModel> reservationList(String id);
-
-	void notifiReser(String id);
-
+	void notifiReturn(SmsModel sms);
 
 }

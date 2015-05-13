@@ -78,7 +78,8 @@ body {
 									<tbody>
 										<c:forEach items="${bookList}" var="book" varStatus="loop">
 											<tr>
-												<td><input type="checkbox" name="bookCode"
+											
+												<td><input type="checkbox" name="book_cd"
 													value="${book.book_cd}"></td>
 												<td align="left">${book.title}</td>
 												<td align="left"><fmt:formatDate type="date"
@@ -88,11 +89,13 @@ body {
 														value="${book.returndate}" /></td>
 												<td class="hidden-xs" align="left">${book.b_group }</td>
 
-												<td>${book.id}</td>
-
+												<td>${book_cd}<c:choose>
+														<c:when test="${empty book.kname}">${book.id}</c:when>
+														<c:otherwise>${book.kname}</c:otherwise>
+													</c:choose></td>
 												<td><button class="btn btn-default btn-sm"
 														type="button" id="reservebook"
-														onClick="location.href='/confirmBorrowBook?book_cd=${book.book_cd}&id=${book.id}'; ok();">승인</button>
+														onClick="location.href='/confirmBorrowBook?book_cd=${book.book_cd1}'; ok();">승인</button>
 
 												</td>
 											</tr>

@@ -50,7 +50,7 @@ public class BoardDaoImpl implements BoardDao {
 	}
 
 	@Override
-	public void deleteNotice(String boardnum) {
+	public void deleteNotice(int boardnum) {
 		session.delete(NAMESPACE + "deleteNotice", boardnum);
 	}
 
@@ -73,13 +73,13 @@ public class BoardDaoImpl implements BoardDao {
 	}
 
 	@Override
-	public void deleteBoard(String boardnum) {
+	public void deleteBoard(int boardnum) {
 		session.delete(NAMESPACE + "deleteBoard", boardnum);
 
 	}
 
 	@Override
-	public BoardModel selectBoardnum(String boardnum) {
+	public BoardModel selectBoardnum(int boardnum) {
 		// TODO Auto-generated method stub
 		return session.selectOne(NAMESPACE + "selectBoardnum", boardnum);
 	}

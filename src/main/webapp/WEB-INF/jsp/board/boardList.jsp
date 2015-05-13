@@ -32,8 +32,9 @@
 						<thead>
 							<tr class="title">
 
-								<th class="td-genre">작성자</th>
+
 								<th style="width: 55%;">제목</th>
+								<th class="td-genre">작성자</th>
 								<th class="td-date hidden-xs">최종 수정일</th>
 								<th class="td-date"></th>
 
@@ -45,13 +46,16 @@
 
 								<tr>
 
-									<td style="vertical-align: top;">${board.id}</td>
+
 									<td style="vertical-align: top;">${board.title}</td>
+									<td><c:choose>
+											<c:when test="${empty board.kname}">${board.id}</c:when>
+											<c:otherwise>${board.kname}</c:otherwise>
+										</c:choose></td>
 									<td class=" hidden-xs"><fmt:formatDate
 											value="${board.modifidate}" pattern="yyyy-MM-dd" /></td>
 
-									<td><input type="hidden" name="boardnum"
-										value="${board.boardnum }">
+									<td>
 										<button class="btn btn-default btn-sm" type="submit"
 											id="modifyBoard"
 											onClick="location.href='/selectBoardnum?boardnum=${board.boardnum}'">수정</button>

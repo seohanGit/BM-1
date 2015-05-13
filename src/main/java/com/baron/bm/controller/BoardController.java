@@ -33,13 +33,13 @@ public class BoardController {
 
 	
 	@RequestMapping("/deleteBoard")
-	public String deleteboard(String boardnum) {
+	public String deleteboard(int boardnum) {
 		boardService.deleteBoard(boardnum);
 		return "redirect:boardList";
 	}
 
 	@RequestMapping("/selectBoardnum")
-	public String selectBoardnum(String boardnum, Model model, BoardModel board) {
+	public String selectBoardnum(int boardnum, Model model, BoardModel board) {
 		board = boardService.selectBoardnum(boardnum);
 		model.addAttribute("board", board );
 		return "board/modifyBoard";
@@ -116,7 +116,7 @@ public class BoardController {
 	}
 
 	@RequestMapping("/deleteNotice")
-	public String deleteNotice(String boardnum) {
+	public String deleteNotice(int boardnum) {
 		boardService.deleteNotice(boardnum);
 		return "redirect:noticeListByAdmin";
 	}

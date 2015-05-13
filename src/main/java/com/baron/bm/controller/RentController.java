@@ -1,24 +1,20 @@
 package com.baron.bm.controller;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
-import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.baron.member.model.BookModel;
-import com.baron.member.service.BookService;
+import com.baron.member.model.SmsModel;
 import com.baron.member.service.RentService;
 
 @Controller
@@ -44,8 +40,8 @@ public class RentController {
 		book.setId(id);
 		book.setBook_cd(book_cd);
 		book.setRentchk("1");
-
-		if (rentservice.selectBook(book_cd).getRentchk().equals("0")) {
+		BookModel chkbook = rentservice.selectBook(book_cd);
+		if (chkbook.getRentchk().equals("0")) {
 			System.out.println(book.getRentchk());
 			rentservice.borrowBook(book);
 			return "redirect:borrowList";
@@ -55,11 +51,10 @@ public class RentController {
 		}
 	}
 
-	@RequestMapping("/confirmBorrowBook")
+	@RequestMapping(value = "/confirmBorrowBook", method = RequestMethod.GET)
 	public String confirmBorrowBook(HttpServletRequest request, String book_cd) {
 
 		rentservice.confirmBorrowBook(book_cd);
-		rentservice.confirmBorrowBook1(book_cd);
 		return "redirect:borrowList";
 	}
 
@@ -69,7 +64,6 @@ public class RentController {
 
 		for (String book_cd : book_cdList) {
 			rentservice.confirmBorrowBook(book_cd);
-			rentservice.confirmBorrowBook1(book_cd);
 		}
 		return "redirect:borrowList";
 	}
@@ -100,7 +94,7 @@ public class RentController {
 					List<BookModel> bookList = rentservice.borrowList(id);
 					List<BookModel> record = rentservice.recordList(id);
 					List<BookModel> reserve = rentservice.reservationList(id);
-					
+
 					model.addAttribute("reserveList", reserve);
 					model.addAttribute("bookList", bookList);
 					model.addAttribute("record", record);
@@ -172,7 +166,6 @@ public class RentController {
 			@RequestParam(value = "book_cd") List<String> book_cdList) {
 		for (String book_cd : book_cdList) {
 			rentservice.returnBook(book_cd);
-			rentservice.returnBook1(book_cd);
 
 		}
 
@@ -181,11 +174,21 @@ public class RentController {
 
 	@RequestMapping("/returnBookByAdmin")
 	public String returnBook(String book_cd, BookModel book) {
-
-		if (rentservice.selectBook(book_cd).getRentchk().equals("2")) {
+		BookModel checkBook = rentservice.selectBook(book_cd);
+		if (checkBook.getRentchk().equals("2")) {
 			System.out.println(book.getRentchk());
 			rentservice.returnBook(book_cd);
-			rentservice.returnBook1(book_cd);
+
+			if (checkBook.getReservechk().equals("1")) {
+				SmsModel sms = new SmsModel();
+				String id = rentservice.selectReservation(book_cd).getId();
+
+				sms.setTitle(checkBook.getTitle());
+				sms.setPhone(rentservice.selectMember(id).getMobi_no()
+						.substring(1));
+				rentservice.notifiReser(sms);
+			}
+
 			return "redirect:rentListAll";
 		} else {
 
@@ -256,16 +259,13 @@ public class RentController {
 		return "rent/recordList";
 	}
 
-	@RequestMapping("/deleteRecord")
-	public String deleteRecord(String id, String book_cd, Model model,
-			BookModel book) {
-		book.setBook_cd(book_cd);
-		book.setId(id);
-		rentservice.deleteRecord(book);
-
-		return "redirect:recordListAll";
-	}
-
+	/*
+	 * @RequestMapping("/deleteRecord") public String deleteRecord(String id,
+	 * String book_cd, Model model, BookModel book) { book.setBook_cd(book_cd);
+	 * book.setId(id); rentservice.deleteRecord(book);
+	 * 
+	 * return "redirect:recordListAll"; }
+	 */
 	@RequestMapping("/reservation")
 	public String reservation(String book_cd, BookModel book,
 			HttpServletRequest request) {

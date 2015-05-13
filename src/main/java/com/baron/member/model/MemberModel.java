@@ -12,7 +12,7 @@ public class MemberModel {
 	private String kname;
 	private String email;
 	private String address;
-	private String cell;
+	private String mobi_no;
 	private String home;
 	private String permission;
 	private Date endday;
@@ -154,12 +154,12 @@ public class MemberModel {
 		this.kname = kname;
 	}
 
-	public String getCell() {
-		return cell;
+	public String getMobi_no() {
+		return mobi_no;
 	}
 
-	public void setCell(String cell) {
-		this.cell = cell;
+	public void setMobi_no(String mobi_no) {
+		this.mobi_no = mobi_no;
 	}
 
 	public String getHome() {

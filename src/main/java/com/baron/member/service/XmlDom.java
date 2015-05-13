@@ -116,8 +116,8 @@ public class XmlDom {
 			BookModel book = new BookModel();
 
 			Element element = (Element) list.item(i);
-			book.setKeyword(keyword);
-			book.setTotalResults(totalResults);
+			//book.setKeyword(keyword);
+			//book.setTotalResults(totalResults);
 
 			book.setTitle(getChildren(element, "title"));
 			book.setLink(getChildren(element, "link"));

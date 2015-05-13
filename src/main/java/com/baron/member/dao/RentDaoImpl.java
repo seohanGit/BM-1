@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.baron.member.model.BookModel;
+import com.baron.member.model.SmsModel;
 
 @Repository
 public class RentDaoImpl implements RentDao {
@@ -22,6 +23,20 @@ public class RentDaoImpl implements RentDao {
 	@Autowired
 	@Resource(name = "smsSession")
 	private SqlSession smsSession;
+
+	private JoinDao joinDao;
+
+	@Override
+	public BookModel selectBook(String book_cd) {
+		// TODO Auto-generated method stub
+		return session.selectOne(NAMESPACE + "selectBook", book_cd);
+	}
+
+	@Override
+	public BookModel selectBorrow(String book_cd) {
+		// TODO Auto-generated method stub
+		return session.selectOne(NAMESPACE + "selectBorrow", book_cd);
+	}
 
 	@Override
 	public List<BookModel> borrowList(String id) {
@@ -38,60 +53,29 @@ public class RentDaoImpl implements RentDao {
 	@Override
 	public void borrowBook(BookModel bookmodel) {
 		session.insert(NAMESPACE + "borrowBook1", bookmodel);
+		session.update(NAMESPACE + "borrowBook2", bookmodel.getBook_cd());
 
 	}
 
 	@Override
-	public void updateBookTable(String bookCode) {
-		session.update(NAMESPACE + "borrowBook2", bookCode);
-	}
+	public void returnBook(String book_cd) {
 
-	@Override
-	public void returnBook(String bookCode) {
-
-		session.update(NAMESPACE + "returnBook", bookCode);
-	}
-
-	@Override
-	public void returnBook1(String book_cd) {
+		session.update(NAMESPACE + "returnBook", book_cd);
 		session.update(NAMESPACE + "returnBook1", book_cd);
 
 	}
 
 	@Override
-	public void confirmBorrowBook(String bookCode) {
-		session.update(NAMESPACE + "confirmBorrowBook", bookCode);
-
-	}
-
-	@Override
-	public void confirmBorrowBook1(String book_cd) {
+	public void confirmBorrowBook(String book_cd) {
+		session.update(NAMESPACE + "confirmBorrowBook", book_cd);
 		session.update(NAMESPACE + "confirmBorrowBook1", book_cd);
 
-	}
-
-	@Override
-	public void upPoint(String id) {
-
-		session.update(NAMESPACE + "upPoint", id);
-	}
-
-	@Override
-	public List<BookModel> returnListAll() {
-		// TODO Auto-generated method stub
-		return session.selectList(NAMESPACE + "returnListAll");
 	}
 
 	@Override
 	public List<BookModel> rentListAll() {
 		// TODO Auto-generated method stub
 		return session.selectList(NAMESPACE + "rentListAll");
-	}
-
-	@Override
-	public void confirmReturnBook(String bookCode) {
-		session.update(NAMESPACE + "confirmReturnBook", bookCode);
-
 	}
 
 	@Override
@@ -113,14 +97,20 @@ public class RentDaoImpl implements RentDao {
 	}
 
 	@Override
-	public void extendBorrowBook(String bookCode) {
-		session.update(NAMESPACE + "extendBorrowBook", bookCode);
+	public List<BookModel> reservationList(String id) {
+		// TODO Auto-generated method stub
+		return session.selectList(NAMESPACE + "reservationList", id);
+	}
+
+	@Override
+	public void extendBorrowBook(String book_cd) {
+		session.update(NAMESPACE + "extendBorrowBook", book_cd);
 
 	}
 
 	@Override
-	public void cancleBorrowBook(String bookCode) {
-		session.update(NAMESPACE + "cancelBorrowBook", bookCode);
+	public void cancleBorrowBook(String book_cd) {
+		session.update(NAMESPACE + "cancelBorrowBook", book_cd);
 
 	}
 
@@ -130,25 +120,14 @@ public class RentDaoImpl implements RentDao {
 	}
 
 	@Override
-	public BookModel selectBook(String bookCode) {
-		// TODO Auto-generated method stub
-		return session.selectOne(NAMESPACE + "selectBook", bookCode);
-	}
-
-	@Override
-	public void stopBorrow(String bookCode) {
-		session.update(NAMESPACE + "stopBorrow", bookCode);
+	public void stopBorrow(String book_cd) {
+		session.update(NAMESPACE + "stopBorrow", book_cd);
 
 	}
 
 	@Override
-	public void deleteRecord(BookModel book) {
-		session.delete(NAMESPACE + "deleteRecord", book);
-	}
-
-	@Override
-	public void recoverBook(String bookCode) {
-		session.update(NAMESPACE + "recoverBook", bookCode);
+	public void recoverBook(String book_cd) {
+		session.update(NAMESPACE + "recoverBook", book_cd);
 
 	}
 
@@ -166,20 +145,26 @@ public class RentDaoImpl implements RentDao {
 	}
 
 	@Override
-	public String selectReservation(String bookCode) {
-		return session.selectOne(NAMESPACE + "selectReservation", bookCode);
+	public BookModel selectReservation(String book_cd) {
+		return session.selectOne(NAMESPACE + "selectReservation", book_cd);
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public List<BookModel> reservationList(String id) {
-		// TODO Auto-generated method stub
-		return session.selectList(NAMESPACE + "reservationList", id);
+	public void notifiReser(SmsModel sms) {
+		smsSession.insert(NAMESPACE + "notifiReser", sms);
 	}
 
 	@Override
-	public void notifiReser(String id) {
-		smsSession.insert(NAMESPACE + "notifiReser", id);
+	public void notifiRent(SmsModel sms) {
+		smsSession.insert(NAMESPACE + "notifiRent", sms);
 	}
+
+	@Override
+	public void notifiReturn(SmsModel sms) {
+		smsSession.insert(NAMESPACE + "notifiReturn", sms);
+
+	}
+
 }

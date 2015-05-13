@@ -49,8 +49,8 @@
 										<tr class="hidden-xs title">
 											<th><input type="checkbox" id="allCheck" class="td-chk"></th>
 											<th>도서명</th>
-											<th class="td-date">대여일</th>
-											<th class="td-date">반납일</th>
+											<th class="td-genre">대여일</th>
+											<th class="td-genre">반납일</th>
 											<th class="td-date">대여자</th>
 											<th class="td-img">반납</th>
 											<th class="td-img">연장</th>
@@ -81,7 +81,11 @@
 																pattern="yyyy-MM-dd" value="${book.returndate }" /></td>
 													</c:otherwise>
 												</c:choose>
-												<td>${book.id}</td>
+
+												<td><c:choose>
+														<c:when test="${empty book.kname}">${book.id}</c:when>
+														<c:otherwise>${book.kname}</c:otherwise>
+													</c:choose></td>
 												<%-- 
 							<td><button class="btn btn-default" type="button"
 									id="extendbook"

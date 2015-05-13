@@ -16,7 +16,7 @@ public interface BoardService {
 
 	public List<BoardModel> noticeList();
 
-	public void deleteNotice(String boardnum);
+	public void deleteNotice(int boardnum);
 
 	public void modifyNotice(BoardModel content);
 
@@ -24,7 +24,7 @@ public interface BoardService {
 
 	public void modifyBoard(BoardModel boardmodel);
 
-	public void deleteBoard(String boardnum);
+	public void deleteBoard(int boardnum);
 
-	public BoardModel selectBoardnum(String boardnum);
+	public BoardModel selectBoardnum(int boardnum);
 }

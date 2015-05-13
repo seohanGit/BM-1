@@ -7,11 +7,16 @@
 
 
 	<select id="selectBoard" resultType="BoardModel">
-		SELECT *
-		FROM TESTLIB.BOOKBOARD
-		WHERE boardtype='0'
+		SELECT B.title, B.id, B.content,
+		B.modifidate, B.boardnum, (SELECT C.KNAME FROM
+		TPRLIB.GR_INSA C WHERE B.id=C.ASABN
+		FETCH
+		first 1 rows only) kname
+		FROM TESTLIB.BOOKBOARD B
+		WHERE
+		B.boardtype='0'
 		ORDER
-		BY REGISDATE
+		BY B.modifidate
 	</select>
 
 	<select id="selectBoardregister" resultType="BoardModel">
@@ -36,7 +41,7 @@
 		ORDER BY title
 	</select>
 
-	<select id="selectBoardnum" parameterType="String" resultType="BoardModel">
+	<select id="selectBoardnum" parameterType="int" resultType="BoardModel">
 		SELECT *
 		FROM
 		TESTLIB.BOOKBOARD
@@ -44,14 +49,16 @@
 
 	</select>
 	<insert id="insertBoard" parameterType="BoardModel">
-		INSERT INTO TESTLIB.BOOKBOARD
+		INSERT INTO
+		TESTLIB.BOOKBOARD
 		(title,content,REGISDATE,modifidate,id)
 		VALUES
 		(#{title},#{content},CURRENT DATE,CURRENT DATE,#{id})
 	</insert>
 
-	<delete id="deleteBoard" parameterType="String">
-		DELETE FROM TESTLIB.BOOKBOARD
+	<delete id="deleteBoard" parameterType="int">
+		DELETE FROM
+		TESTLIB.BOOKBOARD
 		WHERE
 		boardnum=#{boardnum}
 	</delete>
@@ -75,13 +82,15 @@
 	</select>
 
 	<insert id="insertNotice" parameterType="BoardModel">
-		INSERT INTO TESTLIB.BOOKBOARD
+		INSERT INTO
+		TESTLIB.BOOKBOARD
 		(content, REGISDATE)
 		VALUES
 		(#{content}, CURRENT DATE)
 	</insert>
 	<delete id="deleteNotice" parameterType="String">
-		DELETE FROM TESTLIB.BOOKBOARD
+		DELETE FROM
+		TESTLIB.BOOKBOARD
 		WHERE
 		boardnum=#{boardnum}
 	</delete>
@@ -90,7 +99,8 @@
 		UPDATE TESTLIB.BOOKBOARD
 		SET
 		content=#{content}, MODIFYDATE=CURRENT DATE
-		WHERE boardnum=#{boardnum}
+		WHERE
+		boardnum=#{boardnum}
 	</update>
 
 

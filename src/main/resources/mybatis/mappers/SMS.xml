@@ -5,12 +5,13 @@
 	<insert id="notifiRent" parameterType="SmsModel">
 		INSERT INTO
 		master.SHSERVER3.SC_TRAN
-		(TR_SENDDATE , TR_SENDSTAT ,TR_MSGTYPE ,TR_PHONE
+		(TR_SENDDATE , TR_SENDSTAT ,TR_MSGTYPE
+		,TR_PHONE
 		,TR_CALLBACK ,
 		TR_MSG)
-		VALUES(GETDATE(), '0', '0', #{phone}, '4030',
-		'도서
-		' + #{title} + '의 대여요청이 승인되었습니다' )
+		VALUES(GETDATE(), '0', '0', #{phone},
+		'4030',
+		'[ '+ #{title} + ' ]의 대여요청이 승인되었습니다' )
 
 	</insert>
 
@@ -21,7 +22,7 @@
 		,TR_CALLBACK ,
 		TR_MSG)
 		VALUES(GETDATE(), '0', '0', #{phone}, '4030',
-		'예약하신 도서 ['+#{title}+'] 가 반납되었습니다.' )
+		'예약하신 도서 [ '+#{title}+' ] 가 입고되었습니다.' )
 
 	</insert>
 
@@ -32,11 +33,24 @@
 		,TR_CALLBACK ,
 		TR_MSG)
 		VALUES(GETDATE(), '0', '0', #{phone},
-		'4030', '대여한
-		도서 ['+#{title}+'] 의 반납일은 '+ CONVERT(CHAR(10), DATEADD(DAY, 5,
+		'4030',
+		'[ ' +#{title} + ' ] 의 반납일은 '+ CONVERT(CHAR(10), DATEADD(DAY, 5,
 		GETDATE()),
 		23) + ' 입니다.' )
-		
+
+
+	</insert>
+
+	<insert id="notifiReq" parameterType="SmsModel">
+		INSERT INTO
+		SHSERVER3.SC_TRAN
+		(TR_SENDDATE , TR_SENDSTAT ,TR_MSGTYPE ,TR_PHONE
+		,TR_CALLBACK ,
+		TR_MSG)
+		VALUES(GETDATE(), '0', '0', #{phone},
+		'4030',
+		'구매요청도서 [ ' + #{title} + ' ] 입고되었습니다.' )
+
 
 	</insert>
 </mapper>

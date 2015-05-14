@@ -10,10 +10,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.baron.member.model.BookModel;
+import com.baron.member.model.Dto;
+import com.baron.member.model.SmsModel;
 import com.baron.member.service.BookService;
+import com.baron.member.service.JoinService;
+import com.baron.member.service.NotifiService;
+import com.baron.member.service.RentService;
 import com.baron.member.service.RequestService;
 
 @Controller
@@ -21,6 +27,15 @@ public class RequestController {
 
 	@Autowired
 	private RequestService requestservice;
+
+	@Autowired
+	private NotifiService notifiService;
+	
+	@Autowired
+	private JoinService joinService;
+
+	@Autowired
+	private RentService rentService;
 
 	@Autowired
 	private BookService bookService;
@@ -108,9 +123,18 @@ public class RequestController {
 
 	@RequestMapping("/confirmBuy")
 	public String confirmBuy(BookModel model) {
+		SmsModel sms = new SmsModel();
 		if (bookService.selectBook(model.getBook_cd()) == null) {
+			System.out.println(model.getId());
+			String mobi_no = rentService.selectMember(model.getId())
+					.getMobi_no().substring(1);
+
+			sms.setTitle(model.getTitle());
+			sms.setPhone(mobi_no);
+
 			bookService.insertBook(model);
 			requestservice.deleteRequest(model.getReq_cd());
+			notifiService.notifiReq(sms);
 			return "redirect:requestList";
 		} else {
 			return "buyfail";
@@ -119,18 +143,42 @@ public class RequestController {
 
 	@RequestMapping("/confirmBuyList")
 	public String confirmBuyList(
-			@RequestParam(value = "book_cd") List<String> book_cdList) {
-		for (String book_cd : book_cdList) {
-			if (bookService.selectBook(book_cd) == null) {
-				bookService.insertBook(requestservice.selectBook(book_cd));
-				requestservice.deleteRequest(book_cd);
+			@RequestParam(value = "req_cd") List<String> req_cdList) {
+		for (String req_cd : req_cdList) {
+			BookModel book = requestservice.selectBook(req_cd);
+			SmsModel sms = new SmsModel();
+			if (bookService.selectBook(book.getBook_cd()) == null) {
+				String mobi_no = rentService.selectMember(book.getId())
+						.getMobi_no().substring(1);
 
+				sms.setTitle(book.getTitle());
+				sms.setPhone(mobi_no);
+
+				bookService.insertBook(requestservice.selectBook(req_cd));
+				requestservice.deleteRequest(req_cd);
+				notifiService.notifiReq(sms);
+				return "buySuccess";
 			} else {
 				return "buyfail";
 
 			}
 
 		}
+		return "redirect:requestList";
+	}
+
+	@RequestMapping(value = "/modifiRequest", method = RequestMethod.POST)
+	public String modifiRequest(
+			@RequestParam("book_cd") List<String> book_cdList,
+			@RequestParam("req_cd") List<String> req_cdList) {
+		for (int i = 0; i < req_cdList.size(); i++) {
+			Dto dto = new Dto();
+			dto.setString1(book_cdList.get(i));
+			dto.setString2(req_cdList.get(i));
+
+			requestservice.updateBook_cd(dto);
+		}
+
 		return "redirect:requestList";
 	}
 

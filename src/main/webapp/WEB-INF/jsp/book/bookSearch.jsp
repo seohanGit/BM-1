@@ -59,7 +59,7 @@
 					<thead>
 						<tr>
 
-							<th >도서명</th>
+							<th>도서명</th>
 
 							<th class="hidden-xs" class="td-genre">저자</th>
 							<th class="hidden-xs" class="td-genre">출판사</th>

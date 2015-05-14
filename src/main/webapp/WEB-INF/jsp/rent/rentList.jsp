@@ -64,7 +64,7 @@
 										<c:forEach items="${bookList}" var="book" varStatus="loop">
 
 											<tr>
-												<td><input type="checkbox" name="bookCode"
+												<td><input type="checkbox" name="book_cd"
 													value="${book.book_cd}"></td>
 												<td align="left">${book.title }</td>
 												<td align="left"><fmt:formatDate type="date"

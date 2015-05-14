@@ -160,7 +160,7 @@
 	</delete>
 
 	<select id="rentListAll" parameterType="String" resultType="BookModel">
-		SELECT A.title, B.rentdate, B.returndate, B.id, (SELECT C.KNAME FROM
+		SELECT A.title, B.rentdate, B.returndate, B.id, B.book_cd, (SELECT C.KNAME FROM
 		TPRLIB.GR_INSA C WHERE B.id=C.ASABN FETCH
 		first 1 rows only) kname FROM
 		TESTLIB.BOOKMST A, TESTLIB.BOOKRENT B
@@ -168,7 +168,7 @@
 		A.book_cd=B.book_cd AND
 		B.rentchk='2'
 		ORDER BY
-		B.rentchk
+		B.rentchk DESC, B.rentdate
 		DESC
 	</select>
 

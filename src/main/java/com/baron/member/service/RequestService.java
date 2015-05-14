@@ -1,9 +1,9 @@
 package com.baron.member.service;
 
-import java.io.IOException;
 import java.util.List;
 
 import com.baron.member.model.BookModel;
+import com.baron.member.model.Dto;
 
 public interface RequestService {
 
@@ -21,5 +21,7 @@ public interface RequestService {
 	public BookModel selectBook(String bookCode);
 
 	public List<BookModel> requestRecord(String id);
+
+	public void updateBook_cd(Dto dto);
 
 }

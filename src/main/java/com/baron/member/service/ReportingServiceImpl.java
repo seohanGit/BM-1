@@ -1,6 +1,5 @@
 package com.baron.member.service;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -11,6 +10,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import com.baron.member.dao.JoinDao;
+import com.baron.member.dao.NotifiDao;
 import com.baron.member.dao.RentDao;
 import com.baron.member.model.BookModel;
 import com.baron.member.model.SmsModel;
@@ -25,6 +25,9 @@ public class ReportingServiceImpl implements ReportingService {
 
 	@Autowired
 	private RentDao rentDao;
+
+	@Autowired
+	private NotifiDao notifiDao;
 
 	@Override
 	// Every night at 1 AM
@@ -42,18 +45,20 @@ public class ReportingServiceImpl implements ReportingService {
 			if (cal.getTime() == bookModel.getReturndate()) {
 				System.out.println(bookModel.getReturndate());
 				System.out.println(cal.getTime());
-				//TEST
+				// TEST
 				SmsModel sms = new SmsModel();
-				String Cell = joinDao.selectMember(bookModel.getId()).getMobi_no()
-						.substring(1);
+				String Cell = joinDao.selectMember(bookModel.getId())
+						.getMobi_no().substring(1);
 				sms.setTitle(bookModel.getTitle());
 				sms.setPhone(Cell);
 				System.out.println(Cell);
-				rentDao.notifiReturn(sms);
+				notifiDao.notifiReturn(sms);
 			}
-			
+
 		}
 
+		
+		
 		logger.info("Report sent at " + new Date(System.currentTimeMillis()));
 	}
 }

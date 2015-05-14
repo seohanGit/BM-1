@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.baron.member.model.BookModel;
 import com.baron.member.model.SmsModel;
+import com.baron.member.service.NotifiService;
 import com.baron.member.service.RentService;
 
 @Controller
@@ -22,6 +23,9 @@ public class RentController {
 
 	@Autowired
 	RentService rentservice;
+
+	@Autowired
+	NotifiService notifiService;
 
 	@RequestMapping("/borrowbook")
 	public String borrowBook(HttpServletRequest request, String book_cd,
@@ -175,6 +179,7 @@ public class RentController {
 	@RequestMapping("/returnBookByAdmin")
 	public String returnBook(String book_cd, BookModel book) {
 		BookModel checkBook = rentservice.selectBook(book_cd);
+		System.out.println(checkBook.getRentchk());
 		if (checkBook.getRentchk().equals("2")) {
 			System.out.println(book.getRentchk());
 			rentservice.returnBook(book_cd);
@@ -186,7 +191,7 @@ public class RentController {
 				sms.setTitle(checkBook.getTitle());
 				sms.setPhone(rentservice.selectMember(id).getMobi_no()
 						.substring(1));
-				rentservice.notifiReser(sms);
+				notifiService.notifiReser(sms);
 			}
 
 			return "redirect:rentListAll";
@@ -292,6 +297,13 @@ public class RentController {
 
 		model.addAttribute("bookList", bookList);
 		return "rent/reservationListAll";
+	}
+
+	@RequestMapping("/notifiReser")
+	public String NotifiReser(String book_cd) {
+
+		rentservice.notifiReservation(book_cd);
+		return "redirect:reservationListAll";
 	}
 	/*
 	 * 기존 대여기록 새로운 테이블로 옮기기

@@ -46,83 +46,104 @@
 </script>
  -->
 </head>
-<body onload="pagenation()">
+<body>
 	<jsp:include page="../nav.jsp" />
-	<!-- Page Content -->
-	<div id="searchResultArea">
-		<hr>
-		<h2>인터파크 검색</h2>
+	<div id="loadingBar"
+		style="background-color: #fff; position: absolute; top: 0; left: 0; width: 100%; height: 100%; text-align: center; margin: 0 auto; z-index: 100000;">
+		<table width="100%" height="100%" border="0" bgcolor="#fff">
+			<tr>
+				<td align="center">
+					<div style="text-align: center;">
+						<IMG SRC="resources/img/loading_map.gif">
+					</div>
+					<div
+						style="margin-top: 20px; color: #000; text-align: center; font-weight: bold; font-size: 40px">L
+						o a d i n g . . .</div>
+				</td>
+			</tr>
+		</table>
 
-		<h4>원하는 책이 없다면 인터넷에서 주문하세요 !</h4>
-		<div class="input-group ">
-			<form action="/findBook" method="post">
-				<span class="input-group-btn"> <input type="text"
-					class="form-control" id="query" name="keyword"
-					placeholder="인터파크 검색">
-					<button class="btn btn-default" type="submit" id="btn_find">
-						<span class="glyphicon glyphicon-search"></span>
-					</button>
-				</span>
-			</form>
-		</div>
+	</div>
+	<div id="divLoadBody" style="display: none;" class="container">
 
-		<hr>
+		<!-- Page Content -->
+		<div id="searchResultArea">
+			<hr>
+			<h2>인터파크 검색</h2>
 
-		<table class="table table-striped table-bordered"
-			style="width =: 90%; bordercolor: #fff" id="dataTable">
+			<h4>원하는 책이 없다면 인터넷에서 주문하세요 !</h4>
+			<div class="input-group ">
+				<form action="/findBook" method="post">
+					<span class="input-group-btn"> <input type="text"
+						class="form-control" id="query" name="keyword"
+						placeholder="인터파크 검색">
+						<button class="btn btn-default" type="submit" id="btn_find">
+							<span class="glyphicon glyphicon-search"></span>
+						</button>
+					</span>
+				</form>
+			</div>
 
-			<thead>
-				<tr>
-					<td class="hidden-xs" id="td-img">표지</td>
-					<td width="20%">도서명</td>
-					<td class="hidden-xs">저자</td>
-					<td class="hidden-xs" id="td-genre">장르</td>
-					<td class="hidden-xs" id="td-genre">출판사</td>
-					<td id="td-genre">가격</td>
-					<td id="td-img">수량</td>
-					<td id="td-date">구매요청</td>
-				</tr>
-			</thead>
+			<hr>
+			<div class="dataTable_wrapper">
+				<table class="table table-striped table-bordered"
+					style="width =: 90%; bordercolor: #fff" id="dataTable">
 
-			<tbody>
-				<c:forEach items="${bookList}" var="book" varStatus="status">
-					<tr>
-						<td class="hidden-xs" style="width: 50px" align="left"><img
-							style="width: 50px" src="${book.imageurl}"></td>
+					<thead>
+						<tr>
+							<td class="hidden-xs" id="td-img">표지</td>
+							<td>도서명</td>
+							<td class="hidden-xs td-author">저자</td>
+							<td class="hidden-sm hidden-xs hidden-md" id="td-genre">분류</td>
+							<td class="hidden-xs" id="td-genre">출판사</td>
+							<td id="td-date">가격</td>
+							<td id="td-date">수량</td>
+							<td id="td-date">구매요청</td>
+						</tr>
+					</thead>
 
-						<td align="left"><a href="${book.link}">${book.title}</a></td>
-						<td class="hidden-xs" align="left">${book.author }</td>
-						<td class="hidden-xs" align="left">${book.b_group}</td>
-						<td class="hidden-xs" align="left">${book.publish}</td>
-						<td align="left">${book.price}원</td>
+					<tbody>
+						<c:forEach items="${bookList}" var="book" varStatus="status">
+							<tr>
+								<td class="hidden-xs" style="width: 50px" align="left"><img
+									style="width: 50px" src="${book.imageurl}"></td>
 
-						<form action="/requestbook" method="get">
-							<td style="width: 20px"><input type="hidden"
-								value="${book.isbn}" name="isbn"> <input type="number"
-								name="quantity" min="1" placeholder="수량" style="width: 40px"></td>
-							<td>
-								<button class="btn btn-default" type="submit" id="requestbook">구매요청</button>
+								<td align="left"><a href="${book.link}">${book.title}</a></td>
+								<td class="hidden-xs" align="left">${book.author }</td>
+								<td class="hidden-sm hidden-xs hidden-md" align="left">${book.b_group}</td>
+								<td class="hidden-xs" align="left">${book.publish}</td>
+								<td align="left">${book.price}원</td>
+
+								<form action="/requestbook" method="get">
+									<td style="width: 20px"><input type="hidden"
+										value="${book.isbn}" name="isbn"> <input type="number"
+										name="quantity" min="1" placeholder="수량" style="width: 40px"></td>
+									<td>
+										<button class="btn btn-default" type="submit" id="requestbook">구매요청</button>
 
 
-								<%-- 
+										<%-- 
 					<button class="btn btn-default" type="button" id="requestbook"
 						onClick="location.href='/requestbook?isbn=${book.isbn}'">구매</button>
 					&writer=${book.writer}&publisher=${book.publisher}&imageurl=${book.imageurl}
  --%>
-							</td>
-						</form>
-					</tr>
-				</c:forEach>
-			</tbody>
+									</td>
+								</form>
+							</tr>
+						</c:forEach>
+					</tbody>
 
-		</table>
+				</table>
 
+			</div>
+		</div>
 	</div>
-	
 
+
+	<script src="/resources/js/metisMenu.min.js"></script>
+	<script src="/resources/js/jquery/jquery.js"></script>
 	<script src="/resources/js/bootstrap.min.js"></script>
 	<script src="/resources/js/jquery/common.js"></script>
-	<script src="/resources/js/jquery/jquery.js"></script>
 	<script src="/resources/js/jquery/book.js"></script>
 	<script src="/resources/js/jquery.dataTables.min.js"></script>
 	<script src="/resources/js/dataTables.bootstrap.min.js"></script>
@@ -150,6 +171,11 @@
 
 			});
 		});
+		var loadingBar = document.getElementById("loadingBar");
+		var divLoadBody = document.getElementById("divLoadBody");
+
+		divLoadBody.style.display = "";
+		loadingBar.style.display = "none";
 	</script>
 </body>
 </html>

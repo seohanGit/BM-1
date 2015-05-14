@@ -31,6 +31,11 @@
 		'YYYYMMDD') AND GUBN = 'A'
 	</select>
 
+	<select id="selectDate" parameterType="String" resultType="String">
+		SELECT Left(A.rece_ymd,
+		4)||'-'||substring(A.rece_ymd,5,2)||'-'||substring(A.rece_ymd, 7,2) as
+		date from sitlib.bookmst WHERE book_cd = #{book_cd}
+	</select>
 
 
 

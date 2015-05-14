@@ -56,14 +56,14 @@ body {
 							<form action="confirmBuyList" method="post">
 								<div class="right right-end">
 									<button class="btn btn-default" type="submit">구매</button>
+									<button class="btn btn-default" type="submit"
+										formaction="modifiRequest">수정</button>
 								</div>
 								<table class="table table-striped table-bordered" id="dataTable">
 
 									<thead>
 										<tr class="title ">
-											<th class="td-chk"><input type="checkbox" id="allCheck"></th>
-											<th class="hidden-xs td-img">표지</th>
-
+											<th><input type="checkbox" id="allCheck" class="td-chk"></th>
 											<th>도서명</th>
 											<th class="hidden-sm hidden-xs hidden-md td-author">저자</th>
 											<th class="hidden-sm hidden-xs td-date">가격</th>
@@ -77,47 +77,13 @@ body {
 										</tr>
 									</thead>
 
-									<c:forEach items="${bookList}" var="book" varStatus="status">
 
-										<tbody class="hidden" style="width: 100%">
+									<tbody>
+										<c:forEach items="${bookList}" var="book" varStatus="status">
 											<tr>
-												<td><input type="checkbox" name="bookCode"
-													value="${book.book_cd}"></td>
-												<td style="width: 50px" align="left"><img
-													style="width: 50px" src="${book.imageurl}"></td>
+												<td><input type="checkbox" name="req_cd"
+													value="${book.req_cd}"></td>
 
-											</tr>
-											<tr>
-												<td style="width: 40%" align="left"><a
-													href="${book.link}">${book.title }</a></td>
-												<td style="width: 40%" align="left">${book.author }</td>
-												<td align="right"></td>
-											</tr>
-											<tr>
-												<td>${book.b_group}</td>
-												<td>요청자 : ${book.id}</td>
-												<td>
-													<button class="btn btn-default" type="button"
-														onClick="location.href='buyRequest?req_cd=${book.req_cd}'">구매</button>
-												</td>
-											</tr>
-											<tr>
-												<td>${book.price}원</td>
-												<td>수량 : ${book.quantity}</td>
-												<td>
-													<button class="btn btn-default" type="button"
-														onClick="location.href='deleteRequest?req_cd=${book.req_cd}'; del();">삭제</button>
-												</td>
-											</tr>
-										</tbody>
-
-
-										<tbody>
-											<tr>
-												<td><input type="checkbox" name="book_cd"
-													value="${book.book_cd}"></td>
-												<td class="hidden-xs"><img style="width: 50px"
-													src="${book.imageurl}"></td>
 												<td><a href="${book.link}">${book.title }</a></td>
 												<td class="hidden-sm hidden-xs hidden-md ">${book.author}</td>
 
@@ -136,6 +102,7 @@ body {
 														<td><button class="btn btn-sm btn-default"
 																type="button" id="buyBook"
 																onClick="location.href='buyRequest?req_cd=${book.req_cd}'">구매</button>
+
 															<button class="btn btn-sm btn-default" type="button"
 																onClick="location.href='deleteRequest?req_cd=${book.req_cd}'; del();">반려</button>
 														</td>
@@ -155,10 +122,10 @@ body {
 
 
 											</tr>
+										</c:forEach>
+									</tbody>
 
-										</tbody>
 
-									</c:forEach>
 								</table>
 							</form>
 						</c:otherwise>
@@ -169,12 +136,15 @@ body {
 			</div>
 		</div>
 	</div>
-
-	<script src="/resources/js/common.js"></script>
 	<script src="/resources/js/jquery/jquery.js"></script>
 	<script src="/resources/js/bootstrap.min.js"></script>
+	<script src="/resources/js/common.js"></script>
+	<script src="/resources/js/jquery.dataTables.min.js"></script>
+	<script src="/resources/js/dataTables.bootstrap.min.js"></script>
 	<script>
 		function del() {
 			alert("삭제되었습니다.");
 		}
 	</script>
+</body>
+</html>

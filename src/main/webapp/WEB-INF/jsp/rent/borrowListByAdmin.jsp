@@ -52,7 +52,7 @@ body {
 							<c:otherwise>
 
 								<div class="right right-end">
-									<button class="btn btn-default" type="submit">승인</button>
+									<button class="btn btn-default" type="submit" onclick="ok();">승인</button>
 								</div>
 
 								<table class="table table-striped table-bordered">
@@ -78,7 +78,7 @@ body {
 									<tbody>
 										<c:forEach items="${bookList}" var="book" varStatus="loop">
 											<tr>
-											
+
 												<td><input type="checkbox" name="book_cd"
 													value="${book.book_cd}"></td>
 												<td align="left">${book.title}</td>
@@ -115,9 +115,10 @@ body {
 	</div>
 
 	<hr>
-	<script src="/resources/js/common.js"></script>
 	<script src="/resources/js/jquery/jquery.js"></script>
 	<script src="/resources/js/bootstrap.min.js"></script>
-	<script src="/resources/js/book.js"></script>
+	<script src="/resources/js/common.js"></script>
+	<script src="/resources/js/jquery.dataTables.min.js"></script>
+	<script src="/resources/js/dataTables.bootstrap.min.js"></script>
 </body>
 </html>

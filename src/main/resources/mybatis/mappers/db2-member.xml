@@ -114,11 +114,13 @@
 	<select id="selectReservation" parameterType="String"
 		resultType="BookModel">
 		SELECT *
-		FROM testlib.bookreser
+		FROM testlib.bookreser A INNER JOIN tprlib.gr_insa
+		B
+		ON A.id = B.asabn
 		WHERE
 		book_cd=#{book_cd}
 	</select>
-	
+
 	<select id="reservationList" parameterType="String" resultType="BookModel">
 		SELECT *
 		FROM testlib.bookmst A, testlib.bookreser B
@@ -131,11 +133,15 @@
 	</select>
 
 	<select id="reservationListAll" resultType="BookModel">
-		SELECT *
+		SELECT A.book_cd,
+		B.id, B.reser_date, A.title, A.b_group, A.rentchk, (SELECT kname FROM
+		tprlib.gr_insa WHERE asabn=B.id FETCH first 1 rows only) AS kname
 		FROM
-		testlib.bookmst A INNER JOIN testlib.bookreser B
+		testlib.bookmst A INNER
+		JOIN testlib.bookreser B
 		ON A.book_cd=B.book_cd
-		AND A.reservechk=B.reservechk
+		AND
+		A.reservechk=B.reservechk
 		WHERE
 		B.reservechk='1'
 		ORDER

@@ -6,10 +6,6 @@ public class BookModel {
 	private String book_cd;
 	private String book_cd1;
 
-	public String getBook_cd1() {
-		return book_cd1;
-	}
-
 	private String title;
 
 	private String b_group;
@@ -36,6 +32,10 @@ public class BookModel {
 	private String req_cd;
 	private String kname;
 	private String team_nm;
+
+	public String getBook_cd1() {
+		return book_cd1;
+	}
 
 	public String getTeam_nm() {
 		return team_nm;

@@ -151,20 +151,6 @@ public class RentDaoImpl implements RentDao {
 
 	}
 
-	@Override
-	public void notifiReser(SmsModel sms) {
-		smsSession.insert(NAMESPACE + "notifiReser", sms);
-	}
-
-	@Override
-	public void notifiRent(SmsModel sms) {
-		smsSession.insert(NAMESPACE + "notifiRent", sms);
-	}
-
-	@Override
-	public void notifiReturn(SmsModel sms) {
-		smsSession.insert(NAMESPACE + "notifiReturn", sms);
-
-	}
+	
 
 }

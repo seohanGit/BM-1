@@ -47,10 +47,5 @@ public interface RentDao {
 
 	void backupRecord(BookModel bookmodel);
 
-	void notifiReser(SmsModel sms);
-
-	void notifiRent(SmsModel sms);
-
-	void notifiReturn(SmsModel sms);
 
 }

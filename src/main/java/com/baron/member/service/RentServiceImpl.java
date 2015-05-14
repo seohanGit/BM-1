@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.baron.member.dao.JoinDao;
 import com.baron.member.dao.RentDao;
+import com.baron.member.dao.SmsDao;
 import com.baron.member.model.BookModel;
 import com.baron.member.model.MemberModel;
 import com.baron.member.model.SmsModel;
@@ -21,6 +22,8 @@ public class RentServiceImpl implements RentService {
 
 	@Autowired
 	private JoinDao joinDao;
+	@Autowired
+	private SmsDao smsDao;
 
 	@Override
 	public BookModel selectBook(String book_cd) {
@@ -68,7 +71,7 @@ public class RentServiceImpl implements RentService {
 		System.out.println(id);
 		sms.setTitle(title);
 		sms.setPhone(joinDao.selectMember(id).getMobi_no().substring(1));
-		rentDao.notifiRent(sms);
+		smsDao.notifiRent(sms);
 		rentDao.confirmBorrowBook(book_cd);
 	}
 
@@ -148,7 +151,7 @@ public class RentServiceImpl implements RentService {
 
 	@Override
 	public void notifiReser(SmsModel sms) {
-		rentDao.notifiReser(sms);
+		smsDao.notifiReser(sms);
 
 	}
 

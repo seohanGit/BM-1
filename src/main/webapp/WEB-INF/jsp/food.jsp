@@ -26,12 +26,12 @@
 			<!-- /.panel-heading -->
 			<div class="panel-body">
 				<div class="dataTable_wrapper">
+	아침
 					<table class="table table-striped table-bordered " id="dataTable">
 
 						<%-- 
 						
  --%>
-
 						<tbody>
 
 							<c:forEach items="${List1}" var="food" varStatus="loop">
@@ -46,6 +46,7 @@
 						</tbody>
 					</table>
 					<hr>
+					점심
 					<table class="table table-striped table-bordered ">
 						<tbody>
 							<c:forEach items="${List2}" var="food" varStatus="loop">
@@ -59,6 +60,7 @@
 
 					</table>
 					<hr>
+					저녁
 					<table class="table table-striped table-bordered ">
 						<tbody>
 							<c:forEach items="${List3}" var="food" varStatus="loop">

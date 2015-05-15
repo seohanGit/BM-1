@@ -1,7 +1,9 @@
 package com.baron.bm.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -41,6 +43,7 @@ public class RentController {
 			 * cookie.getValue(); }
 			 */
 		}
+		System.out.println(id);
 		book.setId(id);
 		book.setBook_cd(book_cd);
 		book.setRentchk("1");
@@ -219,6 +222,7 @@ public class RentController {
 	public String stopBorrowList(
 			@RequestParam(value = "book_cd") List<String> book_cdList) {
 		for (String book_cd : book_cdList) {
+			
 			rentservice.stopBorrow(book_cd);
 
 		}
@@ -305,27 +309,27 @@ public class RentController {
 		rentservice.notifiReservation(book_cd);
 		return "redirect:reservationListAll";
 	}
-	/*
-	 * 기존 대여기록 새로운 테이블로 옮기기
-	 * 
-	 * @RequestMapping("/backupRecord") public String
-	 * backupRecord(HttpServletRequest request) throws Exception { List
-	 * <BookModel> bookList = new ArrayList<BookModel>(); List <BookModel>
-	 * bookList1 = new ArrayList<BookModel>();
-	 * 
-	 * bookList = rentservice.recordListAll();
-	 * 
-	 * SimpleDateFormat format = new SimpleDateFormat("yyyymmdd",
-	 * Locale.KOREAN);
-	 * 
-	 * for (BookModel bookModel2 : bookList) { BookModel bookmodel = new
-	 * BookModel(); bookmodel.setRentdate(
-	 * format.parse(bookModel2.getReq_ymd())); bookmodel.setReturndate(
-	 * format.parse(bookModel2.getRetu_ymd()));
-	 * bookmodel.setId(bookModel2.getSabun());
-	 * bookmodel.setBook_cd(bookModel2.getBook_cd()); bookList1.add(bookmodel);
-	 * rentservice.insertRecord(bookmodel); }
-	 * 
-	 * return "recordListAll"; }
-	 */
+
+	@RequestMapping("/backupRecord")
+	public String backupRecord(HttpServletRequest request) throws Exception {
+		List<BookModel> bookList = new ArrayList<BookModel>();
+
+		bookList = rentservice.selectRent();
+
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
+		for (BookModel bookmodel : bookList) {
+			bookmodel.setRentdate(format.parse(bookmodel.getReq_ymd()));
+			bookmodel.setReturndate(format.parse(bookmodel.getRetu_ymd()));
+			
+			bookmodel.setBook_cd(bookmodel.getBook_cd());
+			bookmodel.setTeam_nm(bookmodel.getTeam_nm());
+			bookmodel.setId(bookmodel.getId());
+			System.out.println(bookmodel.getBook_cd() + bookmodel.getRentdate() + bookmodel.getReq_ymd() );
+			rentservice.insertRecord(bookmodel);
+		}
+
+		return "rent/recordListAll";
+	}
+
 }

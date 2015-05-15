@@ -144,4 +144,16 @@ public class RentDaoImpl implements RentDao {
 
 	}
 
+	@Override
+	public List<BookModel> selectRent() {
+		// TODO Auto-generated method stub
+		return session.selectList(NAMESPACE + "selectRent");
+	}
+
+	@Override
+	public void insertRecord(BookModel bookmodel) {
+		// TODO Auto-generated method stu
+		session.insert(NAMESPACE + "backupRecord", bookmodel);
+	}
+
 }

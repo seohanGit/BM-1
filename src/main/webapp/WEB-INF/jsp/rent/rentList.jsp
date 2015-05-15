@@ -26,11 +26,10 @@
 			<div class="panel panel-default">
 				<div class="panel-body">
 
-					<div>
+					<div class="left">
 						<h2>대여현황 목록</h2>
 					</div>
-					<br>
-					<p></p>
+					
 					<c:choose>
 						<c:when test="${empty bookList}">
 							<div>
@@ -49,9 +48,9 @@
 										<tr class="hidden-xs title">
 											<th><input type="checkbox" id="allCheck" class="td-chk"></th>
 											<th>도서명</th>
-											<th class="td-genre">대여일</th>
+											<th class="hidden-xs td-genre">대여일</th>
 											<th class="td-genre">반납일</th>
-											<th class="td-date">대여자</th>
+											<th class="hidden-xs td-date">대여자</th>
 											<th class="td-img">반납</th>
 											<th class="td-img">연장</th>
 										</tr>
@@ -67,7 +66,7 @@
 												<td><input type="checkbox" name="book_cd"
 													value="${book.book_cd}"></td>
 												<td align="left">${book.title }</td>
-												<td align="left"><fmt:formatDate type="date"
+												<td class="hidden-xs" align="left"><fmt:formatDate type="date"
 														pattern="yyyy-MM-dd" value="${book.rentdate }" /></td>
 												<c:choose>
 													<c:when test="${book.returndate < now}">
@@ -82,7 +81,7 @@
 													</c:otherwise>
 												</c:choose>
 
-												<td><c:choose>
+												<td class="hidden-xs"><c:choose>
 														<c:when test="${empty book.kname}">${book.id}</c:when>
 														<c:otherwise>${book.kname}</c:otherwise>
 													</c:choose></td>

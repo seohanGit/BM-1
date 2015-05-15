@@ -24,4 +24,6 @@ public interface RequestService {
 
 	public void updateBook_cd(Dto dto);
 
+	public void rejectRequest(String req_cd);
+
 }

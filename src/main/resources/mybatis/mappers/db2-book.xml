@@ -35,7 +35,6 @@
 		TITLE like #{keyword}
 		ORDER BY RENTCHK DESC,
 		RCV_DATE DESC
-
 	</select>
 
 	<select id="listBook" parameterType="Dto" resultType="BookModel">
@@ -75,27 +74,44 @@
 
 
 	<!--4개월간 다수 대여 팀, 도서 -->
-	<select id="getBestTeam">
-		SELECT B.team_nm, A.book_cd, COUNT(*) AS count FROM
-		testlib.bookrent A INNER JOIN tprlib.gr_insa B ON A.id=B.asabn WHERE
-		rentdate > current date - 4 month GROUP BY B.team_nm, A.book_cd ORDER
-		BY count DESC
+
+	<select id="selectBestTeam" resultType="BookModel">
+
+		SELECT B.team_nm,
+		A.book_cd, (SELECT
+		title FROM
+		testlib.bookmst WHERE book_cd
+		= A.book_cd)
+		AS title, (SELECT
+		author FROM testlib.bookmst WHERE
+		book_cd = A.book_cd)
+		AS author , COUNT(*) AS score FROM
+		testlib.bookrent A INNER JOIN
+		tprlib.gr_insa B ON A.id=B.asabn WHERE
+		rentdate > current date - 4
+		month GROUP BY B.team_nm, A.book_cd ORDER
+		BY score DESC
 	</select>
 
-	<select id="getBestPerson">
+	<select id="selectBestPerson" resultType="BookModel">
 
-		SELECT A.id, A.book_cd, COUNT(*) AS count, (SELECT title FROM
-		testlib.bookmst WHERE book_cd = A.book_cd) AS title, (SELECT author
-		FROM testlib.bookmst WHERE book_cd = A.book_cd) AS author FROM
-		testlib.bookrent A INNER JOIN tprlib.gr_insa B ON A.id = B.asabn WHERE
-		A.rentdate > current date - 6 month GROUP BY A.id, A.book_cd ORDER BY
+		SELECT A.id, A.book_cd,
+		COUNT(*) AS count, (SELECT
+		title FROM
+		testlib.bookmst WHERE book_cd =
+		A.book_cd) AS title, (SELECT
+		author
+		FROM testlib.bookmst WHERE book_cd =
+		A.book_cd) AS author FROM
+		testlib.bookrent A INNER JOIN tprlib.gr_insa
+		B ON A.id = B.asabn WHERE
+		A.rentdate > current date - 6 month GROUP BY
+		A.id, A.book_cd ORDER BY
 		count DESC
-
-
 	</select>
 
 
-	<select id="getBestBook" resultType="BookModel">
+	<select id="selectBestBook" resultType="BookModel">
 		SELECT COUNT(*) AS count,
 		B.book_cd,
 		(SELECT title FROM testlib.bookmst WHERE book_cd =
@@ -120,12 +136,12 @@
 		INSERT INTO
 		TESTLIB.BOOKREQ
 		(id,reqdate,title,book_cd,price,author,quantity,b_group,link,
-		imageurl,isbn, publish, summary, req_cd, kname)
+		imageurl,isbn, publish, summary, req_cd )
 		VALUES
 		(#{id}, current
 		date,
 		#{title},#{book_cd},#{price},#{author},#{quantity},#{b_group},#{link},
-		#{imageurl},#{isbn}, #{publish}, #{summary}, #{req_cd}, #{kname})
+		#{imageurl},#{isbn}, #{publish}, #{summary}, #{req_cd})
 	</insert>
 
 	<update id="deleteRequest" parameterType="String">
@@ -134,7 +150,14 @@
 		reqstatus='1'
 		WHERE req_cd= #{req_cd}
 	</update>
-
+	
+	<update id="rejectRequest" parameterType="String">
+		UPDATE TESTLIB.BOOKREQ
+		SET
+		reqstatus='2'
+		WHERE req_cd= #{req_cd}
+	</update>
+	
 	<select id="requestList" resultType="BookModel">
 		SELECT B.title, B.imageurl, B.author, B.price, b.quantity, B.reqdate,
 		B.reqstatus, B.id, B.book_cd, B.req_cd, B.link, (SELECT C.KNAME FROM

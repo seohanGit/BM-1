@@ -57,17 +57,6 @@ public class JoinDaoImpl implements JoinDao {
 	}
 
 	@Override
-	public List<MemberModel> selectBlack() {
-		return session.selectList(NAMESPACE + "selectBlack");
-	}
-
-	@Override
-	public List<MemberModel> selectLate() {
-		// TODO Auto-generated method stub
-		return session.selectList(NAMESPACE + "selectLate");
-	}
-
-	@Override
 	public List<MemberModel> selectBest() {
 		// TODO Auto-generated method stub
 
@@ -103,6 +92,7 @@ public class JoinDaoImpl implements JoinDao {
 		// TODO Auto-generated method stub
 		return session.selectList(NAMESPACE + "test");
 	}
+
 
 }
 // 일반적으로 DAO에서 mybatis를 사용하는 시나리오.

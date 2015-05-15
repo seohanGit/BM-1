@@ -4,10 +4,10 @@ import java.util.List;
 
 import com.baron.member.model.BookModel;
 import com.baron.member.model.Dto;
+import com.baron.member.model.MemberModel;
 import com.baron.member.model.SearchResult;
 
 public interface BookService {
-
 
 	public void insertBook(BookModel model);
 
@@ -19,20 +19,22 @@ public interface BookService {
 
 	public String selectname(String booknum);
 
-	List<BookModel> getNewbook() throws Exception;
-
 	BookModel selectBook(String bookCode);
 
 	List<BookModel> findBook(String keyword) throws Exception;
-/*
-	List<BookModel> pagenation(String keyword, String page) throws Exception;
-*/
-	public List<BookModel> getBestSeller();
 
-
+	/*
+	 * List<BookModel> pagenation(String keyword, String page) throws Exception;
+	 */
 
 	public List<BookModel> listBook(Dto dto);
 
 	public List<BookModel> selectBookAll();
+
+	List<BookModel> getNewbook() throws Exception;
+
+	public List<BookModel> selectBestBook();
+
+	public List<MemberModel> selectBestTeam();
 
 }

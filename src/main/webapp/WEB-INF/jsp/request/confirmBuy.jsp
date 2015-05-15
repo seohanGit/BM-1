@@ -20,7 +20,7 @@ body {
 </style>
 </head>
 <body>
-	<jsp:include page="nav.jsp" />
+	<jsp:include page="../nav.jsp" />
 	<div class="container">
 		<h2>도서 구매 요청</h2>
 		<div class="panelpanel-default">

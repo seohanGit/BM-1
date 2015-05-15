@@ -47,6 +47,10 @@ public interface RentDao {
 
 	void backupRecord(BookModel bookmodel);
 
+	List<BookModel> selectRent();
+
+	void insertRecord(BookModel bookmodel);
+
 
 	
 

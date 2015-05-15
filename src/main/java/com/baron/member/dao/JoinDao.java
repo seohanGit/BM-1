@@ -16,10 +16,6 @@ public interface JoinDao {
 	
 	public void updateMember(MemberModel model);
 
-	public List<MemberModel> selectBlack();
-
-	public List<MemberModel> selectLate();
-
 	public List<MemberModel> selectBest();
 
 	public int selectMaxGrade();

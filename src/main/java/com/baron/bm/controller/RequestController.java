@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.baron.member.dao.JoinDao;
 import com.baron.member.model.BookModel;
 import com.baron.member.model.Dto;
 import com.baron.member.model.SmsModel;
@@ -30,7 +31,7 @@ public class RequestController {
 
 	@Autowired
 	private NotifiService notifiService;
-	
+
 	@Autowired
 	private JoinService joinService;
 
@@ -42,9 +43,11 @@ public class RequestController {
 
 	@RequestMapping("/confirmRequest")
 	public String requestResult(BookModel model) {
-		System.out.println(model.getSummary());
-		model.setReq_cd(model.getB_group() + model.getIsbn());
+		System.out.println(model.getKname()+"님이 "+ model.getTitle() + "을 구매요청하였습니다. " );
+		model.setReq_cd(model.getIsbn() + "(" + model.getQuantity()+1 + ")");
 		requestservice.requestBook(model);
+		
+		
 		return "redirect:requestList";
 	}
 
@@ -60,11 +63,11 @@ public class RequestController {
 					bookList = requestservice.requestList();
 					System.out.println(bookList.get(0).getReq_cd());
 					model.addAttribute("bookList", bookList);
-					return "requestList";
+					return "request/requestList";
 				} else {
 					bookList = requestservice.requestRecord(id);
 					model.addAttribute("bookList", bookList);
-					return "request";
+					return "request/request";
 				}
 			}
 
@@ -87,7 +90,7 @@ public class RequestController {
 				} else {
 					bookList = requestservice.requestRecord(id);
 					model.addAttribute("bookList", bookList);
-					return "request";
+					return "request/request";
 				}
 			}
 
@@ -98,27 +101,29 @@ public class RequestController {
 	@RequestMapping("/requestbook")
 	public String requestBook(HttpServletRequest request, Model model,
 			BookModel book, String isbn, int quantity) throws Exception {
-
+		String id = null;
 		book = requestservice.findBookOne(isbn);
 		book.setQuantity(quantity);
 
 		for (Cookie cookie : request.getCookies()) {
 			if (cookie.getName().equals("bm_id"))
-				book.setId(cookie.getValue());
-		}
-
+			{
+				id = cookie.getValue();
+			book.setId(id);
+		}}
 		model.addAttribute("book", book);
 		System.out.println(book.getId());
 		System.out.println(book.getSummary());
 
-		return "confirmRequest";
+		
+		return "request/confirmRequest";
 	}
 
 	@RequestMapping("/buyRequest")
 	public String buyRequest(String req_cd, Model model, BookModel book) {
 		book = requestservice.selectBook(req_cd);
 		model.addAttribute("book", book);
-		return "confirmBuy";
+		return "request/confirmBuy";
 	}
 
 	@RequestMapping("/confirmBuy")
@@ -137,7 +142,7 @@ public class RequestController {
 			notifiService.notifiReq(sms);
 			return "redirect:requestList";
 		} else {
-			return "buyfail";
+			return "request/buyfail";
 		}
 	}
 
@@ -157,9 +162,9 @@ public class RequestController {
 				bookService.insertBook(requestservice.selectBook(req_cd));
 				requestservice.deleteRequest(req_cd);
 				notifiService.notifiReq(sms);
-				return "buySuccess";
+				return "request/buySuccess";
 			} else {
-				return "buyfail";
+				return "request/buyfail";
 
 			}
 
@@ -186,6 +191,13 @@ public class RequestController {
 	public String deleteRequest(String req_cd) {
 		System.out.println(req_cd);
 		requestservice.deleteRequest(req_cd);
+		return "redirect:requestList";
+	}
+	
+	@RequestMapping("/rejectRequest")
+	public String rejectRequest(String req_cd) {
+		System.out.println(req_cd);
+		requestservice.rejectRequest(req_cd);
 		return "redirect:requestList";
 	}
 }

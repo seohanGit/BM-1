@@ -26,10 +26,10 @@ body {
 </head>
 
 <body>
-	<jsp:include page="nav.jsp" />
+	<jsp:include page="../nav.jsp" />
 	<div class="container">
 
-		<div class="col-md-12"><jsp:include page="menu.jsp" />
+		<div class="col-md-12"><jsp:include page="../menu.jsp" />
 			<div class="panel panel-default">
 				<div class="panel-body">
 
@@ -51,8 +51,7 @@ body {
 							<div class="left">
 								<h2>구매요청 목록</h2>
 							</div>
-							<br>
-							<p></p>
+						
 							<form action="confirmBuyList" method="post">
 								<div class="right right-end">
 									<button class="btn btn-default" type="submit">구매</button>
@@ -68,7 +67,7 @@ body {
 											<th class="hidden-sm hidden-xs hidden-md td-author">저자</th>
 											<th class="hidden-sm hidden-xs td-date">가격</th>
 											<th class="td-img">수량</th>
-											<th class="td-date">신청</th>
+											<th class="hidden-xs td-date">신청</th>
 
 											<th class="hidden-sm hidden-xs hidden-md td-genre">요청일자</th>
 											<th class="td-img">상태</th>
@@ -89,7 +88,7 @@ body {
 
 												<td class="hidden-sm hidden-xs  ">${book.price}원</td>
 												<td align="center">${book.quantity}</td>
-												<td><c:choose>
+												<td  class=" hidden-xs  "><c:choose>
 														<c:when test="${empty book.kname}">${book.id}</c:when>
 														<c:otherwise>${book.kname}</c:otherwise>
 													</c:choose></td>
@@ -104,7 +103,7 @@ body {
 																onClick="location.href='buyRequest?req_cd=${book.req_cd}'">구매</button>
 
 															<button class="btn btn-sm btn-default" type="button"
-																onClick="location.href='deleteRequest?req_cd=${book.req_cd}'; del();">반려</button>
+																onClick="location.href='rejectRequest?req_cd=${book.req_cd}'; del();">반려</button>
 														</td>
 													</c:when>
 													<c:when test="${book.reqstatus =='1'}">

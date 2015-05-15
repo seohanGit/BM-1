@@ -119,4 +119,10 @@ public class RequestServiceImpl implements RequestService {
 	public void updateBook_cd(Dto dto) {
 		requestDao.updateBook_cd(dto);
 	}
+
+	@Override
+	public void rejectRequest(String req_cd) {
+		requestDao.rejectRequest(req_cd);
+		
+	}
 }

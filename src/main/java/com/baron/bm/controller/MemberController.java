@@ -130,14 +130,15 @@ public class MemberController {
 			String id) {
 
 		// ModelAndView mav = new ModelAndView("/index");
-		System.out.println(id);
+	
 
 		MemberModel membermodel = new MemberModel();
 		membermodel = joinService.login(id);
-
+		membermodel.setId(id);
+		
 		response.addCookie(new Cookie("bm_id", membermodel.getId()));
 		mav.setViewName("redirect:searchBook");
-
+		System.out.println(membermodel.getId());
 		mav.addObject("kname", membermodel.getKname());
 		mav.addObject("team_nm", membermodel.getTeam_nm());
 		mav.addObject("jikb", membermodel.getJikb());
@@ -241,15 +242,16 @@ public class MemberController {
 				System.out.println(cookie.getValue());
 				if ("1".equals(cookie.getValue())) {
 
-					/*
-					 * List<MemberModel> memberList = joinService.selectBest();
-					 * List<BookModel> bestSeller = bookService.getBestSeller();
-					 * List<BookModel> newBook = bookService.getNewbook();
-					 * 
-					 * model.addAttribute("bestList", memberList);
-					 * model.addAttribute("bestseller", bestSeller);
-					 * model.addAttribute("newbook", newBook);
-					 */
+					List<MemberModel> memberList = joinService.selectBest();
+					List<BookModel> bestBook = bookService.selectBestBook();
+					List<BookModel> newBook = bookService.getNewbook();
+					List<MemberModel> bestTeam = bookService.selectBestTeam();
+
+					model.addAttribute("bestList", memberList);
+					model.addAttribute("bestBook", bestBook);
+					model.addAttribute("newbook", newBook);
+					model.addAttribute("bestTeam", bestTeam);
+
 					return "/member/admin";
 				} else
 					return "/member/adminfail";
@@ -263,12 +265,6 @@ public class MemberController {
 		return "/member/adminfail";
 	}
 
-	@RequestMapping("/searchLate")
-	public String searchLate(Model model) {
-		List<MemberModel> memberList = joinService.selectLate();
-		model.addAttribute("lateList", memberList);
-		return "/member/late";
-	}
 
 	@RequestMapping("/memberList")
 	public String memberList(Model model) {

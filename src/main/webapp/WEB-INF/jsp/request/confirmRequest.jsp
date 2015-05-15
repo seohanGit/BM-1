@@ -20,7 +20,7 @@ body {
 </style>
 </head>
 <body>
-	<jsp:include page="nav.jsp" />
+	<jsp:include page="../nav.jsp" />
 	<div class="container">
 		<h2>도서 구매 요청</h2>
 		<div class="panelpanel-default">
@@ -54,7 +54,7 @@ body {
 				</div>
 				<div class="form-group">
 					<label for="exampleInputPassword1">구매요청자</label> <input type="text"
-						class="form-control" id="id" name="id" value="${book.id }">
+						class="form-control" id="kname" name="kname" value="${sessionScope.kname}">
 				</div>
 				<%-- 
 				<div class="form-group">
@@ -68,7 +68,7 @@ body {
 					type="hidden" name="publish" value="${book.publish}"><input
 					type="hidden" name="summary" value="${book.summary}"> <input
 					type="hidden" name="price" value="${book.price}"> <input
-					type="hidden" name="kname" value="${sessionScope.kname}">
+					type="hidden" name="id" value="${book.id}">
 				<button type="submit" class="btn btn-default">확인</button>
 			</form>
 		</div>

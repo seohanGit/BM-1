@@ -168,4 +168,15 @@ public class RentServiceImpl implements RentService {
 		notifiDao.notifiReser(sms);
 	}
 
+	@Override
+	public List<BookModel> selectRent() {
+		// TODO Auto-generated method stub
+		return rentDao.selectRent();
+	}
+
+	@Override
+	public void insertRecord(BookModel bookmodel) {
+		rentDao.insertRecord(bookmodel);
+	}
+
 }

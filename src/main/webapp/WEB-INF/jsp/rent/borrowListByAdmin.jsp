@@ -36,21 +36,21 @@ body {
 		<div class="col-md-12"><jsp:include page="../menu.jsp" />
 			<div class="panel panel-default">
 				<div class="panel-body">
-					<form action="confirmBorrowBookList" method="post">
-						<div>
-							<h2>대여요청 목록</h2>
-						</div>
-						<br>
-						<c:choose>
-							<c:when test="${empty bookList}">
+
+					<div class="left">
+						<h2>대여요청 목록</h2>
+					</div>
+					
+					<c:choose>
+						<c:when test="${empty bookList}">
 
 
-								<div>
-									<h3>대여 요청한 도서가 없습니다.</h3>
-								</div>
-							</c:when>
-							<c:otherwise>
-
+							<div>
+								<h3>대여 요청한 도서가 없습니다.</h3>
+							</div>
+						</c:when>
+						<c:otherwise>
+							<form action="confirmBorrowBookList" method="post">
 								<div class="right right-end">
 									<button class="btn btn-default" type="submit" onclick="ok();">승인</button>
 								</div>
@@ -64,8 +64,8 @@ body {
 											<th>도서명</th>
 											<th class="td-genre">대여일</th>
 											<th class="td-genre hidden-xs">반납일</th>
-											<th class="td-genre hidden-xs">분류</th>
-											<th class="td-date">대여자</th>
+											<th class="hidden-xs" style="width: 150px">분류</th>
+											<th class="td-img">대여자</th>
 											<th class="td-img"></th>
 
 
@@ -105,9 +105,10 @@ body {
 
 
 								</table>
-							</c:otherwise>
-						</c:choose>
-					</form>
+							</form>
+						</c:otherwise>
+					</c:choose>
+
 				</div>
 
 			</div>

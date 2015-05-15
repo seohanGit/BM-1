@@ -11,20 +11,27 @@ public class MemberModel {
 	private String password;
 	private String kname;
 	private String email;
-	private String address;
 	private String mobi_no;
-	private String home;
 	private String permission;
 	private Date endday;
 	private int numborrow;
 	private int numarrear;
 	private int score;
 	private String content;
-	private String team_nm;
+	
 	private Date borrowdate;
 	private Date returndate;
 	private String jikb;
 	private String co_gb;
+	private String team_nm;
+
+	public String getTeam_nm() {
+		return team_nm;
+	}
+
+	public void setTeam_nm(String team_nm) {
+		this.team_nm = team_nm;
+	}
 
 	public String getCo_gb() {
 		return co_gb;
@@ -58,14 +65,7 @@ public class MemberModel {
 		this.returndate = returndate;
 	}
 
-	public String getTeam_nm() {
-		return team_nm;
-	}
-
-	public void setTeam_nm(String team_nm) {
-		this.team_nm = team_nm;
-	}
-
+	
 	public String getContent() {
 		return content;
 	}
@@ -138,14 +138,6 @@ public class MemberModel {
 		this.email = email;
 	}
 
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
 	public String getKname() {
 		return kname;
 	}
@@ -160,13 +152,5 @@ public class MemberModel {
 
 	public void setMobi_no(String mobi_no) {
 		this.mobi_no = mobi_no;
-	}
-
-	public String getHome() {
-		return home;
-	}
-
-	public void setHome(String home) {
-		this.home = home;
 	}
 }

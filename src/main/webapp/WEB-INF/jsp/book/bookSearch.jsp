@@ -62,32 +62,16 @@
 							<th>도서명</th>
 
 							<th class="hidden-xs" class="td-genre">저자</th>
-							<th class="hidden-xs" class="td-genre">출판사</th>
-							<th class="hidden-xs" class="td-date">분류</th>
-							<th class="td-genre">대여상태</th>
+							<th class="hidden-xs hidden-sm" class="td-genre">출판사</th>
+							<th class="hidden-xs" style="width:120px">분류</th>
+							<th style="width:90px">대여상태</th>
 
 
 
 							<th class="td-img"></th>
 						</tr>
 					</thead>
-					<tfoot>
-						<tr>
-
-							<th>도서명</th>
-
-							<th class="hidden-xs">저자</th>
-							<th class="hidden-xs">출판사</th>
-							<th class="hidden-xs">분류</th>
-							<th>대여상태</th>
-
-
-
-							<th></th>
-						</tr>
-
-
-					</tfoot>
+					
 					<tbody>
 
 						<c:forEach items="${bookList}" var="book">
@@ -98,7 +82,7 @@
 									onclick="window.open('/bookInfo?book_cd=${book.book_cd}','new','resizeble=yes scrollbars=yes');">
 										${book.title }</a></td>
 								<td class="hidden-xs" align="left">${book.author }</td>
-								<td class="hidden-xs" align="left">${book.publish}</td>
+								<td class="hidden-xs hidden-sm" align="left">${book.publish}</td>
 								<td class="hidden-xs" align="left">${book.b_group }</td>
 								<c:choose>
 									<c:when test="${book.rentchk=='0'}">
@@ -154,7 +138,7 @@
 	<script src="/resources/js/jquery/jquery.js"></script>
 	<script src="/resources/js/bootstrap.min.js"></script>
 	<script src="/resources/js/common.js"></script>
-	<script src="/resources/js/metisMenu.min.js"></script>
+
 	<script src="/resources/js/jquery.dataTables.min.js"></script>
 	<script src="/resources/js/dataTables.bootstrap.min.js"></script>
 	<script src="/resources/js/jquery.dataTables.columnFilter.js"></script>
@@ -176,7 +160,8 @@
 					"searchable" : false
 				} ]
 
-			}).columnFilter({
+			});
+			/* .columnFilter({
 
 				aoColumns : [ null, null, null, {
 					type : "select"
@@ -184,7 +169,7 @@
 					type : "select",
 					values : [ '대여요청중', '대출', '대출' ]
 				}, null ]
-			});
+			}); */
 		});
 
 		var loadingBar = document.getElementById("loadingBar");

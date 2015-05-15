@@ -41,16 +41,18 @@
 		AND rentchk='1'
 		FETCH
 		first 1 rows only
-		
+
 	</select>
 	<insert id="borrowBook1" parameterType="BookModel">
 		INSERT INTO
 		TESTLIB.BOOKRENT
-		(book_cd, rentdate, returndate, rentchk, id)
+		(book_cd, rentdate, returndate, rentchk, id, team_nm)
 		VALUES(#{book_cd}, current
 		date,
 		current date + 20 day,
-		1, #{id})
+		1, #{id}, (SELECT
+		team_nm FROM tprlib.gr_insa WHERE asabn=#{id} FETCH first 1 rows
+		only))
 	</insert>
 
 	<update id="borrowBook2" parameterType="String">
@@ -160,9 +162,11 @@
 	</delete>
 
 	<select id="rentListAll" parameterType="String" resultType="BookModel">
-		SELECT A.title, B.rentdate, B.returndate, B.id, B.book_cd, (SELECT C.KNAME FROM
+		SELECT A.title, B.rentdate, B.returndate, B.id, B.book_cd, (SELECT
+		C.KNAME FROM
 		TPRLIB.GR_INSA C WHERE B.id=C.ASABN FETCH
-		first 1 rows only) kname FROM
+		first 1 rows
+		only) kname FROM
 		TESTLIB.BOOKMST A, TESTLIB.BOOKRENT B
 		WHERE
 		A.book_cd=B.book_cd AND
@@ -188,14 +192,7 @@
 		B.returndate DESC
 	</select>
 
-	<insert id="backupRecord" parameterType="BookModel">
-		INSERT INTO
-		TESTLIB.BOOKRENT
-		(ID, RENTDATE, BOOK_CD, RETURNDATE)
-		VALUES(#{id},
-		#{rentdate},
-		#{book_cd}, #{returndate})
-	</insert>
+
 
 	<select id="recordListAll" resultType="BookModel">
 		SELECT A.title, B.rentdate, B.returndate, (SELECT C.KNAME FROM

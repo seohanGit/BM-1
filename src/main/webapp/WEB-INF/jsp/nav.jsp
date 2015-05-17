@@ -41,12 +41,12 @@
 					<ul class="dropdown-menu" role="menu">
 						<li><a href="#" id="borrowList">대여현항</a></li>
 						<li><a href="#" id="request">구매요청목록</a></li>
-						<li><a href="#" data-toggle="modal" data-target="#myModal">사용자정보수정</a></li>
+						<!-- <li><a href="#" data-toggle="modal" data-target="#myModal">사용자정보수정</a></li>
 						<li class="divider"></li>
 
 						<li><a href="#" id="logout" name="logout">종료 <span
 								class="glyphicon glyphicon-chevron-right"></span>
-						</a></li>
+						</a></li> -->
 					</ul></li>
 
 				<li style="padding-right: 40px">&nbsp;&nbsp;</li>

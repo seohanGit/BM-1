@@ -83,10 +83,13 @@ public class XmlDom {
 	public BookModel getBook(InputStream br) throws Exception, SAXException,
 			IOException {
 		Element root = makeDoc(br);
+		int totalResults = Integer.parseInt(getChildren(root, "totalResults"));
+
 		NodeList list = root.getElementsByTagName("item");
 
 		BookModel book = new BookModel();
 		for (int i = 0; i < list.getLength(); i++) {
+			book.setTotalResults(totalResults);
 
 			Element element = (Element) list.item(0);
 			book.setTitle(getChildren(element, "title"));
@@ -117,7 +120,7 @@ public class XmlDom {
 
 			Element element = (Element) list.item(i);
 			//book.setKeyword(keyword);
-			//book.setTotalResults(totalResults);
+			book.setTotalResults(totalResults);
 
 			book.setTitle(getChildren(element, "title"));
 			book.setLink(getChildren(element, "link"));

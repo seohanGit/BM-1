@@ -10,6 +10,14 @@ public class BookModel {
 
 	private String b_group;
 	private int quantity;
+private int totalResults;
+	public int getTotalResults() {
+	return totalResults;
+}
+
+public void setTotalResults(int totalResults) {
+	this.totalResults = totalResults;
+}
 
 	private java.util.Date rentdate;
 	private java.util.Date returndate;

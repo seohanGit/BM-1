@@ -310,26 +310,5 @@ public class RentController {
 		return "redirect:reservationListAll";
 	}
 
-	@RequestMapping("/backupRecord")
-	public String backupRecord(HttpServletRequest request) throws Exception {
-		List<BookModel> bookList = new ArrayList<BookModel>();
-
-		bookList = rentservice.selectRent();
-
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-
-		for (BookModel bookmodel : bookList) {
-			bookmodel.setRentdate(format.parse(bookmodel.getReq_ymd()));
-			bookmodel.setReturndate(format.parse(bookmodel.getRetu_ymd()));
-			
-			bookmodel.setBook_cd(bookmodel.getBook_cd());
-			bookmodel.setTeam_nm(bookmodel.getTeam_nm());
-			bookmodel.setId(bookmodel.getId());
-			System.out.println(bookmodel.getBook_cd() + bookmodel.getRentdate() + bookmodel.getReq_ymd() );
-			rentservice.insertRecord(bookmodel);
-		}
-
-		return "rent/recordListAll";
-	}
-
+	
 }

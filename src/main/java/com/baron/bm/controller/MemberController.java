@@ -33,7 +33,7 @@ import com.baron.member.service.BoardService;
 import com.baron.member.service.BookService;
 import com.baron.member.service.JoinService;
 
-@SessionAttributes("info")
+@SessionAttributes({ "kname", "jikb", "team_nm", "permission" })
 @Controller
 public class MemberController {
 
@@ -64,7 +64,7 @@ public class MemberController {
 		// List<MemberModel> bestList = joinService.selectBest();
 		// List<BookModel> newBook = bookService.getNewbook();
 		// List<BookModel> bestSeller = bookService.getBestSeller();
-		
+
 		model.addAttribute("noticeList", notice);
 		// model.addAttribute("bestList", bestList);
 
@@ -103,6 +103,11 @@ public class MemberController {
 		}
 
 		ModelAndView mav = new ModelAndView("/member/loginResult");
+		joinService.login(model.getId());
+
+		String info = model.getTeam_nm() + model.getJikb() + model.getKname();
+		mav.addObject("info", info);
+		mav.addObject("permission", model.getPermission());
 		/*
 		 * model = joinService.login(model); if (model != null) {
 		 * System.out.println(model.getId() + model.getPermission());
@@ -125,28 +130,31 @@ public class MemberController {
 			String id) {
 
 		// ModelAndView mav = new ModelAndView("/index");
-		System.out.println(id);
+	
 
 		MemberModel membermodel = new MemberModel();
 		membermodel = joinService.login(id);
-		mav.setViewName("member/login");
-		String info = membermodel.getTeam_nm() + membermodel.getJikb()
-				+ membermodel.getKname();
-		if (membermodel != null) {
-			mav.setViewName("redirect:searchBook");
-			response.addCookie(new Cookie("bm_id", membermodel.getId()));
-			mav.addObject("info", info);
+		membermodel.setId(id);
+		
+		response.addCookie(new Cookie("bm_id", membermodel.getId()));
+		mav.setViewName("redirect:searchBook");
+		System.out.println(membermodel.getId());
+		mav.addObject("kname", membermodel.getKname());
+		mav.addObject("team_nm", membermodel.getTeam_nm());
+		mav.addObject("jikb", membermodel.getJikb());
+		mav.addObject("permission", "0");
 
-			System.out.println(id + "login Success");
-			if (id.equals("4150149")) {
-				response.addCookie(new Cookie("bm_permission", "1"));
-				mav.setViewName("redirect:admin");
-				return mav;
-			} else {
-				response.addCookie(new Cookie("bm_permission", "0"));
-			}
+		System.out.println(id + "login Success");
+		if (id.equals("4150149")) {
+			response.addCookie(new Cookie("bm_permission", "1"));
+			mav.setViewName("redirect:admin");
 
+			mav.addObject("permission", "1");
+			return mav;
+		} else {
+			response.addCookie(new Cookie("bm_permission", "0"));
 		}
+
 		return mav;
 	}
 
@@ -234,15 +242,16 @@ public class MemberController {
 				System.out.println(cookie.getValue());
 				if ("1".equals(cookie.getValue())) {
 
-					/*
-					 * List<MemberModel> memberList = joinService.selectBest();
-					 * List<BookModel> bestSeller = bookService.getBestSeller();
-					 * List<BookModel> newBook = bookService.getNewbook();
-					 * 
-					 * model.addAttribute("bestList", memberList);
-					 * model.addAttribute("bestseller", bestSeller);
-					 * model.addAttribute("newbook", newBook);
-					 */
+					List<MemberModel> memberList = joinService.selectBest();
+					List<BookModel> bestBook = bookService.selectBestBook();
+					List<BookModel> newBook = bookService.getNewbook();
+					List<MemberModel> bestTeam = bookService.selectBestTeam();
+
+					model.addAttribute("bestList", memberList);
+					model.addAttribute("bestBook", bestBook);
+					model.addAttribute("newbook", newBook);
+					model.addAttribute("bestTeam", bestTeam);
+
 					return "/member/admin";
 				} else
 					return "/member/adminfail";
@@ -256,12 +265,6 @@ public class MemberController {
 		return "/member/adminfail";
 	}
 
-	@RequestMapping("/searchLate")
-	public String searchLate(Model model) {
-		List<MemberModel> memberList = joinService.selectLate();
-		model.addAttribute("lateList", memberList);
-		return "/member/late";
-	}
 
 	@RequestMapping("/memberList")
 	public String memberList(Model model) {

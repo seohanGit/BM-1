@@ -17,8 +17,8 @@
 	<entry key="datasource.sqlmap.password">goddns</entry>
 
 
-	<entry key="datasource.sms.driver">com.microsoft.jdbc.sqlserver.SQLServerDriver</entry>
-	<entry key="datasource.sms.url">jdbc:sqlserver://211.40.184.3:1433;databaseName=master</entry>
+	<entry key="datasource.sms.driver">net.sourceforge.jtds.jdbc.Driver</entry>
+	<entry key="datasource.sms.url">jdbc:jtds:sqlserver://211.40.184.3:1433;databaseName=master;</entry>
 	<entry key="datasource.sms.username">SHSERVER3</entry>
 	<entry key="datasource.sms.password"></entry>
 </properties>

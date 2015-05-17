@@ -49,20 +49,21 @@ body {
 	</div>
 	<div id="divLoadBody" style="display: none;" class="container">
 
-		<form action="stopBorrow" method="post">
 
 
 
+		<div class="col-md-12"><jsp:include page="../menu.jsp" />
 
-			<div class="col-md-12"><jsp:include page="../menu.jsp" />
+			<div class="panel panel-default">
 
-				<div class="panel panel-default">
+				<!-- /.panel-heading -->
+				<div class="panel-body">
+					<div class="left">
+						<h2>도서목록</h2>
+					</div>
+					<form action="stopBorrowList" method="post">
 
-					<!-- /.panel-heading -->
-					<div class="panel-body">
-						<div class="left">
-							<h2>도서목록</h2>
-						</div>
+
 						<div class="right-end" style="margin-right: 20px">
 							<button style="width: 100px" class="btn btn-default"
 								type="button" id="insertBook">도서추가</button>
@@ -75,10 +76,9 @@ body {
 							<table class="table table-striped table-bordered " id="dataTable">
 								<thead>
 									<tr>
-										<th style="width: 15px"><input type="checkbox"
-											id="allCheck"></th>
+										<th style="width: 15px"></th>
 										<th>도서명</th>
-										<th class=" hidden-xs td-author">저자</th>
+										<th class=" hidden-xs td-genre">저자</th>
 										<th class="hidden-sm hidden-xs hidden-md td-author">분류</th>
 
 										<th style="width: 110px">대여상태</th>
@@ -97,7 +97,7 @@ body {
 											<td><input type="checkbox" name="book_cd"
 												value="${book.book_cd}"></td>
 											<td align="left"><a href="#"
-												onclick="window.open('/bookInfo?book_cd=${book.book_cd}','new','resizeble=yes scrollbars=yes');">
+												onclick="window.open('/bookInfo?book_cd=${book.book_cd}','new','resizeble=yes scrollbars=yes, width:800px, height:600px');">
 													${book.title }</a></td>
 											<td class=" hidden-xs " align="left">${book.author }</td>
 											<td class="hidden-sm hidden-xs hidden-md " align="left">${book.b_group }</td>
@@ -161,11 +161,12 @@ body {
 								</tbody>
 
 							</table>
-						</div>
-					</div>
+						</div></form>
 				</div>
+				
 			</div>
-		</form>
+		</div>
+
 		<br>
 
 	</div>

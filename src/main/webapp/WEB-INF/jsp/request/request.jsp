@@ -25,7 +25,7 @@ body {
 </head>
 
 <body>
-	<jsp:include page="nav.jsp" />
+	<jsp:include page="../nav.jsp" />
 	<div class="container">
 
 		<hr>
@@ -127,14 +127,14 @@ body {
 				<hr>
 			</div>
 		</div>
-
-		<script src="/resources/js/jquery/jquery.js"></script>
-		<script src="/resources/js/bootstrap.min.js"></script>
-		<script src="/resources/js/common.js"></script>
-		<script>
-			function del() {
-				alert("삭제되었습니다.");
-			}
-		</script>
+	</div>
+	<script src="/resources/js/jquery/jquery.js"></script>
+	<script src="/resources/js/bootstrap.min.js"></script>
+	<script src="/resources/js/common.js"></script>
+	<script>
+		function del() {
+			alert("삭제되었습니다.");
+		}
+	</script>
 </body>
 </html>

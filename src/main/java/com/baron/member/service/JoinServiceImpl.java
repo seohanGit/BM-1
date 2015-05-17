@@ -51,32 +51,9 @@ public class JoinServiceImpl implements JoinService {
 	}
 
 	@Override
-	public List<MemberModel> selectBlack() {
-		return joinDao.selectBlack();
-	}
-
-	@Override
-	public List<MemberModel> selectLate() {
-		// TODO Auto-generated method stub
-		return joinDao.selectLate();
-	}
-
-	@Override
-	public List<MemberModel> selectBest() {
-		// TODO Auto-generated method stub
-		return joinDao.selectBest();
-	}
-
-	@Override
 	public int selectMaxGrade() {
 		// TODO Auto-generated method stub
 		return joinDao.selectMaxGrade();
-	}
-
-	@Override
-	public List<BookModel> selectBestBook() {
-		// TODO Auto-generated method stub
-		return joinDao.selectBestBook();
 	}
 
 	@Override
@@ -88,6 +65,18 @@ public class JoinServiceImpl implements JoinService {
 	@Override
 	public List<MemberModel> memberList() {
 		return joinDao.selectMemberList();
+	}
+
+	@Override
+	public List<MemberModel> selectBest() {
+		// TODO Auto-generated method stub
+		return joinDao.selectBest();
+	}
+
+	@Override
+	public List<BookModel> selectBestBook() {
+		// TODO Auto-generated method stub
+		return joinDao.selectBestBook();
 	}
 
 	@Override

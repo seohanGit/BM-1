@@ -39,9 +39,9 @@
 					</ul>
 
 				</div>
-				<hr>
-				<h4>원하는 책이 없다면 인터넷에서 주문하세요 !</h4>
-				<div class="input-group" style="width: 90%">
+				
+				<h4></h4>
+				<div class="input-group" style="width: 95%">
 					<form action="/findBook" method="post">
 						<span class="input-group-btn"> <input type="text"
 							class="form-control" id="query" name="keyword"
@@ -53,21 +53,23 @@
 					</form>
 				</div>
 				<hr>
-				<img src="/resources/main.JPG" style="width: 100%" id="image1">
 
-				<div id="searchResultArea"></div>
 
-				<hr>
 
 
 			</div>
 			<!-- Blog Sidebar Widgets Column -->
 			<div class="col-md-4">
+			
+			<br><br><br>	<hr>
 
 				<c:forEach items="${team}" var="team" begin="0" end="2">
 
 					<div>${team}</div>
 				</c:forEach>
+				<img src="/resources/main.JPG" style="width: 100%" id="image1">
+
+				<div id="searchResultArea"></div>
 				<!-- Blog Search Well -->
 				<!-- 
 				<div class="well">
@@ -91,9 +93,7 @@
 				</div> -->
 				<!-- Blog Categories Well -->
 
-				<div class="well" align="center">
-					<jsp:include page="sidebar.jsp" />
-				</div>
+
 
 			</div>
 		</div>

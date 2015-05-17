@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.baron.member.model.BookModel;
-import com.baron.member.model.SmsModel;
 
 @Repository
 public class RentDaoImpl implements RentDao {
@@ -19,12 +18,6 @@ public class RentDaoImpl implements RentDao {
 	@Autowired
 	@Resource(name = "sqlSession")
 	private SqlSession session;
-
-	@Autowired
-	@Resource(name = "smsSession")
-	private SqlSession smsSession;
-
-	private JoinDao joinDao;
 
 	@Override
 	public BookModel selectBook(String book_cd) {
@@ -151,6 +144,16 @@ public class RentDaoImpl implements RentDao {
 
 	}
 
-	
+	@Override
+	public List<BookModel> selectRent() {
+		// TODO Auto-generated method stub
+		return session.selectList(NAMESPACE + "selectRent");
+	}
+
+	@Override
+	public void insertRecord(BookModel bookmodel) {
+		// TODO Auto-generated method stu
+		session.insert(NAMESPACE + "backupRecord", bookmodel);
+	}
 
 }

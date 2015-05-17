@@ -20,15 +20,14 @@
 	<div class="container">
 		<div class="row">
 			<!-- Blog Entries Column -->
-			<div class="col-md-6">
+			<div class="col-md-8">
 
 				<jsp:include page="../menu.jsp" />
 
 				<!-- First Blog Post -->
 
-				<hr>
 
-				<div class="input-group" style="width: 95%">
+				<div class="col-xs-12 col-md-10 col-sm-8 input-group" >
 					<form action="/findBook" method="post">
 						<div style="width: 100%">
 
@@ -49,25 +48,27 @@
 			</div>
 
 			<!-- Blog Sidebar Widgets Column -->
-			<div class="col-md-6">
+			<div class="col-md-4 col-xs-12" style="float:right">
 				<!-- Blog Search Well -->
 
 				<!-- Side Widget Well -->
 				<jsp:include page="../sidebar.jsp" />
 
 			</div>
-		</div>
-	</div>
-	<!-- /.row -->
-	<hr>
-	<!-- Footer -->
-	<footer>
-		<div class="row">
-			<div class="col-lg-12"></div>
+
+			<div class="col-md-8 col-xs-12" style="float: left;" >
+				<jsp:include page="../footer.jsp"></jsp:include>
+			</div>
 			<!-- /.col-lg-12 -->
+			<footer>
+
+				<!-- /.row -->
+			</footer>
 		</div>
 		<!-- /.row -->
-	</footer>
+		<hr>
+		<!-- Footer -->
+	</div>
 
 	<!-- /.container -->
 	<!-- jQuery -->

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.baron.member.model.BookModel;
 import com.baron.member.model.Dto;
+import com.baron.member.model.MemberModel;
 import com.baron.member.model.SearchResult;
 
 public interface BookDao {
@@ -19,14 +20,14 @@ public interface BookDao {
 
 	List<SearchResult> searchBook(String keyword);
 
-	public List<BookModel> getNewbook();
-
-	public List<BookModel> getBestSeller();
-
 	public List<BookModel> listBook(Dto dto);
 
-	public  List<BookModel> selectBookAll();
-	
+	public List<BookModel> selectBookAll();
 
+	public List<BookModel> getNewbook();
+
+	public List<BookModel> selectBestBook();
+
+	public List<MemberModel> selectBestTeam();
 
 }

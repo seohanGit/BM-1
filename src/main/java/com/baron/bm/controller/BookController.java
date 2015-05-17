@@ -1,11 +1,11 @@
 package com.baron.bm.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
-import org.hamcrest.core.IsNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,7 +25,6 @@ public class BookController {
 	@Autowired
 	private BookService bookservice;
 
-	@Autowired
 	private RentService rentservice;
 
 	@RequestMapping("/insertbookForm")
@@ -55,14 +54,15 @@ public class BookController {
 	@RequestMapping("/searchBook")
 	public String searchBook(HttpServletRequest request, String keyword,
 			Model model) {
-		if(keyword==null){
-			keyword="";
+		if (keyword == null) {
+			keyword = "";
 		}
 		List<SearchResult> bookList = bookservice.searchBook(keyword);
+
 		System.out.println(keyword);
 		System.out.println(keyword);
 		System.out.println(keyword);
-		
+
 		model.addAttribute("bookList", bookList);
 		String permission;
 		for (Cookie cookie : request.getCookies()) {
@@ -87,9 +87,12 @@ public class BookController {
 		page.setNum1(a);
 		page.setNum2(a + 15);
 		List<BookModel> bookList = bookservice.listBook(page);
-		//int total = ((bookservice.listBook(page).get(0).getCount()) / 15) + 1;
+		
+		
+		// int total = ((bookservice.listBook(page).get(0).getCount()) / 15) +
+		// 1;
 		model.addAttribute("bookList", bookList);
-		//model.addAttribute("total", total);
+		// model.addAttribute("total", total);
 		for (Cookie cookie : request.getCookies()) {
 			if (cookie.getName().equals("bm_permission")) {
 				permission = cookie.getValue();
@@ -108,11 +111,11 @@ public class BookController {
 		Dto page = new Dto();
 		page.setNum1((seq - 1) * 15);
 		page.setNum2((seq) * 15);
-		//total = ((bookservice.listBook(page).get(0).getCount()) / 15) + 1;
+		// total = ((bookservice.listBook(page).get(0).getCount()) / 15) + 1;
 		page.setNum3(total);
 		List<BookModel> bookList = bookservice.listBook(page);
 
-		//model.addAttribute("total", total);
+		// model.addAttribute("total", total);
 		model.addAttribute("bookList", bookList);
 		for (Cookie cookie : request.getCookies()) {
 			if (cookie.getName().equals("bm_permission")) {
@@ -132,9 +135,8 @@ public class BookController {
 		System.out.println(keyword);
 		bookList = bookservice.findBook(keyword);
 
-	
 		model.addAttribute("bookList", bookList);
-		
+
 		model.addAttribute("keyword", keyword);
 		return "book/findBook";
 	}

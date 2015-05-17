@@ -46,6 +46,9 @@ public interface RentService {
 
 	public MemberModel selectMember(String id);
 
-	public void notifiReser(SmsModel sms);
+	public void notifiReservation(String book_cd);
 
+	public List<BookModel> selectRent();
+
+	public void insertRecord(BookModel bookmodel);
 }

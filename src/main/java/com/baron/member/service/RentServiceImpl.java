@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.baron.member.dao.JoinDao;
+import com.baron.member.dao.NotifiDao;
 import com.baron.member.dao.RentDao;
 import com.baron.member.dao.SmsDao;
 import com.baron.member.model.BookModel;
@@ -24,6 +25,9 @@ public class RentServiceImpl implements RentService {
 	private JoinDao joinDao;
 	@Autowired
 	private SmsDao smsDao;
+
+	@Autowired
+	private NotifiDao notifiDao;
 
 	@Override
 	public BookModel selectBook(String book_cd) {
@@ -70,8 +74,13 @@ public class RentServiceImpl implements RentService {
 		String id = rentDao.selectBorrow(book_cd).getId();
 		System.out.println(id);
 		sms.setTitle(title);
+
 		sms.setPhone(joinDao.selectMember(id).getMobi_no().substring(1));
 		smsDao.notifiRent(sms);
+		if (joinDao.selectMember(id).getMobi_no() != null) {
+			sms.setPhone(joinDao.selectMember(id).getMobi_no().substring(1));
+			notifiDao.notifiRent(sms);
+		}
 		rentDao.confirmBorrowBook(book_cd);
 	}
 
@@ -102,6 +111,7 @@ public class RentServiceImpl implements RentService {
 	@Override
 	public List<BookModel> reservationListAll() {
 		// TODO Auto-generated method stub
+	
 		return rentDao.reservationListAll();
 	}
 
@@ -146,13 +156,33 @@ public class RentServiceImpl implements RentService {
 	@Override
 	public MemberModel selectMember(String id) {
 		// TODO Auto-generated method stub
-		return selectMember(id);
+		return joinDao.selectMember(id);
+	}
+
+	
+	
+	public void notifiReservation(String book_cd) {
+		SmsModel sms = new SmsModel();
+
+		BookModel book = rentDao.selectReservation(book_cd);
+		String title = rentDao.selectBook(book_cd).getTitle();
+		String mobi_no = joinDao.selectMember(book.getId()).getMobi_no().substring(1);
+
+		sms.setPhone(mobi_no);
+		sms.setTitle(title);
+
+		notifiDao.notifiReser(sms);
 	}
 
 	@Override
-	public void notifiReser(SmsModel sms) {
-		smsDao.notifiReser(sms);
+	public List<BookModel> selectRent() {
+		// TODO Auto-generated method stub
+		return rentDao.selectRent();
+	}
 
+	@Override
+	public void insertRecord(BookModel bookmodel) {
+		rentDao.insertRecord(bookmodel);
 	}
 
 }

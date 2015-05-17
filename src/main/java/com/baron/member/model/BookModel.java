@@ -6,10 +6,6 @@ public class BookModel {
 	private String book_cd;
 	private String book_cd1;
 
-	public String getBook_cd1() {
-		return book_cd1;
-	}
-
 	private String title;
 
 	private String b_group;
@@ -36,6 +32,27 @@ public class BookModel {
 	private String req_cd;
 	private String kname;
 	private String team_nm;
+
+	private String req_ymd;
+	private String retu_ymd;
+
+	public String getRetu_ymd() {
+		return retu_ymd;
+	}
+
+	public void setRetu_ymd(String retu_ymd) {
+		this.retu_ymd = retu_ymd;
+	}
+
+	public void setReq_ymd(String req_ymd) {
+		this.req_ymd = req_ymd;
+	}public String getReq_ymd() {
+		return req_ymd;
+	}
+
+	public String getBook_cd1() {
+		return book_cd1;
+	}
 
 	public String getTeam_nm() {
 		return team_nm;
@@ -249,5 +266,8 @@ public class BookModel {
 	public void setGrade(int grade) {
 		this.grade = grade;
 	}
+
+	
+
 
 }

@@ -1,6 +1,7 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!-- Navigation -->
 
@@ -34,8 +35,8 @@
 				<li><a href="board">게시판</a></li>
 				<li><a href="searchBook">도서목록</a></li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown" role="button" aria-expanded="false">${sessionScope.info}
-						<span class="caret"></span>
+					data-toggle="dropdown" role="button" aria-expanded="false">${sessionScope.team_nm}
+						${sessionScope.kname} <span class="caret"></span>
 				</a>
 					<ul class="dropdown-menu" role="menu">
 						<li><a href="#" id="borrowList">대여현항</a></li>
@@ -49,9 +50,11 @@
 					</ul></li>
 
 				<li style="padding-right: 40px">&nbsp;&nbsp;</li>
-
-				<li style="font-size: 9px"><a href="admin">관리자페이지</a></li>
-
+				<c:choose>
+					<c:when test="${sessionScope.permission ==1}">
+						<li style="font-size: 9px"><a href="admin">관리자페이지</a></li>
+					</c:when>
+				</c:choose>
 
 
 			</ul>

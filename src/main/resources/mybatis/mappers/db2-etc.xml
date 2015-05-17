@@ -31,9 +31,34 @@
 		'YYYYMMDD') AND GUBN = 'A'
 	</select>
 
+	<select id="selectDate" parameterType="String" resultType="String">
+		SELECT Left(A.rece_ymd,
+		4)||'-'||substring(A.rece_ymd,5,2)||'-'||substring(A.rece_ymd, 7,2) as
+		date from sitlib.bookmst WHERE book_cd = #{book_cd}
+	</select>
 
 
+	<select id="selectRent" resultType="BookModel">
 
+		SELECT DISTINCT A.SABUN AS id ,
+		Left(A.req_ymd,
+		4)||'-'||substring(A.req_ymd,5,2)||'-'||substring(A.req_ymd, 7,2) AS
+		req_ymd,
+		B.book_cd AS book_cd, Left(A.retu_ymd,
+		4)||'-'||substring(A.retu_ymd,5,2)||'-'||substring(A.retu_ymd, 7,2) AS
+		retu_ymd,
+		A.dept_no AS dept_nm
+		FROM sitlib.bookreq A INNER JOIN
+		sitlib.bookreqhis
+		B ON A.SABUN = B.SABUN AND A.req_ymd = B.req_ymd
+	</select>
 
-
+	<insert id="backupRecord" parameterType="BookModel">
+		INSERT INTO
+		TESTLIB.BOOKRENT
+		(ID, RENTDATE,  RETURNDATE, team_nm, book_cd)
+		VALUES(#{id},
+		#{rentdate},
+		 #{returndate}, #{team_nm}, #{book_cd})
+	</insert>
 </mapper>

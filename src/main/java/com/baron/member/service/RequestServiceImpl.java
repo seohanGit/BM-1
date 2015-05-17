@@ -12,9 +12,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.baron.member.dao.BookDao;
 import com.baron.member.dao.RequestDao;
 import com.baron.member.model.BookModel;
+import com.baron.member.model.Dto;
 
 @Service
 public class RequestServiceImpl implements RequestService {
@@ -40,24 +40,19 @@ public class RequestServiceImpl implements RequestService {
 		System.out.println(model.getTitle());
 		requestDao.requestBook(model);
 	}
-/*
-	@Override
-	public BookModel getRequestBook(String isbn, String id, int quantity)
-			throws Exception, IOException {
-		BookModel book = new BookModel();
-		URL url = getIsbnUrl(isbn);
 
-		getApiTest(url);
-
-		XmlDom xmlDom = new XmlDom();
-		book = xmlDom.getBook(url.openStream());
-		book.setId(id);
-		book.setQuantity(quantity);
-		System.out.println(book.getId());
-		System.out.println(book.getGenre());
-		return book;
-	}
-*/
+	/*
+	 * @Override public BookModel getRequestBook(String isbn, String id, int
+	 * quantity) throws Exception, IOException { BookModel book = new
+	 * BookModel(); URL url = getIsbnUrl(isbn);
+	 * 
+	 * getApiTest(url);
+	 * 
+	 * XmlDom xmlDom = new XmlDom(); book = xmlDom.getBook(url.openStream());
+	 * book.setId(id); book.setQuantity(quantity);
+	 * System.out.println(book.getId()); System.out.println(book.getGenre());
+	 * return book; }
+	 */
 	public BookModel findBookOne(String isbn) throws Exception {
 		BookModel book = new BookModel();
 		URL url = getIsbnUrl(isbn);
@@ -70,7 +65,7 @@ public class RequestServiceImpl implements RequestService {
 
 		return book;
 	}
-	
+
 	private URL getIsbnUrl(String keyword) throws UnsupportedEncodingException,
 			MalformedURLException {
 		String key = "B0F933E2847C6447203572CCC68F824A1054E7EF0D966C7B95245288CE95E300";
@@ -109,15 +104,25 @@ public class RequestServiceImpl implements RequestService {
 	}
 
 	@Override
-	public BookModel selectBook(String bookCode) {
-		return requestDao.selectBook(bookCode);
-		
-		
+	public BookModel selectBook(String req_cd) {
+		return requestDao.selectBook(req_cd);
+
 	}
 
 	@Override
 	public List<BookModel> requestRecord(String id) {
 		// TODO Auto-generated method stub
 		return requestDao.requestRecord(id);
+	}
+
+	@Override
+	public void updateBook_cd(Dto dto) {
+		requestDao.updateBook_cd(dto);
+	}
+
+	@Override
+	public void rejectRequest(String req_cd) {
+		requestDao.rejectRequest(req_cd);
+		
 	}
 }

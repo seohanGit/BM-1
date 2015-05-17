@@ -46,7 +46,7 @@ public class JoinDaoImplTest {
 		model.setId("900601");
 		model.setKname("민상훈");
 		model.setPassword("1234");
-		model.setCell("01067766160");
+		model.setMobi_no("01067766160");
 		
 		joinDao.insertMember(model);
 	}

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.baron.member.model.BookModel;
+import com.baron.member.model.Dto;
 
 @Repository
 public class RequestDaoImpl implements RequestDao {
@@ -42,8 +43,8 @@ public class RequestDaoImpl implements RequestDao {
 	}
 
 	@Override
-	public BookModel selectBook(String book_cd) {
-		return session.selectOne(NAMESPACE + "selectRequest", book_cd);
+	public BookModel selectBook(String req_cd) {
+		return session.selectOne(NAMESPACE + "selectRequest", req_cd);
 
 	}
 
@@ -52,4 +53,17 @@ public class RequestDaoImpl implements RequestDao {
 		// TODO Auto-generated method stub
 		return session.selectList(NAMESPACE + "requestRecord", id);
 	}
+
+	@Override
+	public void updateBook_cd(Dto dto) {
+		session.update(NAMESPACE + "updateBook_cd", dto);
+		
+	}
+
+	@Override
+	public void rejectRequest(String req_cd) {
+		session.update(NAMESPACE + "rejectRequest", req_cd);
+		
+	}
+
 }

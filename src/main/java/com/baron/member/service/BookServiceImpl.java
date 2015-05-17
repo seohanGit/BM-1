@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import com.baron.member.dao.BookDao;
 import com.baron.member.model.BookModel;
 import com.baron.member.model.Dto;
+import com.baron.member.model.MemberModel;
 import com.baron.member.model.SearchResult;
 
 //입력을 받는 컨트롤러 클래스와 데이터베이스를 처리하는 다오 클래스 사아에 비지니스 로직이나 트랜잭션을 처리하는 클래스
@@ -39,25 +40,17 @@ public class BookServiceImpl implements BookService {
 	 * }
 	 */
 
-	@Override
-	public List<BookModel> getNewbook() throws Exception {
-		return bookDao.getNewbook();
-
-	}
-/*
-	@Override
-	public List<BookModel> pagenation(String keyword, String page)
-			throws Exception {
-		List<BookModel> bookList = new ArrayList<BookModel>();
-
-		URL url = getPageUrl(keyword, page);
-
-		XmlDom xmlDom = new XmlDom();
-		bookList = xmlDom.getBooklist(url.openStream());
-
-		return bookList;
-	}
-*/
+	/*
+	 * @Override public List<BookModel> pagenation(String keyword, String page)
+	 * throws Exception { List<BookModel> bookList = new ArrayList<BookModel>();
+	 * 
+	 * URL url = getPageUrl(keyword, page);
+	 * 
+	 * XmlDom xmlDom = new XmlDom(); bookList =
+	 * xmlDom.getBooklist(url.openStream());
+	 * 
+	 * return bookList; }
+	 */
 	@Override
 	public List<BookModel> findBook(String keyword) throws Exception {
 		List<BookModel> bookList = new ArrayList<BookModel>();
@@ -68,11 +61,6 @@ public class BookServiceImpl implements BookService {
 		bookList = xmlDom.getBooklist(url.openStream());
 
 		return bookList;
-	}
-
-	@Override
-	public List<BookModel> getBestSeller() {
-		return bookDao.getBestSeller();
 	}
 
 	@Override
@@ -168,7 +156,7 @@ public class BookServiceImpl implements BookService {
 		String key = "B0F933E2847C6447203572CCC68F824A1054E7EF0D966C7B95245288CE95E300";
 		String addr = "http://book.interpark.com/api/search.api?";
 		String parameter = "";
-System.out.println(keyword);
+		System.out.println(keyword);
 		key = URLEncoder.encode(key, "UTF-8");
 		keyword = URLEncoder.encode(keyword, "UTF-8");
 		parameter = parameter + "&" + "query=" + keyword;
@@ -197,6 +185,7 @@ System.out.println(keyword);
 
 		br.close();
 	}
+
 	/*
 	 * private URL getIsbnUrl(String keyword) throws
 	 * UnsupportedEncodingException, MalformedURLException { String key =
@@ -221,10 +210,29 @@ System.out.println(keyword);
 		// TODO Auto-generated method stub
 		return bookDao.listBook(dto);
 	}
+
 	@Override
 	public List<BookModel> selectBookAll() {
 		// TODO Auto-generated method stub
 		return bookDao.selectBookAll();
+	}
+
+	@Override
+	public List<BookModel> getNewbook() throws Exception {
+		return bookDao.getNewbook();
+
+	}
+
+	@Override
+	public List<BookModel> selectBestBook() {
+		// TODO Auto-generated method stub
+		return bookDao.selectBestBook();
+	}
+
+	@Override
+	public List<MemberModel> selectBestTeam() {
+		// TODO Auto-generated method stub
+		return bookDao.selectBestTeam();
 	}
 
 }

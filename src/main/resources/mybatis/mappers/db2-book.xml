@@ -17,7 +17,7 @@
 		rcv_date, isbn,
 		price, summary)
 		VALUES
-		(#{title},#{book_cd},#{b_group},#{publish},#{author},0,#{imageurl},
+		(#{title},#{book_cd},#{b_group},#{publish},#{author},'0', #{imageurl},
 		current date, #{isbn}, #{price}, #{summary})
 	</insert>
 
@@ -35,7 +35,6 @@
 		TITLE like #{keyword}
 		ORDER BY RENTCHK DESC,
 		RCV_DATE DESC
-
 	</select>
 
 	<select id="listBook" parameterType="Dto" resultType="BookModel">
@@ -70,15 +69,65 @@
 		FROM TESTLIB.BOOKMST
 		ORDER BY
 		rcv_date DESC
+		FETCH first 5 rows only
 	</select>
 
-	<select id="getBestSeller" resultType="BookModel">
-		SELECT *
-		FROM
-		TESTLIB.BOOKMST
-		ORDER
-		BY
-		sunbo DESC
+
+	<!--4개월간 다수 대여 팀, 도서 -->
+
+	<select id="selectBestTeam" resultType="BookModel">
+
+		SELECT B.team_nm,
+		A.book_cd, (SELECT
+		title FROM
+		testlib.bookmst WHERE book_cd
+		= A.book_cd)
+		AS title, (SELECT
+		author FROM testlib.bookmst WHERE
+		book_cd = A.book_cd)
+		AS author , COUNT(*) AS score FROM
+		testlib.bookrent A INNER JOIN
+		tprlib.gr_insa B ON A.id=B.asabn WHERE
+		rentdate > current date - 4
+		month GROUP BY B.team_nm, A.book_cd ORDER
+		BY score DESC
+	</select>
+
+	<select id="selectBestPerson" resultType="BookModel">
+
+		SELECT A.id, A.book_cd,
+		COUNT(*) AS count, (SELECT
+		title FROM
+		testlib.bookmst WHERE book_cd =
+		A.book_cd) AS title, (SELECT
+		author
+		FROM testlib.bookmst WHERE book_cd =
+		A.book_cd) AS author FROM
+		testlib.bookrent A INNER JOIN tprlib.gr_insa
+		B ON A.id = B.asabn WHERE
+		A.rentdate > current date - 6 month GROUP BY
+		A.id, A.book_cd ORDER BY
+		count DESC
+	</select>
+
+
+	<select id="selectBestBook" resultType="BookModel">
+		SELECT COUNT(*) AS count,
+		B.book_cd,
+		(SELECT title FROM testlib.bookmst WHERE book_cd =
+		B.book_cd) AS title,
+		(SELECT author FROM testlib.bookmst WHERE book_cd
+		= B.book_cd) AS
+		author
+		FROM testlib.bookrent A INNER JOIN
+		testlib.bookmst B
+		ON A.book_cd
+		= B.book_cd
+		GROUP BY B.book_cd
+		ORDER BY
+		count DESC
+		FETCH
+		first 5 rows only
 	</select>
 
 	<!-- 구매요청, 대여 관련 커리 -->
@@ -87,9 +136,10 @@
 		INSERT INTO
 		TESTLIB.BOOKREQ
 		(id,reqdate,title,book_cd,price,author,quantity,b_group,link,
-		imageurl,isbn, publish, summary, req_cd)
+		imageurl,isbn, publish, summary, req_cd )
 		VALUES
-		(#{id}, current date,
+		(#{id}, current
+		date,
 		#{title},#{book_cd},#{price},#{author},#{quantity},#{b_group},#{link},
 		#{imageurl},#{isbn}, #{publish}, #{summary}, #{req_cd})
 	</insert>
@@ -97,12 +147,20 @@
 	<update id="deleteRequest" parameterType="String">
 		UPDATE TESTLIB.BOOKREQ
 		SET
-		reqstatus='2'
-		WHERE book_cd=#{book_cd}
+		reqstatus='1'
+		WHERE req_cd= #{req_cd}
 	</update>
-
+	
+	<update id="rejectRequest" parameterType="String">
+		UPDATE TESTLIB.BOOKREQ
+		SET
+		reqstatus='2'
+		WHERE req_cd= #{req_cd}
+	</update>
+	
 	<select id="requestList" resultType="BookModel">
-		SELECT B.title, B.imageurl, B.author, B.price, b.quantity, B.reqdate, B.reqstatus, B.id, (SELECT C.KNAME FROM
+		SELECT B.title, B.imageurl, B.author, B.price, b.quantity, B.reqdate,
+		B.reqstatus, B.id, B.book_cd, B.req_cd, B.link, (SELECT C.KNAME FROM
 		TPRLIB.GR_INSA C WHERE B.id=C.ASABN
 		FETCH
 		first 1 rows only) kname
@@ -112,7 +170,7 @@
 
 		ORDER BY
 		reqstatus
-		DESC
+		DESC, reqdate DESC
 	</select>
 
 	<select id="requestRecord" parameterType="String" resultType="BookModel">
@@ -136,9 +194,18 @@
 
 	<select id="selectRequest" parameterType="String" resultType="BookModel">
 		SELECT *
-		FROM TESTLIB.BOOKREQ
+		FROM TESTLIB.BOOKREQ A INNER JOIN TPRLIB.GR_INSA B
+		ON
+		A.id=B.ASABN
 		WHERE req_cd=#{req_cd}
 
 	</select>
 
+	<update id="updateBook_cd" parameterType="Dto">
+		UPDATE TESTLIB.BOOKREQ
+		SET
+		book_cd = #{string1}
+		WHERE
+		req_cd= #{string2}
+	</update>
 </mapper>

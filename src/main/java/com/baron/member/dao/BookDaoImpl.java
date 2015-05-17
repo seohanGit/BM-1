@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.baron.member.model.BookModel;
 import com.baron.member.model.Dto;
+import com.baron.member.model.MemberModel;
 import com.baron.member.model.SearchResult;
 
 @Repository
@@ -60,18 +61,6 @@ public class BookDaoImpl implements BookDao {
 	}
 
 	@Override
-	public List<BookModel> getNewbook() {
-		// TODO Auto-generated method stub
-		return session.selectList(NAMESPACE + "getNewbook");
-	}
-
-	@Override
-	public List<BookModel> getBestSeller() {
-		// TODO Auto-generated method stub
-		return session.selectList(NAMESPACE + "getBestSeller");
-	}
-
-	@Override
 	public List<BookModel> listBook(Dto dto) {
 		// TODO Auto-generated method stub
 		return session.selectList(NAMESPACE + "listBook", dto);
@@ -81,6 +70,24 @@ public class BookDaoImpl implements BookDao {
 	public List<BookModel> selectBookAll() {
 		// TODO Auto-generated method stub
 		return session.selectList(NAMESPACE + "selectBookAll");
+	}
+
+	@Override
+	public List<BookModel> selectBestBook() {
+
+		return session.selectList(NAMESPACE + "selectBestBook");
+	}
+
+	@Override
+	public List<BookModel> getNewbook() {
+		// TODO Auto-generated method stub
+		return session.selectList(NAMESPACE + "getNewbook");
+	}
+
+	@Override
+	public List<MemberModel> selectBestTeam() {
+		// TODO Auto-generated method stub
+		return session.selectList(NAMESPACE + "selectBestTeam");
 	}
 
 }

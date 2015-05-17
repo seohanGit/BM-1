@@ -25,6 +25,20 @@
 		<div class="row">
 			<!-- Blog Entries Column -->
 			<div class="col-md-8">
+
+				<h4></h4>
+				<div class="input-group" style="width: 95%">
+					<form action="/findBook" method="post">
+						<span class="input-group-btn"> <input type="text"
+							class="form-control" id="query" name="keyword"
+							placeholder="인터파크 검색">
+							<button class="btn btn-default" type="submit" id="btn_find">
+								<span class="glyphicon glyphicon-search"></span>
+							</button>
+						</span>
+					</form>
+				</div>
+				<hr>
 				<div id="goodPhrase">
 					<h1 class="page-header">
 						<a href="noticeList">공지사항</a> <small>기술 자료실</small>
@@ -40,31 +54,11 @@
 
 				</div>
 
-				<h4></h4>
-				<div class="input-group" style="width: 95%">
-					<form action="/findBook" method="post">
-						<span class="input-group-btn"> <input type="text"
-							class="form-control" id="query" name="keyword"
-							placeholder="인터파크 검색">
-							<button class="btn btn-default" type="submit" id="btn_find">
-								<span class="glyphicon glyphicon-search"></span>
-							</button>
-						</span>
-					</form>
-				</div>
-				<hr>
-
-
-
-
 			</div>
 			<!-- Blog Sidebar Widgets Column -->
 			<div class="col-md-4">
 
-				<br>
-				<br>
-				<br>
-				<hr>
+				<br> <br>
 
 				<h3>신간도서</h3>
 
@@ -86,7 +80,6 @@
 					</div>
 					<hr>
 				</c:forEach>
-				<img src="/resources/main.JPG" style="width: 100%" id="image1">
 
 				<div id="searchResultArea"></div>
 				<!-- Blog Search Well -->

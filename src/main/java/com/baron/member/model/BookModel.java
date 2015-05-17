@@ -10,14 +10,15 @@ public class BookModel {
 
 	private String b_group;
 	private int quantity;
-private int totalResults;
-	public int getTotalResults() {
-	return totalResults;
-}
+	private int totalResults;
 
-public void setTotalResults(int totalResults) {
-	this.totalResults = totalResults;
-}
+	public int getTotalResults() {
+		return totalResults;
+	}
+
+	public void setTotalResults(int totalResults) {
+		this.totalResults = totalResults;
+	}
 
 	private java.util.Date rentdate;
 	private java.util.Date returndate;
@@ -43,6 +44,15 @@ public void setTotalResults(int totalResults) {
 
 	private String req_ymd;
 	private String retu_ymd;
+	private int score;
+
+	public int getScore() {
+		return score;
+	}
+
+	public void setScore(int score) {
+		this.score = score;
+	}
 
 	public String getRetu_ymd() {
 		return retu_ymd;
@@ -54,7 +64,9 @@ public void setTotalResults(int totalResults) {
 
 	public void setReq_ymd(String req_ymd) {
 		this.req_ymd = req_ymd;
-	}public String getReq_ymd() {
+	}
+
+	public String getReq_ymd() {
 		return req_ymd;
 	}
 
@@ -274,8 +286,5 @@ public void setTotalResults(int totalResults) {
 	public void setGrade(int grade) {
 		this.grade = grade;
 	}
-
-	
-
 
 }

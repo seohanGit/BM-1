@@ -85,7 +85,7 @@
 		AS title, (SELECT
 		author FROM testlib.bookmst WHERE
 		book_cd = A.book_cd)
-		AS author , COUNT(*) AS score FROM
+		AS author , COUNT(*) AS count FROM
 		testlib.bookrent A INNER JOIN
 		tprlib.gr_insa B ON A.id=B.asabn WHERE
 		rentdate > current date - 4

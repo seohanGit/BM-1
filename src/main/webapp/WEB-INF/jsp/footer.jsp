@@ -5,12 +5,12 @@
 
 <div>
 	<h3>Best 도서</h3>
-	<c:forEach items="${bestList}" var="best" begin="0" end="2">
+	<c:forEach items="${bestBook}" var="best" begin="0" end="2">
 
 		<table style="width: 100%">
 			<tr>
-				<td style="width: 35%"><strong>${best.team_nm}</strong></td>
-				<td id="tb-genre">${best.kname}</td>
+				<td style="width: 35%"><strong>${best.title}</strong></td>
+				<td id="tb-genre">${best.author}</td>
 				<td style="width: 35%">대출 : <mark>${best.score}</mark></td>
 			</tr>
 		</table>
@@ -21,13 +21,13 @@
 
 		<table style="width: 100%">
 			<tr>
-				<td style="width: 35%"><strong>${team.team_nm}</strong></td>
-				<td id="tb-genre">${team.kname}</td>
-				<td style="width: 35%">대출 : <mark>${team.score}</mark></td>
+
+				<td style="width: 70%">대출 : <mark>${team.score}</mark></td>
+				<td style="width: 20%"><strong>${team.team_nm}</strong></td>
 			</tr>
 		</table>
 	</c:forEach>
-
+<%-- 
 	<h3>회원 Top 3</h3>
 	<c:forEach items="${bestBook}" var="book" begin="0" end="2">
 
@@ -39,12 +39,12 @@
 			</tr>
 		</table>
 	</c:forEach>
-
+ --%>
 
 	<!-- /.col-lg-6 -->
 
-<!-- /.row -->
-<%-- 
+	<!-- /.row -->
+	<%-- 
 
 
 	<h3>베스트 셀러</h3>
@@ -67,4 +67,5 @@
 		<hr>
 	</c:forEach>
 
- --%></div>
+ --%>
+</div>

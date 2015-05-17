@@ -14,7 +14,7 @@
 			<tr>
 				<td style="width: 35%"><strong>${best.team_nm}</strong></td>
 				<td id="tb-genre">${best.kname}</td>
-				<td style="width: 35%">대출 : <mark>${best.score}</mark></td>
+				<td style="width: 35%">대출 : <mark>${best.count}</mark></td>
 			</tr>
 		</table>
 	</c:forEach>

@@ -7,25 +7,17 @@
 <!-- /.row -->
 
 <div>
+	<h3>Best 사원</h3>
+	<c:forEach items="${bestMember}" var="best" begin="0" end="2">
 
-	<h3>신간도서</h3>
-
-	<c:forEach items="${newbook}" var="newbook" begin="0" end="2" step="1"
-		varStatus="status">
-		<hr>
-		<div align="center">
-			<div class="thumbnail" align="left" style="height: 90px; width: 60px">
-				<img src="${newbook.imageurl}" height="100%" width="100%">
-			</div>
-			<div align="left">
-				<p class="caption">
-					<a href="${newbook.link}">${newbook.title}</a>
-				</p>
-				<p class="caption">${newbook.author}</p>
-				<p class="caption">입고일 : ${newbook.rcv_date}</p>
-			</div>
-		</div>
-		<hr>
+		<table style="width: 100%">
+			<tr>
+				<td style="width: 35%"><strong>${best.team_nm}</strong></td>
+				<td id="tb-genre">${best.kname}</td>
+				<td style="width: 35%">대출 : <mark>${best.score}</mark></td>
+			</tr>
+		</table>
 	</c:forEach>
-
+	
+	
 </div>

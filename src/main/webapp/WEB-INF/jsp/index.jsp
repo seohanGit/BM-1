@@ -39,7 +39,7 @@
 					</ul>
 
 				</div>
-				
+
 				<h4></h4>
 				<div class="input-group" style="width: 95%">
 					<form action="/findBook" method="post">
@@ -60,12 +60,31 @@
 			</div>
 			<!-- Blog Sidebar Widgets Column -->
 			<div class="col-md-4">
-			
-			<br><br><br>	<hr>
 
-				<c:forEach items="${team}" var="team" begin="0" end="2">
+				<br>
+				<br>
+				<br>
+				<hr>
 
-					<div>${team}</div>
+				<h3>신간도서</h3>
+
+				<c:forEach items="${newbook}" var="newbook" begin="0" end="2"
+					step="1" varStatus="status">
+					<hr>
+					<div align="center">
+						<div class="thumbnail" align="left"
+							style="height: 90px; width: 60px">
+							<img src="${newbook.imageurl}" height="100%" width="100%">
+						</div>
+						<div align="left">
+							<p class="caption">
+								<a href="${newbook.link}">${newbook.title}</a>
+							</p>
+							<p class="caption">${newbook.author}</p>
+							<p class="caption">입고일 : ${newbook.rcv_date}</p>
+						</div>
+					</div>
+					<hr>
 				</c:forEach>
 				<img src="/resources/main.JPG" style="width: 100%" id="image1">
 

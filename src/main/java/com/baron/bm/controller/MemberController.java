@@ -62,14 +62,14 @@ public class MemberController {
 
 		List<BoardModel> notice = boardService.noticeList();
 		// List<MemberModel> bestList = joinService.selectBest();
-		// List<BookModel> newBook = bookService.getNewbook();
+		 List<BookModel> newBook = bookService.getNewbook();
 		// List<BookModel> bestSeller = bookService.getBestSeller();
 
 		model.addAttribute("noticeList", notice);
 		// model.addAttribute("bestList", bestList);
 
 		// model.addAttribute("bestseller", bestSeller);
-		// model.addAttribute("newbook", newBook);
+		model.addAttribute("newbook", newBook);
 		return "index";
 	}
 
@@ -242,14 +242,14 @@ public class MemberController {
 				System.out.println(cookie.getValue());
 				if ("1".equals(cookie.getValue())) {
 
-					List<MemberModel> memberList = joinService.selectBest();
+					List<MemberModel> bestMember = joinService.selectBest();
 					List<BookModel> bestBook = bookService.selectBestBook();
-					List<BookModel> newBook = bookService.getNewbook();
+					// List<BookModel> newBook = bookService.getNewbook();
 					List<MemberModel> bestTeam = bookService.selectBestTeam();
 
-					model.addAttribute("bestList", memberList);
+					model.addAttribute("bestMember", bestMember);
 					model.addAttribute("bestBook", bestBook);
-					model.addAttribute("newbook", newBook);
+					// model.addAttribute("newbook", newBook);
 					model.addAttribute("bestTeam", bestTeam);
 
 					return "/member/admin";

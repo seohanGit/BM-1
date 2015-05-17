@@ -52,6 +52,5 @@ public interface RentDao {
 	void insertRecord(BookModel bookmodel);
 
 
-	
 
 }

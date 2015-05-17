@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.baron.member.dao.JoinDao;
 import com.baron.member.dao.NotifiDao;
 import com.baron.member.dao.RentDao;
+import com.baron.member.dao.SmsDao;
 import com.baron.member.model.BookModel;
 import com.baron.member.model.SmsModel;
 
@@ -25,6 +26,9 @@ public class ReportingServiceImpl implements ReportingService {
 
 	@Autowired
 	private RentDao rentDao;
+	
+	@Autowired
+	private SmsDao smsDao;
 
 	@Autowired
 	private NotifiDao notifiDao;
@@ -52,6 +56,7 @@ public class ReportingServiceImpl implements ReportingService {
 				sms.setTitle(bookModel.getTitle());
 				sms.setPhone(Cell);
 				System.out.println(Cell);
+				smsDao.notifiReturn(sms);
 				notifiDao.notifiReturn(sms);
 			}
 

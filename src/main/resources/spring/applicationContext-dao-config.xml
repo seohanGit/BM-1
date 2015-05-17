@@ -66,5 +66,5 @@
 		<constructor-arg index="0" ref="smsSessionFactory" />
 	</bean>
 
-
+	
 </beans>

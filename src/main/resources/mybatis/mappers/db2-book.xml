@@ -75,22 +75,12 @@
 
 	<!--4개월간 다수 대여 팀, 도서 -->
 
-	<select id="selectBestTeam" resultType="BookModel">
+	<select id="selectBestTeam" resultType="MemberModel">
 
-		SELECT B.team_nm,
-		A.book_cd, (SELECT
-		title FROM
-		testlib.bookmst WHERE book_cd
-		= A.book_cd)
-		AS title, (SELECT
-		author FROM testlib.bookmst WHERE
-		book_cd = A.book_cd)
-		AS author , COUNT(*) AS count FROM
-		testlib.bookrent A INNER JOIN
-		tprlib.gr_insa B ON A.id=B.asabn WHERE
-		rentdate > current date - 4
-		month GROUP BY B.team_nm, A.book_cd ORDER
-		BY score DESC
+		SELECT B.team_nm, COUNT(*) AS count FROM
+		testlib.bookrent A INNER JOIN tprlib.gr_insa B ON A.id=B.asabn WHERE
+		rentdate > current date - 4 month GROUP BY B.team_nm ORDER
+		BY count DESC
 	</select>
 
 	<select id="selectBestPerson" resultType="BookModel">

@@ -79,7 +79,7 @@
 							<tr>
 
 								<td align="left"><a href="#"
-									onclick="window.open('/bookInfo?book_cd=${book.book_cd}','new','resizeble=yes scrollbars=yes');">
+									onclick="window.open('/bookInfo?book_cd=${book.book_cd}','new','resizeble=yes scrollbars=yes,  width=850, height=500');">
 										${book.title }</a></td>
 								<td class="hidden-xs" align="left">${book.author }</td>
 								<td class="hidden-xs hidden-sm" align="left">${book.publish}</td>

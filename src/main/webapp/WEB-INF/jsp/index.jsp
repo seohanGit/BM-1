@@ -26,19 +26,7 @@
 			<!-- Blog Entries Column -->
 			<div class="col-md-8">
 
-				<h4></h4>
-				<div class="input-group" style="width: 95%">
-					<form action="/findBook" method="post">
-						<span class="input-group-btn"> <input type="text"
-							class="form-control" id="query" name="keyword"
-							placeholder="인터파크 검색">
-							<button class="btn btn-default" type="submit" id="btn_find">
-								<span class="glyphicon glyphicon-search"></span>
-							</button>
-						</span>
-					</form>
-				</div>
-				<hr>
+
 				<div id="goodPhrase">
 					<h1 class="page-header">
 						<a href="noticeList">공지사항</a> <small>기술 자료실</small>
@@ -52,6 +40,19 @@
 						</c:forEach>
 					</ul>
 
+				</div>
+				<hr>
+				<h4></h4>
+				<div class="input-group" style="width: 95%">
+					<form action="/findBook" method="post">
+						<span class="input-group-btn"> <input type="text"
+							class="form-control" id="query" name="keyword"
+							placeholder="인터파크 검색">
+							<button class="btn btn-default" type="submit" id="btn_find">
+								<span class="glyphicon glyphicon-search"></span>
+							</button>
+						</span>
+					</form>
 				</div>
 
 			</div>
@@ -72,7 +73,8 @@
 						</div>
 						<div align="left">
 							<p class="caption">
-								<a href="${newbook.link}">${newbook.title}</a>
+								<a href="#"
+									onclick="window.open('/bookInfo?book_cd=${newbook.book_cd}','new','resizeble=yes scrollbars=yes, width=850, height=500');">${newbook.title}</a>
 							</p>
 							<p class="caption">${newbook.author}</p>
 							<p class="caption">입고일 : ${newbook.rcv_date}</p>
@@ -109,6 +111,9 @@
 
 			</div>
 		</div>
+	</div>
+	<div class="col-md-12 col-xs-12" style="float: left;">
+		<jsp:include page="footer.jsp"></jsp:include>
 	</div>
 	<!-- /.row -->
 	<hr>

@@ -64,8 +64,8 @@
 		rows only) AS kname,(SELECT team_nm FROM tprlib.gr_insa WHERE asabn =
 		A.asabn FETCH first 1 rows only) AS team_nm, A.asabn AS id, (SELECT
 		COUNT(*) FROM testlib.BOOKRENT B WHERE B.rentdate > current date -30
-		day AND B.id = A.asabn) AS score FROM tprlib.gr_insa AS A GROUP BY
-		A.asabn ORDER BY score DESC
+		day AND B.id = A.asabn) AS count FROM tprlib.gr_insa AS A GROUP BY
+		A.asabn ORDER BY count DESC
 
 
 	</select>

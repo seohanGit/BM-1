@@ -43,11 +43,11 @@ public class RequestController {
 
 	@RequestMapping("/confirmRequest")
 	public String requestResult(BookModel model) {
-		System.out.println(model.getKname()+"님이 "+ model.getTitle() + "을 구매요청하였습니다. " );
-		model.setReq_cd(model.getIsbn() + "(" + model.getQuantity()+1 + ")");
+		System.out.println(model.getKname() + "님이 " + model.getTitle()
+				+ "을 구매요청하였습니다. ");
+		model.setReq_cd(model.getIsbn() + "(" + model.getQuantity() + 1 + ")");
 		requestservice.requestBook(model);
-		
-		
+
 		return "redirect:requestList";
 	}
 
@@ -106,16 +106,15 @@ public class RequestController {
 		book.setQuantity(quantity);
 
 		for (Cookie cookie : request.getCookies()) {
-			if (cookie.getName().equals("bm_id"))
-			{
+			if (cookie.getName().equals("bm_id")) {
 				id = cookie.getValue();
-			book.setId(id);
-		}}
+				book.setId(id);
+			}
+		}
 		model.addAttribute("book", book);
 		System.out.println(book.getId());
 		System.out.println(book.getSummary());
 
-		
 		return "request/confirmRequest";
 	}
 
@@ -172,6 +171,16 @@ public class RequestController {
 		return "redirect:requestList";
 	}
 
+	@RequestMapping("modifiReqForm")
+	public String modifiForm(Model model) {
+		List<BookModel> bookList = new ArrayList<BookModel>();
+		bookList = requestservice.requestList();
+		System.out.println(bookList.get(0).getReq_cd());
+		model.addAttribute("bookList", bookList);
+
+		return "request/modifiReqForm";
+	}
+
 	@RequestMapping(value = "/modifiRequest", method = RequestMethod.POST)
 	public String modifiRequest(
 			@RequestParam("book_cd") List<String> book_cdList,
@@ -193,7 +202,7 @@ public class RequestController {
 		requestservice.deleteRequest(req_cd);
 		return "redirect:requestList";
 	}
-	
+
 	@RequestMapping("/rejectRequest")
 	public String rejectRequest(String req_cd) {
 		System.out.println(req_cd);

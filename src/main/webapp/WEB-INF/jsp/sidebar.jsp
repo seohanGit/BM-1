@@ -5,19 +5,22 @@
 
 
 <!-- /.row -->
-
+<br>
+<br>
+<br>
+<br>
 <div>
 	<h3>Best 사원</h3>
-	<c:forEach items="${bestMember}" var="best" begin="0" end="2">
+	<table class="table table-nobordered table-admin" cellpadding="3px" style="width: 100%">
+		<c:forEach items="${bestMember}" var="best" begin="0" end="2">
 
-		<table style="width: 100%">
-			<tr>
+			<tr class="table-admin">
 				<td style="width: 35%"><strong>${best.team_nm}</strong></td>
 				<td id="tb-genre">${best.kname}</td>
 				<td style="width: 35%">대출 : <mark>${best.count}</mark></td>
 			</tr>
-		</table>
-	</c:forEach>
-	
-	
+		</c:forEach>
+	</table>
+
+
 </div>

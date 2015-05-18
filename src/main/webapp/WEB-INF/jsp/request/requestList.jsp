@@ -51,20 +51,22 @@ body {
 							<div class="left">
 								<h2>구매요청 목록</h2>
 							</div>
-						
+
 							<form action="confirmBuyList" method="post">
 								<div class="right right-end">
 									<button class="btn btn-default" type="submit">구매</button>
-									<button class="btn btn-default" type="submit"
-										formaction="modifiRequest">수정</button>
+									<button class="btn btn-default" type="button"
+										onClick="location.href='modifiReqForm'">수정</button>
 								</div>
 								<table class="table table-striped table-bordered" id="dataTable">
 
 									<thead>
 										<tr class="title ">
+
 											<th><input type="checkbox" id="allCheck" class="td-chk"></th>
+											<th class="hidden-sm hidden-xs hidden-md td-author">도서코드</th>
 											<th>도서명</th>
-											<th class="hidden-sm hidden-xs hidden-md td-author">저자</th>
+
 											<th class="hidden-sm hidden-xs td-date">가격</th>
 											<th class="td-img">수량</th>
 											<th class="hidden-xs td-date">신청</th>
@@ -82,13 +84,13 @@ body {
 											<tr>
 												<td><input type="checkbox" name="req_cd"
 													value="${book.req_cd}"></td>
-
+												<td class="hidden-sm hidden-xs hidden-md ">${book.book_cd}</td>
 												<td><a href="${book.link}">${book.title }</a></td>
-												<td class="hidden-sm hidden-xs hidden-md ">${book.author}</td>
+
 
 												<td class="hidden-sm hidden-xs  ">${book.price}원</td>
 												<td align="center">${book.quantity}</td>
-												<td  class=" hidden-xs  "><c:choose>
+												<td class=" hidden-xs  "><c:choose>
 														<c:when test="${empty book.kname}">${book.id}</c:when>
 														<c:otherwise>${book.kname}</c:otherwise>
 													</c:choose></td>

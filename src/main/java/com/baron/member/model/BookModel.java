@@ -44,18 +44,18 @@ public class BookModel {
 
 	private String req_ymd;
 	private String retu_ymd;
-	private int score;
 
-	public int getScore() {
-		return score;
-	}
-
-	public void setScore(int score) {
-		this.score = score;
-	}
-
+	private int count;
 	public String getRetu_ymd() {
 		return retu_ymd;
+	}
+
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
 	}
 
 	public void setRetu_ymd(String retu_ymd) {

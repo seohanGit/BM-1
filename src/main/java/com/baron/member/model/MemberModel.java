@@ -14,9 +14,8 @@ public class MemberModel {
 	private String mobi_no;
 	private String permission;
 	private Date endday;
-	private int numborrow;
-	private int numarrear;
-	private int score;
+	
+	private int count;
 	private String content;
 	
 	private Date borrowdate;
@@ -24,6 +23,16 @@ public class MemberModel {
 	private String jikb;
 	private String co_gb;
 	private String team_nm;
+
+	private int max;
+	
+	public int getMax() {
+		return max;
+	}
+
+	public void setMax(int max) {
+		this.max = max;
+	}
 
 	public String getTeam_nm() {
 		return team_nm;
@@ -74,29 +83,15 @@ public class MemberModel {
 		this.content = content;
 	}
 
-	public int getScore() {
-		return score;
+	public int getCount() {
+		return count;
 	}
 
-	public void setScore(int score) {
-		this.score = score;
+	public void setCount(int count) {
+		this.count = count;
 	}
 
-	public int getNumarrear() {
-		return numarrear;
-	}
-
-	public void setNumarrear(int numarrear) {
-		this.numarrear = numarrear;
-	}
-
-	public int getNumborrow() {
-		return numborrow;
-	}
-
-	public void setNumborrow(int numborrow) {
-		this.numborrow = numborrow;
-	}
+	
 
 	public Date getEndday() {
 		return endday;

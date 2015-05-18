@@ -61,14 +61,14 @@ public class MemberController {
 	public String index(Model model) throws Exception {
 
 		List<BoardModel> notice = boardService.noticeList();
-		// List<MemberModel> bestList = joinService.selectBest();
-		 List<BookModel> newBook = bookService.getNewbook();
-		// List<BookModel> bestSeller = bookService.getBestSeller();
+
+		List<BookModel> bestBook = bookService.selectBestBook();
+		List<MemberModel> bestTeam = bookService.selectBestTeam();
+		List<BookModel> newBook = bookService.getNewbook();
 
 		model.addAttribute("noticeList", notice);
-		// model.addAttribute("bestList", bestList);
-
-		// model.addAttribute("bestseller", bestSeller);
+		model.addAttribute("bestBook", bestBook);
+		model.addAttribute("bestTeam", bestTeam);
 		model.addAttribute("newbook", newBook);
 		return "index";
 	}
@@ -130,12 +130,11 @@ public class MemberController {
 			String id) {
 
 		// ModelAndView mav = new ModelAndView("/index");
-	
 
 		MemberModel membermodel = new MemberModel();
 		membermodel = joinService.login(id);
 		membermodel.setId(id);
-		
+
 		response.addCookie(new Cookie("bm_id", membermodel.getId()));
 		mav.setViewName("redirect:searchBook");
 		System.out.println(membermodel.getId());
@@ -264,7 +263,6 @@ public class MemberController {
 	public String adminfail() {
 		return "/member/adminfail";
 	}
-
 
 	@RequestMapping("/memberList")
 	public String memberList(Model model) {

@@ -55,8 +55,8 @@
 				<jsp:include page="../sidebar.jsp" />
 
 			</div>
-
-			<div class="col-md-8 col-xs-12" style="float: left;" >
+<hr>
+			<div class="col-md-12 col-xs-12" style="float: left;" >
 				<jsp:include page="../footer.jsp"></jsp:include>
 			</div>
 			<!-- /.col-lg-12 -->

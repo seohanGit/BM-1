@@ -232,7 +232,14 @@ public class BookServiceImpl implements BookService {
 	@Override
 	public List<MemberModel> selectBestTeam() {
 		// TODO Auto-generated method stub
-		return bookDao.selectBestTeam();
+		List<MemberModel> list = new ArrayList<MemberModel>();
+		list = bookDao.selectBestTeam();
+		int max = list.get(0).getCount();
+		
+		for (MemberModel member : list) {
+			member.setMax(max);
+		}
+		return list;
 	}
 
 }

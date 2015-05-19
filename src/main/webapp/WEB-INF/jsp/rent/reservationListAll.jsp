@@ -72,7 +72,7 @@ body {
 													pattern="yyyy-MM-dd" value="${book.reser_date }" /></td>
 											<td><button class="btn btn-default btn-sm" type="button"
 													id="extendbook"
-													onClick="location.href='/notifiReser?book_cd=${book.book_cd}'">알림</button>
+													onClick="location.href='/notifiReser?book_cd=${book.book_cd}'; notifiReser();">알림</button>
 											</td>
 											<td><c:choose>
 													<c:when test="${book.rentchk=='0' }">

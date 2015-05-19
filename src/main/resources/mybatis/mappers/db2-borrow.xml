@@ -34,6 +34,7 @@
 		ORDER BY
 		B.rentdate DESC
 	</select>
+	
 	<select id="selectBorrow" resultType="BookModel" parameterType="String">
 		SELECT *
 		FROM TESTLIB.BOOKRENT
@@ -41,8 +42,17 @@
 		AND rentchk='1'
 		FETCH
 		first 1 rows only
-
 	</select>
+	
+	<select id="selectRent" resultType="BookModel" parameterType="String">
+		SELECT *
+		FROM TESTLIB.BOOKRENT
+		WHERE book_cd = #{book_cd}
+		AND rentchk='2'
+		FETCH
+		first 1 rows only
+	</select>
+
 	<insert id="borrowBook1" parameterType="BookModel">
 		INSERT INTO
 		TESTLIB.BOOKRENT
@@ -162,7 +172,7 @@
 	</delete>
 
 	<select id="rentListAll" parameterType="String" resultType="BookModel">
-		SELECT A.title, B.rentdate, B.returndate, B.id, B.book_cd, (SELECT
+		SELECT A.title, B.rentdate, B.returndate, B.id, B.book_cd, A.rentchk, A.reservechk,(SELECT
 		C.KNAME FROM
 		TPRLIB.GR_INSA C WHERE B.id=C.ASABN FETCH
 		first 1 rows
@@ -182,7 +192,7 @@
 	<!-- <delete id="deleteRecord" parameterType="String"> DELETE ON TESTLIB.BOOKRENT 
 		WHERE DELETE ON reserve WHERE id=#{id} AND book_cd=#{book_cd} </delete> -->
 	<select id="recordList" parameterType="String" resultType="BookModel">
-		SELECT A.title, B.rentdate, B.id, B.returndate, A.book_cd FROM
+		SELECT A.title, B.rentdate, B.id, B.returndate, A.book_cd, A.author FROM
 		TESTLIB.BOOKMST A INNER JOIN TESTLIB.BOOKRENT B ON A.book_cd=B.book_cd
 		WHERE <!-- (B.returndate BETWEEN date_sub(current date, interval 90 day) 
 			AND current date) AND -->

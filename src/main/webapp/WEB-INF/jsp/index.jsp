@@ -24,7 +24,7 @@
 	<div class="container">
 		<div class="row">
 			<!-- Blog Entries Column -->
-			<div class="col-md-8">
+			<div class="col-md-8 ">
 
 
 				<div id="goodPhrase">
@@ -44,9 +44,22 @@
 				<hr>
 				<h4></h4>
 				<div class="input-group" style="width: 95%">
-					<form action="/findBook" method="post">
+					<form action="/searchBook" method="post">
 						<span class="input-group-btn"> <input type="text"
-							class="form-control" id="query" name="keyword"
+							class="form-control" id="keyword" name="keyword"
+							placeholder="기술자료실 도서 검색 [ 대, 소문자 구분 ]">
+							<button class="btn btn-default" type="submit" id="btn_find">
+								<span class="glyphicon glyphicon-search"></span>
+							</button>
+						</span>
+					</form>
+				</div>
+				<br>
+				<hr>
+				<div class="input-group" style="width: 95%">
+					<form action="/searchBook" method="post">
+						<span class="input-group-btn"> <input type="text"
+							class="form-control" id="keyword" name="keyword"
 							placeholder="인터파크 검색">
 							<button class="btn btn-default" type="submit" id="btn_find">
 								<span class="glyphicon glyphicon-search"></span>
@@ -54,7 +67,6 @@
 						</span>
 					</form>
 				</div>
-
 			</div>
 			<!-- Blog Sidebar Widgets Column -->
 			<div class="col-md-4">
@@ -110,21 +122,27 @@
 
 
 			</div>
+			<div class="col-md-8 col-xs-12" style="float: left;">
+				<jsp:include page="footer.jsp"></jsp:include>
+			</div>
+
+			<div class="col-md-4 col-xs-12" style="float: right">
+				<c:forEach items="${bestTeam}" var="team" begin="0" end="4">
+					<div class="progress">
+						<div class="progress-bar progress-bar-info" role="progressbar"
+							style="width: ${team.count/team.max*100}%">${team.team_nm}-
+							${team.count} 권</div>
+					</div>
+
+				</c:forEach>
+			</div>
 		</div>
 	</div>
-	<div class="col-md-12 col-xs-12" style="float: left;">
-		<jsp:include page="footer.jsp"></jsp:include>
-	</div>
+
 	<!-- /.row -->
 	<hr>
 	<!-- Footer -->
-	<footer>
-		<div class="row">
-			<div class="col-lg-12"></div>
-			<!-- /.col-lg-12 -->
-		</div>
-		<!-- /.row -->
-	</footer>
+
 
 	<!-- /.container -->
 	<!-- jQuery -->

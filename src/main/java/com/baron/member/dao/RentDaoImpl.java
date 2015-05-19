@@ -21,19 +21,19 @@ public class RentDaoImpl implements RentDao {
 
 	@Override
 	public BookModel selectBook(String book_cd) {
-		// TODO Auto-generated method stub
+		
 		return session.selectOne(NAMESPACE + "selectBook", book_cd);
 	}
 
 	@Override
 	public BookModel selectBorrow(String book_cd) {
-		// TODO Auto-generated method stub
+		
 		return session.selectOne(NAMESPACE + "selectBorrow", book_cd);
 	}
 
 	@Override
 	public List<BookModel> borrowList(String id) {
-		// TODO Auto-generated method stub
+		
 		System.out.println(id + "dao");
 		return session.selectList(NAMESPACE + "borrowList", id);
 	}
@@ -55,6 +55,7 @@ public class RentDaoImpl implements RentDao {
 
 		session.update(NAMESPACE + "returnBook", book_cd);
 		session.update(NAMESPACE + "returnBook1", book_cd);
+		
 
 	}
 
@@ -67,31 +68,26 @@ public class RentDaoImpl implements RentDao {
 
 	@Override
 	public List<BookModel> rentListAll() {
-		// TODO Auto-generated method stub
 		return session.selectList(NAMESPACE + "rentListAll");
 	}
 
 	@Override
 	public List<BookModel> recordList(String id) {
-		// TODO Auto-generated method stub
 		return session.selectList(NAMESPACE + "recordList", id);
 	}
 
 	@Override
 	public List<BookModel> recordListAll() {
-		// TODO Auto-generated method stub
 		return session.selectList(NAMESPACE + "recordListAll");
 	}
 
 	@Override
 	public List<BookModel> reservationListAll() {
-		// TODO Auto-generated method stub
-		return session.selectList(NAMESPACE + "reservationListAll");
+				return session.selectList(NAMESPACE + "reservationListAll");
 	}
 
 	@Override
 	public List<BookModel> reservationList(String id) {
-		// TODO Auto-generated method stub
 		return session.selectList(NAMESPACE + "reservationList", id);
 	}
 
@@ -132,7 +128,6 @@ public class RentDaoImpl implements RentDao {
 
 	@Override
 	public void insertReservation(BookModel bookmodel) {
-		// TODO Auto-generated method stub
 		session.insert(NAMESPACE + "insertReservation", bookmodel);
 		session.update(NAMESPACE + "insertReservation1", bookmodel.getBook_cd());
 	}
@@ -140,20 +135,29 @@ public class RentDaoImpl implements RentDao {
 	@Override
 	public BookModel selectReservation(String book_cd) {
 		return session.selectOne(NAMESPACE + "selectReservation", book_cd);
-		// TODO Auto-generated method stub
 
 	}
 
+		
 	@Override
-	public List<BookModel> selectRent() {
-		// TODO Auto-generated method stub
-		return session.selectList(NAMESPACE + "selectRent");
+	public List<BookModel> copyRent() {
+		return session.selectList(NAMESPACE + "copyRent");
 	}
 
 	@Override
 	public void insertRecord(BookModel bookmodel) {
-		// TODO Auto-generated method stu
 		session.insert(NAMESPACE + "backupRecord", bookmodel);
+	}
+
+	@Override
+	public BookModel selectRent(String book_cd) {
+		return session.selectOne(NAMESPACE + "selectRent", book_cd);
+	}
+
+	@Override
+	public void deleteReserve(String book_cd) {
+		session.delete(NAMESPACE + "deleteReserve", book_cd);
+		
 	}
 
 }

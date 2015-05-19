@@ -11,7 +11,7 @@ import com.baron.member.model.SmsModel;
 @Repository
 public class NotifiDaoImpl implements NotifiDao {
 
-	private static final String NAMESPACE = "com.baron.member.sqlModel.";
+	private static final String NAMESPACE = "com.baron.member.smsModel.";
 
 	@Autowired
 	@Resource(name="smsSession")
@@ -37,5 +37,17 @@ public class NotifiDaoImpl implements NotifiDao {
 	public void notifiReq(SmsModel sms) {
 		smsSession.insert(NAMESPACE + "notifiReq", sms);
 
+	}
+
+	@Override
+	public void notifiReturnConfirm(SmsModel sms) {
+		smsSession.insert(NAMESPACE + "returnConfirm", sms);
+		
+	}
+
+	@Override
+	public void notifiExtend(SmsModel sms) {
+		smsSession.insert(NAMESPACE + "notifiExtend", sms);
+		
 	}
 }

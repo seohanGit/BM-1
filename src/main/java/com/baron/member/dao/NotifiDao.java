@@ -10,4 +10,9 @@ public interface NotifiDao {
 	void notifiReq(SmsModel sms);
 
 	void notifiReser(SmsModel sms);
+
+	void notifiExtend(SmsModel sms);
+
+
+	void notifiReturnConfirm(SmsModel sms);
 }

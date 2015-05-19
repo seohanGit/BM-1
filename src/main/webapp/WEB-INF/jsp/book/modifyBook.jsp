@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,7 +22,7 @@ body {
 </style>
 </head>
 <body>
-<jsp:include page="../nav.jsp"></jsp:include>
+	<jsp:include page="../nav.jsp"></jsp:include>
 	<div class="container">
 		<h2>도서 수정 페이지</h2>
 		<div class="panelpanel-default">
@@ -34,13 +35,23 @@ body {
 				</div>
 				<div>
 					<label for="exampleInputPassword1">도서명</label> <input type="text"
-						class="form-control" id="title" name="title"
-						value="${book.title}">
+						class="form-control" id="title" name="title" value="${book.title}">
+				</div>
+				<div>
+					<label for="exampleInputPassword1">ISBN</label> <input type="text"
+						class="form-control" id="title" name="title" value="${book.isbn}">
+
 				</div>
 				<div class="form-group">
-					<label for="exampleInputPassword1">카테고리</label> <input type="text"
-						class="form-control" id="b_group" name="b_group"
-						value="${book.b_group}">
+					<label for="exampleInputPassword1">카테고리</label> <br>
+					<select><option
+							selected>${book.b_group}<c:forEach items="${codeList}"
+								var="code">
+								<option>${code}
+							</c:forEach></select>
+<%-- 							<input type="text" class="form-control" id="b_group"
+						name="b_group" value="${book.b_group}"> --%>
+
 				</div>
 				<div class="form-group">
 					<label for="exampleInputPassword1">출판사</label> <input type="text"
@@ -52,8 +63,9 @@ body {
 						class="form-control" id="author" name="author"
 						value="${book.author}">
 				</div>
-
-				<button type="submit" class="btn btn-default">확인</button>
+				<button class="btn btn-default" type="submit">확인</button>
+				<!-- onClick="opener.document.location.href='/searchBook'; 
+					opener.focus(); self.close();" -->
 			</form>
 		</div>
 	</div>

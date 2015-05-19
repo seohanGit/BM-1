@@ -35,7 +35,7 @@ public class ReportingServiceImpl implements ReportingService {
 
 	@Override
 	// Every night at 1 AM
-	@Scheduled(cron = "0 0 18 * * ?")
+	@Scheduled(cron = "0 0 11 * 1-5 ?")
 	public void generateAndEmailReport() {
 		logger.info("Starting report at "
 				+ new Date(System.currentTimeMillis()));

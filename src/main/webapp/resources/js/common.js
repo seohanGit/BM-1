@@ -33,6 +33,9 @@ function ok() {
 function re_turn() {
 	alert("반납되었습니다.");
 }
+function notifiReser() {
+	alert("예약알림문자가 전송되었습니다.");
+}
 
 /* 버튼 클릭 */
 
@@ -57,8 +60,8 @@ $("#request").click(function() {
 $("#insertBook").click(function() {
 	location.href = "/insertbookForm"
 })
-$("#recordListAll").click(function() {
-	location.href = "/recordListAll"
+$("#recordList").click(function() {
+	location.href = "/recordList"
 })
 $("#rentListAll").click(function() {
 	location.href = "/rentListAll"

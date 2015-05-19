@@ -29,32 +29,32 @@ body {
 				<h3>도서 정가 ${book.price }원</h3>
 				<div class="form-group">
 					<label for="exampleInputEmail1">ISBN</label> <input type="text"
-						class="form-control" id="isbn" name="isbn" value="${book.isbn}">
+						class="form-control" id="isbn" name="isbn" value="${book.isbn}" readonly="readonly">
 				</div>
 				<div class="form-group">
 					<label for="exampleInputPassword1">도서명</label> <input type="text"
 						class="form-control" id="title" name="title"
-						value="${book.title }">
+						value="${book.title }" readonly="readonly">
 				</div>
 				<div class="form-group">
 					<label for="exampleInputPassword1">장르</label> <input type="text"
 						class="form-control" id="b_group" name="b_group"
-						value="${book.b_group}">
+						value="${book.b_group}" readonly="readonly">
 				</div>
 				<div class="form-group">
 					<label for="exampleInputPassword1">수량</label> <input type="text"
 						class="form-control" id="quantity" name="quantity"
-						value="${book.quantity}">
+						value="${book.quantity}" >
 				</div>
 
 				<div class="form-group">
 					<label for="exampleInputPassword1">저자</label> <input type="text"
 						class="form-control" id="author" name="author"
-						value="${book.author }">
+						value="${book.author }" readonly="readonly">
 				</div>
 				<div class="form-group">
 					<label for="exampleInputPassword1">구매요청자</label> <input type="text"
-						class="form-control" id="kname" name="kname" value="${sessionScope.kname}">
+						class="form-control" id="kname" name="kname" value="${sessionScope.kname}" readonly="readonly">
 				</div>
 				<%-- 
 				<div class="form-group">

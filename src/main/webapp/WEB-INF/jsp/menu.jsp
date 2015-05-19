@@ -4,9 +4,9 @@
 	관리자 페이지 <small>Admin</small>
 </h2>
 <!-- First Blog Post -->
-<div align="left">
+<div align="left" style="width:98%">
 	<div class="row panel panel-default hidden-xs"
-		style="width: 440px; margin-left: 10px;">
+		style="margin-left: 5px;">
 		<div class="nav nav-tabs nav-justified" role="group" aria-label="...">
 
 
@@ -20,9 +20,9 @@
 
 			<button class="btn btn-default  noborder"
 				onclick="location.href='borrowList'">대여요청</button>
-			<hr>
+			
 			<button class="btn btn-default  noborder"
-				onclick="location.href='recordListAll'">대여기록</button>
+				onclick="location.href='recordList'">대여기록</button>
 			<button class="btn btn-default  noborder"
 				onclick="location.href='noticeListByAdmin'">공지사항</button>
 			<button class="btn btn-default  noborder"
@@ -48,7 +48,7 @@
 				<button class="btn btn-default noborder"
 					onclick="location.href='searchBook'">도서목록</button>
 				<button class="btn btn-default noborder"
-					onclick="location.href='recordListAll'">대여기록</button>
+					onclick="location.href='recordList'">대여기록</button>
 			</div>
 			<div class="btn-group btn-group-xs">
 				<hr>

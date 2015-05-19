@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,7 +18,7 @@
 
 
 </head>
-<body>
+<body onload="parent.resizeTo(1400,1000);">
 	<jsp:include page="../nav.jsp" />
 	<div id="loadingBar"
 		style="background-color: #fff; position: absolute; top: 0; left: 0; width: 100%; height: 100%; text-align: center; margin: 0 auto; z-index: 100000;">
@@ -63,15 +65,15 @@
 
 							<th class="hidden-xs" class="td-genre">저자</th>
 							<th class="hidden-xs hidden-sm" class="td-genre">출판사</th>
-							<th class="hidden-xs" style="width:120px">분류</th>
-							<th style="width:90px">대여상태</th>
+							<th class="hidden-xs" style="width: 120px">분류</th>
+							<th style="width: 90px">대여상태</th>
 
 
 
 							<th class="td-img"></th>
 						</tr>
 					</thead>
-					
+
 					<tbody>
 
 						<c:forEach items="${bookList}" var="book">
@@ -82,8 +84,8 @@
 									onclick="window.open('/bookInfo?book_cd=${book.book_cd}','new','resizeble=yes scrollbars=yes,  width=850, height=500');">
 										${book.title }</a></td>
 								<td class="hidden-xs" align="left">${book.author }</td>
-								<td class="hidden-xs hidden-sm" align="left">${book.publish}</td>
-								<td class="hidden-xs" align="left">${book.b_group }</td>
+								<td class="hidden-xs hidden-sm genre" align="left">${book.publish}</td>
+								<td class="hidden-xs td-genre" align="left">${book.b_group }</td>
 								<c:choose>
 									<c:when test="${book.rentchk=='0'}">
 										<td align="left"><mark>대출가능</mark></td>
@@ -97,7 +99,8 @@
 										<td></td>
 									</c:when>
 									<c:when test="${book.rentchk=='1' and book.reservechk=='0'}">
-										<td>대여중</td>
+										<td>~ <fmt:formatDate type="date" pattern="MM-dd"
+												value="${book.returndate}" /></td>
 										<td><button class="btn btn-default" type="button"
 												id="reservebook"
 												onClick="location.href='/reservation?book_cd=${book.book_cd}'">예약</button></td>
@@ -108,7 +111,8 @@
 										<td></td>
 									</c:when>
 									<c:when test="${book.rentchk=='2' and book.reservechk=='0'}">
-										<td>대여중</td>
+										<td>~ <fmt:formatDate type="date" pattern="MM-dd"
+												value="${book.returndate}" /></td>
 										<td><button class="btn btn-default" type="button"
 												id="reservebook"
 												onClick="location.href='/reservation?book_cd=${book.book_cd}'">예약</button></td>
@@ -150,14 +154,16 @@
 				},
 				"pageLength" : 10,
 				paging : true,
-				ordering : true,
+				"order": [],
 
 				"columns" : [ null, null, null, {
 					"searchable" : false
+					
 				}, {
 					"searchable" : false
 				}, {
-					"searchable" : false
+					"searchable" : false,
+					
 				} ]
 
 			});

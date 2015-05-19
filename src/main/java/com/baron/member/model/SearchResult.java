@@ -32,6 +32,15 @@ public class SearchResult {
 	private String isbn;
 	private String summary;
 	private String rcv_date;
+	private Date returndate;
+
+	public Date getReturndate() {
+		return returndate;
+	}
+
+	public void setReturndate(Date returndate) {
+		this.returndate = returndate;
+	}
 
 	public String getRentchk() {
 		return rentchk;

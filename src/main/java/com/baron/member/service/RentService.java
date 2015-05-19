@@ -48,7 +48,13 @@ public interface RentService {
 
 	public void notifiReservation(String book_cd);
 
-	public List<BookModel> selectRent();
-
 	public void insertRecord(BookModel bookmodel);
+
+	List<BookModel> copyRent();
+
+	public BookModel selectRent(String book_cd);
+
+	public void notifiReturnConfirm(String book_cd);
+
+	public void deleteReserve(String book_cd);
 }

@@ -3,8 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
-<div style="margin: 30px">
-	<hr>
+<div style="margin-left:10px">
+	
 	<h3>Best 도서</h3>
 
 	<table class="table-admin table table-striped " style="width: 100%">
@@ -17,16 +17,6 @@
 		</c:forEach>
 	</table>
 
-	<hr>
-	<h3>Best 부서</h3>
-
-	<c:forEach items="${bestTeam}" var="team" begin="0" end="4">
-		<div class="progress">
-			<div class="progress-bar progress-bar-info" role="progressbar"
-				style="width: ${team.count/team.max*100}%">${team.team_nm} -
-				${team.count} 권</div>
-		</div>
-	</c:forEach>
 
 	<%-- 	
 	<table class="table table-striped " style="width: 100%">

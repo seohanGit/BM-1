@@ -29,7 +29,7 @@
 					<div class="left">
 						<h2>대여현황 목록</h2>
 					</div>
-					
+
 					<c:choose>
 						<c:when test="${empty bookList}">
 							<div>
@@ -48,7 +48,6 @@
 										<tr class="hidden-xs title">
 											<th><input type="checkbox" id="allCheck" class="td-chk"></th>
 											<th>도서명</th>
-											<th class="hidden-xs td-genre">대여일</th>
 											<th class="td-genre">반납일</th>
 											<th class="hidden-xs td-date">대여자</th>
 											<th class="td-img">반납</th>
@@ -66,14 +65,17 @@
 												<td><input type="checkbox" name="book_cd"
 													value="${book.book_cd}"></td>
 												<td align="left">${book.title }</td>
-												<td class="hidden-xs" align="left"><fmt:formatDate type="date"
+												<%-- 												<td class="hidden-xs" align="left"><fmt:formatDate type="date"
 														pattern="yyyy-MM-dd" value="${book.rentdate }" /></td>
+ --%>
 												<c:choose>
 													<c:when test="${book.returndate < now}">
 														<td align="left"
-															style="text-decoration: underline; text-align: right;"><fmt:formatDate
-																type="date" pattern="yyyy-MM-dd"
-																value="${book.returndate }" /></td>
+															style="text-decoration: underline; text-align: right;"><mark>
+																<fmt:formatDate type="date" pattern="yyyy-MM-dd"
+																	value="${book.returndate }" />
+																- 연체중
+															</mark></td>
 													</c:when>
 													<c:otherwise>
 														<td align="left"><fmt:formatDate type="date"
@@ -93,18 +95,22 @@
  --%>
 												<td><button class="btn btn-default btn-sm"
 														type="button" id="reservebook"
-														onClick="location.href='/returnBookByAdmin?book_cd=${book.book_cd}'; re_turn();">반납</button>
+														onClick="location.href='/returnBook?book_cd=${book.book_cd}'; re_turn();">반납</button>
 												</td>
+
 												<c:choose>
-													<c:when test="${book.reservechk==1} ">
-														<td></td>
-													</c:when>
-													<c:otherwise>
+													<c:when test="${book.reservechk=='0'||empty book.reservechk}">
 														<td><button class="btn btn-default btn-sm"
 																type="button" id="reservebook"
 																onClick="location.href='/extendBorrowBook?book_cd=${book.book_cd}'; extend();">연장</button></td>
-													</c:otherwise>
+
+													</c:when>
+													<c:when test="${book.reservechk=='1' }">
+														<td>예약중</td>
+
+													</c:when>
 												</c:choose>
+
 											</tr>
 
 

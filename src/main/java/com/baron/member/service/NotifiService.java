@@ -11,4 +11,9 @@ public interface NotifiService {
 	void notifiRent(SmsModel sms);
 
 	void notifiReturn(SmsModel sms);
+
+	void notifiExtend(SmsModel sms);
+
+	void notifiReturnConfirm(SmsModel sms);
+
 }

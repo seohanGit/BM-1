@@ -110,7 +110,7 @@ body {
 															onClick="location.href='/stopBorrow?book_cd=${book.book_cd}'">대출정지</button>
 														<button class="btn btn-default btn-sm" type="button"
 															id="modifybook"
-															onClick="location.href='/modifyBookForm?book_cd=${book.book_cd}'">도서수정</button>
+															onclick="window.open('/modifyBookForm?book_cd=${book.book_cd}','new','resizeble=yes scrollbars=yes,  width=850px, height=750px');">도서수정</button>
 														<button class="btn btn-default btn-sm" type="button"
 															id="deletebook"
 															onClick="location.href='/deletebook?book_cd=${book.book_cd}'; del();">도서삭제</button>
@@ -120,7 +120,7 @@ body {
 													<td><mark>대여요청중</mark></td>
 													<td><button class="btn btn-default btn-sm"
 															type="button" id="modifybook"
-															onClick="location.href='/modifyBookForm?book_cd=${book.book_cd}'">도서수정</button>
+															onclick="window.open('/modifyBookForm?book_cd=${book.book_cd}','new','resizeble=yes scrollbars=yes,  width=850, height=750');">도서수정</button>
 														<button class="btn btn-default btn-sm" type="button"
 															id="deletebook"
 															onClick="location.href='/deletebook?book_cd=${book.book_cd}'; del();">도서삭제</button>
@@ -130,7 +130,7 @@ body {
 													<td>대출중</td>
 													<td><button class="btn btn-default btn-sm"
 															type="button" id="modifybook"
-															onClick="location.href='/modifyBookForm?book_cd=${book.book_cd}'">도서수정</button>
+															onclick="window.open('/modifyBookForm?book_cd=${book.book_cd}','new','resizeble=yes scrollbars=yes,  width=850, height=750');">도서수정</button>
 														<button class="btn btn-default btn-sm" type="button"
 															id="deletebook"
 															onClick="location.href='/deletebook?book_cd=${book.book_cd}'; del();">도서삭제</button>
@@ -146,7 +146,7 @@ body {
 													<td><mark>예약중</mark></td>
 													<td><button class="btn btn-default btn-sm"
 															type="button" id="modifybook"
-															onClick="location.href='/modifyBookForm?book_cd=${book.book_cd}'">도서수정</button>
+															onclick="window.open('/modifyBookForm?book_cd=${book.book_cd}','new','resizeble=yes scrollbars=yes,  width=850, height=750');">도서수정</button>
 														<button class="btn btn-default btn-sm" type="button"
 															id="deletebook"
 															onClick="location.href='/deletebook?book_cd=${book.book_cd}'; del();">도서삭제</button>
@@ -161,9 +161,10 @@ body {
 								</tbody>
 
 							</table>
-						</div></form>
+						</div>
+					</form>
 				</div>
-				
+
 			</div>
 		</div>
 

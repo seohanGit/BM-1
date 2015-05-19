@@ -10,7 +10,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
-<title>대여 요청 목록</title>
+<title>대여 현황</title>
 <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="/resources/css/signin.css" rel="stylesheet">
 <link href="/resources/css/common.css" rel="stylesheet">
@@ -32,7 +32,7 @@ body {
 		<hr>
 		<div class="row panel panel-default">
 
-			<h4>원하는 책이 없다면 인터넷에서 주문하세요 !</h4>
+			<h4>인터넷에서 주문하세요 !</h4>
 			<div class="input-group" style="width: 90%">
 				<form action="/findBook" method="get">
 					<span class="input-group-btn"> <input type="text"
@@ -45,20 +45,17 @@ body {
 				</form>
 			</div>
 			<div id="searchResultArea">
-				<hr>
-				<h2>대여 현황</h2>
+				<c:choose>
+					<c:when test="${empty bookList}">
+					</c:when>
 
-
-				<table class="table table-striped table-bordered ">
-					<c:choose>
-						<c:when test="${empty bookList}">
-							<h3>대여한 도서가 없습니다.</h3>
-						</c:when>
-						<c:otherwise>
+					<c:otherwise>
+						<h2>대여 도서 목록</h2>
+						<table class="table table-striped table-bordered ">
 							<thead>
 								<tr class="title">
 									<th class="hidden-xs" id="td-img">표지</th>
-									<th id="td-title">도서명</th>
+									<th class="td-title">도서명</th>
 									<th class="hidden-xs" id="td-genre">저자</th>
 									<th class="hidden-xs hidden-sm" id="td-genre">분류</th>
 									<th class="hidden-xs" id="td-genre">대여일</th>
@@ -68,9 +65,10 @@ body {
 								</tr>
 							</thead>
 
-							<c:forEach items="${bookList}" var="book" varStatus="loop">
 
-								<tbody>
+
+							<tbody>
+								<c:forEach items="${bookList}" var="book" varStatus="loop">
 									<tr>
 										<td class="hidden-xs" style="width: 50px" align="left"><img
 											style="width: 50px" src="${book.imageurl}"></td>
@@ -94,7 +92,6 @@ body {
 												</td>
 											</c:when>
 											<c:when test="${book.rentchk=='2'}">
-
 												<td>대여중</td>
 												<td></td>
 											</c:when>
@@ -102,47 +99,10 @@ body {
 
 
 									</tr>
-								</tbody>
-							</c:forEach>
-						</c:otherwise>
-					</c:choose>
-				</table>
-
-				<hr>
-				<c:choose>
-					<c:when test="${empty record}">
-					</c:when>
-					<c:otherwise>
-						<hr>
-						<h2>대여 기록</h2>
-						<table class="table table-striped table-bordered">
-							<thead>
-								<tr class=" title">
-									<th id="tb-title">도서명</th>
-									<th id="tb-date">대여일</th>
-									<th id="tb-date">반납일</th>
-								</tr>
-							</thead>
+								</c:forEach>
+							</tbody>
 
 
-							<c:forEach items="${record}" var="record" varStatus="status">
-								<tbody>
-
-									<tr>
-
-										<td align="left">${record.title }</td>
-										<td align="left"><fmt:formatDate type="date"
-												pattern="yyyy-MM-dd" value="${record.rentdate }" /></td>
-										<td align="left"><fmt:formatDate type="date"
-												pattern="yyyy-MM-dd" value="${record.returndate }" /></td>
-
-
-
-									</tr>
-
-								</tbody>
-
-							</c:forEach>
 						</table>
 					</c:otherwise>
 				</c:choose>
@@ -150,37 +110,37 @@ body {
 					<c:when test="${empty reserveList}">
 					</c:when>
 					<c:otherwise>
-						<hr>
-						<h2>대여 현황</h2>
-						<table class="table table-striped table-bordered">
+						<h2>예약 도서 목록</h2>
+						<table class="table table-striped table-bordered ">
+
 							<thead>
-								<tr class=" title">
-									<th id="tb-title">도서명</th>
-									<th id="tb-date">분류</th>
-									<th id="tb-date">예약일</th>
+								<tr class="title">
+									<th id="td-title">도서명</th>
+									<th class="hidden-xs" id="td-genre">저자</th>
+									<th class="hidden-xs hidden-sm" id="td-genre">분류</th>
+									<th id="td-author">반납예정일</th>
+
 								</tr>
 							</thead>
-
-
-							<c:forEach items="${reserveList}" var="reser" varStatus="status">
-								<tbody>
-
+							<tbody>
+								<c:forEach items="${reserveList}" var="reserve">
 									<tr>
+										<td align="left"><a href="#"
+											onclick="window.open('/bookInfo?book_cd=${reserve.book_cd}','new','resizeble=yes scrollbars=yes,  width=850, height=500');">${reserve.title }</a></td>
+										<td class="hidden-xs" align="left">${reserve.author }</td>
+										<td class="hidden-xs hidden-sm" align="left">${reserve.b_group}</td>
 
-										<td align="left">${reser.title }</td>
-										<td class="hidden-xs hidden-sm" align="left">${book.b_group}</td>
-										<td align="left"><fmt:formatDate type="date"
-												pattern="yyyy-MM-dd" value="${reser.reser_date }" /></td>
-
-
+										<td style="width: inherit;"><fmt:formatDate type="date"
+												pattern="yyyy-MM-dd" value="${reserve.returndate}" /></td>
 									</tr>
+								</c:forEach>
+							</tbody>
 
-								</tbody>
-
-							</c:forEach>
 						</table>
 					</c:otherwise>
 				</c:choose>
+
+
 			</div>
 		</div>
 	</div>

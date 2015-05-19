@@ -60,20 +60,27 @@
 
 	<select id="selectBest" resultType="MemberModel">
 
-		SELECT (SELECT kname FROM tprlib.gr_insa WHERE asabn = A.asabn FETCH first 1
-		rows only) AS kname,(SELECT team_nm FROM tprlib.gr_insa WHERE asabn =
-		A.asabn FETCH first 1 rows only) AS team_nm, A.asabn AS id, (SELECT
-		COUNT(*) FROM testlib.BOOKRENT B WHERE B.rentdate > current date -30
-		day AND B.id = A.asabn) AS count FROM tprlib.gr_insa AS A GROUP BY
-		A.asabn ORDER BY count DESC
+		SELECT (SELECT kname FROM
+		tprlib.gr_insa WHERE asabn = A.asabn FETCH first 1
+		rows only) AS
+		kname,(SELECT team_nm FROM tprlib.gr_insa WHERE asabn =
+		A.asabn FETCH
+		first 1 rows only) AS team_nm, A.asabn AS id, (SELECT
+		COUNT(*) FROM
+		testlib.BOOKRENT B WHERE B.rentdate > current date -30
+		day AND B.id =
+		A.asabn) AS count FROM tprlib.gr_insa AS A GROUP BY
+		A.asabn ORDER BY
+		count DESC
 
 
 	</select>
 
 	<select id="selectMemberList" resultType="MemberModel">
 		SELECT *, (SELECT
-		COUNT(*) FROM BOOKRENT B WHERE B.rentdate >
-		date_sub(current date,
+		COUNT(*) FROM testlib.BOOKRENT B WHERE B.rentdate >
+		date_sub(current
+		date,
 		interval 30
 		day) AND B.id=A.id ) AS numborrow
 		FROM tprlib.gr_insa A
@@ -88,8 +95,8 @@
 		INSERT INTO
 		testlib.bookreser(id, book_cd, reser_date, reservechk)
 		VALUES(#{id},
-		#{book_cd}, (select returndate from bookrent where
-		book_cd=#{book_cd}), 1)
+		#{book_cd}, (SELECT returndate FROM testlib.bookrent WHERE book_cd =
+		#{book_cd} AND (rentchk='1' OR rentchk='2'))+ 2 day, 1)
 	</insert>
 
 	<insert id="insertReservation1" parameterType="String">
@@ -107,6 +114,12 @@
 		book_cd=#{book_cd}
 	</update>
 
+	<delete id="deleteReservation" parameterType="String">
+		DELETE FROM
+		testlib.bookreser
+		WHERE book_cd = #{book_cd}
+	</delete>
+
 
 
 	<select id="selectReservation" parameterType="String"
@@ -120,14 +133,16 @@
 	</select>
 
 	<select id="reservationList" parameterType="String" resultType="BookModel">
-		SELECT *
-		FROM testlib.bookmst A, testlib.bookreser B
+		SELECT A.title, A.author, A.b_group, A.reservechk, A.book_cd, (SELECT returndate FROM
+		testlib.bookrent WHERE book_cd = B.book_cd AND id=#{id}) returndate
+		FROM testlib.bookmst A
+		INNER JOIN testlib.bookreser B
+		ON
+		A.book_cd = B.book_cd
 		WHERE
-		B.reservechk='0'
+		B.reservechk='1'
 		AND
 		B.id=#{id}
-		ORDER BY
-		B.reser_date DESC
 	</select>
 
 	<select id="reservationListAll" resultType="BookModel">

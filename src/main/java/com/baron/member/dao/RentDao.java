@@ -47,9 +47,13 @@ public interface RentDao {
 
 	void backupRecord(BookModel bookmodel);
 
-	List<BookModel> selectRent();
+	BookModel selectRent(String book_cd);
 
 	void insertRecord(BookModel bookmodel);
+
+	List<BookModel> copyRent();
+
+	void deleteReserve(String book_cd);
 
 
 

@@ -35,4 +35,15 @@ public class NotifiServiceImpl implements NotifiService {
 		// TODO Auto-generated method stub
 		notifiDao.notifiReturn(sms);	
 	}
+
+	@Override
+	public void notifiReturnConfirm(SmsModel sms) {
+		notifiDao.notifiReturnConfirm(sms);
+		
+	}
+
+	@Override
+	public void notifiExtend(SmsModel sms) {
+		notifiDao.notifiExtend(sms);
+	}
 }

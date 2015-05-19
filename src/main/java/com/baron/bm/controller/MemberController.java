@@ -74,8 +74,9 @@ public class MemberController {
 	}
 
 	@RequestMapping("/")
-	public String loginForm() {
-		return "/member/login";
+	public String loginForm(String id) {
+		
+		return "start";
 	}
 
 	@RequestMapping("/login")
@@ -136,7 +137,7 @@ public class MemberController {
 		membermodel.setId(id);
 
 		response.addCookie(new Cookie("bm_id", membermodel.getId()));
-		mav.setViewName("redirect:searchBook");
+		mav.setViewName("start");
 		System.out.println(membermodel.getId());
 		mav.addObject("kname", membermodel.getKname());
 		mav.addObject("team_nm", membermodel.getTeam_nm());
@@ -144,9 +145,9 @@ public class MemberController {
 		mav.addObject("permission", "0");
 
 		System.out.println(id + "login Success");
-		if (id.equals("4150149")) {
+		if (id.equals("admin")||id.equals("4150266")) {
 			response.addCookie(new Cookie("bm_permission", "1"));
-			mav.setViewName("redirect:admin");
+			mav.setViewName("startAdmin");
 
 			mav.addObject("permission", "1");
 			return mav;

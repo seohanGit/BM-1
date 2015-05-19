@@ -198,7 +198,7 @@ public class BookController {
 	public String backupRecord(HttpServletRequest request) throws Exception {
 		List<BookModel> bookList = new ArrayList<BookModel>();
 
-		bookList = rentservice.selectRent();
+		bookList = rentservice.copyRent();
 
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 

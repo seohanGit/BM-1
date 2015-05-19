@@ -20,14 +20,14 @@
 	<div class="container">
 		<div class="row">
 			<!-- Blog Entries Column -->
-			<div class="col-md-8">
+			<div class="col-md-8 col-lg-8 col-sm-12">
 
 				<jsp:include page="../menu.jsp" />
 
 				<!-- First Blog Post -->
 
 
-				<div class="col-xs-12 col-md-10 col-sm-8 input-group" >
+				<div class="col-xs-12 col-md-11 col-sm-11 input-group" style="margin-left:10px" >
 					<form action="/findBook" method="post">
 						<div style="width: 100%">
 
@@ -56,7 +56,7 @@
 
 			</div>
 <hr>
-			<div class="col-md-12 col-xs-12" style="float: left;" >
+			<div class="col-md-8 col-lg-8 col-xs-12" style="float: left;" >
 				<jsp:include page="../footer.jsp"></jsp:include>
 			</div>
 			<!-- /.col-lg-12 -->
@@ -66,7 +66,7 @@
 			</footer>
 		</div>
 		<!-- /.row -->
-		<hr>
+		
 		<!-- Footer -->
 	</div>
 

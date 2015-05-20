@@ -16,11 +16,9 @@ public interface JoinDao {
 	
 	public void updateMember(MemberModel model);
 
-	public List<MemberModel> selectBest();
-
+	
 	public int selectMaxGrade();
 
-	public List<BookModel> selectBestBook();
 
 	public int selectMemberById(String id);
 

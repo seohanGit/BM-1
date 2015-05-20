@@ -99,7 +99,7 @@ body {
 											<td align="left"><a href="#"
 												onclick="window.open('/bookInfo?book_cd=${book.book_cd}','new','resizeble=yes scrollbars=yes, width:800px, height:600px');">
 													${book.title }</a></td>
-											<td class=" hidden-xs " align="left">${book.author }</td>
+											<td class=" hidden-xs " align="left">${book.author}</td>
 											<td class="hidden-sm hidden-xs hidden-md " align="left">${book.b_group }</td>
 											<c:choose>
 												<c:when test="${book.rentchk=='0'}">

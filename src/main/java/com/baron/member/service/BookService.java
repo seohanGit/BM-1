@@ -3,6 +3,7 @@ package com.baron.member.service;
 import java.util.List;
 
 import com.baron.member.model.BookModel;
+import com.baron.member.model.CodeModel;
 import com.baron.member.model.Dto;
 import com.baron.member.model.MemberModel;
 import com.baron.member.model.SearchResult;
@@ -31,10 +32,8 @@ public interface BookService {
 
 	public List<BookModel> selectBookAll();
 
-	List<BookModel> getNewbook() throws Exception;
 
-	public List<BookModel> selectBestBook();
 
-	public List<MemberModel> selectBestTeam();
-
+	public List<CodeModel> selectBCodeList();
+	public List<CodeModel> selectCCodeList();
 }

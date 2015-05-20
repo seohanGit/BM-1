@@ -58,23 +58,7 @@
 		A.id=B.id
 	</select>
 
-	<select id="selectBest" resultType="MemberModel">
-
-		SELECT (SELECT kname FROM
-		tprlib.gr_insa WHERE asabn = A.asabn FETCH first 1
-		rows only) AS
-		kname,(SELECT team_nm FROM tprlib.gr_insa WHERE asabn =
-		A.asabn FETCH
-		first 1 rows only) AS team_nm, A.asabn AS id, (SELECT
-		COUNT(*) FROM
-		testlib.BOOKRENT B WHERE B.rentdate > current date -30
-		day AND B.id =
-		A.asabn) AS count FROM tprlib.gr_insa AS A GROUP BY
-		A.asabn ORDER BY
-		count DESC
-
-
-	</select>
+	
 
 	<select id="selectMemberList" resultType="MemberModel">
 		SELECT *, (SELECT
@@ -114,7 +98,7 @@
 		book_cd=#{book_cd}
 	</update>
 
-	<delete id="deleteReservation" parameterType="String">
+	<delete id="deleteReserve" parameterType="String">
 		DELETE FROM
 		testlib.bookreser
 		WHERE book_cd = #{book_cd}

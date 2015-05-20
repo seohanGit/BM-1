@@ -9,8 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.baron.member.model.BookModel;
+import com.baron.member.model.CodeModel;
 import com.baron.member.model.Dto;
-import com.baron.member.model.MemberModel;
 import com.baron.member.model.SearchResult;
 
 @Repository
@@ -43,51 +43,42 @@ public class BookDaoImpl implements BookDao {
 	public void deleteBook(String book_cd) {
 
 		session.delete(NAMESPACE + "deleteBook", book_cd);
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void updateBook(BookModel bookmodel) {
-		// TODO Auto-generated method stub
+
 		session.update(NAMESPACE + "updateBook", bookmodel);
 	}
 
 	@Override
 	public String selectname(String book_cd) {
 		return session.selectOne(NAMESPACE + "selectname", book_cd);
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public List<BookModel> listBook(Dto dto) {
-		// TODO Auto-generated method stub
+
 		return session.selectList(NAMESPACE + "listBook", dto);
 	}
 
 	@Override
 	public List<BookModel> selectBookAll() {
-		// TODO Auto-generated method stub
+
 		return session.selectList(NAMESPACE + "selectBookAll");
 	}
 
 	@Override
-	public List<BookModel> selectBestBook() {
+	public List<CodeModel> selectBCodeList() {
 
-		return session.selectList(NAMESPACE + "selectBestBook");
+		return session.selectList(NAMESPACE + "selectB_codeList");
 	}
 
 	@Override
-	public List<BookModel> getNewbook() {
-		// TODO Auto-generated method stub
-		return session.selectList(NAMESPACE + "getNewbook");
-	}
+	public List<CodeModel> selectCCodeList() {
 
-	@Override
-	public List<MemberModel> selectBestTeam() {
-		// TODO Auto-generated method stub
-		return session.selectList(NAMESPACE + "selectBestTeam");
+		return session.selectList(NAMESPACE + "selectC_codeList");
 	}
-
 }

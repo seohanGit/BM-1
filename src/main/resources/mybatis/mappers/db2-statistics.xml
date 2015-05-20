@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baron.member.sqlModel">
+	<!--4개월간 다수 대여 팀, 도서 -->
+
+	<select id="selectBestTeam" resultType="MemberModel">
+
+		SELECT B.team_nm,
+		COUNT(*) AS count FROM
+		testlib.bookrent A INNER JOIN tprlib.gr_insa B
+		ON A.id=B.asabn WHERE
+		rentdate > current date - 4 month GROUP BY
+		B.team_nm ORDER
+		BY count DESC
+	</select>
+	<select id="selectBest" resultType="MemberModel">
+
+		SELECT (SELECT kname FROM
+		tprlib.gr_insa WHERE asabn = A.asabn FETCH first 1
+		rows only) AS
+		kname,(SELECT team_nm FROM tprlib.gr_insa WHERE asabn =
+		A.asabn FETCH
+		first 1 rows only) AS team_nm, A.asabn AS id, (SELECT
+		COUNT(*) FROM
+		testlib.BOOKRENT B WHERE B.rentdate > current date -30
+		day AND B.id =
+		A.asabn) AS count FROM tprlib.gr_insa AS A GROUP BY
+		A.asabn ORDER BY
+		count DESC
+	</select>
+	
+	<select id="selectBookCount" resultType="BookModel">
+		SELECT COUNT(*) AS count, b_group FROM testlib.bookmst GROUP BY b_group
+	</select>
+
+	<select id="selectBestPerson" resultType="BookModel">
+
+		SELECT A.id, A.book_cd,
+		COUNT(*) AS count, (SELECT
+		title FROM
+		testlib.bookmst WHERE book_cd =
+		A.book_cd) AS title, (SELECT
+		author
+		FROM testlib.bookmst WHERE book_cd =
+		A.book_cd) AS author FROM
+		testlib.bookrent A INNER JOIN tprlib.gr_insa
+		B ON A.id = B.asabn WHERE
+		A.rentdate > current date - 6 month GROUP BY
+		A.id, A.book_cd ORDER BY
+		count DESC
+	</select>
+
+
+	<select id="selectBestBook" resultType="BookModel">
+		SELECT COUNT(*) AS count,
+		B.book_cd,
+		(SELECT title FROM testlib.bookmst WHERE book_cd =
+		B.book_cd) AS title,
+		(SELECT author FROM testlib.bookmst WHERE book_cd
+		= B.book_cd) AS
+		author
+		FROM testlib.bookrent A INNER JOIN
+		testlib.bookmst B
+		ON A.book_cd
+		= B.book_cd
+		GROUP BY B.book_cd
+		ORDER BY
+		count DESC
+		FETCH
+		first 5 rows only
+	</select>
+</mapper>

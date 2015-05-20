@@ -63,8 +63,8 @@ $("#insertBook").click(function() {
 $("#recordList").click(function() {
 	location.href = "/recordList"
 })
-$("#rentListAll").click(function() {
-	location.href = "/rentListAll"
+$("#statistic").click(function() {
+	location.href = "/statistic"
 })
 $("#reservationListAll").click(function() {
 	location.href = "/reservationListAll"

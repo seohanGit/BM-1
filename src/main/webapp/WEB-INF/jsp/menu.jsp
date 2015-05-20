@@ -4,7 +4,7 @@
 	관리자 페이지 <small>Admin</small>
 </h2>
 <!-- First Blog Post -->
-<div align="left" style="width:98%">
+<div align="left" style="width: 98%">
 	<div class="row panel panel-default hidden-xs"
 		style="margin-left: 5px;">
 		<div class="nav nav-tabs nav-justified" role="group" aria-label="...">
@@ -14,23 +14,24 @@
 			<button class="btn btn-default  noborder"
 				onclick="location.href='reservationListAll'">예약현황</button>
 			<button class="btn btn-default  noborder"
-				onclick="location.href='rentListAll'">대여현황</button>
-			<button class="btn btn-default  noborder"
 				onclick="location.href='requestList'">구매요청</button>
 
 			<button class="btn btn-default  noborder"
-				onclick="location.href='borrowList'">대여요청</button>
-			
+				onclick="location.href='borrowList'">대여현황</button>
+
 			<button class="btn btn-default  noborder"
 				onclick="location.href='recordList'">대여기록</button>
 			<button class="btn btn-default  noborder"
 				onclick="location.href='noticeListByAdmin'">공지사항</button>
+
 			<button class="btn btn-default  noborder"
 				onclick="location.href='searchBook'">도서목록</button>
 			<!-- 	<button class="btn btn-default  noborder" 
 			onclick="location.href='memberList'">사원목록</button> -->
 			<button class="btn btn-default  noborder"
 				onclick="location.href='boardList'">게시판</button>
+			<button class="btn btn-default  noborder"
+				onclick="location.href='statistic'">통계자료</button>
 		</div>
 	</div>
 	<div class="col-xs-10 row panel panel-default visible-xs-block "
@@ -47,20 +48,21 @@
 
 				<button class="btn btn-default noborder"
 					onclick="location.href='searchBook'">도서목록</button>
-				<button class="btn btn-default noborder"
-					onclick="location.href='recordList'">대여기록</button>
+
+				<button class="btn btn-default  noborder"
+					onclick="location.href='statistic'">대여현황</button>
 			</div>
 			<div class="btn-group btn-group-xs">
 				<hr>
 				<button class="btn btn-default  noborder"
 					onclick="location.href='reservationListAll'">예약현황</button>
 
-				<button class="btn btn-default  noborder"
-					onclick="location.href='rentListAll'">대여현황</button>
 				<button class="btn btn-default noborder"
 					onclick="location.href='requestList'">구매요청</button>
 				<button class="btn btn-default  noborder"
-					onclick="location.href='borrowList'">대여요청</button>
+					onclick="location.href='borrowList'">대여현황</button>
+				<button class="btn btn-default noborder"
+					onclick="location.href='recordList'">대여기록</button>
 			</div>
 		</div>
 	</div>

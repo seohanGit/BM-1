@@ -32,6 +32,7 @@ import com.baron.member.model.MemberModel;
 import com.baron.member.service.BoardService;
 import com.baron.member.service.BookService;
 import com.baron.member.service.JoinService;
+import com.baron.member.service.StatisticService;
 
 @SessionAttributes({ "kname", "jikb", "team_nm", "permission" })
 @Controller
@@ -45,6 +46,9 @@ public class MemberController {
 
 	@Autowired
 	private BoardService boardService;
+
+	
+	private StatisticService statisticService;
 
 	@RequestMapping("/test")
 	public String test(Model model) {
@@ -62,9 +66,9 @@ public class MemberController {
 
 		List<BoardModel> notice = boardService.noticeList();
 
-		List<BookModel> bestBook = bookService.selectBestBook();
-		List<MemberModel> bestTeam = bookService.selectBestTeam();
-		List<BookModel> newBook = bookService.getNewbook();
+		List<BookModel> bestBook = statisticService.selectBestBook();
+		List<MemberModel> bestTeam = statisticService.selectBestTeam();
+		List<BookModel> newBook = statisticService.getNewbook();
 
 		model.addAttribute("noticeList", notice);
 		model.addAttribute("bestBook", bestBook);
@@ -75,7 +79,7 @@ public class MemberController {
 
 	@RequestMapping("/")
 	public String loginForm(String id) {
-		
+
 		return "start";
 	}
 
@@ -145,7 +149,7 @@ public class MemberController {
 		mav.addObject("permission", "0");
 
 		System.out.println(id + "login Success");
-		if (id.equals("admin")||id.equals("4150266")) {
+		if (id.equals("admin") || id.equals("4150266")) {
 			response.addCookie(new Cookie("bm_permission", "1"));
 			mav.setViewName("startAdmin");
 
@@ -242,10 +246,10 @@ public class MemberController {
 				System.out.println(cookie.getValue());
 				if ("1".equals(cookie.getValue())) {
 
-					List<MemberModel> bestMember = joinService.selectBest();
-					List<BookModel> bestBook = bookService.selectBestBook();
+					List<MemberModel> bestMember = statisticService.selectBest();
+					List<BookModel> bestBook = statisticService.selectBestBook();
 					// List<BookModel> newBook = bookService.getNewbook();
-					List<MemberModel> bestTeam = bookService.selectBestTeam();
+					List<MemberModel> bestTeam = statisticService.selectBestTeam();
 
 					model.addAttribute("bestMember", bestMember);
 					model.addAttribute("bestBook", bestBook);

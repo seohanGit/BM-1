@@ -35,30 +35,30 @@ public class XmlDom {
 		String categoryName;
 		switch (string) {
 		case "300":
-			categoryName = "기타매체";
+			categoryName = "E-기타매체";
 			break;
 		case "400":
-			categoryName = "기타매체";
+			categoryName = "E-기타매체";
 			break;
 		case "107":
-			categoryName = "정기간행물";
+			categoryName = "J-정기간행물";
 			break;
 		case "209":
-			categoryName = "정기간행물";
+			categoryName = "J-정기간행물";
 			break;
 		case "115":
-			categoryName = "규격/사전";
+			categoryName = "S-규격/사전";
 			break;
 		case "203":
-			categoryName = "규격/사전";
+			categoryName = "S-규격/사전";
 			break;
 
 		case "125":
-			categoryName = "논문";
+			categoryName = "T-논문";
 
 			break;
 		default:
-			categoryName = "도서(단행본)";
+			categoryName = "B-도서(단행본)";
 			break;
 		}
 		return categoryName;

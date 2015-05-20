@@ -6,46 +6,49 @@ public class BookModel {
 	private String book_cd;
 	private String book_cd1;
 
-	private String title;
-
 	private String b_group;
+	private String c_group;
 	private int quantity;
-	private int totalResults;
-
-	public int getTotalResults() {
-		return totalResults;
-	}
-
-	public void setTotalResults(int totalResults) {
-		this.totalResults = totalResults;
-	}
 
 	private java.util.Date rentdate;
 	private java.util.Date returndate;
 	private Date reser_date;
-	private Date reqdate;
-	private String id;
-	private String publish;
-	private String rentchk;
-	private String reservechk;
-	private int grade;
-	private String author;
+	private String title;
 	private String imageurl;
+	private String publish;
+	private String author;
 	private String price;
 	private String link;
 	private String isbn;
 	private String summary;
+private int totalResults;
+	
+	public int getTotalResults() {
+	return totalResults;
+}
+
+public void setTotalResults(int totalResults) {
+	this.totalResults = totalResults;
+}
+
+	private String rentchk;
+	private String reservechk;
+
 	private String rcv_date;
 	private String reqstatus;
-	private String sabun;
+	private Date reqdate;
 	private String req_cd;
+
+	private String sabun;
+	private String id;
 	private String kname;
 	private String team_nm;
 
+	private int count;
 	private String req_ymd;
 	private String retu_ymd;
 
-	private int count;
+
 	public String getRetu_ymd() {
 		return retu_ymd;
 	}
@@ -279,12 +282,12 @@ public class BookModel {
 		this.returndate = returndate;
 	}
 
-	public int getGrade() {
-		return grade;
+	public String getC_group() {
+		return c_group;
 	}
 
-	public void setGrade(int grade) {
-		this.grade = grade;
+	public void setC_group(String c_group) {
+		this.c_group = c_group;
 	}
 
 }

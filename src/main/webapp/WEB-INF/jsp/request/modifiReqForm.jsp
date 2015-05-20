@@ -29,7 +29,9 @@ body {
 				<div class="panel-body">
 
 					<!-- Blog Entries Column -->
-
+					<div class="left">
+						<h3>도서코드 구매 후 변경 불가 !!</h3>
+					</div>
 					<form action="modifiRequest" method="post">
 						<div class="right right-end">
 							<button class="btn btn-default" type="submit">수정</button>
@@ -40,10 +42,12 @@ body {
 
 							<thead>
 								<tr class="title ">
-									<th class="td-title">도서코드 수정</th>
+									<th class="td-genre">도서코드 수정</th>
 
 									<th>도서명</th>
 									<th class="hidden-sm hidden-xs hidden-md td-author">저자</th>
+									<th class="author">대분류</th>
+									<th class="author">소분류</th>
 									<th class="td-date">가격</th>
 									<th class="td-img">수량</th>
 
@@ -57,11 +61,27 @@ body {
 								<c:forEach items="${bookList}" var="book" varStatus="status">
 									<tr>
 										<td><input type="text" name="book_cd"
-											value="${book.book_cd}"><input type="hidden"
-											name="req_cd" value="${book.req_cd}"></td>
+											value="${book.book_cd}" tabindex="${status.index }"><input
+											type="hidden" name="req_cd" value="${book.req_cd}"></td>
 
 										<td><a href="${book.link}">${book.title }</a></td>
 										<td class="hidden-sm hidden-xs hidden-md ">${book.author}</td>
+										<td><select name="b_group" tabindex="${status.index }">
+												<!-- <optgroup
+													label="대분류"> -->
+												<option value="${book.b_group}" selected>${book.b_group}</option>
+												<c:forEach items="${BCodeList }" var="b_code">
+													<option value="${b_code.name}">${b_code.name}</option>
+												</c:forEach>
+										</select></td>
+										<%--<td><select name="c_group" tabindex="${status.index }"><!-- <optgroup
+													label="소분류"> -->
+													<option value="${book.c_group}" selected>${book.c_group}
+														<c:forEach items="${CCodeList }" var="c_code">
+															<option value="${c_code.name}">${c_code.name}
+														</c:forEach>
+</select>--%>
+										</td>
 
 										<td class="hidden-sm hidden-xs  ">${book.price}원</td>
 										<td align="center"><input type="number" name="quantity"

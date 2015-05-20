@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import com.baron.member.dao.BookDao;
 import com.baron.member.model.BookModel;
+import com.baron.member.model.CodeModel;
 import com.baron.member.model.Dto;
 import com.baron.member.model.MemberModel;
 import com.baron.member.model.SearchResult;
@@ -65,7 +66,15 @@ public class BookServiceImpl implements BookService {
 
 	@Override
 	public void insertBook(BookModel model) {
-		bookDao.insertBook(model);
+		if (model.getQuantity() == 1) {
+			bookDao.insertBook(model);
+		} else if (model.getQuantity() != 1) {
+			for (int i = 0; i < model.getQuantity(); i++) {
+				model.setBook_cd(model.getBook_cd() + "(" + (i + 1) + ")");
+				bookDao.insertBook(model);
+			}
+
+		}
 	}
 
 	@Override
@@ -80,20 +89,20 @@ public class BookServiceImpl implements BookService {
 
 	@Override
 	public void deleteBook(String bookCode) {
-		// TODO Auto-generated method stub
+
 		bookDao.deleteBook(bookCode);
 	}
 
 	@Override
 	public void updateBook(BookModel bookmodel) {
-		// TODO Auto-generated method stub
+
 		bookDao.updateBook(bookmodel);
 
 	}
 
 	@Override
 	public String selectname(String bookCode) {
-		// TODO Auto-generated method stub
+
 		return bookDao.selectname(bookCode);
 	}
 
@@ -207,39 +216,27 @@ public class BookServiceImpl implements BookService {
 
 	@Override
 	public List<BookModel> listBook(Dto dto) {
-		// TODO Auto-generated method stub
+
 		return bookDao.listBook(dto);
 	}
 
 	@Override
 	public List<BookModel> selectBookAll() {
-		// TODO Auto-generated method stub
+
 		return bookDao.selectBookAll();
 	}
 
-	@Override
-	public List<BookModel> getNewbook() throws Exception {
-		return bookDao.getNewbook();
 
+	@Override
+	public List<CodeModel> selectBCodeList() {
+
+		return bookDao.selectBCodeList();
 	}
 
 	@Override
-	public List<BookModel> selectBestBook() {
-		// TODO Auto-generated method stub
-		return bookDao.selectBestBook();
-	}
+	public List<CodeModel> selectCCodeList() {
 
-	@Override
-	public List<MemberModel> selectBestTeam() {
-		// TODO Auto-generated method stub
-		List<MemberModel> list = new ArrayList<MemberModel>();
-		list = bookDao.selectBestTeam();
-		int max = list.get(0).getCount();
-		
-		for (MemberModel member : list) {
-			member.setMax(max);
-		}
-		return list;
+		return bookDao.selectCCodeList();
 	}
 
 }

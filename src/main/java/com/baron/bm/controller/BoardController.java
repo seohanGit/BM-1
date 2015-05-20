@@ -11,13 +11,18 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.baron.member.model.BoardModel;
+import com.baron.member.model.BookModel;
 import com.baron.member.service.BoardService;
+import com.baron.member.service.StatisticService;
 
 @Controller
 public class BoardController {
 
 	@Autowired
 	private BoardService boardService;
+
+	@Autowired
+	private StatisticService statisticService;
 
 	@RequestMapping("/board")
 	public String board(Model model) {
@@ -31,7 +36,6 @@ public class BoardController {
 		return "board/boardinsert";
 	}
 
-	
 	@RequestMapping("/deleteBoard")
 	public String deleteboard(int boardnum) {
 		boardService.deleteBoard(boardnum);
@@ -41,14 +45,14 @@ public class BoardController {
 	@RequestMapping("/selectBoardnum")
 	public String selectBoardnum(int boardnum, Model model, BoardModel board) {
 		board = boardService.selectBoardnum(boardnum);
-		model.addAttribute("board", board );
+		model.addAttribute("board", board);
 		return "board/modifyBoard";
 	}
-	
+
 	@RequestMapping("/modifyBoard")
 	public String modifyBoard(BoardModel board) {
 		boardService.modifyBoard(board);
-		
+
 		return "redirect:boardList";
 	}
 
@@ -125,5 +129,15 @@ public class BoardController {
 	public String modifyNotice(BoardModel content) {
 		boardService.modifyNotice(content);
 		return "redirect:noticeListByAdmin";
+	}
+
+	@RequestMapping("/statistic")
+	public String statistic() {
+		//System.out.println(statisticService.selectBookCount().get(0).getCount());
+		//if (statisticService.selectBookCount().get(0) != null) {
+			List<BookModel> countList = statisticService.selectBookCount();
+			List<BookModel> bestBook = statisticService.selectBestBook();
+		//}
+		return "statistic";
 	}
 }

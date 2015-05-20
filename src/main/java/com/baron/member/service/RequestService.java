@@ -12,18 +12,19 @@ public interface RequestService {
 	public void deleteRequest(String bookCode);
 
 	public void requestBook(BookModel model);
-/*
-	public BookModel getRequestBook(String isbn, String id, int quantity)
-			throws Exception, IOException;
-*/
-	public BookModel findBookOne(String isbn)throws Exception ;
+
+	/*
+	 * public BookModel getRequestBook(String isbn, String id, int quantity)
+	 * throws Exception, IOException;
+	 */
+	public BookModel findBookOne(String isbn) throws Exception;
 
 	public BookModel selectBook(String bookCode);
 
 	public List<BookModel> requestRecord(String id);
 
-	public void updateBook_cd(Dto dto);
-
 	public void rejectRequest(String req_cd);
+
+	public void modifiBook(BookModel book);
 
 }

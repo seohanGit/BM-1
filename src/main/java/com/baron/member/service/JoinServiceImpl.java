@@ -6,8 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.baron.member.dao.JoinDao;
-import com.baron.member.model.BookModel;
-import com.baron.member.model.ContentModel;
 import com.baron.member.model.MemberModel;
 
 @Service
@@ -67,17 +65,7 @@ public class JoinServiceImpl implements JoinService {
 		return joinDao.selectMemberList();
 	}
 
-	@Override
-	public List<MemberModel> selectBest() {
-		// TODO Auto-generated method stub
-		return joinDao.selectBest();
-	}
 
-	@Override
-	public List<BookModel> selectBestBook() {
-		// TODO Auto-generated method stub
-		return joinDao.selectBestBook();
-	}
 
 	@Override
 	public List<String> test() {

@@ -47,7 +47,7 @@ public class MemberController {
 	@Autowired
 	private BoardService boardService;
 
-	
+	@Autowired
 	private StatisticService statisticService;
 
 	@RequestMapping("/test")

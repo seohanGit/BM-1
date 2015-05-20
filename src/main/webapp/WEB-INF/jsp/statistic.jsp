@@ -14,6 +14,7 @@
 <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="/resources/css/signin.css" rel="stylesheet">
 <link href="/resources/css/common.css" rel="stylesheet">
+
 <style type="text/css">
 body {
 	padding-top: 70px;
@@ -22,22 +23,38 @@ body {
 </head>
 <body><jsp:include page="nav.jsp" />
 
-	<div class="container">
-		<div id="container" style="width: 100%; height: 400px;"></div>
-
-
-
+	<!-- Blog Entries Column -->
+	<div class="col-md-8 ">
+		<div id="chart"
+			style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 
 	</div>
-	<script src="/resources/js/highcharts.js"></script>
+
+	<table class="highchart" data-graph-container-before="1"
+		data-graph-type="column">
+		<thead>
+			<tr>
+				<th></th>
+				<th>대여권수</th>
+			</tr>
+		</thead>
+		<tbody>
+			<c:forEach items="${bookCount }" var="count">
+				<tr>
+					<td>${count.b_group}</td>
+					<td>${count.count}</td>
+				</tr>
+			</c:forEach>
+		</tbody>
+	</table>
+	<script src="/resources/js/common.js"></script>
 	<script src="/resources/js/jquery/jquery.js"></script>
 	<script src="/resources/js/bootstrap.min.js"></script>
-	<script src="/resources/js/jquery/common.js"></script>
-	<script src="/resources/js/jquery/book.js"></script>
-	$(function () { $('#container').highcharts({ chart: { type: 'bar' },
-	title: { text: 'Fruit Consumption' }, xAxis: { categories: ['Apples',
-	'Bananas', 'Oranges'] }, yAxis: { title: { text: 'Fruit eaten' } },
-	series: [{ name: 'Jane', data: [1, 0, 4] }, { name: 'John', data: [5,
-	7, 3] }] }); });
+	<script src="/resources/js/highchartTable.js"></script>
+	<script src="/resources/js/highcharts.js"></script>
+
+
+
+
 </body>
 </html>

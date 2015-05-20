@@ -64,7 +64,8 @@
 		SET
 		TITLE=#{title}, b_group=#{b_group},
 		publish=#{publish},
-		author=#{author}
+		author=#{author},
+		imageurl=#{imageurl}
 		WHERE BOOK_CD=#{book_cd}
 	</update>
 

@@ -9,11 +9,12 @@ public interface StatisticService {
 
 	public List<BookModel> getNewbook() throws Exception;
 
-	public List<BookModel> selectBestBook();
+	public List<BookModel> selectBestBook() throws Exception;
 
-	public List<MemberModel> selectBestTeam();
+	public List<MemberModel> selectBestTeam() throws Exception;
 
-	public List<BookModel> selectBookCount();
+	public List<BookModel> selectBookCount() throws Exception;
 
-	public List<MemberModel> selectBest();
+	public List<MemberModel> selectBest() throws Exception;
+
 }

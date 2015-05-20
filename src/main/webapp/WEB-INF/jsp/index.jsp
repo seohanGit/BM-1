@@ -57,7 +57,7 @@
 				<br>
 				<hr>
 				<div class="input-group" style="width: 95%">
-					<form action="/searchBook" method="post">
+					<form action="/findBook" method="post">
 						<span class="input-group-btn"> <input type="text"
 							class="form-control" id="keyword" name="keyword"
 							placeholder="인터파크 검색">

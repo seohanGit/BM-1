@@ -27,8 +27,10 @@ public class BookController {
 	@Autowired
 	private BookService bookservice;
 
+	@Autowired
 	private RentService rentservice;
 
+	@Autowired
 	private RequestService requestservice;
 
 	@RequestMapping("/insertbookForm")
@@ -222,21 +224,29 @@ public class BookController {
 	public String updateImage() throws Exception {
 		String isbn = "";
 
-		List<BookModel> bookList = new ArrayList<BookModel>();
-		bookList = bookservice.selectBookAll();
-		for (BookModel bookmodel : bookList) {
-			BookModel book = new BookModel();
-			isbn = bookmodel.getIsbn();
+		List<BookModel> bookList = bookservice.selectBookAll();
+		for (int i = 0; i < bookList.size() - 2700; i++) {
+			BookModel book = bookList.get(i);
+			isbn = book.getIsbn();
+			isbn = isbn.substring(0, 13);
+			System.out.println(isbn);
+			book = requestservice.findBookOne(isbn);
+			System.out.println(book.getImageurl());
 
-			if (bookList.get(0).getTotalResults() != 0) {
-				book = requestservice.findBookOne(isbn);
-				System.out.println(book.getImageurl());
-				bookmodel.setImageurl(book.getImageurl());
-				bookmodel.setAuthor(book.getAuthor());
-
-			}
-		}
-		
+		}/*
+		 * for (BookModel bookmodel : bookList) { BookModel book = new
+		 * BookModel(); isbn = bookmodel.getIsbn();
+		 * 
+		 * if (isbn != null) { isbn = isbn.substring(0, 13);
+		 * System.out.println(isbn); if (isbn.substring(0, 5) == "97889") { book
+		 * = requestservice.findBookOne(isbn);
+		 * System.out.println(book.getImageurl());
+		 * bookmodel.setImageurl(book.getImageurl());
+		 * bookmodel.setAuthor(book.getAuthor());
+		 * bookservice.updateBook(bookmodel); } else
+		 * System.out.println("isbn일치 없음"); } else {
+		 * System.out.println("isbn오류"); } }
+		 */
 		return "member/admin";
 
 	}

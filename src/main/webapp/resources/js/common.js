@@ -1,8 +1,8 @@
 $('#btn_search').click(function() {
 	$.ajax({
 		type : "GET", // GET or POST
-		url : "/searchBook", // URL
-		datatype : "xml", // html, xml, json, jsonp, script, text
+		url : "/countBook", // URL
+		datatype : "json", // html, xml, json, jsonp, script, text
 		data : {
 			keyword : $('#keyword').val()
 		},
@@ -191,6 +191,10 @@ $('#title').click(function() {
 	});
 
 })
+
+$(document).ready(function() {
+	$('table.highchart').highchartTable();
+});
 /*
  * $('#btn_find').click(function() { $.ajax({
  * 

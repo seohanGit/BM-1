@@ -1,5 +1,6 @@
 package com.baron.bm.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.Cookie;
@@ -9,11 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.baron.member.model.BoardModel;
 import com.baron.member.model.BookModel;
+import com.baron.member.model.MemberModel;
 import com.baron.member.service.BoardService;
 import com.baron.member.service.StatisticService;
+import com.google.gson.JsonObject;
 
 @Controller
 public class BoardController {
@@ -131,13 +135,36 @@ public class BoardController {
 		return "redirect:noticeListByAdmin";
 	}
 
+	@ResponseBody
+	@RequestMapping("/countList")
+	public String countList() throws Exception {
+		List<BookModel> countList = statisticService.selectBookCount();
+		String data = "", categories = "";
+		for (BookModel bookModel : countList) {
+			categories = categories + "," + bookModel.getB_group();
+			data = bookModel.getCount() + "," + data;
+		}
+		data = data.substring(0, data.length() - 1);
+		/*
+		 * ArrayList<Object> pieDataSet = new ArrayList<Object>();
+		 * pieDataSet.add(piedata1); pieDataSet.add(piedata2);
+		 * pieDataSet.add(piedata3);
+		 */
+		return data;
+	}
+
 	@RequestMapping("/statistic")
-	public String statistic() {
-		//System.out.println(statisticService.selectBookCount().get(0).getCount());
-		//if (statisticService.selectBookCount().get(0) != null) {
-			List<BookModel> countList = statisticService.selectBookCount();
-			List<BookModel> bestBook = statisticService.selectBestBook();
-		//}
+	public String statistic(Model model) throws Exception {
+		List<BookModel> bookCount = statisticService.selectBookCount();
+		List<BookModel> bestBook = statisticService.selectBestBook();
+		List<MemberModel> bestTeam = statisticService.selectBestTeam();
+		List<MemberModel> bestOne = statisticService.selectBest();
+
+		model.addAttribute("bookCount", bookCount);
+		model.addAttribute("bestBook", bestBook);
+		model.addAttribute("bestTeam", bestTeam);
+		model.addAttribute("bestOne", bestOne);
+
 		return "statistic";
 	}
 }

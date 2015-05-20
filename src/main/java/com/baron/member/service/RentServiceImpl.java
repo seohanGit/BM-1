@@ -71,16 +71,18 @@ public class RentServiceImpl implements RentService {
 	@Override
 	public void confirmBorrowBook(String book_cd) {
 
-		String title = rentDao.selectBook(book_cd).getTitle();
-		String id = rentDao.selectBorrow(book_cd).getId();
-		System.out.println(id);
-		sms.setTitle(title);
+		if (rentDao.selectBook(book_cd) != null) {
+			String title = rentDao.selectBook(book_cd).getTitle();
+			String id = rentDao.selectBorrow(book_cd).getId();
+			System.out.println(id);
+			sms.setTitle(title);
 
-		// sms.setPhone(joinDao.selectMember(id).getMobi_no().substring(1));
-		// smsDao.notifiRent(sms);
-		if (joinDao.selectMember(id).getMobi_no() != null) {
-			sms.setPhone(joinDao.selectMember(id).getMobi_no().substring(1));
-			// notifiDao.notifiRent(sms);
+			// sms.setPhone(joinDao.selectMember(id).getMobi_no().substring(1));
+			// smsDao.notifiRent(sms);
+			if (joinDao.selectMember(id).getMobi_no() != null) {
+				sms.setPhone(joinDao.selectMember(id).getMobi_no().substring(1));
+				// notifiDao.notifiRent(sms);
+			}
 		}
 		rentDao.confirmBorrowBook(book_cd);
 	}
@@ -195,8 +197,6 @@ public class RentServiceImpl implements RentService {
 		rentDao.insertRecord(bookmodel);
 	}
 
-
-
 	@Override
 	public BookModel selectRent(String book_cd) {
 
@@ -206,7 +206,7 @@ public class RentServiceImpl implements RentService {
 	@Override
 	public void deleteReserve(String book_cd) {
 		rentDao.deleteReserve(book_cd);
-		
+
 	}
 
 }

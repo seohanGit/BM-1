@@ -2,16 +2,14 @@
 	pageEncoding="EUC-KR"%><%@ taglib prefix="c"
 	uri="http://java.sun.com/jsp/jstl/core"%>
 
-<div id="bestPerson" class="right">
 	<table class="highchart table table-bordered"
 		data-graph-container-before="1" data-graph-type="column">
-		<caption>월별 예산현황</caption>
+		<caption>분류별 대여현황</caption>
 
 		<thead>
 			<tr>
 				<th class="td-title"></th>
-				<th class="td-img">사용예산</th>
-				<th data-graph-type="line">사용가능예산</th>
+				<th data-graph-type="line">대여권수</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -28,4 +26,3 @@
 			</c:forEach>
 		</tbody>
 	</table>
-</div>

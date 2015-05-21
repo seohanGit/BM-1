@@ -7,6 +7,7 @@
 
 package com.baron.bm.controller;
 
+import java.util.Calendar;
 import java.util.Hashtable;
 import java.util.List;
 
@@ -28,6 +29,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.baron.member.model.BoardModel;
 import com.baron.member.model.BookModel;
+import com.baron.member.model.Dto;
 import com.baron.member.model.MemberModel;
 import com.baron.member.service.BoardService;
 import com.baron.member.service.BookService;
@@ -50,6 +52,9 @@ public class MemberController {
 	@Autowired
 	private StatisticService statisticService;
 
+	String year = Integer.toString(Calendar.getInstance().get(Calendar.YEAR));
+	String month = Integer.toString(Calendar.getInstance().get(Calendar.MONTH));
+
 	@RequestMapping("/test")
 	public String test(Model model) {
 		System.out.println(joinService.test());
@@ -63,11 +68,13 @@ public class MemberController {
 
 	@RequestMapping("/index")
 	public String index(Model model) throws Exception {
-
+		Dto param = new Dto();
+		param.setYear(year);
+		param.setMonth(month);
 		List<BoardModel> notice = boardService.noticeList();
 
-		List<BookModel> bestBook = statisticService.selectBestBook();
-		List<MemberModel> bestTeam = statisticService.selectBestTeam();
+		List<BookModel> bestBook = statisticService.selectBestBook(param);
+		List<MemberModel> bestTeam = statisticService.selectBestTeam(year);
 		List<BookModel> newBook = statisticService.getNewbook();
 
 		model.addAttribute("noticeList", notice);
@@ -241,6 +248,9 @@ public class MemberController {
 	@RequestMapping("/admin")
 	public String admin(HttpServletRequest request, Model model)
 			throws Exception {
+		Dto param = new Dto();
+		param.setYear(year);
+		param.setMonth(month);
 		for (Cookie cookie : request.getCookies()) {
 			if (cookie.getName().equals("bm_permission")) {
 				System.out.println(cookie.getValue());
@@ -249,10 +259,10 @@ public class MemberController {
 					List<MemberModel> bestMember = statisticService
 							.selectBest();
 					List<BookModel> bestBook = statisticService
-							.selectBestBook();
+							.selectBestBook(param);
 					// List<BookModel> newBook = bookService.getNewbook();
 					List<MemberModel> bestTeam = statisticService
-							.selectBestTeam();
+							.selectBestTeam(year);
 
 					model.addAttribute("bestMember", bestMember);
 					model.addAttribute("bestBook", bestBook);

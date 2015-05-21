@@ -2,6 +2,7 @@ package com.baron.bm.controller;
 
 import java.awt.print.Book;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.http.Cookie;
@@ -28,6 +29,7 @@ public class BoardController {
 
 	@Autowired
 	private StatisticService statisticService;
+	String year = Integer.toString(Calendar.getInstance().get(Calendar.YEAR));
 
 	@RequestMapping("/board")
 	public String board(Model model) {
@@ -155,36 +157,78 @@ public class BoardController {
 	}
 
 	@RequestMapping("/statistic")
-	public String statistic(Model model, String year) throws Exception {
-	
-		List<BookModel> bookCount = statisticService.selectBookCount();
-		List<BookModel> bestBook = statisticService.selectBestBook();
-		List<MemberModel> teamCount = statisticService.selectBestTeam();
-		List<MemberModel> bestOne = statisticService.selectBest();
-		List<Dto> bestPerson = statisticService.selectBestPerson();
-
+	public String statistic(Model model)
+			throws Exception {
+		Dto param = new Dto();
+		param.setYear(year);
+		param.setMonth("");
+		List<Dto> bestPerson = statisticService.selectBestPerson(param);
 		model.addAttribute("bestPerson", bestPerson);
-
-		model.addAttribute("bookCount", bookCount);
-		model.addAttribute("bestBook", bestBook);
-		model.addAttribute("teamCount", teamCount);
-		model.addAttribute("bestOne", bestOne);
 
 		return "statistic/statistic";
 	}
 
-	@RequestMapping("/selectSumPurchase")
-	public String selectSumPurchase(String year, Model model) {
-		List<Dto> SumPurchase = statisticService.selectSumPurchase(year);
-
-		model.addAttribute("SumPurchase", SumPurchase);
-		return "/statistic/groupByMonth";
+	@RequestMapping("/rentByPerson")
+	public String rentByPerson(Model model, String year, String month) throws Exception {
+		Dto param = new Dto();
+		param.setYear(year);
+		param.setMonth(month);
+		List<Dto> bestPerson = statisticService.selectBestPerson(param);
+		model.addAttribute("bestPerson", bestPerson);
+		return "/statistic/rentByPerson";
 	}
 
-	@RequestMapping("/selectGroupByMonth")
-	public String selectGroupByMonth(String year, Model model) {
-		List<Dto> selectGroupByMonth = statisticService.selectGroupByMonth(year);
-		model.addAttribute("selectGroupByMonth", selectGroupByMonth);
-		return "/statistic/selectGroupByMonth";
+	@RequestMapping("/bookTeamCount")
+	public String bookCount(String year, Model model) throws Exception {
+		List<BookModel> bookCount = statisticService.selectBookCount();
+		model.addAttribute("bookCount", bookCount);
+		List<MemberModel> teamCount = statisticService.selectBestTeam(year);
+		model.addAttribute("teamCount", teamCount);
+		return "/statistic/bookTeamCount";
+	}
+
+	@RequestMapping("/selectSumPurchase")
+	public String selectSumPurchase(String year, Model model) {
+		Dto dto = new Dto();
+		List<Dto> SumPurchase = new ArrayList<Dto>();
+		for (int i = 0; i < 11; i++) {
+			dto.setMonth(Integer.toString(i));
+			dto.setCount("0");
+			SumPurchase.add(i, dto);
+			int last = statisticService.selectSumPurchase(year).lastIndexOf(
+					statisticService.selectSumPurchase(year).get(i));
+			if (last == i) {
+				break;
+			} else if (statisticService.selectSumPurchase(year).get(i)
+					.getMonth() != null) {
+				SumPurchase.add(i, statisticService.selectSumPurchase(year)
+						.get(i));
+			}
+		}
+		model.addAttribute("SumPurchase", SumPurchase);
+		return "/statistic/purchaseByMonth";
+	}
+
+	@RequestMapping("/rentByMonth")
+	public String rentByMonth(String year, String month, Model model) {
+		Dto param = new Dto();
+		param.setYear(year);
+		param.setMonth(month);
+		List<Dto> rentByMonth = statisticService.rentByMonth(param);
+		model.addAttribute("rentByMonth", rentByMonth);
+		return "/statistic/rentByMonth";
+	}
+
+	@RequestMapping("/selectGroupByB")
+	public String selectGroupByB(String year, String month, Model model)
+			throws Exception {
+		Dto param = new Dto();
+		param.setYear(year);
+		param.setMonth(month);
+		List<BookModel> bestBook = statisticService.selectBestBook(param);
+		model.addAttribute("bestBook", bestBook);
+		List<Dto> selectGroupByB = statisticService.selectGroupByB(param);
+		model.addAttribute("selectGroupByB", selectGroupByB);
+		return "/statistic/rentByB_group";
 	}
 }

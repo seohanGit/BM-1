@@ -8,20 +8,22 @@ import com.baron.member.model.MemberModel;
 
 public interface StatisticDao {
 
-	public List<BookModel> selectBestBook();
+	public List<BookModel> selectBestBook(Dto param);
 
 	public List<BookModel> getNewbook();
 
-	public List<MemberModel> selectBestTeam();
+	public List<MemberModel> selectBestTeam(String year);
 
 	public List<MemberModel> selectBest();
 
 	public List<BookModel> selectBookCount();
 
-	public List<Dto> selectGroupByMonth(String year);
-
-	public List<Dto> selectBestPerson();
+	public List<Dto> selectBestPerson(Dto param);
 
 	public List<Dto> selectSumPurchase(String year);
+
+	public List<Dto> selectGroupByB(Dto param);
+
+	public List<Dto> rentByMonth(Dto param);
 
 }

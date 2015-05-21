@@ -21,9 +21,12 @@ public class StatisticDaoImpl implements StatisticDao {
 	private SqlSession session;
 
 	@Override
-	public List<BookModel> selectBestBook() {
-
-		return session.selectList(NAMESPACE + "selectBestBook");
+	public List<BookModel> selectBestBook(Dto param) {
+		if (param.getMonth() != "") {
+			return session.selectList(NAMESPACE + "selectBestBook", param);
+		} else {
+			return session.selectList(NAMESPACE + "selectBestBookYear", param);
+		}
 	}
 
 	@Override
@@ -33,9 +36,9 @@ public class StatisticDaoImpl implements StatisticDao {
 	}
 
 	@Override
-	public List<MemberModel> selectBestTeam() {
+	public List<MemberModel> selectBestTeam(String year) {
 
-		return session.selectList(NAMESPACE + "selectBestTeam");
+		return session.selectList(NAMESPACE + "selectBestTeam", year);
 	}
 
 	@Override
@@ -52,18 +55,31 @@ public class StatisticDaoImpl implements StatisticDao {
 	}
 
 	@Override
-	public List<Dto> selectGroupByMonth(String year) {
-		return session.selectList(NAMESPACE + "selectGroupByMonth", year);
+	public List<Dto> rentByMonth(Dto param) {
+		return session.selectList(NAMESPACE + "rentByMonth", param);
 	}
 
 	@Override
-	public List<Dto> selectBestPerson() {
-		return session.selectList(NAMESPACE + "selectBestPerson");
+	public List<Dto> selectBestPerson(Dto param) {
+		if (param.getMonth() != "") {
+			return session.selectList(NAMESPACE + "selectBestPerson", param);
+		} else {
+			return session.selectList(NAMESPACE + "selectBestPersonYear", param);
+		}
 	}
 
 	@Override
 	public List<Dto> selectSumPurchase(String year) {
 		return session.selectList(NAMESPACE + "selectSumPurchase", year);
+	}
+
+	@Override
+	public List<Dto> selectGroupByB(Dto param) {
+		if (param.getMonth() != "") {
+			return session.selectList(NAMESPACE + "selectGroupByB", param);
+		} else {
+			return session.selectList(NAMESPACE + "selectGroupByBYear", param);
+		}
 	}
 
 }

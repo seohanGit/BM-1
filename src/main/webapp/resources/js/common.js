@@ -187,48 +187,6 @@ $('#title').click(function() {
 
 })
 
-$('#getMonth').click(function() {
-	$.ajax({
-
-		type : "GET", // GET or POST
-		url : "/selectSumPurchase", // URL
-		datatype : "xml",
-		// html, xml, json, jsonp, script, text
-		data : {
-			year : $('#year').val()
-		},
-		// parameters as plain object
-		error : function() { // Ajax error handler
-
-			alert('검색어를 입력하세요');
-		},
-		success : function(data, status) { // Ajax complete handelr
-			$('#rentMonth').empty().append(data);
-		}
-	});
-});
-
-$('#selectGroupByMonth').click(function() {
-	$.ajax({
-
-		type : "GET", // GET or POST
-		url : "/selectGroupByMonth", // URL
-		datatype : "xml",
-		// html, xml, json, jsonp, script, text
-		data : {
-			year : $('#year1').val()
-		},
-		// parameters as plain object
-		error : function() { // Ajax error handler
-
-			alert('검색어를 입력하세요');
-		},
-		success : function(data, status) { // Ajax complete handelr
-			$('#graphPlace').empty().append(data);
-		}
-	});
-});
-
 // ///////////////////////////////리스트
 /*
  * $('#borrowList').click(function() { $.ajax({ type : "GET", // GET or POST url :

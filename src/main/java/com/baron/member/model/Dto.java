@@ -6,6 +6,8 @@ public class Dto {
 	private String year;
 	private String kname;
 	private int price;
+	private String b_group;
+	private String team_nm;
 
 	private String string1;
 	private String string2;
@@ -14,6 +16,22 @@ public class Dto {
 	private int num1;
 	private int num2;
 	private int num3;
+
+	public String getTeam_nm() {
+		return team_nm;
+	}
+
+	public void setTeam_nm(String team_nm) {
+		this.team_nm = team_nm;
+	}
+
+	public String getB_group() {
+		return b_group;
+	}
+
+	public void setB_group(String b_group) {
+		this.b_group = b_group;
+	}
 
 	public int getPrice() {
 		return price;

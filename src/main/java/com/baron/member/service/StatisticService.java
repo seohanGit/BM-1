@@ -10,18 +10,22 @@ public interface StatisticService {
 
 	public List<BookModel> getNewbook() throws Exception;
 
-	public List<BookModel> selectBestBook() throws Exception;
+	public List<BookModel> selectBestBook(Dto param) throws Exception;
 
-	public List<MemberModel> selectBestTeam() throws Exception;
+	public List<MemberModel> selectBestTeam(String year) throws Exception;
 
 	public List<BookModel> selectBookCount() throws Exception;
 
 	public List<MemberModel> selectBest() throws Exception;
 
-	public List<Dto> selectGroupByMonth(String year);
-
-	public List<Dto> selectBestPerson();
+	public List<Dto> selectBestPerson(Dto param);
 
 	public List<Dto> selectSumPurchase(String year);
+
+	public List<Dto> selectGroupByB(Dto param);
+
+	public List<Dto> rentByMonth(Dto param);
+
+	
 
 }

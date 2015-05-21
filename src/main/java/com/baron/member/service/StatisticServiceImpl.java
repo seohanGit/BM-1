@@ -24,21 +24,21 @@ public class StatisticServiceImpl implements StatisticService {
 	}
 
 	@Override
-	public List<BookModel> selectBestBook() {
+	public List<BookModel> selectBestBook(Dto param) throws Exception{
 
-		return statisticDao.selectBestBook();
+		return statisticDao.selectBestBook(param);
 	}
 
 	@Override
-	public List<MemberModel> selectBestTeam() {
+	public List<MemberModel> selectBestTeam(String year) {
 
 		List<MemberModel> list = new ArrayList<MemberModel>();
-		list = statisticDao.selectBestTeam();
-		int max = list.get(0).getCount();
+		list = statisticDao.selectBestTeam(year);
+		/*int max = list.get(0).getCount();
 
 		for (MemberModel member : list) {
 			member.setMax(max);
-		}
+		}*/
 		return list;
 	}
 
@@ -54,19 +54,24 @@ public class StatisticServiceImpl implements StatisticService {
 	}
 
 	@Override
-	public List<Dto> selectGroupByMonth(String year) {
-		return statisticDao.selectGroupByMonth(year);
+	public List<Dto> rentByMonth(Dto param) {
+		return statisticDao.rentByMonth(param);
 	}
 
 	@Override
-	public List<Dto> selectBestPerson() {
-		return statisticDao.selectBestPerson();
+	public List<Dto> selectBestPerson(Dto param) {
+		return statisticDao.selectBestPerson(param);
 	}
 
 	@Override
 	public List<Dto> selectSumPurchase(String year) {
-		// TODO Auto-generated method stub
 		return statisticDao.selectSumPurchase(year);
 	}
 
+	@Override
+	public List<Dto> selectGroupByB(Dto param) {
+		return statisticDao.selectGroupByB(param);
+	}
+
+	
 }

@@ -1,8 +1,5 @@
 package com.baron.member.service;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,6 +61,12 @@ public class StatisticServiceImpl implements StatisticService {
 	@Override
 	public List<Dto> selectBestPerson() {
 		return statisticDao.selectBestPerson();
+	}
+
+	@Override
+	public List<Dto> selectSumPurchase(String year) {
+		// TODO Auto-generated method stub
+		return statisticDao.selectSumPurchase(year);
 	}
 
 }

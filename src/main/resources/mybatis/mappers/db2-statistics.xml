@@ -41,25 +41,28 @@
 
 
 	<select id="selectBestPerson" resultType="Dto">
-		SELECT (SELECT kname FROM tprlib.gr_insa WHERE asabn = A.id FETCH first 1 rows only) kname , 
-		COUNT(*) AS count, 
+		SELECT (SELECT kname
+		FROM tprlib.gr_insa WHERE asabn = A.id FETCH first 1 rows only) kname
+		,
+		COUNT(*) AS count,
 		month(A.rentdate) AS month
 		FROM
-		testlib.bookrent A INNER JOIN tprlib.gr_insa	B 
-		ON A.id = B.asabn 
+		testlib.bookrent A INNER JOIN tprlib.gr_insa B
+		ON A.id = B.asabn
 		WHERE year(A.rentdate) = '2015'
 		GROUP BY
 		A.id, month(A.rentdate)
 		ORDER BY
-		month, count DESC 
+		month, count DESC
 	</select>
 
-	<select id="selectGroupByMonth" parameterType="String" resultType="Dto">
+	<select id="selectGroupByMonth" parameterType="String"
+		resultType="Dto">
 		SELECT COUNT(*)
 		count, month(rentdate) AS month
 		FROM
 		testlib.bookrent
-		WHERE year(rentdate) = #{year} 
+		WHERE year(rentdate) = #{year}
 		GROUP BY
 		month(rentdate)
 	</select>
@@ -85,10 +88,11 @@
 		ORDER BY
 		count DESC
 	</select>
-<select id="selectSumPurchase">
-SELECT SUM(DOUBLE(PRICE)) PRICE, month(rcv_date), count(rcv_date) count FROM 
-testlib.bookmst 
-GROUP BY month(rcv_date)
-</select>
+	<select id="selectSumPurchase" parameterType="String"
+		resultType="Dto">
+		SELECT SUM(DOUBLE(PRICE)) PRICE, month(rcv_date) AS month, count(rcv_date) count FROM
+		testlib.bookmst WHERE year(rcv_date)=#{year}
+		GROUP BY month(rcv_date)
+	</select>
 
 </mapper>

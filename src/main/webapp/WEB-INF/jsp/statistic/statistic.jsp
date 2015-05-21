@@ -118,30 +118,22 @@ body {
 								</tbody>
 							</table>
 						</div>
-						<div id="bestBook" class="right">
-							<table class="highchart table table-bordered"
-								data-graph-container-before="1" data-graph-type="column"
-								style="display: none">
-								<caption>월별 대여현황</caption>
-
-								<thead>
-									<tr>
-										<th class="td-title">월</th>
-										<th class="td-img">대여권수</th>
-									</tr>
-								</thead>
-								<tbody>
-									<c:forEach items="${rentMonth }" var="rentMonth" begin="0"
-										end="11">
-										<tr>
-
-											<td>${rentMonth.month}월</td>
-											<td>${rentMonth.count}</td>
-										</tr>
-									</c:forEach>
-								</tbody>
-							</table>
-						</div>
+						<select id="year1">
+							<option value="2013">2013
+							<option value="2014">2014
+							<option value="2015">2015
+							<option>4
+							<option>5
+							<option>6
+							<option>7
+							<option>8
+							<option>9
+							<option>10
+							<option>11
+							<option>12
+						</select>
+						<button id="selectGroupByMonth" type="button">년</button>
+						<div id="graphPlace" class="right"></div>
 
 					</div>
 					<div class="row">
@@ -202,7 +194,7 @@ ${bestPerson.month}
 
 						</div> --%>
 
-						<select id="year" >
+						<select id="year">
 							<option value="2013">2013
 							<option value="2014">2014
 							<option value="2015">2015
@@ -243,6 +235,7 @@ ${bestPerson.month}
 								</tbody>
 							</table>
 						</div>
+
 
 
 

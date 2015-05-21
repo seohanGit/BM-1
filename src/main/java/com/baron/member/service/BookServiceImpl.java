@@ -7,6 +7,8 @@ import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.baron.member.dao.BookDao;
+import com.baron.member.dao.EtcDao;
 import com.baron.member.model.BookModel;
 import com.baron.member.model.CodeModel;
 import com.baron.member.model.Dto;
@@ -26,6 +29,9 @@ public class BookServiceImpl implements BookService {
 
 	@Autowired
 	private BookDao bookDao;
+
+	@Autowired
+	private EtcDao etcDao;
 
 	/*
 	 * @Override public List<BookModel> getNewbook() throws Exception {
@@ -226,7 +232,6 @@ public class BookServiceImpl implements BookService {
 		return bookDao.selectBookAll();
 	}
 
-
 	@Override
 	public List<CodeModel> selectBCodeList() {
 
@@ -239,4 +244,25 @@ public class BookServiceImpl implements BookService {
 		return bookDao.selectCCodeList();
 	}
 
+	@Override
+	public void updateDate() {
+
+		List<BookModel> bookList = bookDao.selectBookAll();
+
+		for (BookModel book : bookList) {
+			if (etcDao.copyDate(book.getBook_cd()) != null) {
+				book = etcDao.copyDate(book.getBook_cd());
+				SimpleDateFormat format = new SimpleDateFormat();
+				try {
+					format.parse(book.getRcv_date());
+					etcDao.updateDate(book);
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			}
+			;
+		}
+	}
 }

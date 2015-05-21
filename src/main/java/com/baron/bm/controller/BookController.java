@@ -34,7 +34,8 @@ public class BookController {
 	private RequestService requestservice;
 
 	@RequestMapping("/insertbookForm")
-	public String insertbook() {
+	public String insertbook() throws Exception {
+		bookservice.updateDate();
 		return "book/insertbook";
 	}
 
@@ -196,59 +197,5 @@ public class BookController {
 	 * System.out.println(model.getRequestid()); bookservice.requestBook(model);
 	 * return "requestBookResult"; }
 	 */
-	@RequestMapping("/backupRecord")
-	public String backupRecord(HttpServletRequest request) throws Exception {
-		List<BookModel> bookList = new ArrayList<BookModel>();
-
-		bookList = rentservice.copyRent();
-
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-
-		for (BookModel bookmodel : bookList) {
-			bookmodel.setRentdate(format.parse(bookmodel.getReq_ymd()));
-			bookmodel.setReturndate(format.parse(bookmodel.getRetu_ymd()));
-
-			bookmodel.setBook_cd(bookmodel.getBook_cd());
-			bookmodel.setTeam_nm(bookmodel.getTeam_nm());
-			bookmodel.setId(bookmodel.getId());
-			System.out.println(bookmodel.getBook_cd() + bookmodel.getRentdate()
-					+ bookmodel.getReq_ymd());
-			rentservice.insertRecord(bookmodel);
-		}
-
-		return "rent/recordListAll";
-
-	}
-
-	@RequestMapping("/updateImage")
-	public String updateImage() throws Exception {
-		String isbn = "";
-
-		List<BookModel> bookList = bookservice.selectBookAll();
-		for (int i = 0; i < bookList.size() - 2700; i++) {
-			BookModel book = bookList.get(i);
-			isbn = book.getIsbn();
-			isbn = isbn.substring(0, 13);
-			System.out.println(isbn);
-			book = requestservice.findBookOne(isbn);
-			System.out.println(book.getImageurl());
-
-		}/*
-		 * for (BookModel bookmodel : bookList) { BookModel book = new
-		 * BookModel(); isbn = bookmodel.getIsbn();
-		 * 
-		 * if (isbn != null) { isbn = isbn.substring(0, 13);
-		 * System.out.println(isbn); if (isbn.substring(0, 5) == "97889") { book
-		 * = requestservice.findBookOne(isbn);
-		 * System.out.println(book.getImageurl());
-		 * bookmodel.setImageurl(book.getImageurl());
-		 * bookmodel.setAuthor(book.getAuthor());
-		 * bookservice.updateBook(bookmodel); } else
-		 * System.out.println("isbn일치 없음"); } else {
-		 * System.out.println("isbn오류"); } }
-		 */
-		return "member/admin";
-
-	}
 
 }

@@ -58,7 +58,6 @@ public class BookDaoImplTest {
 	}
 
 	
-	
 	@Test
 	public void updateImage() throws Exception {
 		// TODO Auto-generated method stub

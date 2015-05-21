@@ -28,11 +28,18 @@
 		'YYYYMMDD') AND GUBN = 'A'
 	</select>
 
-	<select id="copyDate" parameterType="String" resultType="String">
-		SELECT Left(A.rece_ymd,
+	<select id="copyDate" parameterType="String" resultType="BookModel">
+		SELECT
+		Left(A.rece_ymd,
 		4)||'-'||substring(A.rece_ymd,5,2)||'-'||substring(A.rece_ymd, 7,2) as
-		date from sitlib.bookmst WHERE book_cd = #{book_cd}
+		rcv_date from sitlib.bookmst A WHERE book_cd = #{book_cd} ORDER BY A.rece_ymd DESC
+		FETCH first 1 rows only
+		
 	</select>
+
+	<update id="updateDate" parameterType="BookModel">
+		UPDATE testlib.bookmst SET rcv_date = #{rcv_date} WHERE book_cd=#{book_cd}
+	</update>
 
 
 	<select id="copyRent" resultType="BookModel">
@@ -53,9 +60,9 @@
 	<insert id="backupRecord" parameterType="BookModel">
 		INSERT INTO
 		TESTLIB.BOOKRENT
-		(ID, RENTDATE,  RETURNDATE, team_nm, book_cd)
+		(ID, RENTDATE, RETURNDATE, team_nm, book_cd)
 		VALUES(#{id},
 		#{rentdate},
-		 #{returndate}, #{team_nm}, #{book_cd})
+		#{returndate}, #{team_nm}, #{book_cd})
 	</insert>
 </mapper>

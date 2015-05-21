@@ -22,4 +22,6 @@ public interface StatisticService {
 
 	public List<Dto> selectBestPerson();
 
+	public List<Dto> selectSumPurchase(String year);
+
 }

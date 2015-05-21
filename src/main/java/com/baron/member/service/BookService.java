@@ -36,4 +36,6 @@ public interface BookService {
 
 	public List<CodeModel> selectBCodeList();
 	public List<CodeModel> selectCCodeList();
+
+	public void updateDate() throws Exception;
 }

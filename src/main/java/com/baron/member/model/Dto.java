@@ -5,6 +5,7 @@ public class Dto {
 	private String month;
 	private String year;
 	private String kname;
+	private int price;
 
 	private String string1;
 	private String string2;
@@ -13,6 +14,14 @@ public class Dto {
 	private int num1;
 	private int num2;
 	private int num3;
+
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
 
 	public String getYear() {
 		return year;

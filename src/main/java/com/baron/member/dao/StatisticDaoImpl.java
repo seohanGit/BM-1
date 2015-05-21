@@ -61,4 +61,9 @@ public class StatisticDaoImpl implements StatisticDao {
 		return session.selectList(NAMESPACE + "selectBestPerson");
 	}
 
+	@Override
+	public List<Dto> selectSumPurchase(String year) {
+		return session.selectList(NAMESPACE + "selectSumPurchase", year);
+	}
+
 }

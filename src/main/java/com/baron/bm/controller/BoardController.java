@@ -1,5 +1,6 @@
 package com.baron.bm.controller;
 
+import java.awt.print.Book;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +19,6 @@ import com.baron.member.model.Dto;
 import com.baron.member.model.MemberModel;
 import com.baron.member.service.BoardService;
 import com.baron.member.service.StatisticService;
-import com.google.gson.JsonObject;
 
 @Controller
 public class BoardController {
@@ -155,7 +155,8 @@ public class BoardController {
 	}
 
 	@RequestMapping("/statistic")
-	public String statistic(Model model) throws Exception {
+	public String statistic(Model model, String year) throws Exception {
+	
 		List<BookModel> bookCount = statisticService.selectBookCount();
 		List<BookModel> bestBook = statisticService.selectBestBook();
 		List<MemberModel> teamCount = statisticService.selectBestTeam();
@@ -174,8 +175,16 @@ public class BoardController {
 
 	@RequestMapping("/selectSumPurchase")
 	public String selectSumPurchase(String year, Model model) {
-		List<Dto> rentMonth = statisticService.selectGroupByMonth(year);
-		model.addAttribute("rentMonth", rentMonth);
-		return "groupByMonth";
+		List<Dto> SumPurchase = statisticService.selectSumPurchase(year);
+
+		model.addAttribute("SumPurchase", SumPurchase);
+		return "/statistic/groupByMonth";
+	}
+
+	@RequestMapping("/selectGroupByMonth")
+	public String selectGroupByMonth(String year, Model model) {
+		List<Dto> selectGroupByMonth = statisticService.selectGroupByMonth(year);
+		model.addAttribute("selectGroupByMonth", selectGroupByMonth);
+		return "/statistic/selectGroupByMonth";
 	}
 }

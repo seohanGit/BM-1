@@ -2,6 +2,7 @@ package com.baron.member.service;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.baron.member.dao.StatisticDao;
 import com.baron.member.model.BookModel;
+import com.baron.member.model.Dto;
 import com.baron.member.model.MemberModel;
 
 @Service
@@ -52,6 +54,16 @@ public class StatisticServiceImpl implements StatisticService {
 	public List<MemberModel> selectBest() {
 
 		return statisticDao.selectBest();
+	}
+
+	@Override
+	public List<Dto> selectGroupByMonth(String year) {
+		return statisticDao.selectGroupByMonth(year);
+	}
+
+	@Override
+	public List<Dto> selectBestPerson() {
+		return statisticDao.selectBestPerson();
 	}
 
 }

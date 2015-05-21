@@ -1,14 +1,34 @@
 package com.baron.member.model;
 
 public class Dto {
-	private int num1;
-	private int num2;
-	private int num3;
-	private int num4;
+	private String count;
+	private String month;
+	private String year;
+	private String kname;
 
 	private String string1;
 	private String string2;
 	private String string3;
+
+	private int num1;
+	private int num2;
+	private int num3;
+
+	public String getYear() {
+		return year;
+	}
+
+	public void setYear(String year) {
+		this.year = year;
+	}
+
+	public String getKname() {
+		return kname;
+	}
+
+	public void setKname(String kname) {
+		this.kname = kname;
+	}
 
 	public int getNum1() {
 		return num1;
@@ -34,12 +54,20 @@ public class Dto {
 		this.num3 = num3;
 	}
 
-	public int getNum4() {
-		return num4;
+	public String getCount() {
+		return count;
 	}
 
-	public void setNum4(int num4) {
-		this.num4 = num4;
+	public void setCount(String count) {
+		this.count = count;
+	}
+
+	public String getMonth() {
+		return month;
+	}
+
+	public void setMonth(String month) {
+		this.month = month;
 	}
 
 	public String getString1() {

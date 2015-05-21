@@ -44,16 +44,17 @@
 
 			<h4>원하는 책이 없다면 인터넷에서 주문하세요 !</h4>
 			<div class="input-group" style="width: 95%">
-					<form action="/searchBook" method="post">
-						<span class="input-group-btn"> <input type="text"
-							class="form-control" id="keyword" name="keyword"
-							placeholder="기술자료실 도서 검색 [ 소문자로 입력 ]">
-							<button class="btn btn-default" type="submit" id="btn_find">
-								<span class="glyphicon glyphicon-search"></span>
-							</button>
-						</span>
-					</form>
-				</div>
+				<form action="/searchBook" method="post">
+					<span class="input-group-btn"> <input type="text"
+						class="form-control" id="keyword" name="keyword"
+						placeholder="기술자료실 도서 검색 [ 소문자로 입력 ]">
+						<button class="btn btn-default" type="submit" id="btn_find">
+							<span class="glyphicon glyphicon-search"></span>
+						</button>
+					</span>
+				</form>
+			</div>
+
 			<div class="dataTable_wrapper">
 				<table class="table table-striped table-bordered " id="dataTable">
 
@@ -154,16 +155,16 @@
 				},
 				"pageLength" : 10,
 				paging : true,
-				"order": [],
+				"order" : [],
 
 				"columns" : [ null, null, null, {
 					"searchable" : false
-					
+
 				}, {
 					"searchable" : false
 				}, {
 					"searchable" : false,
-					
+
 				} ]
 
 			});

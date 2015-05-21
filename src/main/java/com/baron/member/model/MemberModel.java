@@ -14,10 +14,10 @@ public class MemberModel {
 	private String mobi_no;
 	private String permission;
 	private Date endday;
-	
+
 	private int count;
 	private String content;
-	
+
 	private Date borrowdate;
 	private Date returndate;
 	private String jikb;
@@ -25,7 +25,27 @@ public class MemberModel {
 	private String team_nm;
 
 	private int max;
+
+	private String year;
+	private String month;
 	
+
+	public String getYear() {
+		return year;
+	}
+
+	public void setYear(String year) {
+		this.year = year;
+	}
+
+	public String getMonth() {
+		return month;
+	}
+
+	public void setMonth(String month) {
+		this.month = month;
+	}
+
 	public int getMax() {
 		return max;
 	}
@@ -74,7 +94,6 @@ public class MemberModel {
 		this.returndate = returndate;
 	}
 
-	
 	public String getContent() {
 		return content;
 	}
@@ -90,8 +109,6 @@ public class MemberModel {
 	public void setCount(int count) {
 		this.count = count;
 	}
-
-	
 
 	public Date getEndday() {
 		return endday;

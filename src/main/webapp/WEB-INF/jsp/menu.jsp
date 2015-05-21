@@ -50,7 +50,7 @@
 					onclick="location.href='searchBook'">도서목록</button>
 
 				<button class="btn btn-default  noborder"
-					onclick="location.href='statistic'">대여현황</button>
+					onclick="location.href='statistic'">통계자료</button>
 			</div>
 			<div class="btn-group btn-group-xs">
 				<hr>

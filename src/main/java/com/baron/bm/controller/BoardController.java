@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.baron.member.model.BoardModel;
 import com.baron.member.model.BookModel;
+import com.baron.member.model.Dto;
 import com.baron.member.model.MemberModel;
 import com.baron.member.service.BoardService;
 import com.baron.member.service.StatisticService;
@@ -157,14 +158,24 @@ public class BoardController {
 	public String statistic(Model model) throws Exception {
 		List<BookModel> bookCount = statisticService.selectBookCount();
 		List<BookModel> bestBook = statisticService.selectBestBook();
-		List<MemberModel> bestTeam = statisticService.selectBestTeam();
+		List<MemberModel> teamCount = statisticService.selectBestTeam();
 		List<MemberModel> bestOne = statisticService.selectBest();
+		List<Dto> bestPerson = statisticService.selectBestPerson();
+
+		model.addAttribute("bestPerson", bestPerson);
 
 		model.addAttribute("bookCount", bookCount);
 		model.addAttribute("bestBook", bestBook);
-		model.addAttribute("bestTeam", bestTeam);
+		model.addAttribute("teamCount", teamCount);
 		model.addAttribute("bestOne", bestOne);
 
-		return "statistic";
+		return "statistic/statistic";
+	}
+
+	@RequestMapping("/selectSumPurchase")
+	public String selectSumPurchase(String year, Model model) {
+		List<Dto> rentMonth = statisticService.selectGroupByMonth(year);
+		model.addAttribute("rentMonth", rentMonth);
+		return "groupByMonth";
 	}
 }

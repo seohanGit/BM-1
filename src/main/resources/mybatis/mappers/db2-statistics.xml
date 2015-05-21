@@ -7,12 +7,16 @@
 
 		SELECT B.team_nm,
 		COUNT(*) AS count FROM
-		testlib.bookrent A INNER JOIN tprlib.gr_insa B
+		testlib.bookrent A INNER JOIN
+		tprlib.gr_insa B
 		ON A.id=B.asabn WHERE
-		rentdate > current date - 4 month GROUP BY
+		rentdate > current date - 12
+		month GROUP BY
 		B.team_nm ORDER
 		BY count DESC
+		<!-- 1년간 팀별 대여현황 -->
 	</select>
+
 	<select id="selectBest" resultType="MemberModel">
 
 		SELECT (SELECT kname FROM
@@ -22,34 +26,43 @@
 		A.asabn FETCH
 		first 1 rows only) AS team_nm, A.asabn AS id, (SELECT
 		COUNT(*) FROM
-		testlib.BOOKRENT B WHERE B.rentdate > current date -30
-		day AND B.id =
+		testlib.BOOKRENT B WHERE B.rentdate > current date - 12 month AND B.id
+		=
 		A.asabn) AS count FROM tprlib.gr_insa AS A GROUP BY
 		A.asabn ORDER BY
 		count DESC
 	</select>
-	
+
 	<select id="selectBookCount" resultType="BookModel">
-		SELECT COUNT(*) AS count, b_group FROM testlib.bookmst GROUP BY b_group
+		SELECT COUNT(*) AS
+		count, b_group FROM testlib.bookmst GROUP BY b_group
 	</select>
 
-	<select id="selectBestPerson" resultType="BookModel">
 
-		SELECT A.id, A.book_cd,
-		COUNT(*) AS count, (SELECT
-		title FROM
-		testlib.bookmst WHERE book_cd =
-		A.book_cd) AS title, (SELECT
-		author
-		FROM testlib.bookmst WHERE book_cd =
-		A.book_cd) AS author FROM
-		testlib.bookrent A INNER JOIN tprlib.gr_insa
-		B ON A.id = B.asabn WHERE
-		A.rentdate > current date - 6 month GROUP BY
-		A.id, A.book_cd ORDER BY
-		count DESC
+
+	<select id="selectBestPerson" resultType="Dto">
+		SELECT (SELECT kname FROM tprlib.gr_insa WHERE asabn = A.id FETCH first 1 rows only) kname , 
+		COUNT(*) AS count, 
+		month(A.rentdate) AS month
+		FROM
+		testlib.bookrent A INNER JOIN tprlib.gr_insa	B 
+		ON A.id = B.asabn 
+		WHERE year(A.rentdate) = '2015'
+		GROUP BY
+		A.id, month(A.rentdate)
+		ORDER BY
+		month, count DESC 
 	</select>
 
+	<select id="selectGroupByMonth" parameterType="String" resultType="Dto">
+		SELECT COUNT(*)
+		count, month(rentdate) AS month
+		FROM
+		testlib.bookrent
+		WHERE year(rentdate) = #{year} 
+		GROUP BY
+		month(rentdate)
+	</select>
 
 	<select id="selectBestBook" resultType="BookModel">
 		SELECT COUNT(*) AS count,
@@ -58,15 +71,24 @@
 		B.book_cd) AS title,
 		(SELECT author FROM testlib.bookmst WHERE book_cd
 		= B.book_cd) AS
-		author
+		author, (SELECT b_group FROM testlib.bookmst WHERE
+		book_cd
+		= B.book_cd) AS
+		b_group
 		FROM testlib.bookrent A INNER JOIN
 		testlib.bookmst B
 		ON A.book_cd
 		= B.book_cd
+		WHERE rentdate > current date
+		- 1 year
 		GROUP BY B.book_cd
 		ORDER BY
 		count DESC
-		FETCH
-		first 5 rows only
 	</select>
+<select id="selectSumPurchase">
+SELECT SUM(DOUBLE(PRICE)) PRICE, month(rcv_date), count(rcv_date) count FROM 
+testlib.bookmst 
+GROUP BY month(rcv_date)
+</select>
+
 </mapper>

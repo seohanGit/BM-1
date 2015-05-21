@@ -141,7 +141,7 @@ public class MemberController {
 		membermodel.setId(id);
 
 		response.addCookie(new Cookie("bm_id", membermodel.getId()));
-		mav.setViewName("start");
+		mav.setViewName("redirect:start");
 		System.out.println(membermodel.getId());
 		mav.addObject("kname", membermodel.getKname());
 		mav.addObject("team_nm", membermodel.getTeam_nm());
@@ -151,7 +151,7 @@ public class MemberController {
 		System.out.println(id + "login Success");
 		if (id.equals("admin") || id.equals("4150266")) {
 			response.addCookie(new Cookie("bm_permission", "1"));
-			mav.setViewName("startAdmin");
+			mav.setViewName("redirect:startAdmin");
 
 			mav.addObject("permission", "1");
 			return mav;
@@ -246,10 +246,13 @@ public class MemberController {
 				System.out.println(cookie.getValue());
 				if ("1".equals(cookie.getValue())) {
 
-					List<MemberModel> bestMember = statisticService.selectBest();
-					List<BookModel> bestBook = statisticService.selectBestBook();
+					List<MemberModel> bestMember = statisticService
+							.selectBest();
+					List<BookModel> bestBook = statisticService
+							.selectBestBook();
 					// List<BookModel> newBook = bookService.getNewbook();
-					List<MemberModel> bestTeam = statisticService.selectBestTeam();
+					List<MemberModel> bestTeam = statisticService
+							.selectBestTeam();
 
 					model.addAttribute("bestMember", bestMember);
 					model.addAttribute("bestBook", bestBook);
@@ -274,6 +277,16 @@ public class MemberController {
 		List<MemberModel> memberList = joinService.memberList();
 		model.addAttribute("memberList", memberList);
 		return "/member/memberList";
+	}
+
+	@RequestMapping("/start")
+	public String start() {
+		return "/start";
+	}
+
+	@RequestMapping("/startAdmin")
+	public String startAdmin() {
+		return "/startAdmin";
 	}
 
 }

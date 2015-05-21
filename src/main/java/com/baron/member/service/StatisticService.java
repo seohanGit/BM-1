@@ -3,6 +3,7 @@ package com.baron.member.service;
 import java.util.List;
 
 import com.baron.member.model.BookModel;
+import com.baron.member.model.Dto;
 import com.baron.member.model.MemberModel;
 
 public interface StatisticService {
@@ -16,5 +17,9 @@ public interface StatisticService {
 	public List<BookModel> selectBookCount() throws Exception;
 
 	public List<MemberModel> selectBest() throws Exception;
+
+	public List<Dto> selectGroupByMonth(String year);
+
+	public List<Dto> selectBestPerson();
 
 }

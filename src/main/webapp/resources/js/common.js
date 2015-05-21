@@ -1,4 +1,4 @@
-$('#btn_search').click(function() {
+/*$('#btn_search').click(function() {
 	$.ajax({
 		type : "GET", // GET or POST
 		url : "/countBook", // URL
@@ -14,7 +14,7 @@ $('#btn_search').click(function() {
 		}
 	});
 });
-
+ */
 function del() {
 	alert("삭제되었습니다.");
 }
@@ -38,17 +38,12 @@ function notifiReser() {
 }
 
 /* 버튼 클릭 */
-
-$("#logout").click(function() {
-	location.href = "/logout"
-})
-
-$('#btn_find').click(function() {
-	if ($('#query').val() == "") {
-		alert("검색어를 입력하세요");
-		return false;
-	}
-})
+/*
+ * $("#logout").click(function() { location.href = "/logout" })
+ * 
+ * $('#btn_find').click(function() { if ($('#query').val() == "") { alert("검색어를
+ * 입력하세요"); return false; } })
+ */
 
 $("#requestList").click(function() {
 	location.href = "/requestList"
@@ -192,21 +187,26 @@ $('#title').click(function() {
 
 })
 
-$(document).ready(function() {
-	$('table.highchart').highchartTable();
+$('#getMonth').click(function() {
+	$.ajax({
+
+		type : "GET", // GET or POST 
+		url : "/selectSumPurchase", // URL 
+		datatype : "xml",
+		// html, xml, json, jsonp, script, text
+		data : {
+			year : $('#year').val()
+		},
+		// parameters as plain object
+		error : function() { // Ajax error handler
+
+			alert('검색어를 입력하세요');
+		},
+		success : function(data, status) { // Ajax complete handelr
+			$('#rentMonth').empty().append(data);
+		}
+	});
 });
-/*
- * $('#btn_find').click(function() { $.ajax({
- * 
- * type : "GET", // GET or POST url : "/findBook", // URL datatype : "xml", //
- * html, xml, json, jsonp, script, text data : { keyword : $('#query').val() }, //
- * parameters as plain object error : function() { // Ajax error handler
- * 
- * alert('검색어를 입력하세요'); }, success : function(data, status) { // Ajax complete
- * handelr $('#goodPhrase').fadeOut(); $('#image1').fadeOut();
- * $('#image2').fadeOut(); $('#searchResultArea').empty().append(data); } });
- * });
- */
 
 // ///////////////////////////////리스트
 /*

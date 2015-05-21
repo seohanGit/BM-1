@@ -3,6 +3,7 @@ package com.baron.member.dao;
 import java.util.List;
 
 import com.baron.member.model.BookModel;
+import com.baron.member.model.Dto;
 import com.baron.member.model.MemberModel;
 
 public interface StatisticDao {
@@ -16,5 +17,9 @@ public interface StatisticDao {
 	public List<MemberModel> selectBest();
 
 	public List<BookModel> selectBookCount();
+
+	public List<Dto> selectGroupByMonth(String year);
+
+	public List<Dto> selectBestPerson();
 
 }

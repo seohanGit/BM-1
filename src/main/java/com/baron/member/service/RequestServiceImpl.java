@@ -34,7 +34,7 @@ public class RequestServiceImpl implements RequestService {
 
 	@Override
 	public void requestBook(BookModel model) {
-		model.setBook_cd(model.getId() + model.getIsbn());
+		model.setBook_cd(model.getB_group()+model.getC_group()+"-");
 		System.out.println(model.getTitle());
 		System.out.println(model.getIsbn());
 		System.out.println(model.getTitle());
@@ -116,8 +116,8 @@ public class RequestServiceImpl implements RequestService {
 	}
 
 	@Override
-	public void updateBook_cd(Dto dto) {
-		requestDao.updateBook_cd(dto);
+	public void modifiBook(BookModel book) {
+		requestDao.modifiBook(book);
 	}
 
 	@Override

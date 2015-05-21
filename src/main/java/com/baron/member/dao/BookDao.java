@@ -3,6 +3,7 @@ package com.baron.member.dao;
 import java.util.List;
 
 import com.baron.member.model.BookModel;
+import com.baron.member.model.CodeModel;
 import com.baron.member.model.Dto;
 import com.baron.member.model.MemberModel;
 import com.baron.member.model.SearchResult;
@@ -24,10 +25,7 @@ public interface BookDao {
 
 	public List<BookModel> selectBookAll();
 
-	public List<BookModel> getNewbook();
-
-	public List<BookModel> selectBestBook();
-
-	public List<MemberModel> selectBestTeam();
+	public List<CodeModel> selectBCodeList();
+	public List<CodeModel> selectCCodeList();
 
 }

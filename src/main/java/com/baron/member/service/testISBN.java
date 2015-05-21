@@ -25,7 +25,7 @@ public class testISBN {
 		book = xmlDom.getBook(url.openStream());
 		System.out.println(isbn);
 
-		System.out.println(book.getTotalResults());
+		
 	}
 
 	private static URL getIsbnUrl(String keyword) throws UnsupportedEncodingException,

@@ -1,8 +1,8 @@
-$('#btn_search').click(function() {
+/*$('#btn_search').click(function() {
 	$.ajax({
 		type : "GET", // GET or POST
-		url : "/searchBook", // URL
-		datatype : "xml", // html, xml, json, jsonp, script, text
+		url : "/countBook", // URL
+		datatype : "json", // html, xml, json, jsonp, script, text
 		data : {
 			keyword : $('#keyword').val()
 		},
@@ -14,7 +14,7 @@ $('#btn_search').click(function() {
 		}
 	});
 });
-
+ */
 function del() {
 	alert("삭제되었습니다.");
 }
@@ -38,17 +38,12 @@ function notifiReser() {
 }
 
 /* 버튼 클릭 */
-
-$("#logout").click(function() {
-	location.href = "/logout"
-})
-
-$('#btn_find').click(function() {
-	if ($('#query').val() == "") {
-		alert("검색어를 입력하세요");
-		return false;
-	}
-})
+/*
+ * $("#logout").click(function() { location.href = "/logout" })
+ * 
+ * $('#btn_find').click(function() { if ($('#query').val() == "") { alert("검색어를
+ * 입력하세요"); return false; } })
+ */
 
 $("#requestList").click(function() {
 	location.href = "/requestList"
@@ -63,8 +58,8 @@ $("#insertBook").click(function() {
 $("#recordList").click(function() {
 	location.href = "/recordList"
 })
-$("#rentListAll").click(function() {
-	location.href = "/rentListAll"
+$("#statistic").click(function() {
+	location.href = "/statistic"
 })
 $("#reservationListAll").click(function() {
 	location.href = "/reservationListAll"
@@ -191,18 +186,6 @@ $('#title').click(function() {
 	});
 
 })
-/*
- * $('#btn_find').click(function() { $.ajax({
- * 
- * type : "GET", // GET or POST url : "/findBook", // URL datatype : "xml", //
- * html, xml, json, jsonp, script, text data : { keyword : $('#query').val() }, //
- * parameters as plain object error : function() { // Ajax error handler
- * 
- * alert('검색어를 입력하세요'); }, success : function(data, status) { // Ajax complete
- * handelr $('#goodPhrase').fadeOut(); $('#image1').fadeOut();
- * $('#image2').fadeOut(); $('#searchResultArea').empty().append(data); } });
- * });
- */
 
 // ///////////////////////////////리스트
 /*

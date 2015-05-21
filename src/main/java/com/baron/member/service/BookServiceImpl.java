@@ -7,6 +7,8 @@ import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +16,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.baron.member.dao.BookDao;
+import com.baron.member.dao.EtcDao;
 import com.baron.member.model.BookModel;
+import com.baron.member.model.CodeModel;
 import com.baron.member.model.Dto;
 import com.baron.member.model.MemberModel;
 import com.baron.member.model.SearchResult;
@@ -25,6 +29,9 @@ public class BookServiceImpl implements BookService {
 
 	@Autowired
 	private BookDao bookDao;
+
+	@Autowired
+	private EtcDao etcDao;
 
 	/*
 	 * @Override public List<BookModel> getNewbook() throws Exception {
@@ -65,7 +72,15 @@ public class BookServiceImpl implements BookService {
 
 	@Override
 	public void insertBook(BookModel model) {
-		bookDao.insertBook(model);
+		if (model.getQuantity() == 1) {
+			bookDao.insertBook(model);
+		} else if (model.getQuantity() != 1) {
+			for (int i = 0; i < model.getQuantity(); i++) {
+				model.setBook_cd(model.getBook_cd() + "(" + (i + 1) + ")");
+				bookDao.insertBook(model);
+			}
+
+		}
 	}
 
 	@Override
@@ -80,20 +95,20 @@ public class BookServiceImpl implements BookService {
 
 	@Override
 	public void deleteBook(String bookCode) {
-		// TODO Auto-generated method stub
+
 		bookDao.deleteBook(bookCode);
 	}
 
 	@Override
 	public void updateBook(BookModel bookmodel) {
-		// TODO Auto-generated method stub
+
 		bookDao.updateBook(bookmodel);
 
 	}
 
 	@Override
 	public String selectname(String bookCode) {
-		// TODO Auto-generated method stub
+
 		return bookDao.selectname(bookCode);
 	}
 
@@ -207,39 +222,47 @@ public class BookServiceImpl implements BookService {
 
 	@Override
 	public List<BookModel> listBook(Dto dto) {
-		// TODO Auto-generated method stub
+
 		return bookDao.listBook(dto);
 	}
 
 	@Override
 	public List<BookModel> selectBookAll() {
-		// TODO Auto-generated method stub
+
 		return bookDao.selectBookAll();
 	}
 
 	@Override
-	public List<BookModel> getNewbook() throws Exception {
-		return bookDao.getNewbook();
+	public List<CodeModel> selectBCodeList() {
 
+		return bookDao.selectBCodeList();
 	}
 
 	@Override
-	public List<BookModel> selectBestBook() {
-		// TODO Auto-generated method stub
-		return bookDao.selectBestBook();
+	public List<CodeModel> selectCCodeList() {
+
+		return bookDao.selectCCodeList();
 	}
 
 	@Override
-	public List<MemberModel> selectBestTeam() {
-		// TODO Auto-generated method stub
-		List<MemberModel> list = new ArrayList<MemberModel>();
-		list = bookDao.selectBestTeam();
-		int max = list.get(0).getCount();
-		
-		for (MemberModel member : list) {
-			member.setMax(max);
+	public void updateDate() {
+
+		List<BookModel> bookList = bookDao.selectBookAll();
+
+		for (BookModel book : bookList) {
+			if (etcDao.copyDate(book.getBook_cd()) != null) {
+				book = etcDao.copyDate(book.getBook_cd());
+				SimpleDateFormat format = new SimpleDateFormat();
+				try {
+					format.parse(book.getRcv_date());
+					etcDao.updateDate(book);
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			}
+			;
 		}
-		return list;
 	}
-
 }

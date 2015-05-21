@@ -6,20 +6,18 @@
 		#{group})
 	</insert>
 
-	<select id="selectB_code" resultType="CodeModel">
-		SELECT * FROM salib.acoderp
+	<select id="selectB_codeList" resultType="CodeModel">
+		SELECT asgub AS code, asdes AS name FROM salib.acoderp
 		WHERE adgub='BD' ORDER BY asgub
 	</select>
-
-
 
 	<insert id="insertC_code" parameterType="CodeModel">
 		INSERT INTO
 		salib.acoderp (adgub, asgub, asdes) VALUES('BS', #{code},
 		#{group})
 	</insert>
-	<select id="selectC_code" resultType="CodeModel">
-		SELECT * FROM salib.acoderp
+	<select id="selectC_codeList" resultType="CodeModel">
+		SELECT asgub AS code, asdes AS name FROM salib.acoderp
 		WHERE adgub='BS' ORDER BY asgub
 	</select>
 </mapper>

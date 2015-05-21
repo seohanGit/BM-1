@@ -7,6 +7,7 @@
 
 package com.baron.bm.controller;
 
+import java.util.Calendar;
 import java.util.Hashtable;
 import java.util.List;
 
@@ -28,10 +29,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.baron.member.model.BoardModel;
 import com.baron.member.model.BookModel;
+import com.baron.member.model.Dto;
 import com.baron.member.model.MemberModel;
 import com.baron.member.service.BoardService;
 import com.baron.member.service.BookService;
 import com.baron.member.service.JoinService;
+import com.baron.member.service.StatisticService;
 
 @SessionAttributes({ "kname", "jikb", "team_nm", "permission" })
 @Controller
@@ -46,6 +49,12 @@ public class MemberController {
 	@Autowired
 	private BoardService boardService;
 
+	@Autowired
+	private StatisticService statisticService;
+
+	String year = Integer.toString(Calendar.getInstance().get(Calendar.YEAR));
+	String month = Integer.toString(Calendar.getInstance().get(Calendar.MONTH));
+
 	@RequestMapping("/test")
 	public String test(Model model) {
 		System.out.println(joinService.test());
@@ -59,12 +68,14 @@ public class MemberController {
 
 	@RequestMapping("/index")
 	public String index(Model model) throws Exception {
-
+		Dto param = new Dto();
+		param.setYear(year);
+		param.setMonth(month);
 		List<BoardModel> notice = boardService.noticeList();
 
-		List<BookModel> bestBook = bookService.selectBestBook();
-		List<MemberModel> bestTeam = bookService.selectBestTeam();
-		List<BookModel> newBook = bookService.getNewbook();
+		List<BookModel> bestBook = statisticService.selectBestBook(param);
+		List<MemberModel> bestTeam = statisticService.selectBestTeam(year);
+		List<BookModel> newBook = statisticService.getNewbook();
 
 		model.addAttribute("noticeList", notice);
 		model.addAttribute("bestBook", bestBook);
@@ -131,16 +142,16 @@ public class MemberController {
 			String id) {
 
 		// ModelAndView mav = new ModelAndView("/index");
+
 		if (joinService.login(id) == null) {
 			mav.setViewName("loginfail");
-			return mav;
-		} else {
+
 			MemberModel membermodel = new MemberModel();
 			membermodel = joinService.login(id);
 			membermodel.setId(id);
 
 			response.addCookie(new Cookie("bm_id", membermodel.getId()));
-			mav.setViewName("start");
+			mav.setViewName("redirect:start");
 			System.out.println(membermodel.getId());
 			mav.addObject("kname", membermodel.getKname());
 			mav.addObject("team_nm", membermodel.getTeam_nm());
@@ -150,15 +161,35 @@ public class MemberController {
 			System.out.println(id + "login Success");
 			if (id.equals("admin") || id.equals("4150266")) {
 				response.addCookie(new Cookie("bm_permission", "1"));
-				mav.setViewName("startAdmin");
+				mav.setViewName("redirect:startAdmin");
 
 				mav.addObject("permission", "1");
 				return mav;
 			} else {
-				response.addCookie(new Cookie("bm_permission", "0"));
-			}
-		}
+				membermodel = joinService.login(id);
+				membermodel.setId(id);
 
+				response.addCookie(new Cookie("bm_id", membermodel.getId()));
+				mav.setViewName("start");
+				System.out.println(membermodel.getId());
+				mav.addObject("kname", membermodel.getKname());
+				mav.addObject("team_nm", membermodel.getTeam_nm());
+				mav.addObject("jikb", membermodel.getJikb());
+				mav.addObject("permission", "0");
+
+				System.out.println(id + "login Success");
+				if (id.equals("admin") || id.equals("4150266")) {
+					response.addCookie(new Cookie("bm_permission", "1"));
+					mav.setViewName("startAdmin");
+
+					mav.addObject("permission", "1");
+					return mav;
+				} else {
+					response.addCookie(new Cookie("bm_permission", "0"));
+				}
+			}
+
+		}
 		return mav;
 	}
 
@@ -241,15 +272,21 @@ public class MemberController {
 	@RequestMapping("/admin")
 	public String admin(HttpServletRequest request, Model model)
 			throws Exception {
+		Dto param = new Dto();
+		param.setYear(year);
+		param.setMonth(month);
 		for (Cookie cookie : request.getCookies()) {
 			if (cookie.getName().equals("bm_permission")) {
 				System.out.println(cookie.getValue());
 				if ("1".equals(cookie.getValue())) {
 
-					List<MemberModel> bestMember = joinService.selectBest();
-					List<BookModel> bestBook = bookService.selectBestBook();
+					List<MemberModel> bestMember = statisticService
+							.selectBest();
+					List<BookModel> bestBook = statisticService
+							.selectBestBook(param);
 					// List<BookModel> newBook = bookService.getNewbook();
-					List<MemberModel> bestTeam = bookService.selectBestTeam();
+					List<MemberModel> bestTeam = statisticService
+							.selectBestTeam(year);
 
 					model.addAttribute("bestMember", bestMember);
 					model.addAttribute("bestBook", bestBook);
@@ -274,6 +311,16 @@ public class MemberController {
 		List<MemberModel> memberList = joinService.memberList();
 		model.addAttribute("memberList", memberList);
 		return "/member/memberList";
+	}
+
+	@RequestMapping("/start")
+	public String start() {
+		return "/start";
+	}
+
+	@RequestMapping("/startAdmin")
+	public String startAdmin() {
+		return "/startAdmin";
 	}
 
 }

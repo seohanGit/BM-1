@@ -43,7 +43,7 @@ body {
 	</div>
 	<div id="divLoadBody" style="display: none;" class="container">
 		<div class="col-md-12"><jsp:include page="../menu.jsp" />
-			<div class="panel panel-default">
+			<div class="col-xs-12 panel panel-default">
 				<div class="panel-body">
 					<div>
 						<h2>대여 기록</h2>

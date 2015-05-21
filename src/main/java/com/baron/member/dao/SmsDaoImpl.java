@@ -10,7 +10,7 @@ import com.baron.member.model.SmsModel;
 
 @Repository
 public class SmsDaoImpl implements SmsDao {
-	private static final String NAMESPACE = "com.baron.member.smsModel";
+	private static final String NAMESPACE = "com.baron.member.smsModel.";
 
 	@Autowired
 	@Resource(name = "smsSession")

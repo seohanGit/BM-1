@@ -30,7 +30,7 @@ body {
 	<div class="container">
 
 		<div class="col-md-12"><jsp:include page="../menu.jsp" />
-			<div class="panel panel-default">
+			<div class="col-xs-12 panel panel-default">
 				<div class="panel-body">
 
 					<!-- Blog Entries Column -->

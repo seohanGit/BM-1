@@ -103,19 +103,19 @@ public class RentController {
 		for (Cookie cookie : request.getCookies()) {
 			if (cookie.getName().equals("bm_permission")) {
 				if (cookie.getValue().equals("1")) {
-					List<BookModel> bookList = new ArrayList<BookModel>();
-					bookList = rentservice.borrowListAll();
+					List<BookModel> bookList =  rentservice.borrowListAll();
 					model.addAttribute("bookList", bookList);
 					return "rent/borrowListByAdmin";
 
 				} else if (cookie.getValue().equals("0")) {
 
 					List<BookModel> bookList = rentservice.borrowList(id);
+					List<BookModel> rentList = rentservice.rentListAll();
 
 					List<BookModel> reserve = rentservice.reservationList(id);
 
 					System.out.println(reserve.get(0).getTitle());
-
+					model.addAttribute("bookList", rentList);
 					model.addAttribute("reserveList", reserve);
 					model.addAttribute("bookList", bookList);
 
@@ -204,17 +204,7 @@ public class RentController {
 	public String returnManyBook(
 			@RequestParam(value = "book_cd") List<String> book_cdList) {
 		for (String book_cd : book_cdList) {
-			BookModel checkBook = rentservice.selectBook(book_cd);
-
-			SmsModel sms = new SmsModel();
-			String id = rentservice.selectReservation(book_cd).getId();
-
-			sms.setTitle(checkBook.getTitle());
-			sms.setPhone(rentservice.selectMember(id).getMobi_no().substring(1));
-
 			rentservice.returnBook(book_cd);
-			notifiService.notifiReser(sms);
-			notifiService.notifiReturnConfirm(sms);
 		}
 
 		return "redirect:rentListAll";
@@ -225,18 +215,28 @@ public class RentController {
 		BookModel checkBook = rentservice.selectBook(book_cd);
 		System.out.println(checkBook.getRentchk());
 		if (checkBook.getRentchk().equals("2")) {
-			SmsModel sms = new SmsModel();
-			String id = rentservice.selectReservation(book_cd).getId();
+			if (rentservice.selectRent(book_cd).getId() != null) {
+				SmsModel sms = new SmsModel();
 
-			sms.setTitle(checkBook.getTitle());
-			sms.setPhone(rentservice.selectMember(id).getMobi_no().substring(1));
+				String id = rentservice.selectRent(book_cd).getId();
+				sms.setTitle(checkBook.getTitle());
+				sms.setPhone(rentservice.selectMember(id).getMobi_no()
+						.substring(1));
 
-			notifiService.notifiReturnConfirm(sms);
-			rentservice.returnBook(book_cd);
-
+				notifiService.notifiReturnConfirm(sms);
+				rentservice.returnBook(book_cd);
+			}
 			if (checkBook.getReservechk().equals("1")) {
+				if (rentservice.selectReservation(book_cd).getId() != null) {
+					SmsModel sms = new SmsModel();
 
-				notifiService.notifiReser(sms);
+					String id = rentservice.selectReservation(book_cd).getId();
+					sms.setTitle(checkBook.getTitle());
+					sms.setPhone(rentservice.selectMember(id).getMobi_no()
+							.substring(1));
+					notifiService.notifiReser(sms);
+
+				}
 
 			}
 

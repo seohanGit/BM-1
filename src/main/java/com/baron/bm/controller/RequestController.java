@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.baron.member.dao.JoinDao;
 import com.baron.member.model.BookModel;
+import com.baron.member.model.CodeModel;
 import com.baron.member.model.Dto;
 import com.baron.member.model.SmsModel;
 import com.baron.member.service.BookService;
@@ -45,6 +46,7 @@ public class RequestController {
 	public String requestResult(BookModel model) {
 		System.out.println(model.getKname() + "님이 " + model.getTitle()
 				+ "을 구매요청하였습니다. ");
+		model.setBook_cd(model.getB_group());
 		model.setReq_cd(model.getIsbn() + "(" + model.getQuantity() + 1 + ")");
 		requestservice.requestBook(model);
 
@@ -136,7 +138,15 @@ public class RequestController {
 			sms.setTitle(model.getTitle());
 			sms.setPhone(mobi_no);
 
-			bookService.insertBook(model);
+			if(model.getQuantity()!=1){
+				for(int i=0; i<model.getQuantity(); i++){
+					model.setBook_cd(model.getBook_cd()+"("+(i+1)+")");
+					bookService.insertBook(model);
+				}
+					
+			}else {
+				bookService.insertBook(model);
+			}
 			requestservice.deleteRequest(model.getReq_cd());
 			notifiService.notifiReq(sms);
 			return "redirect:requestList";
@@ -174,9 +184,16 @@ public class RequestController {
 	@RequestMapping("modifiReqForm")
 	public String modifiForm(Model model) {
 		List<BookModel> bookList = new ArrayList<BookModel>();
+		List<CodeModel> BCodeList = new ArrayList<CodeModel>();
+		List<CodeModel> CCodeList = new ArrayList<CodeModel>();
 		bookList = requestservice.requestList();
+		BCodeList = bookService.selectBCodeList();
+		CCodeList = bookService.selectCCodeList();
+
 		System.out.println(bookList.get(0).getReq_cd());
 		model.addAttribute("bookList", bookList);
+		model.addAttribute("BCodeList", BCodeList);
+		model.addAttribute("CCodeList", CCodeList);
 
 		return "request/modifiReqForm";
 	}
@@ -184,13 +201,17 @@ public class RequestController {
 	@RequestMapping(value = "/modifiRequest", method = RequestMethod.POST)
 	public String modifiRequest(
 			@RequestParam("book_cd") List<String> book_cdList,
-			@RequestParam("req_cd") List<String> req_cdList) {
+			@RequestParam("req_cd") List<String> req_cdList,
+			@RequestParam("b_group") List<String> b_groupList
+			/*@RequestParam("c_group") List<String> c_groupList*/) {
 		for (int i = 0; i < req_cdList.size(); i++) {
-			Dto dto = new Dto();
-			dto.setString1(book_cdList.get(i));
-			dto.setString2(req_cdList.get(i));
-
-			requestservice.updateBook_cd(dto);
+			BookModel book = new BookModel();
+			book.setBook_cd(book_cdList.get(i));
+			book.setReq_cd(req_cdList.get(i));
+			System.out.println(b_groupList.get(i));
+			book.setB_group(b_groupList.get(i));/*
+				book.setC_group(c_groupList.get(i));*/
+			requestservice.modifiBook(book);
 		}
 
 		return "redirect:requestList";

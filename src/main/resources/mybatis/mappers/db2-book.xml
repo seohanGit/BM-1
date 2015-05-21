@@ -28,12 +28,15 @@
 
 	<select id="searchBook" parameterType="String" resultType="SearchResult">
 		<bind name="keyword" value="'%' + _parameter + '%'" />
-		SELECT A.title, A.author, A.publish, A.b_group, A.rentchk, A.reservechk, A.book_cd, B.returndate
+		SELECT A.title, A.author, A.publish, A.b_group, A.rentchk,
+		A.reservechk, A.book_cd, B.returndate
 		FROM
-		TESTLIB.BOOKMST A LEFT OUTER JOIN testlib.bookrent B
-		ON A.book_cd = B.book_cd AND A.rentchk = B.rentchk
+		TESTLIB.BOOKMST A LEFT OUTER
+		JOIN testlib.bookrent B
+		ON A.book_cd = B.book_cd AND A.rentchk =
+		B.rentchk
 		WHERE
-		A.TITLE like #{keyword}
+		LCASE(A.TITLE) like #{keyword}
 		ORDER BY A.RENTCHK DESC,
 		A.RCV_DATE DESC
 	</select>
@@ -61,7 +64,8 @@
 		SET
 		TITLE=#{title}, b_group=#{b_group},
 		publish=#{publish},
-		author=#{author}
+		author=#{author},
+		imageurl=#{imageurl}
 		WHERE BOOK_CD=#{book_cd}
 	</update>
 
@@ -73,53 +77,6 @@
 		FETCH first 5 rows only
 	</select>
 
-
-	<!--4개월간 다수 대여 팀, 도서 -->
-
-	<select id="selectBestTeam" resultType="MemberModel">
-
-		SELECT B.team_nm, COUNT(*) AS count FROM
-		testlib.bookrent A INNER JOIN tprlib.gr_insa B ON A.id=B.asabn WHERE
-		rentdate > current date - 4 month GROUP BY B.team_nm ORDER
-		BY count DESC
-	</select>
-
-	<select id="selectBestPerson" resultType="BookModel">
-
-		SELECT A.id, A.book_cd,
-		COUNT(*) AS count, (SELECT
-		title FROM
-		testlib.bookmst WHERE book_cd =
-		A.book_cd) AS title, (SELECT
-		author
-		FROM testlib.bookmst WHERE book_cd =
-		A.book_cd) AS author FROM
-		testlib.bookrent A INNER JOIN tprlib.gr_insa
-		B ON A.id = B.asabn WHERE
-		A.rentdate > current date - 6 month GROUP BY
-		A.id, A.book_cd ORDER BY
-		count DESC
-	</select>
-
-
-	<select id="selectBestBook" resultType="BookModel">
-		SELECT COUNT(*) AS count,
-		B.book_cd,
-		(SELECT title FROM testlib.bookmst WHERE book_cd =
-		B.book_cd) AS title,
-		(SELECT author FROM testlib.bookmst WHERE book_cd
-		= B.book_cd) AS
-		author
-		FROM testlib.bookrent A INNER JOIN
-		testlib.bookmst B
-		ON A.book_cd
-		= B.book_cd
-		GROUP BY B.book_cd
-		ORDER BY
-		count DESC
-		FETCH
-		first 5 rows only
-	</select>
 
 	<!-- 구매요청, 대여 관련 커리 -->
 
@@ -141,17 +98,17 @@
 		reqstatus='1'
 		WHERE req_cd= #{req_cd}
 	</update>
-	
+
 	<update id="rejectRequest" parameterType="String">
 		UPDATE TESTLIB.BOOKREQ
 		SET
 		reqstatus='2'
 		WHERE req_cd= #{req_cd}
 	</update>
-	
+
 	<select id="requestList" resultType="BookModel">
 		SELECT B.title, B.imageurl, B.author, B.price, b.quantity, B.reqdate,
-		B.reqstatus, B.id, B.book_cd, B.req_cd, B.link, (SELECT C.KNAME FROM
+		B.reqstatus, B.id, B.book_cd, B.req_cd, B.link, B.b_group, B.c_group, (SELECT C.KNAME FROM
 		TPRLIB.GR_INSA C WHERE B.id=C.ASABN
 		FETCH
 		first 1 rows only) kname
@@ -191,11 +148,13 @@
 
 	</select>
 
-	<update id="updateBook_cd" parameterType="Dto">
+	<update id="modifiReqBook" parameterType="BookModel">
 		UPDATE TESTLIB.BOOKREQ
 		SET
-		book_cd = #{string1}
+		book_cd = #{book_cd},
+b_group = #{b_group}<!-- , 
+		c_group = #{c_group} --> 
 		WHERE
-		req_cd= #{string2}
+		req_cd= #{req_cd}
 	</update>
 </mapper>

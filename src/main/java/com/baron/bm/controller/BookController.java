@@ -27,12 +27,15 @@ public class BookController {
 	@Autowired
 	private BookService bookservice;
 
+	@Autowired
 	private RentService rentservice;
 
+	@Autowired
 	private RequestService requestservice;
 
 	@RequestMapping("/insertbookForm")
-	public String insertbook() {
+	public String insertbook() throws Exception {
+		bookservice.updateDate();
 		return "book/insertbook";
 	}
 
@@ -194,51 +197,5 @@ public class BookController {
 	 * System.out.println(model.getRequestid()); bookservice.requestBook(model);
 	 * return "requestBookResult"; }
 	 */
-	@RequestMapping("/backupRecord")
-	public String backupRecord(HttpServletRequest request) throws Exception {
-		List<BookModel> bookList = new ArrayList<BookModel>();
-
-		bookList = rentservice.copyRent();
-
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-
-		for (BookModel bookmodel : bookList) {
-			bookmodel.setRentdate(format.parse(bookmodel.getReq_ymd()));
-			bookmodel.setReturndate(format.parse(bookmodel.getRetu_ymd()));
-
-			bookmodel.setBook_cd(bookmodel.getBook_cd());
-			bookmodel.setTeam_nm(bookmodel.getTeam_nm());
-			bookmodel.setId(bookmodel.getId());
-			System.out.println(bookmodel.getBook_cd() + bookmodel.getRentdate()
-					+ bookmodel.getReq_ymd());
-			rentservice.insertRecord(bookmodel);
-		}
-
-		return "rent/recordListAll";
-
-	}
-
-	@RequestMapping("/updateImage")
-	public String updateImage() throws Exception {
-		String isbn = "";
-
-		List<BookModel> bookList = new ArrayList<BookModel>();
-		bookList = bookservice.selectBookAll();
-		for (BookModel bookmodel : bookList) {
-			BookModel book = new BookModel();
-			isbn = bookmodel.getIsbn();
-
-			if (bookList.get(0).getTotalResults() != 0) {
-				book = requestservice.findBookOne(isbn);
-				System.out.println(book.getImageurl());
-				bookmodel.setImageurl(book.getImageurl());
-				bookmodel.setAuthor(book.getAuthor());
-
-			}
-		}
-		
-		return "member/admin";
-
-	}
 
 }

@@ -47,7 +47,7 @@
 					<form action="/searchBook" method="post">
 						<span class="input-group-btn"> <input type="text"
 							class="form-control" id="keyword" name="keyword"
-							placeholder="기술자료실 도서 검색 [ 대, 소문자 구분 ]">
+							placeholder="기술자료실 도서 검색 [ 소문자로 입력 ]">
 							<button class="btn btn-default" type="submit" id="btn_find">
 								<span class="glyphicon glyphicon-search"></span>
 							</button>
@@ -57,7 +57,7 @@
 				<br>
 				<hr>
 				<div class="input-group" style="width: 95%">
-					<form action="/searchBook" method="post">
+					<form action="/findBook" method="post">
 						<span class="input-group-btn"> <input type="text"
 							class="form-control" id="keyword" name="keyword"
 							placeholder="인터파크 검색">

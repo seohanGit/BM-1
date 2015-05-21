@@ -54,16 +54,20 @@ public class RequestDaoImpl implements RequestDao {
 		return session.selectList(NAMESPACE + "requestRecord", id);
 	}
 
-	@Override
-	public void updateBook_cd(Dto dto) {
-		session.update(NAMESPACE + "updateBook_cd", dto);
-		
-	}
+
 
 	@Override
 	public void rejectRequest(String req_cd) {
 		session.update(NAMESPACE + "rejectRequest", req_cd);
-		
+
+	}
+
+	@Override
+	public void modifiBook(BookModel book) {
+		System.out.println(book.getB_group());
+		System.out.println(book.getReq_cd());
+		session.update(NAMESPACE + "modifiReqBook", book);
+
 	}
 
 }

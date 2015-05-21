@@ -75,7 +75,7 @@ public class MemberController {
 
 	@RequestMapping("/")
 	public String loginForm(String id) {
-		
+
 		return "start";
 	}
 
@@ -131,28 +131,32 @@ public class MemberController {
 			String id) {
 
 		// ModelAndView mav = new ModelAndView("/index");
-
-		MemberModel membermodel = new MemberModel();
-		membermodel = joinService.login(id);
-		membermodel.setId(id);
-
-		response.addCookie(new Cookie("bm_id", membermodel.getId()));
-		mav.setViewName("start");
-		System.out.println(membermodel.getId());
-		mav.addObject("kname", membermodel.getKname());
-		mav.addObject("team_nm", membermodel.getTeam_nm());
-		mav.addObject("jikb", membermodel.getJikb());
-		mav.addObject("permission", "0");
-
-		System.out.println(id + "login Success");
-		if (id.equals("admin")||id.equals("4150266")) {
-			response.addCookie(new Cookie("bm_permission", "1"));
-			mav.setViewName("startAdmin");
-
-			mav.addObject("permission", "1");
+		if (joinService.login(id) == null) {
+			mav.setViewName("loginfail");
 			return mav;
 		} else {
-			response.addCookie(new Cookie("bm_permission", "0"));
+			MemberModel membermodel = new MemberModel();
+			membermodel = joinService.login(id);
+			membermodel.setId(id);
+
+			response.addCookie(new Cookie("bm_id", membermodel.getId()));
+			mav.setViewName("start");
+			System.out.println(membermodel.getId());
+			mav.addObject("kname", membermodel.getKname());
+			mav.addObject("team_nm", membermodel.getTeam_nm());
+			mav.addObject("jikb", membermodel.getJikb());
+			mav.addObject("permission", "0");
+
+			System.out.println(id + "login Success");
+			if (id.equals("admin") || id.equals("4150266")) {
+				response.addCookie(new Cookie("bm_permission", "1"));
+				mav.setViewName("startAdmin");
+
+				mav.addObject("permission", "1");
+				return mav;
+			} else {
+				response.addCookie(new Cookie("bm_permission", "0"));
+			}
 		}
 
 		return mav;

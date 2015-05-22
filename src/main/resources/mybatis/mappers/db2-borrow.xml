@@ -205,7 +205,7 @@
 
 
 	<select id="recordListAll" resultType="BookModel">
-		SELECT A.title, B.rentdate, B.returndate, (SELECT C.KNAME FROM
+		SELECT A.title, B.rentdate, B.returndate, A.b_group, (SELECT C.KNAME FROM
 		TPRLIB.GR_INSA C WHERE B.id=C.ASABN FETCH
 		first 1 rows only) kname FROM
 		TESTLIB.BOOKMST A INNER JOIN TESTLIB.BOOKRENT B ON A.book_cd=B.book_cd

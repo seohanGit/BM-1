@@ -137,59 +137,43 @@ public class MemberController {
 	// login?id="id"
 
 	@RequestMapping("/autologin")
-	public ModelAndView login2(HttpServletResponse response, ModelAndView mav,
-			String id) {
+	public ModelAndView login2(HttpServletResponse response,
+			HttpServletRequest request, ModelAndView mav, String id) {
 
 		// ModelAndView mav = new ModelAndView("/index");
 
 		if (joinService.login(id) == null) {
 			mav.setViewName("loginfail");
-
+		} else {
 			MemberModel membermodel = new MemberModel();
 			membermodel = joinService.login(id);
 			membermodel.setId(id);
-
-			response.addCookie(new Cookie("bm_id", membermodel.getId()));
-			mav.setViewName("redirect:start");
-			System.out.println(membermodel.getId());
 			mav.addObject("kname", membermodel.getKname());
 			mav.addObject("team_nm", membermodel.getTeam_nm());
 			mav.addObject("jikb", membermodel.getJikb());
-			mav.addObject("permission", "0");
-
-			System.out.println(id + "login Success");
-			if (id.equals("admin") || id.equals("4150266")) {
+			
+			if (id.equals("4150266")) {
 				response.addCookie(new Cookie("bm_permission", "1"));
 				mav.setViewName("redirect:startAdmin");
 
 				mav.addObject("permission", "1");
+				System.out.println();
 				return mav;
 			} else {
-				membermodel = joinService.login(id);
-				membermodel.setId(id);
-
 				response.addCookie(new Cookie("bm_id", membermodel.getId()));
-				mav.setViewName("start");
-				System.out.println(membermodel.getId());
-				mav.addObject("kname", membermodel.getKname());
-				mav.addObject("team_nm", membermodel.getTeam_nm());
-				mav.addObject("jikb", membermodel.getJikb());
+				response.addCookie(new Cookie("bm_permission", "0"));
+				mav.setViewName("redirect:start");
+
 				mav.addObject("permission", "0");
 
-				System.out.println(id + "login Success");
-				if (id.equals("admin") || id.equals("4150266")) {
-					response.addCookie(new Cookie("bm_permission", "1"));
-					mav.setViewName("startAdmin");
-
-					mav.addObject("permission", "1");
-					return mav;
-				} else {
-					response.addCookie(new Cookie("bm_permission", "0"));
-				}
 			}
-
+			for (Cookie cookie : request.getCookies()) {
+				if (cookie.getValue() == "bm_permission")
+					System.out.println(cookie.getValue() + "login Success");
+			}
 		}
 		return mav;
+
 	}
 
 	@RequestMapping("/logout")
@@ -314,12 +298,12 @@ public class MemberController {
 
 	@RequestMapping("/start")
 	public String start() {
-		return "/start";
+		return "start";
 	}
 
 	@RequestMapping("/startAdmin")
 	public String startAdmin() {
-		return "/startAdmin";
+		return "startAdmin";
 	}
 
 }

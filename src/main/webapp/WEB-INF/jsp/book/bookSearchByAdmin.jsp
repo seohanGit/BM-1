@@ -62,12 +62,30 @@ body {
 						<h2>도서목록</h2>
 					</div>
 					<form action="stopBorrowList" method="post">
-
-
 						<div class="right-end" style="margin-right: 20px">
+
+							<script type="text/javascript">
+						$("select").change(function(){
+							var options = $(this).val();
+							var table = $("#tablebody");
+							for(var i = 1; i<=$table.find("tr").length; i++){
+								if($("#b_group").text != $("select option:selected").value())
+								$("#b_group").parent().hide();
+							}
+						});
+								
+						</script>
+							<select>
+								<option value="B">B-도서(단행본)
+								<option value="E">E-기타매체
+								<option value="J">J-정기간행물
+								<option value="P">P-특허자료
+								<option value="R">R-보고서
+								<option value="S">S-규격/사전
+								<option value="T">T-논문
+							</select>
 							<button style="width: 100px" class="btn btn-default"
 								type="button" id="insertBook">도서추가</button>
-
 							<button style="width: 100px" class="btn btn-default"
 								type="submit">대출정지</button>
 						</div>
@@ -90,7 +108,7 @@ body {
 						
  --%>
 
-								<tbody>
+								<tbody id="tablebody">
 									<c:forEach items="${bookList}" var="book" varStatus="loop">
 
 										<tr>
@@ -99,8 +117,9 @@ body {
 											<td align="left"><a href="#"
 												onclick="window.open('/bookInfo?book_cd=${book.book_cd}','new','resizeble=yes scrollbars=yes, width:850px, height:500px');">
 													${book.title }</a></td>
-											<td class=" hidden-xs " align="left">${book.author}</td>
-											<td class="hidden-sm hidden-xs hidden-md " align="left">${book.b_group }</td>
+											<td class="hidden-xs" align="left">${book.author}</td>
+											<td class="hidden-sm hidden-xs hidden-md"
+												id="${book.b_group }" align="left">${book.b_group}</td>
 											<c:choose>
 												<c:when test="${book.rentchk=='0'}">
 													<td align="left">대출가능</td>

@@ -14,7 +14,8 @@
 <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="/resources/css/signin.css" rel="stylesheet">
 <link href="/resources/css/common.css" rel="stylesheet">
-
+<script src="/resources/js/jquery/jquery.js"></script>
+<script src="/resources/js/bootstrap.min.js"></script>
 <style type="text/css">
 body {
 	padding-top: 70px;
@@ -24,7 +25,30 @@ body {
 </head>
 
 <body>
-	<jsp:include page="../nav.jsp" />
+	<jsp:include page="../nav.jsp" /><script type="text/javascript">
+		$("#select").change(function() {
+			var options = $(this).val();
+			$("#dataTable tr").each(function() {
+				var tr = $(this);
+				var td = tr.find("td:eq(2)")
+				if (td.text() !== options) {
+					tr.hide();
+				}
+			})
+
+		});
+	</script>
+	<select id="select">
+		<optgroup label="대분류">
+			<option value="B-도서(단행본)">B-도서(단행본)
+			<option value="E-기타매체">E-기타매체
+			<option value="J-정기간행물">J-정기간행물
+			<option value="P-특허자료">P-특허자료
+			<option value="R-보고서">R-보고서
+			<option value="S-규격/사전">S-규격/사전
+			<option value="T-논문">T-논문
+		</optgroup>
+	</select>
 	<div id="loadingBar"
 		style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; text-align: center; margin: 0 auto; z-index: 100000;">
 		<table width="100%" height="100%" border="0" bgcolor="#000000">
@@ -57,6 +81,7 @@ body {
 							<tr class="  title">
 								<th>도서명</th>
 								<th class="td-date">대여자</th>
+								<th class="hidden-sm hidden-xs hidden-md td-author">분류</th>
 								<th class="td-author hidden-xs">대여일</th>
 								<th class="td-author">반납일</th>
 
@@ -81,6 +106,8 @@ body {
 											<c:when test="${empty book.kname}">${book.id}</c:when>
 											<c:otherwise>${book.kname}</c:otherwise>
 										</c:choose></td>
+									<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+										align="left">${book.b_group}</td>
 									<td class="hidden-xs" align="left"><fmt:formatDate
 											type="date" pattern="yyyy-MM-dd" value="${book.rentdate }" /></td>
 									<td align="left"><fmt:formatDate type="date"
@@ -101,8 +128,7 @@ body {
 		</div>
 	</div>
 
-	<script src="/resources/js/jquery/jquery.js"></script>
-	<script src="/resources/js/bootstrap.min.js"></script>
+
 	<script src="/resources/js/common.js"></script>
 	<script src="/resources/js/book.js"></script>
 	<script src="/resources/js/jquery.dataTables.min.js"></script>
@@ -134,5 +160,6 @@ body {
 		divLoadBody.style.display = "";
 		loadingBar.style.display = "none";
 	</script>
+
 </body>
 </html>

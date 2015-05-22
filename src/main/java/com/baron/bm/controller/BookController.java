@@ -68,22 +68,23 @@ public class BookController {
 		List<SearchResult> bookList = bookservice.searchBook(keyword);
 
 		System.out.println(keyword);
-		System.out.println(keyword);
-		System.out.println(keyword);
+		
 
 		model.addAttribute("bookList", bookList);
-		String permission;
+		String permission = "";
 		for (Cookie cookie : request.getCookies()) {
 			if (cookie.getName().equals("bm_permission")) {
 				permission = cookie.getValue();
-				if (permission.equals("1")) {
-					return "book/bookSearchByAdmin";
 
-				}
 			}
 		}
-		return "book/bookSearch";
+		System.out.println(permission);
+		if (permission.equals("1")) {
+			return "book/bookSearchByAdmin";
 
+		} else {
+			return "book/bookSearch";
+		}
 	}
 
 	@RequestMapping("/bookList")

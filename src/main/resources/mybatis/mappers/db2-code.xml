@@ -7,17 +7,27 @@
 	</insert>
 
 	<select id="selectB_codeList" resultType="CodeModel">
-		SELECT asgub AS code, asdes AS name FROM salib.acoderp
+		SELECT RTRIM(asgub) AS
+		code, asdes AS name FROM salib.acoderp
 		WHERE adgub='BD' ORDER BY asgub
 	</select>
-
+	<select id="selectB_code" resultType="String" parameterType="String">
+		SELECT asdes AS name FROM salib.acoderp
+		WHERE adgub='BD' AND asgub=#{b_group}
+	</select>
 	<insert id="insertC_code" parameterType="CodeModel">
 		INSERT INTO
 		salib.acoderp (adgub, asgub, asdes) VALUES('BS', #{code},
 		#{group})
 	</insert>
+	
 	<select id="selectC_codeList" resultType="CodeModel">
-		SELECT asgub AS code, asdes AS name FROM salib.acoderp
+		SELECT RTRIM(asgub) AS
+		code, asdes AS name FROM salib.acoderp
 		WHERE adgub='BS' ORDER BY asgub
+	</select>
+	<select id="selectC_code" resultType="String" parameterType="String">
+		SELECT asdes AS name FROM salib.acoderp
+		WHERE adgub='BS' AND asgub=#{c_group}
 	</select>
 </mapper>

@@ -201,16 +201,22 @@ public class RequestController {
 	@RequestMapping(value = "/modifiRequest", method = RequestMethod.POST)
 	public String modifiRequest(
 			@RequestParam("book_cd") List<String> book_cdList,
-			@RequestParam("req_cd") List<String> req_cdList,
-			@RequestParam("b_group") List<String> b_groupList
-			/*@RequestParam("c_group") List<String> c_groupList*/) {
+			@RequestParam("req_cd") List<String> req_cdList/*,
+			@RequestParam("b_group") List<String> b_groupList,
+			@RequestParam("c_group") List<String> c_groupList*/) {
 		for (int i = 0; i < req_cdList.size(); i++) {
 			BookModel book = new BookModel();
+			String book_cd = book_cdList.get(i);
 			book.setBook_cd(book_cdList.get(i));
-			book.setReq_cd(req_cdList.get(i));
-			System.out.println(b_groupList.get(i));
-			book.setB_group(b_groupList.get(i));/*
-				book.setC_group(c_groupList.get(i));*/
+			book.setReq_cd(req_cdList.get(i));/*
+			book.setB_group(requestservice.selectB_code(book_cd.substring(0,1)));
+			book.setC_group(requestservice.selectC_code(book_cd.substring(1,4)));*/
+			/*String b_group = b_groupList.get(i);
+			System.out.println(b_group);
+			book.setB_group(requestservice.selectB_code(b_group));
+			String c_group = c_groupList.get(i);
+			System.out.println(c_group);
+			book.setC_group(requestservice.selectC_code(c_group));*/
 			requestservice.modifiBook(book);
 		}
 

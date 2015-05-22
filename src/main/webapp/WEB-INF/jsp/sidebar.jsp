@@ -11,12 +11,17 @@
 	<h3>Best 사원</h3>
 	<table class="table table-nobordered table-admin" cellpadding="3px"
 		style="width: 100%">
+		<tr class="table-admin">
+			<th style="width: 60%"><strong>부서명</strong></th>
+			<th >성명</th>
+			<th>대여횟수</th>
+		</tr>
 		<c:forEach items="${bestMember}" var="best" begin="0" end="2">
 
 			<tr class="table-admin">
-				<td style="width: 35%"><strong>${best.team_nm}</strong></td>
-				<td id="tb-genre">${best.kname}</td>
-				<td style="width: 35%">대출 : <mark>${best.count}</mark></td>
+				<td style="width: 50%"><strong>${best.team_nm}</strong></td>
+				<td style="width: 70px">${best.kname}</td>
+				<td style="text-align:right; width: 90px"><mark>${best.count}회</mark></td>
 			</tr>
 		</c:forEach>
 	</table>
@@ -25,7 +30,7 @@
 		<div class="progress">
 			<div class="progress-bar progress-bar-info" role="progressbar"
 				style="width: ${team.count/team.max*100}%">${team.team_nm}-
-				${team.count}권&nbsp; </div>
+				${team.count}권&nbsp;</div>
 		</div>
 
 	</c:forEach>

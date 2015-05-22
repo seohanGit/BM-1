@@ -39,8 +39,8 @@
 		});
 	});
 </script>
-<script src="/resources/js/highchartTable.js"></script>
-<script src="/resources/js/highcharts.js"></script>
+<script type="text/javascript" src="/resources/js/highchartTable.js"></script>
+<script type="text/javascript" src="/resources/js/highcharts.js"></script>
 
 <style type="text/css">
 body {
@@ -86,23 +86,28 @@ body {
 						<option value="12">12
 						<option value="" selected>연간조회
 					</select>
-					<button id="rentByMonth" type="button">연간 도서 대여 현황</button>
-					<button id="bookTeamCount" type="button">팀순위, 도서 보유 현황</button>
+					<button class="btn btn-sm" id="rentByMonth" type="button">연간
+						대여 현황</button>
+					<button class="btn btn-sm" id="purchaseMonth" type="button">연간
+						예산 현황</button>
+					<button class="btn btn-sm" id="bookTeamCount" type="button">보유
+						현황, 팀별 현황</button>
 
-					<button id="selectGroupByB" type="button">분류별 대여순위, 도서별
+					<button class="btn btn-sm" id="selectGroupByB" type="button">분류별,
+						도서별 대여순위</button>
+
+					<button class="btn btn-sm" id="rentByPerson" type="button">개인별
 						대여순위</button>
-					<button id="getMonth" type="button">월별 예산 사용 현황</button>
-					<button id="rentByPerson" type="button">개인별 대여순위</button>
 
 					<div id="container" class="row" style="width: 100%"></div>
-					
+
 				</div>
 			</div>
 		</div>
 	</div>
 
 	<script src="/resources/js/common.js"></script>
-	<script src="/resources/js/ajax.js"></script>
+	<script type="text/javascript" src="/resources/js/ajax.js"></script>
 	<script src="/resources/js/bootstrap.min.js"></script>
 
 </body>

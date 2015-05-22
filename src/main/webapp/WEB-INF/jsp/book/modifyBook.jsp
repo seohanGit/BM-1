@@ -45,9 +45,9 @@ body {
 				<div class="form-group">
 					<label for="exampleInputPassword1">카테고리</label> <br>
 					<select><option
-							selected>${book.b_group}<c:forEach items="${codeList}"
+							selected>${book.b_group}<c:forEach items="${BCodeList}"
 								var="code">
-								<option>${code}
+								<option value="${code.code}-${code.name}">${code.code}-${code.name}
 							</c:forEach></select>
 <%-- 							<input type="text" class="form-control" id="b_group"
 						name="b_group" value="${book.b_group}"> --%>

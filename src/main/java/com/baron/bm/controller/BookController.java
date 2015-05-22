@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.baron.member.model.BookModel;
+import com.baron.member.model.CodeModel;
 import com.baron.member.model.Dto;
 import com.baron.member.model.SearchResult;
 import com.baron.member.service.BookService;
@@ -171,16 +172,17 @@ public class BookController {
 	public String modifyBookForm(BookModel book, String book_cd,
 			HttpServletRequest request, Model model) {
 		String permission;
-
+		List<CodeModel> BCodeList = new ArrayList<CodeModel>();
 		for (Cookie cookie : request.getCookies()) {
 			if (cookie.getName().equals("bm_permission")) {
 				permission = cookie.getValue();
 				book = bookservice.selectBook(book_cd);
+				BCodeList = bookservice.selectBCodeList();
 				if (permission.equals("0"))
 					return "member/adminfail";
 			}
 		}
-
+		model.addAttribute("BCodeList", BCodeList);
 		model.addAttribute("book", book);
 		return "book/modifyBook";
 	}

@@ -10,6 +10,7 @@ import java.net.URLEncoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,6 @@ import com.baron.member.dao.EtcDao;
 import com.baron.member.model.BookModel;
 import com.baron.member.model.CodeModel;
 import com.baron.member.model.Dto;
-import com.baron.member.model.MemberModel;
 import com.baron.member.model.SearchResult;
 
 //입력을 받는 컨트롤러 클래스와 데이터베이스를 처리하는 다오 클래스 사아에 비지니스 로직이나 트랜잭션을 처리하는 클래스
@@ -244,15 +244,40 @@ public class BookServiceImpl implements BookService {
 		return bookDao.selectCCodeList();
 	}
 
+	public boolean isThisDateValid(String dateToValidate, String dateFromat) {
+
+		if (dateToValidate == null) {
+			return false;
+		}
+
+		SimpleDateFormat sdf = new SimpleDateFormat(dateFromat);
+		sdf.setLenient(false);
+
+		try {
+
+			// if not valid, it will throw ParseException
+			Date date = sdf.parse(dateToValidate);
+			System.out.println(date);
+
+		} catch (ParseException e) {
+
+			e.printStackTrace();
+			return false;
+		}
+
+		return true;
+	}
+
 	@Override
 	public void updateDate() {
 
-		List<BookModel> bookList = bookDao.selectBookAll();
+		List<BookModel> bookList = etcDao.copyDate();
 
 		for (BookModel book : bookList) {
-			if (etcDao.copyDate(book.getBook_cd()) != null) {
-				book = etcDao.copyDate(book.getBook_cd());
-				SimpleDateFormat format = new SimpleDateFormat();
+			SimpleDateFormat format = new SimpleDateFormat();
+			if (isThisDateValid(book.getRcv_date(), "yyyy-MM-dd")) {
+				etcDao.updateDate(book);
+			} else {
 				try {
 					format.parse(book.getRcv_date());
 					etcDao.updateDate(book);
@@ -264,5 +289,10 @@ public class BookServiceImpl implements BookService {
 			}
 			;
 		}
+	}
+
+	@Override
+	public List<BookModel> selectBookForImage() {
+		return etcDao.selectBookForImage();
 	}
 }

@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
+<%@ page language="java" contentType="text/html; charset=EUC-kr"
 	pageEncoding="EUC-KR"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html lang="en">
+<html lang="en ko">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -46,8 +46,8 @@ body {
 
 									<th>도서명</th>
 									<th class="hidden-sm hidden-xs hidden-md td-author">저자</th>
-									<th class="author">대분류</th>
-									<th class="author">소분류</th>
+									<!-- <th class="author">대분류</th>
+									<th class="author">소분류</th> -->
 									<th class="td-date">가격</th>
 									<th class="td-img">수량</th>
 
@@ -66,22 +66,22 @@ body {
 
 										<td><a href="${book.link}">${book.title }</a></td>
 										<td class="hidden-sm hidden-xs hidden-md ">${book.author}</td>
-										<td><select name="b_group" tabindex="${status.index }">
+									<%-- 	<td><select name="b_group" tabindex="${status.index }">
 												<!-- <optgroup
 													label="대분류"> -->
-												<option value="${book.b_group}" selected>${book.b_group}</option>
+
 												<c:forEach items="${BCodeList }" var="b_code">
-													<option value="${b_code.name}">${b_code.name}</option>
+													<option value="${b_code.code}">${b_code.code}-${b_code.name}</option>
 												</c:forEach>
 										</select></td>
-										<%--<td><select name="c_group" tabindex="${status.index }"><!-- <optgroup
+										<td><select name="c_group" tabindex="${status.index }">
+												<!-- <optgroup
 													label="소분류"> -->
-													<option value="${book.c_group}" selected>${book.c_group}
-														<c:forEach items="${CCodeList }" var="c_code">
-															<option value="${c_code.name}">${c_code.name}
-														</c:forEach>
-</select>--%>
-										</td>
+
+												<c:forEach items="${CCodeList }" var="c_code">
+													<option value="${c_code.code}">${c_code.code}-${c_code.name}
+												</c:forEach>
+										</select></td> --%>
 
 										<td class="hidden-sm hidden-xs  ">${book.price}원</td>
 										<td align="center"><input type="number" name="quantity"

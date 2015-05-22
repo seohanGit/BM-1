@@ -34,7 +34,7 @@ public class RequestServiceImpl implements RequestService {
 
 	@Override
 	public void requestBook(BookModel model) {
-		model.setBook_cd(model.getB_group()+model.getC_group()+"-");
+		model.setBook_cd(model.getB_group() + model.getC_group() + "-");
 		System.out.println(model.getTitle());
 		System.out.println(model.getIsbn());
 		System.out.println(model.getTitle());
@@ -61,7 +61,7 @@ public class RequestServiceImpl implements RequestService {
 
 		XmlDom xmlDom = new XmlDom();
 		book = xmlDom.getBook(url.openStream());
-		System.out.println(isbn);
+		System.out.println(url);
 
 		return book;
 	}
@@ -123,6 +123,16 @@ public class RequestServiceImpl implements RequestService {
 	@Override
 	public void rejectRequest(String req_cd) {
 		requestDao.rejectRequest(req_cd);
-		
+
+	}
+
+	@Override
+	public String selectB_code(String b_group) {
+		return requestDao.selectB_code(b_group);
+	}
+
+	@Override
+	public String selectC_code(String c_group) {
+		return requestDao.selectC_code(c_group);
 	}
 }

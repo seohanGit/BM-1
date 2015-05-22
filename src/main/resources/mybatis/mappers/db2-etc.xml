@@ -28,17 +28,20 @@
 		'YYYYMMDD') AND GUBN = 'A'
 	</select>
 
-	<select id="copyDate" parameterType="String" resultType="BookModel">
+	<select id="copyDate" resultType="BookModel">
 		SELECT
 		Left(A.rece_ymd,
 		4)||'-'||substring(A.rece_ymd,5,2)||'-'||substring(A.rece_ymd, 7,2) as
-		rcv_date from sitlib.bookmst A WHERE book_cd = #{book_cd} ORDER BY A.rece_ymd DESC
-		FETCH first 1 rows only
-		
+		rcv_date, book_cd from sitlib.bookmst A WHERE rece_ymd
+		is not null AND
+		price is not null AND rece_ymd != ''AND price!='0'
+		ORDER BY RECE_YMD
+		DESC, PRICE DESC
 	</select>
 
 	<update id="updateDate" parameterType="BookModel">
-		UPDATE testlib.bookmst SET rcv_date = #{rcv_date} WHERE book_cd=#{book_cd}
+		UPDATE testlib.bookmst SET
+		rcv_date = #{rcv_date} WHERE book_cd=#{book_cd}
 	</update>
 
 
@@ -65,4 +68,10 @@
 		#{rentdate},
 		#{returndate}, #{team_nm}, #{book_cd})
 	</insert>
+
+	<select id="selectBookForImage" resultType="BookModel">
+		SELECT isbn, book_cd FROM
+		testlib.bookmst
+		where year(rcv_date) is null
+	</select>
 </mapper>

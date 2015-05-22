@@ -157,8 +157,7 @@ public class BoardController {
 	}
 
 	@RequestMapping("/statistic")
-	public String statistic(Model model)
-			throws Exception {
+	public String statistic(Model model) throws Exception {
 		Dto param = new Dto();
 		param.setYear(year);
 		param.setMonth("");
@@ -169,7 +168,8 @@ public class BoardController {
 	}
 
 	@RequestMapping("/rentByPerson")
-	public String rentByPerson(Model model, String year, String month) throws Exception {
+	public String rentByPerson(Model model, String year, String month)
+			throws Exception {
 		Dto param = new Dto();
 		param.setYear(year);
 		param.setMonth(month);
@@ -190,21 +190,10 @@ public class BoardController {
 	@RequestMapping("/selectSumPurchase")
 	public String selectSumPurchase(String year, Model model) {
 		Dto dto = new Dto();
+		dto.setYear(year);
 		List<Dto> SumPurchase = new ArrayList<Dto>();
-		for (int i = 0; i < 11; i++) {
-			dto.setMonth(Integer.toString(i));
-			dto.setCount("0");
-			SumPurchase.add(i, dto);
-			int last = statisticService.selectSumPurchase(year).lastIndexOf(
-					statisticService.selectSumPurchase(year).get(i));
-			if (last == i) {
-				break;
-			} else if (statisticService.selectSumPurchase(year).get(i)
-					.getMonth() != null) {
-				SumPurchase.add(i, statisticService.selectSumPurchase(year)
-						.get(i));
-			}
-		}
+		SumPurchase = statisticService.selectSumPurchase(dto);
+
 		model.addAttribute("SumPurchase", SumPurchase);
 		return "/statistic/purchaseByMonth";
 	}

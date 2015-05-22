@@ -20,4 +20,8 @@ public interface RequestDao {
 	public void rejectRequest(String req_cd);
 
 	public void modifiBook(BookModel book);
+
+	public String selectB_code(String b_group);
+
+	public String selectC_code(String c_group);
 }

@@ -256,8 +256,8 @@ public class MemberController {
 				System.out.println(cookie.getValue());
 				if ("1".equals(cookie.getValue())) {
 
-					List<MemberModel> bestMember = statisticService
-							.selectBest();
+					List<Dto> bestMember = statisticService
+							.selectBestPerson(param);
 					List<BookModel> bestBook = statisticService
 							.selectBestBook(param);
 					// List<BookModel> newBook = bookService.getNewbook();

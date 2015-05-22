@@ -41,12 +41,7 @@ public class StatisticDaoImpl implements StatisticDao {
 		return session.selectList(NAMESPACE + "selectBestTeam", year);
 	}
 
-	@Override
-	public List<MemberModel> selectBest() {
-		// TODO Auto-generated method stub
-
-		return session.selectList(NAMESPACE + "selectBest");
-	}
+	
 
 	@Override
 	public List<BookModel> selectBookCount() {
@@ -69,8 +64,8 @@ public class StatisticDaoImpl implements StatisticDao {
 	}
 
 	@Override
-	public List<Dto> selectSumPurchase(String year) {
-		return session.selectList(NAMESPACE + "selectSumPurchase", year);
+	public List<Dto> selectSumPurchase(Dto param) {
+		return session.selectList(NAMESPACE + "selectSumPurchase", param);
 	}
 
 	@Override

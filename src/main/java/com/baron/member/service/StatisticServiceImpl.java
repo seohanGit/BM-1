@@ -24,7 +24,7 @@ public class StatisticServiceImpl implements StatisticService {
 	}
 
 	@Override
-	public List<BookModel> selectBestBook(Dto param) throws Exception{
+	public List<BookModel> selectBestBook(Dto param) throws Exception {
 
 		return statisticDao.selectBestBook(param);
 	}
@@ -34,23 +34,17 @@ public class StatisticServiceImpl implements StatisticService {
 
 		List<MemberModel> list = new ArrayList<MemberModel>();
 		list = statisticDao.selectBestTeam(year);
-		/*int max = list.get(0).getCount();
+		int max = list.get(0).getCount();
 
 		for (MemberModel member : list) {
 			member.setMax(max);
-		}*/
+		}
 		return list;
 	}
 
 	@Override
 	public List<BookModel> selectBookCount() {
 		return statisticDao.selectBookCount();
-	}
-
-	@Override
-	public List<MemberModel> selectBest() {
-
-		return statisticDao.selectBest();
 	}
 
 	@Override
@@ -64,8 +58,8 @@ public class StatisticServiceImpl implements StatisticService {
 	}
 
 	@Override
-	public List<Dto> selectSumPurchase(String year) {
-		return statisticDao.selectSumPurchase(year);
+	public List<Dto> selectSumPurchase(Dto param) {
+		return statisticDao.selectSumPurchase(param);
 	}
 
 	@Override
@@ -73,5 +67,4 @@ public class StatisticServiceImpl implements StatisticService {
 		return statisticDao.selectGroupByB(param);
 	}
 
-	
 }

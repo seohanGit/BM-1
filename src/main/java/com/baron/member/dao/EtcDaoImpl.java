@@ -18,22 +18,31 @@ public class EtcDaoImpl implements EtcDao {
 	@Resource(name = "sqlSession")
 	private SqlSession session;
 
-	public List<String> dinnerList(){
+	public List<String> dinnerList() {
 		return session.selectList(NAMESPACE + "selectdinner");
 	}
-	public List<String> lunchList(){
+
+	public List<String> lunchList() {
 		return session.selectList(NAMESPACE + "selectlunch");
 	}
-	public List<String> breakfastList(){
+
+	public List<String> breakfastList() {
 		return session.selectList(NAMESPACE + "selectbreakfast");
 	}
+
 	@Override
-	public BookModel copyDate(String book_cd) {
-		return session.selectOne(NAMESPACE + "copyDate", book_cd);
+	public List<BookModel> copyDate() {
+		return session.selectList(NAMESPACE + "copyDate");
 	}
+
 	@Override
 	public void updateDate(BookModel book) {
 		session.update(NAMESPACE + "updateDate", book);
-		
+
+	}
+
+	@Override
+	public List<BookModel> selectBookForImage() {
+		return session.selectList(NAMESPACE + "selectBookForImage");
 	}
 }

@@ -14,13 +14,11 @@ public interface StatisticDao {
 
 	public List<MemberModel> selectBestTeam(String year);
 
-	public List<MemberModel> selectBest();
-
 	public List<BookModel> selectBookCount();
 
 	public List<Dto> selectBestPerson(Dto param);
 
-	public List<Dto> selectSumPurchase(String year);
+	public List<Dto> selectSumPurchase(Dto param);
 
 	public List<Dto> selectGroupByB(Dto param);
 

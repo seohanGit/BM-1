@@ -1,4 +1,4 @@
-$('#getMonth').click(function() {
+$('#purchaseMonth').click(function() {
 	$.ajax({
 
 		type : "GET", // GET or POST
@@ -6,7 +6,7 @@ $('#getMonth').click(function() {
 		datatype : "xml",
 		// html, xml, json, jsonp, script, text
 		data : {
-			year : $('#year').val(),month : $('#month').val()
+			year : $('#year').val()
 		},
 		// parameters as plain object
 		error : function() { // Ajax error handler

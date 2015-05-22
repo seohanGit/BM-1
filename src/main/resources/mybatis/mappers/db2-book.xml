@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="euc-kr" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.baron.member.sqlModel">
-	<!-- TESTLIB.BOOKMST ê´€ë ¨ ì¿¼ë¦¬ -->
+	<!-- TESTLIB.BOOKMST °ü·Ã Äõ¸® -->
 
 
 	<select id="selectBookAll" resultType="BookModel">
@@ -59,7 +59,7 @@
 	</delete>
 
 
-	<update id="updateBook" parameterType="BookModel">
+	 <update id="updateBook" parameterType="BookModel">
 		UPDATE TESTLIB.BOOKMST
 		SET
 		TITLE=#{title}, b_group=#{b_group},
@@ -68,6 +68,7 @@
 		imageurl=#{imageurl}
 		WHERE BOOK_CD=#{book_cd}
 	</update>
+	
 
 	<select id="getNewbook" resultType="BookModel">
 		SELECT *
@@ -78,7 +79,7 @@
 	</select>
 
 
-	<!-- êµ¬ë§¤ìš”ì²­, ëŒ€ì—¬ ê´€ë ¨ ì»¤ë¦¬ -->
+	<!-- ±¸¸Å¿äÃ», ´ë¿© °ü·Ã Ä¿¸® -->
 
 	<insert id="requestBook" parameterType="BookModel">
 		INSERT INTO
@@ -108,10 +109,12 @@
 
 	<select id="requestList" resultType="BookModel">
 		SELECT B.title, B.imageurl, B.author, B.price, b.quantity, B.reqdate,
-		B.reqstatus, B.id, B.book_cd, B.req_cd, B.link, B.b_group, B.c_group, (SELECT C.KNAME FROM
+		B.reqstatus, B.id, B.book_cd, B.req_cd, B.link, B.b_group, B.c_group,
+		(SELECT C.KNAME FROM
 		TPRLIB.GR_INSA C WHERE B.id=C.ASABN
 		FETCH
-		first 1 rows only) kname
+		first 1
+		rows only) kname
 		FROM
 		TESTLIB.BOOKREQ B
 		WHERE reqdate <![CDATA[ > current date -1 year]]>
@@ -151,10 +154,9 @@
 	<update id="modifiReqBook" parameterType="BookModel">
 		UPDATE TESTLIB.BOOKREQ
 		SET
-		book_cd = #{book_cd},
-b_group = #{b_group}<!-- , 
-		c_group = #{c_group} --> 
+		book_cd = #{book_cd}
+
 		WHERE
-		req_cd= #{req_cd}
+		req_cd = #{req_cd}
 	</update>
 </mapper>

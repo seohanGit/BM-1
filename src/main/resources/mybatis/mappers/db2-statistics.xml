@@ -59,7 +59,8 @@
 		FROM tprlib.gr_insa WHERE asabn = A.id
 		FETCH first 1
 		rows only) kname
-		,(SELECT team_nm FROM tprlib.gr_insa WHERE asabn =
+		,(SELECT team_nm FROM tprlib.gr_insa
+		WHERE asabn =
 		A.id FETCH
 		first 1 rows only) AS team_nm,
 		COUNT(*) AS count
@@ -69,13 +70,15 @@
 		tprlib.gr_insa B
 		ON
 		A.id = B.asabn
-		WHERE year(A.rentdate) =
+		WHERE
+		year(A.rentdate) =
 		#{year}
 		GROUP BY
 		A.id
 		ORDER BY
 		count DESC
-		FETCH first 10 rows only
+		FETCH first 10
+		rows only
 	</select>
 	<select id="rentByMonth" parameterType="String" resultType="Dto">
 		SELECT COUNT(*)
@@ -167,11 +170,12 @@
 		ORDER BY
 		count DESC
 	</select>
-	<select id="selectSumPurchase" parameterType="String"
+	<select id="selectSumPurchase" parameterType="Dto"
 		resultType="Dto">
 		SELECT SUM(DOUBLE(PRICE)) PRICE, month(rcv_date) AS month,
-		count(rcv_date) count FROM
-		testlib.bookmst WHERE year(rcv_date)=#{year}
+		count(rcv_date) count
+		FROM testlib.bookmst
+		WHERE year(rcv_date) = #{year}
 		GROUP BY month(rcv_date)
 	</select>
 

@@ -16,15 +16,14 @@ public interface StatisticService {
 
 	public List<BookModel> selectBookCount() throws Exception;
 
-	public List<MemberModel> selectBest() throws Exception;
-
 	public List<Dto> selectBestPerson(Dto param);
 
-	public List<Dto> selectSumPurchase(String year);
+	public List<Dto> selectSumPurchase(Dto param);
 
 	public List<Dto> selectGroupByB(Dto param);
 
 	public List<Dto> rentByMonth(Dto param);
+
 
 	
 

@@ -3,7 +3,7 @@
 	uri="http://java.sun.com/jsp/jstl/core"%>
 <table class="highchart table table-bordered"
 	data-graph-container-before="1" data-graph-inverted="0"
-	data-graph-type="column" style="display: none">
+	data-graph-type="column" style="display: show">
 	<caption>개인별 대여순위</caption>
 
 	<thead>

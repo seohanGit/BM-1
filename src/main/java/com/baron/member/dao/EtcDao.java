@@ -8,6 +8,7 @@ public interface EtcDao {
 	public List<String> dinnerList();
 	public List<String> breakfastList();
 	public List<String> lunchList();
-	public BookModel copyDate(String book_cd);
+	public List<BookModel> copyDate();
 	public void updateDate(BookModel book);
+	public List<BookModel> selectBookForImage();
 }

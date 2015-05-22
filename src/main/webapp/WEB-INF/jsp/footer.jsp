@@ -3,16 +3,21 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
-<div style="margin-left:10px">
-	
+<div style="margin-left: 10px">
+
 	<h3>Best 도서</h3>
 
 	<table class="table-admin table table-striped " style="width: 100%">
+		<tr class="table-admin">
+			<th style="width: 60%"><strong>도서명</strong></th>
+			<th class="hidden-xs">저자</th>
+			<th style="text-align:right; ;width: 90px">대여횟수</th>
+		</tr>
 		<c:forEach items="${bestBook}" var="best" begin="0" end="4">
 			<tr class="table-admin">
-				<td style="left; width: 70%"><strong>${best.title}</strong></td>
+				<td style="width: 60%"><strong>${best.title}</strong></td>
 				<td class="hidden-xs">${best.author}</td>
-				<td style="width: 10%"> <mark>${best.count} 회</mark></td>
+				<td style="text-align:right; ;width: 90px"><mark>${best.count} 회</mark></td>
 			</tr>
 		</c:forEach>
 	</table>

@@ -74,45 +74,48 @@ public class EtcController {
 	}
 
 	@RequestMapping("/updateDate")
-	public String updateDate ()	{
+	public String updateDate() {
 		try {
 			bookservice.updateDate();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
-		return "updateDate";
+
+		return "member/admin";
 	}
-	
+
 	@RequestMapping("/updateImage")
 	public String updateImage() throws Exception {
 		String isbn = "";
 
-		List<BookModel> bookList = bookservice.selectBookAll();
-		for (int i = 0; i < bookList.size() - 2700; i++) {
-			BookModel book = bookList.get(i);
-			isbn = book.getIsbn();
-			isbn = isbn.substring(0, 13);
-			System.out.println(isbn);
-			book = requestservice.findBookOne(isbn);
-			System.out.println(book.getImageurl());
-
-		}/*
-		 * for (BookModel bookmodel : bookList) { BookModel book = new
-		 * BookModel(); isbn = bookmodel.getIsbn();
-		 * 
-		 * if (isbn != null) { isbn = isbn.substring(0, 13);
-		 * System.out.println(isbn); if (isbn.substring(0, 5) == "97889") { book
-		 * = requestservice.findBookOne(isbn);
+		List<BookModel> bookList = bookservice.selectBookForImage();
+		/*
+		 * for (int i = 0; i < bookList.size(); i++) { BookModel book =
+		 * bookList.get(i); isbn = book.getIsbn().trim();
+		 * System.out.println(isbn); book = requestservice.findBookOne(isbn);
 		 * System.out.println(book.getImageurl());
-		 * bookmodel.setImageurl(book.getImageurl());
-		 * bookmodel.setAuthor(book.getAuthor());
-		 * bookservice.updateBook(bookmodel); } else
-		 * System.out.println("isbn일치 없음"); } else {
-		 * System.out.println("isbn오류"); } }
+		 * 
+		 * }
 		 */
+		for (BookModel bookmodel : bookList) {
+			BookModel book = new BookModel();
+			book.setBook_cd(bookmodel.getBook_cd());
+			isbn = bookmodel.getIsbn().trim();
+
+			if (isbn != null) {
+
+				book = requestservice.findBookOne(isbn);
+				System.out.println(book.getImageurl());
+				if (book.getPublish() != null && book.getAuthor() != null) {
+					bookmodel.setPublish(book.getPublish());
+					bookmodel.setImageurl(book.getImageurl());
+					bookmodel.setAuthor(book.getAuthor());
+					bookservice.updateBook(bookmodel);
+				}
+			}
+		}
+
 		return "member/admin";
 	}
 }

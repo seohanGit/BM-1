@@ -70,4 +70,14 @@ public class RequestDaoImpl implements RequestDao {
 
 	}
 
+	@Override
+	public String selectB_code(String b_group) {
+		return session.selectOne(NAMESPACE + "selectB_code", b_group);
+	}
+
+	@Override
+	public String selectC_code(String c_group) {
+		return session.selectOne(NAMESPACE + "selectC_code", c_group);
+	}
+
 }

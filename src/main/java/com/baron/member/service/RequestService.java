@@ -27,4 +27,8 @@ public interface RequestService {
 
 	public void modifiBook(BookModel book);
 
+	public String selectB_code(String b_group);
+
+	public String selectC_code(String c_group);
+
 }

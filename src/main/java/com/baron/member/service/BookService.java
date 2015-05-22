@@ -38,4 +38,6 @@ public interface BookService {
 	public List<CodeModel> selectCCodeList();
 
 	public void updateDate() throws Exception;
+
+	public List<BookModel> selectBookForImage();
 }

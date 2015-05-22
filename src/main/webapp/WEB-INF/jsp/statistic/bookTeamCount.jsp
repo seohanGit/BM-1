@@ -17,7 +17,7 @@
 			<c:forEach items="${bookCount }" var="bookCount">
 				<tr>
 					<td>${bookCount.b_group}</td>
-					<td>${bookCount.count}</td>
+					<td>${bookCount.count}±Ç</td>
 				</tr>
 			</c:forEach>
 		</tbody>

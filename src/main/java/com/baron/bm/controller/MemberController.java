@@ -72,7 +72,6 @@ public class MemberController {
 		param.setYear(year);
 		param.setMonth(month);
 		List<BoardModel> notice = boardService.noticeList();
-
 		List<BookModel> bestBook = statisticService.selectBestBook(param);
 		List<MemberModel> bestTeam = statisticService.selectBestTeam(year);
 		List<BookModel> newBook = statisticService.getNewbook();

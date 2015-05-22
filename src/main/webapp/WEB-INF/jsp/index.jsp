@@ -13,6 +13,49 @@
 <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="/resources/css/common.css" rel="stylesheet">
 <link href="/resources/css/index.css" rel="stylesheet">
+<script src="/resources/js/jquery/jquery.js"></script>
+<script type="text/javascript" src="/resources/js/highchartTable.js"></script>
+<script type="text/javascript" src="/resources/js/highcharts.js"></script>
+<script>
+	$("#logout").click(function() {
+		location.href = "/logout"
+	})
+
+	$document.ready(function() {
+
+		$('table.highchart').highchartTable();
+		var date = "${con.regisdate}";
+		var newicon = "<span class="label label-default">New</span></h3>";
+		if (date < now()) {
+			$("#notice").append(newicon);
+		}
+
+	});
+	var array = [ "a0", "a1", "a2", "a3", "a4", "a5", "a6", "a7", "a8", "a9" ];
+	function deletee() {
+		for ( var i in array) {
+			$("#array[i]").hide();
+		}
+
+	}
+
+	window.onload = function() {
+		deletee();
+
+	};
+
+	var cnt = 0;
+	function add() {
+		if (cnt == 10) {
+			clearInterval(timer);
+		}
+		$("#array[cnt]").show();
+
+		cnt++;
+	}
+
+	var timer = setInterval(add, 2000);
+</script>
 </head>
 <%
 	String id = null;
@@ -136,6 +179,7 @@
 
 				</c:forEach>
 			</div>
+		
 		</div>
 	</div>
 
@@ -146,49 +190,10 @@
 
 	<!-- /.container -->
 	<!-- jQuery -->
-	<script src="/resources/js/jquery/jquery.js"></script>
 	<!-- Bootstrap Core JavaScript -->
 	<script src="/resources/js/bootstrap.min.js"></script>
 	<script src="/resources/js/common.js"></script>
 	<script src="/resources/js/book.js"></script>
-	<script>
-		$("#logout").click(function() {
-			location.href = "/logout"
-		})
 
-		$document.ready(function() {
-			var date = "${con.regisdate}";
-			var newicon = "<span class="label label-default">New</span></h3>";
-			if (date < now()) {
-				$("#notice").append(newicon);
-			}
-
-		});
-		var array = [ "a0", "a1", "a2", "a3", "a4", "a5", "a6", "a7", "a8",
-				"a9" ];
-		function deletee() {
-			for ( var i in array) {
-				$("#array[i]").hide();
-			}
-
-		}
-
-		window.onload = function() {
-			deletee();
-
-		};
-
-		var cnt = 0;
-		function add() {
-			if (cnt == 10) {
-				clearInterval(timer);
-			}
-			$("#array[cnt]").show();
-
-			cnt++;
-		}
-
-		var timer = setInterval(add, 2000);
-	</script>
 </body>
 </html>

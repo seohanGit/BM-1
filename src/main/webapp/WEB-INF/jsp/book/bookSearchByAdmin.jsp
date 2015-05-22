@@ -97,7 +97,7 @@ body {
 											<td><input type="checkbox" name="book_cd"
 												value="${book.book_cd}"></td>
 											<td align="left"><a href="#"
-												onclick="window.open('/bookInfo?book_cd=${book.book_cd}','new','resizeble=yes scrollbars=yes, width:800px, height:600px');">
+												onclick="window.open('/bookInfo?book_cd=${book.book_cd}','new','resizeble=yes scrollbars=yes, width:850px, height:500px');">
 													${book.title }</a></td>
 											<td class=" hidden-xs " align="left">${book.author}</td>
 											<td class="hidden-sm hidden-xs hidden-md " align="left">${book.b_group }</td>

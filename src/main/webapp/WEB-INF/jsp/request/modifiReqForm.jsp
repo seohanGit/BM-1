@@ -61,10 +61,10 @@ body {
 								<c:forEach items="${bookList}" var="book" varStatus="status">
 									<tr>
 										<td><input type="text" name="book_cd"
-											value="${book.book_cd}" tabindex="${status.index }"><input
+											value="${book.book_cd}" "><input
 											type="hidden" name="req_cd" value="${book.req_cd}"></td>
 
-										<td><a href="${book.link}">${book.title }</a></td>
+										<td><a href="${book.link}" tabindex="0">${book.title }</a></td>
 										<td class="hidden-sm hidden-xs hidden-md ">${book.author}</td>
 									<%-- 	<td><select name="b_group" tabindex="${status.index }">
 												<!-- <optgroup

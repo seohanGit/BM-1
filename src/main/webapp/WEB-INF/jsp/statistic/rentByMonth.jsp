@@ -3,9 +3,9 @@
 	uri="http://java.sun.com/jsp/jstl/core"%>
 
 <table class="highchart table table-bordered"
-	data-graph-container-before="1" data-graph-type="line"
+	data-graph-container-before="1" data-graph-type="column"
 	style="display: none">
-	<caption>월별 대여현황</caption>
+	<caption>연간 대여 현황</caption>
 
 	<thead>
 		<tr>

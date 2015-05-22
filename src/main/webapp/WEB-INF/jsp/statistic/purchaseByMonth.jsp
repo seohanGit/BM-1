@@ -3,14 +3,14 @@
 	uri="http://java.sun.com/jsp/jstl/core"%>
 
 <table class="highchart table table-bordered"
-	data-graph-container-before="1" data-graph-type="column"
-	style="display: show" >
-	<caption style="font-size:20px"> 분류별 대여현황 (사용예산, 배정예산 버튼을 끄면 구매권수를 볼 수 있습니다.)</caption>
+	data-graph-container-before="1" data-graph-type="line"
+	data-graph-yaxis-2-opposite="1" style="display: show" >
+	<caption style="font-size:20px"> 연간 예산 현황</caption>
 
 	<thead>
 		<tr>
-			<th class="td-title"></th>
-			<th>구매권수</th>
+			<th class="td-img"></th>
+			<th  data-graph-yaxis="1">구매권수</th>
 			<th>사용예산</th>
 			<th data-graph-type="line">배정예산</th>
 		</tr>

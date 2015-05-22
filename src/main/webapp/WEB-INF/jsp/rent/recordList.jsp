@@ -113,7 +113,7 @@ body {
 			var table = $('#dataTable').DataTable({
 
 				paging : true,
-				ordering : true,
+				"order" : [],
 				"columns" : [ {
 					"searchable" : true
 				}, {

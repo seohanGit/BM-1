@@ -6,7 +6,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=850px, height=500px, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
 <title>도서정보 페이지</title>
@@ -14,11 +14,6 @@
 <link href="/resources/css/common.css" rel="stylesheet">
 <link href="/resources/css/signin.css" rel="stylesheet">
 
-<style type="text/css">
-body {
-	padding-top: 0px;
-}
-</style>
 </head>
 <body>
 	<div class="container">
@@ -121,8 +116,7 @@ body {
 
 				</div>
 			</div>
-		</div>
-	</div>
+		
 	<script src="/resources/js/jquery/jquery.js"></script>
 	<script src="/resources/js/bootstrap.min.js"></script>
 	<script src="/resources/js/common.js"></script>

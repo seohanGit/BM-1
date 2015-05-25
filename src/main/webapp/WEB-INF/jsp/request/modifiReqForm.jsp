@@ -92,6 +92,8 @@ body {
 										</select></td> --%>
 
 										<td class="hidden-sm hidden-xs" style="text-align: right; ">${book.price}¿ø</td>
+										<td class="hidden-sm hidden-xs" style="text-align: right;">${book.price}¿ø</td>
+
 										<td align="center"><c:choose>
 												<c:when test="${book.reqstatus == 0}">
 													<input type="number" name="quantity" min="1"

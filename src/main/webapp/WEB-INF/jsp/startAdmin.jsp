@@ -18,7 +18,7 @@
 </script>
 </head>
 
-<body onload="doOnload('admin', 'admin', 1350, 920); window.close();">
+<body onload="doOnload('admin', 'admin', 1500, 920); window.close();">
 
 	<p>Window is closing...</p>
 

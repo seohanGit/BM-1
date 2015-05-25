@@ -21,15 +21,7 @@ public class BookModel {
 	private String link;
 	private String isbn;
 	private String summary;
-private int totalResults;
-	
-	public int getTotalResults() {
-	return totalResults;
-}
-
-public void setTotalResults(int totalResults) {
-	this.totalResults = totalResults;
-}
+	private int totalResults;
 
 	private String rentchk;
 	private String reservechk;
@@ -48,6 +40,13 @@ public void setTotalResults(int totalResults) {
 	private String req_ymd;
 	private String retu_ymd;
 
+	public int getTotalResults() {
+		return totalResults;
+	}
+
+	public void setTotalResults(int totalResults) {
+		this.totalResults = totalResults;
+	}
 
 	public String getRetu_ymd() {
 		return retu_ymd;

@@ -79,7 +79,7 @@
 						<c:forEach items="${noticeList}" var="notice" varStatus="status"
 							begin="0" end="1" step="1">
 							<li class="list-group-item"><textarea style="width: 100%;"
-									readonly rows="5">${notice.content}</textarea></li>
+									readonly rows="4">${notice.content}</textarea></li>
 						</c:forEach>
 					</ul>
 

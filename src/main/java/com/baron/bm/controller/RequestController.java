@@ -214,11 +214,13 @@ public class RequestController {
 															 * List<String>
 															 * c_groupList
 															 */) {
-		for (int i = 0; i < req_cdList.size(); i++) {
+		for (int i = 0; i < req_cdList.size()-1; i++) {
+			System.out.println(req_cdList.size());
+			System.out.println(book_cdList.get(i));
 			BookModel book = new BookModel();
-			String book_cd = book_cdList.get(i);
 			book.setBook_cd(book_cdList.get(i));
-			book.setReq_cd(req_cdList.get(i));/*
+			book.setReq_cd(req_cdList.get(i));
+			/*
 											 * book.setB_group(requestservice.
 											 * selectB_code
 											 * (book_cd.substring(0,1)));

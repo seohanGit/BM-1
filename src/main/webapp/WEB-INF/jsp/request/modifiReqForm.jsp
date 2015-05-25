@@ -63,11 +63,11 @@ body {
 									<tr>
 										<td><c:choose>
 												<c:when test="${book.reqstatus == 0}">
-													<input type="text" name="book_cd" value="${book.book_cd}">
+													<input type="text" name="book_cd" value="${book.book_cd}"  style="width: 150px;">
 													<input type="hidden" name="req_cd" value="${book.req_cd}">
 												</c:when>
 												<c:otherwise>
-													<input type="text" value="${book.book_cd}" readonly>
+													<input type="text" name="book_cd" value="${book.book_cd}" style="width: 150px;" readonly>
 													<input type="hidden" name="req_cd" value="${book.req_cd}">
 												</c:otherwise>
 											</c:choose></td>
@@ -92,18 +92,18 @@ body {
 										</select></td> --%>
 
 										<td class="hidden-sm hidden-xs" style="text-align: right; ">${book.price}원</td>
-										<td class="hidden-sm hidden-xs" style="text-align: right;">${book.price}원</td>
+									
 
-										<td align="center"><c:choose>
+										<td align="center"><%-- <c:choose>
 												<c:when test="${book.reqstatus == 0}">
 													<input type="number" name="quantity" min="1"
-														placeholder="수량" value="${book.quantity}">
+														placeholder="수량" style="width: 30px;" value="${book.quantity}">
 												</c:when>
 												<c:otherwise>
 													<input type="number" name="quantity" min="1"
-														value="${book.quantity}" readonly>
+														value="${book.quantity}"  style="width: 30px;" readonly>
 												</c:otherwise>
-											</c:choose></td>
+											</c:choose> --%>${book.quantity }</td>
 
 									</tr>
 								</c:forEach>

@@ -10,7 +10,7 @@
 	<thead>
 		<tr>
 			<th class="td-img"></th>
-			<th  data-graph-yaxis="1">구매권수</th>
+			<th data-graph-type="column" data-graph-yaxis="1">구매권수</th>
 			<th>사용예산</th>
 			<th data-graph-type="line">배정예산</th>
 		</tr>

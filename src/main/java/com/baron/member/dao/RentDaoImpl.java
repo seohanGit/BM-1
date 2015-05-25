@@ -81,15 +81,7 @@ public class RentDaoImpl implements RentDao {
 		return session.selectList(NAMESPACE + "recordListAll");
 	}
 
-	@Override
-	public List<BookModel> reservationListAll() {
-				return session.selectList(NAMESPACE + "reservationListAll");
-	}
-
-	@Override
-	public List<BookModel> reservationList(String id) {
-		return session.selectList(NAMESPACE + "reservationList", id);
-	}
+	
 
 	@Override
 	public void extendBorrowBook(String book_cd) {
@@ -137,7 +129,15 @@ public class RentDaoImpl implements RentDao {
 		return session.selectOne(NAMESPACE + "selectReservation", book_cd);
 
 	}
+	@Override
+	public List<BookModel> reservationListAll() {
+				return session.selectList(NAMESPACE + "reservationListAll");
+	}
 
+	@Override
+	public List<BookModel> reservationList(String id) {
+		return session.selectList(NAMESPACE + "reservationList", id);
+	}
 		
 	@Override
 	public List<BookModel> copyRent() {

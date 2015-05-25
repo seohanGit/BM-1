@@ -103,7 +103,9 @@ public class RentController {
 		for (Cookie cookie : request.getCookies()) {
 			if (cookie.getName().equals("bm_permission")) {
 				if (cookie.getValue().equals("1")) {
-					List<BookModel> bookList =  rentservice.borrowListAll();
+					List<BookModel> rentList = rentservice.rentListAll();
+					List<BookModel> bookList = rentservice.borrowListAll();
+					model.addAttribute("rentList", rentList);
 					model.addAttribute("bookList", bookList);
 					return "rent/borrowListByAdmin";
 
@@ -114,8 +116,7 @@ public class RentController {
 
 					List<BookModel> reserve = rentservice.reservationList(id);
 
-					System.out.println(reserve.get(0).getTitle());
-					model.addAttribute("bookList", rentList);
+					model.addAttribute("rentList", rentList);
 					model.addAttribute("reserveList", reserve);
 					model.addAttribute("bookList", bookList);
 
@@ -322,9 +323,11 @@ public class RentController {
 
 	@RequestMapping("/deleteReserve")
 	public String deleteReserve(String book_cd, Model model, BookModel book) {
-
-		rentservice.deleteReserve(book_cd);
+		book = rentservice.selectReservation(book_cd);
+		rentservice.borrowBook(book);
 		rentservice.confirmBorrowBook(book_cd);
+		rentservice.deleteReserve(book_cd);
+		
 		return "redirect:recordListAll";
 	}
 

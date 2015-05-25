@@ -18,7 +18,7 @@
 		ON
 		A.book_cd=B.book_cd
 		WHERE
-		B.rentchk='1'
+		B.rentchk='1' 
 		ORDER BY
 		B.rentchk
 		DESC

@@ -214,7 +214,7 @@ public class RequestController {
 															 * List<String>
 															 * c_groupList
 															 */) {
-		for (int i = 0; i < req_cdList.size()-1; i++) {
+		for (int i = 0; i < req_cdList.size(); i++) {
 			System.out.println(req_cdList.size());
 			System.out.println(book_cdList.get(i));
 			BookModel book = new BookModel();

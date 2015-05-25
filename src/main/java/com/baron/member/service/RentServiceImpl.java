@@ -89,7 +89,29 @@ public class RentServiceImpl implements RentService {
 
 	@Override
 	public void returnBook(String book_cd) {
-		rentDao.returnBook(book_cd);
+		BookModel checkBook = selectBook(book_cd);
+		SmsModel sms = new SmsModel();
+		if (selectRent(book_cd).getId() != null) {
+			String id = selectRent(book_cd).getId();
+			sms.setTitle(checkBook.getTitle());
+			sms.setPhone(selectMember(id).getMobi_no()
+					.substring(1));
+
+			notifiDao.notifiReturnConfirm(sms);
+			rentDao.returnBook(book_cd);
+		}
+		if (checkBook.getReservechk().equals("1")) {
+			if (selectReservation(book_cd).getId() != null) {
+				String id = selectReservation(book_cd).getId();
+				sms.setTitle(checkBook.getTitle());
+				sms.setPhone(selectMember(id).getMobi_no()
+						.substring(1));
+				notifiDao.notifiReser(sms);
+
+			}
+
+		}
+		
 	}
 
 	@Override

@@ -216,30 +216,7 @@ public class RentController {
 		BookModel checkBook = rentservice.selectBook(book_cd);
 		System.out.println(checkBook.getRentchk());
 		if (checkBook.getRentchk().equals("2")) {
-			if (rentservice.selectRent(book_cd).getId() != null) {
-				SmsModel sms = new SmsModel();
-
-				String id = rentservice.selectRent(book_cd).getId();
-				sms.setTitle(checkBook.getTitle());
-				sms.setPhone(rentservice.selectMember(id).getMobi_no()
-						.substring(1));
-
-				notifiService.notifiReturnConfirm(sms);
-				rentservice.returnBook(book_cd);
-			}
-			if (checkBook.getReservechk().equals("1")) {
-				if (rentservice.selectReservation(book_cd).getId() != null) {
-					SmsModel sms = new SmsModel();
-
-					String id = rentservice.selectReservation(book_cd).getId();
-					sms.setTitle(checkBook.getTitle());
-					sms.setPhone(rentservice.selectMember(id).getMobi_no()
-							.substring(1));
-					notifiService.notifiReser(sms);
-
-				}
-
-			}
+			rentservice.returnBook(book_cd);
 
 			return "redirect:rentListAll";
 		} else {
@@ -259,6 +236,7 @@ public class RentController {
 	public String stopBorrow(String book_cd) {
 		rentservice.stopBorrow(book_cd);
 
+	
 		return "redirect:bookList";
 	}
 
@@ -327,7 +305,7 @@ public class RentController {
 		rentservice.borrowBook(book);
 		rentservice.confirmBorrowBook(book_cd);
 		rentservice.deleteReserve(book_cd);
-		
+
 		return "redirect:recordListAll";
 	}
 

@@ -31,7 +31,7 @@
 </head>
 
 <body
-	onload="javascript:openPopup('searchBook', 'login', 1600, 1000); window.close(); ">
+	onload="javascript:openPopup('index', 'login', 1600, 1000); window.close(); ">
 
 	<p>Window is closing...</p>
 

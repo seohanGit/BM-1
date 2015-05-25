@@ -36,7 +36,7 @@
 		ON A.book_cd = B.book_cd AND A.rentchk =
 		B.rentchk
 		WHERE
-		LCASE(A.TITLE) like #{keyword}
+		LCASE(A.TITLE) like #{keyword} OR LCASE(A.AUTHOR) like #{keyword}
 		ORDER BY A.RENTCHK DESC,
 		A.RCV_DATE DESC
 	</select>

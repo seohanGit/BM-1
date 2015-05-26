@@ -129,7 +129,7 @@
 						<div align="left">
 							<p class="caption">
 								<a href="#"
-									onclick="window.open('/bookInfo?book_cd=${newbook.book_cd}','new','resizeble=yes scrollbars=yes, width=850, height=500');">${newbook.title}</a>
+									onclick="window.open('/bookInfo?book_cd=${newbook.book_cd}','new','resizeble=yes scrollbars=yes, width=850, height=850');">${newbook.title}</a>
 							</p>
 							<p class="caption">${newbook.author}</p>
 							<p class="caption">입고일 : ${newbook.rcv_date}</p>

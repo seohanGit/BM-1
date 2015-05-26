@@ -75,7 +75,7 @@ public class MemberController {
 		List<BookModel> bestBook = statisticService.selectBestBook(param);
 		List<MemberModel> bestTeam = statisticService.selectBestTeam(year);
 		List<BookModel> newBook = statisticService.getNewbook();
-
+		
 		model.addAttribute("noticeList", notice);
 		model.addAttribute("bestBook", bestBook);
 		model.addAttribute("bestTeam", bestTeam);

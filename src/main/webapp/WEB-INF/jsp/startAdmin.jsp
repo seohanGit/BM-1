@@ -1,10 +1,10 @@
 <%@ page language="java" session="false" isErrorPage="false"
-	pageEncoding="ISO-8859-1"%>
+	pageEncoding="euc-kr"%>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>No-one should see this!</title>
+<title>기술자료실</title>
 
 <script type="text/javascript" language="Javascript1.5">
 	function winClose() {

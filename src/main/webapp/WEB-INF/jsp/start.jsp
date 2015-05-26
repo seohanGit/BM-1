@@ -1,15 +1,11 @@
 <%@ page language="java" session="false" isErrorPage="false"
-	pageEncoding="utf-8"%>
+	pageEncoding="euc-kr"%>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="">
-<meta name="author" content="">
-<title>No-one should see this!</title>
+
+<title>기술자료실</title>
 
 <script type="text/javascript">
 	function winClose() {

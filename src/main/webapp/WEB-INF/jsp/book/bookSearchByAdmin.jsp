@@ -75,7 +75,7 @@ body {
 						});
 								
 						</script>
-							<select>
+						<!-- 	<select>
 								<option value="B">B-도서(단행본)
 								<option value="E">E-기타매체
 								<option value="J">J-정기간행물
@@ -83,7 +83,7 @@ body {
 								<option value="R">R-보고서
 								<option value="S">S-규격/사전
 								<option value="T">T-논문
-							</select>
+							</select> -->
 							<button style="width: 100px" class="btn btn-default"
 								type="button" id="insertBook">도서추가</button>
 							<button style="width: 100px" class="btn btn-default"
@@ -115,7 +115,7 @@ body {
 											<td><input type="checkbox" name="book_cd"
 												value="${book.book_cd}"></td>
 											<td align="left"><a href="#"
-												onclick="window.open('/bookInfo?book_cd=${book.book_cd}','new','resizeble=yes scrollbars=yes, width:850px, height:500px');">
+												onclick="window.open('/bookInfo?book_cd=${book.book_cd}','new','resizeble=yes scrollbars=yes, width=850, height=850');">
 													${book.title }</a></td>
 											<td class="hidden-xs" align="left">${book.author}</td>
 											<td class="hidden-sm hidden-xs hidden-md"

@@ -23,7 +23,7 @@
 
 
 	<select id="selectBook" parameterType="String" resultType="BookModel">
-		SELECT * FROM TESTLIB.BOOKMST WHERE book_cd=#{book_cd}
+		SELECT * FROM TESTLIB.BOOKMST WHERE book_cd=#{book_cd} FETCH first 1 rows only
 	</select>
 
 	<select id="searchBook" parameterType="String" resultType="SearchResult">
@@ -72,7 +72,8 @@
 
 	<select id="getNewbook" resultType="BookModel">
 		SELECT *
-		FROM TESTLIB.BOOKMST
+		FROM TESTLIB.BOOKMST 
+		WHERE rcv_date is not null
 		ORDER BY
 		rcv_date DESC
 		FETCH first 5 rows only

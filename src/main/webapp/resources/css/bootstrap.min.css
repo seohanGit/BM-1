@@ -3,7 +3,7 @@ HEAD /*!
  * Bootstrap v3.3.0 (http://getbootstrap.com)
  * Copyright 2011-2014 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
- */ /*! normalize.css v3.0.2 | MIT License | git.io/normalize */      
+ */ /*! normalize.css v3.0.2 | MIT License | git.io/normalize */        
 html {
 	font-family: sans-serif;
 	-webkit-text-size-adjust: 100%;
@@ -23,13 +23,16 @@ article, aside, details, figcaption, figure, footer, header, hgroup,
 	display: block
 }
 
-
 audio, canvas, progress, video {
 	display: inline-block;
 	vertical-align: baseline
 }
 
 audio
+
+
+
+
 
 
 
@@ -49,7 +52,11 @@ audio
 
 
 
+
+
  
+
+
 
 
 
@@ -66,7 +73,11 @@ controls
 
 
 
+
+
  
+
+
 
 
 
@@ -87,7 +98,13 @@ display
 
 
 
+
+
+
+
 :
+
+
 
 
 
@@ -101,7 +118,13 @@ display
 
 
 
+
+
 none
+
+
+
+
 
 
 
@@ -128,6 +151,10 @@ height
 
 
 
+
+
+
+
 :
 
 
@@ -135,7 +162,11 @@ height
 
 
 
+
+
  
+
+
 
 
 
@@ -214,6 +245,10 @@ svg
 
 
 
+
+
+
+
 :not
 
 
@@ -221,7 +256,11 @@ svg
 
 
 
+
+
  
+
+
 
 
 
@@ -236,7 +275,11 @@ svg
 
 
 
+
+
  
+
+
 
 
 
@@ -257,7 +300,13 @@ overflow
 
 
 
+
+
+
+
 :
+
+
 
 
 
@@ -271,7 +320,13 @@ overflow
 
 
 
+
+
 hidden
+
+
+
+
 
 
 
@@ -386,10 +441,14 @@ table {
 	border-spacing: 5px;
 	border-collapse: collapse;
 	border-radius: 10px;
+	table-layout: fixed;
 }
 
 td, th {
-	padding: 0
+	padding: 0;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
 }
 /*! Source: https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css */
 @media print {
@@ -3792,6 +3851,10 @@ tbody.collapse.in {
 
 
 
+
+
+
+
 :not
 
 
@@ -3799,7 +3862,11 @@ tbody.collapse.in {
 
 
 
+
+
  
+
+
 
 
 
@@ -3814,7 +3881,11 @@ tbody.collapse.in {
 
 
 
+
+
  
+
+
 
 
 
@@ -3829,7 +3900,11 @@ tbody.collapse.in {
 
 
 
+
+
  
+
+
 
 
 
@@ -3844,7 +3919,11 @@ tbody.collapse.in {
 
 
 
+
+
  
+
+
 
 
 
@@ -3859,7 +3938,11 @@ tbody.collapse.in {
 
 
 
+
+
  
+
+
 
 
 
@@ -3875,7 +3958,11 @@ tbody.collapse.in {
 
 
 
+
+
 	
+
+
 
 
 
@@ -3896,6 +3983,10 @@ border-radius
 
 
 
+
+
+
+
 :
 
 
@@ -3903,7 +3994,11 @@ border-radius
 
 
 
+
+
  
+
+
 
 
 
@@ -3931,7 +4026,15 @@ border-radius
 
 
 
+
+
+
+
 :first-child
+
+
+
+
 
 
 
@@ -3951,7 +4054,11 @@ border-radius
 
 
 
+
+
  
+
+
 
 
 
@@ -3966,7 +4073,11 @@ border-radius
 
 
 
+
+
  
+
+
 
 
 
@@ -3981,7 +4092,11 @@ border-radius
 
 
 
+
+
  
+
+
 
 
 
@@ -3996,7 +4111,11 @@ border-radius
 
 
 
+
+
  
+
+
 
 
 
@@ -4017,6 +4136,10 @@ border-top-right-radius
 
 
 
+
+
+
+
 :
 
 
@@ -4024,7 +4147,11 @@ border-top-right-radius
 
 
 
+
+
  
+
+
 
 
 
@@ -4045,6 +4172,10 @@ border-bottom-right-radius
 
 
 
+
+
+
+
 :
 
 
@@ -4052,7 +4183,11 @@ border-bottom-right-radius
 
 
 
+
+
  
+
+
 
 
 
@@ -4076,7 +4211,15 @@ border-bottom-right-radius
 
 
 
+
+
+
+
 :last-child
+
+
+
+
 
 
 
@@ -4096,7 +4239,11 @@ border-bottom-right-radius
 
 
 
+
+
  
+
+
 
 
 
@@ -4111,7 +4258,11 @@ border-bottom-right-radius
 
 
 
+
+
  
+
+
 
 
 
@@ -4134,7 +4285,13 @@ border-bottom-right-radius
 
 
 
+
+
+
+
 :not
+
+
 
 
 
@@ -4149,8 +4306,12 @@ border-bottom-right-radius
 
 
 
+
+
 (
 :first-child
+
+
 
 
 
@@ -4164,12 +4325,20 @@ border-bottom-right-radius
 
 
 
+
+
 ){
 border-top-left-radius
+
+
+
+
 :
+
+
+
+
 10;
-
-
 border-bottom-left-radius
 
 
@@ -4183,6 +4352,10 @@ border-bottom-left-radius
 
 
 
+
+
+
+
 :
 
 
@@ -4190,7 +4363,11 @@ border-bottom-left-radius
 
 
 
+
+
  
+
+
 
 
 
@@ -4289,6 +4466,10 @@ border-bottom-left-radius
 
 
 
+
+
+
+
 :not
 
 
@@ -4296,7 +4477,11 @@ border-bottom-left-radius
 
 
 
+
+
  
+
+
 
 
 
@@ -4311,7 +4496,11 @@ border-bottom-left-radius
 
 
 
+
+
  
+
+
 
 
 
@@ -4326,7 +4515,11 @@ border-bottom-left-radius
 
 
 
+
+
  
+
+
 
 
 
@@ -4341,7 +4534,11 @@ border-bottom-left-radius
 
 
 
+
+
  
+
+
 
 
 
@@ -4362,6 +4559,10 @@ border-radius
 
 
 
+
+
+
+
 :
 
 
@@ -4369,7 +4570,11 @@ border-radius
 
 
 
+
+
  
+
+
 
 
 
@@ -4393,7 +4598,15 @@ border-radius
 
 
 
+
+
+
+
 :first-child
+
+
+
+
 
 
 
@@ -4413,7 +4626,11 @@ border-radius
 
 
 
+
+
  
+
+
 
 
 
@@ -4428,7 +4645,11 @@ border-radius
 
 
 
+
+
  
+
+
 
 
 
@@ -4449,7 +4670,13 @@ border-top-right-radius
 
 
 
+
+
+
+
 :
+
+
 
 
 
@@ -4463,8 +4690,14 @@ border-top-right-radius
 
 
 
+
+
 4
 px
+
+
+
+
 
 
 
@@ -4491,6 +4724,10 @@ border-bottom-right-radius
 
 
 
+
+
+
+
 :
 
 
@@ -4498,7 +4735,11 @@ border-bottom-right-radius
 
 
 
+
+
  
+
+
 
 
 
@@ -4519,7 +4760,13 @@ border-bottom-left-radius
 
 
 
+
+
+
+
 :
+
+
 
 
 
@@ -4533,11 +4780,17 @@ border-bottom-left-radius
 
 
 
+
+
 0
 }
 .btn-group-vertical
 >
 .btn
+
+
+
+
 
 
 
@@ -4563,6 +4816,10 @@ border-bottom-left-radius
 
 
 
+
+
+
+
 :not
 
 
@@ -4570,7 +4827,11 @@ border-bottom-left-radius
 
 
 
+
+
  
+
+
 
 
 
@@ -4585,7 +4846,11 @@ border-bottom-left-radius
 
 
 
+
+
  
+
+
 
 
 
@@ -4606,6 +4871,10 @@ border-top-left-radius
 
 
 
+
+
+
+
 :
 
 
@@ -4613,7 +4882,11 @@ border-top-left-radius
 
 
 
+
+
  
+
+
 
 
 
@@ -4634,6 +4907,10 @@ border-top-right-radius
 
 
 
+
+
+
+
 :
 
 
@@ -4641,7 +4918,11 @@ border-top-right-radius
 
 
 
+
+
  
+
+
 
 
 
@@ -4662,7 +4943,13 @@ border-bottom-left-radius
 
 
 
+
+
+
+
 :
+
+
 
 
 
@@ -4676,8 +4963,14 @@ border-bottom-left-radius
 
 
 
+
+
 4
 px
+
+
+
+
 
 
 
@@ -4821,6 +5114,10 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 
 
 
+
+
+
+
 :not
 
 
@@ -4828,7 +5125,11 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 
 
 
+
+
  
+
+
 
 
 
@@ -4843,7 +5144,11 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 
 
 
+
+
  
+
+
 
 
 
@@ -4858,7 +5163,11 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 
 
 
+
+
  
+
+
 
 
 
@@ -4873,7 +5182,11 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 
 
 
+
+
  
+
+
 
 
 
@@ -4894,6 +5207,10 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 
 
 
+
+
+
+
 :not
 
 
@@ -4901,7 +5218,11 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 
 
 
+
+
  
+
+
 
 
 
@@ -4916,7 +5237,11 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 
 
 
+
+
  
+
+
 
 
 
@@ -4931,7 +5256,11 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 
 
 
+
+
  
+
+
 
 
 
@@ -4946,7 +5275,11 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 
 
 
+
+
  
+
+
 
 
 
@@ -4961,7 +5294,11 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 
 
 
+
+
  
+
+
 
 
 
@@ -4981,7 +5318,13 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 
 
 
+
+
+
+
 :not
+
+
 
 
 
@@ -4996,6 +5339,8 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 
 
 
+
+
 (
 :first-child
 
@@ -5004,7 +5349,11 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 
 
 
+
+
  
+
+
 
 
 
@@ -5019,7 +5368,11 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 
 
 
+
+
  
+
+
 
 
 
@@ -5034,7 +5387,11 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 
 
 
+
+
  
+
+
 
 
 
@@ -5055,6 +5412,10 @@ border-radius
 
 
 
+
+
+
+
 :
 
 
@@ -5062,7 +5423,11 @@ border-radius
 
 
 
+
+
  
+
+
 
 
 
@@ -5169,7 +5534,6 @@ border-radius
 
 .nav>li {
 	position: relative;
-	
 }
 
 .nav>li>a {
@@ -5186,7 +5550,6 @@ border-radius
 
 .nav>li>a:hover, .nav>li>a:focus {
 	text-decoration: none;
-	
 }
 
 .nav>li.disabled>a {
@@ -5208,8 +5571,7 @@ border-radius
 .nav .nav-divider {
 	height: 1px;
 	margin: 9px 0;
-	overflow:inherit;
-
+	overflow: inherit;
 }
 
 .nav>li>a>img {
@@ -5827,7 +6189,6 @@ border-radius
 	}
 	.navbar-default .navbar-nav .open .dropdown-menu>li>a:hover,
 		.navbar-default .navbar-nav .open .dropdown-menu>li>a:focus {
-		
 		background-color: transparent
 	}
 	.navbar-default .navbar-nav .open .dropdown-menu>.active>a,
@@ -5866,11 +6227,10 @@ border-radius
 	color: #ccc
 }
 
-.navbar-inverse {	
+.navbar-inverse {
 	background: url(../img/topsmenu_bg.GIF);
 	background-position: top left;
 	background-repeat: repeat-x;
-	
 	border-color: #080808
 }
 
@@ -5927,8 +6287,8 @@ border-radius
 .navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
 	border-color: #101010;
 	background: url(../img/topsmenu_bg.GIF);
-  background-position: top left;
-  background-repeat: repeat;
+	background-position: top left;
+	background-repeat: repeat;
 }
 
 .navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:hover,
@@ -6814,7 +7174,7 @@ a.list-group-item-danger.active, a.list-group-item-danger.active:hover,
 	border-bottom: 1px solid transparent;
 	border-top-right-radius: 10px;
 	border-bottom-right-radius: 10px;
-	 background-color: #fff;
+	background-color: #fff;
 }
 
 .panel-heading>.dropdown .dropdown-toggle {
@@ -8245,13 +8605,21 @@ button.close {
 	
 	
 	
+	
+	
+	
+	
 	:not
 	
 	
 	
 	
 	
+	
+	
 	 
+	
+	
 	
 	
 	
@@ -8266,7 +8634,11 @@ button.close {
 	
 	
 	
+	
+	
 	 
+	
+	
 	
 	
 	
@@ -8284,7 +8656,13 @@ button.close {
 	
 	
 	
+	
+	
+	
+	
 	:
+	
+	
 	
 	
 	
@@ -8296,7 +8674,13 @@ button.close {
 	
 	
 	
+	
+	
 	none
+	
+	
+	
+	
 	
 	
 	
@@ -8319,13 +8703,21 @@ button.close {
 	
 	
 	
+	
+	
+	
+	
 	:
 	
 	
 	
 	
 	
+	
+	
 	 
+	
+	
 	
 	
 	
@@ -8402,13 +8794,21 @@ svg
 
 
 
+
+
+
+
 :not
 
 
 
 
 
+
+
  
+
+
 
 
 
@@ -8421,7 +8821,11 @@ svg
 
 
 
+
+
  
+
+
 
 
 
@@ -8439,7 +8843,13 @@ overflow
 
 
 
+
+
+
+
 :
+
+
 
 
 
@@ -8451,7 +8861,13 @@ overflow
 
 
 
+
+
 hidden
+
+
+
+
 
 
 
@@ -11988,13 +12404,21 @@ tbody.collapse.in {
 
 
 
+
+
+
+
 :not
 
 
 
 
 
+
+
  
+
+
 
 
 
@@ -12007,7 +12431,11 @@ tbody.collapse.in {
 
 
 
+
+
  
+
+
 
 
 
@@ -12020,7 +12448,11 @@ tbody.collapse.in {
 
 
 
+
+
  
+
+
 
 
 
@@ -12033,7 +12465,11 @@ tbody.collapse.in {
 
 
 
+
+
  
+
+
 
 
 
@@ -12046,7 +12482,11 @@ tbody.collapse.in {
 
 
 
+
+
  
+
+
 
 
 
@@ -12060,7 +12500,11 @@ tbody.collapse.in {
 
 
 
+
+
 	
+
+
 
 
 
@@ -12078,13 +12522,21 @@ border-radius
 
 
 
+
+
+
+
 :
 
 
 
 
 
+
+
  
+
+
 
 
 
@@ -12109,7 +12561,15 @@ border-radius
 
 
 
+
+
+
+
 :first-child
+
+
+
+
 
 
 
@@ -12126,7 +12586,11 @@ border-radius
 
 
 
+
+
  
+
+
 
 
 
@@ -12139,7 +12603,11 @@ border-radius
 
 
 
+
+
  
+
+
 
 
 
@@ -12152,7 +12620,11 @@ border-radius
 
 
 
+
+
  
+
+
 
 
 
@@ -12165,7 +12637,11 @@ border-radius
 
 
 
+
+
  
+
+
 
 
 
@@ -12183,13 +12659,21 @@ border-top-right-radius
 
 
 
+
+
+
+
 :
 
 
 
 
 
+
+
  
+
+
 
 
 
@@ -12207,13 +12691,21 @@ border-bottom-right-radius
 
 
 
+
+
+
+
 :
 
 
 
 
 
+
+
  
+
+
 
 
 
@@ -12234,7 +12726,15 @@ border-bottom-right-radius
 
 
 
+
+
+
+
 :last-child
+
+
+
+
 
 
 
@@ -12251,7 +12751,11 @@ border-bottom-right-radius
 
 
 
+
+
  
+
+
 
 
 
@@ -12264,7 +12768,11 @@ border-bottom-right-radius
 
 
 
+
+
  
+
+
 
 
 
@@ -12284,7 +12792,13 @@ border-bottom-right-radius
 
 
 
+
+
+
+
 :not
+
+
 
 
 
@@ -12297,6 +12811,8 @@ border-bottom-right-radius
 
 
 
+
+
 (
 :first-child
 
@@ -12304,7 +12820,11 @@ border-bottom-right-radius
 
 
 
+
+
  
+
+
 
 
 
@@ -12322,13 +12842,21 @@ border-top-left-radius
 
 
 
+
+
+
+
 :
 
 
 
 
 
+
+
  
+
+
 
 
 
@@ -12346,13 +12874,21 @@ border-bottom-left-radius
 
 
 
+
+
+
+
 :
 
 
 
 
 
+
+
  
+
+
 
 
 
@@ -12448,13 +12984,21 @@ border-bottom-left-radius
 
 
 
+
+
+
+
 :not
 
 
 
 
 
+
+
  
+
+
 
 
 
@@ -12467,7 +13011,11 @@ border-bottom-left-radius
 
 
 
+
+
  
+
+
 
 
 
@@ -12480,7 +13028,11 @@ border-bottom-left-radius
 
 
 
+
+
  
+
+
 
 
 
@@ -12493,7 +13045,11 @@ border-bottom-left-radius
 
 
 
+
+
  
+
+
 
 
 
@@ -12511,13 +13067,21 @@ border-radius
 
 
 
+
+
+
+
 :
 
 
 
 
 
+
+
  
+
+
 
 
 
@@ -12538,7 +13102,15 @@ border-radius
 
 
 
+
+
+
+
 :first-child
+
+
+
+
 
 
 
@@ -12555,7 +13127,11 @@ border-radius
 
 
 
+
+
  
+
+
 
 
 
@@ -12568,7 +13144,11 @@ border-radius
 
 
 
+
+
  
+
+
 
 
 
@@ -12586,7 +13166,13 @@ border-top-right-radius
 
 
 
+
+
+
+
 :
+
+
 
 
 
@@ -12598,8 +13184,14 @@ border-top-right-radius
 
 
 
+
+
 4
 px
+
+
+
+
 
 
 
@@ -12622,13 +13214,21 @@ border-bottom-right-radius
 
 
 
+
+
+
+
 :
 
 
 
 
 
+
+
  
+
+
 
 
 
@@ -12646,7 +13246,13 @@ border-bottom-left-radius
 
 
 
+
+
+
+
 :
+
+
 
 
 
@@ -12658,11 +13264,17 @@ border-bottom-left-radius
 
 
 
+
+
 0
 }
 .btn-group-vertical
 >
 .btn
+
+
+
+
 
 
 
@@ -12684,13 +13296,21 @@ border-bottom-left-radius
 
 
 
+
+
+
+
 :not
 
 
 
 
 
+
+
  
+
+
 
 
 
@@ -12703,7 +13323,11 @@ border-bottom-left-radius
 
 
 
+
+
  
+
+
 
 
 
@@ -12721,13 +13345,21 @@ border-top-left-radius
 
 
 
+
+
+
+
 :
 
 
 
 
 
+
+
  
+
+
 
 
 
@@ -12745,13 +13377,21 @@ border-top-right-radius
 
 
 
+
+
+
+
 :
 
 
 
 
 
+
+
  
+
+
 
 
 
@@ -12769,7 +13409,13 @@ border-bottom-left-radius
 
 
 
+
+
+
+
 :
+
+
 
 
 
@@ -12781,8 +13427,14 @@ border-bottom-left-radius
 
 
 
+
+
 4
 px
+
+
+
+
 
 
 
@@ -12922,13 +13574,21 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 
 
 
+
+
+
+
 :not
 
 
 
 
 
+
+
  
+
+
 
 
 
@@ -12941,7 +13601,11 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 
 
 
+
+
  
+
+
 
 
 
@@ -12954,7 +13618,11 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 
 
 
+
+
  
+
+
 
 
 
@@ -12967,7 +13635,11 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 
 
 
+
+
  
+
+
 
 
 
@@ -12985,13 +13657,21 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 
 
 
+
+
+
+
 :not
 
 
 
 
 
+
+
  
+
+
 
 
 
@@ -13004,7 +13684,11 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 
 
 
+
+
  
+
+
 
 
 
@@ -13017,7 +13701,11 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 
 
 
+
+
  
+
+
 
 
 
@@ -13030,7 +13718,11 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 
 
 
+
+
  
+
+
 
 
 
@@ -13043,7 +13735,11 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 
 
 
+
+
  
+
+
 
 
 
@@ -13060,7 +13756,13 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 
 
 
+
+
+
+
 :not
+
+
 
 
 
@@ -13073,6 +13775,8 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 
 
 
+
+
 (
 :first-child
 
@@ -13080,7 +13784,11 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 
 
 
+
+
  
+
+
 
 
 
@@ -13093,7 +13801,11 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 
 
 
+
+
  
+
+
 
 
 
@@ -13106,7 +13818,11 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 
 
 
+
+
  
+
+
 
 
 
@@ -13124,13 +13840,21 @@ border-radius
 
 
 
+
+
+
+
 :
 
 
 
 
 
+
+
  
+
+
 
 
 
@@ -13963,7 +14687,7 @@ border-radius
 
 .navbar-inverse .navbar-toggle {
 	border-color: #333;
-	color:#333;
+	color: #333;
 }
 
 .navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus
@@ -16240,5 +16964,4 @@ button.close {
 	.hidden-print {
 		display: none !important
 	}
-	
 }

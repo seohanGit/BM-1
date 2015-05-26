@@ -67,7 +67,7 @@
 	<div class="container">
 		<div class="row">
 			<!-- Blog Entries Column -->
-			<div class="col-md-8 ">
+			<div class="col-md-8 col-sm-8 col-xs-12">
 
 
 				<div id="goodPhrase">
@@ -112,7 +112,7 @@
 				</div>
 			</div>
 			<!-- Blog Sidebar Widgets Column -->
-			<div class="col-md-4">
+			<div class="col-md-4 col-sm-4 col-xs-12">
 
 				<br> <br>
 
@@ -165,11 +165,11 @@
 
 
 			</div>
-			<div class="col-md-8 col-xs-12" style="float: left;">
+			<div class="col-md-8 col-sm-8 col-xs-12" style="float: left;">
 				<jsp:include page="footer.jsp"></jsp:include>
 			</div>
 
-			<div class="col-md-4 col-xs-12" style="float: right">
+			<div class="col-md-4 col-sm-4 col-xs-12" style="float: right">
 				<c:forEach items="${bestTeam}" var="team" begin="0" end="4">
 					<div class="progress">
 						<div class="progress-bar progress-bar-info" role="progressbar"

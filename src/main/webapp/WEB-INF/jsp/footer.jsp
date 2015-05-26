@@ -7,17 +7,20 @@
 
 	<h3>Best 도서</h3>
 
-	<table class="table-admin table table-striped " style="width: 100%">
+	<table class="table-admin table table-striped "
+		style="width: 100%; table-layout: fixed;">
 		<tr class="table-admin">
 			<th style="width: 60%"><strong>도서명</strong></th>
 			<th class="hidden-xs">저자</th>
-			<th style="text-align:right; ;width: 90px">대여횟수</th>
+			<th style="text-align: right;; width: 90px">대여횟수</th>
 		</tr>
 		<c:forEach items="${bestBook}" var="best" begin="0" end="4">
 			<tr class="table-admin">
 				<td style="width: 60%"><strong>${best.title}</strong></td>
-				<td class="hidden-xs">${best.author}</td>
-				<td style="text-align:right; ;width: 90px"><mark>${best.count} 회</mark></td>
+				<td class="hidden-xs"
+					style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden;">${best.author}</td>
+				<td style="text-align: right;; width: 90px"><mark>${best.count}
+						회</mark></td>
 			</tr>
 		</c:forEach>
 	</table>

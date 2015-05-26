@@ -67,11 +67,11 @@ body {
 				<div class="panel-body">
 
 
-					<select id="year">
-						<option value="2013">2013
-						<option value="2014">2014
+					<select  style="height: 22px; vertical-align: bottom;" id="year">
 						<option value="2015" selected>2015
-					</select> <select id="month">
+						<option value="2014">2014
+						<option value="2013">2013
+					</select> <select style="height: 22px; vertical-align: bottom;" id="month">
 						<option value="1">1
 						<option value="2">2
 						<option value="3">3
@@ -84,7 +84,7 @@ body {
 						<option value="10">10
 						<option value="11">11
 						<option value="12">12
-						<option value="" selected>연간조회
+						<option value=""  selected >연간조회
 					</select>
 					<button class="btn btn-sm" id="rentByMonth" type="button">연간
 						대여 현황</button>

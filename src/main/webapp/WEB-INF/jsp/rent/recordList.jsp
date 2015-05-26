@@ -21,34 +21,14 @@ body {
 	padding-top: 70px;
 }
 </style>
-
+<script type="text/javascript">
+	
+</script>
 </head>
 
 <body>
-	<jsp:include page="../nav.jsp" /><script type="text/javascript">
-		$("#select").change(function() {
-			var options = $(this).val();
-			$("#dataTable tr").each(function() {
-				var tr = $(this);
-				var td = tr.find("td:eq(2)")
-				if (td.text() !== options) {
-					tr.hide();
-				}
-			})
+	<jsp:include page="../nav.jsp" />
 
-		});
-	</script>
-	<select id="select">
-		<optgroup label="대분류">
-			<option value="B-도서(단행본)">B-도서(단행본)
-			<option value="E-기타매체">E-기타매체
-			<option value="J-정기간행물">J-정기간행물
-			<option value="P-특허자료">P-특허자료
-			<option value="R-보고서">R-보고서
-			<option value="S-규격/사전">S-규격/사전
-			<option value="T-논문">T-논문
-		</optgroup>
-	</select>
 	<div id="loadingBar"
 		style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; text-align: center; margin: 0 auto; z-index: 100000;">
 		<table width="100%" height="100%" border="0" bgcolor="#000000">
@@ -69,8 +49,21 @@ body {
 		<div class="col-md-12"><jsp:include page="../menu.jsp" />
 			<div class="col-xs-12 panel panel-default">
 				<div class="panel-body">
-					<div>
+					<div class="left">
 						<h2>대여 기록</h2>
+					</div>
+					<div style="vertical-align: middle;" class="right-end">
+						<select id="select">
+							<optgroup label="대분류">
+								<option value="B-도서(단행본)">B-도서(단행본)
+								<option value="E-기타매체">E-기타매체
+								<option value="J-정기간행물">J-정기간행물
+								<option value="P-특허자료">P-특허자료
+								<option value="R-보고서">R-보고서
+								<option value="S-규격/사전">S-규격/사전
+								<option value="T-논문">T-논문
+							</optgroup>
+						</select>
 					</div>
 					<!-- 
 			기록 검색<button type="button" onclick="location.href='/insertRecord'">삽입</button>
@@ -84,14 +77,7 @@ body {
 								<th class="hidden-sm hidden-xs hidden-md td-author">분류</th>
 								<th class="td-author hidden-xs">대여일</th>
 								<th class="td-author">반납일</th>
-
-
 								<!-- <th class="td-img">삭제</th> -->
-
-
-
-
-
 							</tr>
 						</thead>
 
@@ -130,20 +116,21 @@ body {
 
 
 	<script src="/resources/js/common.js"></script>
-	<script src="/resources/js/book.js"></script>
 	<script src="/resources/js/jquery.dataTables.min.js"></script>
 	<script src="/resources/js/dataTables.bootstrap.min.js"></script>
 	<script src="/resources/js/jquery.dataTables.columnFilter.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
 			var table = $('#dataTable').DataTable({
-
+				"pageLength" : 10,
 				paging : true,
 				"order" : [],
 				"columns" : [ {
 					"searchable" : true
 				}, {
 					"searchable" : true
+				}, {
+					"searchable" : false
 				}, {
 					"searchable" : false
 				}, {
@@ -159,6 +146,19 @@ body {
 
 		divLoadBody.style.display = "";
 		loadingBar.style.display = "none";
+
+		$("#select").change(function() {
+			var options = $(this).val();
+			$('table tr').show();
+			$("#dataTable tbody tr").each(function() {
+				var tr = $(this);
+				var td = tr.find("td:eq(2)")
+				if (td.text() !== options) {
+					tr.hide();
+				}
+			})
+
+		});
 	</script>
 
 </body>

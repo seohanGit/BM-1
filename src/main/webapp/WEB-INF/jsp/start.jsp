@@ -21,7 +21,7 @@
 								+ width
 								+ ",height="
 								+ height
-								+ ", directories=0,titlebar=0,toolbar=0,status=no,toolbar=no,menubar=no,location=no'");
+								+ ", directories=0,titlebar=0,toolbar=0,status=no,scrollbars=yes,toolbar=no,menubar=no,location=no'");
 	}
 </script>
 </head>

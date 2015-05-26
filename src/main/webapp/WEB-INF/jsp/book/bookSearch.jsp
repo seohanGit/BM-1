@@ -40,8 +40,22 @@
 
 		<div id="searchResultArea">
 			<hr>
-			<h2>도서검색 목록</h2>
-
+			<div class="left">
+				<h2>도서검색 목록</h2>
+			</div>
+			<div style="vertical-align: middle;" class="right-end">
+				<select id="select">
+					<optgroup label="대분류">
+						<option value="B-도서(단행본)">B-도서(단행본)
+						<option value="E-기타매체">E-기타매체
+						<option value="J-정기간행물">J-정기간행물
+						<option value="P-특허자료">P-특허자료
+						<option value="R-보고서">R-보고서
+						<option value="S-규격/사전">S-규격/사전
+						<option value="T-논문">T-논문
+					</optgroup>
+				</select>
+			</div>
 			<h4>원하는 책이 없다면 인터넷에서 주문하세요 !</h4>
 			<div class="input-group" style="width: 95%">
 				<form action="/searchBook" method="post">
@@ -153,8 +167,8 @@
 				"language" : {
 					"url" : "dataTables.korean.lang"
 				},
-				"pageLength" : 10,
-				paging : true,
+				/* "pageLength" : 10, */
+				paging : false,
 				"order" : [],
 
 				"columns" : [ null, null, null, {
@@ -184,6 +198,18 @@
 
 		divLoadBody.style.display = "";
 		loadingBar.style.display = "none";
+		$("#select").change(function() {
+			var options = $(this).val();
+			$('table tr').show();
+			$("#dataTable tbody tr").each(function() {
+				var tr = $(this);
+				var td = tr.find("td:eq(2)")
+				if (td.text() !== options) {
+					tr.hide();
+				}
+			})
+
+		});
 	</script>
 
 

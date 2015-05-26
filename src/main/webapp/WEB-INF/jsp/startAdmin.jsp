@@ -13,7 +13,7 @@
 	}
 	function doOnload(url, name, width, height) {
 		window.open(url, name, "width=" + width + ",height=" + height
-				+ ",status=no,toolbar=no,menubar=no,location=no");
+				+ ",status=no,toolbar=no,menubar=no,scrollbars=yes,location=no");
 	}
 </script>
 </head>

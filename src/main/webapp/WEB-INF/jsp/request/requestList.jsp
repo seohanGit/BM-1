@@ -63,7 +63,7 @@ body {
 									<thead>
 										<tr class="title ">
 
-											<th><input type="checkbox" id="allCheck" class="td-chk"></th>
+											<th class="td-chk"><input type="checkbox" id="allCheck" ></th>
 											<th class="hidden-sm hidden-xs hidden-md td-author">도서코드</th>
 											<th>도서명</th>
 
@@ -73,7 +73,7 @@ body {
 
 											<th class="hidden-sm hidden-xs hidden-md td-genre">요청일자</th>
 											<th class="td-img">상태</th>
-											<th class="td-img"></th>
+											<th class="td-genre"></th>
 
 										</tr>
 									</thead>

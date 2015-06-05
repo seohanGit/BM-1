@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.baron.member.dao.BookDao;
 import com.baron.member.dao.JoinDao;
 import com.baron.member.dao.RentDao;
 import com.baron.member.model.BookModel;
@@ -28,8 +29,12 @@ public class RentController {
 
 	@Autowired
 	NotifiService notifiService;
-
+	
+	@Autowired
 	private RentDao rentDao;
+	@Autowired
+	private BookDao bookDao;
+	@Autowired
 	private JoinDao joinDao;
 
 	@RequestMapping("/borrowbook")
@@ -51,12 +56,16 @@ public class RentController {
 		book.setBook_cd(book_cd);
 		book.setRentchk("1");
 		BookModel chkbook = rentservice.selectBook(book_cd);
-		if (chkbook.getRentchk().equals("0")) {
-			System.out.println(book.getRentchk());
-			rentservice.borrowBook(book);
-			return "redirect:borrowList";
-		} else {
+		if (id != null) {
+			if (chkbook.getRentchk().equals("0")) {
+				System.out.println(book.getRentchk());
+				rentservice.borrowBook(book);
+				return "redirect:borrowList";
+			} else {
 
+				return "rent/borrowfail";
+			}
+		} else {
 			return "rent/borrowfail";
 		}
 	}
@@ -136,7 +145,7 @@ public class RentController {
 
 		if (rentservice.selectReservation(book_cd) == null) {
 			sms.setPhone(joinDao.selectMember(id).getMobi_no().substring(1));
-			sms.setTitle(rentDao.selectBorrow(book_cd).getTitle());
+			sms.setTitle(bookDao.selectBook(book_cd).getTitle());
 
 			rentservice.extendBorrowBook(book_cd);
 			notifiService.notifiExtend(sms);
@@ -188,12 +197,22 @@ public class RentController {
 	}
 
 	@RequestMapping("/rentListAll")
-	public String rentListAll(Model model) {
+	public String rentListAll(Model model, HttpServletRequest request) {
 		List<BookModel> bookList = new ArrayList<BookModel>();
+		String permission = null;
 		bookList = rentservice.rentListAll();
 		model.addAttribute("bookList", bookList);
 
-		return "rent/rentList";
+		for (Cookie cookie : request.getCookies()) {
+			if (cookie.getName().equals("bm_permission"))
+				permission = (cookie.getValue());
+		}
+		if (permission.equals("1")) {
+			return "rent/rentList";
+		}else{
+			return "rent/borrowfail";
+		}
+
 	}
 
 	/*
@@ -236,7 +255,6 @@ public class RentController {
 	public String stopBorrow(String book_cd) {
 		rentservice.stopBorrow(book_cd);
 
-	
 		return "redirect:bookList";
 	}
 

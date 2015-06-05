@@ -61,7 +61,7 @@ body {
 
 									<thead>
 										<tr class="title">
-											<th><input type="checkbox" id="allCheck" class="td-chk"></th>
+											<th class="td-chk"><input type="checkbox" id="allCheck" ></th>
 											<th>도서명</th>
 											<th class="td-genre">대여일</th>
 											<th class="td-genre hidden-xs">반납일</th>
@@ -130,7 +130,7 @@ body {
 									id="dataTable">
 									<thead>
 										<tr class="hidden-xs title">
-											<th><input type="checkbox" id="allCheck" class="td-chk"></th>
+											<th class="td-chk"><input type="checkbox" id="allCheck"></th>
 											<th>도서명</th>
 											<th class="td-genre">반납일</th>
 											<th class="hidden-xs td-date">대여자</th>

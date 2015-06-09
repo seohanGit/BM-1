@@ -42,9 +42,9 @@ body {
 						value="${book.b_group}" readonly="readonly">
 				</div>
 				<div class="form-group">
-					<label for="exampleInputPassword1">수량</label> <input type="text"
-						class="form-control" id="quantity" name="quantity"
-						value="${book.quantity}" >
+					<label for="exampleInputPassword1">수량</label> <input type="number"
+						class="form-control" id="quantity" name="quantity" 
+						value="1" >
 				</div>
 
 				<div class="form-group">

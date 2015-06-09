@@ -167,10 +167,7 @@ public class MemberController {
 				mav.addObject("permission", "0");
 
 			}
-			for (Cookie cookie : request.getCookies()) {
-				if (cookie.getValue() == "bm_permission")
-					System.out.println(cookie.getValue() + "login Success");
-			}
+			
 		}
 		return mav;
 

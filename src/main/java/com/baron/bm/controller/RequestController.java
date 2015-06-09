@@ -103,10 +103,9 @@ public class RequestController {
 
 	@RequestMapping("/requestbook")
 	public String requestBook(HttpServletRequest request, Model model,
-			BookModel book, String isbn, int quantity) throws Exception {
+			String isbn) throws Exception {
 		String id = null;
-		book = requestservice.findBookOne(isbn);
-		book.setQuantity(quantity);
+		BookModel book = requestservice.findBookOne(isbn);
 
 		for (Cookie cookie : request.getCookies()) {
 			if (cookie.getName().equals("bm_id")) {
@@ -115,7 +114,6 @@ public class RequestController {
 			}
 		}
 		model.addAttribute("book", book);
-
 		return "request/confirmRequest";
 	}
 

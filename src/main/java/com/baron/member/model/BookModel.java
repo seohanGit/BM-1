@@ -35,10 +35,19 @@ public class BookModel {
 	private String id;
 	private String kname;
 	private String team_nm;
-
+	
 	private int count;
 	private String req_ymd;
 	private String retu_ymd;
+	private String mobi_no;
+	
+	public String getMobi_no() {
+		return mobi_no;
+	}
+
+	public void setMobi_no(String mobi_no) {
+		this.mobi_no = mobi_no;
+	}
 
 	public int getTotalResults() {
 		return totalResults;

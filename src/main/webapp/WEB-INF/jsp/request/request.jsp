@@ -71,40 +71,34 @@ body {
 
 							<c:forEach items="${bookList}" var="book" varStatus="status">
 
-								<tbody class="hidden" style="width: 100%">
+								<tbody class="visible-xs" style="width: 100%">
 									<tr>
-
 										<td rowspan="4" style="width: 50px" align="left"><img
 											style="width: 50px" src="${book.imageurl}"></td>
-
 									</tr>
 									<tr>
 										<td style="width: 40%" align="left"><a
 											href="${book.link}">${book.title }</a></td>
 										<td style="width: 40%" align="left">${book.author }</td>
-
 									</tr>
 									<tr>
 										<td>${book.b_group}</td>
 										<td>요청자 : ${book.id}</td>
-
 									</tr>
 									<tr>
 										<td>${book.price}원</td>
 										<td>수량 : ${book.quantity}</td>
-
 									</tr>
 								</tbody>
-
-
-								<tbody>
+								<tbody class="hidden-xs">
 									<tr>
-
-										<td><img style="width: 50px" src="${book.imageurl}"></td>
+										<td ><img style="width: 50px"
+											src="${book.imageurl}"></td>
 										<td><a href="${book.link}">${book.title }</a></td>
 										<td class="hidden-xs">${book.author}</td>
 
 										<td>${book.price}원</td>
+									
 										<td align="center">${book.quantity}</td>
 
 										<td class="hidden-xs"><fmt:formatDate type="date"

@@ -9,8 +9,8 @@
 
 <script type="text/javascript">
 	function winClose() {
-		self.close();
-		window.close();
+		/* self.close();
+		window.close(); */
 	}
 	function openPopup(url, name, width, height) {
 		window

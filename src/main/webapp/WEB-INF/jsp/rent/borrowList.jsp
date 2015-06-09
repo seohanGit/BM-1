@@ -29,9 +29,19 @@ body {
 	<jsp:include page="../nav.jsp" />
 
 	<div class="container">
-		<hr>
+		
 		<div class="row panel panel-default">
-
+			<div class="input-group" style="width: 95%">
+				<form action="/searchBook" method="post">
+					<span class="input-group-btn"> <input type="text"
+						class="form-control" id="keyword" name="keyword"
+						placeholder="기술자료실 도서 검색 [ 소문자로 입력 ]">
+						<button class="btn btn-default" type="submit" id="btn_find">
+							<span class="glyphicon glyphicon-search"></span>
+						</button>
+					</span>
+				</form>
+			</div>
 			<h4>인터넷에서 주문하세요 !</h4>
 			<div class="input-group" style="width: 90%">
 				<form action="/findBook" method="get">
@@ -70,8 +80,10 @@ body {
 							<tbody>
 								<c:forEach items="${bookList}" var="book" varStatus="loop">
 									<tr>
-										<td class="hidden-xs" style="width: 50px" align="left"><img
-											style="width: 50px" src="${book.imageurl}"></td>
+										<td class="hidden-xs" align="left"><c:if
+												test="${!empty book.imageurl }">
+												<img style="width: 50px" src="${book.imageurl}">
+											</c:if></td>
 
 										<td align="left">${book.title }</td>
 										<td class="hidden-xs" align="left">${book.author }</td>

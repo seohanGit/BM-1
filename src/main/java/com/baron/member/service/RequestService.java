@@ -31,4 +31,6 @@ public interface RequestService {
 
 	public String selectC_code(String c_group);
 
+	public void confirmBuy(BookModel model);
+
 }

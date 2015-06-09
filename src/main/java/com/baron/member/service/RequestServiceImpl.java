@@ -12,15 +12,30 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.baron.member.dao.BookDao;
+import com.baron.member.dao.JoinDao;
+import com.baron.member.dao.NotifiDao;
 import com.baron.member.dao.RequestDao;
+import com.baron.member.dao.SmsDao;
 import com.baron.member.model.BookModel;
-import com.baron.member.model.Dto;
+import com.baron.member.model.SmsModel;
 
 @Service
 public class RequestServiceImpl implements RequestService {
 	@Autowired
 	private RequestDao requestDao;
 
+	@Autowired
+	private BookDao bookDao;
+	
+	@Autowired
+	private SmsDao smsDao;
+	
+	@Autowired
+	private JoinDao joinDao;
+
+	@Autowired NotifiDao notifiDao;
+	
 	@Override
 	public List<BookModel> requestList() {
 		// TODO Auto-generated method stub
@@ -35,12 +50,30 @@ public class RequestServiceImpl implements RequestService {
 	@Override
 	public void requestBook(BookModel model) {
 		model.setBook_cd(model.getB_group() + model.getC_group() + "-");
-		System.out.println(model.getTitle());
-		System.out.println(model.getIsbn());
-		System.out.println(model.getTitle());
+	
 		requestDao.requestBook(model);
 	}
 
+	@Override
+	public void confirmBuy(BookModel model){
+		SmsModel sms = new SmsModel();
+		String mobi_no = joinDao.selectMember(model.getId())
+				.getMobi_no().substring(1);
+		
+		sms.setTitle(model.getTitle());
+		sms.setPhone(mobi_no);
+
+		if (model.getQuantity() > 1) {
+			for (int i = 0; i < model.getQuantity(); i++) {
+				model.setBook_cd(model.getBook_cd() + "(" + (i + 1) + ")");
+				bookDao.insertBook(model);
+			}
+
+		} else {
+			bookDao.insertBook(model);
+		}
+		notifiDao.notifiReq(sms);
+	}
 	/*
 	 * @Override public BookModel getRequestBook(String isbn, String id, int
 	 * quantity) throws Exception, IOException { BookModel book = new

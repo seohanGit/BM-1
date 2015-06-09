@@ -86,35 +86,36 @@
 
 			<hr>
 			<div class="dataTable_wrapper">
-				<table class="table table-striped table-bordered"
-					style="width =: 90%; bordercolor: #fff" id="dataTable">
+				<form action="/requestbook" method="get">
+					<table class="table table-striped table-bordered"
+						style="width =: 90%; bordercolor: #fff" id="dataTable">
 
-					<thead>
-						<tr>
-							<td class="hidden-xs" id="td-img">표지</td>
-							<td>도서명</td>
-							<td class="hidden-xs td-author">저자</td>
-							<td class="hidden-sm hidden-xs hidden-md" id="td-genre">분류</td>
-							<td class="hidden-xs" id="td-genre">출판사</td>
-							<td id="td-date">가격</td>
-							<td id="td-date">수량</td>
-							<td id="td-date">구매요청</td>
-						</tr>
-					</thead>
-
-					<tbody>
-						<c:forEach items="${bookList}" var="book" varStatus="status">
+						<thead>
 							<tr>
-								<td class="hidden-xs" style="width: 50px" align="left"><img
-									style="width: 50px" src="${book.imageurl}"></td>
+								<td class="hidden-xs" id="td-img">표지</td>
+								<td>도서명</td>
+								<td class="hidden-xs td-author">저자</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="td-genre">분류</td>
+								<td class="hidden-xs" id="td-genre">출판사</td>
+								<td id="td-date">가격</td>
+								<td id="td-date">수량</td>
+								<td id="td-date">구매요청</td>
+							</tr>
+						</thead>
 
-								<td align="left"><a href="${book.link}">${book.title}</a></td>
-								<td class="hidden-xs" align="left">${book.author }</td>
-								<td class="hidden-sm hidden-xs hidden-md" align="left">${book.b_group}</td>
-								<td class="hidden-xs" align="left">${book.publish}</td>
-								<td align="left">${book.price}원</td>
+						<tbody>
+							<c:forEach items="${bookList}" var="book" varStatus="status">
+								<tr>
+									<td class="hidden-xs" style="width: 50px" align="left"><img
+										style="width: 50px" src="${book.imageurl}"></td>
 
-								<form action="/requestbook" method="get">
+									<td align="left"><a href="${book.link}">${book.title}</a></td>
+									<td class="hidden-xs" align="left">${book.author }</td>
+									<td class="hidden-sm hidden-xs hidden-md" align="left">${book.b_group}</td>
+									<td class="hidden-xs" align="left">${book.publish}</td>
+									<td align="left">${book.price}원</td>
+
+
 									<td style="width: 20px"><input type="hidden"
 										value="${book.isbn}" name="isbn"> <input type="number"
 										name="quantity" min="1" placeholder="수량" style="width: 40px"></td>
@@ -128,13 +129,13 @@
 					&writer=${book.writer}&publisher=${book.publisher}&imageurl=${book.imageurl}
  --%>
 									</td>
-								</form>
-							</tr>
-						</c:forEach>
-					</tbody>
 
-				</table>
+								</tr>
+							</c:forEach>
+						</tbody>
 
+					</table>
+				</form>
 			</div>
 		</div>
 	</div>

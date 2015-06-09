@@ -9,6 +9,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.List;
 
+import org.exolab.castor.xml.dtd.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -49,8 +50,12 @@ public class RequestServiceImpl implements RequestService {
 
 	@Override
 	public void requestBook(BookModel model) {
+		model.setB_group(requestDao.convertB_code(model.getB_group().substring(2)));
+		if(model.getC_group() != null){
+			model.setC_group(requestDao.convertC_code(model.getC_group().substring(4)));
+		}
 		model.setBook_cd(model.getB_group() + model.getC_group() + "-");
-	
+		
 		requestDao.requestBook(model);
 	}
 

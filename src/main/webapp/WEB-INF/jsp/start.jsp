@@ -8,10 +8,10 @@
 <title>기술자료실</title>
 
 <script type="text/javascript">
-	function winClose() {
-		/* self.close();
-		window.close(); */
-	}
+	/* function winClose() {
+		self.close();
+		window.close(); 
+		} */
 	function openPopup(url, name, width, height) {
 		window
 				.open(

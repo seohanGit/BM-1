@@ -65,12 +65,16 @@ public class JoinServiceImpl implements JoinService {
 		return joinDao.selectMemberList();
 	}
 
-
-
 	@Override
 	public List<String> test() {
 		// TODO Auto-generated method stub
 		return joinDao.test();
+	}
+
+	@Override
+	public MemberModel selectMember(String id) {
+		return joinDao.selectMember(id);
+		
 	}
 
 }

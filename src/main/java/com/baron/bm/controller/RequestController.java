@@ -47,37 +47,15 @@ public class RequestController {
 		/*System.out.println(model.getKname() + "님이 " + model.getTitle()
 				+ "을 구매요청하였습니다. ");
 		*/
-		model.setBook_cd(model.getB_group());
-		model.setReq_cd(model.getIsbn() + "-(" + model.getQuantity() + 1+")");
+		model.setKname(model.getKname().substring(0,5));
+		model.setBook_cd(model.getB_group().substring(2) + model.getC_group().substring(0,4)+"-");
+		model.setReq_cd(model.getIsbn().substring(2)+ model.getSabun() + "-(" + model.getQuantity() + 1+")");
 		requestservice.requestBook(model);
 
-		return "redirect:requestList";
+		return "redirect:request";
 	}
 
-	@RequestMapping("/requestList")
-	public String requestList(HttpServletRequest request, Model model, String id) {
-		List<BookModel> bookList = new ArrayList<BookModel>();
-
-		for (Cookie cookie : request.getCookies()) {
-			if (cookie.getName().equals("bm_id")) {
-				id = (cookie.getValue());
-			} else if (cookie.getName().equals("bm_permission")) {
-				if ("1".equals(cookie.getValue())) {
-					bookList = requestservice.requestList();
-					//System.out.println(bookList.get(0).getReq_cd());
-					model.addAttribute("bookList", bookList);
-					return "request/requestList";
-				} else {
-					bookList = requestservice.requestRecord(id);
-					model.addAttribute("bookList", bookList);
-					return "request/request";
-				}
-			}
-
-		}
-		return null;
-	}
-
+	
 	@RequestMapping("/request")
 	public String request(HttpServletRequest request, Model model, String id) {
 		List<BookModel> bookList = new ArrayList<BookModel>();
@@ -89,7 +67,7 @@ public class RequestController {
 				if ("1".equals(cookie.getValue())) {
 					bookList = requestservice.requestList();
 					model.addAttribute("bookList", bookList);
-					return "redirect:requestList";
+					return "request/requestList";
 				} else {
 					bookList = requestservice.requestRecord(id);
 					model.addAttribute("bookList", bookList);
@@ -105,6 +83,7 @@ public class RequestController {
 	public String requestBook(HttpServletRequest request, Model model,
 			String isbn) throws Exception {
 		String id = null;
+		
 		BookModel book = requestservice.findBookOne(isbn);
 
 		for (Cookie cookie : request.getCookies()) {
@@ -113,6 +92,7 @@ public class RequestController {
 				book.setId(id);
 			}
 		}
+		
 		model.addAttribute("book", book);
 		return "request/confirmRequest";
 	}
@@ -130,7 +110,7 @@ public class RequestController {
 			requestservice.confirmBuy(model);
 			requestservice.deleteRequest(model.getReq_cd());
 			
-			return "redirect:requestList";
+			return "redirect:request";
 		} else {
 			return "request/buyfail";
 		}
@@ -150,7 +130,7 @@ public class RequestController {
 			}
 
 		}
-		return "redirect:requestList";
+		return "redirect:request";
 	}
 
 	@RequestMapping("modifiReqForm")
@@ -203,19 +183,19 @@ public class RequestController {
 			requestservice.modifiBook(book);
 		}
 
-		return "redirect:requestList";
+		return "redirect:request";
 	}
 
 	@RequestMapping("/deleteRequest")
 	public String deleteRequest(String req_cd) {
 		requestservice.deleteRequest(req_cd);
-		return "redirect:requestList";
+		return "redirect:request";
 	}
 
 	@RequestMapping("/rejectRequest")
 	public String rejectRequest(String req_cd) {
 		
 		requestservice.rejectRequest(req_cd);
-		return "redirect:requestList";
+		return "redirect:request";
 	}
 }

@@ -86,12 +86,12 @@
 		INSERT INTO
 		TESTLIB.BOOKREQ
 		(id,reqdate,title,book_cd,price,author,quantity,b_group,link,
-		imageurl,isbn, publish, summary, req_cd )
+		imageurl,isbn, publish, summary, req_cd, kname)
 		VALUES
 		(#{id}, current
 		date,
 		#{title},#{book_cd},#{price},#{author},#{quantity},#{b_group},#{link},
-		#{imageurl},#{isbn}, #{publish}, #{summary}, #{req_cd})
+		#{imageurl},#{isbn}, #{publish}, #{summary}, #{req_cd}, #{kname})
 	</insert>
 
 	<update id="deleteRequest" parameterType="String">
@@ -148,7 +148,8 @@
 		FROM TESTLIB.BOOKREQ A INNER JOIN TPRLIB.GR_INSA B
 		ON
 		A.id=B.ASABN
-		WHERE req_cd=#{req_cd}
+		WHERE req_cd=#{req_cd} 
+		FETCH first 1 rows only
 
 	</select>
 

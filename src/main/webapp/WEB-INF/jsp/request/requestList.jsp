@@ -109,12 +109,12 @@ body {
 														</td>
 													</c:when>
 													<c:when test="${book.reqstatus =='1'}">
-														<td align="left">승인</td>
+														<td class="ok" align="left">승인</td>
 														<td></td>
 
 													</c:when>
 													<c:when test="${book.reqstatus =='2'}">
-														<td>반려</td>
+														<td class="no">반려</td>
 														<td></td>
 
 													</c:when>

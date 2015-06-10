@@ -29,7 +29,7 @@
 <body
 	onload="javascript:openPopup('index', 'login', 1600, 1000); window.close(); ">
 
-	<p>Window is closing...</p>
+	<p>페이지가 안 보일 때에는 팝업 차단을 해제해 주시기 바랍니다.</p>
 
 </body>
 </html>

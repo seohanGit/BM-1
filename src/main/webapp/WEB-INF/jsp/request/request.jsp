@@ -58,13 +58,13 @@ body {
 							<thead>
 								<tr class=" title">
 
-									<td id="td-img">표지</td>
-									<td id="td-title">도서명</td>
-									<td class="hidden-xs" id="td-author">저자</td>
-									<td id="td-date">가격</td>
-									<td id="td-img">수량</td>
-									<td class="hidden-xs" id="td-genre">요청일자</td>
-									<td id="td-img">상태</td>
+									<td class="hidden-xs td-img">표지</td>
+									<td class="td-title">도서명</td>
+									<td class="hidden-xs td-author">저자</td>
+									<td style="width:50px">가격</td>
+									<td class="td-chk">수량</td>
+									<td class="hidden-xs td-genre">요청일자</td>
+									<td class="td-chk">상태</td>
 
 								</tr>
 							</thead>
@@ -100,7 +100,7 @@ body {
 								<tbody>
 									<tr>
 
-										<td><img style="width: 50px" src="${book.imageurl}"></td>
+										<td class="hidden-xs"><img style="width: 50px" src="${book.imageurl}"></td>
 										<td><a href="${book.link}">${book.title }</a></td>
 										<td class="hidden-xs">${book.author}</td>
 
@@ -109,11 +109,11 @@ body {
 
 										<td class="hidden-xs"><fmt:formatDate type="date"
 												pattern="yyyy-MM-dd" value="${book.reqdate}" /></td>
-										<td><c:choose>
-												<c:when test="${book.reqstatus=='0'}">대기</c:when>
-												<c:when test="${book.reqstatus=='1'}">승인</c:when>
-												<c:when test="${book.reqstatus=='2'}">반려</c:when>
-											</c:choose></td>
+										<c:choose>
+												<c:when test="${book.reqstatus=='0'}"><td>대기</td></c:when>
+												<c:when test="${book.reqstatus=='1'}"><td class="ok">승인</td></c:when>
+												<c:when test="${book.reqstatus=='2'}"><td class="no">반려</td></c:when>
+											</c:choose>
 									</tr>
 
 								</tbody>

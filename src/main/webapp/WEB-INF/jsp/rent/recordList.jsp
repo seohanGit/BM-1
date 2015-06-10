@@ -14,6 +14,7 @@
 <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="/resources/css/signin.css" rel="stylesheet">
 <link href="/resources/css/common.css" rel="stylesheet">
+<link href="/resources/css/bootstrap-select.min.css" rel="stylesheet">
 <script src="/resources/js/jquery/jquery.js"></script>
 <script src="/resources/js/bootstrap.min.js"></script>
 <style type="text/css">
@@ -52,63 +53,68 @@ body {
 					<div class="left">
 						<h2>대여 기록</h2>
 					</div>
-					<div style="vertical-align: middle;" class="right-end">
-						<select id="select">
-							<optgroup label="대분류">
-								<option value="B-도서(단행본)">B-도서(단행본)
-								<option value="E-기타매체">E-기타매체
-								<option value="J-정기간행물">J-정기간행물
-								<option value="P-특허자료">P-특허자료
-								<option value="R-보고서">R-보고서
-								<option value="S-규격/사전">S-규격/사전
-								<option value="T-논문">T-논문
-							</optgroup>
-						</select>
-					</div>
+
 					<!-- 
 			기록 검색<button type="button" onclick="location.href='/insertRecord'">삽입</button>
 			 -->
-
-					<table class="table table-striped table-bordered" id="dataTable">
-						<thead>
-							<tr class="  title">
-								<th>도서명</th>
-								<th class="td-date">대여자</th>
-								<th class="hidden-sm hidden-xs hidden-md td-author">분류</th>
-								<th class="td-author hidden-xs">대여일</th>
-								<th class="td-author">반납일</th>
-								<!-- <th class="td-img">삭제</th> -->
-							</tr>
-						</thead>
-
-
-						<tbody>
-							<c:forEach items="${bookList}" var="book" varStatus="status">
-
-								<tr>
-
-									<td align="left">${book.title }</td>
-									<td><c:choose>
-											<c:when test="${empty book.kname}">${book.id}</c:when>
-											<c:otherwise>${book.kname}</c:otherwise>
-										</c:choose></td>
-									<td class="hidden-sm hidden-xs hidden-md" id="b_group"
-										align="left">${book.b_group}</td>
-									<td class="hidden-xs" align="left"><fmt:formatDate
-											type="date" pattern="yyyy-MM-dd" value="${book.rentdate }" /></td>
-									<td align="left"><fmt:formatDate type="date"
-											pattern="yyyy-MM-dd" value="${book.returndate }" /></td>
+					<div class="dataTable_wrapper">
+						<!-- <div
+							style="width: 20%; vertical-align: bottom; margin-left: 30px; margin-top: 10px; height: 50px"
+							class="right">
+							<select id="select" class="selectpicker">
+								<optgroup label="대분류">
+									<option value="B-도서(단행본)">B-도서(단행본)
+									<option value="E-기타매체">E-기타매체
+									<option value="J-정기간행물">J-정기간행물
+									<option value="P-특허자료">P-특허자료
+									<option value="R-보고서">R-보고서
+									<option value="S-규격/사전">S-규격/사전
+									<option value="T-논문">T-논문
+								</optgroup>
+							</select>
+						</div> -->
+						<table class="table table-striped table-bordered" id="dataTable">
+							<thead>
+								<tr class="  title">
+									<th>도서명</th>
+									<th class="td-date">대여자</th>
+									<th class="hidden-sm hidden-xs hidden-md td-author">분류</th>
+									<th class="td-author hidden-xs">대여일</th>
+									<th class="td-author">반납일</th>
+									<!-- <th class="td-img">삭제</th> -->
+								</tr>
+							</thead>
 
 
-									<%-- <td><button class="btn btn-default btn-sm" type="button"
+							<tbody>
+								<c:forEach items="${bookList}" var="book" varStatus="status">
+
+									<tr>
+
+										<td align="left">${book.title }</td>
+										<td><c:choose>
+												<c:when test="${empty book.kname}">${book.id}</c:when>
+												<c:otherwise>${book.kname}</c:otherwise>
+											</c:choose></td>
+										<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+											align="left">${book.b_group}</td>
+										<td class="hidden-xs" align="left"><fmt:formatDate
+												type="date" pattern="yyyy-MM-dd" value="${book.rentdate }" /></td>
+										<td align="left"><fmt:formatDate type="date"
+												pattern="yyyy-MM-dd" value="${book.returndate }" /></td>
+
+
+										<%-- <td><button class="btn btn-default btn-sm" type="button"
 											id="extendbook"
 											onClick="location.href='/deleteRecord?book_cd=${book.book_cd}&id=${book.id}'">삭제</button></td>
 								 --%>
-								</tr>
+									</tr>
 
-							</c:forEach>
-						</tbody>
-					</table>
+								</c:forEach>
+							</tbody>
+						</table>
+
+					</div>
 				</div>
 			</div>
 		</div>
@@ -117,12 +123,13 @@ body {
 
 	<script src="/resources/js/common.js"></script>
 	<script src="/resources/js/jquery.dataTables.min.js"></script>
+	<script src="/resources/js/bootstrap-select.min.js"></script>
 	<script src="/resources/js/dataTables.bootstrap.min.js"></script>
 	<script src="/resources/js/jquery.dataTables.columnFilter.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
 			var table = $('#dataTable').DataTable({
-				"pageLength" : 10,
+				"pageLength" : 1000,
 				paging : true,
 				"order" : [],
 				"columns" : [ {
@@ -160,6 +167,5 @@ body {
 
 		});
 	</script>
-
 </body>
 </html>

@@ -91,14 +91,14 @@
 
 					<thead>
 						<tr>
-							<td class="hidden-xs" id="td-img">표지</td>
+							<td class="hidden-xs td-img">표지</td>
 							<td>도서명</td>
 							<td class="hidden-xs td-author">저자</td>
-							<td class="hidden-sm hidden-xs hidden-md" id="td-genre">분류</td>
-							<td class="hidden-xs" id="td-genre">출판사</td>
-							<td id="td-date">가격</td>
-							<td id="td-date">수량</td>
-							<td id="td-date">구매요청</td>
+							<td class="hidden-sm hidden-xs hidden-md td-genre">분류</td>
+							<td class="hidden-xs td-genre">출판사</td>
+							<td class="td-date">가격</td>
+							<td class="td-date">수량</td>
+							<td class="td-genre">구매요청</td>
 						</tr>
 					</thead>
 

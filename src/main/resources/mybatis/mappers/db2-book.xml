@@ -37,8 +37,8 @@
 		B.rentchk
 		WHERE
 		LCASE(A.TITLE) like #{keyword} OR LCASE(A.AUTHOR) like #{keyword}
-		ORDER BY A.RENTCHK DESC,
-		A.RCV_DATE DESC
+		ORDER BY A.RENTCHK DESC, A.RCV_DATE DESC 
+		FETCH first 200 rows only
 	</select>
 
 	<select id="listBook" parameterType="Dto" resultType="BookModel">
@@ -48,6 +48,7 @@
 		TESTLIB.BOOKMST
 		ORDER
 		BY RENTCHK DESC
+		FETCH first 100 rows only
 	</select>
 
 

@@ -28,23 +28,23 @@ body {
 <body>
 	<jsp:include page="../nav.jsp" />
 
-	<div class="container">
-		<hr>
+	<div class="container ">
+		
 		<div class="row panel panel-default">
-			<div id="searchResultArea">
+			<div id="searchResultArea col-md-12 col-xs-12 col-sm-9">
 				<c:choose>
 					<c:when test="${empty record}">
 					</c:when>
 					<c:otherwise>
-						<hr>
+						
 						<h2>대여 기록</h2>
 						<table class="table table-striped table-bordered">
 							<thead>
 								<tr class=" title">
-									<th id="td-title">도서명</th>
-									<th class="hidden-xs" id="td-genre">저자</th>
-									<th id="td-date">대여일</th>
-									<th id="td-date">반납일</th>
+									<th class="td-title">도서명</th>
+									<th class="hidden-xs td-genre">저자</th>
+									<th class="hidden-xs td-date">대여일</th>
+									<th class="td-date">반납일</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -52,7 +52,7 @@ body {
 									<tr>
 										<td align="left">${record.title }</td>
 										<td class="hidden-xs" align="left">${record.author}</td>
-										<td align="left"><fmt:formatDate type="date"
+										<td class="hidden-xs" align="left"><fmt:formatDate type="date"
 												pattern="yyyy-MM-dd" value="${record.rentdate }" /></td>
 										<td align="left"><fmt:formatDate type="date"
 												pattern="yyyy-MM-dd" value="${record.returndate }" /></td>

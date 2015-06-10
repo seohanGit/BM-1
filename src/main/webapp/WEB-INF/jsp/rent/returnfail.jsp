@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <script>
-alert("중복된 도서코드입니다.");
-location.href="/requestList";
+alert("이미 예약중 입니다.");
+location.href="/searchBook";
 </script>

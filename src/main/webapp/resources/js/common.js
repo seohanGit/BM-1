@@ -45,9 +45,9 @@ function notifiReser() {
  * 입력하세요"); return false; } })
  */
 
-$("#requestList").click(function() {
+/*$("#requestList").click(function() {
 	location.href = "/requestList"
-})
+})*/
 $("#request").click(function() {
 	location.href = "/request"
 })

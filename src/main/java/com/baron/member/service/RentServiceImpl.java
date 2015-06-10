@@ -70,15 +70,12 @@ public class RentServiceImpl implements RentService {
 
 	@Override
 	public void confirmBorrowBook(String book_cd) {
-
+		String id = null;
 		if (rentDao.selectBook(book_cd) != null) {
 			String title = rentDao.selectBook(book_cd).getTitle();
-			String id = rentDao.selectBorrow(book_cd).getId();
-			System.out.println(id);
+			id = rentDao.selectBorrow(book_cd).getId();
 			sms.setTitle(title);
 
-			// sms.setPhone(joinDao.selectMember(id).getMobi_no().substring(1));
-			// smsDao.notifiRent(sms);
 			if (joinDao.selectMember(id).getMobi_no() != null) {
 				sms.setPhone(joinDao.selectMember(id).getMobi_no().substring(1));
 				// notifiDao.notifiRent(sms);
@@ -89,29 +86,7 @@ public class RentServiceImpl implements RentService {
 
 	@Override
 	public void returnBook(String book_cd) {
-		BookModel checkBook = selectBook(book_cd);
-		SmsModel sms = new SmsModel();
-		if (selectRent(book_cd).getId() != null) {
-			String id = selectRent(book_cd).getId();
-			sms.setTitle(checkBook.getTitle());
-			sms.setPhone(selectMember(id).getMobi_no()
-					.substring(1));
-
-			notifiDao.notifiReturnConfirm(sms);
-			rentDao.returnBook(book_cd);
-		}
-		if (checkBook.getReservechk().equals("1")) {
-			if (selectReservation(book_cd).getId() != null) {
-				String id = selectReservation(book_cd).getId();
-				sms.setTitle(checkBook.getTitle());
-				sms.setPhone(selectMember(id).getMobi_no()
-						.substring(1));
-				notifiDao.notifiReser(sms);
-
-			}
-
-		}
-		
+		rentDao.returnBook(book_cd);	
 	}
 
 	@Override
@@ -181,31 +156,6 @@ public class RentServiceImpl implements RentService {
 	public MemberModel selectMember(String id) {
 		// TODO Auto-generated method stub
 		return joinDao.selectMember(id);
-	}
-
-	public void notifiReservation(String book_cd) {
-		SmsModel sms = new SmsModel();
-
-		BookModel book = rentDao.selectReservation(book_cd);
-		String title = rentDao.selectBook(book_cd).getTitle();
-		String mobi_no = joinDao.selectMember(book.getId()).getMobi_no()
-				.substring(1);
-
-		sms.setPhone(mobi_no);
-		sms.setTitle(title);
-
-		notifiDao.notifiReser(sms);
-	}
-
-	public void notifiReturnConfirm(String book_cd) {
-		BookModel book = rentDao.selectBorrow(book_cd);
-		String title = rentDao.selectBook(book_cd).getTitle();
-		String mobi_no = joinDao.selectMember(book.getId()).getMobi_no()
-				.substring(1);
-		sms.setPhone(mobi_no);
-		sms.setTitle(title);
-		notifiDao.notifiReturnConfirm(sms);
-
 	}
 
 	@Override

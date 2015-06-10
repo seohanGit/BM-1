@@ -14,7 +14,7 @@
 			<button class="btn btn-default  noborder"
 				onclick="location.href='reservationListAll'">예약현황</button>
 			<button class="btn btn-default  noborder"
-				onclick="location.href='requestList'">구매요청</button>
+				onclick="location.href='request'">구매요청</button>
 
 			<button class="btn btn-default  noborder"
 				onclick="location.href='borrowList'">대여현황</button>
@@ -58,7 +58,7 @@
 					onclick="location.href='reservationListAll'">예약현황</button>
 
 				<button class="btn btn-default noborder"
-					onclick="location.href='requestList'">구매요청</button>
+					onclick="location.href='request'">구매요청</button>
 				<button class="btn btn-default  noborder"
 					onclick="location.href='borrowList'">대여현황</button>
 				<button class="btn btn-default noborder"

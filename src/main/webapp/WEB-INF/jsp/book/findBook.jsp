@@ -86,10 +86,11 @@
 
 			<hr>
 			<div class="dataTable_wrapper">
-				<table class="table table-striped table-bordered"
-					style="width =: 90%; bordercolor: #fff" id="dataTable">
 
-					<thead>
+				<table class="table table-striped table-bordered"
+					style="width =: 90%; bordercolor: #fff" id="dataTae">
+
+						<thead>
 						<tr>
 							<td class="hidden-xs td-img">표지</td>
 							<td>도서명</td>
@@ -99,36 +100,25 @@
 							<td class="td-date">가격</td>
 							<td class="td-date">수량</td>
 							<td class="td-genre">구매요청</td>
+							<td class="td-date">구매요청</td>
 						</tr>
 					</thead>
-
+					
 					<tbody>
 						<c:forEach items="${bookList}" var="book" varStatus="status">
 							<tr>
-								<td class="hidden-xs" style="width: 50px" align="left"><img
-									style="width: 50px" src="${book.imageurl}"></td>
-
+								<td rowspan="2" class="hidden-xs" style="width: 50px"
+									align="left"><img style="width: 50px"
+									src="${book.imageurl}"></td>
 								<td align="left"><a href="${book.link}">${book.title}</a></td>
 								<td class="hidden-xs" align="left">${book.author }</td>
 								<td class="hidden-sm hidden-xs hidden-md" align="left">${book.b_group}</td>
-								<td class="hidden-xs" align="left">${book.publish}</td>
+								</tr><tr><td class="hidden-xs" align="left">${book.publish}</td>
 								<td align="left">${book.price}원</td>
-
-								<form action="/requestbook" method="get">
-									<td style="width: 20px"><input type="hidden"
-										value="${book.isbn}" name="isbn"> <input type="number"
-										name="quantity" min="1" placeholder="수량" style="width: 40px"></td>
-									<td>
-										<button class="btn btn-default" type="submit" id="requestbook">구매요청</button>
-
-
-										<%-- 
-					<button class="btn btn-default" type="button" id="requestbook"
-						onClick="location.href='/requestbook?isbn=${book.isbn}'">구매</button>
-					&writer=${book.writer}&publisher=${book.publisher}&imageurl=${book.imageurl}
- --%>
-									</td>
-								</form>
+								<td>
+									<button class="btn btn-default" type="submit"
+										onclick="location.href='/requestbook?isbn=${book.isbn}'; ">구매요청</button>
+								</td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -160,8 +150,6 @@
 				"columns" : [ {
 					"searchable" : false
 				}, null, null, , {
-					"searchable" : false
-				}, {
 					"searchable" : false
 				}, {
 					"searchable" : false

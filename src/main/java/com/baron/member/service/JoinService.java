@@ -18,6 +18,8 @@ public interface JoinService {
 
 	public int selectMaxGrade();
 
+	public MemberModel selectMember(String id);
+	
 	public int selectMemberById(String id);
 
 	public List<MemberModel> memberList();

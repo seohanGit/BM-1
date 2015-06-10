@@ -44,17 +44,20 @@ public class RequestController {
 
 	@RequestMapping("/confirmRequest")
 	public String requestResult(BookModel model) {
-		System.out.println(model.getKname() + "님이 " + model.getTitle()
+		/*System.out.println(model.getKname() + "님이 " + model.getTitle()
 				+ "을 구매요청하였습니다. ");
-		model.setBook_cd(model.getB_group());
-		model.setReq_cd(model.getIsbn() + "(" + model.getQuantity() + 1 + ")");
+		*/
+		model.setKname(model.getKname().substring(0,5));
+		model.setBook_cd(model.getB_group().substring(2) + model.getC_group().substring(0,4)+"-");
+		model.setReq_cd(model.getIsbn().substring(2)+ model.getSabun() + "-(" + model.getQuantity() + 1+")");
 		requestservice.requestBook(model);
 
-		return "redirect:requestList";
+		return "redirect:request";
 	}
 
-	@RequestMapping("/requestList")
-	public String requestList(HttpServletRequest request, Model model, String id) {
+	
+	@RequestMapping("/request")
+	public String request(HttpServletRequest request, Model model, String id) {
 		List<BookModel> bookList = new ArrayList<BookModel>();
 
 		for (Cookie cookie : request.getCookies()) {
@@ -63,7 +66,6 @@ public class RequestController {
 			} else if (cookie.getName().equals("bm_permission")) {
 				if ("1".equals(cookie.getValue())) {
 					bookList = requestservice.requestList();
-					System.out.println(bookList.get(0).getReq_cd());
 					model.addAttribute("bookList", bookList);
 					return "request/requestList";
 				} else {
@@ -77,35 +79,12 @@ public class RequestController {
 		return null;
 	}
 
-	@RequestMapping("/request")
-	public String request(HttpServletRequest request, Model model, String id) {
-		List<BookModel> bookList = new ArrayList<BookModel>();
-
-		for (Cookie cookie : request.getCookies()) {
-			if (cookie.getName().equals("bm_id")) {
-				id = (cookie.getValue());
-			} else if (cookie.getName().equals("bm_permission")) {
-				if ("1".equals(cookie.getValue())) {
-					bookList = requestservice.requestList();
-					model.addAttribute("bookList", bookList);
-					return "redirect:requestList";
-				} else {
-					bookList = requestservice.requestRecord(id);
-					model.addAttribute("bookList", bookList);
-					return "request/request";
-				}
-			}
-
-		}
-		return null;
-	}
-
 	@RequestMapping("/requestbook")
 	public String requestBook(HttpServletRequest request, Model model,
-			BookModel book, String isbn, int quantity) throws Exception {
+			String isbn) throws Exception {
 		String id = null;
-		book = requestservice.findBookOne(isbn);
-		book.setQuantity(quantity);
+		
+		BookModel book = requestservice.findBookOne(isbn);
 
 		for (Cookie cookie : request.getCookies()) {
 			if (cookie.getName().equals("bm_id")) {
@@ -113,10 +92,8 @@ public class RequestController {
 				book.setId(id);
 			}
 		}
+		
 		model.addAttribute("book", book);
-		System.out.println(book.getId());
-		System.out.println(book.getSummary());
-
 		return "request/confirmRequest";
 	}
 
@@ -129,27 +106,11 @@ public class RequestController {
 
 	@RequestMapping("/confirmBuy")
 	public String confirmBuy(BookModel model) {
-		SmsModel sms = new SmsModel();
 		if (bookService.selectBook(model.getBook_cd()) == null) {
-			System.out.println(model.getId());
-			String mobi_no = rentService.selectMember(model.getId())
-					.getMobi_no().substring(1);
-
-			sms.setTitle(model.getTitle());
-			sms.setPhone(mobi_no);
-
-			if (model.getQuantity() != 1) {
-				for (int i = 0; i < model.getQuantity(); i++) {
-					model.setBook_cd(model.getBook_cd() + "(" + (i + 1) + ")");
-					bookService.insertBook(model);
-				}
-
-			} else {
-				bookService.insertBook(model);
-			}
+			requestservice.confirmBuy(model);
 			requestservice.deleteRequest(model.getReq_cd());
-			notifiService.notifiReq(sms);
-			return "redirect:requestList";
+			
+			return "redirect:request";
 		} else {
 			return "request/buyfail";
 		}
@@ -160,17 +121,9 @@ public class RequestController {
 			@RequestParam(value = "req_cd") List<String> req_cdList) {
 		for (String req_cd : req_cdList) {
 			BookModel book = requestservice.selectBook(req_cd);
-			SmsModel sms = new SmsModel();
 			if (bookService.selectBook(book.getBook_cd()) == null) {
-				String mobi_no = rentService.selectMember(book.getId())
-						.getMobi_no().substring(1);
-
-				sms.setTitle(book.getTitle());
-				sms.setPhone(mobi_no);
-
-				bookService.insertBook(requestservice.selectBook(req_cd));
-				requestservice.deleteRequest(req_cd);
-				notifiService.notifiReq(sms);
+				requestservice.confirmBuy(book);
+				requestservice.deleteRequest(book.getReq_cd());
 				return "request/buySuccess";
 			} else {
 				return "request/buyfail";
@@ -178,19 +131,15 @@ public class RequestController {
 			}
 
 		}
-		return "redirect:requestList";
+		return "redirect:request";
 	}
 
 	@RequestMapping("modifiReqForm")
 	public String modifiForm(Model model) {
-		List<BookModel> bookList = new ArrayList<BookModel>();
-		List<CodeModel> BCodeList = new ArrayList<CodeModel>();
-		List<CodeModel> CCodeList = new ArrayList<CodeModel>();
-		bookList = requestservice.requestList();
-		BCodeList = bookService.selectBCodeList();
-		CCodeList = bookService.selectCCodeList();
+		List<BookModel> bookList = requestservice.requestList();
+		List<CodeModel> BCodeList = bookService.selectBCodeList();
+		List<CodeModel> CCodeList = bookService.selectCCodeList();
 
-		System.out.println(bookList.get(0).getReq_cd());
 		model.addAttribute("bookList", bookList);
 		model.addAttribute("BCodeList", BCodeList);
 		model.addAttribute("CCodeList", CCodeList);
@@ -215,8 +164,6 @@ public class RequestController {
 															 * c_groupList
 															 */) {
 		for (int i = 0; i < req_cdList.size(); i++) {
-			System.out.println(req_cdList.size());
-			System.out.println(book_cdList.get(i));
 			BookModel book = new BookModel();
 			book.setBook_cd(book_cdList.get(i));
 			book.setReq_cd(req_cdList.get(i));
@@ -237,20 +184,19 @@ public class RequestController {
 			requestservice.modifiBook(book);
 		}
 
-		return "redirect:requestList";
+		return "redirect:request";
 	}
 
 	@RequestMapping("/deleteRequest")
 	public String deleteRequest(String req_cd) {
-		System.out.println(req_cd);
 		requestservice.deleteRequest(req_cd);
-		return "redirect:requestList";
+		return "redirect:request";
 	}
 
 	@RequestMapping("/rejectRequest")
 	public String rejectRequest(String req_cd) {
-		System.out.println(req_cd);
+		
 		requestservice.rejectRequest(req_cd);
-		return "redirect:requestList";
+		return "redirect:request";
 	}
 }

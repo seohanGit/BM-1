@@ -123,6 +123,7 @@ public class RequestController {
 			BookModel book = requestservice.selectBook(req_cd);
 			if (bookService.selectBook(book.getBook_cd()) == null) {
 				requestservice.confirmBuy(book);
+				requestservice.deleteRequest(book.getReq_cd());
 				return "request/buySuccess";
 			} else {
 				return "request/buyfail";

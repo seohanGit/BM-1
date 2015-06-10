@@ -13,9 +13,8 @@
 	<insert id="insertBook" parameterType="BookModel">
 		INSERT INTO
 		TESTLIB.BOOKMST
-		(title,BOOK_CD,b_group,publish,author,rentchk,imageurl,
-		rcv_date, isbn,
-		price, summary)
+		(title, book_cd,b_group,publish,author,rentchk,imageurl,
+		rcv_date, isbn, price, summary)
 		VALUES
 		(#{title},#{book_cd},#{b_group},#{publish},#{author},'0', #{imageurl},
 		current date, #{isbn}, #{price}, #{summary})

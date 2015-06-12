@@ -76,7 +76,7 @@ body {
 						<table class="table table-striped table-bordered" id="dataTable">
 							<thead>
 								<tr class="  title">
-									<th>도서명</th>
+									<th class="td-title">도서명</th>
 									<th class="td-date">대여자</th>
 									<th class="hidden-sm hidden-xs hidden-md td-author">분류</th>
 									<th class="td-author hidden-xs">대여일</th>
@@ -91,7 +91,7 @@ body {
 
 									<tr>
 
-										<td align="left">${book.title }</td>
+										<td class="td-title" align="left">${book.title }</td>
 										<td><c:choose>
 												<c:when test="${empty book.kname}">${book.id}</c:when>
 												<c:otherwise>${book.kname}</c:otherwise>

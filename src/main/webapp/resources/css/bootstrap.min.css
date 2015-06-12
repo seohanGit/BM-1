@@ -457,6 +457,7 @@ td, th {
 	white-space: nowrap;
 	text-overflow: ellipsis;
 	overflow: hidden;
+	
 }
 /*! Source: https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css */
 @media print {

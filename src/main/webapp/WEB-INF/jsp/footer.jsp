@@ -16,7 +16,7 @@
 		</tr>
 		<c:forEach items="${bestBook}" var="best" begin="0" end="4">
 			<tr class="table-admin">
-				<td style="width: 60%"><strong>${best.title}</strong></td>
+				<td class="td-title" style="width: 60%"><strong>${best.title}</strong></td>
 				<td class="hidden-xs"
 					style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden;">${best.author}</td>
 				<td style="text-align: right;; width: 90px"><mark>${best.count}

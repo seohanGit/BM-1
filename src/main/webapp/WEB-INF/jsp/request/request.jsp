@@ -47,7 +47,7 @@ body {
 				<hr>
 				<h2>구매요청 목록</h2>
 
-				<table class="table table-striped table-bordered">
+				<table class="table table-striped table-bordered" id="dataTable">
 
 					<c:choose>
 						<c:when test="${empty bookList}">
@@ -58,13 +58,13 @@ body {
 							<thead>
 								<tr class=" title">
 
-									<td class="hidden-xs td-img">표지</td>
-									<td class="td-title">도서명</td>
-									<td class="hidden-xs td-author">저자</td>
-									<td style="width:50px">가격</td>
-									<td class="td-chk">수량</td>
-									<td class="hidden-xs td-genre">요청일자</td>
-									<td class="td-chk">상태</td>
+									<th class="hidden-xs td-img">표지</th>
+									<th class="td-title">도서명</th>
+									<th class="hidden-xs td-author">저자</th>
+									<th class="hidden-xs td-date">가격</th>
+									<th style="width:50px">수량</th>
+									<th class="hidden-xs td-genre">요청일자</th>
+									<th class="td-img">상태</th>
 
 								</tr>
 							</thead>
@@ -92,25 +92,25 @@ body {
 								</tbody>
 								<tbody class="hidden-xs">
 									<tr>
-
-
-										<td class="hidden-xs"><img style="width: 50px" src="${book.imageurl}"></td>
-										<td ><img style="width: 50px"
+										<td class="hidden-xs"><img style="width: 50px"
 											src="${book.imageurl}"></td>
-										<td><a href="${book.link}">${book.title }</a></td>
+										<td class="td-title"><a href="${book.link}">${book.title }</a></td>
 										<td class="hidden-xs">${book.author}</td>
-
 										<td>${book.price}원</td>
-									
 										<td align="center">${book.quantity}</td>
-
 										<td class="hidden-xs"><fmt:formatDate type="date"
 												pattern="yyyy-MM-dd" value="${book.reqdate}" /></td>
 										<c:choose>
-												<c:when test="${book.reqstatus=='0'}"><td>대기</td></c:when>
-												<c:when test="${book.reqstatus=='1'}"><td class="ok">승인</td></c:when>
-												<c:when test="${book.reqstatus=='2'}"><td class="no">반려</td></c:when>
-											</c:choose>
+											<c:when test="${book.reqstatus=='0'}">
+												<td>대기</td>
+											</c:when>
+											<c:when test="${book.reqstatus=='1'}">
+												<td class="ok">승인</td>
+											</c:when>
+											<c:when test="${book.reqstatus=='2'}">
+												<td class="no">반려</td>
+											</c:when>
+										</c:choose>
 									</tr>
 
 								</tbody>

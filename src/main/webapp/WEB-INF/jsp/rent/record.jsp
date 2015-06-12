@@ -42,15 +42,15 @@ body {
 							<thead>
 								<tr class=" title">
 									<th class="td-title">도서명</th>
-									<th class="hidden-xs td-genre">저자</th>
-									<th class="hidden-xs td-date">대여일</th>
-									<th class="td-date">반납일</th>
+									<th class="hidden-xs td-author">저자</th>
+									<th class="hidden-xs td-genre">대여일</th>
+									<th class="td-genre">반납일</th>
 								</tr>
 							</thead>
 							<tbody>
 								<c:forEach items="${record}" var="record" varStatus="status">
 									<tr>
-										<td align="left">${record.title }</td>
+										<td class="td-title" align="left">${record.title }</td>
 										<td class="hidden-xs" align="left">${record.author}</td>
 										<td class="hidden-xs" align="left"><fmt:formatDate type="date"
 												pattern="yyyy-MM-dd" value="${record.rentdate }" /></td>

@@ -51,8 +51,7 @@ public class RentServiceImpl implements RentService {
 
 	@Override
 	public List<BookModel> borrowList(String id) {
-		// TODO Auto-generated method stub
-		System.out.println(id + "service");
+		
 		return rentDao.borrowList(id);
 	}
 
@@ -63,8 +62,9 @@ public class RentServiceImpl implements RentService {
 
 	@Override
 	public void borrowBook(BookModel bookmodel) {
-
+		
 		rentDao.borrowBook(bookmodel);
+		deleteReserve(bookmodel.getBook_cd());
 
 	}
 

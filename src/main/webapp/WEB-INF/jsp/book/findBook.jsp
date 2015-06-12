@@ -88,7 +88,7 @@
 			<div class="dataTable_wrapper">
 
 				<table class="table table-striped table-bordered"
-					style="width =: 90%; bordercolor: #fff" id="dataTae">
+					style="width =: 90%; bordercolor: #fff" id="dataTable">
 
 						<thead>
 						<tr>
@@ -98,22 +98,20 @@
 							<td class="hidden-sm hidden-xs hidden-md td-genre">분류</td>
 							<td class="hidden-xs td-genre">출판사</td>
 							<td class="td-date">가격</td>
-							<td class="td-date">수량</td>
 							<td class="td-genre">구매요청</td>
-							<td class="td-date">구매요청</td>
 						</tr>
 					</thead>
 					
 					<tbody>
 						<c:forEach items="${bookList}" var="book" varStatus="status">
 							<tr>
-								<td rowspan="2" class="hidden-xs" style="width: 50px"
+								<td  class="hidden-xs" style="width: 50px"
 									align="left"><img style="width: 50px"
 									src="${book.imageurl}"></td>
-								<td align="left"><a href="${book.link}">${book.title}</a></td>
+								<td class="td-title" align="left"><a href="${book.link}">${book.title}</a></td>
 								<td class="hidden-xs" align="left">${book.author }</td>
 								<td class="hidden-sm hidden-xs hidden-md" align="left">${book.b_group}</td>
-								</tr><tr><td class="hidden-xs" align="left">${book.publish}</td>
+								<td class="hidden-xs" align="left">${book.publish}</td>
 								<td align="left">${book.price}원</td>
 								<td>
 									<button class="btn btn-default" type="submit"

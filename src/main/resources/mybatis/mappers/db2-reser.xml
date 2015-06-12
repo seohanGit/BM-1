@@ -47,16 +47,14 @@
 	</select>
 
 	<select id="reservationList" parameterType="String" resultType="BookModel">
-		SELECT A.title, A.author, A.b_group, A.reservechk, A.book_cd, (SELECT returndate FROM
-		testlib.bookrent WHERE book_cd = B.book_cd AND id=#{id}) returndate
-		FROM testlib.bookmst A
-		INNER JOIN testlib.bookreser B
-		ON
-		A.book_cd = B.book_cd
-		WHERE
-		B.reservechk='1'
-		AND
-		B.id=#{id}
+		SELECT B.RETURNDATE, C.KNAME, D.TITLE, D.AUTHOR, A.BOOK_CD,
+		A.RESER_DATE, D.B_GROUP, D.rentchk FROM testlib.bookreser A
+		Left outer join testlib.bookrent B on A.id = B.id and A.book_cd =
+		B.book_cd
+		inner join TPRLIB.GR_INSA C on A.id = C.asabn
+		left outer join testlib.bookmst D on A.book_cd = D.book_cd where co_gb =
+		'SEOHAN' and B.rentchk in (0, 1, 2, 3) and A.reservechk='1'
+		AND A.id = #{id}
 	</select>
 
 	<select id="reservationListAll" resultType="BookModel">

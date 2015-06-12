@@ -28,15 +28,16 @@ public class RequestServiceImpl implements RequestService {
 
 	@Autowired
 	private BookDao bookDao;
-	
+
 	@Autowired
 	private SmsDao smsDao;
-	
+
 	@Autowired
 	private JoinDao joinDao;
 
-	@Autowired NotifiDao notifiDao;
-	
+	@Autowired
+	NotifiDao notifiDao;
+
 	@Override
 	public List<BookModel> requestList() {
 		// TODO Auto-generated method stub
@@ -50,46 +51,55 @@ public class RequestServiceImpl implements RequestService {
 
 	@Override
 	public void requestBook(BookModel model) {
-		model.setB_group(requestDao.convertB_code(model.getB_group().substring(2)));
-		if(model.getC_group() != null){
-			model.setC_group(requestDao.convertC_code(model.getC_group().substring(4)));
+		model.setB_group(requestDao.convertB_code(model.getB_group().substring(
+				2)));
+		if (model.getC_group() != null) {
+			model.setC_group(requestDao.convertC_code(model.getC_group()
+					.substring(4)));
 		}
 		model.setBook_cd(model.getB_group() + model.getC_group() + "-");
-		
+
 		requestDao.requestBook(model);
 	}
 
 	@Override
-	public void confirmBuy(BookModel model){
+	public void confirmBuy(BookModel model) {
 		SmsModel sms = new SmsModel();
-		String mobi_no = joinDao.selectMember(model.getId())
-				.getMobi_no().substring(1);
-		
+		String mobi_no = joinDao.selectMember(model.getId()).getMobi_no()
+				.substring(1);
+
 		sms.setTitle(model.getTitle());
 		sms.setPhone(mobi_no);
+		model.setBook_cd(model.getB_group().substring(0, 1)
+				+ model.getC_group().substring(0, 3) + "-" + model.getBook_cd());
+		
 
-		if (model.getQuantity() > 1) {
-			for (int i = 0; i < model.getQuantity(); i++) {
-				model.setBook_cd(model.getBook_cd().substring(0, 8));
-				model.setBook_cd(model.getBook_cd() + "(" + (i + 1) + ")");
-				System.out.println(model.getAuthor());
-				System.out.println(model.getB_group());
-				System.out.println(model.getBook_cd());
-				System.out.println(model.getImageurl());
-				System.out.println(model.getIsbn());
-				System.out.println(model.getPrice());
-				System.out.println(model.getPublish());
-				System.out.println(model.getTitle());
-				System.out.println(model.getSummary());
-				
+		if (bookDao.selectBook(model.getBook_cd()) == null) {
+			if (model.getQuantity() > 1) {
+				for (int i = 0; i < model.getQuantity(); i++) {
+					model.setBook_cd(model.getBook_cd().substring(0, 8));
+					model.setBook_cd(model.getBook_cd() + "(" + (i + 1) + ")");
+					System.out.println(model.getAuthor());
+					System.out.println(model.getB_group());
+					System.out.println(model.getC_group());
+					System.out.println(model.getBook_cd());
+					System.out.println(model.getImageurl());
+					System.out.println(model.getIsbn());
+					System.out.println(model.getPrice());
+					System.out.println(model.getPublish());
+					System.out.println(model.getTitle());
+					System.out.println(model.getSummary());
+
+					bookDao.insertBook(model);
+				}
+
+			} else {
 				bookDao.insertBook(model);
 			}
-
-		} else {
-			bookDao.insertBook(model);
+			notifiDao.notifiReq(sms);
 		}
-		notifiDao.notifiReq(sms);
 	}
+
 	/*
 	 * @Override public BookModel getRequestBook(String isbn, String id, int
 	 * quantity) throws Exception, IOException { BookModel book = new

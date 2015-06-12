@@ -67,7 +67,7 @@ body {
 													<input type="hidden" name="req_cd" value="${book.req_cd}">
 												</c:when>
 												<c:otherwise>
-													<input type="text" name="book_cd" value="${book.book_cd}" style="width: 150px;" readonly>
+													<label style="width: 150px;">${book.book_cd}</label>
 													<input type="hidden" name="req_cd" value="${book.req_cd}">
 												</c:otherwise>
 											</c:choose></td>

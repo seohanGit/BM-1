@@ -46,19 +46,13 @@ public class RentController {
 			if (cookie.getName().equals("bm_id")) {
 				id = cookie.getValue();
 			}
-			/*
-			 * if (cookie.getName().equals("bm_late")) { late =
-			 * cookie.getValue(); }
-			 */
-		}
-		System.out.println(id);
+			}
 		book.setId(id);
 		book.setBook_cd(book_cd);
 		book.setRentchk("1");
 		BookModel chkbook = rentservice.selectBook(book_cd);
 		if (id != null) {
 			if (chkbook.getRentchk().equals("0")) {
-				System.out.println(book.getRentchk());
 				rentservice.borrowBook(book);
 				return "redirect:borrowList";
 			} else {
@@ -135,7 +129,6 @@ public class RentController {
 
 					List<BookModel> bookList = rentservice.borrowList(id);
 					List<BookModel> rentList = rentservice.rentListAll();
-
 					List<BookModel> reserve = rentservice.reservationList(id);
 
 					model.addAttribute("rentList", rentList);

@@ -29,7 +29,7 @@ body {
 	<jsp:include page="../nav.jsp" />
 
 	<div class="container">
-		
+
 		<div class="row panel panel-default">
 			<div class="input-group" style="width: 95%">
 				<form action="/searchBook" method="post">
@@ -64,14 +64,14 @@ body {
 						<table class="table table-striped table-bordered ">
 							<thead>
 								<tr class="title">
-									<th class="hidden-xs" id="td-img">표지</th>
+									<th class="hidden-xs td-img">표지</th>
 									<th class="td-title">도서명</th>
-									<th class="hidden-xs" id="td-genre">저자</th>
-									<th class="hidden-xs hidden-sm" id="td-genre">분류</th>
-									<th class="hidden-xs" id="td-genre">대여일</th>
-									<th id="td-genre">반납일</th>
-									<th id="td-genre">상태</th>
-									<th id="td-img"></th>
+									<th class="hidden-xs td-genre">저자</th>
+									<th class="hidden-xs hidden-sm td-genre">분류</th>
+									<th class="hidden-xs td-genre">대여일</th>
+									<th class="td-genre">반납일</th>
+									<th class="td-genre">상태</th>
+									<th class="td-img"></th>
 								</tr>
 							</thead>
 
@@ -85,7 +85,7 @@ body {
 												<img style="width: 50px" src="${book.imageurl}">
 											</c:if></td>
 
-										<td align="left">${book.title }</td>
+										<td class="td-title" align="left">${book.title }</td>
 										<td class="hidden-xs" align="left">${book.author }</td>
 										<td class="hidden-xs hidden-sm" align="left">${book.b_group}</td>
 
@@ -127,11 +127,11 @@ body {
 
 							<thead>
 								<tr class="title">
-									<th id="td-title">도서명</th>
-									<th class="hidden-xs" id="td-genre">저자</th>
-									<th class="hidden-xs hidden-sm" id="td-genre">분류</th>
-									<th id="td-author">반납예정일</th>
-
+									<th class="td-title">도서명</th>
+									<th class="hidden-xs td-author">저자</th>
+									<th class="hidden-xs hidden-sm td-genre">분류</th>
+									<th class="td-genre">반납예정일</th>
+									<th class="td-date"></th>
 								</tr>
 							</thead>
 							<tbody>
@@ -144,6 +144,10 @@ body {
 
 										<td style="width: inherit;"><fmt:formatDate type="date"
 												pattern="yyyy-MM-dd" value="${reserve.returndate}" /></td>
+										<td><c:if test="${reserve.rentchk == '0'}">
+												<button class="btn btn-default" type="button"
+													onclick="location.href='/borrowbook?book_cd=${reserve.book_cd}'; ">대여</button>
+											</c:if></td>
 									</tr>
 								</c:forEach>
 							</tbody>

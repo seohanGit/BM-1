@@ -82,7 +82,7 @@ body {
 
 												<td><input type="checkbox" name="book_cd"
 													value="${book.book_cd}"></td>
-												<td align="left">${book.title}</td>
+												<td class="td-title" align="left">${book.title}</td>
 												<td align="left"><fmt:formatDate type="date"
 														pattern="yyyy-MM-dd" value="${book.rentdate}" /></td>
 												<td class="hidden-xs" style="width: inherit;"><fmt:formatDate

@@ -33,10 +33,12 @@
 							<tr class="title">
 
 
-								<th style="width: 55%;">제목</th>
+								<th style="width: 20%;">제목</th>
+								<th >내용</th>
 								<th class="td-genre">작성자</th>
+								
 								<th class="td-date hidden-xs">최종 수정일</th>
-								<th class="td-date"></th>
+								<th class="td-genre"></th>
 
 							</tr>
 
@@ -48,6 +50,7 @@
 
 
 									<td style="vertical-align: top;">${board.title}</td>
+									<td>${board.title}</td>
 									<td><c:choose>
 											<c:when test="${empty board.kname}">${board.id}</c:when>
 											<c:otherwise>${board.kname}</c:otherwise>

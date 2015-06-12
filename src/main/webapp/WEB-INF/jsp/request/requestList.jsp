@@ -85,7 +85,7 @@ body {
 												<td><input type="checkbox" name="req_cd"
 													value="${book.req_cd}"></td>
 												<td class="hidden-sm hidden-xs hidden-md ">${book.book_cd}</td>
-												<td><a href="${book.link}">${book.title }</a></td>
+												<td class="td-title"><a href="${book.link}">${book.title }</a></td>
 
 
 												<td class="hidden-sm hidden-xs  ">${book.price}원</td>

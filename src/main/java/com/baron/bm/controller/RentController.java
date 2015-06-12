@@ -29,7 +29,9 @@ public class RentController {
 	@Autowired
 	NotifiService notifiService;
 
+	@Autowired
 	private RentDao rentDao;
+	@Autowired
 	private JoinDao joinDao;
 
 	@RequestMapping("/borrowbook")

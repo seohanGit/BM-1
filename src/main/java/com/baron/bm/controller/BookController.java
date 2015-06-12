@@ -89,18 +89,19 @@ public class BookController {
 
 	@RequestMapping("/bookList")
 	public String BookList(HttpServletRequest request, Model model) {
-		int a = 1;
+/*		int a = 1;
 
 		String permission;
 		Dto page = new Dto();
 		page.setNum1(a);
 		page.setNum2(a + 15);
 		List<BookModel> bookList = bookservice.listBook(page);
-
+*/
 		// int total = ((bookservice.listBook(page).get(0).getCount()) / 15) +
 		// 1;
+		List<BookModel> bookList = bookservice.listBook();
 		model.addAttribute("bookList", bookList);
-		// model.addAttribute("total", total);
+		/*model.addAttribute("total", total);
 		for (Cookie cookie : request.getCookies()) {
 			if (cookie.getName().equals("bm_permission")) {
 				permission = cookie.getValue();
@@ -108,11 +109,11 @@ public class BookController {
 					return "book/bookSearch";
 				}
 			}
-		}
+		}*/
 		return "book/bookList";
 	}
 
-	@RequestMapping("/page")
+	/*@RequestMapping("/page")
 	public String listPage(HttpServletRequest request, Model model, int seq) {
 		String permission;
 		int total = 0;
@@ -134,7 +135,7 @@ public class BookController {
 			}
 		}
 		return "book/bookList";
-	}
+	}*/
 
 	@RequestMapping("/findBook")
 	public String findBook(String keyword, String page, Model model)

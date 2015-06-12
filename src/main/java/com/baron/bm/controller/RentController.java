@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.baron.member.dao.BookDao;
 import com.baron.member.dao.JoinDao;
 import com.baron.member.dao.RentDao;
 import com.baron.member.model.BookModel;
@@ -32,6 +33,8 @@ public class RentController {
 	@Autowired
 	private RentDao rentDao;
 	@Autowired
+	private BookDao bookDao;
+	@Autowired
 	private JoinDao joinDao;
 
 	@RequestMapping("/borrowbook")
@@ -43,22 +46,20 @@ public class RentController {
 			if (cookie.getName().equals("bm_id")) {
 				id = cookie.getValue();
 			}
-			/*
-			 * if (cookie.getName().equals("bm_late")) { late =
-			 * cookie.getValue(); }
-			 */
-		}
-		System.out.println(id);
+			}
 		book.setId(id);
 		book.setBook_cd(book_cd);
 		book.setRentchk("1");
 		BookModel chkbook = rentservice.selectBook(book_cd);
-		if (chkbook.getRentchk().equals("0")) {
-			System.out.println(book.getRentchk());
-			rentservice.borrowBook(book);
-			return "redirect:borrowList";
-		} else {
+		if (id != null) {
+			if (chkbook.getRentchk().equals("0")) {
+				rentservice.borrowBook(book);
+				return "redirect:borrowList";
+			} else {
 
+				return "rent/borrowfail";
+			}
+		} else {
 			return "rent/borrowfail";
 		}
 	}
@@ -67,6 +68,7 @@ public class RentController {
 	public String confirmBorrowBook(HttpServletRequest request, String book_cd) {
 		String id = null;
 		rentservice.confirmBorrowBook(book_cd);
+		notifiService.notifiRent(book_cd);
 		for (Cookie cookie : request.getCookies()) {
 			if (cookie.getName().equals("bm_id")) {
 				id = cookie.getValue();
@@ -75,17 +77,29 @@ public class RentController {
 		if (rentservice.selectReservation(book_cd) != null) {
 			if (rentservice.selectReservation(book_cd).getId() == id)
 				rentservice.deleteReserve(book_cd);
+
 		}
+
 		return "redirect:borrowList";
 	}
 
 	@RequestMapping("/confirmBorrowBookList")
-	public String confirmBorrowBookList(
+	public String confirmBorrowBookList(HttpServletRequest request,
 			@RequestParam(value = "book_cd") List<String> book_cdList) {
-
+		String id = null;
+		for (Cookie cookie : request.getCookies()) {
+			if (cookie.getName().equals("bm_id")) {
+				id = cookie.getValue();
+			}
+		}
 		for (String book_cd : book_cdList) {
 			rentservice.confirmBorrowBook(book_cd);
+			notifiService.notifiRent(book_cd);
+			if (rentservice.selectReservation(book_cd) != null) {
+				if (rentservice.selectReservation(book_cd).getId() == id)
+					rentservice.deleteReserve(book_cd);
 
+			}
 		}
 		return "redirect:borrowList";
 	}
@@ -115,7 +129,6 @@ public class RentController {
 
 					List<BookModel> bookList = rentservice.borrowList(id);
 					List<BookModel> rentList = rentservice.rentListAll();
-
 					List<BookModel> reserve = rentservice.reservationList(id);
 
 					model.addAttribute("rentList", rentList);
@@ -138,7 +151,7 @@ public class RentController {
 
 		if (rentservice.selectReservation(book_cd) == null) {
 			sms.setPhone(joinDao.selectMember(id).getMobi_no().substring(1));
-			sms.setTitle(rentDao.selectBorrow(book_cd).getTitle());
+			sms.setTitle(bookDao.selectBook(book_cd).getTitle());
 
 			rentservice.extendBorrowBook(book_cd);
 			notifiService.notifiExtend(sms);
@@ -190,12 +203,22 @@ public class RentController {
 	}
 
 	@RequestMapping("/rentListAll")
-	public String rentListAll(Model model) {
+	public String rentListAll(Model model, HttpServletRequest request) {
 		List<BookModel> bookList = new ArrayList<BookModel>();
+		String permission = null;
 		bookList = rentservice.rentListAll();
 		model.addAttribute("bookList", bookList);
 
-		return "rent/rentList";
+		for (Cookie cookie : request.getCookies()) {
+			if (cookie.getName().equals("bm_permission"))
+				permission = (cookie.getValue());
+		}
+		if (permission.equals("1")) {
+			return "rent/rentList";
+		} else {
+			return "rent/borrowfail";
+		}
+
 	}
 
 	/*
@@ -206,21 +229,31 @@ public class RentController {
 	 */@RequestMapping("/returnBookList")
 	public String returnManyBook(
 			@RequestParam(value = "book_cd") List<String> book_cdList) {
+
 		for (String book_cd : book_cdList) {
-			rentservice.returnBook(book_cd);
+			BookModel checkBook = rentservice.selectBook(book_cd);
+			if (checkBook.getRentchk().equals("2")) {
+				notifiService.notifiReturnConfirm(book_cd);
+				rentservice.returnBook(book_cd);
+				
+			} else {
+
+				return "rent/returnfail";
+			}
 		}
 
-		return "redirect:rentListAll";
+		return "redirect:borrowList";
 	}
 
 	@RequestMapping("/returnBook")
 	public String returnBook(String book_cd, BookModel book) {
 		BookModel checkBook = rentservice.selectBook(book_cd);
-		System.out.println(checkBook.getRentchk());
-		if (checkBook.getRentchk().equals("2")) {
-			rentservice.returnBook(book_cd);
 
-			return "redirect:rentListAll";
+		if (checkBook.getRentchk().equals("2")) {
+
+			notifiService.notifiReturnConfirm(book_cd);
+			rentservice.returnBook(book_cd);
+			return "redirect:borrowList";
 		} else {
 
 			return "rent/returnfail";
@@ -238,7 +271,6 @@ public class RentController {
 	public String stopBorrow(String book_cd) {
 		rentservice.stopBorrow(book_cd);
 
-	
 		return "redirect:bookList";
 	}
 
@@ -279,8 +311,7 @@ public class RentController {
 			}
 		}
 		if (permission.equals("1")) {
-			List<BookModel> bookList = new ArrayList<BookModel>();
-			bookList = rentservice.recordListAll();
+			List<BookModel> bookList = rentservice.recordListAll();
 			model.addAttribute("bookList", bookList);
 			return "rent/recordList";
 		} else if (permission.equals("0")) {
@@ -289,16 +320,6 @@ public class RentController {
 			return "rent/record";
 		}
 		return "rent/borrowList";
-	}
-
-	@RequestMapping("/recordListAll")
-	public String recordListAll(HttpServletRequest request, Model model) {
-		List<BookModel> bookList = new ArrayList<BookModel>();
-
-		bookList = rentservice.recordListAll();
-
-		model.addAttribute("bookList", bookList);
-		return "rent/recordList";
 	}
 
 	@RequestMapping("/deleteReserve")
@@ -314,15 +335,20 @@ public class RentController {
 	@RequestMapping("/reservation")
 	public String reservation(String book_cd, BookModel book,
 			HttpServletRequest request) {
-
+		String id = null;
 		if (rentservice.selectReservation(book_cd) == null) {
-			book.setBook_cd(book_cd);
 			for (Cookie cookie : request.getCookies()) {
 				if (cookie.getName().equals("bm_id"))
+					id = rentservice.selectBook(book_cd).getId();
+				if (cookie.getValue().equals(id)) {
+					return "rent/reservationfail";
+				} else {
 					book.setId(cookie.getValue());
+					book.setBook_cd(book_cd);
+					rentservice.insertReservation(book);
+					System.out.println(book.getTitle() + "도서가 예약 되었습니다.");
+				}
 			}
-			rentservice.insertReservation(book);
-			System.out.println(book.getTitle() + "도서가 예약 되었습니다.");
 		} else if (rentservice.selectReservation(book_cd).equals("1")) {
 			return "rent/reservationfail";
 		}
@@ -338,12 +364,4 @@ public class RentController {
 		model.addAttribute("bookList", bookList);
 		return "rent/reservationListAll";
 	}
-
-	@RequestMapping("/notifiReser")
-	public String NotifiReser(String book_cd) {
-
-		rentservice.notifiReservation(book_cd);
-		return "redirect:reservationListAll";
-	}
-
 }

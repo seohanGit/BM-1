@@ -28,7 +28,7 @@ public interface BookService {
 	 * List<BookModel> pagenation(String keyword, String page) throws Exception;
 	 */
 
-	public List<BookModel> listBook(Dto dto);
+	public List<BookModel> listBook();
 
 	public List<BookModel> selectBookAll();
 

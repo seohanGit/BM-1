@@ -25,8 +25,6 @@ public class RequestDaoImpl implements RequestDao {
 
 	@Override
 	public void requestBook(BookModel model) {
-		System.out.println(model.getTitle());
-		// TODO Auto-generated method stub
 		session.insert(NAMESPACE + "requestBook", model);
 
 	}
@@ -54,8 +52,6 @@ public class RequestDaoImpl implements RequestDao {
 		return session.selectList(NAMESPACE + "requestRecord", id);
 	}
 
-
-
 	@Override
 	public void rejectRequest(String req_cd) {
 		session.update(NAMESPACE + "rejectRequest", req_cd);
@@ -80,4 +76,13 @@ public class RequestDaoImpl implements RequestDao {
 		return session.selectOne(NAMESPACE + "selectC_code", c_group);
 	}
 
+	@Override
+	public String convertB_code(String b_group) {
+		return session.selectOne(NAMESPACE + "convertB_code", b_group);
+	}
+
+	@Override
+	public String convertC_code(String c_group) {
+		return session.selectOne(NAMESPACE + "convertC_code", c_group);
+	}
 }

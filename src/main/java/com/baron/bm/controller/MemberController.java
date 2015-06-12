@@ -153,6 +153,7 @@ public class MemberController {
 			mav.addObject("jikb", membermodel.getJikb());
 			
 			if (id.equals("4150266")) {
+				response.addCookie(new Cookie("bm_id", id));
 				response.addCookie(new Cookie("bm_permission", "1"));
 				mav.setViewName("redirect:startAdmin");
 
@@ -160,17 +161,14 @@ public class MemberController {
 				System.out.println();
 				return mav;
 			} else {
-				response.addCookie(new Cookie("bm_id", membermodel.getId()));
+				response.addCookie(new Cookie("bm_id", id));
 				response.addCookie(new Cookie("bm_permission", "0"));
 				mav.setViewName("redirect:start");
 
 				mav.addObject("permission", "0");
 
 			}
-			for (Cookie cookie : request.getCookies()) {
-				if (cookie.getValue() == "bm_permission")
-					System.out.println(cookie.getValue() + "login Success");
-			}
+			
 		}
 		return mav;
 

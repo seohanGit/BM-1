@@ -9,4 +9,6 @@ public interface SmsDao {
 	public void notifiRent(SmsModel sms);
 
 	public void notifiReturn(SmsModel sms);
+
+	
 }

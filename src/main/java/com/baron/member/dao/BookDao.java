@@ -21,7 +21,7 @@ public interface BookDao {
 
 	List<SearchResult> searchBook(String keyword);
 
-	public List<BookModel> listBook(Dto dto);
+	public List<BookModel> listBook();
 
 	public List<BookModel> selectBookAll();
 

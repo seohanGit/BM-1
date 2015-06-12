@@ -221,9 +221,9 @@ public class BookServiceImpl implements BookService {
 	 */
 
 	@Override
-	public List<BookModel> listBook(Dto dto) {
+	public List<BookModel> listBook() {
 
-		return bookDao.listBook(dto);
+		return bookDao.listBook();
 	}
 
 	@Override

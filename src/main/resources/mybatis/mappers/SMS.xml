@@ -21,7 +21,8 @@
 		(TR_SENDDATE , TR_SENDSTAT ,TR_MSGTYPE ,TR_PHONE
 		,TR_CALLBACK ,
 		TR_MSG)
-		VALUES(GETDATE(), '0', '0', #{phone}, '031804744325',
+		VALUES(GETDATE(), '0', '0', #{phone},
+		'031804744325',
 		'예약하신 도서 [ '+#{title}+' ] 대여가능합니다.' )
 
 	</insert>
@@ -31,7 +32,8 @@
 		(TR_SENDDATE , TR_SENDSTAT ,TR_MSGTYPE ,TR_PHONE
 		,TR_CALLBACK ,
 		TR_MSG)
-		VALUES(GETDATE(), '0', '0', #{phone}, '031804744325',
+		VALUES(GETDATE(), '0', '0', #{phone},
+		'031804744325',
 		'[ '+#{title}+' ] 도서가 반납처리 되었습니다.' )
 
 	</insert>
@@ -45,7 +47,8 @@
 		VALUES(GETDATE(), '0', '0', #{phone},
 		'031804744325',
 		'[ '
-		+#{title} + ' ] 의 반납일은 '+ CONVERT(CHAR(10), DATEADD(DAY, 5,
+		+#{title} + ' ] 의 반납일은 '+ CONVERT(CHAR(10),
+		DATEADD(DAY, 5,
 		GETDATE()),
 		23) + ' 입니다.' )
 
@@ -61,6 +64,18 @@
 		VALUES(GETDATE(), '0', '0', #{phone},
 		'031804744325',
 		'구매요청도서 [ ' + #{title} + ' ] 입고되었습니다.' )
+
+
+	</insert>
+	<insert id="notifiExtend" parameterType="SmsModel">
+		INSERT INTO
+		SHSERVER3.SC_TRAN
+		(TR_SENDDATE , TR_SENDSTAT ,TR_MSGTYPE ,TR_PHONE
+		,TR_CALLBACK ,
+		TR_MSG)
+		VALUES(GETDATE(), '0', '0', #{phone},
+		'031804744325',
+		'[ ' + #{title} + ' ] 도서가 연장되었습니다.' )
 
 
 	</insert>

@@ -61,7 +61,7 @@ body {
 
 									<thead>
 										<tr class="title">
-											<th><input type="checkbox" id="allCheck" class="td-chk"></th>
+											<th class="td-chk"><input type="checkbox" id="allCheck" ></th>
 											<th>도서명</th>
 											<th class="td-genre">대여일</th>
 											<th class="td-genre hidden-xs">반납일</th>
@@ -82,7 +82,7 @@ body {
 
 												<td><input type="checkbox" name="book_cd"
 													value="${book.book_cd}"></td>
-												<td align="left">${book.title}</td>
+												<td class="td-title" align="left">${book.title}</td>
 												<td align="left"><fmt:formatDate type="date"
 														pattern="yyyy-MM-dd" value="${book.rentdate}" /></td>
 												<td class="hidden-xs" style="width: inherit;"><fmt:formatDate
@@ -130,7 +130,7 @@ body {
 									id="dataTable">
 									<thead>
 										<tr class="hidden-xs title">
-											<th><input type="checkbox" id="allCheck" class="td-chk"></th>
+											<th class="td-chk"><input type="checkbox" id="allCheck"></th>
 											<th>도서명</th>
 											<th class="td-genre">반납일</th>
 											<th class="hidden-xs td-date">대여자</th>

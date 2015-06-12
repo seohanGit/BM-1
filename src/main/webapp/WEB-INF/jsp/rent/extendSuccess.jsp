@@ -3,5 +3,5 @@
 
 <script>
 	alert("연장되었습니다.");
-	location.href = "/rentListAll";
+	location.href = "/borrowList";
 </script>

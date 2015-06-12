@@ -50,7 +50,7 @@ div .right-end {
 }
 
 table thead .td-title {
-	width: 40%;
+	text-transform: capitalize;
 }
 
 table  thead .td-author {
@@ -70,7 +70,7 @@ table  thead .td-date {
 }
 
 table thead .td-chk {
-	width: 20px;
+	width: 30px;
 }
 .table-admin{
 	font-size: 16px;

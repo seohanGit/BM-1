@@ -63,7 +63,7 @@ body {
 									<thead>
 										<tr class="title ">
 
-											<th><input type="checkbox" id="allCheck" class="td-chk"></th>
+											<th class="td-chk"><input type="checkbox" id="allCheck" ></th>
 											<th class="hidden-sm hidden-xs hidden-md td-author">도서코드</th>
 											<th>도서명</th>
 
@@ -73,7 +73,7 @@ body {
 
 											<th class="hidden-sm hidden-xs hidden-md td-genre">요청일자</th>
 											<th class="td-img">상태</th>
-											<th class="td-img"></th>
+											<th class="td-genre"></th>
 
 										</tr>
 									</thead>
@@ -85,7 +85,7 @@ body {
 												<td><input type="checkbox" name="req_cd"
 													value="${book.req_cd}"></td>
 												<td class="hidden-sm hidden-xs hidden-md ">${book.book_cd}</td>
-												<td><a href="${book.link}">${book.title }</a></td>
+												<td class="td-title"><a href="${book.link}">${book.title }</a></td>
 
 
 												<td class="hidden-sm hidden-xs  ">${book.price}원</td>
@@ -109,12 +109,12 @@ body {
 														</td>
 													</c:when>
 													<c:when test="${book.reqstatus =='1'}">
-														<td align="left">승인</td>
+														<td class="ok" align="left">승인</td>
 														<td></td>
 
 													</c:when>
 													<c:when test="${book.reqstatus =='2'}">
-														<td>반려</td>
+														<td class="no">반려</td>
 														<td></td>
 
 													</c:when>

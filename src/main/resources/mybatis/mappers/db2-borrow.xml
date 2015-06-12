@@ -37,18 +37,22 @@
 	
 	<select id="selectBorrow" resultType="BookModel" parameterType="String">
 		SELECT *
-		FROM TESTLIB.BOOKRENT
-		WHERE book_cd = #{book_cd}
-		AND rentchk='1'
+		FROM TESTLIB.BOOKRENT A INNER JOIN tprlib.gr_insa
+		B
+		ON A.id = B.asabn
+		WHERE A.book_cd = #{book_cd}
+		AND A.rentchk='1'
 		FETCH
 		first 1 rows only
 	</select>
 	
 	<select id="selectRent" resultType="BookModel" parameterType="String">
 		SELECT *
-		FROM TESTLIB.BOOKRENT
-		WHERE book_cd = #{book_cd}
-		AND rentchk='2'
+		FROM TESTLIB.BOOKRENT A INNER JOIN tprlib.gr_insa
+		B
+		ON A.id = B.asabn
+		WHERE A.book_cd = #{book_cd}
+		AND A.rentchk='2'
 		FETCH
 		first 1 rows only
 	</select>

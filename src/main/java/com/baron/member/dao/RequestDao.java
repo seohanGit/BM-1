@@ -24,4 +24,8 @@ public interface RequestDao {
 	public String selectB_code(String b_group);
 
 	public String selectC_code(String c_group);
+
+	String convertB_code(String b_group);
+
+	String convertC_code(String c_group);
 }

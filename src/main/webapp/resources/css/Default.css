@@ -45,6 +45,8 @@ html, body {wdith: 100%; height: 100%;}
 	word-break: keep-all;
 }
 table {border-collapse: collapse;}
+
+td .td-title{ text-align:left; }
 img, button, fieldset, iframe {border: none;}
 img, input, select {vertical-align: middle;}
 hr, button img {display: none;}

@@ -40,9 +40,9 @@
 					<table class="table table-bordered" id="dataTable">
 						<thead class="title">
 							<tr>
-								<td class="hidden-xs">등록일</td>
-								<td>내용</td>
-								<td></td>
+								<td class="hidden-xs td-genre">등록일</td>
+								<td >내용</td>
+								<td class="td-genre"></td>
 							</tr>
 						</thead>
 						<tbody>

@@ -13,11 +13,10 @@
 	<insert id="insertBook" parameterType="BookModel">
 		INSERT INTO
 		TESTLIB.BOOKMST
-		(title,BOOK_CD,b_group,publish,author,rentchk,imageurl,
-		rcv_date, isbn,
-		price, summary)
+		(title, book_cd,b_group, c_group, publish,author,rentchk,imageurl,
+		rcv_date, isbn, price, summary)
 		VALUES
-		(#{title},#{book_cd},#{b_group},#{publish},#{author},'0', #{imageurl},
+		(#{title},#{book_cd},#{b_group}, #{c_group}, #{publish},#{author},'0', #{imageurl},
 		current date, #{isbn}, #{price}, #{summary})
 	</insert>
 
@@ -37,17 +36,18 @@
 		B.rentchk
 		WHERE
 		LCASE(A.TITLE) like #{keyword} OR LCASE(A.AUTHOR) like #{keyword}
-		ORDER BY A.RENTCHK DESC,
-		A.RCV_DATE DESC
+		ORDER BY A.RENTCHK DESC, A.RCV_DATE DESC 
+		FETCH first 200 rows only
 	</select>
 
 	<select id="listBook" parameterType="Dto" resultType="BookModel">
 		SELECT
-		title, author, b_group, rentchk, reservechk, book_cd
+		title, author, b_group, rentchk, reservechk, book_cd, rcv_date
 		FROM
 		TESTLIB.BOOKMST
 		ORDER
-		BY RENTCHK DESC
+		BY rcv_date DESC
+		FETCH first 200 rows only
 	</select>
 
 
@@ -86,12 +86,12 @@
 		INSERT INTO
 		TESTLIB.BOOKREQ
 		(id,reqdate,title,book_cd,price,author,quantity,b_group,link,
-		imageurl,isbn, publish, summary, req_cd )
+		imageurl,isbn, publish, summary, req_cd, kname)
 		VALUES
 		(#{id}, current
 		date,
 		#{title},#{book_cd},#{price},#{author},#{quantity},#{b_group},#{link},
-		#{imageurl},#{isbn}, #{publish}, #{summary}, #{req_cd})
+		#{imageurl},#{isbn}, #{publish}, #{summary}, #{req_cd}, #{kname})
 	</insert>
 
 	<update id="deleteRequest" parameterType="String">
@@ -110,16 +110,10 @@
 
 	<select id="requestList" resultType="BookModel">
 		SELECT B.title, B.imageurl, B.author, B.price, b.quantity, B.reqdate,
-		B.reqstatus, B.id, B.book_cd, B.req_cd, B.link, B.b_group, B.c_group,
-		(SELECT C.KNAME FROM
-		TPRLIB.GR_INSA C WHERE B.id=C.ASABN
-		FETCH
-		first 1
-		rows only) kname
-		FROM
-		TESTLIB.BOOKREQ B
-		WHERE reqdate <![CDATA[ > current date -1 year]]>
-
+		B.reqstatus, B.id, B.book_cd, B.req_cd, B.link, B.b_group, B.c_group
+		FROM TESTLIB.BOOKREQ B 
+		LEFT OUTER JOIN TPRLIB.GR_INSA C ON B.id=C.ASABN
+		WHERE C.CO_GB = 'SEOHAN' AND reqdate  <![CDATA[ > current date -1 year]]>
 		ORDER BY
 		reqstatus, reqdate DESC
 	</select>
@@ -145,10 +139,10 @@
 
 	<select id="selectRequest" parameterType="String" resultType="BookModel">
 		SELECT *
-		FROM TESTLIB.BOOKREQ A INNER JOIN TPRLIB.GR_INSA B
-		ON
-		A.id=B.ASABN
-		WHERE req_cd=#{req_cd}
+		FROM TESTLIB.BOOKREQ A 
+		INNER JOIN TPRLIB.GR_INSA B ON A.id=B.ASABN		
+		WHERE req_cd=#{req_cd} 
+		FETCH first 1 rows only
 
 	</select>
 

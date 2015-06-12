@@ -17,4 +17,10 @@ public class NotifyContorller {
 	public void NotifiReser(SmsModel sms) {
 		notifiService.notifiReser(sms);
 	}*/
+	
+	@RequestMapping("/notifiReser")
+	public void NotifiReser(String book_cd) {
+
+		notifiService.notifiReser(book_cd);
+	}
 }

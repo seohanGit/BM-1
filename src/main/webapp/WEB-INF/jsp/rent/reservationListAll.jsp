@@ -61,7 +61,7 @@ body {
 									<c:forEach items="${bookList}" var="book" varStatus="status">
 										<tr>
 
-											<td align="left">${book.title }</td>
+											<td class="td-title" align="left">${book.title }</td>
 
 											<td align="left">${book.b_group }</td>
 											<td><c:choose>

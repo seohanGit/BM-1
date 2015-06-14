@@ -179,7 +179,7 @@ public class RentController {
 			if (rentservice.selectReservation(book_cd) == null) {
 				rentservice.extendBorrowBook(book_cd);
 			} else if (rentservice.selectReservation(book_cd).getReservechk()
-					.equals("0")) {
+					.equals("0") && rentservice.selectRent(book_cd).getExtendchk().equals("0")) {
 				rentservice.extendBorrowBook(book_cd);
 			} else {
 				return "/rent/extendFail";

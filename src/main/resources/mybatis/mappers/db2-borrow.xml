@@ -153,7 +153,7 @@
 		UPDATE
 		TESTLIB.BOOKRENT
 		SET
-		returndate = current date +20 day
+		returndate = current date +20 day, extendchk = '1'
 		WHERE
 		book_cd=#{book_cd}
 		AND

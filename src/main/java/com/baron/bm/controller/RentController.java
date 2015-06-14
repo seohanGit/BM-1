@@ -54,7 +54,7 @@ public class RentController {
 		if (id != null) {
 			if (chkbook.getRentchk().equals("0")) {
 				rentservice.borrowBook(book);
-				return "redirect:borrowList";
+				return "rent/borrowSuccess";
 			} else {
 
 				return "rent/borrowfail";

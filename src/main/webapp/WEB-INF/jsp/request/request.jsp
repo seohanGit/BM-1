@@ -44,9 +44,9 @@ body {
 				</form>
 			</div>
 			<div>
-				<hr>
 				<h2>구매요청 목록</h2>
-
+				<button class="btn btn-default" type="button"
+										onclick="location.href='/insertbook'; ">구매요청</button>			
 				<table class="table table-striped table-bordered" id="dataTable">
 
 					<c:choose>

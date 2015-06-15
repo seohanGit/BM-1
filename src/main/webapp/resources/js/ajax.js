@@ -152,3 +152,25 @@ $('#bestBook').click(function() {
 		}
 	});
 });
+
+
+$('#getBookInfo').click(function() {
+	$.ajax({
+		type : "GET", // GET or POST
+		url : "/getBookInfo", // URL
+		datatype : "xml",
+		// html, xml, json, jsonp, script, text
+		data : {
+			keyword : $('#keyword').val()
+		},
+		// parameters as plain object
+		error : function() { // Ajax error handler
+
+			alert('검색어를 입력하세요');
+		},
+		success : function(data, status) { // Ajax complete handelr
+			$('#searchResultArea').empty().append(data);
+			
+		}
+	});
+});

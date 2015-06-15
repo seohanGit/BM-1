@@ -41,6 +41,16 @@ public class BookModel {
 	private String retu_ymd;
 	private String mobi_no;
 	
+	private String extendchk;
+	
+	public String getExtendchk() {
+		return extendchk;
+	}
+
+	public void setExtendchk(String extendchk) {
+		this.extendchk = extendchk;
+	}
+
 	public String getMobi_no() {
 		return mobi_no;
 	}

@@ -36,7 +36,7 @@ body {
 					<label for="exampleInputEmail1">도서코드</label>
 					<div class="form-group">
 
-						<div style="float: left; width: 45%">
+						<div style="float: left; width: 60%">
 							<select class="selectpicker"
 								 name="b_group">
 								<optgroup label="대분류">
@@ -66,7 +66,7 @@ body {
 								</optgroup>
 							</select>
 						</div>
-						<div class="right" style="width: 55%">
+						<div class="right" style="width: 40%">
 							<input type="text" class="form-control" id="book_cd"
 								name="book_cd" value="${book.book_cd}">
 						</div>

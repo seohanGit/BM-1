@@ -59,6 +59,7 @@ public class RequestController {
 
 	@RequestMapping("/request")
 	public String request(HttpServletRequest request, Model model) {
+
 		List<BookModel> bookList = new ArrayList<BookModel>();
 		String id = null, permission = null;
 		for (Cookie cookie : request.getCookies()) {
@@ -70,15 +71,19 @@ public class RequestController {
 			}
 
 		}
-		if (permission.equals("1")) {
-			bookList = requestservice.requestList();
-			model.addAttribute("bookList", bookList);
-			return "request/requestList";
+		if (id == "") {
+			return "getout";
 		} else {
-			bookList = requestservice.requestRecord(id);
-			System.out.println(id);
-			model.addAttribute("bookList", bookList);
-			return "request/request";
+			if (permission.equals("1")) {
+				bookList = requestservice.requestList();
+				model.addAttribute("bookList", bookList);
+				return "request/requestList";
+			} else {
+				bookList = requestservice.requestRecord(id);
+				System.out.println(id);
+				model.addAttribute("bookList", bookList);
+				return "request/request";
+			}
 		}
 	}
 
@@ -101,20 +106,23 @@ public class RequestController {
 	}
 
 	@RequestMapping("/buyRequest")
-	public String buyRequest(String req_cd, Model model, BookModel book){
-		
+	public String buyRequest(String req_cd, Model model, BookModel book) {
+
 		book = requestservice.selectBook(req_cd);
-		book.setB_group(book.getB_group().trim() +"-"+ requestservice.selectB_code(book.getB_group()).trim());
-		book.setC_group(book.getC_group() +"-"+ requestservice.selectC_code(book.getC_group()));
-		System.out.println(book.getB_group());System.out.println(book.getC_group());
-		
+		book.setB_group(book.getB_group().trim() + "-"
+				+ requestservice.selectB_code(book.getB_group()).trim());
+		book.setC_group(book.getC_group() + "-"
+				+ requestservice.selectC_code(book.getC_group()));
+		System.out.println(book.getB_group());
+		System.out.println(book.getC_group());
+
 		model.addAttribute("book", book);
 		return "request/confirmBuy";
 	}
 
 	@RequestMapping("/confirmBuy")
 	public String confirmBuy(BookModel model) {
-		
+
 		requestservice.confirmBuy(model);
 		requestservice.deleteRequest(model.getReq_cd());
 

@@ -110,7 +110,7 @@
 
 	<select id="requestList" resultType="BookModel">
 		SELECT B.title, B.imageurl, B.author, B.price, b.quantity, B.reqdate,
-		B.reqstatus, B.id, B.book_cd, B.req_cd, B.link, B.b_group, B.c_group
+		B.reqstatus, B.id, C.kname, B.book_cd, B.req_cd, B.link, B.b_group, B.c_group
 		FROM TESTLIB.BOOKREQ B 
 		LEFT OUTER JOIN TPRLIB.GR_INSA C ON B.id=C.ASABN
 		WHERE C.CO_GB = 'SEOHAN' AND reqdate  <![CDATA[ > current date -1 year]]>

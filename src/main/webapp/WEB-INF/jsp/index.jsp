@@ -67,26 +67,12 @@
 	<div class="container">
 		<div class="row">
 			<!-- Blog Entries Column -->
-			<div class="col-md-8 col-sm-8 col-xs-12">
-
-
-				<div id="goodPhrase">
-					<h1 class="page-header">
-						<a href="noticeList">공지사항</a> <small>기술 자료실</small>
-					</h1>
-					<!-- First Blog Post -->
-					<ul class="list-group">
-						<c:forEach items="${noticeList}" var="notice" varStatus="status"
-							begin="0" end="1" step="1">
-							<li class="list-group-item"><textarea style="width: 100%;"
-									readonly rows="4">${notice.content}</textarea></li>
-						</c:forEach>
-					</ul>
-
-				</div>
-				<hr>
-				<h4></h4>
-				<div class="input-group" style="width: 95%">
+			<div class="col-md-8 col-sm-8 col-xs-12" style="float: left">
+				<h1 class="page-header">
+					<a href="noticeList">공지사항</a> <small>기술 자료실</small>
+				</h1>
+				<!-- First Blog Post -->
+				<div class="input-group" style="width: 90%">
 					<form action="/searchBook" method="post">
 						<span class="input-group-btn"> <input type="text"
 							class="form-control" id="keyword" name="keyword"
@@ -97,24 +83,17 @@
 						</span>
 					</form>
 				</div>
-				<br>
 				<hr>
-				<div class="input-group" style="width: 95%">
-					<form action="/findBook" method="post">
-						<span class="input-group-btn"> <input type="text"
-							class="form-control" id="keyword" name="keyword"
-							placeholder="인터파크 검색">
-							<button class="btn btn-default" type="submit" id="btn_find">
-								<span class="glyphicon glyphicon-search"></span>
-							</button>
-						</span>
-					</form>
-				</div>
+				<ul class="list-group">
+					<c:forEach items="${noticeList}" var="notice" varStatus="status"
+						begin="0" end="1" step="1">
+						<li class="list-group-item"><textarea style="width: 100%;"
+								readonly rows="4">${notice.content}</textarea></li>
+					</c:forEach>
+				</ul>
 			</div>
-			<!-- Blog Sidebar Widgets Column -->
-			<div class="col-md-4 col-sm-4 col-xs-12">
-
-				<br> <br>
+			<div class="col-md-4 col-sm-4 col-xs-12"
+				style="float: right; margin-top: 40px">
 
 				<h3>신간도서</h3>
 
@@ -137,39 +116,14 @@
 					</div>
 					<hr>
 				</c:forEach>
-
-				<div id="searchResultArea"></div>
-				<!-- Blog Search Well -->
-				<!-- 
-				<div class="well">
-					<tr>
-						<td><button class="btn btn-default" type="button"
-								id="btn_bookList" style="width: 100%">도서목록</button></td>
-					</tr>
-					<hr>
-					<div class="input-group">
-						<input type="text" class="form-control" id="keyword"
-							placeholder="도서검색"> <span class="input-group-btn">
-							<button class="btn btn-default" type="button" id="btn_search">
-								<span class="glyphicon glyphicon-search"></span>
-							</button>
-						</span>
-					</div>
-
-
-
-					/.input-group
-				</div> -->
-				<!-- Blog Categories Well -->
-
-
-
 			</div>
 			<div class="col-md-8 col-sm-8 col-xs-12" style="float: left;">
 				<jsp:include page="footer.jsp"></jsp:include>
 			</div>
+			<!-- Blog Sidebar Widgets Column -->
 
-			<div class="col-md-4 col-sm-4 col-xs-12" style="float: right">
+
+			<%-- <div class="col-md-4 col-sm-4 col-xs-12" style="float: right">
 				<c:forEach items="${bestTeam}" var="team" begin="0" end="4">
 					<div class="progress">
 						<div class="progress-bar progress-bar-info" role="progressbar"
@@ -178,8 +132,7 @@
 					</div>
 
 				</c:forEach>
-			</div>
-		
+			</div> --%>
 		</div>
 	</div>
 

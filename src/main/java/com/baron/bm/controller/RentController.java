@@ -46,7 +46,7 @@ public class RentController {
 			if (cookie.getName().equals("bm_id")) {
 				id = cookie.getValue();
 			}
-			}
+		}
 		book.setId(id);
 		book.setBook_cd(book_cd);
 		book.setRentchk("1");
@@ -104,6 +104,32 @@ public class RentController {
 		return "redirect:borrowList";
 	}
 
+	@RequestMapping("/borrowReqList")
+	public String borrowReqList(HttpServletRequest request, Model model) {
+		String id = null;
+		for (Cookie cookie : request.getCookies()) {
+			if (cookie.getName().equals("bm_id")) {
+				id = cookie.getValue();
+			}
+		}
+		for (Cookie cookie : request.getCookies()) {
+			if (cookie.getName().equals("bm_permission")) {
+				if (cookie.getValue().equals("1")) {
+					List<BookModel> bookList = rentservice.borrowList();
+					model.addAttribute("bookList", bookList);
+					return "rent/borrowReqListByAdmin";
+
+				} else if (cookie.getValue().equals("0")) {
+					List<BookModel> bookList = rentservice.borrowList(id);
+					model.addAttribute("bookList", bookList);
+					return "rent/borrowReqList";
+				}
+			}
+
+		}
+		return null;
+	}
+
 	@RequestMapping("/borrowList")
 	public String borrowList(HttpServletRequest request, Model model) {
 		String id = null;
@@ -119,22 +145,13 @@ public class RentController {
 		for (Cookie cookie : request.getCookies()) {
 			if (cookie.getName().equals("bm_permission")) {
 				if (cookie.getValue().equals("1")) {
-					List<BookModel> rentList = rentservice.rentListAll();
-					List<BookModel> bookList = rentservice.borrowListAll();
+					List<BookModel> rentList = rentservice.rentList();
 					model.addAttribute("rentList", rentList);
-					model.addAttribute("bookList", bookList);
 					return "rent/borrowListByAdmin";
 
 				} else if (cookie.getValue().equals("0")) {
-
-					List<BookModel> bookList = rentservice.borrowList(id);
-					List<BookModel> rentList = rentservice.rentListAll();
-					List<BookModel> reserve = rentservice.reservationList(id);
-
+					List<BookModel> rentList = rentservice.rentList(id);
 					model.addAttribute("rentList", rentList);
-					model.addAttribute("reserveList", reserve);
-					model.addAttribute("bookList", bookList);
-
 					return "rent/borrowList";
 				}
 			}
@@ -179,7 +196,9 @@ public class RentController {
 			if (rentservice.selectReservation(book_cd) == null) {
 				rentservice.extendBorrowBook(book_cd);
 			} else if (rentservice.selectReservation(book_cd).getReservechk()
-					.equals("0") && rentservice.selectRent(book_cd).getExtendchk().equals("0")) {
+					.equals("0")
+					&& rentservice.selectRent(book_cd).getExtendchk()
+							.equals("0")) {
 				rentservice.extendBorrowBook(book_cd);
 			} else {
 				return "/rent/extendFail";
@@ -206,7 +225,7 @@ public class RentController {
 	public String rentListAll(Model model, HttpServletRequest request) {
 		List<BookModel> bookList = new ArrayList<BookModel>();
 		String permission = null;
-		bookList = rentservice.rentListAll();
+		bookList = rentservice.rentList();
 		model.addAttribute("bookList", bookList);
 
 		for (Cookie cookie : request.getCookies()) {
@@ -235,7 +254,7 @@ public class RentController {
 			if (checkBook.getRentchk().equals("2")) {
 				notifiService.notifiReturnConfirm(book_cd);
 				rentservice.returnBook(book_cd);
-				
+
 			} else {
 
 				return "rent/returnfail";
@@ -311,7 +330,7 @@ public class RentController {
 			}
 		}
 		if (permission.equals("1")) {
-			List<BookModel> bookList = rentservice.recordListAll();
+			List<BookModel> bookList = rentservice.recordList();
 			model.addAttribute("bookList", bookList);
 			return "rent/recordList";
 		} else if (permission.equals("0")) {
@@ -355,13 +374,29 @@ public class RentController {
 		return "rent/reservationresult";
 	}
 
-	@RequestMapping("/reservationListAll")
-	public String reserveListAll(HttpServletRequest request, Model model) {
-		List<BookModel> bookList = new ArrayList<BookModel>();
+	@RequestMapping("/reserveList")
+	public String reserveList(HttpServletRequest request, Model model) {
+		String id = null;
+		for (Cookie cookie : request.getCookies()) {
+			if (cookie.getName().equals("bm_id")) {
+				id = cookie.getValue();
+			}
+		}
+		for (Cookie cookie : request.getCookies()) {
+			if (cookie.getName().equals("bm_permission")) {
+				if (cookie.getValue().equals("1")) {
+					List<BookModel> bookList = rentservice.reserveList();
+					model.addAttribute("bookList", bookList);
+					return "rent/reserveList";
 
-		bookList = rentservice.reservationListAll();
+				} else if (cookie.getValue().equals("0")) {
+					List<BookModel> reserve = rentservice.reserveList(id);
+					model.addAttribute("bookList", reserve);
+					return "rent/reserve";
+				}
+			}
 
-		model.addAttribute("bookList", bookList);
-		return "rent/reservationListAll";
+		}
+		return null;
 	}
 }

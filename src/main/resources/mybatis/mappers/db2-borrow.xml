@@ -18,7 +18,7 @@
 		ON
 		A.book_cd=B.book_cd
 		WHERE
-		B.rentchk='1' 
+		B.rentchk='1'
 		ORDER BY
 		B.rentchk
 		DESC
@@ -29,32 +29,36 @@
 		FROM TESTLIB.BOOKMST A, TESTLIB.BOOKRENT B
 		WHERE B.id = #{id}
 		AND
-		(B.rentchk='1' OR B.rentchk='2') AND
+		B.rentchk='1' AND
 		A.book_cd=B.book_cd
 		ORDER BY
 		B.rentdate DESC
 	</select>
-	
+
 	<select id="selectBorrow" resultType="BookModel" parameterType="String">
 		SELECT *
 		FROM TESTLIB.BOOKRENT A INNER JOIN tprlib.gr_insa
 		B
-		ON A.id = B.asabn
+		ON A.id =
+		B.asabn
 		WHERE A.book_cd = #{book_cd}
 		AND A.rentchk='1'
 		FETCH
-		first 1 rows only
+		first 1 rows
+		only
 	</select>
-	
+
 	<select id="selectRent" resultType="BookModel" parameterType="String">
 		SELECT *
 		FROM TESTLIB.BOOKRENT A INNER JOIN tprlib.gr_insa
 		B
-		ON A.id = B.asabn
+		ON A.id =
+		B.asabn
 		WHERE A.book_cd = #{book_cd}
 		AND A.rentchk='2'
 		FETCH
-		first 1 rows only
+		first 1 rows
+		only
 	</select>
 
 	<insert id="borrowBook1" parameterType="BookModel">
@@ -175,31 +179,58 @@
 		WHERE book_cd=#{book_cd} AND id=#{id}
 	</delete>
 
-	<select id="rentListAll" parameterType="String" resultType="BookModel">
-		SELECT A.title, B.rentdate, B.returndate, B.id, B.book_cd, A.rentchk, A.reservechk,(SELECT
-		C.KNAME FROM
-		TPRLIB.GR_INSA C WHERE B.id=C.ASABN FETCH
+	<select id="rentListAll" resultType="BookModel">
+		SELECT A.title, B.rentdate,
+		B.returndate, B.id, B.book_cd, A.rentchk,
+		A.reservechk,(SELECT
+		C.KNAME
+		FROM
+		TPRLIB.GR_INSA C WHERE B.id=C.ASABN
+		FETCH
 		first 1 rows
-		only) kname FROM
+		only) kname
+		FROM
 		TESTLIB.BOOKMST A, TESTLIB.BOOKRENT B
 		WHERE
 		A.book_cd=B.book_cd AND
 		B.rentchk='2'
 		ORDER BY
-		B.rentchk DESC, B.rentdate
+		B.rentchk DESC,
+		B.rentdate
 		DESC
 	</select>
 
-
+	<select id="rentList" parameterType="String" resultType="BookModel">
+		SELECT
+		A.title, B.rentdate, B.returndate, B.id, B.book_cd, A.rentchk,
+		A.reservechk,(SELECT
+		C.KNAME FROM
+		TPRLIB.GR_INSA C WHERE B.id=C.ASABN
+		FETCH
+		first 1 rows
+		only) kname FROM
+		TESTLIB.BOOKMST A INNER JOIN
+		TESTLIB.BOOKRENT B
+		ON A.book_cd=B.book_cd
+		WHERE
+		B.id= #{id} AND
+		B.rentchk='2'
+		ORDER BY
+		B.rentchk DESC,
+		B.rentdate
+		DESC
+	</select>
 	<!-- <![CDATA[B.returndate > current date]]> -->
 
 	<!-- <delete id="deleteRecord" parameterType="String"> DELETE ON TESTLIB.BOOKRENT 
 		WHERE DELETE ON reserve WHERE id=#{id} AND book_cd=#{book_cd} </delete> -->
 	<select id="recordList" parameterType="String" resultType="BookModel">
-		SELECT A.title, B.rentdate, B.id, B.returndate, A.book_cd, A.author FROM
-		TESTLIB.BOOKMST A INNER JOIN TESTLIB.BOOKRENT B ON A.book_cd=B.book_cd
-		WHERE <!-- (B.returndate BETWEEN date_sub(current date, interval 90 day) 
-			AND current date) AND -->
+		SELECT A.title, B.rentdate, B.id, B.returndate, A.book_cd, A.author
+		FROM
+		TESTLIB.BOOKMST A INNER JOIN TESTLIB.BOOKRENT B ON
+		A.book_cd=B.book_cd
+		WHERE <!-- (B.returndate BETWEEN date_sub(current date, 
+			interval 90 day) AND current date) AND -->
 		B.id=#{id} AND
 		B.rentchk='3'
 		ORDER BY
@@ -209,12 +240,15 @@
 
 
 	<select id="recordListAll" resultType="BookModel">
-		SELECT A.title, B.rentdate, B.returndate, A.b_group, (SELECT C.KNAME FROM
+		SELECT A.title, B.rentdate, B.returndate, A.b_group, (SELECT C.KNAME
+		FROM
 		TPRLIB.GR_INSA C WHERE B.id=C.ASABN FETCH
-		first 1 rows only) kname FROM
-		TESTLIB.BOOKMST A INNER JOIN TESTLIB.BOOKRENT B ON A.book_cd=B.book_cd
-		WHERE <!-- (B.returndate BETWEEN date_sub(current date, interval 90 day) 
-			AND current date) AND -->
+		first 1 rows only) kname
+		FROM
+		TESTLIB.BOOKMST A INNER JOIN TESTLIB.BOOKRENT B ON
+		A.book_cd=B.book_cd
+		WHERE <!-- (B.returndate BETWEEN date_sub(current date, 
+			interval 90 day) AND current date) AND -->
 		B.rentchk='3'
 		ORDER BY
 		B.returndate DESC

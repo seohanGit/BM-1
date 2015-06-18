@@ -115,7 +115,7 @@
 		LEFT OUTER JOIN TPRLIB.GR_INSA C ON B.id=C.ASABN
 		WHERE C.CO_GB = 'SEOHAN' AND reqdate  <![CDATA[ > current date -1 year]]>
 		ORDER BY
-		reqstatus, reqdate DESC
+		reqdate DESC, reqstatus DESC 
 	</select>
 
 	<select id="requestRecord" parameterType="String" resultType="BookModel">

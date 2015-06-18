@@ -31,7 +31,7 @@ body {
 	<div class="container">
 
 		<div class="row panel panel-default">
-			<h2>대여 현황</h2>
+			<h2>대여 요청 현황</h2>
 			<br>
 			<div class="input-group" style="width: 95%">
 				<form action="/searchBook" method="post">
@@ -49,11 +49,11 @@ body {
 			<div id="searchResultArea">
 				<c:choose>
 					<c:when test="${empty bookList}">
-						<h3>대여중인 도서가 없습니다.</h3>
+						<h3>대여 요청중인 도서가 없습니다.</h3>
 					</c:when>
 
 					<c:otherwise>
-						<h2>대여 도서 목록</h2>
+						<h2>대여 요청 목록</h2>
 						<table class="table table-striped table-bordered ">
 							<thead>
 								<tr class="title">
@@ -95,14 +95,8 @@ body {
 														id="reservebook"
 														onClick="location.href='/cancleBorrowBook?book_cd=${book.book_cd}'; cancel();">취소</button>
 												</td>
-											</c:when>
-											<c:when test="${book.rentchk=='2'}">
-												<td>대여중</td>
-												<td></td>
-											</c:when>
+											</c:when>											
 										</c:choose>
-
-
 									</tr>
 								</c:forEach>
 							</tbody>

@@ -21,19 +21,19 @@ public class RentDaoImpl implements RentDao {
 
 	@Override
 	public BookModel selectBook(String book_cd) {
-		
+
 		return session.selectOne(NAMESPACE + "selectBook", book_cd);
 	}
 
 	@Override
 	public BookModel selectBorrow(String book_cd) {
-		
+
 		return session.selectOne(NAMESPACE + "selectBorrow", book_cd);
 	}
 
 	@Override
 	public List<BookModel> borrowList(String id) {
-		
+
 		System.out.println(id + "dao");
 		return session.selectList(NAMESPACE + "borrowList", id);
 	}
@@ -55,7 +55,6 @@ public class RentDaoImpl implements RentDao {
 
 		session.update(NAMESPACE + "returnBook", book_cd);
 		session.update(NAMESPACE + "returnBook1", book_cd);
-		
 
 	}
 
@@ -72,6 +71,11 @@ public class RentDaoImpl implements RentDao {
 	}
 
 	@Override
+	public List<BookModel> rentList(String id) {
+		return session.selectList(NAMESPACE + "rentList", id);
+	}
+
+	@Override
 	public List<BookModel> recordList(String id) {
 		return session.selectList(NAMESPACE + "recordList", id);
 	}
@@ -80,8 +84,6 @@ public class RentDaoImpl implements RentDao {
 	public List<BookModel> recordListAll() {
 		return session.selectList(NAMESPACE + "recordListAll");
 	}
-
-	
 
 	@Override
 	public void extendBorrowBook(String book_cd) {
@@ -129,16 +131,17 @@ public class RentDaoImpl implements RentDao {
 		return session.selectOne(NAMESPACE + "selectReservation", book_cd);
 
 	}
+
 	@Override
 	public List<BookModel> reservationListAll() {
-				return session.selectList(NAMESPACE + "reservationListAll");
+		return session.selectList(NAMESPACE + "reservationListAll");
 	}
 
 	@Override
 	public List<BookModel> reservationList(String id) {
 		return session.selectList(NAMESPACE + "reservationList", id);
 	}
-		
+
 	@Override
 	public List<BookModel> copyRent() {
 		return session.selectList(NAMESPACE + "copyRent");
@@ -157,7 +160,7 @@ public class RentDaoImpl implements RentDao {
 	@Override
 	public void deleteReserve(String book_cd) {
 		session.delete(NAMESPACE + "deleteReserve", book_cd);
-		
+
 	}
 
 }

@@ -55,6 +55,8 @@ public interface RentDao {
 
 	void deleteReserve(String book_cd);
 
+	List<BookModel> rentList(String id);
+
 
 
 }

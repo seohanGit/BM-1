@@ -14,8 +14,12 @@ $('#purchaseMonth').click(function() {
 			alert('검색어를 입력하세요');
 		},
 		success : function(data, status) { // Ajax complete handelr
-			$('#container').empty().append(data);
+			$('#full').empty();
+			$('#table').empty();
+			$('#chart').empty();
+			$('#chart').empty().append(data);
 			$('table.highchart').highchartTable();
+			$('#table').empty().append(data);
 		}
 	});
 });
@@ -36,8 +40,13 @@ $('#rentByPerson').click(function() {
 			alert('검색어를 입력하세요');
 		},
 		success : function(data, status) { // Ajax complete handelr
-			$('#container').empty().append(data);
+			$('#full').empty();
+			$('#table').empty();
+			$('#chart').empty();
+			$('#chart').empty().append(data);
 			$('table.highchart').highchartTable();
+			$('#table').empty().append(data);
+			$('#table').show("slow");
 		}
 	});
 });
@@ -50,28 +59,6 @@ $('#rentByMonth').click(function() {
 		datatype : "xml",
 		// html, xml, json, jsonp, script, text
 		data : {
-			year : $('#year').val(),month : $('#month').val()
-		},
-		// parameters as plain object
-		error : function() { // Ajax error handler
-
-			alert('검색어를 입력하세요');
-		},
-		success : function(data, status) { // Ajax complete handelr
-			$('#container').empty().append(data);
-			$('table.highchart').highchartTable();
-		}
-	});
-});
-
-$('#bookTeamCount').click(function() {
-	$.ajax({
-
-		type : "GET", // GET or POST
-		url : "/bookTeamCount", // URL
-		datatype : "xml",
-		// html, xml, json, jsonp, script, text
-		data : {
 			year : $('#year').val(),
 			month : $('#month').val()
 		},
@@ -81,11 +68,16 @@ $('#bookTeamCount').click(function() {
 			alert('검색어를 입력하세요');
 		},
 		success : function(data, status) { // Ajax complete handelr
-			$('#container').empty().append(data);
+			$('#full').empty();
+			$('#table').empty();
+			$('#chart').empty();
+			$('#chart').empty().append(data);
 			$('table.highchart').highchartTable();
+			$('#table').empty().append(data);
 		}
 	});
 });
+
 $('#teamCount').click(function() {
 	$.ajax({
 
@@ -103,16 +95,48 @@ $('#teamCount').click(function() {
 			alert('검색어를 입력하세요');
 		},
 		success : function(data, status) { // Ajax complete handelr
-			$('#container').empty().append(data);
+			$('#full').empty();
+			$('#table').empty();
+			$('#chart').empty();
+			$('#full').empty().append(data);
 			$('table.highchart').highchartTable();
+			
 		}
 	});
 });
-$('#selectGroupByB').click(function() {
+
+$('#bookCount').click(function() {
 	$.ajax({
 
 		type : "GET", // GET or POST
-		url : "/selectGroupByB", // URL
+		url : "/bookCount", // URL
+		datatype : "xml",
+		// html, xml, json, jsonp, script, text
+		data : {
+			year : $('#year').val(),
+			month : $('#month').val()
+		},
+		// parameters as plain object
+		error : function() { // Ajax error handler
+
+			alert('검색어를 입력하세요');
+		},
+		success : function(data, status) { // Ajax complete handelr
+			$('#full').empty();
+			$('#table').empty();
+			$('#chart').empty();
+			$('#full').empty().append(data);
+			$('table.highchart').highchartTable();
+			
+		}
+	});
+});
+
+$('#rankGroupByB').click(function() {
+	$.ajax({
+
+		type : "GET", // GET or POST
+		url : "/rankGroupByB", // URL
 		datatype : "xml",
 		// html, xml, json, jsonp, script, text
 		data : {
@@ -126,20 +150,26 @@ $('#selectGroupByB').click(function() {
 			alert('검색어를 입력하세요');
 		},
 		success : function(data, status) { // Ajax complete handelr
-			$('#container').empty().append(data);
+			$('#full').empty();
+			$('#table').empty();
+			$('#chart').empty();
+			$('#chart').empty().append(data);
 			$('table.highchart').highchartTable();
+			$('#table').empty().append(data);
 		}
 	});
 });
-$('#bestBook').click(function() {
+$('#rankGroupByBook').click(function() {
 	$.ajax({
 
 		type : "GET", // GET or POST
-		url : "/selectBestBook", // URL
+		url : "/rankGroupByBook", // URL
 		datatype : "xml",
 		// html, xml, json, jsonp, script, text
 		data : {
-			year : $('#year').val()
+			year : $('#year').val(),
+			month : $('#month').val()
+
 		},
 		// parameters as plain object
 		error : function() { // Ajax error handler
@@ -147,30 +177,12 @@ $('#bestBook').click(function() {
 			alert('검색어를 입력하세요');
 		},
 		success : function(data, status) { // Ajax complete handelr
-			$('#container').empty().append(data);
+			$('#full').empty();
+			$('#table').empty();
+			$('#chart').empty();
+			$('#chart').empty().append(data);
 			$('table.highchart').highchartTable();
-		}
-	});
-});
-
-
-$('#getBookInfo').click(function() {
-	$.ajax({
-		type : "GET", // GET or POST
-		url : "/getBookInfo", // URL
-		datatype : "xml",
-		// html, xml, json, jsonp, script, text
-		data : {
-			keyword : $('#keyword').val()
-		},
-		// parameters as plain object
-		error : function() { // Ajax error handler
-
-			alert('검색어를 입력하세요');
-		},
-		success : function(data, status) { // Ajax complete handelr
-			$('#searchResultArea').empty().append(data);
-			
+			$('#table').empty().append(data);
 		}
 	});
 });

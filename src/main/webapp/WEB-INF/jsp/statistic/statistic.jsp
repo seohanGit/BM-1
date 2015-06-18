@@ -69,7 +69,8 @@ body {
 
 
 					<select class="selectpicker"
-						style="height: 22px; vertical-align: bottom; width:100px" id="year">
+						style="height: 22px; vertical-align: bottom; width: 100px"
+						id="year">
 						<option value="2015" selected>2015
 						<option value="2014">2014
 						<option value="2013">2013
@@ -93,16 +94,20 @@ body {
 						대여 현황</button>
 					<button class="btn btn-sm" id="purchaseMonth" type="button">연간
 						예산 현황</button>
-					<button class="btn btn-sm" id="bookTeamCount" type="button">보유
-						현황, 팀별 현황</button>
-
-					<button class="btn btn-sm" id="selectGroupByB" type="button">분류별,
-						도서별 대여순위</button>
-
+					<button class="btn btn-sm" id="bookCount" type="button">보유
+						현황</button>
+					<button class="btn btn-sm" id="teamCount" type="button">
+						팀별 현황</button>
+					<button class="btn btn-sm" id="rankGroupByB" type="button">분류별
+						대여 순위</button>
+					<button class="btn btn-sm" id="rankGroupByBook" type="button">도서별
+						대여 순위</button>
 					<button class="btn btn-sm" id="rentByPerson" type="button">개인별
-						대여순위</button>
+						대여 순위</button>
 
-					<div id="container" class="row" style="width: 100%"></div>
+					<div id="chart" class="row" style="width: 50%"></div>
+					<div id="table" class="row" style="width: 50%"></div>
+					<div id="full" class="row" style="width: 100%"></div>
 
 				</div>
 			</div>
@@ -110,9 +115,20 @@ body {
 	</div>
 
 	<script src="/resources/js/common.js"></script>
-	<script type="text/javascript" src="/resources/js/ajax.js"></script>
+	<script src="/resources/js/statistic.js"></script>
 	<script src="/resources/js/bootstrap.min.js"></script>
 	<script src="/resources/js/bootstrap-select.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			var sum = 0;
+			var quantity = 0;
+			$('.count').each(function() {
+				sum += parseInt($('.count').val());
+				});
 
+			$('#total_price'). = sum;
+
+		})
+	</script>
 </body>
 </html>

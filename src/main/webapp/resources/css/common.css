@@ -41,6 +41,16 @@ div .right {
 	width: 40%;
 	margin-bottom: 10px;
 }
+div .title {
+	width:100%;
+	text-align: center;
+	font-size: xx-large; 
+}
+div #center {
+	width:100%;
+	text-align: center;
+	font-size: xx-large; 
+}
 
 div .right-end {
 	margin-top: 20px;

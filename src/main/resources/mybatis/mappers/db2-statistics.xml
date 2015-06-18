@@ -23,7 +23,7 @@
 
 	<select id="selectBookCount" resultType="BookModel">
 		SELECT COUNT(*) AS
-		count, b_group FROM testlib.bookmst GROUP BY b_group
+		count, b_group, (SELECT count(*) FROM testlib.bookmst) FROM testlib.bookmst GROUP BY b_group
 	</select>
 
 

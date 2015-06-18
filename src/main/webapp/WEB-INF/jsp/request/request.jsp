@@ -28,99 +28,103 @@ body {
 	<jsp:include page="../nav.jsp" />
 	<div class="container">
 
-		<hr>
 		<div class="row panel panel-default">
 			<!-- Blog Entries Column -->
-			<h4>원하는 책이 없다면 인터넷에서 주문하세요 !</h4>
-			<div class="input-group" style="width: 90%">
-				<form action="/findBook" method="get">
-					<span class="input-group-btn"> <input type="text"
-						class="form-control" id="query" name="keyword"
-						placeholder="인터파크 검색">
-						<button class="btn btn-default" type="submit" id="btn_find">
-							<span class="glyphicon glyphicon-search"></span>
-						</button>
-					</span>
-				</form>
-			</div>
+
 			<div>
 				<h2>구매요청 목록</h2>
-				<button class="btn btn-default" type="button"
-										onclick="location.href='/insertbook'; ">구매요청</button>			
-				<table class="table table-striped table-bordered" id="dataTable">
 
-					<c:choose>
-						<c:when test="${empty bookList}">
+				<div class="input-group" style="float: left; width: 70%">
+					<form action="/findBook" method="get">
+						<span class="input-group-btn"> <input type="text"
+							class="form-control" id="query" name="keyword"
+							placeholder="ISBN, 도서명, 저자 검색">
+							<button class="btn btn-default" type="submit" id="btn_find">
+								<span class="glyphicon glyphicon-search"></span>
+							</button>
+						</span>
+					</form>
+				</div>
+				<div style="float: right;">
+					<button class="btn btn-default" type="button"
+						onclick="location.href='/requestbook'; ">구매요청</button>
+				</div>
+				<br>
+				<div style="margin-top: 20px; padding-top : 20px">
+					<table class="table table-striped table-bordered" id="dataTable">
 
-							<h3>구매 요청한 도서가 없습니다.</h3>
-						</c:when>
-						<c:otherwise>
-							<thead>
-								<tr class=" title">
+						<c:choose>
+							<c:when test="${empty bookList}">
 
-									<th class="hidden-xs td-img">표지</th>
-									<th class="td-title">도서명</th>
-									<th class="hidden-xs td-author">저자</th>
-									<th class="hidden-xs td-date">가격</th>
-									<th style="width:50px">수량</th>
-									<th class="hidden-xs td-genre">요청일자</th>
-									<th class="td-img">상태</th>
+								<h3>구매 요청한 도서가 없습니다.</h3>
+							</c:when>
+							<c:otherwise>
+								<thead>
+									<tr class=" title">
 
-								</tr>
-							</thead>
+										<th class="hidden-xs td-img">표지</th>
+										<th class="td-title">도서명</th>
+										<th class="hidden-xs td-author">저자</th>
+										<th class="hidden-xs td-date">가격</th>
+										<th style="width: 50px">수량</th>
+										<th class="hidden-xs td-genre">요청일자</th>
+										<th class="td-img">상태</th>
 
-							<c:forEach items="${bookList}" var="book" varStatus="status">
-
-								<tbody class="visible-xs" style="width: 100%">
-									<tr>
-										<td rowspan="4" style="width: 50px" align="left"><img
-											style="width: 50px" src="${book.imageurl}"></td>
 									</tr>
-									<tr>
-										<td style="width: 40%" align="left"><a
-											href="${book.link}">${book.title }</a></td>
-										<td style="width: 40%" align="left">${book.author }</td>
-									</tr>
-									<tr>
-										<td>${book.b_group}</td>
-										<td>요청자 : ${book.id}</td>
-									</tr>
-									<tr>
-										<td>${book.price}원</td>
-										<td>수량 : ${book.quantity}</td>
-									</tr>
-								</tbody>
-								<tbody class="hidden-xs">
-									<tr>
-										<td class="hidden-xs"><img style="width: 50px"
-											src="${book.imageurl}"></td>
-										<td class="td-title"><a href="${book.link}">${book.title }</a></td>
-										<td class="hidden-xs">${book.author}</td>
-										<td>${book.price}원</td>
-										<td align="center">${book.quantity}</td>
-										<td class="hidden-xs"><fmt:formatDate type="date"
-												pattern="yyyy-MM-dd" value="${book.reqdate}" /></td>
-										<c:choose>
-											<c:when test="${book.reqstatus=='0'}">
-												<td>대기</td>
-											</c:when>
-											<c:when test="${book.reqstatus=='1'}">
-												<td class="ok">승인</td>
-											</c:when>
-											<c:when test="${book.reqstatus=='2'}">
-												<td class="no">반려</td>
-											</c:when>
-										</c:choose>
-									</tr>
+								</thead>
 
-								</tbody>
+								<c:forEach items="${bookList}" var="book" varStatus="status">
 
-							</c:forEach>
+									<tbody class="visible-xs" style="width: 100%">
+										<tr>
+											<td rowspan="4" style="width: 50px" align="left"><img
+												style="width: 50px" src="${book.imageurl}"></td>
+										</tr>
+										<tr>
+											<td style="width: 40%" align="left"><a
+												href="${book.link}">${book.title }</a></td>
+											<td style="width: 40%" align="left">${book.author }</td>
+										</tr>
+										<tr>
+											<td>${book.b_group}</td>
+											<td>요청자 : ${book.id}</td>
+										</tr>
+										<tr>
+											<td>${book.price}원</td>
+											<td>수량 : ${book.quantity}</td>
+										</tr>
+									</tbody>
+									<tbody class="hidden-xs">
+										<tr>
+											<td class="hidden-xs"><img style="width: 50px"
+												src="${book.imageurl}"></td>
+											<td class="td-title"><a href="${book.link}">${book.title }</a></td>
+											<td class="hidden-xs">${book.author}</td>
+											<td>${book.price}원</td>
+											<td align="center">${book.quantity}</td>
+											<td class="hidden-xs"><fmt:formatDate type="date"
+													pattern="yyyy-MM-dd" value="${book.reqdate}" /></td>
+											<c:choose>
+												<c:when test="${book.reqstatus=='0'}">
+													<td>대기</td>
+												</c:when>
+												<c:when test="${book.reqstatus=='1'}">
+													<td class="ok">승인</td>
+												</c:when>
+												<c:when test="${book.reqstatus=='2'}">
+													<td class="no">반려</td>
+												</c:when>
+											</c:choose>
+										</tr>
 
-						</c:otherwise>
-					</c:choose>
-				</table>
+									</tbody>
 
+								</c:forEach>
+
+							</c:otherwise>
+						</c:choose>
+					</table>
+				</div>
 				<hr>
 			</div>
 		</div>

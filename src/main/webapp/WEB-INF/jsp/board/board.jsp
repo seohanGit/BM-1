@@ -64,6 +64,6 @@
 	<script src="/resources/js/jquery/jquery.js"></script>
 	<!-- Bootstrap Core JavaScript -->
 	<script src="/resources/js/bootstrap.min.js"></script>
-	<script src="/resources/js/common.js"></script>
+	<script src="/resources/js/board.js"></script>
 </body>
 </html>

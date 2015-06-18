@@ -91,18 +91,22 @@ public class RequestController {
 	public String requestBook(HttpServletRequest request, Model model,
 			String isbn) throws Exception {
 		String id = null;
+		if (isbn != null) {
 
-		BookModel book = requestservice.findBookOne(isbn);
+			BookModel book = requestservice.findBookOne(isbn);
 
-		for (Cookie cookie : request.getCookies()) {
-			if (cookie.getName().equals("bm_id")) {
-				id = cookie.getValue();
-				book.setId(id);
+			for (Cookie cookie : request.getCookies()) {
+				if (cookie.getName().equals("bm_id")) {
+					id = cookie.getValue();
+					book.setId(id);
+				}
 			}
-		}
 
-		model.addAttribute("book", book);
-		return "request/confirmRequest";
+			model.addAttribute("book", book);
+			return "request/confirmRequest";
+		}else {
+			return "request/manualRequest"; 
+		}
 	}
 
 	@RequestMapping("/buyRequest")

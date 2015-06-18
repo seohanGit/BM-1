@@ -4,7 +4,7 @@
 
 <table class="highchart table table-bordered"
 	data-graph-container-before="1" data-graph-type="line"
-	data-graph-yaxis-2-opposite="1" style="display: show" >
+	data-graph-yaxis-2-opposite="1" style="display: none" >
 	<caption style="font-size:20px"> 연간 예산 현황</caption>
 
 	<thead>

@@ -1,20 +1,4 @@
-/*$('#btn_search').click(function() {
-	$.ajax({
-		type : "GET", // GET or POST
-		url : "/countBook", // URL
-		datatype : "json", // html, xml, json, jsonp, script, text
-		data : {
-			keyword : $('#keyword').val()
-		},
-		success : function(data, status) { // Ajax complete handelr
-			goUrl(url);
-		}, // parameters as plain object
-		error : function() { // Ajax error handler
-			alert('ajax failed');
-		}
-	});
-});
- */
+
 function del() {
 	alert("삭제되었습니다.");
 }
@@ -37,17 +21,7 @@ function notifiReser() {
 	alert("예약알림문자가 전송되었습니다.");
 }
 
-/* 버튼 클릭 */
-/*
- * $("#logout").click(function() { location.href = "/logout" })
- * 
- * $('#btn_find').click(function() { if ($('#query').val() == "") { alert("검색어를
- * 입력하세요"); return false; } })
- */
 
-/*$("#requestList").click(function() {
-	location.href = "/requestList"
-})*/
 $("#request").click(function() {
 	location.href = "/request"
 })
@@ -61,17 +35,14 @@ $("#recordList").click(function() {
 $("#statistic").click(function() {
 	location.href = "/statistic"
 })
-$("#reservationListAll").click(function() {
-	location.href = "/reservationListAll"
+$("#reserveList").click(function() {
+	location.href = "/reserveList"
 })
 $("#borrowList").click(function() {
 	location.href = "/borrowList"
 })
-$("#borrowList2").click(function() {
-	location.href = "/borrowList"
-})
-$("#logout").click(function() {
-	location.href = "/logout"
+$("#borrowReqList").click(function() {
+	location.href = "/borrowReqList"
 })
 $("#noticeListByAdmin").click(function() {
 	location.href = "/noticeListByAdmin"
@@ -80,15 +51,11 @@ $("#noticeListByAdmin").click(function() {
 $("#bookList").click(function() {
 	location.href = "/bookList"
 })
-$("#memberList").click(function() {
-	location.href = "/memberList"
-})
+
 $("#boardList").click(function() {
 	location.href = "/boardList"
 })
-$("#boardList").click(function() {
-	location.href = "/boardList"
-})
+
 $("#allCheck").click(function() {
 	if ($("#allCheck").prop("checked")) {
 		$("input[type=checkbox]").prop("checked", true);
@@ -97,27 +64,10 @@ $("#allCheck").click(function() {
 	}
 
 })
-
-$('#btn_bookList').click(function() {
-	$.ajax({
-		type : "GET", // GET or POST
-		url : "/bookList", // URL
-		datatype : "xml", // html, xml, json, jsonp, script, text
-		error : function() { // Ajax error handler
-			alert('ajax failed');
-		},
-		success : function(data, status) { // Ajax complete handelr
-			$('#goodPhrase').fadeOut();
-			$('#image1').fadeOut();
-			$('#image2').fadeOut();
-			$('#searchResultArea').empty().append(data);
-			$('#container').empty().append(data);
-		}
-	});
-});
 $('.board .btn').click(function() {
 	$(this).parent().parent().find('.content').toggleClass('ellipsis');
 });
+
 
 $('#blackList').click(function() {
 	$.ajax({
@@ -135,57 +85,6 @@ $('#blackList').click(function() {
 
 })
 
-$('#late').click(function() {
-	$.ajax({
-		type : "GET", // GET or POST
-		url : "/searchLate", // URL
-		datatype : "xml", // html, xml, json, jsonp, script, text
-		error : function() { // Ajax error handler
-			alert('ajax failed');
-		},
-		success : function(data, status) { // Ajax complete handelr]
-			$('#image3').fadeOut();
-			$('#personResultArea').empty().append(data);
-		}
-	});
-
-})
-
-$('#register').click(function() {
-	$.ajax({
-		type : "GET", // GET or POST
-		url : "/selectboard", // URL
-		datatype : "xml",
-		data : {
-			per : "register"
-		},// html, xml, json, jsonp, script, text
-		error : function() { // Ajax error handler
-			alert('ajax failed');
-		},
-		success : function(data, status) { // Ajax complete handelr]
-			$('#bulletin').empty().append(data);
-		}
-	});
-
-})
-
-$('#title').click(function() {
-	$.ajax({
-		type : "GET", // GET or POST
-		url : "/selectboard", // URL
-		datatype : "xml",
-		data : {
-			per : "title"
-		},// html, xml, json, jsonp, script, text
-		error : function() { // Ajax error handler
-			alert('ajax failed');
-		},
-		success : function(data, status) { // Ajax complete handelr]
-			$('#bulletin').empty().append(data);
-		}
-	});
-
-})
 
 // ///////////////////////////////리스트
 /*

@@ -71,8 +71,7 @@
 			<hr>
 			<h2>인터파크 검색</h2>
 
-			<h4>원하는 책이 없다면 인터넷에서 주문하세요 !</h4>
-			<div class="input-group ">
+			<div class="input-group " style="width: 70%">
 				<form action="/findBook" method="post">
 					<span class="input-group-btn"> <input type="text"
 						class="form-control" id="query" name="keyword"
@@ -83,14 +82,18 @@
 					</span>
 				</form>
 			</div>
-
+			<div style="width: 30%">
+				<button class="btn btn-default"
+					onclick="location.href='/requestbook'; ">미등록
+					도서 구매</button>
+			</div>
 			<hr>
 			<div class="dataTable_wrapper">
 
 				<table class="table table-striped table-bordered"
 					style="width =: 90%; bordercolor: #fff" id="dataTable">
 
-						<thead>
+					<thead>
 						<tr>
 							<td class="hidden-xs td-img">표지</td>
 							<td>도서명</td>
@@ -101,13 +104,12 @@
 							<td class="td-genre">구매요청</td>
 						</tr>
 					</thead>
-					
+
 					<tbody>
 						<c:forEach items="${bookList}" var="book" varStatus="status">
 							<tr>
-								<td  class="hidden-xs" style="width: 50px"
-									align="left"><img style="width: 50px"
-									src="${book.imageurl}"></td>
+								<td class="hidden-xs" style="width: 50px" align="left"><img
+									style="width: 50px" src="${book.imageurl}"></td>
 								<td class="td-title" align="left"><a href="${book.link}">${book.title}</a></td>
 								<td class="hidden-xs" align="left">${book.author }</td>
 								<td class="hidden-sm hidden-xs hidden-md" align="left">${book.b_group}</td>

@@ -27,10 +27,6 @@ public class BoardController {
 	@Autowired
 	private BoardService boardService;
 
-	@Autowired
-	private StatisticService statisticService;
-	String year = Integer.toString(Calendar.getInstance().get(Calendar.YEAR));
-
 	@RequestMapping("/board")
 	public String board(Model model) {
 		List<BoardModel> boardList = boardService.selectBoard();
@@ -138,86 +134,6 @@ public class BoardController {
 		return "redirect:noticeListByAdmin";
 	}
 
-	@ResponseBody
-	@RequestMapping("/countList")
-	public String countList() throws Exception {
-		List<BookModel> countList = statisticService.selectBookCount();
-		String data = "", categories = "";
-		for (BookModel bookModel : countList) {
-			categories = categories + "," + bookModel.getB_group();
-			data = bookModel.getCount() + "," + data;
-		}
-		data = data.substring(0, data.length() - 1);
-		/*
-		 * ArrayList<Object> pieDataSet = new ArrayList<Object>();
-		 * pieDataSet.add(piedata1); pieDataSet.add(piedata2);
-		 * pieDataSet.add(piedata3);
-		 */
-		return data;
-	}
+	
 
-	@RequestMapping("/statistic")
-	public String statistic(Model model) throws Exception {
-		Dto param = new Dto();
-		param.setYear(year);
-		param.setMonth("");
-		List<Dto> bestPerson = statisticService.selectBestPerson(param);
-		model.addAttribute("bestPerson", bestPerson);
-
-		return "statistic/statistic";
-	}
-
-	@RequestMapping("/rentByPerson")
-	public String rentByPerson(Model model, String year, String month)
-			throws Exception {
-		Dto param = new Dto();
-		param.setYear(year);
-		param.setMonth(month);
-		List<Dto> bestPerson = statisticService.selectBestPerson(param);
-		model.addAttribute("bestPerson", bestPerson);
-		return "/statistic/rentByPerson";
-	}
-
-	@RequestMapping("/bookTeamCount")
-	public String bookCount(String year, Model model) throws Exception {
-		List<BookModel> bookCount = statisticService.selectBookCount();
-		model.addAttribute("bookCount", bookCount);
-		List<MemberModel> teamCount = statisticService.selectBestTeam(year);
-		model.addAttribute("teamCount", teamCount);
-		return "/statistic/bookTeamCount";
-	}
-
-	@RequestMapping("/selectSumPurchase")
-	public String selectSumPurchase(String year, Model model) {
-		Dto dto = new Dto();
-		dto.setYear(year);
-		List<Dto> SumPurchase = new ArrayList<Dto>();
-		SumPurchase = statisticService.selectSumPurchase(dto);
-
-		model.addAttribute("SumPurchase", SumPurchase);
-		return "/statistic/purchaseByMonth";
-	}
-
-	@RequestMapping("/rentByMonth")
-	public String rentByMonth(String year, String month, Model model) {
-		Dto param = new Dto();
-		param.setYear(year);
-		param.setMonth(month);
-		List<Dto> rentByMonth = statisticService.rentByMonth(param);
-		model.addAttribute("rentByMonth", rentByMonth);
-		return "/statistic/rentByMonth";
-	}
-
-	@RequestMapping("/selectGroupByB")
-	public String selectGroupByB(String year, String month, Model model)
-			throws Exception {
-		Dto param = new Dto();
-		param.setYear(year);
-		param.setMonth(month);
-		List<BookModel> bestBook = statisticService.selectBestBook(param);
-		model.addAttribute("bestBook", bestBook);
-		List<Dto> selectGroupByB = statisticService.selectGroupByB(param);
-		model.addAttribute("selectGroupByB", selectGroupByB);
-		return "/statistic/rentByB_group";
-	}
 }

@@ -7,51 +7,56 @@ import com.baron.member.model.MemberModel;
 import com.baron.member.model.SmsModel;
 
 public interface RentService {
-
-	public BookModel selectReservation(String book_cd);
-
-	public List<BookModel> borrowList(String id);
-
-	public List<BookModel> borrowListAll();
-
-	public void borrowBook(BookModel bookmodel);
-
-	public void returnBook(String book_cd);
-
-	public void insertReservation(BookModel bookmodel);
-
-	public void confirmBorrowBook(String book_cd);
-
-	public List<BookModel> rentListAll();
-
-	public List<BookModel> recordList(String id);
-
-	List<BookModel> recordListAll();
-
-	public List<BookModel> reservationListAll();
-
-	public void extendBorrowBook(String book_cd);
-
-	BookModel selectBook(String book_cd);
-
-	public void stopBorrow(String book_cd);
-
-	void cancleBorrowBook(BookModel bookmodel);
-
-	public void recoverBook(String book_cd);
-
-	public void backupRecord(BookModel bookmodel);
-
-	public List<BookModel> reservationList(String id);
-
 	public MemberModel selectMember(String id);
 
-	public void insertRecord(BookModel bookmodel);
-
-	List<BookModel> copyRent();
+	public BookModel selectBook(String book_cd);
 
 	public BookModel selectRent(String book_cd);
 
-	
+	public BookModel selectReservation(String book_cd);
+
+	// 대여요청
+	public List<BookModel> borrowList(String id);
+
+	public List<BookModel> borrowList();
+
+	public void borrowBook(BookModel bookmodel);
+
+	public void cancleBorrowBook(BookModel bookmodel);
+
+	public void returnBook(String book_cd);
+
+	public void confirmBorrowBook(String book_cd);
+
+	// 대여 현황
+	public List<BookModel> rentList();
+
+	public List<BookModel> rentList(String id);
+
+	public void extendBorrowBook(String book_cd);
+
+	public void stopBorrow(String book_cd);
+
+	public void recoverBook(String book_cd);
+
+	// 백업 및 데이터 이관
+	List<BookModel> copyRent();
+
+	void backupRecord(BookModel bookmodel);
+
+	// 대여 기록
+	public void insertRecord(BookModel bookmodel);
+
+	public List<BookModel> recordList(String id);
+
+	public List<BookModel> recordList();
+
+	// 예약 기능
+	public void insertReservation(BookModel bookmodel);
+
+	public List<BookModel> reserveList();
+
+	public List<BookModel> reserveList(String id);
+
 	public void deleteReserve(String book_cd);
 }

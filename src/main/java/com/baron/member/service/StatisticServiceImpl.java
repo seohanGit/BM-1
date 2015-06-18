@@ -44,7 +44,13 @@ public class StatisticServiceImpl implements StatisticService {
 
 	@Override
 	public List<BookModel> selectBookCount() {
-		return statisticDao.selectBookCount();
+		/*int total = statisticDao.selectBookCount().get(0).getTotal();
+		BookModel book = new BookModel();
+		book.setB_group("도서 합계");
+		book.setCount(total);
+		List<BookModel> bookList =
+		bookList.add(book);*/
+		return  statisticDao.selectBookCount();
 	}
 
 	@Override

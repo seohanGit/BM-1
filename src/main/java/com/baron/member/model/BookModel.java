@@ -42,7 +42,16 @@ public class BookModel {
 	private String mobi_no;
 	
 	private String extendchk;
+	private int total;
 	
+	public int getTotal() {
+		return total;
+	}
+
+	public void setTotal(int total) {
+		this.total = total;
+	}
+
 	public String getExtendchk() {
 		return extendchk;
 	}

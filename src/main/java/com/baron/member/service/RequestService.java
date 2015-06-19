@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.baron.member.model.BookModel;
 import com.baron.member.model.Dto;
+import com.baron.member.model.MemberModel;
 
 public interface RequestService {
 
@@ -11,7 +12,7 @@ public interface RequestService {
 
 	public void deleteRequest(String bookCode);
 
-	public void requestBook(BookModel model);
+	public void requestBook(BookModel model, MemberModel member);
 
 	/*
 	 * public BookModel getRequestBook(String isbn, String id, int quantity)
@@ -32,5 +33,7 @@ public interface RequestService {
 	public String selectC_code(String c_group);
 
 	public void confirmBuy(BookModel model);
+
+	public String selectMaxSer();
 
 }

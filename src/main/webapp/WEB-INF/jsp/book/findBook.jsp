@@ -67,11 +67,10 @@
 	<div id="divLoadBody" style="display: none;" class="container">
 
 		<!-- Page Content -->
-		<div id="searchResultArea">
-			<hr>
+		<div id="panel panel-default">
 			<h2>인터파크 검색</h2>
-
-			<div class="input-group " style="width: 70%">
+			<div class="input-group "
+				style="width: 30%; float: right; margin-right: 20%">
 				<form action="/findBook" method="post">
 					<span class="input-group-btn"> <input type="text"
 						class="form-control" id="query" name="keyword"
@@ -79,15 +78,15 @@
 						<button class="btn btn-default" type="submit" id="btn_find">
 							<span class="glyphicon glyphicon-search"></span>
 						</button>
+						<button class="btn btn-default"
+							onclick="location.href='/requestbook'; ">ISBN 미등록 도서</button>
 					</span>
 				</form>
 			</div>
-			<div style="width: 30%">
+			<!-- <div style="width: 16%; float: right" align="right">
 				<button class="btn btn-default"
-					onclick="location.href='/requestbook'; ">미등록
-					도서 구매</button>
-			</div>
-			<hr>
+					onclick="location.href='/requestbook'; ">미등록 도서 구매</button>
+			</div> -->
 			<div class="dataTable_wrapper">
 
 				<table class="table table-striped table-bordered"
@@ -130,11 +129,10 @@
 	</div>
 
 
-	<script src="/resources/js/metisMenu.min.js"></script>
 	<script src="/resources/js/jquery/jquery.js"></script>
 	<script src="/resources/js/bootstrap.min.js"></script>
-	<script src="/resources/js/jquery/common.js"></script>
-	<script src="/resources/js/jquery/book.js"></script>
+	<script src="/resources/js/common.js"></script>
+	<script src="/resources/js/book.js"></script>
 	<script src="/resources/js/jquery.dataTables.min.js"></script>
 	<script src="/resources/js/dataTables.bootstrap.min.js"></script>
 	<script>
@@ -146,6 +144,7 @@
 				startSave : true,
 				ordering : true,
 				info : false,
+				searching : false,
 
 				"columns" : [ {
 					"searchable" : false

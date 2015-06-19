@@ -38,6 +38,11 @@ body {
 							value="${book.title }" readonly="readonly">
 					</div>
 					<div class="form-group">
+						<label for="exampleInputPassword1">저자</label> <input type="text"
+							class="form-control" id="author" name="author"
+							value="${book.author }" readonly="readonly">
+					</div>
+					<div class="form-group">
 						<label for="exampleInputPassword1">장르</label> <input type="text"
 							class="form-control" id="b_group" name="b_group"
 							value="${book.b_group}" readonly="readonly">
@@ -46,11 +51,9 @@ body {
 						<label for="exampleInputPassword1">수량</label> <input type="number"
 							class="form-control" id="quantity" name="quantity" value="1">
 					</div>
-
 					<div class="form-group">
-						<label for="exampleInputPassword1">저자</label> <input type="text"
-							class="form-control" id="author" name="author"
-							value="${book.author }" readonly="readonly">
+						<label for="exampleInputPassword1">신청 사유</label> <input
+							type="text" class="form-control" name="reason" id="reason">
 					</div>
 					<div class="form-group">
 						<label for="exampleInputPassword1">구매요청자</label> <input
@@ -71,28 +74,30 @@ body {
 						type="hidden" name="price" id="price" value="${book.price}">
 					<input type="hidden" name="id" value="${book.id}">
 					<button type="submit" class="btn btn-default">확인</button>
-					<select name="chief">
+					<%-- <select name="chief">
 						<option value="${member.chief}" selected>${member.chief}
-					</select>
+					</select> --%>
 				</div>
 			</form>
 		</div>
 	</div>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			if ($('price').val > 100000) {
+				alert("100,000원 이상 도서 구매시 팀장 결재 필요합니다.");
+				/* $('#top').append("<select name="chief" >");
+				$('#top')
+						.append(
+								"<option value="${member.chief}" selected>${member.chief}");
+				$('#top').append("</select>"); */
+			}
+			if ($('quantity').val > 5) {
+				alert("5권이상은 선행기획팀 서하림 사원에게 문의하십시오.")
+			}
+		});
+	</script>
 	<script src="/resources/js/jquery/jquery.js"></script>
 	<script src="/resources/js/bootstrap.min.js"></script>
-	<script type="text/javascript">
-		$("#price")
-				.change(
-						function() {
 
-							if ($('#price').val > 100000) {
-								$('#top').append("<select name="chief" >");
-								$('#top')
-										.append(
-												"<option value="${member.chief}" selected>${member.chief}");
-								$('#top').append("</select>");
-							}
-						});
-	</script>
 </body>
 </html>

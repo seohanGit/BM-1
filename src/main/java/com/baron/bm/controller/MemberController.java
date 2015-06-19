@@ -18,6 +18,7 @@ import javax.naming.directory.InitialDirContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -138,7 +139,7 @@ public class MemberController {
 
 	@RequestMapping("/autologin")
 	public ModelAndView login2(HttpServletResponse response,
-			HttpServletRequest request, ModelAndView mav, String id) {
+			HttpServletRequest request, HttpSession session, ModelAndView mav, String id) {
 
 		// ModelAndView mav = new ModelAndView("/index");
 
@@ -151,6 +152,10 @@ public class MemberController {
 			mav.addObject("kname", membermodel.getKname());
 			mav.addObject("team_nm", membermodel.getTeam_nm());
 			mav.addObject("jikb", membermodel.getJikb());
+			mav.addObject("chief", membermodel.getChief());
+			mav.addObject("chiefId", membermodel.getChiefid());
+			
+			session.setAttribute("membermodel", membermodel);
 			
 			if (id.equals("4150266")) {
 				response.addCookie(new Cookie("bm_id", id));

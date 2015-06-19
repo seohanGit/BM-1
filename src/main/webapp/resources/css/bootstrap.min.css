@@ -10,17 +10,7 @@ html {
 	-ms-text-size-adjust: 100%
 }
 
-.ok{ 
-	color: green;
-}
 
-.no{
-	color:red;
-}
-
-.hide {
-	visibility: hidden;
-}
 
 body {
 	margin: 0

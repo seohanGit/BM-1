@@ -23,13 +23,31 @@ public class MemberModel {
 	private String jikb;
 	private String co_gb;
 	private String team_nm;
+	private String chief;
+	private String chiefid;
+
 
 	private int max;
 
 	private String year;
 	private String month;
-	
 
+	
+	public String getChief() {
+		return chief;
+	}
+
+	public void setChief(String chief) {
+		this.chief = chief;
+	}
+
+	public String getChiefid() {
+		return chiefid;
+	}
+
+	public void setChiefid(String chiefid) {
+		this.chiefid = chiefid;
+	}
 	public String getYear() {
 		return year;
 	}

@@ -1,10 +1,12 @@
 package com.baron.bm.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +19,7 @@ import com.baron.member.dao.JoinDao;
 import com.baron.member.model.BookModel;
 import com.baron.member.model.CodeModel;
 import com.baron.member.model.Dto;
+import com.baron.member.model.MemberModel;
 import com.baron.member.model.SmsModel;
 import com.baron.member.service.BookService;
 import com.baron.member.service.JoinService;
@@ -43,16 +46,17 @@ public class RequestController {
 	private BookService bookService;
 
 	@RequestMapping("/confirmRequest")
-	public String requestResult(BookModel model) {
-		/*
-		 * System.out.println(model.getKname() + "님이 " + model.getTitle() +
-		 * "을 구매요청하였습니다. ");
-		 */
+	public String requestResult(BookModel model, HttpSession session) {
+		Date date = new Date();
+		String now = date.toString();
+		MemberModel member = (MemberModel) session.getAttribute("membermodel");
+		System.out.println(now);
+		String max = requestservice.selectMaxSer();
 		model.setKname(model.getKname().substring(0, 5));
 		model.setBook_cd(model.getB_group().substring(2));
-		model.setReq_cd(model.getIsbn().substring(2) + model.getSabun() + "-("
-				+ model.getQuantity() + 1 + ")");
-		requestservice.requestBook(model);
+		model.setReq_cd("Book" + now + max);
+		
+		requestservice.requestBook(model, member);
 
 		return "redirect:request";
 	}
@@ -65,11 +69,9 @@ public class RequestController {
 		for (Cookie cookie : request.getCookies()) {
 			if (cookie.getName().equals("bm_id")) {
 				id = cookie.getValue();
-				System.out.println(id);
 			} else if (cookie.getName().equals("bm_permission")) {
 				permission = cookie.getValue();
 			}
-
 		}
 		if (id == "") {
 			return "getout";
@@ -90,6 +92,7 @@ public class RequestController {
 	@RequestMapping("/requestbook")
 	public String requestBook(HttpServletRequest request, Model model,
 			String isbn) throws Exception {
+		
 		String id = null;
 		if (isbn != null) {
 
@@ -101,7 +104,6 @@ public class RequestController {
 					book.setId(id);
 				}
 			}
-
 			model.addAttribute("book", book);
 			return "request/confirmRequest";
 		}else {

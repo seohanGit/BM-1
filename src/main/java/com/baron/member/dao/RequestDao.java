@@ -2,6 +2,7 @@ package com.baron.member.dao;
 
 import java.util.List;
 
+import com.baron.member.model.ApprovalModel;
 import com.baron.member.model.BookModel;
 import com.baron.member.model.Dto;
 
@@ -28,4 +29,8 @@ public interface RequestDao {
 	String convertB_code(String b_group);
 
 	String convertC_code(String c_group);
+
+	public String selectMaxSer();
+
+	public void approveChief(ApprovalModel approval);
 }

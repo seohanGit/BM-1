@@ -37,33 +37,44 @@
 		</table>
 
 	</div>
-	<div id="divLoadBody" style="display: none;" class="container">
-		<div class="col-md-12 col-xs-12 col-sm-9">
-			<div class="panel panel-default">
+	<div id="divLoadBody" style="display: none;" class="container ">
+		<div class="col-md-12">
+			<div class="panel panel-default ">
 
 				<div class="panel-body">
-					
+
 					<div style="width: 100%; float: left;">
 						<h2>도서검색 목록</h2>
 					</div>
 
 
 
-					<div style="float: right; vertical-align: baseline; width: 90%;"
+					<div style="float: right; width: 43%; margin-right: 30px"
 						align="right">
-						<div align="right" class="input-group "
-							style="vertical-align: baseline; float: left; width: 60%">
+						<div align="right" style="vertical-align: baseline; float: right;">
 							<form action="/searchBook" method="post">
 								<span class="input-group-btn"> <input type="text"
-									class="form-control" id="keyword" name="keyword"
+									style="width: 70%; float: left" class="form-control"
+									id="keyword" name="keyword"
 									placeholder="기술자료실 도서 검색 [ 소문자로 입력 ]">
 									<button class="btn btn-default" type="submit" id="btn_find">
 										<span class="glyphicon glyphicon-search"></span>
-									</button>
-								</span>
+									</button> <select class="selectpicker"
+									style="width: 30%; font-size: 14px; margin-top: 10px; vertical-align: baseline;"
+									id="select">
+										<optgroup label="대분류">
+											<option value="B-도서(단행본)">B-도서(단행본)
+											<option value="E-기타매체">E-기타매체
+											<option value="J-정기간행물">J-정기간행물
+											<option value="P-특허자료">P-특허자료
+											<option value="R-보고서">R-보고서
+											<option value="S-규격/사전">S-규격/사전
+											<option value="T-논문">T-논문
+										</optgroup>
+								</select></span>
 							</form>
 						</div>
-						<div class="input-group"
+						<!-- <div class="input-group"
 							style="width: 20%; vertical-align: baseline; float: right; margin-right: 30px;">
 							<select class="selectpicker"
 								style="width: 10%; font-size: 14px; margin-top: 10px; vertical-align: baseline;"
@@ -78,7 +89,7 @@
 									<option value="T-논문">T-논문
 								</optgroup>
 							</select>
-						</div>
+						</div> -->
 					</div>
 					<div class="dataTable_wrapper">
 						<table class="table table-striped table-bordered " id="dataTable">
@@ -89,7 +100,7 @@
 
 									<th>도서명</th>
 
-									<th class="hidden-xs td-author">저자</th>
+									<th class="hidden-xs hidden-sm hidden-md td-author">저자</th>
 									<th class="hidden-xs hidden-sm td-genre">출판사</th>
 									<th class="hidden-xs td-genre" style="width: 120px">분류</th>
 									<th style="width: 100px">대여상태</th>
@@ -106,11 +117,11 @@
 
 									<tr>
 
-										<td class="td-title" align="left"><a href="#"
+										<td align="left"><a href="#"
 											onclick="window.open('/bookInfo?book_cd=${book.book_cd}','new','resizeble=yes scrollbars=yes,  width=850, height=850');">
 												${book.title }</a></td>
-										<td class="hidden-xs" align="left">${book.author }</td>
-										<td class="hidden-xs hidden-sm genre" align="left">${book.publish}</td>
+										<td class="hidden-xs hidden-sm hidden-md" align="left">${book.author }</td>
+										<td class="hidden-xs hidden-sm" align="left">${book.publish}</td>
 										<td class="hidden-xs td-genre" align="left">${book.b_group }</td>
 										<c:choose>
 											<c:when test="${book.rentchk=='0'}">
@@ -162,7 +173,6 @@
 
 							</tbody>
 						</table>
-
 					</div>
 				</div>
 			</div>
@@ -183,7 +193,7 @@
 				},
 				/* "pageLength" : 10, */
 				"pageLength" : 100,
-				paging : false,
+				paging : true,
 				searching : false,
 				"columns" : [ null, null, null, {
 					"searchable" : false

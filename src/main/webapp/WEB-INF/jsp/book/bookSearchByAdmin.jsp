@@ -51,9 +51,6 @@ body {
 	</div>
 	<div id="divLoadBody" style="display: none;" class="container">
 
-
-
-
 		<div class="col-md-12"><jsp:include page="../menu.jsp" />
 
 			<div class="panel panel-default">

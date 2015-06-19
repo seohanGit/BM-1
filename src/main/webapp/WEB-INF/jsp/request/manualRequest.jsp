@@ -13,20 +13,22 @@
 <link href="/resources/css/common.css" rel="stylesheet">
 <link href="/resources/css/bootstrap-select.min.css" rel="stylesheet">
 
-	<script src="/resources/js/jquery/jquery.js"></script>
+<script src="/resources/js/jquery/jquery.js"></script>
 <style type="text/css">
 body {
 	padding-top: 70px;
 }
+
 span {
-display: none;}
+	display: none;
+}
 </style>
 </head>
 <body>
 	<jsp:include page="../nav.jsp" />
 	<div class="container">
 		<h2>도서 구매 요청</h2>
-		<div class="panelpanel-default">
+		<div class="panel panel-default">
 			<form action="/confirmRequest" method="post" class="panel-body">
 				<div id="top">
 					<div class="form-group">
@@ -90,9 +92,15 @@ display: none;}
 							class="form-control" name="price" id="price">
 					</div>
 					<div class="form-group">
+						<label for="exampleInputPassword1">신청 사유</label> <input
+							type="text" class="form-control" name="reason" id="reason">
+					</div>
+					<div class="form-group">
 						<label for="exampleInputPassword1">구매요청자</label> <input
 							type="text" class="form-control" id="kname" name="kname"
-							value="${sessionScope.kname}" readonly="readonly"><span>focus fire</span></p>
+							value="${sessionScope.kname}" readonly="readonly"><span>focus
+							fire</span>
+
 					</div>
 					<%-- 
 				<div class="form-group">
@@ -102,6 +110,7 @@ display: none;}
 				</div>
 				 --%>
 					<input type="hidden" name="id" value="${sessionScope.id}">
+					<input type="hidden" name="cheifId" value="${sessionScope.cheifId}">
 					<button type="submit" class="btn btn-default">확인</button>
 					<%-- <select name="chief">
 						<option value="${member.chief}" selected>${member.chief}
@@ -113,35 +122,42 @@ display: none;}
 
 	<script type="text/javascript">
 		$(document).ready(function() {
-
 			if ($('price').val > 100000) {
-				alert("팀장 결재 후 메일로 구매요청 해주시기 바랍니다.");
+				alert('100,000원 이상 도서 구매시 팀장 결재 필요합니다.');
 				/* $('#top').append("<select name="chief" >");
 				$('#top')
 						.append(
 								"<option value="${member.chief}" selected>${member.chief}");
 				$('#top').append("</select>"); */
+			}
+			if ($('quantity').val > 5) {
+				alert("5권이상은 선행기획팀 서하림 사원에게 문의하십시오.")
 			}
 		});
-		window.addEventListener(, listener, useCapture)
-		document.getElementById('price').onchange = 
-		
-		(
-			var price = document.getElementById('#price')	
-			$( this ).next( "span" ).css( "display", "inline" ).fadeOut( 1000 );
-			if (price.val > 100000) {
-				alert("팀장 결재 후 메일로 구매요청 해주시기 바랍니다.");
-				/* $('#top').append("<select name="chief" >");
-				$('#top')
-						.append(
-								"<option value="${member.chief}" selected>${member.chief}");
-				$('#top').append("</select>"); */
+		$('#price')
+				.bind(
+						'focusout',
+						function() {
+							var price = $('#price').val();
+							$(this).next('span').css('display', 'inline')
+									.fadeOut(1000);
+							if (price > 100000) {
+								alert("100,000원 이상 도서 구매시 팀장 결재 필요합니다.");
+								$('#top').append('<select name="chief">');
+								$('#top')
+										.append(
+												'<option value="${member.chief}" selected>${member.chief}');
+								$('#top').append('</select>');
+							}
+						});
+		$('#quantity').bind('click', function() {
+			if ($('#quantity').val > 5) {
+				alert('5권이상은 선행기획팀 서하림 사원에게 문의하십시오.')
 			}
-		);
+		})
 	</script>
 	<script src="/resources/js/bootstrap-select.min.js"></script>
 	<script src="/resources/js/bootstrap.min.js"></script>
-
 	<script src="/resources/js/jquery/jquery.js"></script>
 </body>
 </html>

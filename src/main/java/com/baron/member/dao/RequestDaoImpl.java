@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.baron.member.model.ApprovalModel;
 import com.baron.member.model.BookModel;
 import com.baron.member.model.Dto;
 
@@ -84,5 +85,17 @@ public class RequestDaoImpl implements RequestDao {
 	@Override
 	public String convertC_code(String c_group) {
 		return session.selectOne(NAMESPACE + "convertC_code", c_group);
+	}
+
+	@Override
+	public String selectMaxSer() {
+		return session.selectOne(NAMESPACE + "selectMaxSer"); 
+	}
+
+	@Override
+	public void approveChief(ApprovalModel approval) {
+		session.insert(NAMESPACE + "insertApproval");
+		session.delete(NAMESPACE + "deleteApproval");
+		
 	}
 }

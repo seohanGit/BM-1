@@ -35,15 +35,23 @@ public class BookModel {
 	private String id;
 	private String kname;
 	private String team_nm;
-	
+	private String reason;
 	private int count;
 	private String req_ymd;
 	private String retu_ymd;
 	private String mobi_no;
-	
+
 	private String extendchk;
 	private int total;
-	
+
+	public String getReason() {
+		return reason;
+	}
+
+	public void setReason(String reason) {
+		this.reason = reason;
+	}
+
 	public int getTotal() {
 		return total;
 	}

@@ -7,7 +7,13 @@ import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.text.Format;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+
+import javax.mail.Session;
+import javax.servlet.http.HttpSession;
 
 import org.exolab.castor.xml.dtd.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +24,9 @@ import com.baron.member.dao.JoinDao;
 import com.baron.member.dao.NotifiDao;
 import com.baron.member.dao.RequestDao;
 import com.baron.member.dao.SmsDao;
+import com.baron.member.model.ApprovalModel;
 import com.baron.member.model.BookModel;
+import com.baron.member.model.MemberModel;
 import com.baron.member.model.SmsModel;
 
 @Service
@@ -50,16 +58,33 @@ public class RequestServiceImpl implements RequestService {
 	}
 
 	@Override
-	public void requestBook(BookModel model) {
-		model.setB_group(requestDao.convertB_code(model.getB_group().substring(
-				2)));
-		if (model.getC_group() != null) {
-			model.setC_group(requestDao.convertC_code(model.getC_group()
-					.substring(4)));
-		}
-		model.setBook_cd(model.getB_group() + model.getC_group() + "-");
+	public void requestBook(BookModel book, MemberModel member ) {
+		ApprovalModel approval = new ApprovalModel();
+		Date date = new Date();
 
-		requestDao.requestBook(model);
+		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+		
+		book.setB_group(requestDao.convertB_code(book.getB_group().substring(
+				2)));
+		if (book.getC_group() != null) {
+			book.setC_group(requestDao.convertC_code(book.getC_group()
+					.substring(4)));
+		}else{
+			book.setC_group("");
+		}
+		
+		book.setBook_cd(book.getB_group() + book.getC_group() + "-");
+		approval.setChiefId(member.getChiefid());
+		approval.setCompanyGroup(member.getCo_gb());
+		approval.setDescription1("[도서구매신청]");
+		approval.setDescription2(book.getReason());
+		approval.setTableName("BOOKREQ");
+		approval.setId(member.getId());
+		approval.setNowDate(format.format(date));
+		approval.setDocumentId(book.getReq_cd());
+		
+		requestDao.approveChief(approval);
+		requestDao.requestBook(book);
 	}
 
 	@Override
@@ -193,5 +218,10 @@ public class RequestServiceImpl implements RequestService {
 	@Override
 	public String selectC_code(String c_group) {
 		return requestDao.selectC_code(c_group);
+	}
+
+	@Override
+	public String selectMaxSer() {
+		return requestDao.selectMaxSer();
 	}
 }

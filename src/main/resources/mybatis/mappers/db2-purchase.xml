@@ -76,7 +76,7 @@
 		SELECT
 		COALESCE(MAX(REQ_CD),0) SER
 		FROM TESTLIB.BOOKREQ A
-		WHERE REQ_DATE =
+		WHERE REQDATE =
 		current date
 	</select>
 

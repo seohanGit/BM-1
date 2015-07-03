@@ -18,7 +18,7 @@
 	<!-- Page Content -->
 	<div class="container">
 		<div class="row row-offcanvas row-offcanvas-right">
-			<div class="col-xs-12 col-sm-9">
+			<div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
 				<div class="wrapper" id="jumbotron">
 					<div class="left">
 					<br>
@@ -39,7 +39,7 @@
 
 				<div class="row" id="bulletin">
 					<c:forEach items="${boardList}" var="board">
-						<div class="board col-6 col-sm-6 col-lg-4">
+						<div class="board col-6 col-sm-6 col-lg-6">
 							<h2>${board.title}</h2>
 							<p class="content ellipsis">${board.content}</p>
 							<p>
@@ -62,7 +62,7 @@
 	<!-- /.container -->
 	<!-- jQuery -->
 	<script src="/resources/js/jquery/jquery.js"></script>
-	<!-- Bootstrap Core JavaScript -->
+	<script src="/resources/js/common.js"></script>
 	<script src="/resources/js/bootstrap.min.js"></script>
 	<script src="/resources/js/board.js"></script>
 </body>

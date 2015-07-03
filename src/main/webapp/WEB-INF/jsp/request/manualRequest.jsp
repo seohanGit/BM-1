@@ -65,7 +65,7 @@ span {
 						<label for="exampleInputPassword1">소분류</label> <select
 							class="selectpicker" name="c_group">
 							<optgroup label="소분류">
-
+								
 								<option value="010-일반">일반
 								<option value="020-기계공학">기계공학
 								<option value="030-재료/소재">재료/소재
@@ -111,7 +111,7 @@ span {
 				 --%>
 					<input type="hidden" name="id" value="${sessionScope.id}">
 					<input type="hidden" name="cheifId" value="${sessionScope.cheifId}">
-					<button type="submit" class="btn btn-default">확인</button>
+					<button id="confirm" type="submit" class="btn btn-default">확인</button>
 					<%-- <select name="chief">
 						<option value="${member.chief}" selected>${member.chief}
 					</select> --%>
@@ -121,7 +121,12 @@ span {
 	</div>
 
 	<script type="text/javascript">
+		
+	
 		$(document).ready(function() {
+			
+						
+			
 			if ($('price').val > 100000) {
 				alert('100,000원 이상 도서 구매시 팀장 결재 필요합니다.');
 				/* $('#top').append("<select name="chief" >");
@@ -154,10 +159,42 @@ span {
 			if ($('#quantity').val > 5) {
 				alert('5권이상은 선행기획팀 서하림 사원에게 문의하십시오.')
 			}
-		})
+		});
+		
+		$('#confirm').bind('click', function() {
+			var title = $('#title').val();
+			var isbn = $('#isbn').val();
+			var author = $('#author').val();
+			var publish = $('#publish').val();
+			var price = $('#price').val();
+			var reason = $('#reason').val();
+			
+			if (title.isEmpty) {
+				alert('도서명을 입력하시기 바랍니다.');
+			}
+			if (isbn.is('')) {
+				alert('ISBN을 입력하시기 바랍니다.');
+			}
+			if (author = '') {
+				alert('저자를 입력하시기 바랍니다.');
+			}
+			if (publish = '') {
+				alert('출판사를 입력하시기 바랍니다.');
+			}
+			if (price = '') {
+				alert('가격을 입력하시기 바랍니다.');
+			}
+			if (reason = '') {
+				alert('신청사유를 입력하시기 바랍니다.');
+			}
+			
+			
+		});
+		
 	</script>
 	<script src="/resources/js/bootstrap-select.min.js"></script>
 	<script src="/resources/js/bootstrap.min.js"></script>
-	<script src="/resources/js/jquery/jquery.js"></script>
+	<script src="/resources/js/jquery/jquery.js"></script>	
+	<script src="/resources/js/common.js"></script>
 </body>
 </html>

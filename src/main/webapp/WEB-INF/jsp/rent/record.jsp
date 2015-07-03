@@ -38,7 +38,7 @@ body {
 					<c:otherwise>
 						
 						<h2>대여 기록</h2>
-						<table class="table table-striped table-bordered">
+						<table class="table table-striped table-bordered" id="dataTable">
 							<thead>
 								<tr class=" title">
 									<th class="td-title">도서명</th>
@@ -70,6 +70,7 @@ body {
 	</div>
 	<script src="/resources/js/jquery/jquery.js"></script>
 	<script src="/resources/js/bootstrap.min.js"></script>
+	<script src="/resources/js/jquery.dataTables.min.js"></script>
 	<script src="/resources/js/common.js"></script>
 </body>
 </html>

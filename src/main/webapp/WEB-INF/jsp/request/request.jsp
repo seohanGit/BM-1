@@ -38,7 +38,7 @@ body {
 					<form action="/findBook" method="get">
 						<span class="input-group-btn"> <input type="text"
 							class="form-control" id="query" name="keyword"
-							placeholder="ISBN, 도서명, 저자 검색">
+							placeholder="검색가능도서 - ISBN, 도서명, 저자 검색">
 							<button class="btn btn-default" type="submit" id="btn_find">
 								<span class="glyphicon glyphicon-search"></span>
 							</button>
@@ -47,7 +47,7 @@ body {
 				</div>
 				<div style="float: right;">
 					<button class="btn btn-default" type="button"
-						onclick="location.href='/requestbook'; ">구매요청</button>
+						onclick="location.href='/requestbook'; ">ISBN 미보유 도서</button>
 				</div>
 				<br>
 				<div style="margin-top: 20px; padding-top : 20px">

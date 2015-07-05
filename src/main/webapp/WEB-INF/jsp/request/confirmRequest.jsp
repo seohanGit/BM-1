@@ -11,7 +11,7 @@
 <title>도서 구매 요청</title>
 <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="/resources/css/common.css" rel="stylesheet">
-
+<script src="/resources/js/jquery/jquery.js"></script>
 <style type="text/css">
 body {
 	padding-top: 70px;
@@ -26,7 +26,7 @@ body {
 			<form action="/confirmRequest" method="post" class="panel-body">
 				<div id="top">
 					<input type="image" name="imageurl" src="${book.imageurl}">
-					<h3>도서 정가 ${book.price }원</h3>
+					
 					<div class="form-group">
 						<label for="exampleInputEmail1">ISBN</label> <input type="text"
 							class="form-control" id="isbn" name="isbn" value="${book.isbn}"
@@ -46,6 +46,10 @@ body {
 						<label for="exampleInputPassword1">장르</label> <input type="text"
 							class="form-control" id="b_group" name="b_group"
 							value="${book.b_group}" readonly="readonly">
+					</div>
+					<div class="form-group">
+						<label for="exampleInputPassword1">구매요청자</label> <input
+						type="number" class="form-control" name="price" id="price" value="${book.price}" readonly="readonly">
 					</div>
 					<div class="form-group">
 						<label for="exampleInputPassword1">수량</label> <input type="number"
@@ -70,8 +74,7 @@ body {
 					<input type="hidden" name="imageurl" value="${book.imageurl }">
 					<input type="hidden" name="link" value="${book.link}"> <input
 						type="hidden" name="publish" value="${book.publish}"><input
-						type="hidden" name="summary" value="${book.summary}"> <input
-						type="hidden" name="price" id="price" value="${book.price}">
+						type="hidden" name="summary" value="${book.summary}">
 					<input type="hidden" name="id" value="${book.id}">
 					<button type="submit" class="btn btn-default">확인</button>
 					<%-- <select name="chief">
@@ -83,7 +86,8 @@ body {
 	</div>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			if ($('price').val > 100000) {
+			var price = $('#price').val();
+			if (price > 100000) {
 				alert("100,000원 이상 도서 구매시 팀장 결재 필요합니다.");
 				/* $('#top').append("<select name="chief" >");
 				$('#top')
@@ -91,7 +95,7 @@ body {
 								"<option value="${member.chief}" selected>${member.chief}");
 				$('#top').append("</select>"); */
 			}
-			if ($('quantity').val > 5) {
+			if ($('quantity').val() > 5) {
 				alert("5권이상은 선행기획팀 서하림 사원에게 문의하십시오.")
 			}
 		});

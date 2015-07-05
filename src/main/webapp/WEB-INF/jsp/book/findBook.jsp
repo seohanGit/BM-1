@@ -14,7 +14,6 @@
 <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="/resources/css/common.css" rel="stylesheet">
 <link href="/resources/css/index.css" rel="stylesheet">
-
 <!-- <script type="text/javascript">
 	function request() {
 		alert("구매요청되엇습니다.");

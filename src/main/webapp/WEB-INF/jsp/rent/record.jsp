@@ -29,48 +29,80 @@ body {
 	<jsp:include page="../nav.jsp" />
 
 	<div class="container ">
-		
+
 		<div class="row panel panel-default">
 			<div id="searchResultArea col-md-12 col-xs-12 col-sm-9">
 				<c:choose>
 					<c:when test="${empty record}">
 					</c:when>
 					<c:otherwise>
-						
+
 						<h2>대여 기록</h2>
-						<table class="table table-striped table-bordered" id="dataTable">
-							<thead>
-								<tr class=" title">
-									<th class="td-title">도서명</th>
-									<th class="hidden-xs td-author">저자</th>
-									<th class="hidden-xs td-genre">대여일</th>
-									<th class="td-genre">반납일</th>
-								</tr>
-							</thead>
-							<tbody>
-								<c:forEach items="${record}" var="record" varStatus="status">
-									<tr>
-										<td class="td-title" align="left">${record.title }</td>
-										<td class="hidden-xs" align="left">${record.author}</td>
-										<td class="hidden-xs" align="left"><fmt:formatDate type="date"
-												pattern="yyyy-MM-dd" value="${record.rentdate }" /></td>
-										<td align="left"><fmt:formatDate type="date"
-												pattern="yyyy-MM-dd" value="${record.returndate }" /></td>
+
+
+						<div class="dataTable_wrapper">
+
+							<table class="table table-striped table-bordered" id="dataTable">
+								<thead>
+									<tr class=" title">
+										<th class="td-title">도서명</th>
+										<th class="hidden-xs td-author">저자</th>
+										<th class="hidden-xs td-genre">대여일</th>
+										<th class="td-genre">반납일</th>
 									</tr>
+								</thead>
+								<tbody>
+									<c:forEach items="${record}" var="record" varStatus="status">
+										<tr>
+											<td class="td-title" align="left">${record.title }</td>
+											<td class="hidden-xs" align="left">${record.author}</td>
+											<td class="hidden-xs" align="left"><fmt:formatDate
+													type="date" pattern="yyyy-MM-dd"
+													value="${record.rentdate }" /></td>
+											<td align="left"><fmt:formatDate type="date"
+													pattern="yyyy-MM-dd" value="${record.returndate }" /></td>
+										</tr>
 
-								</c:forEach>
-							</tbody>
+									</c:forEach>
+								</tbody>
 
-						</table>
+							</table>
+						</div>
 					</c:otherwise>
 				</c:choose>
 			</div>
+
 		</div>
 
 	</div>
 	<script src="/resources/js/jquery/jquery.js"></script>
 	<script src="/resources/js/bootstrap.min.js"></script>
 	<script src="/resources/js/jquery.dataTables.min.js"></script>
+	<script src="/resources/js/dataTables.bootstrap.min.js"></script>
 	<script src="/resources/js/common.js"></script>
+	<script>
+		$(document).ready(function() {
+			$('#dataTable').DataTable({
+				"pageLength" : 20,
+				paging : true,
+				startSave : true,
+				ordering : true,
+				info : false,
+				searching : false,
+				"columns" : [  null, null, {
+					"searchable" : false
+				}, {
+					"searchable" : false
+				} ]
+
+			});
+		});
+		var loadingBar = document.getElementById("loadingBar");
+		var divLoadBody = document.getElementById("divLoadBody");
+
+		divLoadBody.style.display = "";
+		loadingBar.style.display = "none";
+
+		</script>
 </body>
 </html>

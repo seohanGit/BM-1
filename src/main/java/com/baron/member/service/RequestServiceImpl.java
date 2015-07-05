@@ -74,17 +74,21 @@ public class RequestServiceImpl implements RequestService {
 		}
 		
 		book.setBook_cd(book.getB_group() + book.getC_group() + "-");
-		approval.setChiefId(member.getChiefid());
-		approval.setCompanyGroup(member.getCo_gb());
-		approval.setDescription1("[도서구매신청]");
-		approval.setDescription2(book.getReason());
-		approval.setTableName("BOOKREQ");
-		approval.setId(member.getId());
-		approval.setNowDate(format.format(date));
-		approval.setDocumentId(book.getReq_cd());
-		
-		requestDao.approveChief(approval);
 		requestDao.requestBook(book);
+		if (Integer.parseInt(book.getPrice()) > 100000){
+			approval.setChiefId(member.getChiefid());
+			approval.setCompanyGroup(member.getCo_gb());
+			approval.setDescription1("[도서구매신청]");
+			approval.setDescription2(book.getReason());
+			approval.setTableName("BOOKREQ");
+			approval.setId(member.getId());
+			approval.setNowDate(format.format(date));
+			approval.setDocumentId(book.getReq_cd());
+			
+			requestDao.approveChief(approval);
+		}
+		
+		
 	}
 
 	@Override

@@ -12,7 +12,6 @@
 <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="/resources/css/common.css" rel="stylesheet">
 <link href="/resources/css/bootstrap-select.min.css" rel="stylesheet">
-
 <script src="/resources/js/jquery/jquery.js"></script>
 <style type="text/css">
 body {
@@ -29,23 +28,26 @@ span {
 	<div class="container">
 		<h2>도서 구매 요청</h2>
 		<div class="panel panel-default">
-			<form action="/confirmRequest" method="post" class="panel-body">
+			<form action="/confirmRequest" name="requestForm" method="post"
+				class="panel-body" onsubmit="formChk();return false">
 				<div id="top">
 					<div class="form-group">
 						<label for="exampleInputEmail1">ISBN</label> <input type="text"
-							class="form-control" id="isbn" name="isbn">
+							class="form-control" id="isbn" name="isbn" required="required">
 					</div>
 					<div class="form-group">
 						<label for="exampleInputPassword1">도서명</label> <input type="text"
-							class="form-control" id="title" name="title">
+							class="form-control" id="title" name="title" required="required">
 					</div>
 					<div class="form-group">
 						<label for="exampleInputPassword1">저자</label> <input type="text"
-							class="form-control" id="author" name="author">
+							class="form-control" id="author" name="author"
+							required="required">
 					</div>
 					<div class="form-group">
 						<label for="exampleInputPassword1">출판사</label> <input type="text"
-							class="form-control" id="publish" name="publish">
+							class="form-control" id="publish" name="publish"
+							required="required">
 					</div>
 					<div class="form-group left" style="width: 50%">
 						<label for="exampleInputPassword1">대분류</label> <select
@@ -65,7 +67,7 @@ span {
 						<label for="exampleInputPassword1">소분류</label> <select
 							class="selectpicker" name="c_group">
 							<optgroup label="소분류">
-								
+
 								<option value="010-일반">일반
 								<option value="020-기계공학">기계공학
 								<option value="030-재료/소재">재료/소재
@@ -83,23 +85,24 @@ span {
 
 					<div class="form-group">
 						<label for="exampleInputPassword1">수량</label> <input type="number"
-							class="form-control" id="quantity" name="quantity" value="1">
+							class="form-control" id="quantity" name="quantity" value="1"
+							required="required" onkeypress="quantityCheck();">
 					</div>
 
 
 					<div class="form-group">
 						<label for="exampleInputPassword1">가격</label> <input type="number"
-							class="form-control" name="price" id="price">
+							class="form-control" name="price" id="price" required="required"">
 					</div>
 					<div class="form-group">
 						<label for="exampleInputPassword1">신청 사유</label> <input
-							type="text" class="form-control" name="reason" id="reason">
+							type="text" class="form-control" name="reason" id="reason"
+							required="required">
 					</div>
 					<div class="form-group">
 						<label for="exampleInputPassword1">구매요청자</label> <input
 							type="text" class="form-control" id="kname" name="kname"
-							value="${sessionScope.kname}" readonly="readonly"><span>focus
-							fire</span>
+							value="${sessionScope.kname}" readonly="readonly">
 
 					</div>
 					<%-- 
@@ -110,24 +113,23 @@ span {
 				</div>
 				 --%>
 					<input type="hidden" name="id" value="${sessionScope.id}">
-					<input type="hidden" name="cheifId" value="${sessionScope.cheifId}">
-					<button id="confirm" type="submit" class="btn btn-default">확인</button>
-					<%-- <select name="chief">
-						<option value="${member.chief}" selected>${member.chief}
-					</select> --%>
+					<input type="hidden" name="chiefId" value="${sessionScope.chiefId}">
+					<div class="form-group" id="chief" hidden="true">
+						<label for="exampleInputPassword1">부서 팀장</label> <input
+							type="text" class="form-control" id="chief" name="chief"
+							value="${sessionScope.chief}" readonly="readonly">
+					</div>
+					<input type="submit" id="confirm" value="구매신청"
+						class="btn btn-default">
+
 				</div>
 			</form>
 		</div>
 	</div>
 
 	<script type="text/javascript">
-		
-	
 		$(document).ready(function() {
-			
-						
-			
-			if ($('price').val > 100000) {
+			if ($('#price').val() > 100000) {
 				alert('100,000원 이상 도서 구매시 팀장 결재 필요합니다.');
 				/* $('#top').append("<select name="chief" >");
 				$('#top')
@@ -135,33 +137,34 @@ span {
 								"<option value="${member.chief}" selected>${member.chief}");
 				$('#top').append("</select>"); */
 			}
-			if ($('quantity').val > 5) {
+			if ($('#quantity').val() > 5) {
 				alert("5권이상은 선행기획팀 서하림 사원에게 문의하십시오.")
 			}
+
 		});
-		$('#price')
-				.bind(
-						'focusout',
-						function() {
-							var price = $('#price').val();
-							$(this).next('span').css('display', 'inline')
-									.fadeOut(1000);
-							if (price > 100000) {
-								alert("100,000원 이상 도서 구매시 팀장 결재 필요합니다.");
-								$('#top').append('<select name="chief">');
-								$('#top')
-										.append(
-												'<option value="${member.chief}" selected>${member.chief}');
-								$('#top').append('</select>');
-							}
-						});
-		$('#quantity').bind('click', function() {
-			if ($('#quantity').val > 5) {
+		function quantityCheck() {
+			var quantity = $('#quantity').val();
+			if (quantity > 5) {
 				alert('5권이상은 선행기획팀 서하림 사원에게 문의하십시오.')
 			}
-		});
-		
-		$('#confirm').bind('click', function() {
+		}
+		$('#price').bind('keydown', function() {
+			var price = $('#price').val();
+			var code = event.keyCode;
+			$(this).next('span').css('display', 'inline').fadeOut(1000);
+			
+			if (code == 8 || code == 46) {
+				if (price < 100000) {
+					$('#chief').hide();
+				}
+			}else if (price >= 100000) {
+				alert("100,000원 이상 도서 구매시 팀장 결재 필요합니다.");
+				$('#chief').show();
+			} 
+
+			});
+
+		/* function formChk() {
 			var title = $('#title').val();
 			var isbn = $('#isbn').val();
 			var author = $('#author').val();
@@ -169,32 +172,41 @@ span {
 			var price = $('#price').val();
 			var reason = $('#reason').val();
 			
-			if (title.isEmpty) {
-				alert('도서명을 입력하시기 바랍니다.');
-			}
-			if (isbn.is('')) {
-				alert('ISBN을 입력하시기 바랍니다.');
-			}
-			if (author = '') {
-				alert('저자를 입력하시기 바랍니다.');
-			}
-			if (publish = '') {
-				alert('출판사를 입력하시기 바랍니다.');
-			}
-			if (price = '') {
-				alert('가격을 입력하시기 바랍니다.');
-			}
-			if (reason = '') {
-				alert('신청사유를 입력하시기 바랍니다.');
-			}
-			
-			
-		});
+			title.attr("required", true);
 		
+			if (title == '') {
+				alert('도서명을 입력하시기 바랍니다.');
+				title.focus();
+				return false;
+			}else if (isbn == '') {
+				alert('ISBN을 입력하시기 바랍니다.');
+				isbn.focus();
+				return false;
+			}else if (author == '') {
+				alert('저자를 입력하시기 바랍니다.');
+				author.focus();
+				return false;
+			}else if (publish == '') {
+				alert('출판사를 입력하시기 바랍니다.');
+				publish.focus();
+				return false;
+			}else if (price == '') {
+				alert('가격을 입력하시기 바랍니다.');
+				price.focus();
+				return false;
+			}else if (reason == '') {
+				alert('신청사유를 입력하시기 바랍니다.');
+				reason.focus();
+				return false;
+			}else{
+				document.requestForm.submit();
+				return true;
+			}
+		 */
 	</script>
 	<script src="/resources/js/bootstrap-select.min.js"></script>
 	<script src="/resources/js/bootstrap.min.js"></script>
-	<script src="/resources/js/jquery/jquery.js"></script>	
+	<script src="/resources/js/jquery/jquery.js"></script>
 	<script src="/resources/js/common.js"></script>
 </body>
 </html>

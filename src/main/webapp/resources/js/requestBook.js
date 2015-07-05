@@ -18,6 +18,8 @@ $('#btn_request').click(function() {
 	});
 });
 
+
+
 $('#getBookInfo').click(function() {
 	$.ajax({
 		type : "GET", // GET or POST

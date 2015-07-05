@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.apache.ibatis.logging.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -141,8 +142,6 @@ public class MemberController {
 	public ModelAndView login2(HttpServletResponse response,
 			HttpServletRequest request, HttpSession session, ModelAndView mav, String id) {
 
-		// ModelAndView mav = new ModelAndView("/index");
-
 		if (joinService.login(id) == null) {
 			mav.setViewName("loginfail");
 		} else {
@@ -155,8 +154,8 @@ public class MemberController {
 			mav.addObject("chief", membermodel.getChief());
 			mav.addObject("chiefId", membermodel.getChiefid());
 			
-			session.setAttribute("membermodel", membermodel);
-			
+			session.setAttribute("chief", membermodel.getChief());
+			session.setAttribute("chiefId", membermodel.getChiefid());
 			if (id.equals("4150266")) {
 				response.addCookie(new Cookie("bm_id", id));
 				response.addCookie(new Cookie("bm_permission", "1"));

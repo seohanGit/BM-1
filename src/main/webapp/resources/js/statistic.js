@@ -40,12 +40,12 @@ $('#rentByPerson').click(function() {
 			alert('검색어를 입력하세요');
 		},
 		success : function(data, status) { // Ajax complete handelr
-			$('#full').empty();
+			$('#full').empty().append(data);
 			$('#table').empty();
 			$('#chart').empty();
-			$('#chart').empty().append(data);
+			$('#chart').empty();
 			$('table.highchart').highchartTable();
-			$('#table').empty().append(data);
+			$('#table').empty();
 			$('#table').show("slow");
 		}
 	});
@@ -60,22 +60,22 @@ $('#rentByMonth').click(function() {
 		// html, xml, json, jsonp, script, text
 		data : {
 			year : $('#year').val(),
-			month : $('#month').val()
+			month : $('#month').val(),
+			which : 'table'
 		},
 		// parameters as plain object
 		error : function() { // Ajax error handler
-
 			alert('검색어를 입력하세요');
 		},
 		success : function(data, status) { // Ajax complete handelr
 			$('#full').empty();
-			$('#table').empty();
-			$('#chart').empty();
+			$('#table').empty().append(data);
 			$('#chart').empty().append(data);
 			$('table.highchart').highchartTable();
-			$('#table').empty().append(data);
 		}
 	});
+	$('.chart > #table').hide();
+	$('.table > .highcharts-container').hide();	
 });
 
 $('#teamCount').click(function() {

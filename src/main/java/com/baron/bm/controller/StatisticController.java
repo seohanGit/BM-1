@@ -100,6 +100,7 @@ public class StatisticController {
 		return "/statistic/rentByMonth";
 	}
 
+	
 	@RequestMapping("/rankGroupByB")
 	public String selectGroupByB(String year, String month, Model model)
 			throws Exception {

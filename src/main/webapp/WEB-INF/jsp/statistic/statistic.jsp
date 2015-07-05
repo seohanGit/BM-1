@@ -105,8 +105,10 @@ body {
 					<button class="btn btn-sm" id="rentByPerson" type="button">개인별
 						대여 순위</button>
 
-					<div id="chart" class="row" style="width: 50%"></div>
-					<div id="table" class="row" style="width: 50%"></div>
+					<div id="chart" class="row" style="width: 49%; float: left">
+					
+					</div>					
+					<div id="table" class="row" style="width: 49%; float: right"></div>
 					<div id="full" class="row" style="width: 100%"></div>
 
 				</div>
@@ -126,7 +128,7 @@ body {
 				sum += parseInt($('.count').val());
 				});
 
-			$('#total_price'). = sum;
+			$('#total_price').val(sum);
 
 		})
 	</script>

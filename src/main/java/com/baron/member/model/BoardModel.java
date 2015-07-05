@@ -1,7 +1,7 @@
 package com.baron.member.model;
 
 import java.util.Date;
-
+ 
 public class BoardModel {
 	private int boardnum;
 	private String title;

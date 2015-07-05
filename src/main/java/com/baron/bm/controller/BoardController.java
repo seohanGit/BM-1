@@ -23,7 +23,9 @@ import com.baron.member.service.StatisticService;
 
 @Controller
 public class BoardController {
-
+/**
+ * 
+ */
 	@Autowired
 	private BoardService boardService;
 

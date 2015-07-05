@@ -68,14 +68,14 @@ $('#rentByMonth').click(function() {
 			alert('검색어를 입력하세요');
 		},
 		success : function(data, status) { // Ajax complete handelr
-			$('#full').empty();
-			$('#table').empty().append(data);
-			$('#chart').empty().append(data);
+			$('#full').empty().append(data);
+			//$('#table').empty();
+			$('#chart').empty();
 			$('table.highchart').highchartTable();
 		}
 	});
-	$('.chart > #table').hide();
-	$('.table > .highcharts-container').hide();	
+	$('.highcharts-container').css('display','inline');
+	
 });
 
 $('#teamCount').click(function() {

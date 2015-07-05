@@ -108,7 +108,7 @@ body {
 					<div id="chart" class="row" style="width: 49%; float: left">
 					
 					</div>					
-					<div id="table" class="row" style="width: 49%; float: right"></div>
+					<div id="table-wrap" class="row" style="width: 49%; float: right"></div>
 					<div id="full" class="row" style="width: 100%"></div>
 
 				</div>

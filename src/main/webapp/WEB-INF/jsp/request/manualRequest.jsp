@@ -142,12 +142,12 @@ span {
 			}
 
 		});
-		function quantityCheck() {
+		$('#quantity').bind('keydown', function() {
 			var quantity = $('#quantity').val();
 			if (quantity > 5) {
-				alert('5권이상은 선행기획팀 서하림 사원에게 문의하십시오.')
+				alert('5권이상은 선행기획팀 서하림 사원에게 문의하십시오.');
 			}
-		}
+		});
 		$('#price').bind('keydown', function() {
 			var price = $('#price').val();
 			var code = event.keyCode;

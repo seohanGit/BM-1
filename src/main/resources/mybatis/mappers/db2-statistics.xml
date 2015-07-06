@@ -101,7 +101,7 @@
 		WHERE year(A.rentdate) = #{year} AND month(A.rentdate) =
 		#{month}
 		GROUP BY month(A.rentdate), B.b_group
-		ORDER BY month
+		ORDER BY count desc, month
 	</select>
 	<select id="selectGroupByBYear" parameterType="Dto" resultType="Dto">
 		SELECT COUNT(*)

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%><%@ taglib prefix="c"
 	uri="http://java.sun.com/jsp/jstl/core"%>
-<div id="center">분류별 보유현황</div>
+<div align="center"><h2>분류별 보유현황</h2></div>
 <div class="left">
 	<table class="highchart" data-graph-container-before="1"
 		data-graph-type="pie" style="display: none"
@@ -24,7 +24,7 @@
 		</tbody>
 	</table>
 </div>
-<div class="right">
+<div class="right table-wrap" style="margin-top: 40px">
 	<table class="table table-bordered" id="bookCount">
 
 		<thead>

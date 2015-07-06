@@ -14,12 +14,11 @@ $('#purchaseMonth').click(function() {
 			alert('검색어를 입력하세요');
 		},
 		success : function(data, status) { // Ajax complete handelr
-			$('#full').empty();
 			$('#table').empty();
 			$('#chart').empty();
-			$('#chart').empty().append(data);
+			$('#full').empty().append(data);
 			$('table.highchart').highchartTable();
-			$('#table').empty().append(data);
+			
 		}
 	});
 });
@@ -153,9 +152,8 @@ $('#rankGroupByB').click(function() {
 			$('#full').empty();
 			$('#table').empty();
 			$('#chart').empty();
-			$('#chart').empty().append(data);
+			$('#full').empty().append(data);
 			$('table.highchart').highchartTable();
-			$('#table').empty().append(data);
 		}
 	});
 });
@@ -180,9 +178,8 @@ $('#rankGroupByBook').click(function() {
 			$('#full').empty();
 			$('#table').empty();
 			$('#chart').empty();
-			$('#chart').empty().append(data);
+			$('#full').empty().append(data);
 			$('table.highchart').highchartTable();
-			$('#table').empty().append(data);
 		}
 	});
 });

@@ -2,10 +2,10 @@
 	pageEncoding="EUC-KR"%><%@ taglib prefix="c"
 	uri="http://java.sun.com/jsp/jstl/core"%>
 
-<table class="highchart table table-bordered"
-	data-graph-container-before="1" data-graph-type="line"
-	data-graph-yaxis-2-opposite="1" style="display: none" >
-	<caption style="font-size:20px"> 연간 예산 현황</caption>
+<table class="highchart" data-graph-container-before="1"
+	data-graph-type="line" data-graph-yaxis-2-opposite="1"
+	style="display: none">
+	<caption style="font-size: 20px">연간 예산 현황</caption>
 
 	<thead>
 		<tr>
@@ -16,8 +16,8 @@
 		</tr>
 	</thead>
 	<tbody>
-		<c:forEach items="${SumPurchase}" var="SumPurchase" begin="0"
-			end="11" varStatus="status">
+		<c:forEach items="${SumPurchase}" var="SumPurchase" begin="0" end="11"
+			varStatus="status">
 			<tr>
 				<td>${SumPurchase.month}월</td>
 				<td>${SumPurchase.count}권</td>
@@ -27,3 +27,31 @@
 		</c:forEach>
 	</tbody>
 </table>
+
+<div class="table_wrap">
+	<table class="table table-bordered">
+		<caption style="font-size: 20px">연간 예산 현황</caption>
+		<thead>
+			<tr>
+				<c:forEach items="${SumPurchase}" var="SumPurchase" begin="0"
+					end="11" varStatus="status">
+					<th>${SumPurchase.month}월</th>
+				</c:forEach>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<c:forEach items="${SumPurchase}" var="SumPurchase" begin="0"
+					end="11" varStatus="status">
+					<td>${SumPurchase.count}권</td>
+				</c:forEach>
+			</tr>
+			<tr>
+				<c:forEach items="${SumPurchase}" var="SumPurchase" begin="0"
+					end="11" varStatus="status">
+					<td>${SumPurchase.price}원</td>
+				</c:forEach>
+			</tr>
+		</tbody>
+	</table>
+</div>

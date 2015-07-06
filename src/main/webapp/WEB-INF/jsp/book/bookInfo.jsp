@@ -56,17 +56,34 @@
 		<div class="panel panel-default">
 			<c:choose>
 				<c:when test="${empty book.imageurl }">
-
-
 				</c:when>
 				<c:otherwise>
-					<div  style="width:50%; height:700px" class="left">
-						<img style="width: 100%; " src="${book.imageurl}">
+					<div style="width: 50%; height: 700px" class="left">
+						<img style="width: 100%;" src="${book.imageurl}">
 					</div>
 				</c:otherwise>
 			</c:choose>
 
 			<div class="right form-group">
+				<table class="table table-bordered">
+
+					<tr>
+						<th>도서번호</th>
+						<td>${ book.book_cd }</td>
+						<th>도서명</th>
+						<td>${book.title}</td>
+						<th>분류</th>
+						<td>${book.b_group}</td>
+						<th>출판사</th>
+						<td>${book.publish}</td>
+						<th>저자</th>
+						<td>${book.author}</td>
+					</tr>
+				</table>
+			</div>
+			<%-- 
+
+
 				<label for="exampleInputEmail1">도서번호</label>
 				<h4>${ book.book_cd }</h4>
 			</div>
@@ -100,7 +117,7 @@
 						<h4>${book.author }</h4>
 					</div>
 				</c:otherwise>
-			</c:choose>
+			</c:choose> --%>
 			<c:choose>
 				<c:when test="${book.summary == '' }">
 

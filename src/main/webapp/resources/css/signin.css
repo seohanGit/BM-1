@@ -56,6 +56,25 @@ body {
 	padding: 4px;
 }
 
+.chart-wrap{
+	float:left;
+	width:55%;	
+}
+
+.table-wrap {
+	float:right;
+	width:40%;
+	margin-top: 20px;
+	margin-left: 20px;
+}
+
+.table-bottom {
+	float: none;
+	width:95%;
+	margin-left: 20px;
+
+	}
+
 .navbar-dropdown {
 	position: relative;
 	float: none;

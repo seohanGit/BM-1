@@ -2,7 +2,7 @@
 	pageEncoding="EUC-KR"%><%@ taglib prefix="c"
 	uri="http://java.sun.com/jsp/jstl/core"%>
 
-<div class="left">
+<div  class="chart-wrap">
 	<table class="highchart" data-graph-container-before="1"
 		data-graph-type="column" style="display: none"
 		data-graph-container="#graphcontainer">
@@ -24,7 +24,7 @@
 		</tbody>
 	</table>
 </div>
-<div class="right" style="margin-top: 40px">
+<div class="table-wrap" >
 	<table class=" table table-bordered"  >
 		<caption>팀별 연간 대여현황</caption>
 		<thead>

@@ -33,7 +33,8 @@ span {
 				<div id="top">
 					<div class="form-group">
 						<label for="exampleInputEmail1">ISBN</label> <input type="text"
-							class="form-control" id="isbn" name="isbn" required="required">
+							class="form-control" id="isbn" name="isbn" maxlength="13"
+							required="required">
 					</div>
 					<div class="form-group">
 						<label for="exampleInputPassword1">도서명</label> <input type="text"
@@ -103,7 +104,6 @@ span {
 						<label for="exampleInputPassword1">구매요청자</label> <input
 							type="text" class="form-control" id="kname" name="kname"
 							value="${sessionScope.kname}" readonly="readonly">
-
 					</div>
 					<%-- 
 				<div class="form-group">
@@ -144,25 +144,29 @@ span {
 		});
 		$('#quantity').bind('keydown', function() {
 			var quantity = $('#quantity').val();
-			if (quantity > 5) {
-				alert('5권이상은 선행기획팀 서하림 사원에게 문의하십시오.');
+			var code = event.keyCode;
+			
+			if (code != 8 && code != 46) {
+				if (quantity > 5) {
+					alert('5권이상은 선행기획팀 서하림 사원에게 문의하십시오.');
+				}
 			}
 		});
 		$('#price').bind('keydown', function() {
 			var price = $('#price').val();
 			var code = event.keyCode;
 			$(this).next('span').css('display', 'inline').fadeOut(1000);
-			
+
 			if (code == 8 || code == 46) {
 				if (price < 100000) {
 					$('#chief').hide();
 				}
-			}else if (price >= 100000) {
+			} else if (price >= 100000) {
 				alert("100,000원 이상 도서 구매시 팀장 결재 필요합니다.");
 				$('#chief').show();
-			} 
+			}
 
-			});
+		});
 
 		/* function formChk() {
 			var title = $('#title').val();

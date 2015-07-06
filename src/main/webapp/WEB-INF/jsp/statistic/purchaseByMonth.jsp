@@ -28,9 +28,9 @@
 	</tbody>
 </table>
 
-<div class="table_wrap">
+<div class="table-bottom">
 	<table class="table table-bordered">
-		<caption style="font-size: 20px">연간 예산 현황</caption>
+		<caption >연간 예산 현황</caption>
 		<thead>
 			<tr>
 				<c:forEach items="${SumPurchase}" var="SumPurchase" begin="0"

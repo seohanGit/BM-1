@@ -23,7 +23,7 @@
 		</c:forEach>
 	</tbody>
 </table>
-<div class="table-wrap" style="float: right; display: inline">
+<div class="table-bottom" style="float: right; display: inline">
 	<table id="table" class="table table-bordered">
 		<caption>연간 대여 현황</caption>
 

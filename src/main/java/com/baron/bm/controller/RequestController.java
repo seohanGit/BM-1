@@ -1,5 +1,6 @@
 package com.baron.bm.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -48,13 +49,14 @@ public class RequestController {
 	@RequestMapping("/confirmRequest")
 	public String requestResult(BookModel model, HttpSession session) {
 		Date date = new Date();
-		String now = date.toString();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		String now = sdf.format(date);
 		MemberModel member = (MemberModel) session.getAttribute("membermodel");
 		System.out.println(now);
 		String max = requestservice.selectMaxSer();
 		model.setKname(model.getKname().substring(0, 5));
-		model.setBook_cd(model.getB_group().substring(2));
-		model.setReq_cd("Book" + now + max);
+		model.setBook_cd(model.getB_group().substring(0, 1)+model.getC_group().substring(0,3)+"-");
+		model.setReq_cd("Book" + now.toString() + max);
 		
 		requestservice.requestBook(model, member);
 
@@ -94,18 +96,20 @@ public class RequestController {
 	@RequestMapping("/requestbook")
 	public String requestBook(HttpServletRequest request, Model model,
 			String isbn) throws Exception {
-		
 		String id = null;
+		BookModel book = requestservice.findBookOne(isbn);
+		
+		for (Cookie cookie : request.getCookies()) {
+			if (cookie.getName().equals("bm_id")) {
+				id = cookie.getValue();
+				book.setId(id);
+			}
+		}
 		if (isbn != null) {
 
-			BookModel book = requestservice.findBookOne(isbn);
+		
 
-			for (Cookie cookie : request.getCookies()) {
-				if (cookie.getName().equals("bm_id")) {
-					id = cookie.getValue();
-					book.setId(id);
-				}
-			}
+			
 			model.addAttribute("book", book);
 			return "request/confirmRequest";
 		}else {

@@ -2,7 +2,7 @@
 	pageEncoding="EUC-KR"%><%@ taglib prefix="c"
 	uri="http://java.sun.com/jsp/jstl/core"%>
 <div align="center"><h2>분류별 보유현황</h2></div>
-<div class="left">
+<div class="chart-wrap">
 	<table class="highchart" data-graph-container-before="1"
 		data-graph-type="pie" style="display: none"
 		data-graph-container="#graphcontainer">
@@ -24,7 +24,8 @@
 		</tbody>
 	</table>
 </div>
-<div class="right table-wrap" style="margin-top: 40px">
+<div class="table-wrap" style="margin-top: 40px">
+	
 	<table class="table table-bordered" id="bookCount">
 
 		<thead>

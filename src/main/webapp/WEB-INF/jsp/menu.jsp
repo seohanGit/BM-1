@@ -12,7 +12,7 @@
 
 
 			<button class="btn btn-default  noborder"
-				onclick="location.href='reservationListAll'">예약현황</button>
+				onclick="location.href='reserveList'">예약현황</button>
 			<button class="btn btn-default  noborder"
 				onclick="location.href='request'">구매요청</button>
 

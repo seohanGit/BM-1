@@ -42,7 +42,7 @@
 		select mst.co_gb, mst.kname, mst.team_nm, mst.jikb, tmj.kname as chief, tmj.asabn as chiefId
                  from (select * from tprlib.GR_INSA where RETI_GB not in ('R') and ASABN=#{id})MST 
                   left outer join (select * from AALIB.GR_EMP where RETI_GB not in ('R') and CO_GB in ('SEOHAN','KAMTEC') and FAGB_CD in ('3','6') and JIKC_CD in ('13')) TMJ 
-                  on MST.ASOSK=TMJ.ASOSK and MST.CO_GB=TMJ.CO_GB FETCH first 1 rows only
+                  on MST.ASOSK=TMJ.ASOSK and MST.CO_GB=TMJ.CO_GB WHERE tmj.kname != '' FETCH first 1 rows only
 	</select>
 
 	<select id="selectLate" resultType="MemberModel">

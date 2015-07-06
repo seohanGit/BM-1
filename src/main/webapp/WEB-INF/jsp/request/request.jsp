@@ -50,7 +50,7 @@ body {
 						onclick="location.href='/requestbook'; ">ISBN 미보유 도서</button>
 				</div>
 				<br>
-				<div style="margin-top: 20px; padding-top : 20px">
+				<div style="margin-top: 20px; padding-top: 20px">
 					<table class="table table-striped table-bordered" id="dataTable">
 
 						<c:choose>
@@ -98,7 +98,15 @@ body {
 										<tr>
 											<td class="hidden-xs"><img style="width: 50px"
 												src="${book.imageurl}"></td>
-											<td class="td-title"><a href="${book.link}">${book.title }</a></td>
+											<td class="td-title"><c:choose>
+													<c:when test="${not empty book.link}">
+														<a href="${book.link}">${book.title }</a>
+													</c:when>
+													<c:otherwise>
+													${book.title }
+													</c:otherwise>
+												</c:choose>
+												</td>
 											<td class="hidden-xs">${book.author}</td>
 											<td>${book.price}원</td>
 											<td align="center">${book.quantity}</td>
@@ -116,11 +124,8 @@ body {
 												</c:when>
 											</c:choose>
 										</tr>
-
 									</tbody>
-
 								</c:forEach>
-
 							</c:otherwise>
 						</c:choose>
 					</table>

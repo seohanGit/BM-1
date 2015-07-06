@@ -18,26 +18,31 @@
 <script type="text/javascript" src="/resources/js/jquery/jquery.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
+
 		$.ajax({
 
 			type : "GET", // GET or POST
-			url : "/rentByPerson", // URL
+			url : "/rentByMonth", // URL
 			datatype : "xml",
 			// html, xml, json, jsonp, script, text
 			data : {
 				year : $('#year').val(),
-				month : $('#month').val()
+				month : $('#month').val(),
+				which : 'table'
 			},
 			// parameters as plain object
 			error : function() { // Ajax error handler
-
 				alert('검색어를 입력하세요');
 			},
 			success : function(data, status) { // Ajax complete handelr
-				$('#container').empty().append(data);
+				$('#full').empty().append(data);
+				//$('#table').empty();
+				$('#chart').empty();
 				$('table.highchart').highchartTable();
 			}
 		});
+		$('.highcharts-container').css('display', 'inline');
+
 	});
 </script>
 <script type="text/javascript" src="/resources/js/highchartTable.js"></script>
@@ -106,8 +111,8 @@ body {
 						대여 순위</button>
 
 					<div id="chart" class="row" style="width: 49%; float: left">
-					
-					</div>					
+
+					</div>
 					<div id="table-wrap" class="row" style="width: 49%; float: right"></div>
 					<div id="full" class="row" style="width: 100%"></div>
 
@@ -126,7 +131,7 @@ body {
 			var quantity = 0;
 			$('.count').each(function() {
 				sum += parseInt($('.count').val());
-				});
+			});
 
 			$('#total_price').val(sum);
 

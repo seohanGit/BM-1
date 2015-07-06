@@ -24,7 +24,7 @@
 		</tbody>
 	</table>
 </div>
-<div class="table_wrap">
+<div class="table-bottom">
 	<table class="table table-bordered" >
 		<caption>분류별 대여현황</caption>
 		<thead>

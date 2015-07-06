@@ -38,7 +38,7 @@ import com.baron.member.service.BookService;
 import com.baron.member.service.JoinService;
 import com.baron.member.service.StatisticService;
 
-@SessionAttributes({ "kname", "jikb", "team_nm", "permission" })
+@SessionAttributes({ "kname", "jikb", "team_nm", "permission", "id", "chief", "chiefId" })
 @Controller
 public class MemberController {
 
@@ -153,7 +153,9 @@ public class MemberController {
 			mav.addObject("jikb", membermodel.getJikb());
 			mav.addObject("chief", membermodel.getChief());
 			mav.addObject("chiefId", membermodel.getChiefid());
+			mav.addObject("id", membermodel.getId());
 			
+			session.setAttribute("id", membermodel.getId());
 			session.setAttribute("chief", membermodel.getChief());
 			session.setAttribute("chiefId", membermodel.getChiefid());
 			if (id.equals("4150266")) {

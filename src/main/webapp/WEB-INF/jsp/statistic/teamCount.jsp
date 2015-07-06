@@ -29,8 +29,8 @@
 		<caption>팀별 연간 대여현황</caption>
 		<thead>
 			<tr>
-				<th ></th>
-				<th class="td-genre">대여권수</th>
+				<th>부서명</th>
+				<th class="td-date">대여권수</th>
 			</tr>
 		</thead>
 		<tbody>

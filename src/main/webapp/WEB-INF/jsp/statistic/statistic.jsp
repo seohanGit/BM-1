@@ -125,17 +125,6 @@ body {
 	<script src="/resources/js/statistic.js"></script>
 	<script src="/resources/js/bootstrap.min.js"></script>
 	<script src="/resources/js/bootstrap-select.min.js"></script>
-	<script type="text/javascript">
-		$(document).ready(function() {
-			var sum = 0;
-			var quantity = 0;
-			$('.count').each(function() {
-				sum += parseInt($('.count').val());
-			});
-
-			$('#total_price').val(sum);
-
-		})
-	</script>
+	
 </body>
 </html>

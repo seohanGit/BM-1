@@ -42,7 +42,7 @@
 				<c:forEach items="${rentByMonth }" var="rentByMonth" begin="0"
 					end="11">
 
-					<td>${rentByMonth.count}±Ç</td>
+					<td class="td-count">${rentByMonth.count}±Ç</td>
 
 				</c:forEach>
 			</tr>

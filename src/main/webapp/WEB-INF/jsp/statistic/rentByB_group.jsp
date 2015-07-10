@@ -40,14 +40,14 @@
 		<thead>
 			<tr>
 				<th class="td-title"></th>
-				<th class="td-img">대여권수</th>
+				<th >대여권수</th>
 			</tr>
 		</thead>
 		<tbody>
 			<c:forEach items="${bestBook }" var="bestBook" begin="0" end="9">
 				<tr>
 					<td>${bestBook.title}</td>
-					<td>${bestBook.count}</td>
+					<td class="td-count">${bestBook.count}</td>
 				</tr>
 			</c:forEach>
 		</tbody>

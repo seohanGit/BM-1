@@ -36,7 +36,7 @@ $('#purchaseMonth').click(function() {
 
 		type : "GET", // GET or POST
 		url : "/selectSumPurchase", // URL
-		datatype : "xml",
+		datatype : "json",
 		// html, xml, json, jsonp, script, text
 		data : {
 			year : $('#year').val()
@@ -51,7 +51,8 @@ $('#purchaseMonth').click(function() {
 			$('#chart').empty();
 			$('#full').empty().append(data);
 			$('table.highchart').highchartTable();
-			CommaFormatted($('.td-count').val().substring(0, temp.length - 1));
+			var temp = $('.td-count').val();
+			CommaFormatted(temp.substring(0, temp.length - 1));
 		}
 	});
 });

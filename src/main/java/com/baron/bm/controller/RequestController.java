@@ -53,9 +53,9 @@ public class RequestController {
 		String now = sdf.format(date);
 		MemberModel member = (MemberModel) session.getAttribute("membermodel");
 		System.out.println(now);
-		String max = requestservice.selectMaxSer();
+		String max = requestservice.selectMaxSer();		
 		model.setKname(model.getKname().substring(0, 5));
-		model.setBook_cd(model.getB_group().substring(0, 1)+model.getC_group().substring(0,3)+"-");
+		//model.setBook_cd(model.getB_group().substring(0, 1)+model.getC_group().substring(0,3)+"-");
 		model.setReq_cd("Book" + now.toString() + max);
 		
 		requestservice.requestBook(model, member);

@@ -35,7 +35,7 @@ body {
 				<h2>구매요청 목록</h2>
 
 				<div class="input-group" style="float: left; width: 70%">
-					<form action="/findBook" method="get">
+					<form action="/findBook" method="post">
 						<span class="input-group-btn"> <input type="text"
 							class="form-control" id="query" name="keyword"
 							placeholder="검색가능도서 - ISBN, 도서명, 저자 검색">

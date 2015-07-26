@@ -21,7 +21,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import org.apache.ibatis.logging.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,6 +32,7 @@ import com.baron.member.model.BoardModel;
 import com.baron.member.model.BookModel;
 import com.baron.member.model.Dto;
 import com.baron.member.model.MemberModel;
+import com.baron.member.model.SearchResult;
 import com.baron.member.service.BoardService;
 import com.baron.member.service.BookService;
 import com.baron.member.service.JoinService;
@@ -73,11 +73,15 @@ public class MemberController {
 		Dto param = new Dto();
 		param.setYear(year);
 		param.setMonth(month);
+		String keyword = "";
 		List<BoardModel> notice = boardService.noticeList();
 		List<BookModel> bestBook = statisticService.selectBestBook(param);
 		List<MemberModel> bestTeam = statisticService.selectBestTeam(year);
 		List<BookModel> newBook = statisticService.getNewbook();
+		List<SearchResult> bookList = bookService.searchBook(keyword);
 		
+		model.addAttribute("bookList", bookList);
+		String permission = "";
 		model.addAttribute("noticeList", notice);
 		model.addAttribute("bestBook", bestBook);
 		model.addAttribute("bestTeam", bestTeam);

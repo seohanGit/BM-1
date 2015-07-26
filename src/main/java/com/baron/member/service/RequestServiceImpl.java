@@ -63,7 +63,7 @@ public class RequestServiceImpl implements RequestService {
 		Date date = new Date();
 
 		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
-		
+		book.setId(member.getId());
 		book.setB_group(requestDao.convertB_code(book.getB_group().substring(
 				0,1)));
 		if (book.getC_group() != null) {

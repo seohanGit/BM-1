@@ -32,7 +32,7 @@ span {
 				class="panel-body" onsubmit="formChk();return false">
 				<div id="top">
 					<div class="form-group">
-						<label for="exampleInputEmail1">ISBN</label> <input type="text"
+						<label for="exampleInputEmail1">ISBN</label> <input type="number"
 							class="form-control" id="isbn" name="isbn" maxlength="13"
 							required="required">
 					</div>
@@ -92,8 +92,8 @@ span {
 
 
 					<div class="form-group">
-						<label for="exampleInputPassword1">가격</label> <input type="number"
-							class="form-control" name="price" id="price" required="required"">
+						<label for="exampleInputPassword1">가격</label> <input type="number" 
+							class="form-control" name="price" id="price" required="required">
 					</div>
 					<div class="form-group">
 						<label for="exampleInputPassword1">신청 사유</label> <input

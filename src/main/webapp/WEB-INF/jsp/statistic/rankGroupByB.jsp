@@ -5,7 +5,7 @@
 <div>
 	<table class="highchart table table-bordered"
 		data-graph-container-before="1" data-graph-type="column"
-		style="display: none">
+		style="display: none" data-graph-datalabels-enabled="1">
 		<caption>분류별 대여현황</caption>
 
 		<thead>
@@ -38,7 +38,7 @@
 			<tr>
 				<c:forEach items="${rankGroupByB }" var="b_group" varStatus="status">
 
-					<td>${b_group.count }</td>
+					<td class="td-count">${b_group.count }</td>
 
 				</c:forEach>
 			</tr>

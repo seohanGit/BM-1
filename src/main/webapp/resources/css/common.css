@@ -84,6 +84,11 @@ table  thead .td-date {
 table thead .td-chk {
 	width: 30px;
 }
+table .td-count {
+	width: 80px;
+	text-align: right;
+	
+}
 
 .table-admin {
 	font-size: 16px;

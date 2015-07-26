@@ -4,15 +4,15 @@
 
 <table class="highchart" data-graph-container-before="1"
 	data-graph-type="line" data-graph-yaxis-2-opposite="1"
-	style="display: none">
+	style="display: none" >
 	<caption style="font-size: 20px">연간 예산 현황</caption>
 
 	<thead>
 		<tr>
 			<th class="td-img"></th>
-			<th data-graph-type="column" data-graph-yaxis="1">구매권수</th>
-			<th>사용예산</th>
-			<th data-graph-type="line">배정예산</th>
+			<th data-graph-type="column" data-graph-yaxis="1" data-graph-datalabels-color="blue" data-graph-datalabels-enabled="1">구매권수</th>
+			<th data-graph-datalabels-color="red" data-graph-datalabels-enabled="1">사용예산</th>
+			<th data-graph-type="line" >배정예산</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -21,7 +21,7 @@
 			<tr>
 				<td>${SumPurchase.month}월</td>
 				<td>${SumPurchase.count}권</td>
-				<td>${SumPurchase.price}원</td>
+				<td >${SumPurchase.price}원</td>
 				<td>750000원</td>
 			</tr>
 		</c:forEach>
@@ -43,13 +43,13 @@
 			<tr>
 				<c:forEach items="${SumPurchase}" var="SumPurchase" begin="0"
 					end="11" varStatus="status">
-					<td>${SumPurchase.count}권</td>
+					<td class="td-count">${SumPurchase.count}권</td>
 				</c:forEach>
 			</tr>
 			<tr>
 				<c:forEach items="${SumPurchase}" var="SumPurchase" begin="0"
 					end="11" varStatus="status">
-					<td>${SumPurchase.price}원</td>
+					<td class="td-count">${SumPurchase.price}원</td>
 				</c:forEach>
 			</tr>
 		</tbody>

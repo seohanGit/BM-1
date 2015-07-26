@@ -4,21 +4,18 @@
 <div align="center"><h2>분류별 보유현황</h2></div>
 <div class="chart-wrap">
 	<table class="highchart" data-graph-container-before="1"
-		data-graph-type="pie" style="display: none"
-		data-graph-container="#graphcontainer">
-
-
+		data-graph-type="pie" style="display: none" data-graph-datalabels-enabled="1">
 		<thead>
-			<tr class="  title">
+			<tr class="title">
 				<th></th>
-				<th class="td-genre">보유권수</th>
+				<th >보유권수</th>
 			</tr>
 		</thead>
 		<tbody>
 			<c:forEach items="${bookCount }" var="bookCount">
 				<tr>
 					<td>${bookCount.b_group}</td>
-					<td>${bookCount.count}권</td>
+					<td data-graph-name="${bookCount.b_group}">${bookCount.count}권</td>
 				</tr>
 			</c:forEach>
 		</tbody>
@@ -31,21 +28,21 @@
 		<thead>
 			<tr>
 				<th class="td-title">도서 분류</th>
-				<th class="td-date">보유권수</th>
+				<th class="td-count" >보유권수</th>
 			</tr>
 		</thead>
 		<tbody>
 			<c:forEach items="${bookCount }" var="bookCount">
 				<tr>
 					<td>${bookCount.b_group}</td>
-					<td class="count">${bookCount.count}권</td>
+					<td class="td-count count">${bookCount.count}권</td>
 				</tr>
 			</c:forEach>
 		</tbody>
 		<tfoot>
 			<tr class="summary">
 				<td>T o t a l : </td>
-				<td id="total_price"></td>
+				<td class="td-count" id="total_price"></td>
 								
 			</tr>
 		</tfoot>

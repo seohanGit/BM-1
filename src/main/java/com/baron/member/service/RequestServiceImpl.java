@@ -64,16 +64,15 @@ public class RequestServiceImpl implements RequestService {
 
 		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
 		
-		book.setB_group(requestDao.convertB_code(book.getB_group().substring(
-				0,1)));
+		book.setB_group(requestDao.convertB_code(book.getB_group().substring(0,1).trim()));
 		if (book.getC_group() != null) {
 			book.setC_group(requestDao.convertC_code(book.getC_group()
-					.substring(0,3)));
+					.substring(0,3).trim()));
 		}else{
 			book.setC_group("");
 		}
 		
-		book.setBook_cd(book.getB_group()+book.getC_group() + "-");
+		//book.setBook_cd(book.getB_group()+book.getC_group() + "-");
 		requestDao.requestBook(book);
 		if (Integer.parseInt(book.getPrice()) > 100000){
 			approval.setChiefId(member.getChiefid());

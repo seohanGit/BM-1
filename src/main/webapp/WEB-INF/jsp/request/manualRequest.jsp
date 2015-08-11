@@ -93,7 +93,7 @@ span {
 
 					<div class="form-group">
 						<label for="exampleInputPassword1">가격</label> <input type="number"
-							class="form-control" name="price" id="price" required="required"">
+							class="form-control" name="price" id="price" min="0" required="required"">
 					</div>
 					<div class="form-group">
 						<label for="exampleInputPassword1">신청 사유</label> <input

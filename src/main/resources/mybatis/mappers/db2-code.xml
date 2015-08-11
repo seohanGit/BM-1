@@ -17,8 +17,8 @@
 	</select>
 	
 	<select id="convertB_code" resultType="String" parameterType="String">
-		SELECT asgub AS name FROM salib.acoderp
-		WHERE adgub='BD' AND asdes=#{b_group}
+		SELECT asdes AS name FROM salib.acoderp
+		WHERE adgub='BD' AND asgub=#{b_group}
 	</select>
 	<insert id="insertC_code" parameterType="CodeModel">
 		INSERT INTO
@@ -37,7 +37,7 @@
 	</select>
 	
 	<select id="convertC_code" resultType="String" parameterType="String">
-		SELECT asgub AS name FROM salib.acoderp
-		WHERE adgub='BS' AND asdes=#{c_group}
+		SELECT asdes AS name FROM salib.acoderp
+		WHERE adgub='BS' AND asgub=#{c_group}
 	</select>
 </mapper>

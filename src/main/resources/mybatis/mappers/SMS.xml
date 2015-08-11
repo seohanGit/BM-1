@@ -4,7 +4,7 @@
 
 	<insert id="notifiRent" parameterType="SmsModel">
 		INSERT INTO
-		master.SHSERVER3.SC_TRAN
+		SHSERVER3.SC_TRAN
 		(TR_SENDDATE , TR_SENDSTAT ,TR_MSGTYPE
 		,TR_PHONE
 		,TR_CALLBACK ,

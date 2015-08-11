@@ -41,7 +41,7 @@ import com.baron.member.service.StatisticService;
 @SessionAttributes({ "kname", "jikb", "team_nm", "permission", "id", "chief", "chiefId" })
 @Controller
 public class MemberController {
-
+	
 	@Autowired
 	private JoinService joinService;
 
@@ -152,6 +152,7 @@ public class MemberController {
 			MemberModel membermodel = new MemberModel();
 			membermodel = joinService.login(id);
 			membermodel.setId(id);
+			
 			mav.addObject("kname", membermodel.getKname());
 			mav.addObject("team_nm", membermodel.getTeam_nm());
 			mav.addObject("jikb", membermodel.getJikb());
@@ -161,7 +162,7 @@ public class MemberController {
 			
 			session.setAttribute("id", membermodel.getId());
 			session.setAttribute("chief", membermodel.getChief());
-			session.setAttribute("chiefId", membermodel.getChiefid());
+			session.setAttribute("chiefId", membermodel.getChiefid());                                                                                                                                                                                                                                                 
 			if (id.equals("4150266")) {
 				response.addCookie(new Cookie("bm_id", id));
 				response.addCookie(new Cookie("bm_permission", "1"));

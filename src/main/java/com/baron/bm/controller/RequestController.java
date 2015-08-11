@@ -9,6 +9,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.scripting.xmltags.TrimSqlNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -47,18 +48,27 @@ public class RequestController {
 	private BookService bookService;
 
 	@RequestMapping("/confirmRequest")
-	public String requestResult(BookModel model, HttpSession session) {
+	public String requestResult(BookModel model, HttpServletRequest request) {
 		Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 		String now = sdf.format(date);
-		MemberModel member = (MemberModel) session.getAttribute("membermodel");
+		for (Cookie cookie : request.getCookies()) {
+			if (cookie.getName().equals("bm_id")) {
+				model.setId(cookie.getValue());
+			}
+		}
+		MemberModel membermodel =  new MemberModel();
+		membermodel = joinService.selectMember(model.getId());
+		
 		System.out.println(now);
-		String max = requestservice.selectMaxSer();		
-		model.setKname(model.getKname().substring(0, 5));
-		//model.setBook_cd(model.getB_group().substring(0, 1)+model.getC_group().substring(0,3)+"-");
+
+		String max = requestservice.selectMaxSer();
+		model.setKname(model.getKname().substring(0, 5).trim());
+		model.setBook_cd(model.getB_group().substring(0, 1)+model.getC_group().substring(0,3)+"-");
+
 		model.setReq_cd("Book" + now.toString() + max);
 		
-		requestservice.requestBook(model, member);
+		requestservice.requestBook(model, membermodel);
 
 		return "redirect:request";
 	}
@@ -105,11 +115,8 @@ public class RequestController {
 				book.setId(id);
 			}
 		}
-		if (isbn != null) {
-
 		
-
-			
+		if (isbn != null) {
 			model.addAttribute("book", book);
 			return "request/confirmRequest";
 		}else {

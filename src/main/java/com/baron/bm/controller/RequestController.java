@@ -59,10 +59,9 @@ public class RequestController {
 		}
 		MemberModel membermodel =  new MemberModel();
 		membermodel = joinService.selectMember(model.getId());
-		
-		System.out.println(now);
-
+		membermodel.setId(model.getId());
 		String max = requestservice.selectMaxSer();
+		
 		model.setKname(model.getKname().substring(0, 5).trim());
 		model.setBook_cd(model.getB_group().substring(0, 1)+model.getC_group().substring(0,3)+"-");
 

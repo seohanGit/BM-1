@@ -32,7 +32,7 @@ span {
 				class="panel-body" onsubmit="formChk();return false">
 				<div id="top">
 					<div class="form-group">
-						<label for="exampleInputEmail1">ISBN</label> <input type="number"
+						<label for="exampleInputEmail1">ISBN</label> <input type="tel"
 							class="form-control" id="isbn" name="isbn" maxlength="13"
 							required="required">
 					</div>

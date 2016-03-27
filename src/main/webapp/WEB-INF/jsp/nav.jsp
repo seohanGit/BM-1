@@ -25,15 +25,11 @@
 		<div class="collapse navbar-collapse"
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav " role="menu">
-				<!-- <li id="nav-input"><input type="text" class="form-control"
-					id="keyword" style="height: 40px;" placeholder="도서검색"></li>
-				<li id="nav-input"><button class="btn btn-default"
-						type="button" id="btn_search" style="height: 40px; align: center;">
-						<span class="glyphicon glyphicon-search"></span>
-					</button></li> -->
-
+				<li><a href="searchBook">자료검색</a></li>
+				<li><a href="newBook">신간도서</a></li>
 				<li><a href="board">게시판</a></li>
-				<li><a href="searchBook">도서목록</a></li>
+				<li><a href="thisMonthBook">이달의 추천도서</a></li>
+				<li><a href="bestBook">베스트 도서</a></li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown" role="button" aria-expanded="false">${sessionScope.team_nm}
 						${sessionScope.kname} <span class="caret"></span>

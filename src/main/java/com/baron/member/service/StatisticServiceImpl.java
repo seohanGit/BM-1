@@ -31,10 +31,12 @@ public class StatisticServiceImpl implements StatisticService {
 
 	@Override
 	public List<MemberModel> selectBestTeam(String year) {
-
+		int max = 0 ;
 		List<MemberModel> list = new ArrayList<MemberModel>();
 		list = statisticDao.selectBestTeam(year);
-		int max = list.get(0).getCount();
+		if (list.isEmpty() == false ){
+			max = list.get(0).getCount();
+		}
 
 		for (MemberModel member : list) {
 			member.setMax(max);

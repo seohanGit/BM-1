@@ -33,22 +33,19 @@ public class StatisticServiceImpl implements StatisticService {
 	public List<MemberModel> selectBestTeam(String year) {
 		int max = 0 ;
 		List<MemberModel> list = new ArrayList<MemberModel>();
-		list = statisticDao.selectBestTeam(year);
-<<<<<<< HEAD
+		list = statisticDao.selectBestTeam(year); 
 		if (list.isEmpty() == false ){
 			max = list.get(0).getCount();
 		}
 
 		for (MemberModel member : list) {
 			member.setMax(max);
-		}
-=======
+		} 
 //		int max = list.get(0).getCount();
 //
 //		for (MemberModel member : list) {
 //			member.setMax(max);
-//		}
->>>>>>> c1914638adc6de54bc4f961912f9f023f7d7efda
+//		} 
 		return list;
 	}
 

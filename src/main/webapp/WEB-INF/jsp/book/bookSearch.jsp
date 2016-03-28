@@ -39,28 +39,26 @@
 	<div id="divLoadBody" style="display: none;" class="container ">
 		<div class="col-md-12">
 			<div class="panel panel-default ">
-
 				<div class="panel-body">
-
 					<div style="width: 100%; float: left;">
 						<h2>도서검색 목록</h2>
 					</div>
-
-
-
 					<div style="float: right; width: 43%; margin-right: 30px"
 						align="right">
-						<div align="right" style="vertical-align: baseline; float: right;">
-							<form action="/searchBook" method="post">
-								<span class="input-group-btn"> <input type="text"
-									style="width: 70%; float: left" class="form-control"
-									id="keyword" name="keyword"
-									placeholder="기술자료실 도서 검색 [ 소문자로 입력 ]">
-									<button class="btn btn-default" type="submit" id="btn_find">
-										<span class="glyphicon glyphicon-search"></span>
-									</button> <select class="selectpicker"
-									style="width: 30%; font-size: 14px; margin-top: 10px; vertical-align: baseline;"
-									id="select">
+						<form action="/searchBook" method="post">
+							<div class="row">
+								<div align="left" style="float: right;">
+									<input type="radio" name="title" value="title" checked>
+									제목 <input type="radio" name="author" value="author">
+									저자 <input type="radio" name="publisher" value="publisher">
+									출판사
+								</div>
+							</div>
+							<div class="row">
+								<div align="left" style="float: left;">
+									<select class="selectpicker"
+										style="width: 30%; font-size: 14px; margin-top: 10px; vertical-align: baseline;"
+										id="select">
 										<optgroup label="대분류">
 											<option value="B-도서(단행본)">B-도서(단행본)
 											<option value="E-기타매체">E-기타매체
@@ -70,9 +68,19 @@
 											<option value="S-규격/사전">S-규격/사전
 											<option value="T-논문">T-논문
 										</optgroup>
-								</select></span>
-							</form>
-						</div>
+									</select>
+								</div>
+								<div align="right" style="float: right;">
+									<span class="input-group-btn"> <input type="text"
+										style="width: 70%; float: left" class="form-control"
+										id="keyword" name="keyword"
+										placeholder="기술자료실 도서 검색 [ 소문자로 입력 ]">
+										<button class="btn btn-default" type="submit" id="btn_find">
+											<span class="glyphicon glyphicon-search"></span>
+										</button></span>
+								</div>
+							</div>
+						</form>
 						<!-- <div class="input-group"
 							style="width: 20%; vertical-align: baseline; float: right; margin-right: 30px;">
 							<select class="selectpicker"

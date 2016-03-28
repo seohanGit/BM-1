@@ -129,7 +129,7 @@ body {
 	<script type="text/javascript">
 		$(document).ready(function() {
 			var table = $('#dataTable').DataTable({
-				"pageLength" : 1000,
+				"pageLength" : 50,
 				paging : true,
 				"order" : [],
 				"columns" : [ {

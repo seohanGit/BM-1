@@ -93,12 +93,12 @@
 						<a href="#" style="display:block">개인정보관리</a>
 					</div>
 					<div class="col-md-4 col-sm-4 col-xs-4" style="float: left; display: block; text-align:center" >
-						<a href="#" style="display:block" ><img src="/resources/img/btn2.png" style="width: 100%; margin:10px"></a>
-						<a href="#" style="display:block">대출/예약연기</a>
+						<a href="borrowList" style="display:block" ><img src="/resources/img/btn2.png" style="width: 100%; margin:10px"></a>
+						<a href="borrowList" style="display:block">대출/예약연기</a>
 					</div>
 					<div class="col-md-4 col-sm-4 col-xs-4" style="float: left; display: block; text-align:center" >
-						<a href="#"style="display:block"><img src="/resources/img/btn3.png" style="width: 100%; margin:10px"></a>
-						<a href="#" style="display:block">도서구매신청</a>
+						<a href="request"style="display:block"><img src="/resources/img/btn3.png" style="width: 100%; margin:10px"></a>
+						<a href="request" style="display:block">도서구매신청</a>
 					</div>
 				</div>
 				<div class="col-md-6 col-sm-6 col-xs-6" style="float: right;">

@@ -68,169 +68,84 @@
 	<div class="container">
 		<div class="row">
 			<!-- Blog Entries Column -->
-			<div class="col-md-12 col-sm-12 col-xs-12" style="float: left">
-				<h1 class="page-header">
-					<a href="noticeList">공지사항</a> <small>기술 자료실</small>
-				</h1>
-				<!-- First Blog Post -->
-				<div style="float: right; width: 43%; margin-right: 30px"
-					align="right">
-					<div align="right" style="vertical-align: baseline; float: right;">
-						<form action="/searchBook" method="post">
-							<span class="input-group-btn"> <input type="text"
-								style="width: 70%; float: left" class="form-control"
-								id="keyword" name="keyword"
-								placeholder="기술자료실 도서 검색 [ 소문자로 입력 ]">
-								<button class="btn btn-default" type="submit" id="btn_find">
-									<span class="glyphicon glyphicon-search"></span>
-								</button> <select class="selectpicker"
-								style="width: 30%; font-size: 14px; margin-top: 10px; vertical-align: baseline;"
-								id="select">
-									<optgroup label="대분류">
-										<option value="B-도서(단행본)">B-도서(단행본)
-										<option value="E-기타매체">E-기타매체
-										<option value="J-정기간행물">J-정기간행물
-										<option value="P-특허자료">P-특허자료
-										<option value="R-보고서">R-보고서
-										<option value="S-규격/사전">S-규격/사전
-										<option value="T-논문">T-논문
-									</optgroup>
-							</select></span>
-						</form>
+			<h1>기술 자료실</h1>
+			
+			<div align="center" col-md-12 col-sm-12 col-xs-12" style="float:left;">
+				<!-- First Blog Post --> 
+				<img align="middle" src="/resources/img/background.png" style="width:95%; height:150px"/> 
+				
+				<div align="center" style="vertical-align: baseline; float: left; margin:10px">
+					<form action="/searchBook" method="post">
+						<span class="input-group-btn"> <input type="text"
+							style="width: 98%; float: left" class="form-control"
+							id="keyword" name="keyword"
+							placeholder="기술자료실 도서 검색 [ 소문자로 입력 ]">
+							<button class="btn btn-default" type="submit" id="btn_find">
+								<span class="glyphicon glyphicon-search"></span>
+							</button> </span>
+					</form>
+				</div> 
+			</div>
+			<div class="col-md-12 col-sm-12 col-xs-12" style="float:left">
+				<div class="col-md-6 col-sm-6 col-xs-6" style="float: left; display: block; margin-top: 50px" >
+					<div class="col-md-4 col-sm-4 col-xs-4" style="float: left; display: block; text-align:center" >
+						<a href="#"style="display:block"><img src="/resources/img/btn1.png"  style="width: 100%; margin:10px"></a>
+						<a href="#" style="display:block">개인정보관리</a>
+					</div>
+					<div class="col-md-4 col-sm-4 col-xs-4" style="float: left; display: block; text-align:center" >
+						<a href="borrowList" style="display:block" ><img src="/resources/img/btn2.png" style="width: 100%; margin:10px"></a>
+						<a href="borrowList" style="display:block">대출/예약연기</a>
+					</div>
+					<div class="col-md-4 col-sm-4 col-xs-4" style="float: left; display: block; text-align:center" >
+						<a href="request"style="display:block"><img src="/resources/img/btn3.png" style="width: 100%; margin:10px"></a>
+						<a href="request" style="display:block">도서구매신청</a>
 					</div>
 				</div>
-				<div class="dataTable_wrapper">
-					<table class="table table-striped table-bordered " id="dataTable">
-
-
-						<thead>
-							<tr>
-
-								<th>도서명</th>
-
-								<th class="hidden-xs hidden-sm hidden-md td-author">저자</th>
-								<th class="hidden-xs hidden-sm td-genre">출판사</th>
-								<th class="hidden-xs td-genre" style="width: 120px">분류</th>
-								<th style="width: 100px">대여상태</th>
-
-
-
-								<th class="td-img"></th>
-							</tr>
-						</thead>
-
-						<tbody>
-
-							<c:forEach items="${bookList}" var="book">
-
-								<tr>
-
-									<td align="left"><a href="#"
-										onclick="window.open('/bookInfo?book_cd=${book.book_cd}','new','resizeble=yes scrollbars=yes,  width=850, height=850');">
-											${book.title }</a></td>
-									<td class="hidden-xs hidden-sm hidden-md" align="left">${book.author }</td>
-									<td class="hidden-xs hidden-sm" align="left">${book.publish}</td>
-									<td class="hidden-xs td-genre" align="left">${book.b_group }</td>
-									<c:choose>
-										<c:when test="${book.rentchk=='0'}">
-											<td align="left"><mark>대출가능</mark></td>
-											<td align="left"><button class="btn btn-default"
-													type="button" id="borrowbook"
-													onClick="location.href='/borrowbook?book_cd=${book.book_cd}'; borrow();">대출</button></td>
-										</c:when>
-
-										<c:when test="${book.rentchk=='1' and book.reservechk=='1'}">
-											<td>예약중</td>
-											<td></td>
-										</c:when>
-										<c:when test="${book.rentchk=='1' and book.reservechk=='0'}">
-											<td>~ <fmt:formatDate type="date" pattern="MM-dd"
-													value="${book.returndate}" /></td>
-											<td><button class="btn btn-default" type="button"
-													id="reservebook"
-													onClick="location.href='/reservation?book_cd=${book.book_cd}'">예약</button></td>
-										</c:when>
-
-										<c:when test="${book.rentchk=='2' and book.reservechk=='1'}">
-											<td>예약중</td>
-											<td></td>
-										</c:when>
-										<c:when test="${book.rentchk=='2' and book.reservechk=='0'}">
-											<td>~ <fmt:formatDate type="date" pattern="MM-dd"
-													value="${book.returndate}" /></td>
-											<td><button class="btn btn-default" type="button"
-													id="reservebook"
-													onClick="location.href='/reservation?book_cd=${book.book_cd}'">예약</button></td>
-										</c:when>
-
-										<c:when test="${book.rentchk=='4'}">
-											<td>대출 정지</td>
-											<td></td>
-
-
-										</c:when>
-										<c:when test="${book.rentchk=='5'}">
-											<td>예약중</td>
-											<td></td>
-										</c:when>
-									</c:choose>
-								</tr>
-
-
-							</c:forEach>
-
-						</tbody>
-					</table>
+				<div class="col-md-6 col-sm-6 col-xs-6" style="float: right;">
+					<h4 class="page-header">
+						<a href="noticeList">공지사항</a> 
+					</h4>
+					<ul class="list-group">
+						<c:forEach items="${noticeList}" var="notice" varStatus="status"
+							begin="0" end="0" step="1">
+							<li class="list-group-item"><textarea style="width: 100%;"
+									readonly rows="4">${notice.content}</textarea></li>
+						</c:forEach>
+					</ul>
 				</div>
-
-
-				<%-- <ul class="list-group"> ---------------------원본 위치
-					<c:forEach items="${noticeList}" var="notice" varStatus="status"
-						begin="0" end="1" step="1">
-						<li class="list-group-item"><textarea style="width: 100%;"
-								readonly rows="4">${notice.content}</textarea></li>
-					</c:forEach>
-				</ul> --%>
 			</div>
-			<div class="col-md-4 col-sm-4 col-xs-12"
-				style="float: right; margin-top: 40px">
-
-				<%-- <jsp:include page="footer.jsp"></jsp:include>
-				 --%>
-				<%-- <h3>신간도서</h3> ------------------------원본 메인 화면
-
-				<c:forEach items="${newbook}" var="newbook" begin="0" end="2"
-					step="1" varStatus="status">
-					<hr>
-					<div align="center">
-						<div class="thumbnail" align="left"
-							style="height: 90px; width: 60px">
-							<img src="${newbook.imageurl}" height="100%" width="100%">
-						</div>
-						<div align="left">
-							<p class="caption">
+			<div class="col-md-12 col-sm-12 col-xs-12" style="float:left">
+				<div class="col-md-6 col-sm-6 col-xs-6" style="float: left">
+					<h3>신간도서</h3>  
+					<c:forEach items="${newbook}" var="newbook" begin="0" end="2"
+						step="1" varStatus="status"> 
+						<div align="center">
+							<div class="thumbnail" align="left"
+								style="height: 90px; width: 23%; margin:10px">
+								<img src="${newbook.imageurl}" height="100%" width="100%">
 								<a href="#"
-									onclick="window.open('/bookInfo?book_cd=${newbook.book_cd}','new','resizeble=yes scrollbars=yes, width=850, height=850');">${newbook.title}</a>
-							</p>
-							<p class="caption">${newbook.author}</p>
-							<p class="caption">입고일 : ${newbook.rcv_date}</p>
+										onclick="window.open('/bookInfo?book_cd=${newbook.book_cd}','new','resizeble=yes scrollbars=yes, width=850, height=850');">${newbook.title}</a>
+							</div>
+							 
 						</div>
-					</div>
-					<hr>
-				</c:forEach> --%>
-			</div>
-			<%-- 
-			<div class="col-md-8 col-sm-8 col-xs-12" style="float: left;">
-				<jsp:include page="footer.jsp"></jsp:include>
-			</div> --%>
-			<div class="col-md-12 col-sm-12 col-xs-12" style="float: left;">
-				<ul class="list-group">
-					<c:forEach items="${noticeList}" var="notice" varStatus="status"
-						begin="0" end="1" step="1">
-						<li class="list-group-item"><textarea style="width: 100%;"
-								readonly rows="4">${notice.content}</textarea></li>
 					</c:forEach>
-				</ul>
+				</div>
+				<div class="col-md-6 col-sm-6 col-xs-6" style="float: left">
+					<h3>추천도서</h3>  
+					<c:forEach items="${newbook}" var="newbook" begin="0" end="2"						step="1" varStatus="status"> 
+						<div align="center">
+							<div class="thumbnail" align="left"
+								style="height: 90px; width: 23%; margin:10px">
+								<img src="${newbook.imageurl}" height="100%" width="100%">
+								<a href="#"
+										onclick="window.open('/bookInfo?book_cd=${newbook.book_cd}','new','resizeble=yes scrollbars=yes, width=850, height=850');">${newbook.title}</a>
+							</div>
+	<%-- 							<p class="caption">${newbook.author}</p> --%>
+	<%-- 							<p class="caption">입고일 : ${newbook.rcv_date}</p> --%>
+							
+						</div> 
+					</c:forEach>
+				</div>
 			</div>
 		</div>
 	</div>

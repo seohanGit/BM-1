@@ -14,10 +14,10 @@
 		INSERT INTO
 		TESTLIB.BOOKMST
 		(title, book_cd,b_group, c_group, publish,author,rentchk,imageurl,
-		rcv_date, isbn, price, summary)
+		rcv_date, isbn, price, summary, rcmdchk)
 		VALUES
 		(#{title},#{book_cd},#{b_group}, #{c_group}, #{publish},#{author},'0', #{imageurl},
-		current date, #{isbn}, #{price}, #{summary})
+		current date, #{isbn}, #{price}, #{summary}, '')
 	</insert>
 
 
@@ -40,7 +40,7 @@
 		FETCH first 200 rows only
 	</select>
 
-	<select id="listBook" parameterType="Dto" resultType="BookModel">
+	<select id="listBook" parameterType="String" resultType="BookModel">
 		SELECT
 		title, author, b_group, rentchk, reservechk, book_cd, rcv_date
 		FROM
@@ -48,8 +48,33 @@
 		ORDER
 		BY rcv_date DESC
 		FETCH first 200 rows only
+	</select>	
+	<select id="newBook" parameterType="String" resultType="BookModel">
+		SELECT
+		title, author, b_group, rentchk, reservechk, book_cd, rcv_date
+		FROM
+		TESTLIB.BOOKMST
+		where rcv_date > ? 
+		ORDER
+		BY rcv_date DESC
+		FETCH first 200 rows only
 	</select>
-
+	<select id="bestBook" resultType="BookModel">
+		SELECT
+		title, author, b_group, rentchk, reservechk, book_cd, rcv_date
+		FROM
+		TESTLIB.BOOKMST
+		ORDER
+		BY grade DESC
+		FETCH first 50 rows only
+	</select>
+	<select id="recommandBook" parameterType="String" resultType="BookModel">
+		SELECT
+		title, author, b_group, rentchk, reservechk, book_cd, rcv_date
+		FROM
+		TESTLIB.BOOKMST
+		where rcmdchk = 'Y'
+	</select>	
 
 	<delete id="deleteBook" parameterType="String">
 		DELETE FROM

@@ -2,11 +2,24 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd" >
 <properties>
 
-    <comment>환경설정</comment>
-    
-    <entry key="datasource.sqlmap.url">jdbc:mysql://127.0.0.1:3306/webdb</entry>
-    <entry key="datasource.sqlmap.username">root</entry>
-    <entry key="datasource.sqlmap.password">admin</entry>
+	<comment>환경설정</comment>
 
+	<!-- MySQL 커넥션 스트링 -->
+	<!-- <entry key="datasource.sqlmap.driver">com.mysql.jdbc.Driver</entry> 
+		<entry key="datasource.sqlmap.url">jdbc:as400://175.200.81.7/SITLIB;</entry><entry 
+		key="datasource.sqlmap.url">jdbc:mysql://127.0.0.1:3306/webdb</entry> <entry 
+		key="datasource.sqlmap.username">root</entry> <entry key="datasource.sqlmap.password">admin</entry> -->
+	<!-- DB2 커넥션 스트링 -->
+	<entry key="datasource.sqlmap.driver">com.ibm.as400.access.AS400JDBCDriver</entry>
+	<entry key="datasource.sqlmap.url">jdbc:as400://175.200.81.7;Translate
+		Binary=true;</entry>
+	<entry key="datasource.sqlmap.username">QSECOFR</entry>
+	<entry key="datasource.sqlmap.password">goddns</entry>
+
+
+	<entry key="datasource.sms.driver">net.sourceforge.jtds.jdbc.Driver</entry>
+	<entry key="datasource.sms.url">jdbc:jtds:sqlserver://211.40.184.3:1433;databaseName=master;</entry>
+	<entry key="datasource.sms.username">SHSERVER3</entry>
+	<entry key="datasource.sms.password"></entry>
 </properties>
 

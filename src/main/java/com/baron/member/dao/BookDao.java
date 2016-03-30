@@ -22,6 +22,9 @@ public interface BookDao {
 	List<SearchResult> searchBook(String keyword);
 
 	public List<BookModel> listBook();
+	public List<BookModel> newBook();
+	public List<BookModel> bestBook();
+	public List<BookModel> recommandBook();
 
 	public List<BookModel> selectBookAll();
 

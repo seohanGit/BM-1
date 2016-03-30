@@ -60,7 +60,7 @@ public class BookController {
 	 * "book/nationalBest"; }
 	 */
 	@RequestMapping("/searchBook")
-	public String searchBook(HttpServletRequest request, String keyword,
+	public String searchBook(HttpServletRequest request, String keyword, 
 			Model model) {
 		if (keyword == null) {
 			keyword = "";
@@ -88,7 +88,7 @@ public class BookController {
 	}
 
 	@RequestMapping("/bookList")
-	public String BookList(HttpServletRequest request, Model model) {
+	public String BookList(HttpServletRequest request, String listType, Model model) {
 /*		int a = 1;
 
 		String permission;
@@ -99,7 +99,7 @@ public class BookController {
 */
 		// int total = ((bookservice.listBook(page).get(0).getCount()) / 15) +
 		// 1;
-		List<BookModel> bookList = bookservice.listBook();
+		List<BookModel> bookList = bookservice.listBook(listType);
 		model.addAttribute("bookList", bookList);
 		/*model.addAttribute("total", total);
 		for (Cookie cookie : request.getCookies()) {

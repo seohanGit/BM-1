@@ -221,8 +221,16 @@ public class BookServiceImpl implements BookService {
 	 */
 
 	@Override
-	public List<BookModel> listBook() {
+	public List<BookModel> listBook(String listType) {
 
+		switch (listType) {
+			case "new":			
+				return bookDao.listBook();
+			case "best":	
+				return bookDao.listBook();
+			case "recommand":
+				return bookDao.listBook();
+		}
 		return bookDao.listBook();
 	}
 

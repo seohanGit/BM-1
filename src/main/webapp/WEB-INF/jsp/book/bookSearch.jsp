@@ -43,22 +43,20 @@
 					<div style="width: 100%; float: left;">
 						<h2>도서검색 목록</h2>
 					</div>
-					<div style="float: right; width: 43%; margin-right: 30px"
-						align="right">
+					<div>
 						<form action="/searchBook" method="post">
-							<div class="row">
-								<div align="left" style="float: right;">
-									<input type="radio" name="title" value="title" checked>
-									제목 <input type="radio" name="author" value="author">
-									저자 <input type="radio" name="publisher" value="publisher">
+							<div class="row" align="left" >
+								<div align="left" style="float: left;">
+									<input type="radio" name="option" value="title" checked>
+									제목 <input type="radio" name="option" value="author">
+									저자 <input type="radio" name="option" value="publisher">
 									출판사
 								</div>
 							</div>
 							<div class="row">
-								<div align="left" style="float: left;">
+								<div align="left" style="float: left; width:136px; ">
 									<select class="selectpicker"
-										style="width: 30%; font-size: 14px; margin-top: 10px; vertical-align: baseline;"
-										id="select">
+										style="font-size: 14px"	id="select">
 										<optgroup label="대분류">
 											<option value="B-도서(단행본)">B-도서(단행본)
 											<option value="E-기타매체">E-기타매체
@@ -70,9 +68,9 @@
 										</optgroup>
 									</select>
 								</div>
-								<div align="right" style="float: right;">
+								<div align="right" style="float: left; width:70%; ">
 									<span class="input-group-btn"> <input type="text"
-										style="width: 70%; float: left" class="form-control"
+										style="width: 100%; float: left" class="form-control"
 										id="keyword" name="keyword"
 										placeholder="기술자료실 도서 검색 [ 소문자로 입력 ]">
 										<button class="btn btn-default" type="submit" id="btn_find">

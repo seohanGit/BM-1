@@ -1,2 +1,10 @@
 /target/
+/target/
+/.classpath
+/.classpath.rej
+/.gitignore
+/.project
+/.settings/
+/jt400.jar
+/pom.xml
 /src/

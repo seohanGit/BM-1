@@ -63,7 +63,7 @@
 		ON A.book_cd = B.book_cd AND A.rentchk =
 		B.rentchk
 		WHERE
-		LCASE(A.PUBLISHER) like #{keyword}
+		LCASE(A.PUBLISH) like #{keyword}
 		ORDER BY A.RENTCHK DESC, A.RCV_DATE DESC 
 		FETCH first 200 rows only
 	</select>

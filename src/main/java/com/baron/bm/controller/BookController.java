@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.baron.member.model.BookModel;
 import com.baron.member.model.CodeModel;
@@ -60,18 +61,20 @@ public class BookController {
 	 * "book/nationalBest"; }
 	 */
 	@RequestMapping("/searchBook")
-	public String searchBook(HttpServletRequest request, String keyword, String listType, String datepicker1, String datepicker2, String field,
-			Model model) {
+	public ModelAndView searchBook(HttpServletRequest request, String keyword, String listType, String datepicker1, String datepicker2, String field,
+			ModelAndView mav) {
 		
 		if (keyword == null) {
 			keyword = "";
 		}
 		if (listType =="") {
 			List<SearchResult> bookList = bookservice.searchBook(field, keyword);
-			model.addAttribute("bookList", bookList);
+			mav.addObject("bookList", bookList);
+			mav.addObject("listType", "");
 		}else{
 			List<BookModel> bookList = bookservice.listBook(listType, datepicker1, datepicker2);
-			model.addAttribute("bookList", bookList);
+			mav.addObject("bookList", bookList);
+			mav.addObject("listType", listType);
 		}
 		
 		String permission = "";
@@ -82,11 +85,11 @@ public class BookController {
 			}
 		} 
 		if (permission.equals("1")) {
-			return "book/bookSearchByAdmin";
-
+			mav.setViewName("book/bookSearchByAdmin");
+			return mav;
 		} else {
-			
-			return "book/bookSearch";
+			mav.setViewName("book/bookSearch");
+			return mav;
 		}
 	}
 	

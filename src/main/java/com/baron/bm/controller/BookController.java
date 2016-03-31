@@ -60,82 +60,58 @@ public class BookController {
 	 * "book/nationalBest"; }
 	 */
 	@RequestMapping("/searchBook")
-	public String searchBook(HttpServletRequest request, String keyword, 
+	public String searchBook(HttpServletRequest request, String keyword, String listType, String datepicker1, String datepicker2, String field,
 			Model model) {
+		
 		if (keyword == null) {
 			keyword = "";
 		}
-		List<SearchResult> bookList = bookservice.searchBook(keyword);
-
-		System.out.println(keyword);
+		if (listType =="") {
+			List<SearchResult> bookList = bookservice.searchBook(field, keyword);
+			model.addAttribute("bookList", bookList);
+		}else{
+			List<BookModel> bookList = bookservice.listBook(listType, datepicker1, datepicker2);
+			model.addAttribute("bookList", bookList);
+		}
 		
-
-		model.addAttribute("bookList", bookList);
 		String permission = "";
 		for (Cookie cookie : request.getCookies()) {
 			if (cookie.getName().equals("bm_permission")) {
 				permission = cookie.getValue();
 
 			}
-		}
-		System.out.println(permission);
+		} 
 		if (permission.equals("1")) {
 			return "book/bookSearchByAdmin";
 
 		} else {
+			
 			return "book/bookSearch";
 		}
 	}
+	
+		
+//	@RequestMapping("/bookList")
+//	public String BookList(HttpServletRequest request, String listType, Model model) {
+// 
+//		List<BookModel> bookList = bookservice.bookList(listType );
+//		model.addAttribute("bookList", bookList);
+//		
+//		String permission = "";
+//		for (Cookie cookie : request.getCookies()) {
+//			if (cookie.getName().equals("bm_permission")) {
+//				permission = cookie.getValue(); 
+//			}
+//		} 
+//		if (permission.equals("1")) {
+//			return "book/bookSearchByAdmin";
+//
+//		} else {
+//			return "book/bookList";
+//			//return "book/bookSearch";
+//		}
+//	}
 
-	@RequestMapping("/bookList")
-	public String BookList(HttpServletRequest request, String listType, Model model) {
-/*		int a = 1;
-
-		String permission;
-		Dto page = new Dto();
-		page.setNum1(a);
-		page.setNum2(a + 15);
-		List<BookModel> bookList = bookservice.listBook(page);
-*/
-		// int total = ((bookservice.listBook(page).get(0).getCount()) / 15) +
-		// 1;
-		List<BookModel> bookList = bookservice.listBook(listType);
-		model.addAttribute("bookList", bookList);
-		/*model.addAttribute("total", total);
-		for (Cookie cookie : request.getCookies()) {
-			if (cookie.getName().equals("bm_permission")) {
-				permission = cookie.getValue();
-				if (permission.equals("0")) {
-					return "book/bookSearch";
-				}
-			}
-		}*/
-		return "book/bookList";
-	}
-
-	/*@RequestMapping("/page")
-	public String listPage(HttpServletRequest request, Model model, int seq) {
-		String permission;
-		int total = 0;
-		Dto page = new Dto();
-		page.setNum1((seq - 1) * 15);
-		page.setNum2((seq) * 15);
-		// total = ((bookservice.listBook(page).get(0).getCount()) / 15) + 1;
-		page.setNum3(total);
-		List<BookModel> bookList = bookservice.listBook(page);
-
-		// model.addAttribute("total", total);
-		model.addAttribute("bookList", bookList);
-		for (Cookie cookie : request.getCookies()) {
-			if (cookie.getName().equals("bm_permission")) {
-				permission = cookie.getValue();
-				if (permission.equals("0")) {
-					return "book/bookSearch";
-				}
-			}
-		}
-		return "book/bookList";
-	}*/
 
 	@RequestMapping("/findBook")
 	public String findBook(String keyword, String page, Model model)

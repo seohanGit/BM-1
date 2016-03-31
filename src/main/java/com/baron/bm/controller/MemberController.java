@@ -78,7 +78,7 @@ public class MemberController {
 		List<BookModel> bestBook = statisticService.selectBestBook(param);
 		List<MemberModel> bestTeam = statisticService.selectBestTeam(year);
 		List<BookModel> newBook = statisticService.getNewbook();
-		List<SearchResult> bookList = bookService.searchBook(keyword);
+		List<SearchResult> bookList = bookService.searchBook("title", keyword);
 		
 		model.addAttribute("bookList", bookList);
 		String permission = "";

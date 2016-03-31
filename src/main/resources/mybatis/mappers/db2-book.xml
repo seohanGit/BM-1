@@ -35,7 +35,35 @@
 		ON A.book_cd = B.book_cd AND A.rentchk =
 		B.rentchk
 		WHERE
-		LCASE(A.TITLE) like #{keyword} OR LCASE(A.AUTHOR) like #{keyword}
+		LCASE(A.TITLE) like #{keyword} 
+		ORDER BY A.RENTCHK DESC, A.RCV_DATE DESC 
+		FETCH first 200 rows only
+	</select>
+	<select id="searchAuthor" parameterType="String" resultType="SearchResult">
+		<bind name="keyword" value="'%' + _parameter + '%'" />
+		SELECT A.title, A.author, A.publish, A.b_group, A.rentchk,
+		A.reservechk, A.book_cd, B.returndate
+		FROM
+		TESTLIB.BOOKMST A LEFT OUTER
+		JOIN testlib.bookrent B
+		ON A.book_cd = B.book_cd AND A.rentchk =
+		B.rentchk
+		WHERE
+		LCASE(A.AUTHOR) like #{keyword} 
+		ORDER BY A.RENTCHK DESC, A.RCV_DATE DESC 
+		FETCH first 200 rows only
+	</select>
+	<select id="searchPublisher" parameterType="String" resultType="SearchResult">
+		<bind name="keyword" value="'%' + _parameter + '%'" />
+		SELECT A.title, A.author, A.publish, A.b_group, A.rentchk,
+		A.reservechk, A.book_cd, B.returndate
+		FROM
+		TESTLIB.BOOKMST A LEFT OUTER
+		JOIN testlib.bookrent B
+		ON A.book_cd = B.book_cd AND A.rentchk =
+		B.rentchk
+		WHERE
+		LCASE(A.PUBLISHER) like #{keyword}
 		ORDER BY A.RENTCHK DESC, A.RCV_DATE DESC 
 		FETCH first 200 rows only
 	</select>
@@ -49,12 +77,12 @@
 		BY rcv_date DESC
 		FETCH first 200 rows only
 	</select>	
-	<select id="newBook" parameterType="String" resultType="BookModel">
+	<select id="newBook" parameterType="Dto" resultType="BookModel">
 		SELECT
 		title, author, b_group, rentchk, reservechk, book_cd, rcv_date
 		FROM
 		TESTLIB.BOOKMST
-		where rcv_date > ? 
+		where rcv_date between #{date1} and #{date2} 
 		ORDER
 		BY rcv_date DESC
 		FETCH first 200 rows only
@@ -68,7 +96,7 @@
 		BY grade DESC
 		FETCH first 50 rows only
 	</select>
-	<select id="recommandBook" parameterType="String" resultType="BookModel">
+	<select id="recommendBook" parameterType="String" resultType="BookModel">
 		SELECT
 		title, author, b_group, rentchk, reservechk, book_cd, rcv_date
 		FROM

@@ -2917,19 +2917,23 @@ input[type=search] {
 input[type=date], input[type=time], input[type=datetime-local], input[type=month]
 	{
 	line-height: 34px;
-	line-height: 1.42857143 \0
+	line-height: 1.42857143 \0;
+	width:100px;
 }
 
 input[type=date].input-sm, input[type=time].input-sm, input[type=datetime-local].input-sm,
 	input[type=month].input-sm {
 	line-height: 30px;
-	line-height: 1.5 \0
+	line-height: 1.5 \0;
+	width:100px;
+	
 }
 
 input[type=date].input-lg, input[type=time].input-lg, input[type=datetime-local].input-lg,
 	input[type=month].input-lg {
 	line-height: 46px;
-	line-height: 1.33 \0
+	line-height: 1.33 \0;
+	width:100px;
 }
 
 _:-ms-fullscreen, :root input[type=date], _:-ms-fullscreen, :root input[type=time],
@@ -10408,11 +10412,7 @@ pre code {
 	margin-right: auto;
 	margin-left: auto
 }
-
-.row {
-	margin-right: -15px;
-	margin-left: -15px
-}
+ 
 
 .col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2,
 	.col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3,

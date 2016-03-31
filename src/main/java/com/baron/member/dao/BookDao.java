@@ -19,16 +19,18 @@ public interface BookDao {
 
 	public String selectname(String booknum);
 
-	List<SearchResult> searchBook(String keyword);
-
 	public List<BookModel> listBook();
-	public List<BookModel> newBook();
+	public List<BookModel> newBook(Dto dto);
 	public List<BookModel> bestBook();
-	public List<BookModel> recommandBook();
+	public List<BookModel> recommendBook();
 
 	public List<BookModel> selectBookAll();
 
 	public List<CodeModel> selectBCodeList();
 	public List<CodeModel> selectCCodeList();
+
+	public List<SearchResult> searchBook(String keyword); 
+	public List<SearchResult> searchAuthor(String keyword); 
+	public List<SearchResult> searchPublisher(String keyword);
 
 }

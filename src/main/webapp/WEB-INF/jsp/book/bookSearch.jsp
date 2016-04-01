@@ -92,7 +92,7 @@
 								<div class="col-lg-2 col-md-2">
 									<div class="input-group date " data-provide="datepicker"
 										style="width: 140px;">
-										<input id="datepicker1" type="text" class="form-control">
+										<input id="datepicker1" type="text" class="form-control" value="${date1}">
 										<div class="input-group-addon">
 											<span class="glyphicon glyphicon-th"></span>
 										</div>
@@ -101,7 +101,7 @@
 								<div class="col-lg-2 col-md-2">
 									<div class="input-group date  " data-provide="datepicker"
 										style="width: 140px;">
-										<input id="datepicker2" type="text" class="form-control">
+										<input id="datepicker2" type="text" class="form-control" value="${date2}">
 										<div class="input-group-addon">
 											<span class="glyphicon glyphicon-th"></span>
 										</div>

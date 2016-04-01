@@ -82,7 +82,7 @@
 		title, author, b_group, rentchk, reservechk, book_cd, rcv_date
 		FROM
 		TESTLIB.BOOKMST
-		where rcv_date between #{date1} and #{date2} 
+		where rcv_date between #{date1} and #{date2} and left(b_group,1) = 'B'  
 		ORDER
 		BY rcv_date DESC
 		FETCH first 200 rows only
@@ -115,7 +115,7 @@
 	 <update id="updateBook" parameterType="BookModel">
 		UPDATE TESTLIB.BOOKMST
 		SET
-		TITLE=#{title}, b_group=#{b_group},
+		TITLE=#{title} ,
 		publish=#{publish},
 		author=#{author},
 		imageurl=#{imageurl}

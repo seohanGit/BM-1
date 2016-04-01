@@ -74,8 +74,8 @@
 		<div align="center" class="row col-md-12 col-sm-12	col-xs-12"
 			 >
 			<!-- First Blog Post -->
-			<img align="middle" src="/resources/img/background.png"
-				style="width: 100%; height: 150px" />
+			<img align="middle" src="/resources/img/background.jpg"
+				style="width: 70%;  " />
 
 			<div align="center"
 				style="vertical-align: baseline; ">
@@ -118,7 +118,7 @@
 					<c:forEach items="${noticeList}" var="notice" varStatus="status"
 						begin="0" end="0" step="1">
 						<li class="list-group-item"><textarea style="width: 100%;"
-								readonly rows="4">${notice.content}</textarea></li>
+								readonly rows="6">${notice.content}</textarea></li>
 					</c:forEach>
 				</ul>
 			</div>

@@ -2,12 +2,15 @@ package com.baron.bm.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.support.SimpleCacheManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +18,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.baron.member.model.BookModel;
 import com.baron.member.model.CodeModel;
-import com.baron.member.model.Dto;
 import com.baron.member.model.SearchResult;
 import com.baron.member.service.BookService;
 import com.baron.member.service.RentService;
@@ -62,20 +64,27 @@ public class BookController {
 	 */
 	@RequestMapping("/searchBook")
 	public ModelAndView searchBook(HttpServletRequest request, String keyword, String listType, String datepicker1, String datepicker2, String field,
-			ModelAndView mav) {
-		
-		if (keyword == null) {
-			keyword = "";
-		}
-		if (listType =="") {
+			ModelAndView mav) throws NullPointerException {
+		if (listType == null)  {
 			List<SearchResult> bookList = bookservice.searchBook(field, keyword);
 			mav.addObject("bookList", bookList);
 			mav.addObject("listType", "");
 		}else{
+			if ( datepicker1 == null){				
+				Calendar cal = Calendar.getInstance();				
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");				
+				Date date2 = cal.getTime();
+				cal.add(cal.MONTH, -1);
+				Date date1 = cal.getTime();
+				datepicker1 = sdf.format(date1); 
+				datepicker2 = sdf.format(date2);
+			}
 			List<BookModel> bookList = bookservice.listBook(listType, datepicker1, datepicker2);
 			mav.addObject("bookList", bookList);
+			mav.addObject("date1", datepicker1);
+			mav.addObject("date2", datepicker2);
 			mav.addObject("listType", listType);
-		}
+		} 
 		
 		String permission = "";
 		for (Cookie cookie : request.getCookies()) {

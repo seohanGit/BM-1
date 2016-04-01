@@ -72,6 +72,6 @@
 	<select id="selectBookForImage" resultType="BookModel">
 		SELECT isbn, book_cd FROM
 		testlib.bookmst
-		where imageurl = '' and isbn != ''  and left(b_group,1) = 'B'
+		where imageurl = '' and isbn != ''  and left(b_group,1) = 'B' and title is null 
 	</select>
 </mapper>

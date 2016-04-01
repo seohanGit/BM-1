@@ -168,21 +168,14 @@
 						</div> -->
 				</div>
 				<div class="dataTable_wrapper">
-					<table class="table table-striped table-bordered " id="dataTable">
-
-
+					<table class="table table-striped table-bordered " id="dataTable"> 
 						<thead>
-							<tr>
-
-								<th>도서명</th>
-
+							<tr> 
+								<th>도서명</th> 
 								<th class="hidden-xs hidden-sm hidden-md td-author">저자</th>
 								<th class="hidden-xs hidden-sm td-genre">출판사</th>
 								<th class="hidden-xs td-genre" style="width: 120px">분류</th>
-								<th style="width: 100px">대여상태</th>
-
-
-
+								<th style="width: 100px">대여상태</th> 
 								<th class="td-img"></th>
 							</tr>
 						</thead>

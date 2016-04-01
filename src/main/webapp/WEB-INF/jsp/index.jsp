@@ -71,28 +71,29 @@
 			<h1>기술 자료실</h1>
 		</div>
 
-		<div align="center" class="row col-md-12 col-sm-12	col-xs-12"
-			style="position: relative;">
-			<!-- First Blog Post -->
-			<div align="right"  >
-				<img src="/resources/img/background.jpg" style="width: 50%;" />
-			</div>
-			<div align="center"
-				style="vertical-align: middle; position: absolute; bottom:20%; right: 30%; width:60%">
-				<form action="/searchBook" method="post">
-					<span class="input-group-btn"> <input type="text"
-						style="width: 94%; float: left" class="form-control" id="keyword"
-						name="keyword" placeholder="기술자료실 도서 검색 [ 소문자로 입력 ]">
-						<button class="btn btn-default" type="submit" id="btn_find"
-							style="width: 6%">
-							<span class="glyphicon glyphicon-search"></span>
-						</button>
-					</span>
-				</form>
+		<div align="center" class="row " style="position: relative;">
+			<div class="col-md-12 col-sm-12	col-xs-12">
+				<!-- First Blog Post -->
+				<div align="right">
+					<img src="/resources/img/background.jpg" style="width: 50%;" />
+				</div>
+				<div align="center"
+					style="vertical-align: middle; position: absolute; bottom: 20%; right: 30%; width: 60%">
+					<form action="/searchBook" method="post">
+						<span class="input-group-btn"> <input type="text"
+							style="width: 94%; float: left" class="form-control" id="keyword"
+							name="keyword" placeholder="기술자료실 도서 검색 [ 소문자로 입력 ]">
+							<button class="btn btn-default" type="submit" id="btn_find"
+								style="width: 6%">
+								<span class="glyphicon glyphicon-search"></span>
+							</button>
+						</span>
+					</form>
+				</div>
 			</div>
 		</div>
-		<div align="center" class="row col-md-12 col-sm-12 col-xs-12">
-			<div class="col-md-6 col-sm-6 col-xs-6"
+		<div align="center" class=" row" style="overflow: auto;">
+			<div class="col-md-6 col-sm-12 col-xs-12"
 				style="float: left; display: block;">
 				<div class="col-md-4 col-sm-4 col-xs-4"
 					style="float: left; display: block; text-align: center">
@@ -113,7 +114,7 @@
 					<a href="request" style="display: block">도서구매신청</a>
 				</div>
 			</div>
-			<div class="col-md-6 col-sm-6 col-xs-6"
+			<div class="col-md-6 col-sm-12 col-xs-12"
 				style="float: right; text-align: left;">
 				<a href="noticeList" style="font-size: 20px;">공지사항</a>
 				<ul class="list-group">
@@ -125,16 +126,15 @@
 				</ul>
 			</div>
 		</div>
-		<div align="center" class="row col-md-12 col-sm-12 col-xs-12"
-			style="float: left">
-			<div class="col-md-6 col-sm-6 col-xs-6"
-				style="float: left; text-align: left;">
+		<div align="center" class="row">
+			<div class="col-md-6 col-sm-12 col-xs-12"
+				style="float: left; text-align: left; margin-bottom: 30px">
 				<h4>신간도서</h4>
 				<c:forEach items="${newbook}" var="newbook" begin="0" end="2"
 					step="1" varStatus="status">
 					<div align="center">
 						<div class="col-md-4 col-sm-4 col-xs-4"
-							style="float: left; display: block; text-align: center; height: 90px;">
+							style="float: left; display: block; text-align: center; height: 170px;">
 							<img src="${newbook.imageurl}" height="100%" width="100%">
 							<a href="#"
 								onclick="window.open('/bookInfo?book_cd=${newbook.book_cd}','new','resizeble=yes scrollbars=yes, width=850, height=850');">${newbook.title}</a>
@@ -143,14 +143,14 @@
 					</div>
 				</c:forEach>
 			</div>
-			<div class="col-md-6 col-sm-6 col-xs-6"
+			<div class="col-md-6 col-sm-12 col-xs-12"
 				style="float: left; text-align: left;">
 				<h4>추천도서</h4>
 				<c:forEach items="${newbook}" var="newbook" begin="0" end="2"
 					step="1" varStatus="status">
 					<div align="center">
 						<div class="col-md-4 col-sm-4 col-xs-4"
-							style="float: left; display: block; text-align: center; height: 90px;">
+							style="float: left; display: block; text-align: center; height: 170px;">
 							<img src="${newbook.imageurl}" height="100%" width="100%">
 							<a href="#"
 								onclick="window.open('/bookInfo?book_cd=${newbook.book_cd}','new','resizeble=yes scrollbars=yes, width=850, height=850');">${newbook.title}</a>

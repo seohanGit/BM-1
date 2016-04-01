@@ -78,13 +78,13 @@
 				<img src="/resources/img/background.jpg" style="width: 50%;" />
 			</div>
 			<div align="center"
-				style="vertical-align: middle; position: absolute; bottom:20%; right: 30%;">
+				style="vertical-align: middle; position: absolute; bottom:20%; right: 30%; width:60%">
 				<form action="/searchBook" method="post">
 					<span class="input-group-btn"> <input type="text"
-						style="width: 96%; float: left" class="form-control" id="keyword"
+						style="width: 94%; float: left" class="form-control" id="keyword"
 						name="keyword" placeholder="기술자료실 도서 검색 [ 소문자로 입력 ]">
 						<button class="btn btn-default" type="submit" id="btn_find"
-							style="width: 4%">
+							style="width: 6%">
 							<span class="glyphicon glyphicon-search"></span>
 						</button>
 					</span>

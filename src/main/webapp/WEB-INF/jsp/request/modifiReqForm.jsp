@@ -36,42 +36,33 @@ body {
 						<div class="right right-end">
 							<button class="btn btn-default" type="submit">수정</button>
 						</div>
-						<table class="table table-striped table-bordered" id="dataTable">
-
-
-
+						<table class="table table-striped table-bordered" id="dataTable"> 
 							<thead>
 								<tr class="title ">
-									<th class="td-genre">도서코드 수정</th>
-
+									<th class="td-genre">도서코드 수정</th> 
 									<th>도서명</th>
 									<th class="hidden-sm hidden-xs hidden-md td-author">저자</th>
 									<!-- <th class="author">대분류</th>
 									<th class="author">소분류</th> -->
 									<th class="td-date hidden-sm hidden-xs">가격</th>
-									<th class="td-date">수량</th>
-
-
-
+									<th class="td-date">수량</th> 
 								</tr>
-							</thead>
-
-
-
+							</thead> 
 							<tbody>
 								<c:forEach items="${bookList}" var="book" varStatus="status">
 									<tr>
-										<td><c:choose>
+										<td>
+											<c:choose>
 												<c:when test="${book.reqstatus == 0}">
 													<input type="text" name="book_cd" value="${book.book_cd}"  style="width: 150px;">
 													<input type="hidden" name="req_cd" value="${book.req_cd}">
 												</c:when>
 												<c:otherwise>
-													<label style="width: 150px;">${book.book_cd}</label>
+													<input style="width: 150px;" disabled="disabled" value="${book.book_cd}">
 													<input type="hidden" name="req_cd" value="${book.req_cd}">
 												</c:otherwise>
-											</c:choose></td>
-
+											</c:choose>
+										</td>
 										<td><a href="${book.link}" tabindex="0">${book.title }</a></td>
 										<td class="hidden-sm hidden-xs hidden-md ">${book.author}</td>
 										<%-- 	<td><select name="b_group" tabindex="${status.index }">

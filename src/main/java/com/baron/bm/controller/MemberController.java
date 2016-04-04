@@ -171,7 +171,7 @@ public class MemberController {
 			session.setAttribute("chief", membermodel.getChief());
 			session.setAttribute("chiefId", membermodel.getChiefid());    
 			for (String string : adminList) {
-				if (string == id) {
+				if (string.equals(id)) {
 					adminchk = true;
 				}
 			}

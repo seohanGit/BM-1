@@ -44,7 +44,7 @@ $('#bestBook').click(function() {
 		// parameters as plain object
 		error : function() { // Ajax error handler
 
-			alert('검색어를 입력하세요');
+			alert(error());
 		},
 		success : function(data, status) { // Ajax complete handelr
 			$('#container').empty().append(data);

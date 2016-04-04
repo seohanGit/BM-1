@@ -134,7 +134,7 @@
 					step="1" varStatus="status">
 					<div align="center">
 						<div class="col-md-4 col-sm-4 col-xs-4"
-							style="float: left; display: block; text-align: center; height: 170px;">
+							style="float: left; display: block; text-align: center;">
 							<img src="${newbook.imageurl}" height="100%" width="100%">
 							<a href="#"
 								onclick="window.open('/bookInfo?book_cd=${newbook.book_cd}','new','resizeble=yes scrollbars=yes, width=850, height=850');">${newbook.title}</a>
@@ -150,7 +150,7 @@
 					step="1" varStatus="status">
 					<div align="center">
 						<div class="col-md-4 col-sm-4 col-xs-4"
-							style="float: left; display: block; text-align: center; height: 170px;">
+							style="float: left; display: block; text-align: center; ">
 							<img src="${newbook.imageurl}" height="100%" width="100%">
 							<a href="#"
 								onclick="window.open('/bookInfo?book_cd=${newbook.book_cd}','new','resizeble=yes scrollbars=yes, width=850, height=850');">${newbook.title}</a>

@@ -7,6 +7,7 @@
 
 package com.baron.bm.controller;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Hashtable;
 import java.util.List;
@@ -78,7 +79,7 @@ public class MemberController {
 		List<BookModel> bestBook = statisticService.selectBestBook(param);
 		List<MemberModel> bestTeam = statisticService.selectBestTeam(year);
 		List<BookModel> newBook = statisticService.getNewbook();
-		List<SearchResult> bookList = bookService.searchBook(keyword);
+		List<SearchResult> bookList = bookService.searchBook("title", keyword);
 		
 		model.addAttribute("bookList", bookList);
 		String permission = "";
@@ -145,7 +146,13 @@ public class MemberController {
 	@RequestMapping("/autologin")
 	public ModelAndView login2(HttpServletResponse response,
 			HttpServletRequest request, HttpSession session, ModelAndView mav, String id) {
-
+		Boolean	 adminchk = false;
+		List<String> adminList = new ArrayList<String>();
+		adminList.add("4150266");
+		adminList.add("4150240");
+		adminList.add("4030243");
+		adminList.add("4130257");
+		
 		if (joinService.login(id) == null) {
 			mav.setViewName("loginfail");
 		} else {
@@ -162,8 +169,13 @@ public class MemberController {
 			
 			session.setAttribute("id", membermodel.getId());
 			session.setAttribute("chief", membermodel.getChief());
-			session.setAttribute("chiefId", membermodel.getChiefid());                                                                                                                                                                                                                                                 
-			if (id.equals("4150266")) {
+			session.setAttribute("chiefId", membermodel.getChiefid());    
+			for (String string : adminList) {
+				if (string.equals(id)) {
+					adminchk = true;
+				}
+			}
+			if (adminchk) {
 				response.addCookie(new Cookie("bm_id", id));
 				response.addCookie(new Cookie("bm_permission", "1"));
 				mav.setViewName("redirect:startAdmin");

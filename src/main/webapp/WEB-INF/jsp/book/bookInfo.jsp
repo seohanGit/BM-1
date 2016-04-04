@@ -20,10 +20,10 @@
 	<div class="container">
 
 
-		<div class="left">
+		<div class="left"  >
 			<h2>도서정보</h2>
 		</div>
-		<div class="right form-group" style="margin-top: 20px">
+		<div class="right form-group" style="margin-top: 40px">
 			<c:choose>
 				<c:when test="${book.rentchk=='0'}">
 					<mark>대출가능</mark>
@@ -58,24 +58,32 @@
 				<c:when test="${empty book.imageurl }">
 				</c:when>
 				<c:otherwise>
-					<div style="width: 50%; height: 700px" class="left">
+					<div style="width: 35%; height:600px" class="left">
 						<img style="width: 100%;" src="${book.imageurl}">
 					</div>
 				</c:otherwise>
 			</c:choose>
 
-			<div class="right form-group">
+			<div  style="width:60%; float:right">
 				<table class="table table-bordered">
 
 					<tr>
 						<th>도서번호</th>
 						<td>${ book.book_cd }</td>
+					</tr>
+					<tr>
 						<th>도서명</th>
 						<td>${book.title}</td>
+					</tr>
+					<tr>
 						<th>분류</th>
 						<td>${book.b_group}</td>
+					</tr>
+					<tr>
 						<th>출판사</th>
 						<td>${book.publish}</td>
+					</tr>
+					<tr>
 						<th>저자</th>
 						<td>${book.author}</td>
 					</tr>
@@ -123,7 +131,7 @@
 
 				</c:when>
 				<c:otherwise>
-					<div id="bulletin" class="board right ">
+					<div id="bulletin" class="board " style="width:60%; float:right">
 						<p class="content ellipsis">${book.summary}</p>
 						<c:choose>
 							<c:when test="${empty book.summary}"></c:when>

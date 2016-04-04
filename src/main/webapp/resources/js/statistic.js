@@ -70,7 +70,7 @@ $('#rentByPerson').click(function() {
 		// parameters as plain object
 		error : function() { // Ajax error handler
 
-			alert('검색어를 입력하세요');
+			alert(error());
 		},
 		success : function(data, status) { // Ajax complete handelr
 			$('#full').empty().append(data);
@@ -99,7 +99,7 @@ $('#rentByMonth').click(function() {
 		},
 		// parameters as plain object
 		error : function() { // Ajax error handler
-			alert('검색어를 입력하세요');
+			alert(error());
 		},
 		success : function(data, status) { // Ajax complete handelr
 			$('#full').empty().append(data);
@@ -127,7 +127,7 @@ $('#teamCount').click(function() {
 		// parameters as plain object
 		error : function() { // Ajax error handler
 
-			alert('검색어를 입력하세요');
+			alert(error());
 		},
 		success : function(data, status) { // Ajax complete handelr
 			$('#full').empty();
@@ -154,7 +154,7 @@ $('#bookCount').click(function() {
 		// parameters as plain object
 		error : function() { // Ajax error handler
 
-			alert('검색어를 입력하세요');
+			alert(error());
 		},
 		success : function(data, status) { // Ajax complete handelr
 			$('#full').empty();
@@ -191,7 +191,7 @@ $('#rankGroupByB').click(function() {
 		// parameters as plain object
 		error : function() { // Ajax error handler
 
-			alert('검색어를 입력하세요');
+			alert(error());
 		},
 		success : function(data, status) { // Ajax complete handelr
 			$('#full').empty();
@@ -218,7 +218,7 @@ $('#rankGroupByBook').click(function() {
 		// parameters as plain object
 		error : function() { // Ajax error handler
 
-			alert('검색어를 입력하세요');
+			alert(error());
 		},
 		success : function(data, status) { // Ajax complete handelr
 			$('#full').empty();

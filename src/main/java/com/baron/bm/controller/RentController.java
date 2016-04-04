@@ -133,8 +133,7 @@ public class RentController {
 	@RequestMapping("/borrowList")
 	public String borrowList(HttpServletRequest request, Model model) {
 		String id = null;
-		for (Cookie cookie : request.getCookies()) {
-
+		for (Cookie cookie : request.getCookies()) { 
 			if (cookie.getName().equals("bm_id")) {
 
 				id = cookie.getValue();

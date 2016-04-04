@@ -2,19 +2,22 @@ package com.baron.bm.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.support.SimpleCacheManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.baron.member.model.BookModel;
 import com.baron.member.model.CodeModel;
-import com.baron.member.model.Dto;
 import com.baron.member.model.SearchResult;
 import com.baron.member.service.BookService;
 import com.baron.member.service.RentService;
@@ -60,82 +63,67 @@ public class BookController {
 	 * "book/nationalBest"; }
 	 */
 	@RequestMapping("/searchBook")
-	public String searchBook(HttpServletRequest request, String keyword,
-			Model model) {
-		if (keyword == null) {
-			keyword = "";
-		}
-		List<SearchResult> bookList = bookservice.searchBook(keyword);
-
-		System.out.println(keyword);
+	public ModelAndView searchBook(HttpServletRequest request, String keyword, String listType, String datepicker1, String datepicker2, String field,
+			ModelAndView mav) throws NullPointerException {
+		if (listType == null)  {
+			List<SearchResult> bookList = bookservice.searchBook(field, keyword);
+			mav.addObject("bookList", bookList);
+			mav.addObject("listType", "");
+		}else{
+			if ( datepicker1 == null){				
+				Calendar cal = Calendar.getInstance();				
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");				
+				Date date2 = cal.getTime();
+				cal.add(cal.MONTH, -1);
+				Date date1 = cal.getTime();
+				datepicker1 = sdf.format(date1); 
+				datepicker2 = sdf.format(date2);
+			}
+			List<BookModel> bookList = bookservice.listBook(listType, datepicker1, datepicker2);
+			mav.addObject("bookList", bookList);
+			mav.addObject("date1", datepicker1);
+			mav.addObject("date2", datepicker2);
+			mav.addObject("listType", listType);
+		} 
 		
-
-		model.addAttribute("bookList", bookList);
 		String permission = "";
 		for (Cookie cookie : request.getCookies()) {
 			if (cookie.getName().equals("bm_permission")) {
 				permission = cookie.getValue();
 
 			}
-		}
-		System.out.println(permission);
+		} 
 		if (permission.equals("1")) {
-			return "book/bookSearchByAdmin";
-
+			mav.setViewName("book/bookSearchByAdmin");
+			return mav;
 		} else {
-			return "book/bookSearch";
+			mav.setViewName("book/bookSearch");
+			return mav;
 		}
 	}
+	
+		
+//	@RequestMapping("/bookList")
+//	public String BookList(HttpServletRequest request, String listType, Model model) {
+// 
+//		List<BookModel> bookList = bookservice.bookList(listType );
+//		model.addAttribute("bookList", bookList);
+//		
+//		String permission = "";
+//		for (Cookie cookie : request.getCookies()) {
+//			if (cookie.getName().equals("bm_permission")) {
+//				permission = cookie.getValue(); 
+//			}
+//		} 
+//		if (permission.equals("1")) {
+//			return "book/bookSearchByAdmin";
+//
+//		} else {
+//			return "book/bookList";
+//			//return "book/bookSearch";
+//		}
+//	}
 
-	@RequestMapping("/bookList")
-	public String BookList(HttpServletRequest request, Model model) {
-/*		int a = 1;
-
-		String permission;
-		Dto page = new Dto();
-		page.setNum1(a);
-		page.setNum2(a + 15);
-		List<BookModel> bookList = bookservice.listBook(page);
-*/
-		// int total = ((bookservice.listBook(page).get(0).getCount()) / 15) +
-		// 1;
-		List<BookModel> bookList = bookservice.listBook();
-		model.addAttribute("bookList", bookList);
-		/*model.addAttribute("total", total);
-		for (Cookie cookie : request.getCookies()) {
-			if (cookie.getName().equals("bm_permission")) {
-				permission = cookie.getValue();
-				if (permission.equals("0")) {
-					return "book/bookSearch";
-				}
-			}
-		}*/
-		return "book/bookList";
-	}
-
-	/*@RequestMapping("/page")
-	public String listPage(HttpServletRequest request, Model model, int seq) {
-		String permission;
-		int total = 0;
-		Dto page = new Dto();
-		page.setNum1((seq - 1) * 15);
-		page.setNum2((seq) * 15);
-		// total = ((bookservice.listBook(page).get(0).getCount()) / 15) + 1;
-		page.setNum3(total);
-		List<BookModel> bookList = bookservice.listBook(page);
-
-		// model.addAttribute("total", total);
-		model.addAttribute("bookList", bookList);
-		for (Cookie cookie : request.getCookies()) {
-			if (cookie.getName().equals("bm_permission")) {
-				permission = cookie.getValue();
-				if (permission.equals("0")) {
-					return "book/bookSearch";
-				}
-			}
-		}
-		return "book/bookList";
-	}*/
 
 	@RequestMapping("/findBook")
 	public String findBook(String keyword, String page, Model model)

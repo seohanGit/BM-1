@@ -85,7 +85,7 @@ public class EtcController {
 		return "member/admin";
 	}
 
-	@RequestMapping("/updateImage")
+	@RequestMapping("/updateImage")											//이미지 업데이트 
 	public String updateImage() throws Exception {
 		String isbn = "";
 
@@ -108,6 +108,7 @@ public class EtcController {
 				book = requestservice.findBookOne(isbn);
 				System.out.println(book.getImageurl());
 				if (book.getPublish() != null && book.getAuthor() != null) {
+					bookmodel.setTitle(book.getTitle());
 					bookmodel.setPublish(book.getPublish());
 					bookmodel.setImageurl(book.getImageurl());
 					bookmodel.setAuthor(book.getAuthor());

@@ -84,8 +84,16 @@ public class BookServiceImpl implements BookService {
 	}
 
 	@Override
-	public List<SearchResult> searchBook(String keyword) {
-		return bookDao.searchBook(keyword);
+	public List<SearchResult> searchBook(String field, String keyword) {
+		if(field=="title"){
+			return bookDao.searchBook(keyword);
+		}else if(field=="author"){
+			return bookDao.searchAuthor(keyword);
+		}else {
+			return bookDao.searchPublisher(keyword);
+		}
+		
+		
 	}
 
 	@Override
@@ -221,11 +229,28 @@ public class BookServiceImpl implements BookService {
 	 */
 
 	@Override
-	public List<BookModel> listBook() {
-
+	public List<BookModel> listBook(String listType, String datepicker1, String datepicker2) {  
+		  
+		Dto dto = new Dto();
+		dto.setDate1(datepicker1);
+		dto.setDate2(datepicker2);
+		
+		switch (listType) {
+			case "new":			
+				return bookDao.newBook(dto);
+			case "best":	
+				return bookDao.bestBook();
+			case "recommend":
+				return bookDao.recommendBook();
+		}
 		return bookDao.listBook();
 	}
-
+	
+	@Override
+	public List<BookModel> bookList(String listType) {
+		return bookDao.listBook();
+	}
+	
 	@Override
 	public List<BookModel> selectBookAll() {
 
@@ -295,4 +320,5 @@ public class BookServiceImpl implements BookService {
 	public List<BookModel> selectBookForImage() {
 		return etcDao.selectBookForImage();
 	}
+	
 }

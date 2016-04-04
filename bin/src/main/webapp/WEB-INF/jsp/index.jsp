@@ -1,163 +1,192 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="Content-Type" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
-<title>Blog Home - Start Bootstrap Template</title>
+<title>서한 기술 자료실</title>
 <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="/resources/css/common.css" rel="stylesheet">
 <link href="/resources/css/index.css" rel="stylesheet">
+<link href="/resources/css/bootstrap-select.min.css" rel="stylesheet">
+<script type="text/javascript" src="/resources/js/highchartTable.js"></script>
+<script type="text/javascript" src="/resources/js/highcharts.js"></script>
+<script>
+	$("#logout").click(function() {
+		location.href = "/logout"
+	})
+
+	$document.ready(function() {
+
+		$('table.highchart').highchartTable();
+		var date = "${con.regisdate}";
+		var newicon = "<span class="label label-default">New</span></h3>";
+		if (date < now()) {
+			$("#notice").append(newicon);
+		}
+
+	});
+	var array = [ "a0", "a1", "a2", "a3", "a4", "a5", "a6", "a7", "a8", "a9" ];
+	function deletee() {
+		for ( var i in array) {
+			$("#array[i]").hide();
+		}
+
+	}
+
+	window.onload = function() {
+		deletee();
+
+	};
+
+	var cnt = 0;
+	function add() {
+		if (cnt == 10) {
+			clearInterval(timer);
+		}
+		$("#array[cnt]").show();
+
+		cnt++;
+	}
+
+	var timer = setInterval(add, 2000);
+</script>
 </head>
+<%
+	String id = null;
+	session.setAttribute("id", id);
+%>
 <body>
 	<jsp:include page="nav.jsp" />
 	<!-- Page Content -->
 	<div class="container">
 		<div class="row">
 			<!-- Blog Entries Column -->
-			<div class="col-md-8">
-				<h1 class="page-header">
-					한줄 명언 <small>민상훈책방</small>
-				</h1>
-				<!-- First Blog Post -->
-				<select multiple class="form-control">
-				<c:forEach items="${contentList}" var="con" varStatus="status">
-					<option>${con.content}</option>
-					
-					</c:forEach>
-				</select>
+			<h1>기술 자료실</h1>
+			
+			<div align="center" col-md-12 col-sm-12 col-xs-12" style="float:left;">
+				<!-- First Blog Post --> 
+				<img align="middle" src="/resources/img/background.png" style="width:95%; height:150px"/> 
 				
-				<hr>
-				<img src="/resources/main.JPG" style="width: 750px; height: 400px"
-					id="image1">
-				<div id="searchResultArea"></div>
-				<hr>
-				<p>잠은 인생의 사치입니다! 저는 하루 네 시간만 자면 충분하다고 생각해요. 물론,숙면을 취할 때 말이죠</p>
-				<a class="btn btn-primary" id="logout" name="logout">로그 아웃 <span
-					class="glyphicon glyphicon-chevron-right"></span></a>
-
-				<hr>
-				<!-- Pager -->
-				<ul class="pager">
-					<li class="previous"><a href="#">&larr; Older</a></li>
-					<li class="next"><a href="#">Newer &rarr;</a></li>
-				</ul>
-			</div>
-			<!-- Blog Sidebar Widgets Column -->
-			<div class="col-md-4">
-				<!-- Blog Search Well -->
-				<div class="well">
-					<h4>도서 검색</h4>
-					<div class="input-group">
-						<input type="text" class="form-control" id="keyword"> <span
-							class="input-group-btn">
-							<button class="btn btn-default" type="button" id="btn_search">
+				<div align="center" style="vertical-align: baseline; float: left; margin:10px">
+					<form action="/searchBook" method="post">
+						<span class="input-group-btn"> <input type="text"
+							style="width: 98%; float: left" class="form-control"
+							id="keyword" name="keyword"
+							placeholder="기술자료실 도서 검색 [ 소문자로 입력 ]">
+							<button class="btn btn-default" type="submit" id="btn_find">
 								<span class="glyphicon glyphicon-search"></span>
-							</button>
-						</span>
+							</button> </span>
+					</form>
+				</div> 
+			</div>
+			<div class="col-md-12 col-sm-12 col-xs-12" style="float:left">
+				<div class="col-md-6 col-sm-6 col-xs-6" style="float: left; display: block; margin-top: 50px" >
+					<div class="col-md-4 col-sm-4 col-xs-4" style="float: left; display: block; text-align:center" >
+						<a href="#"style="display:block"><img src="/resources/img/btn1.png"  style="width: 100%; margin:10px"></a>
+						<a href="#" style="display:block">개인정보관리</a>
 					</div>
-					<!-- /.input-group -->
+					<div class="col-md-4 col-sm-4 col-xs-4" style="float: left; display: block; text-align:center" >
+						<a href="borrowList" style="display:block" ><img src="/resources/img/btn2.png" style="width: 100%; margin:10px"></a>
+						<a href="borrowList" style="display:block">대출/예약연기</a>
+					</div>
+					<div class="col-md-4 col-sm-4 col-xs-4" style="float: left; display: block; text-align:center" >
+						<a href="request"style="display:block"><img src="/resources/img/btn3.png" style="width: 100%; margin:10px"></a>
+						<a href="request" style="display:block">도서구매신청</a>
+					</div>
 				</div>
-				<!-- Blog Categories Well -->
-				<div class="well" align="center">
-					<h3>이달의 베스트 회원 Top 3</h3>
-					<br>
-					<div class="row">
-
+				<div class="col-md-6 col-sm-6 col-xs-6" style="float: right;">
+					<h4 class="page-header">
+						<a href="noticeList">공지사항</a> 
+					</h4>
+					<ul class="list-group">
+						<c:forEach items="${noticeList}" var="notice" varStatus="status"
+							begin="0" end="0" step="1">
+							<li class="list-group-item"><textarea style="width: 100%;"
+									readonly rows="4">${notice.content}</textarea></li>
+						</c:forEach>
+					</ul>
+				</div>
+			</div>
+			<div class="col-md-12 col-sm-12 col-xs-12" style="float:left">
+				<div class="col-md-6 col-sm-6 col-xs-6" style="float: left">
+					<h3>신간도서</h3>  
+					<c:forEach items="${newbook}" var="newbook" begin="0" end="2"
+						step="1" varStatus="status"> 
 						<div align="center">
-							<c:forEach items="${bestList}" var="best" begin="0" end="2"
-								step="1" varStatus="status">
-								<font size=3><strong> ${best.id} </strong></font>
-								<br>
-								<strong>${best.name}</strong>
-								<br>
-                                  ${best.score}점<br>
-								<br>
-							</c:forEach>
-						</div>
-
-						<!-- /.col-lg-6 -->
-					</div>
-					<!-- /.row -->
-				</div>
-				<!-- Side Widget Well -->
-				<div class="well">
-
-					<h4>데이터베이스 배움터</h4>
-					<p>이 책을 저술하기 위해서 약 20,000페이지에 가까운 자료를 찾아서 검토하였다. 또한 이 분야에서 오랜
-						강의 경험이 있는 많은 교수들의 자문도 구하였다. 이와 같은 준비 과정을 거쳐, 적절한 학습 분량의 데이터베이스의
-						기본적인 개념과 실용적인 주제들을 정선하여 이 책을 저술하였다. 실제 업무와 관련이 적은 순수한 데이터베이스 이론
-						주제들은 과감하게 배제하였고, 개념을 알기 쉽게 보여주는 그림들을 많이 사용하여 이해하기 쉬운 책이 되도록 꾸몄다..</p>
-					<c:forEach items="${bookmodel}" var="book" begin="0" end="2"
-						step="1" varStatus="status">
-						<div class="row" align="center">
-							<div align="center">
-								<div class="thumbnail" align="center">
-									<img src="${book.imageurl}">
-									<div class="caption">
-										<p>${book.bookname}</p>
-									</div>
-								</div>
+							<div class="thumbnail" align="left"
+								style="height: 90px; width: 23%; margin:10px">
+								<img src="${newbook.imageurl}" height="100%" width="100%">
+								<a href="#"
+										onclick="window.open('/bookInfo?book_cd=${newbook.book_cd}','new','resizeble=yes scrollbars=yes, width=850, height=850');">${newbook.title}</a>
 							</div>
+							 
+						</div>
 					</c:forEach>
 				</div>
-
+				<div class="col-md-6 col-sm-6 col-xs-6" style="float: left">
+					<h3>추천도서</h3>  
+					<c:forEach items="${newbook}" var="newbook" begin="0" end="2"						step="1" varStatus="status"> 
+						<div align="center">
+							<div class="thumbnail" align="left"
+								style="height: 90px; width: 23%; margin:10px">
+								<img src="${newbook.imageurl}" height="100%" width="100%">
+								<a href="#"
+										onclick="window.open('/bookInfo?book_cd=${newbook.book_cd}','new','resizeble=yes scrollbars=yes, width=850, height=850');">${newbook.title}</a>
+							</div>
+	<%-- 							<p class="caption">${newbook.author}</p> --%>
+	<%-- 							<p class="caption">입고일 : ${newbook.rcv_date}</p> --%>
+							
+						</div> 
+					</c:forEach>
+				</div>
 			</div>
-
 		</div>
 	</div>
+
 	<!-- /.row -->
 	<hr>
 	<!-- Footer -->
-	<footer>
-		<div class="row">
-			<div class="col-lg-12">
-				<p>Copyright &copy; Your Website 2014</p>
-			</div>
-			<!-- /.col-lg-12 -->
-		</div>
-		<!-- /.row -->
-	</footer>
-	</div>
+
+
 	<!-- /.container -->
 	<!-- jQuery -->
-	<script src="/resources/js/jquery/jquery.js"></script>
 	<!-- Bootstrap Core JavaScript -->
+	<script src="/resources/js/jquery/jquery.js"></script>
+	<script src="/resources/js/jquery.dataTables.min.js"></script>
+	<script src="/resources/js/dataTables.bootstrap.min.js"></script>
 	<script src="/resources/js/bootstrap.min.js"></script>
 	<script src="/resources/js/common.js"></script>
-	<script>
-		$("#logout").click(function() {
-			location.href = "/logout"
-		})
-		var array = [ "a0", "a1", "a2", "a3", "a4", "a5", "a6", "a7", "a8",
-				"a9" ];
-		function deletee() {
-			for ( var i in array) {
-				$("#array[i]").hide();
-			}
+	<script src="/resources/js/book.js"></script>
+	<script src="/resources/js/bootstrap-select.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#dataTable').dataTable({
+				"language" : {
+					"url" : "dataTables.korean.lang"
+				},
+				/* "pageLength" : 10, */
+				"pageLength" : 20,
+				paging : true,
+				searching : false,
+				"columns" : [ null, null, null, {
+					"searchable" : false
 
-		}
-		window.onload = function() {
-			deletee();
+				}, {
+					"searchable" : false
+				}, {
+					"searchable" : false,
 
-		};
+				} ]
 
-		var cnt = 0;
-		function add() {
-			if (cnt == 10) {
-				clearInterval(timer);
-			}
-			$("#array[cnt]").show();
-
-			cnt++;
-		}
-
-		var timer = setInterval(add, 2000);
+			});
+		});
 	</script>
 </body>
 </html>

@@ -66,90 +66,103 @@
 	<jsp:include page="nav.jsp" />
 	<!-- Page Content -->
 	<div class="container">
-		<div class="row">
+		<div class="row col-md-12 col-sm-12 col-xs-12">
 			<!-- Blog Entries Column -->
 			<h1>기술 자료실</h1>
-			
-			<div align="center" col-md-12 col-sm-12 col-xs-12" style="float:left;">
-				<!-- First Blog Post --> 
-				<img align="middle" src="/resources/img/background.png" style="width:95%; height:150px"/> 
-				
-				<div align="center" style="vertical-align: baseline; float: left; margin:10px">
+		</div>
+
+		<div align="center" class="row " style="position: relative;">
+			<div class="col-md-12 col-sm-12	col-xs-12">
+				<!-- First Blog Post -->
+				<div align="right">
+					<img src="/resources/img/background.jpg" style="width: 50%;" />
+				</div>
+				<div align="center"
+					style="vertical-align: middle; position: absolute; bottom: 20%; right: 30%; width: 60%">
 					<form action="/searchBook" method="post">
 						<span class="input-group-btn"> <input type="text"
-							style="width: 98%; float: left" class="form-control"
-							id="keyword" name="keyword"
-							placeholder="기술자료실 도서 검색 [ 소문자로 입력 ]">
-							<button class="btn btn-default" type="submit" id="btn_find">
+							style="width: 94%; float: left" class="form-control" id="keyword"
+							name="keyword" placeholder="기술자료실 도서 검색 [ 소문자로 입력 ]">
+							<button class="btn btn-default" type="submit" id="btn_find"
+								style="width: 6%">
 								<span class="glyphicon glyphicon-search"></span>
-							</button> </span>
+							</button>
+						</span>
 					</form>
-				</div> 
-			</div>
-			<div class="col-md-12 col-sm-12 col-xs-12" style="float:left">
-				<div class="col-md-6 col-sm-6 col-xs-6" style="float: left; display: block; margin-top: 50px" >
-					<div class="col-md-4 col-sm-4 col-xs-4" style="float: left; display: block; text-align:center" >
-						<a href="#"style="display:block"><img src="/resources/img/btn1.png"  style="width: 100%; margin:10px"></a>
-						<a href="#" style="display:block">개인정보관리</a>
-					</div>
-					<div class="col-md-4 col-sm-4 col-xs-4" style="float: left; display: block; text-align:center" >
-						<a href="borrowList" style="display:block" ><img src="/resources/img/btn2.png" style="width: 100%; margin:10px"></a>
-						<a href="borrowList" style="display:block">대출/예약연기</a>
-					</div>
-					<div class="col-md-4 col-sm-4 col-xs-4" style="float: left; display: block; text-align:center" >
-						<a href="request"style="display:block"><img src="/resources/img/btn3.png" style="width: 100%; margin:10px"></a>
-						<a href="request" style="display:block">도서구매신청</a>
-					</div>
-				</div>
-				<div class="col-md-6 col-sm-6 col-xs-6" style="float: right;">
-					<h4 class="page-header">
-						<a href="noticeList">공지사항</a> 
-					</h4>
-					<ul class="list-group">
-						<c:forEach items="${noticeList}" var="notice" varStatus="status"
-							begin="0" end="0" step="1">
-							<li class="list-group-item"><textarea style="width: 100%;"
-									readonly rows="4">${notice.content}</textarea></li>
-						</c:forEach>
-					</ul>
-				</div>
-			</div>
-			<div class="col-md-12 col-sm-12 col-xs-12" style="float:left">
-				<div class="col-md-6 col-sm-6 col-xs-6" style="float: left">
-					<h3>신간도서</h3>  
-					<c:forEach items="${newbook}" var="newbook" begin="0" end="2"
-						step="1" varStatus="status"> 
-						<div align="center">
-							<div class="thumbnail" align="left"
-								style="height: 90px; width: 23%; margin:10px">
-								<img src="${newbook.imageurl}" height="100%" width="100%">
-								<a href="#"
-										onclick="window.open('/bookInfo?book_cd=${newbook.book_cd}','new','resizeble=yes scrollbars=yes, width=850, height=850');">${newbook.title}</a>
-							</div>
-							 
-						</div>
-					</c:forEach>
-				</div>
-				<div class="col-md-6 col-sm-6 col-xs-6" style="float: left">
-					<h3>추천도서</h3>  
-					<c:forEach items="${newbook}" var="newbook" begin="0" end="2"						step="1" varStatus="status"> 
-						<div align="center">
-							<div class="thumbnail" align="left"
-								style="height: 90px; width: 23%; margin:10px">
-								<img src="${newbook.imageurl}" height="100%" width="100%">
-								<a href="#"
-										onclick="window.open('/bookInfo?book_cd=${newbook.book_cd}','new','resizeble=yes scrollbars=yes, width=850, height=850');">${newbook.title}</a>
-							</div>
-	<%-- 							<p class="caption">${newbook.author}</p> --%>
-	<%-- 							<p class="caption">입고일 : ${newbook.rcv_date}</p> --%>
-							
-						</div> 
-					</c:forEach>
 				</div>
 			</div>
 		</div>
-	</div>
+		<div align="center" class=" row" style="overflow: auto;">
+			<div class="col-md-6 col-sm-12 col-xs-12"
+				style="float: left; display: block;">
+				<div class="col-md-4 col-sm-4 col-xs-4"
+					style="float: left; display: block; text-align: center">
+					<a href="#" style="display: block"><img
+						src="/resources/img/btn1.png" style="width: 100%; margin: 10px"></a>
+					<a href="#" style="display: block">개인정보관리</a>
+				</div>
+				<div class="col-md-4 col-sm-4 col-xs-4"
+					style="float: left; display: block; text-align: center">
+					<a href="borrowList" style="display: block"><img
+						src="/resources/img/btn2.png" style="width: 100%; margin: 10px"></a>
+					<a href="borrowList" style="display: block">대출/예약연기</a>
+				</div>
+				<div class="col-md-4 col-sm-4 col-xs-4"
+					style="float: left; display: block; text-align: center">
+					<a href="request" style="display: block"><img
+						src="/resources/img/btn3.png" style="width: 100%; margin: 10px"></a>
+					<a href="request" style="display: block">도서구매신청</a>
+				</div>
+			</div>
+			<div class="col-md-6 col-sm-12 col-xs-12"
+				style="float: right; text-align: left;">
+				<a href="noticeList" style="font-size: 20px;">공지사항</a>
+				<ul class="list-group">
+					<c:forEach items="${noticeList}" var="notice" varStatus="status"
+						begin="0" end="0" step="1">
+						<li class="list-group-item"><textarea style="width: 100%;"
+								readonly rows="6">${notice.content}</textarea></li>
+					</c:forEach>
+				</ul>
+			</div>
+		</div>
+		<div align="center" class="row">
+			<div class="col-md-6 col-sm-12 col-xs-12"
+				style="float: left; text-align: left; margin-bottom: 30px">
+				<h4>신간도서</h4>
+				<c:forEach items="${newbook}" var="newbook" begin="0" end="2"
+					step="1" varStatus="status">
+					<div align="center">
+						<div class="col-md-4 col-sm-4 col-xs-4"
+							style="float: left; display: block; text-align: center;">
+							<img src="${newbook.imageurl}" height="100%" width="100%">
+							<a href="#"
+								onclick="window.open('/bookInfo?book_cd=${newbook.book_cd}','new','resizeble=yes scrollbars=yes, width=850, height=850');">${newbook.title}</a>
+						</div>
 
+					</div>
+				</c:forEach>
+			</div>
+			<div class="col-md-6 col-sm-12 col-xs-12"
+				style="float: left; text-align: left;">
+				<h4>추천도서</h4>
+				<c:forEach items="${newbook}" var="newbook" begin="0" end="2"
+					step="1" varStatus="status">
+					<div align="center">
+						<div class="col-md-4 col-sm-4 col-xs-4"
+							style="float: left; display: block; text-align: center; ">
+							<img src="${newbook.imageurl}" height="100%" width="100%">
+							<a href="#"
+								onclick="window.open('/bookInfo?book_cd=${newbook.book_cd}','new','resizeble=yes scrollbars=yes, width=850, height=850');">${newbook.title}</a>
+						</div>
+						<%-- 							<p class="caption">${newbook.author}</p> --%>
+						<%-- 							<p class="caption">입고일 : ${newbook.rcv_date}</p> --%>
+
+					</div>
+				</c:forEach>
+			</div>
+		</div>
+	</div>
 	<!-- /.row -->
 	<hr>
 	<!-- Footer -->

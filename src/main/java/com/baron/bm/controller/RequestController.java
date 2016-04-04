@@ -57,23 +57,22 @@ public class RequestController {
 				model.setId(cookie.getValue());
 			}
 		}
-		MemberModel membermodel =  new MemberModel();
+		MemberModel membermodel = new MemberModel();
 		membermodel = joinService.selectMember(model.getId());
 		membermodel.setId(model.getId());
 		String max = requestservice.selectMaxSer();
-		
+
 		model.setKname(model.getKname().substring(0, 5).trim());
-		model.setBook_cd(model.getB_group().substring(0, 1)+model.getC_group().substring(0,3)+"-");
+		model.setBook_cd(model.getB_group().substring(0, 1)
+				+ model.getC_group().substring(0, 3) + "-");
 
 		model.setReq_cd("Book" + now.toString() + max);
-		
+
 		requestservice.requestBook(model, membermodel);
 
 		return "redirect:request";
 	}
 
-	
-	
 	@RequestMapping("/request")
 	public String request(HttpServletRequest request, Model model) {
 
@@ -107,19 +106,19 @@ public class RequestController {
 			String isbn) throws Exception {
 		String id = null;
 		BookModel book = requestservice.findBookOne(isbn);
-		
+
 		for (Cookie cookie : request.getCookies()) {
 			if (cookie.getName().equals("bm_id")) {
 				id = cookie.getValue();
 				book.setId(id);
 			}
 		}
-		
+
 		if (isbn != null) {
 			model.addAttribute("book", book);
 			return "request/confirmRequest";
-		}else {
-			return "request/manualRequest"; 
+		} else {
+			return "request/manualRequest";
 		}
 	}
 
@@ -182,20 +181,8 @@ public class RequestController {
 	@RequestMapping(value = "/modifiRequest", method = RequestMethod.POST)
 	public String modifiRequest(
 			@RequestParam("book_cd") List<String> book_cdList,
-			@RequestParam("req_cd") List<String> req_cdList/*
-															 * ,
-															 * 
-															 * @RequestParam(
-															 * "b_group")
-															 * List<String>
-															 * b_groupList,
-															 * 
-															 * @RequestParam(
-															 * "c_group")
-															 * List<String>
-															 * c_groupList
-															 */) {
-		for (int i = 0; i < req_cdList.size(); i++) {
+			@RequestParam("req_cd") List<String> req_cdList) {
+		for (int i = 0; i < req_cdList.size()-1; i++) {
 			BookModel book = new BookModel();
 			book.setBook_cd(book_cdList.get(i));
 			book.setReq_cd(req_cdList.get(i));

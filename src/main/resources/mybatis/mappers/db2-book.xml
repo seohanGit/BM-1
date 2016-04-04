@@ -14,10 +14,10 @@
 		INSERT INTO
 		TESTLIB.BOOKMST
 		(title, book_cd,b_group, c_group, publish,author,rentchk,imageurl,
-		rcv_date, isbn, price, summary)
+		rcv_date, isbn, price, summary, rcmdchk)
 		VALUES
 		(#{title},#{book_cd},#{b_group}, #{c_group}, #{publish},#{author},'0', #{imageurl},
-		current date, #{isbn}, #{price}, #{summary})
+		current date, #{isbn}, #{price}, #{summary}, '')
 	</insert>
 
 
@@ -35,12 +35,40 @@
 		ON A.book_cd = B.book_cd AND A.rentchk =
 		B.rentchk
 		WHERE
-		LCASE(A.TITLE) like #{keyword} OR LCASE(A.AUTHOR) like #{keyword}
+		LCASE(A.TITLE) like #{keyword} 
+		ORDER BY A.RENTCHK DESC, A.RCV_DATE DESC 
+		FETCH first 200 rows only
+	</select>
+	<select id="searchAuthor" parameterType="String" resultType="SearchResult">
+		<bind name="keyword" value="'%' + _parameter + '%'" />
+		SELECT A.title, A.author, A.publish, A.b_group, A.rentchk,
+		A.reservechk, A.book_cd, B.returndate
+		FROM
+		TESTLIB.BOOKMST A LEFT OUTER
+		JOIN testlib.bookrent B
+		ON A.book_cd = B.book_cd AND A.rentchk =
+		B.rentchk
+		WHERE
+		LCASE(A.AUTHOR) like #{keyword} 
+		ORDER BY A.RENTCHK DESC, A.RCV_DATE DESC 
+		FETCH first 200 rows only
+	</select>
+	<select id="searchPublisher" parameterType="String" resultType="SearchResult">
+		<bind name="keyword" value="'%' + _parameter + '%'" />
+		SELECT A.title, A.author, A.publish, A.b_group, A.rentchk,
+		A.reservechk, A.book_cd, B.returndate
+		FROM
+		TESTLIB.BOOKMST A LEFT OUTER
+		JOIN testlib.bookrent B
+		ON A.book_cd = B.book_cd AND A.rentchk =
+		B.rentchk
+		WHERE
+		LCASE(A.PUBLISH) like #{keyword}
 		ORDER BY A.RENTCHK DESC, A.RCV_DATE DESC 
 		FETCH first 200 rows only
 	</select>
 
-	<select id="listBook" parameterType="Dto" resultType="BookModel">
+	<select id="listBook" parameterType="String" resultType="BookModel">
 		SELECT
 		title, author, b_group, rentchk, reservechk, book_cd, rcv_date
 		FROM
@@ -48,8 +76,33 @@
 		ORDER
 		BY rcv_date DESC
 		FETCH first 200 rows only
+	</select>	
+	<select id="newBook" parameterType="Dto" resultType="BookModel">
+		SELECT
+		title, author, b_group, rentchk, reservechk, book_cd, rcv_date
+		FROM
+		TESTLIB.BOOKMST
+		where rcv_date between #{date1} and #{date2} and left(b_group,1) = 'B'  
+		ORDER
+		BY rcv_date DESC
+		FETCH first 200 rows only
 	</select>
-
+	<select id="bestBook" resultType="BookModel">
+		SELECT
+		title, author, b_group, rentchk, reservechk, book_cd, rcv_date
+		FROM
+		TESTLIB.BOOKMST
+		ORDER
+		BY grade DESC
+		FETCH first 50 rows only
+	</select>
+	<select id="recommendBook" parameterType="String" resultType="BookModel">
+		SELECT
+		title, author, b_group, rentchk, reservechk, book_cd, rcv_date
+		FROM
+		TESTLIB.BOOKMST
+		where rcmdchk = 'Y'
+	</select>	
 
 	<delete id="deleteBook" parameterType="String">
 		DELETE FROM
@@ -62,7 +115,7 @@
 	 <update id="updateBook" parameterType="BookModel">
 		UPDATE TESTLIB.BOOKMST
 		SET
-		TITLE=#{title}, b_group=#{b_group},
+		TITLE=#{title} ,
 		publish=#{publish},
 		author=#{author},
 		imageurl=#{imageurl}

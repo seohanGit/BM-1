@@ -1,5 +1,6 @@
 package com.baron.member.service;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -33,6 +34,8 @@ public class ReportingServiceImpl implements ReportingService {
 	@Autowired
 	private NotifiDao notifiDao;
 
+	Calendar cal = java.util.Calendar.getInstance();
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 	@Override
 	// Every night at 1 AM
 	@Scheduled(cron = "0 0 11 * 1-5 ?")
@@ -42,11 +45,11 @@ public class ReportingServiceImpl implements ReportingService {
 
 		List<BookModel> rentList = rentDao.rentListAll();
 		for (BookModel bookModel : rentList) {
-			Calendar cal = java.util.Calendar.getInstance();
 			cal.add(Calendar.DATE, 5);
+			
 			System.out.println(bookModel.getReturndate());
 			System.out.println(cal.getTime());
-			if (cal.getTime() == bookModel.getReturndate()) {
+			if (sdf.format(cal.getTime()) == bookModel.getReturndate()) {
 				System.out.println(bookModel.getReturndate());
 				System.out.println(cal.getTime());
 				// TEST

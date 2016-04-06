@@ -10,9 +10,9 @@ public class BookModel {
 	private String c_group;
 	private int quantity;
 
-	private java.util.Date rentdate;
-	private java.util.Date returndate;
-	private Date reser_date;
+	private String rentdate;
+	private String returndate;
+	private String reser_date;
 	private String title;
 	private String imageurl;
 	private String publish;
@@ -28,7 +28,7 @@ public class BookModel {
 
 	private String rcv_date;
 	private String reqstatus;
-	private Date reqdate;
+	private String reqdate;
 	private String req_cd;
 
 	private String sabun;
@@ -144,27 +144,27 @@ public class BookModel {
 		this.sabun = sabun;
 	}
 
-	public java.util.Date getRentdate() {
+	public String getRentdate() {
 		return rentdate;
 	}
 
-	public void setRentdate(java.util.Date date) {
+	public void setRentdate(String date) {
 		this.rentdate = date;
 	}
 
-	public Date getReser_date() {
+	public String getReser_date() {
 		return reser_date;
 	}
 
-	public void setReser_date(Date reser_date) {
+	public void setReser_date(String reser_date) {
 		this.reser_date = reser_date;
 	}
 
-	public Date getReqdate() {
+	public String getReqdate() {
 		return reqdate;
 	}
 
-	public void setReqdate(Date reqdate) {
+	public void setReqdate(String reqdate) {
 		this.reqdate = reqdate;
 	}
 
@@ -281,7 +281,7 @@ public class BookModel {
 		this.id = id;
 	}
 
-	public void setReturndate(java.util.Date date) {
+	public void setReturndate(String date) {
 		this.returndate = date;
 	}
 
@@ -309,11 +309,11 @@ public class BookModel {
 		this.imageurl = imageurl;
 	}
 
-	public java.util.Date getReturndate() {
+	public String getReturndate() {
 		return returndate;
 	}
 
-	public void setRetrundate(Date returndate) {
+	public void setRetrundate(String returndate) {
 		this.returndate = returndate;
 	}
 

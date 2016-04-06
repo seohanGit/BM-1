@@ -53,7 +53,7 @@
 		TESTLIB.BOOKBOARD
 		(title,content,REGISDATE,modifidate,id)
 		VALUES
-		(#{title},#{content},CURRENT DATE,CURRENT DATE,#{id})
+		(#{title},#{content},#{regisdate},#{modifidate},#{id})
 	</insert>
 
 	<delete id="deleteBoard" parameterType="int">
@@ -66,7 +66,7 @@
 	<update id="modifyBoard" parameterType="BoardModel">
 		UPDATE TESTLIB.BOOKBOARD
 		SET
-		content=#{content}, title=#{title}, modifidate=CURRENT DATE
+		content=#{content}, title=#{title}, modifidate=#{modifidate}
 		WHERE
 		boardnum=#{boardnum}
 	</update>
@@ -86,7 +86,7 @@
 		TESTLIB.BOOKBOARD
 		(content, REGISDATE)
 		VALUES
-		(#{content}, CURRENT DATE)
+		(#{content}, #{regisdate})
 	</insert>
 	<delete id="deleteNotice" parameterType="String">
 		DELETE FROM
@@ -98,7 +98,7 @@
 	<update id="modifyNotice" parameterType="BoardModel">
 		UPDATE TESTLIB.BOOKBOARD
 		SET
-		content=#{content}, MODIFYDATE=CURRENT DATE
+		content=#{content}, MODIFYDATE=#{modifidate}
 		WHERE
 		boardnum=#{boardnum}
 	</update>

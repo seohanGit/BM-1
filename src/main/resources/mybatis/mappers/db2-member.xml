@@ -50,7 +50,9 @@
 		A.id,A.name,A.email,A.address,A.cell,A.home, B.rentdate,
 		B.returndate
 		FROM tprlib.gr_insa as A ,BOOKRENT as B
-		WHERE current date >
+		WHERE VARCHAR_FORMAT(CURRENT
+		TIMESTAMP,
+		'YYYYMMDD') >
 		B.returndate
 		AND B.rentchk ='2' and
 		A.id=B.id
@@ -61,10 +63,8 @@
 	<select id="selectMemberList" resultType="MemberModel">
 		SELECT *, (SELECT
 		COUNT(*) FROM testlib.BOOKRENT B WHERE B.rentdate >
-		date_sub(current
-		date,
-		interval 30
-		day) AND B.id=A.id ) AS numborrow
+		VARCHAR_FORMAT(CURRENT
+		TIMESTAMP, 'YYYYMMDD') -30 AND B.id=A.id ) AS numborrow
 		FROM tprlib.gr_insa A
 		ORDER BY
 		team_nm

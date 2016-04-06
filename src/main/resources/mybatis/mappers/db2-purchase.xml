@@ -10,7 +10,7 @@
 		imageurl,isbn, publish, summary, req_cd, kname, reason)
 		VALUES
 		(#{id},
-		current date,
+		#{reqdate},
 		#{title},#{book_cd},#{price},#{author},#{quantity},#{b_group},#{c_group},#{link},
 		#{imageurl},#{isbn}, #{publish}, #{summary}, #{req_cd}, #{kname},
 		#{reason})
@@ -30,7 +30,7 @@
 		WHERE req_cd= #{req_cd}
 	</update>
 
-	<select id="requestList" resultType="BookModel">
+	<select id="requestList" parameterType="String" resultType="BookModel">
 		SELECT B.title, B.imageurl, B.author, B.price, b.quantity, B.reqdate,
 		B.reqstatus, B.id, C.kname, B.book_cd, B.req_cd, B.link, B.b_group,
 		B.c_group
@@ -38,12 +38,12 @@
 		LEFT OUTER JOIN TPRLIB.GR_INSA C ON
 		B.id=C.ASABN
 		WHERE C.CO_GB = 'SEOHAN'
-		AND reqdate  <![CDATA[ > current date -1 year]]>
+		AND reqdate  > #{reqdate}
 		ORDER BY
 		reqdate DESC, reqstatus DESC
 	</select>
 
-	<select id="requestRecord" parameterType="String" resultType="BookModel">
+	<select id="requestRecord" parameterType="BookModel" resultType="BookModel">
 		SELECT *
 		FROM
 		TESTLIB.BOOKREQ A
@@ -54,8 +54,7 @@
 		current
 		date - 1
 		year
-		AND <![CDATA[A.reqdate <= current
-		date]]>)
+		AND <![CDATA[A.reqdate <= #{reqdate} ]]>)
 		ORDER
 		BY
 		A.reqstatus, 
@@ -76,7 +75,9 @@
 		SELECT
 		COALESCE(MAX(REQ_CD),0) SER
 		FROM TESTLIB.BOOKREQ A
-		WHERE REQDATE = current date
+		WHERE REQDATE = VARCHAR_FORMAT(CURRENT
+		TIMESTAMP,
+		'YYYYMMDD')
 	</select>
 
 	<update id="modifiReqBook" parameterType="BookModel">

@@ -55,11 +55,11 @@ public class EtcController {
 
 		bookList = rentservice.copyRent();
 
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
 
 		for (BookModel bookmodel : bookList) {
-			bookmodel.setRentdate(format.parse(bookmodel.getReq_ymd()));
-			bookmodel.setReturndate(format.parse(bookmodel.getRetu_ymd()));
+			bookmodel.setRentdate(format.format(bookmodel.getReq_ymd()));
+			bookmodel.setReturndate(format.format(bookmodel.getRetu_ymd()));
 
 			bookmodel.setBook_cd(bookmodel.getBook_cd());
 			bookmodel.setTeam_nm(bookmodel.getTeam_nm());

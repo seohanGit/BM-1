@@ -66,6 +66,7 @@ public class BookController {
 	public ModelAndView searchBook(HttpServletRequest request, String keyword, String listType, String datepicker1, String datepicker2, String field,
 			ModelAndView mav) throws NullPointerException {
 		if (listType == null)  {
+			if (field == null){field = "title";}
 			List<SearchResult> bookList = bookservice.searchBook(field, keyword);
 			mav.addObject("bookList", bookList);
 			mav.addObject("listType", "");

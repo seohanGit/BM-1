@@ -1,8 +1,10 @@
 package com.baron.bm.controller;
 
 import java.awt.print.Book;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.Cookie;
@@ -26,6 +28,11 @@ public class BoardController {
 /**
  * 
  */
+	Calendar cal = Calendar.getInstance();				
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");				
+	Date nowDate = cal.getTime();
+	
+	
 	@Autowired
 	private BoardService boardService;
 
@@ -56,8 +63,8 @@ public class BoardController {
 
 	@RequestMapping("/modifyBoard")
 	public String modifyBoard(BoardModel board) {
+		board.setModifidate(sdf.format(nowDate));
 		boardService.modifyBoard(board);
-
 		return "redirect:boardList";
 	}
 
@@ -69,6 +76,7 @@ public class BoardController {
 				model.setId(cookie.getValue());
 			}
 		}
+		model.setModifidate(sdf.format(nowDate));
 		boardService.insertBoard(model);
 		return "board/boardsuccess";
 	}
@@ -115,11 +123,13 @@ public class BoardController {
 
 	@RequestMapping("/writeNotice")
 	public String writeNotice() {
+		
 		return "board/insertNotice";
 	}
 
 	@RequestMapping("/insertNotice")
 	public String insertNotice(BoardModel boardmodel) {
+		boardmodel.setModifidate(sdf.format(nowDate));
 		boardService.insertNotice(boardmodel);
 		return "redirect:noticeListByAdmin";
 	}
@@ -132,6 +142,7 @@ public class BoardController {
 
 	@RequestMapping("/modifyNotice")
 	public String modifyNotice(BoardModel content) {
+		content.setModifidate(sdf.format(nowDate));
 		boardService.modifyNotice(content);
 		return "redirect:noticeListByAdmin";
 	}

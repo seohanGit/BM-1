@@ -43,6 +43,14 @@ public class BookModel {
 
 	private String extendchk;
 	private int total;
+	private String field;
+	public String getField() {
+		return field;
+	}
+
+	public void setField(String field) {
+		this.field = field;
+	}
 
 	public String getReason() {
 		return reason;

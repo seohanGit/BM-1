@@ -31,17 +31,16 @@ body {
 	<div class="container ">
 
 		<div class="row panel panel-default">
-			<div id="searchResultArea col-md-12 col-xs-12 col-sm-9">
+			<h2>대여 기록</h2>
+			
+			<br>
+			<div id="searchResultArea col-md-12 col-xs-12 col-sm-9">				
 				<c:choose>
-					<c:when test="${empty record}">
+					<c:when test="${empty record}"> 
+						<h3>대여중인 도서가 없습니다.</h3>
 					</c:when>
-					<c:otherwise>
-
-						<h2>대여 기록</h2>
-
-
-						<div class="dataTable_wrapper">
-
+					<c:otherwise> 
+						<div class="dataTable_wrapper"> 
 							<table class="table table-striped table-bordered" id="dataTable">
 								<thead>
 									<tr class=" title">

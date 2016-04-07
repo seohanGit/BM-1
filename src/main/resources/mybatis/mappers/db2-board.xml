@@ -98,7 +98,7 @@
 	<update id="modifyNotice" parameterType="BoardModel">
 		UPDATE TESTLIB.BOOKBOARD
 		SET
-		content=#{content}, MODIFYDATE=#{modifidate}
+		content=#{content}, MODIFiDATE=#{modifidate}
 		WHERE
 		boardnum=#{boardnum}
 	</update>

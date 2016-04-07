@@ -111,7 +111,7 @@
 									<div class="input-group  ">
 										<input type="radio" name="field" value="title" checked>
 										제목 <input type="radio" name="field" value="author">
-										저자 <input type="radio" name="field" value="publisher">
+										저자 <input type="radio" name="field" value="publish">
 										출판사
 									</div>
 								</div>
@@ -187,7 +187,7 @@
 								<tr>
 
 									<td align="left"><a href="#"
-										onclick="window.open('/bookInfo?book_cd=${book.book_cd}','new','resizeble=yes scrollbars=yes,  width=850, height=850');">
+										onclick="window.open('/bookInfo?book_cd=${book.book_cd}','new','resizeble=yes scrollbars=yes,  width=750, height=500');">
 											${book.title }</a></td>
 									<td class="hidden-xs hidden-sm hidden-md" align="left">${book.author }</td>
 									<td class="hidden-xs hidden-sm" align="left">${book.publish}</td>
@@ -205,8 +205,7 @@
 											<td></td>
 										</c:when>
 										<c:when test="${book.rentchk=='1' and book.reservechk=='0'}">
-											<td>~ <fmt:formatDate type="date" pattern="MM-dd"
-													value="${book.returndate}" /></td>
+											<td>${book.returndate}"</td>
 											<td><button class="btn btn-default" type="button"
 													id="reservebook"
 													onClick="location.href='/reservation?book_cd=${book.book_cd}'">예약</button></td>
@@ -217,8 +216,7 @@
 											<td></td>
 										</c:when>
 										<c:when test="${book.rentchk=='2' and book.reservechk=='0'}">
-											<td>~ <fmt:formatDate type="date" pattern="MM-dd"
-													value="${book.returndate}" /></td>
+											<td>${book.returndate}</td>
 											<td><button class="btn btn-default" type="button"
 													id="reservebook"
 													onClick="location.href='/reservation?book_cd=${book.book_cd}'">예약</button></td>
@@ -245,9 +243,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
-	</div>
-
+	</div> 
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$('#dataTable').dataTable({

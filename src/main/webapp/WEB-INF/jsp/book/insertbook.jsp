@@ -25,7 +25,7 @@ body {
 		<h2>도서 추가 페이지</h2>
 		<div class="panelpanel-default left">
 			<div class="input-group" style="width: 95%">
-				<form action="/getBookInfo" method="post">
+				<form action="/findBook" method="post">
 					<span class="input-group-btn"> <input type="text"
 						class="form-control" id="keyword" name="keyword"
 						placeholder="인터파크 검색">

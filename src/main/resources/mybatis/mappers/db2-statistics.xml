@@ -11,7 +11,7 @@
 		testlib.bookrent A INNER JOIN
 		tprlib.gr_insa B
 		ON A.id=B.asabn WHERE
-		year(A.rentdate) = #{year}
+		left(A.rentdate,4) = #{year}
 		GROUP
 		BY
 		B.team_nm ORDER
@@ -44,9 +44,9 @@
 		ON
 		A.id = B.asabn
 		WHERE
-		year(A.rentdate) =
+		left(A.rentdate,4) =
 		#{year} AND
-		month(A.rentdate) =
+		substr(A.rentdate,5,2) =
 		#{month}
 		GROUP BY
 		A.id
@@ -71,7 +71,7 @@
 		ON
 		A.id = B.asabn
 		WHERE
-		year(A.rentdate) =
+		left(A.rentdate,4) =
 		#{year}
 		GROUP BY
 		A.id
@@ -85,22 +85,22 @@
 		count, month(rentdate) AS month
 		FROM
 		testlib.bookrent
-		WHERE year(rentdate) = #{year}
+		WHERE left(rentdate,4) = #{year}
 		GROUP BY
 		month(rentdate)
 	</select>
 
 	<select id="selectGroupByB" parameterType="Dto" resultType="Dto">
 		SELECT COUNT(*)
-		count, B.b_group, month(A.rentdate) AS
+		count, B.b_group, substr(A.rentdate,5,2) AS
 		month
 		FROM
 		testlib.bookrent A INNER JOIN testlib.bookmst B
 		ON A.book_cd =
 		B.book_cd
-		WHERE year(A.rentdate) = #{year} AND month(A.rentdate) =
+		WHERE left(A.rentdate,4) = #{year} AND substr(A.rentdate,5,2) =
 		#{month}
-		GROUP BY month(A.rentdate), B.b_group
+		GROUP BY substr(A.rentdate,5,2), B.b_group
 		ORDER BY count desc, month
 	</select>
 	<select id="selectGroupByBYear" parameterType="Dto" resultType="Dto">
@@ -111,7 +111,7 @@
 		testlib.bookmst B
 		ON A.book_cd =
 		B.book_cd
-		WHERE year(A.rentdate) =
+		WHERE left(A.rentdate,4) =
 		#{year}
 		GROUP BY B.b_group
 
@@ -137,8 +137,8 @@
 		testlib.bookmst B
 		ON A.book_cd
 		= B.book_cd
-		WHERE year(rentdate) = #{year} AND
-		month(rentdate)= #{month}
+		WHERE left(rentdate,4) = #{year} AND
+		substr(rentdate,5,2)= #{month}
 		GROUP BY
 		B.book_cd
 		ORDER BY
@@ -164,7 +164,7 @@
 		testlib.bookmst B
 		ON A.book_cd
 		= B.book_cd
-		WHERE year(rentdate) = #{year}
+		WHERE left(rentdate,4) = #{year}
 		GROUP BY
 		B.book_cd
 		ORDER BY
@@ -172,11 +172,11 @@
 	</select>
 	<select id="selectSumPurchase" parameterType="Dto"
 		resultType="Dto">
-		SELECT SUM(DOUBLE(PRICE)) PRICE, month(rcv_date) AS month,
+		SELECT SUM(DOUBLE(PRICE)) PRICE, substr(rcv_date,5,2) AS month,
 		count(rcv_date) count
 		FROM testlib.bookmst
-		WHERE year(rcv_date) = #{year}
-		GROUP BY month(rcv_date)
+		WHERE left(rcv_date,4) = #{year}
+		GROUP BY substr(rcv_date,5,2)
 	</select>
 
 </mapper>

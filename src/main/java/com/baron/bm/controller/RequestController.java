@@ -2,6 +2,7 @@ package com.baron.bm.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -31,7 +32,10 @@ import com.baron.member.service.RequestService;
 
 @Controller
 public class RequestController {
-
+	Calendar cal =  Calendar.getInstance();
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+	String nowDate = sdf.format(cal.getTime());
+	
 	@Autowired
 	private RequestService requestservice;
 
@@ -49,9 +53,7 @@ public class RequestController {
 
 	@RequestMapping("/confirmRequest")
 	public String requestResult(BookModel model, HttpServletRequest request) {
-		Date date = new Date();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-		String now = sdf.format(date);
+		
 		for (Cookie cookie : request.getCookies()) {
 			if (cookie.getName().equals("bm_id")) {
 				model.setId(cookie.getValue());
@@ -66,7 +68,7 @@ public class RequestController {
 		model.setBook_cd(model.getB_group().substring(0, 1)
 				+ model.getC_group().substring(0, 3) + "-");
 
-		model.setReq_cd("Book" + now.toString() + max);
+		model.setReq_cd("Book" + nowDate.toString() + max);
 
 		requestservice.requestBook(model, membermodel);
 
@@ -110,6 +112,7 @@ public class RequestController {
 		for (Cookie cookie : request.getCookies()) {
 			if (cookie.getName().equals("bm_id")) {
 				id = cookie.getValue();
+				book.setReqdate(nowDate);
 				book.setId(id);
 			}
 		}
@@ -126,10 +129,10 @@ public class RequestController {
 	public String buyRequest(String req_cd, Model model, BookModel book) {
 
 		book = requestservice.selectBook(req_cd);
-		book.setB_group(book.getB_group().trim() + "-"
-				+ requestservice.selectB_code(book.getB_group()).trim());
-		book.setC_group(book.getC_group() + "-"
-				+ requestservice.selectC_code(book.getC_group()));
+//		book.setB_group(book.getB_group().trim() + "-"
+//				+ requestservice.selectB_code(book.getB_group()).substring(0,1).trim());
+//		book.setC_group(book.getC_group() + "-"
+//				+ requestservice.selectC_code(book.getC_group()));
 		System.out.println(book.getB_group());
 		System.out.println(book.getC_group());
 
@@ -139,7 +142,7 @@ public class RequestController {
 
 	@RequestMapping("/confirmBuy")
 	public String confirmBuy(BookModel model) {
-
+		model.setRcv_date(nowDate);
 		requestservice.confirmBuy(model);
 		requestservice.deleteRequest(model.getReq_cd());
 

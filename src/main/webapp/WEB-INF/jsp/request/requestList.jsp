@@ -94,8 +94,7 @@ body {
 														<c:when test="${empty book.kname}">${book.id}</c:when>
 														<c:otherwise>${book.kname}</c:otherwise>
 													</c:choose></td>
-												<td class="hidden-sm hidden-xs hidden-md "><fmt:formatDate
-														type="date" pattern="yyyy-MM-dd" value="${book.reqdate}" /></td>
+												<td class="hidden-sm hidden-xs hidden-md ">${book.reqdate}</td>
 
 												<c:choose>
 													<c:when test="${book.reqstatus =='0'}">

@@ -121,7 +121,7 @@
 	</update>
 	<!-- <update id="upPoint" parameterType="String"> UPDATE BOOKMEMBER SET 
 		numborrow = numborrow + 1 WHERE id = #{id} </update> -->
-	<update id="returnBook" parameterType="String">
+	<update id="returnBook" parameterType="BookModel">
 		UPDATE
 		TESTLIB.BOOKRENT
 		SET
@@ -151,7 +151,7 @@
 		right(B.returndate,2) - right(#{returndate},2)=5
 	</select>
 
-	<update id="extendBorrowBook" parameterType="String">
+	<update id="extendBorrowBook" parameterType="BookModel">
 		UPDATE
 		TESTLIB.BOOKRENT
 		SET
@@ -199,9 +199,8 @@
 	</select>
 
 	<select id="rentList" parameterType="String" resultType="BookModel">
-		SELECT
-		A.title, B.rentdate, B.returndate, B.id, B.book_cd, A.rentchk,
-		A.reservechk,(SELECT
+		SELECT  
+		A.*, B.rentdate, B.returndate, B.id, (SELECT
 		C.KNAME FROM
 		TPRLIB.GR_INSA C WHERE B.id=C.ASABN
 		FETCH

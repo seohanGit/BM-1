@@ -31,11 +31,11 @@ public interface RentDao {
 
 	void borrowBook(BookModel bookmodel);
 
-	void returnBook(String bookCode);
+	void returnBook(BookModel book);
 
 	void confirmBorrowBook(String bookCode);
 
-	void extendBorrowBook(String bookCode);
+	void extendBorrowBook(BookModel book);
 
 	void cancleBorrowBook(String bookCode);
 

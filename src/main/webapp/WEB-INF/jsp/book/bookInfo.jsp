@@ -7,7 +7,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport"
-	content="width=850px, height=500px, initial-scale=1">
+	content="width=750px, height=350px, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
 <title>도서정보 페이지</title>
@@ -18,53 +18,55 @@
 </head>
 <body>
 	<div class="container">
+		<div class="row">
+			<div class="col-md-4 col-sm-4	col-xs-4">
+				<h2>도서정보</h2>
+			</div>
+			<div class="col-md-8 col-sm-8 col-xs-8" style="margin-top: 20px;">
+				<c:choose>
+					<c:when test="${book.rentchk=='0'}">
+						<mark>대출가능</mark>
+						<button class="btn btn-default" type="button" id="borrowbook"
+							onClick="opener.document.location.href='/borrowbook?book_cd=${book.book_cd}'; borrow(); opener.focus(); self.close();">대출</button>
+					</c:when>
 
-
-		<div class="left"  >
-			<h2>도서정보</h2>
-		</div>
-		<div class="right form-group" style="margin-top: 40px">
-			<c:choose>
-				<c:when test="${book.rentchk=='0'}">
-					<mark>대출가능</mark>
-					<button class="btn btn-default" type="button" id="borrowbook"
-						onClick="opener.document.location.href='/borrowbook?book_cd=${book.book_cd}'; borrow(); opener.focus(); self.close();">대출</button>
-				</c:when>
-
-				<c:when test="${book.rentchk=='1' and book.reservechk=='1'}">	예약중
+					<c:when test="${book.rentchk=='1' and book.reservechk=='1'}">	예약중
 						</c:when>
-				<c:when test="${book.rentchk=='1' and book.reservechk=='0'}"> 대여요청중<button
-						class="btn btn-default" type="button" id="reservebook"
-						onClick="location.href='/reservation?book_cd=${book.book_cd}'">예약</button>
-				</c:when>
+					<c:when test="${book.rentchk=='1' and book.reservechk=='0'}"> 대여요청중<button
+							class="btn btn-default" type="button" id="reservebook"
+							onClick="location.href='/reservation?book_cd=${book.book_cd}'">예약</button>
+					</c:when>
 
-				<c:when test="${book.rentchk=='2' and book.reservechk=='1'}">	예약중 	
+					<c:when test="${book.rentchk=='2' and book.reservechk=='1'}">	예약중 	
 								
 						</c:when>
-				<c:when test="${book.rentchk=='2' and book.reservechk=='0'}"> 대출중 <button
-						class="btn btn-default" type="button" id="reservebook"
-						onClick="location.href='/reservation?book_cd=${book.book_cd}'">예약</button>
-				</c:when>
+					<c:when test="${book.rentchk=='2' and book.reservechk=='0'}"> 대출중 <button
+							class="btn btn-default" type="button" id="reservebook"
+							onClick="location.href='/reservation?book_cd=${book.book_cd}'">예약</button>
+					</c:when>
 
-				<c:when test="${book.rentchk=='4'}">대출정지
+					<c:when test="${book.rentchk=='4'}">대출정지
 						</c:when>
-				<c:when test="${book.rentchk=='5'}"> 예약중
+					<c:when test="${book.rentchk=='5'}"> 예약중
 						</c:when>
-			</c:choose>
+				</c:choose>
+			</div>
 		</div>
+		<div class="col-md-12 col-sm-12	col-xs-12">
+			<div class="col-md-4 col-sm-4	col-xs-4">
 
-		<div class="panel panel-default">
-			<c:choose>
-				<c:when test="${empty book.imageurl }">
-				</c:when>
-				<c:otherwise>
-					<div style="width: 35%; height:600px" class="left">
-						<img style="width: 100%;" src="${book.imageurl}">
-					</div>
-				</c:otherwise>
-			</c:choose>
+				<c:choose>
+					<c:when test="${empty book.imageurl }">
+					</c:when>
+					<c:otherwise>
+						<div style="width: 100%;">
+							<img style="width: 100%;" src="${book.imageurl}">
+						</div>
+					</c:otherwise>
+				</c:choose>
+			</div>
+			<div class="col-md-8 col-sm-8 col-xs-8">
 
-			<div  style="width:60%; float:right">
 				<table class="table table-bordered">
 
 					<tr>
@@ -131,7 +133,7 @@
 
 				</c:when>
 				<c:otherwise>
-					<div id="bulletin" class="board " style="width:60%; float:right">
+					<div id="bulletin" class="board " style="width: 60%; float: right">
 						<p class="content ellipsis">${book.summary}</p>
 						<c:choose>
 							<c:when test="${empty book.summary}"></c:when>

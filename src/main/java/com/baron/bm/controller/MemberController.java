@@ -7,6 +7,7 @@
 
 package com.baron.bm.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Hashtable;
@@ -42,6 +43,10 @@ import com.baron.member.service.StatisticService;
 @SessionAttributes({ "kname", "jikb", "team_nm", "permission", "id", "chief", "chiefId" })
 @Controller
 public class MemberController {
+
+	Calendar cal =  Calendar.getInstance();
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+	String nowDate = sdf.format(cal.getTime());
 	
 	@Autowired
 	private JoinService joinService;
@@ -312,7 +317,9 @@ public class MemberController {
 
 	@RequestMapping("/memberList")
 	public String memberList(Model model) {
-		List<MemberModel> memberList = joinService.memberList();
+		cal.add(cal.MONTH, -1);
+		String rentdate = sdf.format(cal);
+		List<MemberModel> memberList = joinService.memberList(rentdate);
 		model.addAttribute("memberList", memberList);
 		return "/member/memberList";
 	}

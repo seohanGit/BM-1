@@ -137,7 +137,7 @@
 							style="float: left; display: block; text-align: center;">
 							<img src="${newbook.imageurl}" height="100%" width="100%">
 							<a href="#"
-								onclick="window.open('/bookInfo?book_cd=${newbook.book_cd}','new','resizeble=yes scrollbars=yes, width=850, height=850');">${newbook.title}</a>
+								onclick="window.open('/bookInfo?book_cd=${newbook.book_cd}','new','resizeble=yes scrollbars=yes, width=750, height=500');">${newbook.title}</a>
 						</div>
 
 					</div>
@@ -153,7 +153,7 @@
 							style="float: left; display: block; text-align: center; ">
 							<img src="${newbook.imageurl}" height="100%" width="100%">
 							<a href="#"
-								onclick="window.open('/bookInfo?book_cd=${newbook.book_cd}','new','resizeble=yes scrollbars=yes, width=850, height=850');">${newbook.title}</a>
+								onclick="window.open('/bookInfo?book_cd=${newbook.book_cd}','new','resizeble=yes scrollbars=yes, width=750, height=500');">${newbook.title}</a>
 						</div>
 						<%-- 							<p class="caption">${newbook.author}</p> --%>
 						<%-- 							<p class="caption">입고일 : ${newbook.rcv_date}</p> --%>

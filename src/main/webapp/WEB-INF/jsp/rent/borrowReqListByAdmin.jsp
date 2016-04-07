@@ -1,3 +1,5 @@
+<%@page import="java.util.Calendar"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -10,7 +12,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
-<title>대여현황</title>
+<title>대여 요청 현황</title>
 <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="/resources/css/signin.css" rel="stylesheet">
 <link href="/resources/css/common.css" rel="stylesheet">
@@ -83,11 +85,8 @@ body {
 												<td><input type="checkbox" name="book_cd"
 													value="${book.book_cd}"></td>
 												<td class="td-title" align="left">${book.title}</td>
-												<td align="left"><fmt:formatDate type="date"
-														pattern="yyyy-MM-dd" value="${book.rentdate}" /></td>
-												<td class="hidden-xs" style="width: inherit;"><fmt:formatDate
-														type="date" pattern="yyyy-MM-dd"
-														value="${book.returndate}" /></td>
+												<td align="left"> ${book.rentdate} </td>
+												<td class="hidden-xs" style="width: inherit;"> ${book.returndate} </td>
 												<td class="hidden-xs" align="left">${book.b_group }</td>
 
 												<td>${book_cd}<c:choose>
@@ -138,8 +137,9 @@ body {
 											<th class="td-img">연장</th>
 										</tr>
 									</thead>
-
-									<c:set var="now" value="<%=new java.util.Date()%>" />
+									<% SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");  %>
+									<% Calendar cal = Calendar.getInstance();  %>
+									<c:set var="now" value="<%=sdf.format(cal.getTime()) %>" />
 
 
 									<tbody>
@@ -156,14 +156,11 @@ body {
 													<c:when test="${rent.returndate < now}">
 														<td align="left"
 															style="text-decoration: underline; text-align: right;"><mark>
-																<fmt:formatDate type="date" pattern="yyyy-MM-dd"
-																	value="${rent.returndate }" />
-																- 연체중
+																${rent.returndate }	- 연체중
 															</mark></td>
 													</c:when>
 													<c:otherwise>
-														<td align="left"><fmt:formatDate type="date"
-																pattern="yyyy-MM-dd" value="${rent.returndate }" /></td>
+														<td align="left"> ${rent.returndate } </td>
 													</c:otherwise>
 												</c:choose>
 

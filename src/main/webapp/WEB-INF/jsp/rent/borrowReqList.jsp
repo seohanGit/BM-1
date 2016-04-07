@@ -82,11 +82,9 @@ body {
 										<td class="hidden-xs" align="left">${book.author }</td>
 										<td class="hidden-xs hidden-sm" align="left">${book.b_group}</td>
 
-
-										<td class="hidden-xs"><fmt:formatDate type="date"
-												pattern="yyyy-MM-dd" value="${book.rentdate}" /></td>
-										<td style="width: inherit;"><fmt:formatDate type="date"
-												pattern="yyyy-MM-dd" value="${book.returndate}" /></td>
+										
+										<td class="hidden-xs"> ${book.rentdate}  </td>
+										<td style="width: inherit;"> ${book.returndate}  </td>
 										<c:choose>
 											<c:when test="${book.rentchk=='1'}">
 												<td>요청중</td>

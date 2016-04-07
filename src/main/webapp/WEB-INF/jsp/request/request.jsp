@@ -110,8 +110,7 @@ body {
 											<td class="hidden-xs">${book.author}</td>
 											<td>${book.price}원</td>
 											<td align="center">${book.quantity}</td>
-											<td class="hidden-xs"><fmt:formatDate type="date"
-													pattern="yyyy-MM-dd" value="${book.reqdate}" /></td>
+											<td class="hidden-xs"> ${book.reqdate}</td>
 											<c:choose>
 												<c:when test="${book.reqstatus=='0'}">
 													<td>대기</td>

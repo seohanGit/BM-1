@@ -22,7 +22,7 @@ public interface JoinService {
 	
 	public int selectMemberById(String id);
 
-	public List<MemberModel> memberList();
+	public List<MemberModel> memberList(String rentdate);
 
 	public List<String> test();
 }

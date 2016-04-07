@@ -72,7 +72,7 @@ public class BookServiceImpl implements BookService {
 
 	@Override
 	public void insertBook(BookModel model) {
-		if (model.getQuantity() == 1) {
+		if (model.getQuantity() == 1  ) {
 			bookDao.insertBook(model);
 		} else if (model.getQuantity() != 1) {
 			for (int i = 0; i < model.getQuantity(); i++) {
@@ -85,15 +85,15 @@ public class BookServiceImpl implements BookService {
 
 	@Override
 	public List<SearchResult> searchBook(String field, String keyword) {
-		if(field=="title"){
+		if(field.equals("title")){
 			return bookDao.searchBook(keyword);
-		}else if(field=="author"){
+		}else if(field.equals("author")){
 			return bookDao.searchAuthor(keyword);
-		}else {
+		}else  if(field.equals("publish")){
 			return bookDao.searchPublisher(keyword);
+		}else{
+			return bookDao.searchBook(keyword);
 		}
-		
-		
 	}
 
 	@Override
@@ -300,7 +300,7 @@ public class BookServiceImpl implements BookService {
 
 		for (BookModel book : bookList) {
 			SimpleDateFormat format = new SimpleDateFormat();
-			if (isThisDateValid(book.getRcv_date(), "yyyy-MM-dd")) {
+			if (isThisDateValid(book.getRcv_date(), "yyyyMMdd")) {
 				etcDao.updateDate(book);
 			} else {
 				try {

@@ -51,10 +51,10 @@ public class RentDaoImpl implements RentDao {
 	}
 
 	@Override
-	public void returnBook(String book_cd) {
+	public void returnBook(BookModel book) {
 
-		session.update(NAMESPACE + "returnBook", book_cd);
-		session.update(NAMESPACE + "returnBook1", book_cd);
+		session.update(NAMESPACE + "returnBook", book);
+		session.update(NAMESPACE + "returnBook1", book);
 
 	}
 
@@ -86,8 +86,8 @@ public class RentDaoImpl implements RentDao {
 	}
 
 	@Override
-	public void extendBorrowBook(String book_cd) {
-		session.update(NAMESPACE + "extendBorrowBook", book_cd);
+	public void extendBorrowBook(BookModel book) {
+		session.update(NAMESPACE + "extendBorrowBook", book);
 
 	}
 

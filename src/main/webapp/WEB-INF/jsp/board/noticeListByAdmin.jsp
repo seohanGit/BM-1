@@ -49,9 +49,10 @@
 							<c:forEach items="${noticeList}" var="notice" varStatus="status">
 								<form action="/modifyNotice" method="post">
 									<tr style="padding-bottom: 10px">
-										<td class="hidden-xs" width="15%" align="left"><fmt:formatDate
-												value="${notice.regisdate}" pattern="yyyy-MM-dd" /></td>
-
+										<td class="hidden-xs" width="15%" align="left">
+										${notice.regisdate}</td>
+										<td hidden="true"><input name="boardnum" value="${notice.boardnum}" hidden="true">
+										</td>
 										<td style="width: 80%; height: auto; padding-left: 10px"><textarea
 												class="content ellipsis" id="content" name="content"
 												style="width: 100%;" rows="5">${notice.content }</textarea>

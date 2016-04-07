@@ -1,3 +1,5 @@
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Calendar" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -65,8 +67,9 @@ body {
 											<th class="td-img">연장</th>
 										</tr>
 									</thead>
-
-									<c:set var="now" value="<%=new java.util.Date()%>" />
+								<% SimpleDateFormat sdf =  new SimpleDateFormat("yyyyMMdd");
+								Calendar cal = Calendar.getInstance(); %>
+									<c:set var="now" value="<%= sdf.format(cal.getTime())%>" />
 
 
 									<tbody>
@@ -83,14 +86,13 @@ body {
 													<c:when test="${rent.returndate < now}">
 														<td align="left"
 															style="text-decoration: underline; text-align: right;"><mark>
-																<fmt:formatDate type="date" pattern="yyyy-MM-dd"
-																	value="${rent.returndate }" />
-																- 연체중
+<%-- 																 <%String.format("yyyyMMdd" , "${rent.returndate}");%>  --%>
+																${rent.returndate} - 연체중
 															</mark></td>
 													</c:when>
 													<c:otherwise>
-														<td align="left"><fmt:formatDate type="date"
-																pattern="yyyy-MM-dd" value="${rent.returndate }" /></td>
+														<td align="left">${rent.returndate} </td>
+<%-- 														<%String.format("yyyyMMdd","${rent.returndate}");%> --%>
 													</c:otherwise>
 												</c:choose>
 

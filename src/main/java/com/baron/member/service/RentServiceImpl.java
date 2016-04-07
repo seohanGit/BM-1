@@ -85,8 +85,8 @@ public class RentServiceImpl implements RentService {
 	}
 
 	@Override
-	public void returnBook(String book_cd) {
-		rentDao.returnBook(book_cd);	
+	public void returnBook(BookModel book) {
+		rentDao.returnBook(book);	
 	}
 
 	@Override
@@ -115,9 +115,9 @@ public class RentServiceImpl implements RentService {
 	}
 
 	@Override
-	public void extendBorrowBook(String book_cd) {
+	public void extendBorrowBook(BookModel book) {
 
-		rentDao.extendBorrowBook(book_cd);
+		rentDao.extendBorrowBook(book);
 	}
 
 	@Override

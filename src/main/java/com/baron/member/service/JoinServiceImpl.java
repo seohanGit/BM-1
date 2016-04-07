@@ -61,7 +61,7 @@ public class JoinServiceImpl implements JoinService {
 	}
 
 	@Override
-	public List<MemberModel> memberList() {
+	public List<MemberModel> memberList(String rentdate) {
 		return joinDao.selectMemberList();
 	}
 

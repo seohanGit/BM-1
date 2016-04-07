@@ -32,13 +32,13 @@ public class SearchResult {
 	private String isbn;
 	private String summary;
 	private String rcv_date;
-	private Date returndate;
+	private String returndate;
 
-	public Date getReturndate() {
+	public String getReturndate() {
 		return returndate;
 	}
 
-	public void setReturndate(Date returndate) {
+	public void setReturndate(String returndate) {
 		this.returndate = returndate;
 	}
 

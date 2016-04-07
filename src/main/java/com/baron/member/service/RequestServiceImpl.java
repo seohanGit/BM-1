@@ -7,15 +7,11 @@ import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.text.Format;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import javax.mail.Session;
-import javax.servlet.http.HttpSession;
-
-import org.exolab.castor.xml.dtd.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +27,10 @@ import com.baron.member.model.SmsModel;
 
 @Service
 public class RequestServiceImpl implements RequestService {
+	Calendar cal =  Calendar.getInstance();
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");	
+	String nowDate = sdf.format(cal.getTime());
+	
 	@Autowired
 	private RequestDao requestDao;
 
@@ -49,7 +49,9 @@ public class RequestServiceImpl implements RequestService {
 	@Override
 	public List<BookModel> requestList() {
 		// TODO Auto-generated method stub
-		return requestDao.requestList();
+		cal.add(cal.MONTH, -1);
+		String monthago = sdf.format(cal.getTime());
+		return requestDao.requestList(monthago);
 	}
 
 	@Override
@@ -127,6 +129,43 @@ public class RequestServiceImpl implements RequestService {
 		}
 	}
 
+	@Override
+	public BookModel selectBook(String req_cd) {
+		return requestDao.selectBook(req_cd);
+
+	}
+
+	@Override
+	public List<BookModel> requestRecord(String id) {
+		// TODO Auto-generated method stub
+		return requestDao.requestRecord(id);
+	}
+
+	@Override
+	public void modifiBook(BookModel book) {
+		requestDao.modifiBook(book);
+	}
+
+	@Override
+	public void rejectRequest(String req_cd) {
+		requestDao.rejectRequest(req_cd);
+
+	}
+
+	@Override
+	public String selectB_code(String b_group) {
+		return requestDao.selectB_code(b_group);
+	}
+
+	@Override
+	public String selectC_code(String c_group) {
+		return requestDao.selectC_code(c_group);
+	}
+
+	@Override
+	public String selectMaxSer() {
+		return requestDao.selectMaxSer();
+	}
 	/*
 	 * @Override public BookModel getRequestBook(String isbn, String id, int
 	 * quantity) throws Exception, IOException { BookModel book = new
@@ -189,41 +228,4 @@ public class RequestServiceImpl implements RequestService {
 		br.close();
 	}
 
-	@Override
-	public BookModel selectBook(String req_cd) {
-		return requestDao.selectBook(req_cd);
-
-	}
-
-	@Override
-	public List<BookModel> requestRecord(String id) {
-		// TODO Auto-generated method stub
-		return requestDao.requestRecord(id);
-	}
-
-	@Override
-	public void modifiBook(BookModel book) {
-		requestDao.modifiBook(book);
-	}
-
-	@Override
-	public void rejectRequest(String req_cd) {
-		requestDao.rejectRequest(req_cd);
-
-	}
-
-	@Override
-	public String selectB_code(String b_group) {
-		return requestDao.selectB_code(b_group);
-	}
-
-	@Override
-	public String selectC_code(String c_group) {
-		return requestDao.selectC_code(c_group);
-	}
-
-	@Override
-	public String selectMaxSer() {
-		return requestDao.selectMaxSer();
-	}
 }

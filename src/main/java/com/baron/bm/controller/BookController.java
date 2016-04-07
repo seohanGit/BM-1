@@ -37,14 +37,21 @@ public class BookController {
 	@Autowired
 	private RequestService requestservice;
 
+	Calendar cal = Calendar.getInstance();				
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");				
+	String nowDate = sdf.format(cal.getTime());
+
 	@RequestMapping("/insertbookForm")
 	public String insertbook() throws Exception {
-		bookservice.updateDate();
+//		bookservice.updateDate();
 		return "book/insertbook";
 	}
 
 	@RequestMapping("/insertbook")
 	public String insertresult(BookModel model) {
+		model.setRcv_date(nowDate); 
+		model.setQuantity(1);
+		model.setIsbn("");
 		bookservice.insertBook(model);
 		return "book/insertbookresult";
 	}
@@ -56,12 +63,7 @@ public class BookController {
 
 		return "book/bookInfo";
 	}
-
-	/*
-	 * @RequestMapping("/national") public String getNationalBest(BookModel
-	 * model) throws Exception { bookservice.getBestSeller(); return
-	 * "book/nationalBest"; }
-	 */
+ 
 	@RequestMapping("/searchBook")
 	public ModelAndView searchBook(HttpServletRequest request, String keyword, String listType, String datepicker1, String datepicker2, String field,
 			ModelAndView mav) throws NullPointerException {

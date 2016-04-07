@@ -31,30 +31,23 @@
 	</update>
 
 	<select id="requestList" parameterType="String" resultType="BookModel">
-		SELECT B.title, B.imageurl, B.author, B.price, b.quantity, B.reqdate,
+		SELECT distinct B.title, B.imageurl, B.author, B.price, b.quantity, B.reqdate,
 		B.reqstatus, B.id, C.kname, B.book_cd, B.req_cd, B.link, B.b_group,
 		B.c_group
 		FROM TESTLIB.BOOKREQ B
 		LEFT OUTER JOIN TPRLIB.GR_INSA C ON
 		B.id=C.ASABN
 		WHERE C.CO_GB = 'SEOHAN'
-		AND reqdate  > #{reqdate}
+		AND reqdate  > #{monthago} or B.reqstatus = '1'
 		ORDER BY
 		reqdate DESC, reqstatus DESC
 	</select>
 
-	<select id="requestRecord" parameterType="BookModel" resultType="BookModel">
+	<select id="requestRecord" parameterType="String" resultType="BookModel">
 		SELECT *
 		FROM
-		TESTLIB.BOOKREQ A
-
-		WHERE A.id=#{id} AND
-		(A.reqdate
-		>
-		current
-		date - 1
-		year
-		AND <![CDATA[A.reqdate <= #{reqdate} ]]>)
+		TESTLIB.BOOKREQ A 
+		WHERE A.id=#{id}  
 		ORDER
 		BY
 		A.reqstatus, 

@@ -68,7 +68,7 @@ body {
 						</div>
 						<div class="right" style="width: 40%">
 							<input type="text" class="form-control" id="book_cd"
-								name="book_cd" value="${book.book_cd}">
+								name="book_cd" placeholder="${book.book_cd}">${book.book_cd}
 						</div>
 					</div>
 

@@ -57,6 +57,9 @@
 
 				<c:choose>
 					<c:when test="${empty book.imageurl }">
+						<div style="width: 100%;">
+							<img style="width: 100%;" src="/resources/img/noimage.png">
+						</div>
 					</c:when>
 					<c:otherwise>
 						<div style="width: 100%;">
@@ -129,19 +132,11 @@
 				</c:otherwise>
 			</c:choose> --%>
 			<c:choose>
-				<c:when test="${book.summary == '' }">
-
+				<c:when test="${book.summary == '' }"> 
 				</c:when>
 				<c:otherwise>
 					<div id="bulletin" class="board " style="width: 60%; float: right">
-						<p class="content ellipsis">${book.summary}</p>
-						<c:choose>
-							<c:when test="${empty book.summary}"></c:when>
-							<c:otherwise>
-								<a class="btn btn-default">펼쳐보기 »</a>
-							</c:otherwise>
-						</c:choose>
-						<p></p>
+						<p class="content ellipsis">${book.summary}</p> 
 					</div>
 				</c:otherwise>
 			</c:choose>

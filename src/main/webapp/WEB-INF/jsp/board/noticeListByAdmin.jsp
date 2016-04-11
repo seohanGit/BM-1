@@ -32,11 +32,6 @@
 							<button class="btn btn-default" type="button"
 								onClick="location.href='/writeNotice'">추가</button>
 					</div>
-
-
-
-
-
 					<table class="table table-bordered" id="dataTable">
 						<thead class="title">
 							<tr>
@@ -58,8 +53,7 @@
 												style="width: 100%;" rows="5">${notice.content }</textarea>
 										</td>
 										<td><button class="btn btn-default btn-sm" type="submit"
-												id="modifyNotice">수정</button>
-
+												id="modifyNotice">수정</button> 
 											<button class="btn btn-default btn-sm" type="button"
 												id="deleteNotice"
 												onClick="location.href='/deleteNotice?boardnum=${notice.boardnum}'">삭제</button>
@@ -100,6 +94,9 @@
 		}
 		function del() {
 			alert("승인되었습니다.");
+		}
+		function modify() {
+			alert("수정되었습니다.");
 		}
 	</script>
 </body>

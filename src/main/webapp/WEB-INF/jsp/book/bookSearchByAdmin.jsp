@@ -79,28 +79,22 @@ body {
 							</form>
 						</div>
 						<div class="input-group"
-							style="width: 40%; vertical-align: baseline; float: right">
-							<select class="selectpicker"
-								style="width: 10%; font-size: 14px; margin-top: 10px; vertical-align: baseline;"
-								id="select">
-								<optgroup label="대분류">
-									<option value="B-도서(단행본)">B-도서(단행본)
-									<option value="E-기타매체">E-기타매체
-									<option value="J-정기간행물">J-정기간행물
-									<option value="P-특허자료">P-특허자료
-									<option value="R-보고서">R-보고서
-									<option value="S-규격/사전">S-규격/사전
-									<option value="T-논문">T-논문
-								</optgroup>
-							</select>
-							<form action="stopBorrowList" method="post">
+							style="width: 40%; vertical-align: baseline; float: right">														
+								<select class="selectpicker" style="width: 10%; font-size: 14px; margin-top: 10px; vertical-align: baseline;"
+								id="select"><option
+							selected>${book.b_group}<c:forEach items="${BCodeList}"
+								var="code">
+								<option value="${code.code}-${code.name}">${code.code}-${code.name}
+							</c:forEach></select>					
 								<button style="width: 100px; vertical-align: baseline;"
-									class="btn btn-default" type="button" id="insertBook">도서추가</button>
-								<button style="width: 100px; vertical-align: baseline;"
-									class="btn btn-default" type="submit">대출정지</button>
+									class="btn btn-default" type="button" id="insertBook"
+									onclick="window.open('/insertbookForm','new','resizeble=yes scrollbars=yes,  width=750, height=500');">도서추가</button>
+<!-- 								<button style="width: 100px; vertical-align: baseline;" -->
+<!-- 									class="btn btn-default" type="submit">대출정지</button> -->
 						</div>
 					</div>
 				</div>
+				<form action="stopBorrowList" method="post">
 				<div class="dataTable_wrapper">
 					<div class="left"
 						style="vertical-align: baseline; margin-right: 20px"></div>
@@ -110,11 +104,9 @@ body {
 								<th class="td-chk"></th>
 								<th>도서명</th>
 								<th class="hidden-xs td-genre">저자</th>
-								<th class="hidden-sm hidden-xs hidden-md td-author">분류</th>
-
-								<th style="width: 110px">대여상태</th>
-
-								<th style="width: 90px"></th>
+								<th class="hidden-sm hidden-xs hidden-md td-author">분류</th> 
+								<th style="width: 110px">대여상태</th> 
+								<th style="width: 230px"></th>
 							</tr>
 						</thead>
 						<%-- 
@@ -122,8 +114,7 @@ body {
  --%>
 
 						<tbody id="tablebody">
-							<c:forEach items="${bookList}" var="book" varStatus="loop">
-
+							<c:forEach items="${bookList}" var="book" varStatus="loop">  
 								<tr>
 									<td><input type="checkbox" name="book_cd"
 										value="${book.book_cd}"></td>
@@ -138,14 +129,15 @@ body {
 											<td align="left">대출가능</td>
 											<td>
 												<button class="btn btn-default btn-sm" type="button"
+													id="deletebook"
+													onClick="location.href='/deletebook?book_cd=${book.book_cd}'; del();">도서삭제</button>
+												<button class="btn btn-default btn-sm" type="button"
 													id="reservebook"
 													onClick="location.href='/stopBorrow?book_cd=${book.book_cd}'">대출정지</button>
 												<button class="btn btn-default btn-sm" type="button"
 													id="modifybook"
 													onclick="window.open('/modifyBookForm?book_cd=${book.book_cd}','new','resizeble=yes scrollbars=yes,  width=850px, height=750px');">도서수정</button>
-												<button class="btn btn-default btn-sm" type="button"
-													id="deletebook"
-													onClick="location.href='/deletebook?book_cd=${book.book_cd}'; del();">도서삭제</button>
+												
 											</td>
 										</c:when>
 										<c:when test="${book.rentchk=='1'}">
@@ -254,5 +246,5 @@ body {
 
 		});
 	</script>
-	</ body>
+	</body>
 </html>

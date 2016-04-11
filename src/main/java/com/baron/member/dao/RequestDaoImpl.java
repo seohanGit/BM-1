@@ -31,8 +31,8 @@ public class RequestDaoImpl implements RequestDao {
 	}
 
 	@Override
-	public List<BookModel> requestList(String monthago) {
-		return session.selectList(NAMESPACE + "requestList", monthago);
+	public List<BookModel> requestList() {
+		return session.selectList(NAMESPACE + "requestList");
 	}
 
 	@Override

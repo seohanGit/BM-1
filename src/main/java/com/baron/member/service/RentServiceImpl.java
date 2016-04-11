@@ -78,7 +78,7 @@ public class RentServiceImpl implements RentService {
 
 			if (joinDao.selectMember(id).getMobi_no() != null) {
 				sms.setPhone(joinDao.selectMember(id).getMobi_no().substring(1));
-				// notifiDao.notifiRent(sms);
+				notifiDao.notifiRent(sms);
 			}
 		}
 		rentDao.confirmBorrowBook(book_cd);

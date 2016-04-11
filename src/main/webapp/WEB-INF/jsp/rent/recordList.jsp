@@ -98,10 +98,8 @@ body {
 											</c:choose></td>
 										<td class="hidden-sm hidden-xs hidden-md" id="b_group"
 											align="left">${book.b_group}</td>
-										<td class="hidden-xs" align="left"><fmt:formatDate
-												type="date" pattern="yyyy-MM-dd" value="${book.rentdate }" /></td>
-										<td align="left"><fmt:formatDate type="date"
-												pattern="yyyy-MM-dd" value="${book.returndate }" /></td>
+										<td class="hidden-xs" align="left"> ${book.rentdate } </td>
+										<td align="left"> ${book.returndate } </td>
 
 
 										<%-- <td><button class="btn btn-default btn-sm" type="button"

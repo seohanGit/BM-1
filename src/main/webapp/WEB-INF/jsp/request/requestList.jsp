@@ -31,11 +31,7 @@ body {
 
 		<div class="col-md-12"><jsp:include page="../menu.jsp" />
 			<div class="col-xs-12 panel panel-default">
-				<div class="panel-body">
-
-					<!-- Blog Entries Column -->
-
-
+				<div class="panel-body"> 
 					<c:choose>
 						<c:when test="${empty bookList}">
 							<div>
@@ -117,10 +113,7 @@ body {
 														<td></td>
 
 													</c:when>
-												</c:choose>
-
-
-
+												</c:choose> 
 											</tr>
 										</c:forEach>
 									</tbody>

@@ -91,7 +91,7 @@ public class MemberController {
 		model.addAttribute("noticeList", notice);
 		model.addAttribute("bestBook", bestBook);
 		model.addAttribute("bestTeam", bestTeam);
-		model.addAttribute("newbook", newBook);
+		model.addAttribute("newBook", newBook);
 		return "index";
 	}
 
@@ -183,7 +183,7 @@ public class MemberController {
 			if (adminchk) {
 				response.addCookie(new Cookie("bm_id", id));
 				response.addCookie(new Cookie("bm_permission", "1"));
-				mav.setViewName("redirect:startAdmin");
+				mav.setViewName("redirect:admin");
 
 				mav.addObject("permission", "1");
 				System.out.println();
@@ -191,7 +191,7 @@ public class MemberController {
 			} else {
 				response.addCookie(new Cookie("bm_id", id));
 				response.addCookie(new Cookie("bm_permission", "0"));
-				mav.setViewName("redirect:start");
+				mav.setViewName("redirect:index");
 
 				mav.addObject("permission", "0");
 

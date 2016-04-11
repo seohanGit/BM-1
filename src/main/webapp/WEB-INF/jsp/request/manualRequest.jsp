@@ -12,44 +12,16 @@
 <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="/resources/css/common.css" rel="stylesheet">
 <link href="/resources/css/bootstrap-select.min.css" rel="stylesheet">
-<script src="/resources/js/jquery/jquery.js"></script>
-<style type="text/css">
-body {
-	padding-top: 70px;
-}
-
-span {
-	display: none;
-}
-</style>
+<script src="/resources/js/jquery/jquery.js"></script> 
 </head>
 <body>
-	<jsp:include page="../nav.jsp" />
 	<div class="container">
-		<h2>도서 구매 요청</h2>
+		<h3>도서 구매 요청</h3>
 		<div class="panel panel-default">
 			<form action="/confirmRequest" name="requestForm" method="post"
 				class="panel-body" onsubmit="formChk();return false">
 				<div id="top">
-					<div class="form-group">
-						<label for="exampleInputEmail1">ISBN</label> <input type="tel"
-							class="form-control" id="isbn" name="isbn" maxlength="13"
-							required="required">
-					</div>
-					<div class="form-group">
-						<label for="exampleInputPassword1">도서명</label> <input type="text"
-							class="form-control" id="title" name="title" required="required">
-					</div>
-					<div class="form-group">
-						<label for="exampleInputPassword1">저자</label> <input type="text"
-							class="form-control" id="author" name="author"
-							required="required">
-					</div>
-					<div class="form-group">
-						<label for="exampleInputPassword1">출판사</label> <input type="text"
-							class="form-control" id="publish" name="publish"
-							required="required">
-					</div>
+				
 					<div class="form-group left" style="width: 50%">
 						<label for="exampleInputPassword1">대분류</label> <select
 							class="selectpicker" name="b_group">
@@ -66,7 +38,7 @@ span {
 					</div>
 					<div class="form-group right" style="width: 50%;">
 						<label for="exampleInputPassword1">소분류</label> <select
-							class="selectpicker" name="c_group">
+							class="selectpicker" name="c_group" style="width: 80%;">
 							<optgroup label="소분류">
 
 								<option value="010-일반">일반
@@ -82,18 +54,38 @@ span {
 							</optgroup>
 						</select>
 					</div>
-
-
 					<div class="form-group">
+						<label for="exampleInputEmail1">ISBN</label> <input type="tel"
+							class="form-control" id="isbn" name="isbn" maxlength="13"
+							 >
+					</div>
+					
+					<div class="form-group">
+						<label for="exampleInputPassword1">도서명</label> <input type="text"
+							class="form-control" id="title" name="title" required="required">
+					</div>
+					<div class="form-group left" style="width: 50%">
+						<label for="exampleInputPassword1">저자</label> <input type="text"
+							class="form-control" id="author" name="author" style="width: 80%;"
+							required="required">
+					</div>
+					<div class="form-group right" style="width: 50%">
+						<label for="exampleInputPassword1">출판사</label> <input type="text"
+							class="form-control" id="publish" name="publish" style="width: 80%;"
+							required="required">
+					</div>
+
+
+					<div class="form-group left" style="width: 50%">
 						<label for="exampleInputPassword1">수량</label> <input type="number"
 							class="form-control" id="quantity" min="0" name="quantity" value="1"
-							required="required" onkeypress="quantityCheck();">
+							required="required" style="width: 80%;" onkeypress="quantityCheck();">
 					</div>
-					<div class="form-group">
+					<div class="form-group right" style="width: 50%">
 						<label for="exampleInputPassword1">가격</label> <input type="number" 
-							class="form-control" name="price" id="price" min="0" required="required">
+							class="form-control" style="width: 80%;" name="price" id="price" min="0" required="required">
 					</div>
-					<div class="form-group">
+					<div class="form-group" style="width: 100%">
 						<label for="exampleInputPassword1">신청 사유</label> <input
 							type="text" class="form-control" name="reason" id="reason"
 							required="required">

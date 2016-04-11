@@ -57,7 +57,8 @@ body {
 					<label for="exampleInputPassword1">저자</label> <input type="text"
 						class="form-control" id="author" name="author" placeholder="저자">
 				</div>
-				<button type="submit" class="btn btn-default">확인</button>
+				<button type="submit" class="btn btn-default"
+				 onClick="opener.document.location.href='/searchBook?listType=title&keyword='; opener.focus(); self.close(); ">확인</button>
 			</form>
 		</div>
 		<div class="right" id="searchResultArea"></div>

@@ -14,17 +14,11 @@
 <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="/resources/css/signin.css" rel="stylesheet">
 <link href="/resources/css/common.css" rel="stylesheet">
-
-<style type="text/css">
-body {
-	padding-top: 70px;
-}
-</style>
-
+ 
 
 </head>
 
-<body>
+<body class="main">
 	<jsp:include page="../nav.jsp" />
 	<div class="container">
 
@@ -45,9 +39,11 @@ body {
 						</span>
 					</form>
 				</div>
-				<div style="float: right;">
+				<div style="float: right;"> 
 					<button class="btn btn-default" type="button"
-						onclick="location.href='/requestbook'; ">ISBN 미보유 도서</button>
+						onclick="window.open
+							('/requestbook','new','resizeble=yes scrollbars=yes, width=500, height=700');">
+							ISBN 미보유 도서</button>
 				</div>
 				<br>
 				<div style="margin-top: 20px; padding-top: 20px">

@@ -26,9 +26,7 @@ $("#request").click(function() {
 	location.href = "/request"
 })
 
-$("#insertBook").click(function() {
-	location.href = "/insertbookForm"
-})
+ 
 $("#recordList").click(function() {
 	location.href = "/recordList"
 })

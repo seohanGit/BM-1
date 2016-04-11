@@ -47,11 +47,10 @@ public class RequestServiceImpl implements RequestService {
 	NotifiDao notifiDao;
 
 	@Override
-	public List<BookModel> requestList() {
-		// TODO Auto-generated method stub
-		cal.add(cal.MONTH, -1);
-		String monthago = sdf.format(cal.getTime());
-		return requestDao.requestList(monthago);
+	public List<BookModel> requestList() { 
+//		cal.add(cal.MONTH, -1);
+//		String monthago = sdf.format(cal.getTime());
+		return requestDao.requestList();
 	}
 
 	@Override

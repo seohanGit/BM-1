@@ -55,11 +55,8 @@ body {
 										<tr>
 											<td class="td-title" align="left">${record.title }</td>
 											<td class="hidden-xs" align="left">${record.author}</td>
-											<td class="hidden-xs" align="left"><fmt:formatDate
-													type="date" pattern="yyyy-MM-dd"
-													value="${record.rentdate }" /></td>
-											<td align="left"><fmt:formatDate type="date"
-													pattern="yyyy-MM-dd" value="${record.returndate }" /></td>
+											<td class="hidden-xs" align="left">${record.rentdate }</td>
+											<td align="left"> ${record.returndate }</td>
 										</tr>
 
 									</c:forEach>

@@ -67,6 +67,8 @@ public class BookController {
 	@RequestMapping("/searchBook")
 	public ModelAndView searchBook(HttpServletRequest request, String keyword, String listType, String datepicker1, String datepicker2, String field,
 			ModelAndView mav) throws NullPointerException {
+
+		List<CodeModel> BCodeList = new ArrayList<CodeModel>();
 		if (listType == null)  {
 			if (field == null){field = "title";}
 			List<SearchResult> bookList = bookservice.searchBook(field, keyword);
@@ -88,6 +90,10 @@ public class BookController {
 			mav.addObject("date2", datepicker2);
 			mav.addObject("listType", listType);
 		} 
+
+		BCodeList = bookservice.selectBCodeList(); 
+		mav.addObject("BCodeList", BCodeList);
+		 
 		
 		String permission = "";
 		for (Cookie cookie : request.getCookies()) {
@@ -157,7 +163,7 @@ public class BookController {
 		}
 
 		bookservice.deleteBook(book_cd);
-		return "member/admin";
+		return "redirect:searchBook?listType=title&keyword=";
 
 	}
 

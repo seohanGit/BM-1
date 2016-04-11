@@ -96,7 +96,6 @@ body {
 												<td><button class="btn btn-default btn-sm"
 														type="button" id="reservebook"
 														onClick="location.href='/confirmBorrowBook?book_cd=${book.book_cd1}'; ok();">승인</button>
-
 												</td>
 											</tr>
 										</c:forEach>

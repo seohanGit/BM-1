@@ -94,7 +94,7 @@
 		TESTLIB.BOOKMST
 		ORDER
 		BY grade DESC
-		FETCH first 50 rows only
+		FETCH first 10 rows only
 	</select>
 	<select id="recommendBook" parameterType="String" resultType="BookModel">
 		SELECT

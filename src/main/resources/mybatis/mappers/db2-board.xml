@@ -51,9 +51,9 @@
 	<insert id="insertBoard" parameterType="BoardModel">
 		INSERT INTO
 		TESTLIB.BOOKBOARD
-		(title,content,REGISDATE,modifidate,id)
+		(title,content,REGISDATE,modifidate,id,boardtype)
 		VALUES
-		(#{title},#{content},#{regisdate},#{modifidate},#{id})
+		(#{title},#{content},#{regisdate},#{modifidate},#{id}, #{boardType})
 	</insert>
 
 	<delete id="deleteBoard" parameterType="int">
@@ -82,13 +82,14 @@
 	</select>
 
 	<insert id="insertNotice" parameterType="BoardModel">
+		
 		INSERT INTO
 		TESTLIB.BOOKBOARD
-		(content, REGISDATE)
+		(title,content,REGISDATE,modifidate,id,boardtype)
 		VALUES
-		(#{content}, #{regisdate})
+		(#{title},#{content},#{regisdate},#{modifidate},#{id}, #{boardType}
 	</insert>
-	<delete id="deleteNotice" parameterType="String">
+	<delete id="deleteNotice" parameterType="int">
 		DELETE FROM
 		TESTLIB.BOOKBOARD
 		WHERE

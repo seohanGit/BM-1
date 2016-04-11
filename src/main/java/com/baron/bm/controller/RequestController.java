@@ -72,7 +72,7 @@ public class RequestController {
 
 		requestservice.requestBook(model, membermodel);
 
-		return "redirect:request";
+		return "requestSuccess";
 	}
 
 	@RequestMapping("/request")
@@ -91,7 +91,7 @@ public class RequestController {
 			return "getout";
 		} else {
 			if (permission.equals("1")) {
-				bookList = requestservice.requestList();
+				bookList = requestservice.requestList(); 
 				model.addAttribute("bookList", bookList);
 				return "request/requestList";
 			} else {

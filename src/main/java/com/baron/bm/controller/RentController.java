@@ -57,6 +57,7 @@ public class RentController {
 		book.setBook_cd(book_cd);
 		book.setRentchk("1");
 		book.setRentdate(nowDate);
+		cal = Calendar.getInstance();
 		cal.add(cal.DAY_OF_MONTH, 20);
 		book.setRetrundate(sdf.format(cal.getTime()));
 		BookModel chkbook = rentservice.selectBook(book_cd);
@@ -85,11 +86,9 @@ public class RentController {
 		}
 		if (rentservice.selectReservation(book_cd) != null) {
 			if (rentservice.selectReservation(book_cd).getId() == id)
-				rentservice.deleteReserve(book_cd);
-
-		}
-
-		return "redirect:borrowList";
+				rentservice.deleteReserve(book_cd); 
+		} 
+		return "redirect:borrowReqList";
 	}
 
 	@RequestMapping("/confirmBorrowBookList")
@@ -110,7 +109,7 @@ public class RentController {
 
 			}
 		}
-		return "redirect:borrowList";
+		return "redirect:borrowReqList";
 	}
 
 	@RequestMapping("/borrowReqList")
@@ -178,6 +177,7 @@ public class RentController {
 		String id = rentservice.selectRent(book_cd).getId();
 		SmsModel sms = new SmsModel();
 		book.setBook_cd(book_cd);
+		cal = Calendar.getInstance();	
 		cal.add(cal.MONTH, +1);		
 		book.setReturndate(sdf.format(cal.getTime()));
 
@@ -233,15 +233,18 @@ public class RentController {
 
 	@RequestMapping("/cancleBorrowBook")
 	public String cancleBorrowBook(String book_cd, BookModel bookmodel,
-			HttpServletRequest request) {
+			HttpServletRequest request, Model model) {
+		String id = "";
 		bookmodel = rentservice.selectBook(book_cd);
 		for (Cookie cookie : request.getCookies()) {
 			if (cookie.getName().equals("bm_id"))
 				bookmodel.setId(cookie.getValue());
+				id = cookie.getValue();
 		}
 		rentservice.cancleBorrowBook(bookmodel);
-
-		return "redirect:borrowList";
+		List<BookModel> bookList = rentservice.borrowList(id);
+		model.addAttribute("bookList", bookList);
+		return "redirect:borrowReqList";
 	}
 
 	@RequestMapping("/rentListAll")
@@ -311,14 +314,14 @@ public class RentController {
 	public String recoverBook(String book_cd) {
 		rentservice.recoverBook(book_cd);
 
-		return "redirect:bookList";
+		return "redirect:searchBook?listType=title&keyword=";
 	}
 
 	@RequestMapping("stopBorrow")
 	public String stopBorrow(String book_cd) {
 		rentservice.stopBorrow(book_cd);
 
-		return "redirect:bookList";
+		return "redirect:searchBook?listType=title&keyword";
 	}
 
 	@RequestMapping("/stopBorrowList")

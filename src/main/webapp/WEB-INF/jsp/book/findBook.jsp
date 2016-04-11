@@ -115,7 +115,9 @@
 								<td align="left">${book.price}원</td>
 								<td>
 									<button class="btn btn-default" type="submit"
-										onclick="location.href='/requestbook?isbn=${book.isbn}'; ">구매요청</button>
+										onclick="window.open
+							('/requestbook?isbn=${book.isbn}','new','resizeble=yes scrollbars=yes, width=500, height=700');">
+							구매요청</button>
 								</td>
 							</tr>
 						</c:forEach>

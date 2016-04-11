@@ -13,16 +13,12 @@
 <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="/resources/css/signin.css" rel="stylesheet">
 <link href="/resources/css/common.css" rel="stylesheet">
+<link href="/resources/css/bootstrap-select.min.css" rel="stylesheet">
 <script src="/resources/js/jquery/jquery.js"></script>
 <script src="/resources/js/bootstrap.min.js"></script>
-<style type="text/css">
-body {
-	padding-top: 70px;
-}
-</style>
+ 
 </head>
-<body>
-	<jsp:include page="../nav.jsp"></jsp:include>
+<body> 
 	<div class="container">
 		<h2>도서 수정 페이지</h2>
 		<div class="panelpanel-default">
@@ -44,7 +40,7 @@ body {
 				</div>
 				<div class="form-group">
 					<label for="exampleInputPassword1">카테고리</label> <br>
-					<select><option
+					<select class="selectpicker"><option
 							selected>${book.b_group}<c:forEach items="${BCodeList}"
 								var="code">
 								<option value="${code.code}-${code.name}">${code.code}-${code.name}
@@ -63,11 +59,13 @@ body {
 						class="form-control" id="author" name="author"
 						value="${book.author}">
 				</div>
-				<button class="btn btn-default" type="submit">확인</button>
-				<!-- onClick="opener.document.location.href='/searchBook'; 
-					opener.focus(); self.close();" -->
+				<button class="btn btn-default" type="submit" 
+				onClick="opener.document.location.href='/searchBook?listType=title&keyword='; opener.focus(); self.close(); ">확인</button>
+
 			</form>
 		</div>
 	</div>
 </body>
+
+	<script src="/resources/js/bootstrap-select.min.js"></script>
 </html>

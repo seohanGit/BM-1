@@ -40,8 +40,7 @@ public class NotifiServiceImpl implements NotifiService {
 	}
 
 	@Override
-	public void notifiReq(SmsModel sms) {
-		// TODO Auto-generated method stub
+	public void notifiReq(SmsModel sms) { 
 		notifiDao.notifiReq(sms);
 	}
 
@@ -57,18 +56,20 @@ public class NotifiServiceImpl implements NotifiService {
 	}
 
 	@Override
-	public void notifiReturn(SmsModel sms) {
-		// TODO Auto-generated method stub
+	public void notifiReturn(SmsModel sms) { 
 		notifiDao.notifiReturn(sms);
 	}
 
 	@Override
-	public void notifiReturnConfirm(String book_cd) {
+	public void notifiReturnConfirm(String book_cd)  {
 		SmsModel sms = new SmsModel();		
 		BookModel book = rentDao.selectRent(book_cd);
 		String title = bookDao.selectBook(book_cd).getTitle();
 		sms.setTitle(title);
-		sms.setPhone(book.getMobi_no().substring(1));
+		sms.setPhone("");
+		if(book.getMobi_no().length()>0){
+			sms.setPhone(book.getMobi_no().substring(1));
+		}
 		
 		notifiDao.notifiReturnConfirm(sms);
 

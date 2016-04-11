@@ -77,6 +77,7 @@ public class BoardController {
 			}
 		}
 		model.setModifidate(sdf.format(nowDate));
+		model.setBoardType("0");
 		boardService.insertBoard(model);
 		return "board/boardsuccess";
 	}
@@ -130,6 +131,7 @@ public class BoardController {
 	@RequestMapping("/insertNotice")
 	public String insertNotice(BoardModel boardmodel) {
 		boardmodel.setModifidate(sdf.format(nowDate));
+		boardmodel.setBoardType("1");
 		boardService.insertNotice(boardmodel);
 		return "redirect:noticeListByAdmin";
 	}

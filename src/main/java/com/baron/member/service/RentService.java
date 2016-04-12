@@ -59,4 +59,7 @@ public interface RentService {
 	public List<BookModel> reserveList(String id);
 
 	public void deleteReserve(String book_cd);
+	
+
+	public List<BookModel> delayList();
 }

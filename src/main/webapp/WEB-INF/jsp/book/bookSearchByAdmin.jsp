@@ -16,11 +16,6 @@
 <link href="/resources/css/bootstrap-select.min.css" rel="stylesheet">
 <script src="/resources/js/jquery/jquery.js"></script>
 <script src="/resources/js/bootstrap.min.js"></script>
-<style type="text/css">
-body {
-	padding-top: 70px;
-}
-</style>
 <script>
 	function del() {
 		alert("삭제되었습니다.");
@@ -59,15 +54,21 @@ body {
 
 				<div class="panel-body">
 
-					<div style="width:100%; float: left;">
+					<div style="width: 100%; float: left;">
 						<h2>도서목록</h2>
 					</div>
 
-					<div
-						style="float: right; vertical-align: baseline; width: 90%; margin-right: 10px;"
-						align="right">
-						<div align="right" class="input-group "
-							style="vertical-align: baseline; float: left; width: 55%">
+					<div style="width: 70%; margin-right: 10px;">
+						<div class="left" style="width: 20%;" align="right">
+							<select class="selectpicker"
+								style="font-size: 14px; margin-top: 10px; vertical-align: baseline;"
+								id="select"><option selected>전체
+									<c:forEach items="${BCodeList}" var="code">
+										<option value="${code.code}-${code.name}">${code.code}-${code.name}
+									</c:forEach></select>
+						</div>
+						<div class="input-group right"
+							style="vertical-align: baseline; float: left; width: 80%">
 							<form action="/searchBook" method="post">
 								<span class="input-group-btn"> <input type="text"
 									class="form-control" id="keyword" name="keyword"
@@ -78,114 +79,108 @@ body {
 								</span>
 							</form>
 						</div>
-						<div class="input-group"
-							style="width: 40%; vertical-align: baseline; float: right">														
-								<select class="selectpicker" style="width: 10%; font-size: 14px; margin-top: 10px; vertical-align: baseline;"
-								id="select"><option
-							selected>${book.b_group}<c:forEach items="${BCodeList}"
-								var="code">
-								<option value="${code.code}-${code.name}">${code.code}-${code.name}
-							</c:forEach></select>					
-								<button style="width: 100px; vertical-align: baseline;"
-									class="btn btn-default" type="button" id="insertBook"
-									onclick="window.open('/insertbookForm','new','resizeble=yes scrollbars=yes,  width=750, height=500');">도서추가</button>
-<!-- 								<button style="width: 100px; vertical-align: baseline;" -->
-<!-- 									class="btn btn-default" type="submit">대출정지</button> -->
-						</div>
-					</div>
 				</div>
+						<div class="input-group right" align="right"
+							style="width: 20%; "> 
+							<button style="width: 100px; vertical-align: baseline;"
+								class="btn btn-default" type="button" id="insertBook"
+								onclick="window.open('/insertbookForm','new','resizeble=yes scrollbars=yes,  width=500, height=600');">도서추가</button>
+							<!-- 								<button style="width: 100px; vertical-align: baseline;" -->
+							<!-- 									class="btn btn-default" type="submit">대출정지</button> -->
+						</div>
+ 
 				<form action="stopBorrowList" method="post">
-				<div class="dataTable_wrapper">
-					<div class="left"
-						style="vertical-align: baseline; margin-right: 20px"></div>
-					<table class="table table-striped table-bordered " id="dataTable">
-						<thead>
-							<tr>
-								<th class="td-chk"></th>
-								<th>도서명</th>
-								<th class="hidden-xs td-genre">저자</th>
-								<th class="hidden-sm hidden-xs hidden-md td-author">분류</th> 
-								<th style="width: 110px">대여상태</th> 
-								<th style="width: 230px"></th>
-							</tr>
-						</thead>
-						<%-- 
+					<div class="dataTable_wrapper">
+						<div class="left"
+							style="vertical-align: baseline; margin-right: 20px"></div>
+						<table class="table table-striped table-bordered " id="dataTable">
+							<thead>
+								<tr>
+									<th class="td-chk"></th>
+									<th>도서명</th>
+									<th class="hidden-xs td-genre">저자</th>
+									<th class="hidden-sm hidden-xs hidden-md td-author">분류</th>
+									<th style="width: 110px">대여상태</th>
+									<th style="width: 230px"></th>
+								</tr>
+							</thead>
+							<%-- 
 						
  --%>
 
-						<tbody id="tablebody">
-							<c:forEach items="${bookList}" var="book" varStatus="loop">  
-								<tr>
-									<td><input type="checkbox" name="book_cd"
-										value="${book.book_cd}"></td>
-									<td align="left"><a href="#"
-										onclick="window.open('/bookInfo?book_cd=${book.book_cd}','new','resizeble=yes scrollbars=yes, width=850, height=850');">
-											${book.title }</a></td>
-									<td class="hidden-xs" align="left">${book.author}</td>
-									<td class="hidden-sm hidden-xs hidden-md" id="${book.b_group }"
-										align="left">${book.b_group}</td>
-									<c:choose>
-										<c:when test="${book.rentchk=='0'}">
-											<td align="left">대출가능</td>
-											<td>
-												<button class="btn btn-default btn-sm" type="button"
-													id="deletebook"
-													onClick="location.href='/deletebook?book_cd=${book.book_cd}'; del();">도서삭제</button>
-												<button class="btn btn-default btn-sm" type="button"
-													id="reservebook"
-													onClick="location.href='/stopBorrow?book_cd=${book.book_cd}'">대출정지</button>
-												<button class="btn btn-default btn-sm" type="button"
-													id="modifybook"
-													onclick="window.open('/modifyBookForm?book_cd=${book.book_cd}','new','resizeble=yes scrollbars=yes,  width=850px, height=750px');">도서수정</button>
-												
-											</td>
-										</c:when>
-										<c:when test="${book.rentchk=='1'}">
-											<td><mark>대여요청중</mark></td>
-											<td><button class="btn btn-default btn-sm" type="button"
-													id="modifybook"
-													onclick="window.open('/modifyBookForm?book_cd=${book.book_cd}','new','resizeble=yes scrollbars=yes,  width=850, height=750');">도서수정</button>
-												<button class="btn btn-default btn-sm" type="button"
-													id="deletebook"
-													onClick="location.href='/deletebook?book_cd=${book.book_cd}'; del();">도서삭제</button>
-											</td>
-										</c:when>
-										<c:when test="${book.rentchk=='2'}">
-											<td>대출중</td>
-											<td><button class="btn btn-default btn-sm" type="button"
-													id="modifybook"
-													onclick="window.open('/modifyBookForm?book_cd=${book.book_cd}','new','resizeble=yes scrollbars=yes,  width=850, height=750');">도서수정</button>
-												<button class="btn btn-default btn-sm" type="button"
-													id="deletebook"
-													onClick="location.href='/deletebook?book_cd=${book.book_cd}'; del();">도서삭제</button>
-											</td>
-										</c:when>
-										<c:when test="${book.rentchk=='4'}">
-											<td><mark>대출정지</mark></td>
-											<td><button class="btn btn-default btn-sm" type="button"
-													id="modifybook"
-													onClick="location.href='/recoverBook?book_cd=${book.book_cd}'">대출재개</button></td>
-										</c:when>
-										<c:when test="${book.rentchk=='5'}">
-											<td><mark>예약중</mark></td>
-											<td><button class="btn btn-default btn-sm" type="button"
-													id="modifybook"
-													onclick="window.open('/modifyBookForm?book_cd=${book.book_cd}','new','resizeble=yes scrollbars=yes,  width=850, height=750');">도서수정</button>
-												<button class="btn btn-default btn-sm" type="button"
-													id="deletebook"
-													onClick="location.href='/deletebook?book_cd=${book.book_cd}'; del();">도서삭제</button>
-											</td>
-										</c:when>
-									</c:choose>
+							<tbody id="tablebody">
+								<c:forEach items="${bookList}" var="book" varStatus="loop">
+									<tr>
+										<td><input type="checkbox" name="book_cd"
+											value="${book.book_cd}"></td>
+										<td align="left"><a href="#"
+											onclick="window.open('/bookInfo?book_cd=${book.book_cd}','new','resizeble=yes scrollbars=yes, width=850, height=850');">
+												${book.title }</a></td>
+										<td class="hidden-xs" align="left">${book.author}</td>
+										<td class="hidden-sm hidden-xs hidden-md"
+											id="${book.b_group }" align="left">${book.b_group}</td>
+										<c:choose>
+											<c:when test="${book.rentchk=='0'}">
+												<td align="left">대출가능</td>
+												<td>
+													<button class="btn btn-default btn-sm" type="button"
+														id="deletebook"
+														onClick="location.href='/deletebook?book_cd=${book.book_cd}'; del();">도서삭제</button>
+													<button class="btn btn-default btn-sm" type="button"
+														id="reservebook"
+														onClick="location.href='/stopBorrow?book_cd=${book.book_cd}'">대출정지</button>
+													<button class="btn btn-default btn-sm" type="button"
+														id="modifybook"
+														onclick="window.open('/modifyBookForm?book_cd=${book.book_cd}','new','resizeble=yes scrollbars=yes,  width=850px, height=750px');">도서수정</button>
+
+												</td>
+											</c:when>
+											<c:when test="${book.rentchk=='1'}">
+												<td><mark>대여요청중</mark></td>
+												<td><button class="btn btn-default btn-sm"
+														type="button" id="modifybook"
+														onclick="window.open('/modifyBookForm?book_cd=${book.book_cd}','new','resizeble=yes scrollbars=yes,  width=850, height=750');">도서수정</button>
+													<button class="btn btn-default btn-sm" type="button"
+														id="deletebook"
+														onClick="location.href='/deletebook?book_cd=${book.book_cd}'; del();">도서삭제</button>
+												</td>
+											</c:when>
+											<c:when test="${book.rentchk=='2'}">
+												<td>대출중</td>
+												<td><button class="btn btn-default btn-sm"
+														type="button" id="modifybook"
+														onclick="window.open('/modifyBookForm?book_cd=${book.book_cd}','new','resizeble=yes scrollbars=yes,  width=850, height=750');">도서수정</button>
+													<button class="btn btn-default btn-sm" type="button"
+														id="deletebook"
+														onClick="location.href='/deletebook?book_cd=${book.book_cd}'; del();">도서삭제</button>
+												</td>
+											</c:when>
+											<c:when test="${book.rentchk=='4'}">
+												<td><mark>대출정지</mark></td>
+												<td><button class="btn btn-default btn-sm"
+														type="button" id="modifybook"
+														onClick="location.href='/recoverBook?book_cd=${book.book_cd}'">대출재개</button></td>
+											</c:when>
+											<c:when test="${book.rentchk=='5'}">
+												<td><mark>예약중</mark></td>
+												<td><button class="btn btn-default btn-sm"
+														type="button" id="modifybook"
+														onclick="window.open('/modifyBookForm?book_cd=${book.book_cd}','new','resizeble=yes scrollbars=yes,  width=850, height=750');">도서수정</button>
+													<button class="btn btn-default btn-sm" type="button"
+														id="deletebook"
+														onClick="location.href='/deletebook?book_cd=${book.book_cd}'; del();">도서삭제</button>
+												</td>
+											</c:when>
+										</c:choose>
 
 
-								</tr>
+									</tr>
 
-							</c:forEach>
-						</tbody>
+								</c:forEach>
+							</tbody>
 
-					</table>
-				</div>
+						</table>
+					</div>
 				</form>
 			</div>
 		</div>
@@ -206,7 +201,7 @@ body {
 			$('#dataTable').dataTable({
 				"pageLength" : 100,
 				paging : false,
-				searching: false,
+				searching : false,
 				"order" : [],
 				"columns" : [ {
 					"searchable" : false
@@ -236,15 +231,19 @@ body {
 		$("#select").change(function() {
 			var options = $(this).val();
 			$('table tr').show();
-			$("#dataTable tbody tr").each(function() {
-				var tr = $(this);
-				var td = tr.find("td:eq(3)")
-				if (td.text() !== options) {
-					tr.hide();
-				}
-			})
+			 if(options == "전체"){
+				$('table tr').show();		
+			}else {
+				$("#dataTable tbody tr").each(function() {			
+					var tr = $(this);
+					var td = tr.find("td:eq(3)")
+					if (td.text() !== options) {
+						tr.hide();
+					} 
+				})
+			}
 
 		});
 	</script>
-	</body>
+</body>
 </html>

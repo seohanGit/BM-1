@@ -57,6 +57,8 @@ public interface RentDao {
 
 	List<BookModel> rentList(String id);
 
+	List<BookModel> delayList();
+
 
 
 }

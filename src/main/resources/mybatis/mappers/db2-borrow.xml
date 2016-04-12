@@ -256,5 +256,17 @@
 		SET RENTCHK='6'
 		WHERE book_cd=#{book_cd} AND id=#{id} AND rentchk='3'
 	</update>
-
+	<select id="selectDelayList" resultType="BookModel">
+		SELECT A.title, B.rentdate, B.returndate, A.b_group, (SELECT C.KNAME
+		FROM
+		TPRLIB.GR_INSA C WHERE B.id=C.ASABN FETCH
+		first 1 rows only) kname
+		FROM
+		TESTLIB.BOOKMST A INNER JOIN TESTLIB.BOOKRENT B ON
+		A.book_cd=B.book_cd
+		WHERE <![CDATA[B.returndate < VARCHAR_FORMAT(CURRENT	TIMESTAMP, 'YYYYMMDD')]]> AND
+		B.rentchk='2'
+		ORDER BY
+		B.returndate DESC
+	</select>
 </mapper>

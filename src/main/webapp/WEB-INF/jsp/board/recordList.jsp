@@ -17,7 +17,11 @@
 <link href="/resources/css/bootstrap-select.min.css" rel="stylesheet">
 <script src="/resources/js/jquery/jquery.js"></script>
 <script src="/resources/js/bootstrap.min.js"></script>
- 
+<style type="text/css">
+body {
+	padding-top: 70px;
+}
+</style>
 <script type="text/javascript">
 	
 </script>
@@ -53,7 +57,22 @@
 					<!-- 
 			기록 검색<button type="button" onclick="location.href='/insertRecord'">삽입</button>
 			 -->
-					<div class="dataTable_wrapper"> 
+					<div class="dataTable_wrapper">
+						<!-- <div
+							style="width: 20%; vertical-align: bottom; margin-left: 30px; margin-top: 10px; height: 50px"
+							class="right">
+							<select id="select" class="selectpicker">
+								<optgroup label="대분류">
+									<option value="B-도서(단행본)">B-도서(단행본)
+									<option value="E-기타매체">E-기타매체
+									<option value="J-정기간행물">J-정기간행물
+									<option value="P-특허자료">P-특허자료
+									<option value="R-보고서">R-보고서
+									<option value="S-규격/사전">S-규격/사전
+									<option value="T-논문">T-논문
+								</optgroup>
+							</select>
+						</div> -->
 						<table class="table table-striped table-bordered" id="dataTable">
 							<thead>
 								<tr class="  title">
@@ -80,7 +99,7 @@
 										<td class="hidden-sm hidden-xs hidden-md" id="b_group"
 											align="left">${book.b_group}</td>
 										<td class="hidden-xs" align="left"> ${book.rentdate } </td>
-										<td align="left">${book.returndate } </td>
+										<td align="left"> ${book.returndate } </td>
 
 
 										<%-- <td><button class="btn btn-default btn-sm" type="button"
@@ -108,7 +127,7 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 			var table = $('#dataTable').DataTable({
-				"pageLength" : 1000,
+				"pageLength" : 50,
 				paging : true,
 				"order" : [],
 				"columns" : [ {

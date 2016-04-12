@@ -87,3 +87,24 @@ $('#btn_bookList').click(function() {
 		 }// ajax complete handelr gourl(url); 
 	 }); // parameters as plain
  });
+
+ $('#getBookInfo').click(function() {
+ 	$.ajax({
+ 		type : "GET", // GET or POST
+ 		url : "/findBook", // URL
+ 		datatype : "json", // html, xml, json, jsonp, script, text
+ 		data : { 
+			 keyword : $('#keyword').val(),
+			 type : $('#type').val()
+			 }, 
+ 		error : function() { // Ajax error handler
+ 			alert('ajax failed');
+ 		},
+ 		success : function(data, status) { // Ajax complete handelr]
+ 			$('#insertForm').fadeOut();
+ 			$('#insertForm').empty();
+ 			$('#searchResultArea').empty().append(data);
+ 		}
+ 	});
+
+ })

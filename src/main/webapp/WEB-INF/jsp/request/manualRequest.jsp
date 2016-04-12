@@ -20,8 +20,7 @@
 		<div class="panel panel-default">
 			<form action="/confirmRequest" name="requestForm" method="post"
 				class="panel-body" onsubmit="formChk();return false">
-				<div id="top">
-				
+				<div id="top"> 
 					<div class="form-group left" style="width: 50%">
 						<label for="exampleInputPassword1">대분류</label> <select
 							class="selectpicker" name="b_group">
@@ -73,9 +72,7 @@
 						<label for="exampleInputPassword1">출판사</label> <input type="text"
 							class="form-control" id="publish" name="publish" style="width: 80%;"
 							required="required">
-					</div>
-
-
+					</div> 
 					<div class="form-group left" style="width: 50%">
 						<label for="exampleInputPassword1">수량</label> <input type="number"
 							class="form-control" id="quantity" min="0" name="quantity" value="1"

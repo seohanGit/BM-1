@@ -444,9 +444,9 @@ table {
 
 td, th {
 	padding: 0;
-	white-space: nowrap;
+	white-space: normal;
 	text-overflow: ellipsis;
-	overflow: hidden;
+	word-break:keep-all;
 	
 }
 /*! Source: https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css */

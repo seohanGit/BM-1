@@ -50,14 +50,13 @@
 
 
 									<td style="vertical-align: top;">${board.title}</td>
-									<td>${board.title}</td>
+									<td>${board.content}</td>
 									<td><c:choose>
 											<c:when test="${empty board.kname}">${board.id}</c:when>
 											<c:otherwise>${board.kname}</c:otherwise>
 										</c:choose></td>
-									<td class=" hidden-xs"><fmt:formatDate
-											value="${board.modifidate}" pattern="yyyy-MM-dd" /></td>
-
+									<td class=" hidden-xs">
+									${board.modifidate}</td>
 									<td>
 										<button class="btn btn-default btn-sm" type="submit"
 											id="modifyBoard"

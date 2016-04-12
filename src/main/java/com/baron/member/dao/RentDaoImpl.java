@@ -163,4 +163,9 @@ public class RentDaoImpl implements RentDao {
 
 	}
 
+	@Override
+	public List<BookModel> delayList() { 
+		return session.selectList(NAMESPACE + "selectDelayList");
+	}
+
 }

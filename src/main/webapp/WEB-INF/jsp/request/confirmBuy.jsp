@@ -32,10 +32,9 @@ body {
 			<div class="right" style="margin: 20px"></div>
 
 			<form action="/confirmBuy" method="post" class="panel-body">
-				<div style="float: right; width: 48%;">
+				<div style="float: right; width: 48%;">					
 					<label for="exampleInputEmail1">도서코드</label>
-					<div class="form-group">
-
+						<div class="form-group">						
 						<div style="float: left; width: 60%">
 							<select class="selectpicker"
 								 name="b_group">
@@ -67,8 +66,9 @@ body {
 							</select>
 						</div>
 						<div class="right" style="width: 40%">
+							${book.book_cd}-
 							<input type="text" class="form-control" id="book_cd"
-								name="book_cd" placeholder="${book.book_cd}">${book.book_cd}
+								name="book_cd" placeholder=""> 
 						</div>
 					</div>
 

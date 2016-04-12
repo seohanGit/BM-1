@@ -74,12 +74,11 @@ public class BookServiceImpl implements BookService {
 	public void insertBook(BookModel model) {
 		if (model.getQuantity() == 1  ) {
 			bookDao.insertBook(model);
-		} else if (model.getQuantity() != 1) {
+		} else if (model.getQuantity() > 1) {
 			for (int i = 0; i < model.getQuantity(); i++) {
 				model.setBook_cd(model.getBook_cd() + "(" + (i + 1) + ")");
 				bookDao.insertBook(model);
-			}
-
+			} 
 		}
 	}
 
@@ -320,5 +319,7 @@ public class BookServiceImpl implements BookService {
 	public List<BookModel> selectBookForImage() {
 		return etcDao.selectBookForImage();
 	}
+
+	
 	
 }

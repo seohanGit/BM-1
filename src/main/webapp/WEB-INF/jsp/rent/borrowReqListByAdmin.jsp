@@ -15,13 +15,7 @@
 <title>대여 요청 현황</title>
 <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="/resources/css/signin.css" rel="stylesheet">
-<link href="/resources/css/common.css" rel="stylesheet">
-
-<style type="text/css">
-body {
-	padding-top: 70px;
-}
-</style>
+<link href="/resources/css/common.css" rel="stylesheet"> 
 <script>
 	function del() {
 		alert("승인되었습니다.");
@@ -31,7 +25,7 @@ body {
 
 </head>
 
-<body>
+<body class="main">
 	<jsp:include page="../nav.jsp" />
 	<div class="container">
 
@@ -45,9 +39,7 @@ body {
 					</div>
 
 					<c:choose>
-						<c:when test="${empty bookList}">
-
-
+						<c:when test="${empty bookList}"> 
 							<div>
 								<h3>대여 요청한 도서가 없습니다.</h3>
 							</div>
@@ -58,9 +50,7 @@ body {
 									<button class="btn btn-default" type="submit" onclick="ok();">승인</button>
 								</div>
 
-								<table class="table table-striped table-bordered">
-
-
+								<table class="table table-striped table-bordered"> 
 									<thead>
 										<tr class="title">
 											<th class="td-chk"><input type="checkbox" id="allCheck" ></th>
@@ -69,15 +59,9 @@ body {
 											<th class="td-genre hidden-xs">반납일</th>
 											<th class="hidden-xs" style="width: 150px">분류</th>
 											<th class="td-img">대여자</th>
-											<th class="td-img"></th>
-
-
+											<th class="td-img"></th> 
 										</tr>
-									</thead>
-
-
-
-
+									</thead> 
 									<tbody>
 										<c:forEach items="${bookList}" var="book" varStatus="loop">
 											<tr>
@@ -99,10 +83,7 @@ body {
 												</td>
 											</tr>
 										</c:forEach>
-									</tbody>
-
-
-
+									</tbody> 
 								</table>
 							</form>
 						</c:otherwise>

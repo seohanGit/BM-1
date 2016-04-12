@@ -87,13 +87,16 @@
 		BY rcv_date DESC
 		FETCH first 200 rows only
 	</select>
-	<select id="bestBook" resultType="BookModel">
+	<select id="bestBook" resultType="BookModel"> 
 		SELECT
-		title, author, b_group, rentchk, reservechk, book_cd, rcv_date
+		title, author, b_group, a.publish, b.book_cd, a.rentchk, a.reservechk,
+		case when b.returndate <> '' then b.returndate end as returnDate
 		FROM
-		TESTLIB.BOOKMST
+		testlib.bookmst A 
+		inner join tESTLIB.BOOKrent B on a.book_cd = b.book_cd
+		group by title, author, b_group, a.publish, b.book_cd, a.rentchk, a.reservechk, b.returndate
 		ORDER
-		BY grade DESC
+		BY count(b.book_cd) DESC
 		FETCH first 10 rows only
 	</select>
 	<select id="recommendBook" parameterType="String" resultType="BookModel">

@@ -78,11 +78,15 @@
 					<div class="col-md-12 col-lg-12">
 						<form action="/searchBook" method="post">
 							<div class="col-md-12 col-lg-12">
+
 								<c:choose>
 									<c:when test="${listType=='new'}">
-										<h2>신간도서</h2>
-										<div class="row">
+
+										<div class="row" style="margin:auto; vertical-align: middle;">
 											<div class="col-lg-2 col-md-2">
+												<h2>신간도서</h2>
+											</div>
+											<div class="col-lg-2 col-md-2" style="margin-top: 3%;">
 												<div class="input-group date " data-provide="datepicker"
 													style="width: 140px;">
 													<input id="datepicker1" type="text" class="form-control"
@@ -92,7 +96,7 @@
 													</div>
 												</div>
 											</div>
-											<div class="col-lg-2 col-md-2">
+											<div class="col-lg-2 col-md-2" style="margin-top: 3%;">
 												<div class="input-group date  " data-provide="datepicker"
 													style="width: 140px;">
 													<input id="datepicker2" type="text" class="form-control"
@@ -104,57 +108,53 @@
 											</div>
 										</div>
 									</c:when>
-									<c:when test="${listType=='best'}">
-										<h2>베스트도서</h2>
-										<div class="row"></div>
-									</c:when>
-									<c:when test="${listType=='best'}">
-										<h2>추천도서</h2>
-										<div class="row"></div>
-									</c:when>
 									<c:otherwise>
-										<h2>자료검색</h2>
 										<div class="row">
+											<c:choose>
+												<c:when test="${listType=='best'}">
+													<div class="col-lg-3 col-md-3">
+														<h2>베스트도서</h2>
+													</div>
 
-											<!-- 									<div class="col-lg-3 col-md-3"> -->
-											<!-- 										<div class="input-group  "> -->
-											<!-- 											<input type="radio" name="field" value="title" checked> -->
-											<!-- 											제목 <input type="radio" name="field" value="author"> -->
-											<!-- 											저자 <input type="radio" name="field" value="publish"> -->
-											<!-- 											출판사 -->
-											<!-- 										</div> -->
-											<!-- 									</div> -->
+												</c:when>
+												<c:when test="${listType=='recommend'}">
+													<div class="col-lg-3 col-md-3">
+														<h2>추천도서</h2>
+													</div>
+												</c:when>
+												<c:otherwise>
+													<div class="col-lg-3 col-md-3">
+														<h2>도서 목록</h2>
+													</div>
+												</c:otherwise>
+											</c:choose>
+											<div class="col-lg-8 col-md-8" style="margin-top: 3%;">
+												<div class="left" style="width: 20%;" align="right">
+													<select class="selectpicker"
+														style="font-size: 14px; margin-top: 10px; vertical-align: baseline;"
+														id="select"><option selected>전체
+															<c:forEach items="${BCodeList}" var="code">
+																<option value="${code.code}-${code.name}">${code.code}-${code.name}
+															</c:forEach></select>
+												</div>
+												<div class="input-group right"
+													style="vertical-align: baseline; float: left; width: 80%">
+
+													<span class="input-group-btn"> <input type="text"
+														class="form-control" id="keyword" name="keyword"
+														placeholder="기술자료실 도서 검색 [ 소문자로 입력 ]">
+														<button class="btn btn-default" type="submit"
+															id="btn_find">
+															<span class="glyphicon glyphicon-search"></span>
+														</button>
+													</span>
+												</div>
+											</div>
 										</div>
 									</c:otherwise>
+
 								</c:choose>
-							</div>
-							<div class="row">
-								<div align="left" style="float: left; width: 30%">
-									<select class="selectpicker"
-										style="font-size: 14px; width: 100%" id="select"
-										name="b_group">
-										<optgroup label="대분류">
-											<option value="">전체
-											<option value="B-도서(단행본)">B-도서(단행본)
-											<option value="E-기타매체">E-기타매체
-											<option value="J-정기간행물">J-정기간행물
-											<option value="P-특허자료">P-특허자료
-											<option value="R-보고서">R-보고서
-											<option value="S-규격/사전">S-규격/사전
-											<option value="T-논문">T-논문
-											<option value="F-PDF">F-PDF
-										</optgroup>
-									</select>
-								</div>
-								<div align="left" style="float: left; width: 70%;">
-									<span class="input-group-btn"> <input type="text"
-										style="width: 100%; float: left" class="form-control"
-										id="keyword" name="keyword"
-										placeholder="기술자료실 도서 검색 [ 소문자로 입력 ]">
-										<button class="btn btn-default" type="submit" id="btn_find">
-											<span class="glyphicon glyphicon-search"></span>
-										</button></span>
-								</div>
+
 							</div>
 						</form>
 					</div>
@@ -207,10 +207,9 @@
 										<c:when test="${book.rentchk=='2' and book.reservechk=='0'}">
 											<td>대출중 반납일 :${book.returndate}</td>
 											<td>
-<!-- 											<button class="btn btn-default" type="button" -->
-<!-- 													id="reservebook" -->
-<%-- 													onClick="location.href='/reservation?book_cd=${book.book_cd}'">예약</button> --%>
-													</td>
+												<!-- 											<button class="btn btn-default" type="button" -->
+												<!-- 													id="reservebook" --> <%-- 													onClick="location.href='/reservation?book_cd=${book.book_cd}'">예약</button> --%>
+											</td>
 										</c:when>
 
 										<c:when test="${book.rentchk=='4'}">

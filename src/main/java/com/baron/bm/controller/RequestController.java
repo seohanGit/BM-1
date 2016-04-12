@@ -59,20 +59,18 @@ public class RequestController {
 				model.setId(cookie.getValue());
 			}
 		}
-		MemberModel membermodel = new MemberModel();
-		membermodel = joinService.selectMember(model.getId());
-		membermodel.setId(model.getId());
+		MemberModel membermodel = joinService.selectMember(model.getId());  
 		String max = requestservice.selectMaxSer();
 
+		model.setReqdate(nowDate);
 		model.setKname(model.getKname().substring(0, 5).trim());
 		model.setBook_cd(model.getB_group().substring(0, 1)
 				+ model.getC_group().substring(0, 3) + "-");
-
-		model.setReq_cd("Book" + nowDate.toString() + max);
+		model.setReq_cd("Book"  + "-"+ nowDate.toString()  + "-"+ max);
 
 		requestservice.requestBook(model, membermodel);
 
-		return "requestSuccess";
+		return "request/requestSuccess";
 	}
 
 	@RequestMapping("/request")
@@ -144,7 +142,7 @@ public class RequestController {
 	public String confirmBuy(BookModel model) {
 		model.setRcv_date(nowDate);
 		requestservice.confirmBuy(model);
-		requestservice.deleteRequest(model.getReq_cd());
+		requestservice.deleteRequest(model);
 
 		return "redirect:request";
 
@@ -157,7 +155,7 @@ public class RequestController {
 			BookModel book = requestservice.selectBook(req_cd);
 			if (bookService.selectBook(book.getBook_cd()) == null) {
 				requestservice.confirmBuy(book);
-				requestservice.deleteRequest(book.getReq_cd());
+				requestservice.deleteRequest(book);
 				return "request/buySuccess";
 			} else {
 				return "request/buyfail";
@@ -208,7 +206,9 @@ public class RequestController {
 
 	@RequestMapping("/deleteRequest")
 	public String deleteRequest(String req_cd) {
-		requestservice.deleteRequest(req_cd);
+		BookModel book = new BookModel();
+		book.setReq_cd(req_cd);
+		requestservice.deleteRequest(book);
 		return "redirect:request";
 	}
 

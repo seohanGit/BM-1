@@ -2,5 +2,5 @@
     pageEncoding="UTF-8"%>
 <script>
 alert("구매 신청되었습니다."); 
-
+self.close();
 </script>

@@ -49,10 +49,16 @@ public class BookController {
 
 	@RequestMapping("/insertbook")
 	public String insertresult(BookModel model) {
-		model.setRcv_date(nowDate); 
-		model.setQuantity(1);
-		model.setIsbn("");
-		bookservice.insertBook(model);
+		if (model.getIsbn().equals("")){
+			model.setRcv_date(nowDate); 
+			model.setQuantity(1);
+			model.setIsbn("");
+			bookservice.insertBook(model);
+		}else{
+			model.setRcv_date(nowDate); 
+			model.setQuantity(1);		
+			bookservice.insertBook(model);
+		}		
 		return "book/insertbookresult";
 	}
 
@@ -135,16 +141,23 @@ public class BookController {
 
 
 	@RequestMapping("/findBook")
-	public String findBook(String keyword, String page, Model model)
+	public String findBook(String keyword, String page, Model model, String type)
 			throws Exception {
 		List<BookModel> bookList;
+		BookModel book;
 		System.out.println(keyword);
-		bookList = bookservice.findBook(keyword);
-
-		model.addAttribute("bookList", bookList);
-
-		model.addAttribute("keyword", keyword);
-		return "book/findBook";
+		
+		if(type.equals("isbn")){
+			book = requestservice.findBookOne(keyword);
+			model.addAttribute("book", book);
+			model.addAttribute("keyword", keyword);
+			return "book/result1";
+		} else{
+			bookList = bookservice.findBook(keyword);
+			model.addAttribute("bookList", bookList);
+			model.addAttribute("keyword", keyword);
+			return "book/findBook";
+		}		
 	}
 
 	@RequestMapping("/deletebook")
@@ -192,7 +205,14 @@ public class BookController {
 		bookservice.updateBook(bookmodel);
 		return "book/modifybookresult";
 	}
-
+	
+	@RequestMapping("/delayList")
+	public ModelAndView delayList(BookModel bookmodel,ModelAndView mav) { 
+		List<BookModel> bookList = rentservice.delayList();
+		mav.addObject("bookList", bookList);
+		mav.setViewName("rent/delayList");		
+		return mav;
+	}
 	/*
 	 * @RequestMapping("/requestOk") public String requestOk(BookModel model) {
 	 * System.out.println(model.getRequestid()); bookservice.requestBook(model);

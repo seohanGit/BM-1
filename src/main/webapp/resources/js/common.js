@@ -67,21 +67,6 @@ $('.board .btn').click(function() {
 });
 
 
-$('#blackList').click(function() {
-	$.ajax({
-		type : "GET", // GET or POST
-		url : "/searchBlack", // URL
-		datatype : "xml", // html, xml, json, jsonp, script, text
-		error : function() { // Ajax error handler
-			alert('ajax failed');
-		},
-		success : function(data, status) { // Ajax complete handelr]
-			$('#image3').fadeOut();
-			$('#personResultArea').empty().append(data);
-		}
-	});
-
-})
 
 
 // ///////////////////////////////리스트

@@ -53,7 +53,7 @@
 		TESTLIB.BOOKBOARD
 		(title,content,REGISDATE,modifidate,id,boardtype)
 		VALUES
-		(#{title},#{content},#{regisdate},#{modifidate},#{id}, #{boardType})
+		(#{title},#{content},#{regisdate},#{modifidate},#{id}, #{boardType} )
 	</insert>
 
 	<delete id="deleteBoard" parameterType="int">
@@ -87,7 +87,7 @@
 		TESTLIB.BOOKBOARD
 		(title,content,REGISDATE,modifidate,id,boardtype)
 		VALUES
-		(#{title},#{content},#{regisdate},#{modifidate},#{id}, #{boardType}
+		(#{title},#{content},#{regisdate},#{modifidate},#{id}, #{boardType})
 	</insert>
 	<delete id="deleteNotice" parameterType="int">
 		DELETE FROM

@@ -23,22 +23,16 @@ public interface BookService {
 	BookModel selectBook(String bookCode);
 
 	List<BookModel> findBook(String keyword) throws Exception;
-
+ 
 	/*
 	 * List<BookModel> pagenation(String keyword, String page) throws Exception;
 	 */
 
 	public List<BookModel> listBook(String listType, String datepicker1, String datepicker2);
-	public List<BookModel> bookList(String listType);
-	
-	public List<BookModel> selectBookAll();
-
-
-
+	public List<BookModel> bookList(String listType); 
+	public List<BookModel> selectBookAll(); 
 	public List<CodeModel> selectBCodeList();
-	public List<CodeModel> selectCCodeList();
-
-	public void updateDate() throws Exception;
-
-	public List<BookModel> selectBookForImage();
+	public List<CodeModel> selectCCodeList(); 
+	public void updateDate() throws Exception; 
+	public List<BookModel> selectBookForImage(); 
 }

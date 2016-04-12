@@ -40,16 +40,10 @@
 						<li><a href="#" id="reserveList">예약현항</a></li>
 						<li><a href="#" id="request">구매요청</a></li>
 						<li><a href="#" id="recordList">대여기록</a></li>
-						
-						<!-- <li><a href="#" data-toggle="modal" data-target="#myModal">사용자정보수정</a></li>
-						<li class="divider"></li>
-
-						<li><a href="#" id="logout" name="logout">종료 <span
-								class="glyphicon glyphicon-chevron-right"></span>
-						</a></li> -->
+						 
 					</ul></li>
 
-				<li style="padding-right: 40px">&nbsp;&nbsp;</li>
+				
 				<c:choose>
 					<c:when test="${sessionScope.permission ==1}">
 						<li style="font-size: 9px"><a href="admin">관리자페이지</a></li>

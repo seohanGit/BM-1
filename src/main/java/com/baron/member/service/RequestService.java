@@ -10,7 +10,7 @@ public interface RequestService {
 
 	public List<BookModel> requestList();
 
-	public void deleteRequest(String bookCode);
+	public void deleteRequest(BookModel model);
 
 	public void requestBook(BookModel model, MemberModel member);
 

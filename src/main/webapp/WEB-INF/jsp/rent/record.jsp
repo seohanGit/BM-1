@@ -37,7 +37,7 @@ body {
 			<div id="searchResultArea col-md-12 col-xs-12 col-sm-9">				
 				<c:choose>
 					<c:when test="${empty record}"> 
-						<h3>대여중인 도서가 없습니다.</h3>
+						<h3>대여한 도서가 없습니다.</h3>
 					</c:when>
 					<c:otherwise> 
 						<div class="dataTable_wrapper"> 

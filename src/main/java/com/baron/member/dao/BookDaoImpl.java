@@ -84,26 +84,22 @@ public class BookDaoImpl implements BookDao {
 	}
 
 	@Override
-	public List<CodeModel> selectCCodeList() {
-
+	public List<CodeModel> selectCCodeList() { 
 		return session.selectList(NAMESPACE + "selectC_codeList");
 	}
 
 	@Override
-	public List<BookModel> newBook(Dto dto) {
-		// TODO Auto-generated method stub
+	public List<BookModel> newBook(Dto dto) { 
 		return session.selectList(NAMESPACE + "newBook", dto);
 	}
 
 	@Override
-	public List<BookModel> bestBook() {
-		// TODO Auto-generated method stub
+	public List<BookModel> bestBook() { 
 		return session.selectList(NAMESPACE + "bestBook");
 	}
 
 	@Override
-	public List<BookModel> recommendBook() {
-		// TODO Auto-generated method stub
+	public List<BookModel> recommendBook() { 
 		return session.selectList(NAMESPACE + "recommendBook");
 	}
 

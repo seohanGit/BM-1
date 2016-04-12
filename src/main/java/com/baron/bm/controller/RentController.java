@@ -26,6 +26,7 @@ import com.baron.member.service.RentService;
 @Controller
 public class RentController {
 
+	
 	Calendar cal = Calendar.getInstance();				
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");				
 	String nowDate = sdf.format(cal.getTime());
@@ -43,6 +44,18 @@ public class RentController {
 	@Autowired
 	private JoinDao joinDao;
 
+	public boolean authChk(HttpServletRequest request ){
+		boolean authChk = true;
+		for (Cookie cookie : request.getCookies()) {
+			if (cookie.getName().equals("bm_permission")) {
+				if ("1".equals(cookie.getValue())) {
+					authChk= true;
+				}
+			}
+		}
+		return false;
+	}
+	
 	@RequestMapping("/borrowbook")
 	public String borrowBook(HttpServletRequest request, String book_cd,
 			BookModel book) {

@@ -12,7 +12,7 @@ public interface RequestDao {
 
 	public List<BookModel> requestList( );
 
-	public void deleteRequest(String req_cd);
+	public void deleteRequest(BookModel model);
 
 	public BookModel selectBook(String req_cd);
 

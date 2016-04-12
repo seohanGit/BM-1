@@ -130,8 +130,9 @@ public class BoardController {
 
 	@RequestMapping("/insertNotice")
 	public String insertNotice(BoardModel boardmodel) {
-		boardmodel.setModifidate(sdf.format(nowDate));
+		boardmodel.setRegisdate(sdf.format(nowDate));
 		boardmodel.setBoardType("1");
+		boardmodel.setId("admin");
 		boardService.insertNotice(boardmodel);
 		return "redirect:noticeListByAdmin";
 	}

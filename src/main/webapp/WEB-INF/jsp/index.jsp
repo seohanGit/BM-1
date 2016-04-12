@@ -65,15 +65,14 @@
 <body>
 	<jsp:include page="nav.jsp" />
 	<!-- Page Content -->
-	<div  class="container ">
-		<div align="center" class="row col-md-10 col-sm-10 col-xs-10">
-			<div align="left" class="row col-md-10 col-sm-10 col-xs-10">
+	<div align="center" class="container col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+		<div align="center" >
+			<div align="left" class="row col-xs-12 col-sm-12 col-md-12 col-lg-12">
 				<!-- Blog Entries Column -->
 				<h1>기술 자료실</h1>
 			</div>
-	
-			<div align="left" class="row " style="position: relative;">
-				<div class="col-md-10 col-sm-10 col-xs-10">
+			<div align="left" class="row" style="position: relative;height:25%;">
+				<div class="">
 					<!-- First Blog Post -->
 					<div align="right">
 						<img src="/resources/img/background.jpg" style="width: 40%; height: 60%" />
@@ -93,8 +92,8 @@
 					</div>
 				</div>
 			</div>
-			<div align="center" class="row" style="overflow: auto; height:30%; background-color:#EEEEEE; ;">
-				<div class="col-md-6 col-sm-10 col-xs-10"
+			<div align="center" class="row" style="overflow: auto; height:25%; background-color:#EEEEEE; ;">
+				<div class="col-md-6 col-sm-12 col-xs-12"
 					style="float: left; display: block;">
 					<div class="col-md-4 col-sm-4 col-xs-4"
 						style="float: left; display: block; text-align: center">
@@ -115,24 +114,24 @@
 						<a class="href" href="request" style="display: block;">도서구매신청</a>
 					</div>
 				</div>
-				<div class="col-md-6 col-sm-10 col-xs-10"
+				<div class="col-md-6 col-sm-12 col-xs-12"
 					style="float: right; text-align: left;">
 					<a href="noticeList" style="font-size: 20px;">공지사항</a>
 					<ul class="list-group">
 						<c:forEach items="${noticeList}" var="notice" varStatus="status"
 							begin="0" end="0" step="1">
 							<li class="list-group-item"><textarea style="width: 100%;"
-									readonly rows="6">${notice.content}</textarea></li>
+									readonly rows="4">${notice.content}</textarea></li>
 						</c:forEach>
 					</ul>
 				</div>
 			</div>
-			<div align="center" class="row">
+			<div align="center" class="row" style="position: relative;height:25%;">
 				<div class="col-md-6 col-sm-12 col-xs-12"
-					style="float: left; text-align: left; margin-bottom: 30px;vertical-align: baseline;">				
-					<div class="row">
-					<div class="col-md-8 col-sm-8 col-xs-8"><h3>신간도서</h3></div>
-					<div class="col-md-1 col-sm-1 col-xs-1" ><a href="searchBook?listType=new" >more...</a></div>
+					style="float: left; text-align: left; margin-bottom: 30px;  ">				
+					<div class="row"  >
+						<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8"><h3>신간도서</h3></div>
+						<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4"  ><a href="/searchBook?listType=new" >more...</a></div>
 					</div>
 					<c:forEach items="${newBook}" var="newBook" begin="0" end="2"
 						step="1" varStatus="status">

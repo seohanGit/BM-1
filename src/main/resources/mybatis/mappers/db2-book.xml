@@ -87,10 +87,11 @@
 		BY rcv_date DESC
 		FETCH first 200 rows only
 	</select>
+	
 	<select id="bestBook" resultType="BookModel"> 
 		SELECT
 		title, author, b_group, a.publish, b.book_cd, a.rentchk, a.reservechk,
-		case when b.returndate <> '' then b.returndate end as returnDate
+		<![CDATA[case when b.returndate <> '' then b.returndate end as returnDate]]>
 		FROM
 		testlib.bookmst A 
 		inner join tESTLIB.BOOKrent B on a.book_cd = b.book_cd

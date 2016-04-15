@@ -90,7 +90,6 @@
 		where rcv_date between #{date1} and #{date2} and left(b_group,1) = 'B'
 		ORDER
 		BY rcv_date DESC
-		FETCH first 200 rows only
 	</select>
 	
 	<select id="bestBook" resultType="BookModel" parameterType="Dto"> 

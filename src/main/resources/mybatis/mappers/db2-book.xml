@@ -81,15 +81,12 @@
 		BY rcv_date DESC
 		FETCH first 200 rows only
 	</select>	
-	<select id="newBook" parameterType="Dto" resultType="BookModel">
+	<select id="newBook"  resultType="BookModel" parameterType="Dto">
 		SELECT
 		A.title, A.author, A.publish, A.b_group, A.rentchk,
-		A.reservechk, A.book_cd, B.returndate
+		A.reservechk, A.book_cd 
 		FROM
-		TESTLIB.BOOKMST A LEFT OUTER
-		JOIN testlib.bookrent B
-		ON A.book_cd = B.book_cd AND A.rentchk =
-		B.rentchk
+		TESTLIB.BOOKMST A  
 		where rcv_date between #{date1} and #{date2} and left(b_group,1) = 'B'
 		ORDER
 		BY rcv_date DESC

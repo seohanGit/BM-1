@@ -1,45 +1,54 @@
-$('#btn_national').click(function() {
+$('.bestpicker').change(function() {
 	$.ajax({
 		type : "GET", // GET or POST
-		url : "/national", // URL
-		datatype : "xml", // html, xml, json, jsonp, script, text// parameters
-		// as plain object
-		error : function() { // Ajax error handler
-			alert('ajax failed');
-		},
-		success : function(data, status) { // Ajax complete handelr
-			$('#well').empty().append(data);
-		}
-	});
-});
-
-$('#btn_international').click(function() {
-	$.ajax({
-		type : "GET", // GET or POST
-		url : "/searchBook", // URL
+		url : "/bookList", // URL
 		datatype : "xml", // html, xml, json, jsonp, script, text
 		data : {
+			listType: 'best',
+			year: $('#year').val(),
+			month: $('#month').val(),
 			keyword : $('#keyword').val()
 		}, // parameters as plain object
 		error : function() { // Ajax error handler
 			alert('ajax failed');
 		},
-		success : function(data, status) { // Ajax complete handelr
-			$('#image1').fadeOut();
-			$('#image2').fadeOut();
+		success : function(data, status) { // Ajax complete handelr 
 			$('#searchResultArea').empty().append(data);
 		}
 	});
 });
+
+$('.datepicker').change(function() {
+	$.ajax({
+		type : "GET", // GET or POST
+		url : "/bookList", // URL
+		datatype : "xml", // html, xml, json, jsonp, script, text
+		data : {
+			listType: 'new',
+			year: $('#year').val(),
+			month: $('#month').val(),
+			keyword : $('#keyword').val()
+		}, // parameters as plain object
+		error : function() { // Ajax error handler
+			alert('ajax failed');
+		},
+		success : function(data, status) { // Ajax complete handelr 
+			$('#searchResultArea').empty().append(data);
+		}
+	});
+});
+
+// 
 $('#bestBook').click(function() {
 	$.ajax({
 
 		type : "GET", // GET or POST
-		url : "/selectBestBook", // URL
+		url : "/bookList", // URL
 		datatype : "xml",
 		// html, xml, json, jsonp, script, text
 		data : {
-			year : $('#year').val()
+			year : $('#year').val(),
+			month: $('#month').val()
 		},
 		// parameters as plain object
 		error : function() { // Ajax error handler

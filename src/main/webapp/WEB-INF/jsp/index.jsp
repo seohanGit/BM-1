@@ -17,16 +17,12 @@
 <link href="/resources/css/bootstrap-select.min.css" rel="stylesheet">
 <script type="text/javascript" src="/resources/js/highchartTable.js"></script>
 <script type="text/javascript" src="/resources/js/highcharts.js"></script>
-<script>
-	$("#logout").click(function() {
-		location.href = "/logout"
-	})
+<script> 
 
 	$document.ready(function() {
 
 		$('table.highchart').highchartTable();
-		var date = "${con.regisdate}";
-		var newicon = "<span class="label label-default">New</span></h3>";
+		var date = "${con.regisdate}"; 
 		if (date < now()) {
 			$("#notice").append(newicon);
 		}
@@ -65,7 +61,7 @@
 <body>
 	<jsp:include page="nav.jsp" />
 	<!-- Page Content -->
-	<div align="center" class="container col-xs-12  col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2" style="margin:2px">
+	<div align="center" class="container col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2" >
 		<div align="center" >
 			<div align="left" class="row" style="position: relative;height:25%; margin-top: 10px"> 
 					<!-- First Blog Post -->

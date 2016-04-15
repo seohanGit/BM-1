@@ -25,8 +25,8 @@ $('.datepicker').change(function() {
 		datatype : "xml", // html, xml, json, jsonp, script, text
 		data : {
 			listType: 'new',
-			year: $('#year').val(),
-			month: $('#month').val(),
+			datepicker1: $('#datepicker1').val(),
+			datepicker2: $('#datepicker2').val(),
 			keyword : $('#keyword').val()
 		}, // parameters as plain object
 		error : function() { // Ajax error handler

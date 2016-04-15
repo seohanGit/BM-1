@@ -322,6 +322,12 @@ public class BookServiceImpl implements BookService {
 		return etcDao.selectBookForImage();
 	}
 
+	@Override
+	public void setRecommend(BookModel bookmodel) {
+		//if (book)
+		
+	}
+
 	
 	
 }

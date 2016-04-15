@@ -230,7 +230,13 @@ public class BookController {
 		return "redirect:searchBook?listType=title&keyword=";
 
 	}
-
+	
+	@RequestMapping("/setRecommend")
+	public String setRecommend(BookModel bookmodel) { 
+		bookservice.setRecommend(bookmodel);
+		return "redirect:bookInfo";
+	}
+	
 	@RequestMapping("/modifyBookForm")
 	public String modifyBookForm(BookModel book, String book_cd,
 			HttpServletRequest request, Model model) {

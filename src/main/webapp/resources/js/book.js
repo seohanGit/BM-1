@@ -88,6 +88,36 @@ $('#btn_bookList').click(function() {
 	 }); // parameters as plain
  });
 
+ $('#datepicker1').click(function() { 
+	 $.ajax({ 
+		 type : "get", // get or post 
+		 url : "/searchBook",
+		 datatype : "json", // html, xml, json, jsonp, script,
+		 data : { 
+			 keyword : $('#keyword').val(),
+			 datepicker1 : $('#datepicker1').val(),
+			 datepicker2 : $('#datepicker2').val(),
+			 }, 
+		 success : function(data,status) {
+			 $('#dataTable_wrapper').empty().append(data);
+		 }// ajax complete handelr gourl(url); 
+	 }); // parameters as plain
+ });
+ $('#datepicker2').click(function() { 
+	 $.ajax({ 
+		 type : "get", // get or post 
+		 url : "/searchBook",
+		 datatype : "json", // html, xml, json, jsonp, script,
+		 data : { 
+			 keyword : $('#keyword').val(),
+			 datepicker1 : $('#datepicker1').val(),
+			 datepicker2 : $('#datepicker2').val(),
+			 }, 
+		 success : function(data,status) {
+			 $('#dataTable_wrapper').empty().append(data);
+		 }// ajax complete handelr gourl(url); 
+	 }); // parameters as plain
+ });
  $('#getBookInfo').click(function() {
  	$.ajax({
  		type : "GET", // GET or POST

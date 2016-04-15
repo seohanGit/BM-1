@@ -12,7 +12,7 @@ public interface BookService {
 
 	public void insertBook(BookModel model);
 
-	public List<SearchResult> searchBook(String field, String keyword);
+	public List<BookModel> searchBook(String field, String keyword);
 
 	public void deleteBook(String booknum);
 
@@ -28,7 +28,7 @@ public interface BookService {
 	 * List<BookModel> pagenation(String keyword, String page) throws Exception;
 	 */
 
-	public List<BookModel> listBook(String listType, String datepicker1, String datepicker2);
+	public List<BookModel> listBook(String listType, String datepicker1, String datepicker2, String month);
 	public List<BookModel> bookList(String listType); 
 	public List<BookModel> selectBookAll(); 
 	public List<CodeModel> selectBCodeList();

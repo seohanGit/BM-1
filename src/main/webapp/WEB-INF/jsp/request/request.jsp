@@ -30,6 +30,7 @@
 
 				<div class="input-group" style="float: left; width: 70%">
 					<form action="/findBook" method="post">
+						<input type="hidden" name="type" value="">
 						<span class="input-group-btn"> <input type="text"
 							class="form-control" id="query" name="keyword"
 							placeholder="검색가능도서 - ISBN, 도서명, 저자 검색">
@@ -42,7 +43,7 @@
 				<div style="float: right;"> 
 					<button class="btn btn-default" type="button"
 						onclick="window.open
-							('/requestbook','new','resizeble=yes scrollbars=yes, width=500, height=700');">
+							('/requestbook?type=isbn&keyword=','new','resizeble=yes scrollbars=yes, width=500, height=700');">
 							ISBN 미보유 도서</button>
 				</div>
 				<br>

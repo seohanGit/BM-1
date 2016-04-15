@@ -60,9 +60,9 @@ public class MemberController {
 	@Autowired
 	private StatisticService statisticService;
 
-	String year = Integer.toString(Calendar.getInstance().get(Calendar.YEAR));
-	String month = Integer.toString(Calendar.getInstance().get(Calendar.MONTH));
-
+	String year = Integer.toString(Calendar.getInstance().get(Calendar.YEAR)); 
+	String month = String.format("%02d", Calendar.getInstance().get(Calendar.MONTH));
+	
 	@RequestMapping("/test")
 	public String test(Model model) {
 		System.out.println(joinService.test());
@@ -84,7 +84,7 @@ public class MemberController {
 		List<BookModel> bestBook = statisticService.selectBestBook(param);
 		List<MemberModel> bestTeam = statisticService.selectBestTeam(year);
 		List<BookModel> newBook = statisticService.getNewbook();
-		List<SearchResult> bookList = bookService.searchBook("title", keyword);
+		List<BookModel> bookList = bookService.searchBook("title", keyword);
 		
 		model.addAttribute("bookList", bookList);
 		String permission = "";

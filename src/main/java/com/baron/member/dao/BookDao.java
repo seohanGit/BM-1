@@ -21,7 +21,7 @@ public interface BookDao {
 
 	public List<BookModel> listBook();
 	public List<BookModel> newBook(Dto dto);
-	public List<BookModel> bestBook();
+	public List<BookModel> bestBook(Dto dto);
 	public List<BookModel> recommendBook();
 
 	public List<BookModel> selectBookAll();
@@ -29,8 +29,8 @@ public interface BookDao {
 	public List<CodeModel> selectBCodeList();
 	public List<CodeModel> selectCCodeList();
 
-	public List<SearchResult> searchBook(String keyword); 
-	public List<SearchResult> searchAuthor(String keyword); 
-	public List<SearchResult> searchPublisher(String keyword);
+	public List<BookModel> searchBook(String keyword); 
+	public List<BookModel> searchAuthor(String keyword); 
+	public List<BookModel> searchPublisher(String keyword);
 
 }

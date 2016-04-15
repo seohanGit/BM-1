@@ -57,7 +57,7 @@
 	<jsp:include page="../nav.jsp" />
 	<div id="loadingBar"
 		style="background-color: #fff; position: absolute; top: 0; left: 0; width: 100%; height: 100%; text-align: center; margin: 0 auto; z-index: 100000;">
-		<table width="100%" height="100%" border="0" bgcolor="#fff">
+		<table style="" 100%" height="100%" border='0' ; bgcolor='#fff'" >
 			<tr>
 				<td align="center">
 					<div style="text-align: center;">
@@ -78,83 +78,38 @@
 					<div class="col-md-12 col-lg-12">
 						<form action="/searchBook" method="post">
 							<div class="col-md-12 col-lg-12">
-
 								<c:choose>
 									<c:when test="${listType=='new'}">
 
-										<div class="row" style="margin:auto; vertical-align: middle;">
-											<div class="col-lg-2 col-md-2">
-												<h2>신간도서</h2>
-											</div>
-											<div class="col-lg-2 col-md-2" style="margin-top: 3%;">
-												<div class="input-group date " data-provide="datepicker"
-													style="width: 140px;">
-													<input id="datepicker1" type="text" class="form-control"
-														value="${date1}">
-													<div class="input-group-addon">
-														<span class="glyphicon glyphicon-th"></span>
-													</div>
-												</div>
-											</div>
-											<div class="col-lg-2 col-md-2" style="margin-top: 3%;">
-												<div class="input-group date  " data-provide="datepicker"
-													style="width: 140px;">
-													<input id="datepicker2" type="text" class="form-control"
-														value="${date2}">
-													<div class="input-group-addon">
-														<span class="glyphicon glyphicon-th"></span>
-													</div>
-												</div>
-											</div>
-										</div>
 									</c:when>
 									<c:otherwise>
-										<div class="row">
-											<c:choose>
-												<c:when test="${listType=='best'}">
-													<div class="col-lg-3 col-md-3">
-														<h2>베스트도서</h2>
-													</div>
 
-												</c:when>
-												<c:when test="${listType=='recommend'}">
-													<div class="col-lg-3 col-md-3">
-														<h2>추천도서</h2>
-													</div>
-												</c:when>
-												<c:otherwise>
-													<div class="col-lg-3 col-md-3">
-														<h2>도서 목록</h2>
-													</div>
-												</c:otherwise>
-											</c:choose>
-											<div class="col-lg-8 col-md-8" style="margin-top: 3%;">
-												<div class="left" style="width: 20%;" align="right">
-													<select class="selectpicker"
-														style="font-size: 14px; margin-top: 10px; vertical-align: baseline;"
-														id="select"><option selected>전체
-															<c:forEach items="${BCodeList}" var="code">
-																<option value="${code.code}-${code.name}">${code.code}-${code.name}
-															</c:forEach></select>
-												</div>
-												<div class="input-group right"
-													style="vertical-align: baseline; float: left; width: 80%">
-
-													<span class="input-group-btn"> <input type="text"
-														class="form-control" id="keyword" name="keyword"
-														placeholder="기술자료실 도서 검색 [ 소문자로 입력 ]">
-														<button class="btn btn-default" type="submit"
-															id="btn_find">
-															<span class="glyphicon glyphicon-search"></span>
-														</button>
-													</span>
-												</div>
-											</div>
+										<div class="col-lg-3 col-md-3">
+											<h2>도서 목록</h2>
 										</div>
 									</c:otherwise>
-
 								</c:choose>
+								<div class="col-lg-12 col-md-12" style="margin-top: 3%;">
+									<div style="float: left" align="left">
+										<select class="selectpicker"
+											style="font-size: 14px; margin-top: 10px; vertical-align: baseline;"
+											id="select"><option selected>전체
+												<c:forEach items="${BCodeList}" var="code">
+													<option value="${code.code}-${code.name}">${code.code}-${code.name}
+												</c:forEach></select>
+									</div>
+									<div class="input-group left"
+										style="vertical-align: baseline; float: left; width: 80%">
 
+										<span class="input-group-btn"> <input type="text"
+											class="form-control" id="keyword" name="keyword"
+											placeholder="기술자료실 도서 검색 [ 소문자로 입력 ]">
+											<button class="btn btn-default" type="submit" id="btn_find">
+												<span class="glyphicon glyphicon-search"></span>
+											</button>
+										</span>
+									</div>
+								</div>
 							</div>
 						</form>
 					</div>
@@ -167,7 +122,7 @@
 								<th class="hidden-xs hidden-sm hidden-md td-author">저자</th>
 								<th class="hidden-xs hidden-sm td-genre">출판사</th>
 								<th class="hidden-xs td-genre" style="width: 120px">분류</th>
-								<th style="width: 100px">대여상태</th>
+								<th style="width: 160px">대여상태</th>
 								<th class="td-img"></th>
 							</tr>
 						</thead>
@@ -194,29 +149,24 @@
 											<td></td>
 										</c:when>
 										<c:when test="${book.rentchk=='1' and book.reservechk=='0'}">
-											<td>대출중 반납일 :${book.returndate}</td>
+											<td><p style="color: blue;">대출중</p> 반납일
+												:${book.returndate}</td>
 											<td><button class="btn btn-default" type="button"
 													id="reservebook"
 													onClick="location.href='/reservation?book_cd=${book.book_cd}'">예약</button></td>
 										</c:when>
-
 										<c:when test="${book.rentchk=='2' and book.reservechk=='1'}">
 											<td>예약중</td>
 											<td></td>
 										</c:when>
 										<c:when test="${book.rentchk=='2' and book.reservechk=='0'}">
-											<td>대출중 반납일 :${book.returndate}</td>
-											<td>
-												<!-- 											<button class="btn btn-default" type="button" -->
-												<!-- 													id="reservebook" --> <%-- 													onClick="location.href='/reservation?book_cd=${book.book_cd}'">예약</button> --%>
-											</td>
+											<td><p style="color: blue;">대출중</p> 반납일
+												:${book.returndate}</td>
+											<td></td>
 										</c:when>
-
 										<c:when test="${book.rentchk=='4'}">
 											<td>대출 정지</td>
 											<td></td>
-
-
 										</c:when>
 										<c:when test="${book.rentchk=='5'}">
 											<td>예약중</td>

@@ -30,17 +30,17 @@ public class BookDaoImpl implements BookDao {
 	}
 
 	@Override
-	public List<SearchResult> searchBook(String keyword) {
+	public List<BookModel> searchBook(String keyword) {
 		return session.selectList(NAMESPACE + "searchBook", keyword);
 	}
 
 	@Override
-	public List<SearchResult> searchAuthor(String keyword) { 
+	public List<BookModel> searchAuthor(String keyword) { 
 		return session.selectList(NAMESPACE + "searchAuthor", keyword);
 	}
 
 	@Override
-	public List<SearchResult> searchPublisher(String keyword) {
+	public List<BookModel> searchPublisher(String keyword) {
 		return session.selectList(NAMESPACE + "searchPublisher", keyword);
 	}
 	@Override
@@ -94,7 +94,7 @@ public class BookDaoImpl implements BookDao {
 	}
 
 	@Override
-	public List<BookModel> bestBook() { 
+	public List<BookModel> bestBook(Dto dto) { 
 		return session.selectList(NAMESPACE + "bestBook");
 	}
 

@@ -23,7 +23,7 @@
 
 	<select id="selectBookCount" resultType="BookModel">
 		SELECT COUNT(*) AS
-		count, b_group, (SELECT count(*) FROM testlib.bookmst) FROM testlib.bookmst GROUP BY b_group
+		count, b_group, (SELECT count(*) FROM testlib.bookmst) FROM testlib.bookmst GROUP BY b_group order by B_group
 	</select>
 
 
@@ -82,12 +82,12 @@
 	</select>
 	<select id="rentByMonth" parameterType="String" resultType="Dto">
 		SELECT COUNT(*)
-		count, month(rentdate) AS month
+		count, substr(rentdate,5,2) AS month
 		FROM
 		testlib.bookrent
 		WHERE left(rentdate,4) = #{year}
 		GROUP BY
-		month(rentdate)
+		substr(rentdate,5,2)
 	</select>
 
 	<select id="selectGroupByB" parameterType="Dto" resultType="Dto">
@@ -120,45 +120,23 @@
 	<select id="selectBestBook" resultType="BookModel"
 		parameterType="Dto">
 		SELECT COUNT(*) AS count,
-		B.book_cd,
-		(SELECT title FROM
-		testlib.bookmst WHERE book_cd =
-		B.book_cd) AS title,
-		(SELECT author FROM
-		testlib.bookmst WHERE book_cd
-		= B.book_cd) AS
-		author, (SELECT b_group
-		FROM testlib.bookmst WHERE
-		book_cd
-		= B.book_cd) AS
-		b_group
+		B.book_cd,B.title,
+		B.author, B.b_group, B.imageurl
 		FROM
 		testlib.bookrent A INNER JOIN
 		testlib.bookmst B
-		ON A.book_cd
-		= B.book_cd
-		WHERE left(rentdate,4) = #{year} AND
-		substr(rentdate,5,2)= #{month}
+		ON A.book_cd = B.book_cd
+		WHERE left(rentdate,4) = #{year} 
 		GROUP BY
-		B.book_cd
+		B.book_cd,B.title,B.author, B.b_group, B.imageurl
 		ORDER BY
 		count DESC
 	</select>
 	<select id="selectBestBookYear" resultType="BookModel"
 		parameterType="Dto">
 		SELECT COUNT(*) AS count,
-		B.book_cd,
-		(SELECT title FROM
-		testlib.bookmst WHERE book_cd =
-		B.book_cd) AS title,
-		(SELECT author FROM
-		testlib.bookmst WHERE book_cd
-		= B.book_cd) AS
-		author, (SELECT b_group
-		FROM testlib.bookmst WHERE
-		book_cd
-		= B.book_cd) AS
-		b_group
+		B.book_cd,B.title,
+		B.author, B.b_group, B.imageurl
 		FROM
 		testlib.bookrent A INNER JOIN
 		testlib.bookmst B
@@ -166,7 +144,7 @@
 		= B.book_cd
 		WHERE left(rentdate,4) = #{year}
 		GROUP BY
-		B.book_cd
+		B.book_cd,B.title,B.author, B.b_group, B.imageurl
 		ORDER BY
 		count DESC
 	</select>

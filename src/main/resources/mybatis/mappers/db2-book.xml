@@ -25,7 +25,7 @@
 		SELECT * FROM TESTLIB.BOOKMST WHERE book_cd=#{book_cd} FETCH first 1 rows only
 	</select>
 
-	<select id="searchBook" parameterType="String" resultType="SearchResult">
+	<select id="searchBook" parameterType="String" resultType="BookModel">
 		<bind name="keyword" value="'%' + _parameter + '%'" />
 		SELECT A.title, A.author, A.publish, A.b_group, A.rentchk,
 		A.reservechk, A.book_cd, B.returndate
@@ -39,7 +39,7 @@
 		ORDER BY A.RENTCHK DESC, A.RCV_DATE DESC 
 		FETCH first 200 rows only
 	</select>
-	<select id="searchAuthor" parameterType="String" resultType="SearchResult">
+	<select id="searchAuthor" parameterType="String" resultType="BookModel">
 		<bind name="keyword" value="'%' + _parameter + '%'" />
 		SELECT A.title, A.author, A.publish, A.b_group, A.rentchk,
 		A.reservechk, A.book_cd, B.returndate
@@ -53,7 +53,7 @@
 		ORDER BY A.RENTCHK DESC, A.RCV_DATE DESC 
 		FETCH first 200 rows only
 	</select>
-	<select id="searchPublisher" parameterType="String" resultType="SearchResult">
+	<select id="searchPublisher" parameterType="String" resultType="BookModel">
 		<bind name="keyword" value="'%' + _parameter + '%'" />
 		SELECT A.title, A.author, A.publish, A.b_group, A.rentchk,
 		A.reservechk, A.book_cd, B.returndate
@@ -70,31 +70,40 @@
 
 	<select id="listBook" parameterType="String" resultType="BookModel">
 		SELECT
-		title, author, b_group, rentchk, reservechk, book_cd, rcv_date
+		A.title, A.author, A.publish, A.b_group, A.rentchk,
+		A.reservechk, A.book_cd, B.returndate
 		FROM
-		TESTLIB.BOOKMST
+		TESTLIB.BOOKMST A LEFT OUTER
+		JOIN testlib.bookrent B
+		ON A.book_cd = B.book_cd AND A.rentchk =
+		B.rentchk
 		ORDER
 		BY rcv_date DESC
 		FETCH first 200 rows only
 	</select>	
 	<select id="newBook" parameterType="Dto" resultType="BookModel">
 		SELECT
-		title, author, b_group, rentchk, reservechk, book_cd, rcv_date
+		A.title, A.author, A.publish, A.b_group, A.rentchk,
+		A.reservechk, A.book_cd, B.returndate
 		FROM
-		TESTLIB.BOOKMST
-		where rcv_date between #{date1} and #{date2} and left(b_group,1) = 'B'  
+		TESTLIB.BOOKMST A LEFT OUTER
+		JOIN testlib.bookrent B
+		ON A.book_cd = B.book_cd AND A.rentchk =
+		B.rentchk
+		where rcv_date between #{date1} and #{date2} and left(b_group,1) = 'B'
 		ORDER
 		BY rcv_date DESC
 		FETCH first 200 rows only
 	</select>
 	
-	<select id="bestBook" resultType="BookModel"> 
+	<select id="bestBook" resultType="BookModel" parameterType="Dto"> 
 		SELECT
 		title, author, b_group, a.publish, b.book_cd, a.rentchk, a.reservechk,
 		<![CDATA[case when b.returndate <> '' then b.returndate end as returnDate]]>
 		FROM
 		testlib.bookmst A 
 		inner join tESTLIB.BOOKrent B on a.book_cd = b.book_cd
+		where left(B.rentdate,6) = #{month}
 		group by title, author, b_group, a.publish, b.book_cd, a.rentchk, a.reservechk, b.returndate
 		ORDER
 		BY count(b.book_cd) DESC
@@ -102,10 +111,11 @@
 	</select>
 	<select id="recommendBook" parameterType="String" resultType="BookModel">
 		SELECT
-		title, author, b_group, rentchk, reservechk, book_cd, rcv_date
+		A.title, A.author, A.publish, A.b_group, A.rentchk,
+		A.reservechk, A.book_cd 
 		FROM
-		TESTLIB.BOOKMST
-		where rcmdchk = 'Y'
+		TESTLIB.BOOKMST A
+		where A.rcmdchk = 'Y'
 	</select>	
 
 	<delete id="deleteBook" parameterType="String">
@@ -130,7 +140,7 @@
 	<select id="getNewbook" resultType="BookModel">
 		SELECT *
 		FROM TESTLIB.BOOKMST 
-		WHERE rcv_date is not null
+		WHERE rcv_date is not null and imageurl != '' 
 		ORDER BY
 		rcv_date DESC
 		FETCH first 5 rows only

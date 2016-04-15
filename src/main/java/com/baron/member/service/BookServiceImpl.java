@@ -83,7 +83,7 @@ public class BookServiceImpl implements BookService {
 	}
 
 	@Override
-	public List<SearchResult> searchBook(String field, String keyword) {
+	public List<BookModel> searchBook(String field, String keyword) {
 		if(field.equals("title")){
 			return bookDao.searchBook(keyword);
 		}else if(field.equals("author")){
@@ -94,7 +94,25 @@ public class BookServiceImpl implements BookService {
 			return bookDao.searchBook(keyword);
 		}
 	}
-
+	
+	@Override
+	public List<BookModel> listBook(String listType, String datepicker1, String datepicker2, String month) {  
+		  
+		Dto dto = new Dto();
+		dto.setDate1(datepicker1);
+		dto.setDate2(datepicker2);
+		dto.setMonth(month);
+		switch (listType) {
+			case "new":			
+				return bookDao.newBook(dto);
+			case "best":	
+				return bookDao.bestBook(dto);
+			case "recommend":
+				return bookDao.recommendBook();
+		}
+		return bookDao.listBook();
+	}
+	
 	@Override
 	public BookModel selectBook(String bookCode) {
 		return bookDao.selectBook(bookCode);
@@ -227,23 +245,7 @@ public class BookServiceImpl implements BookService {
 	 * }
 	 */
 
-	@Override
-	public List<BookModel> listBook(String listType, String datepicker1, String datepicker2) {  
-		  
-		Dto dto = new Dto();
-		dto.setDate1(datepicker1);
-		dto.setDate2(datepicker2);
-		
-		switch (listType) {
-			case "new":			
-				return bookDao.newBook(dto);
-			case "best":	
-				return bookDao.bestBook();
-			case "recommend":
-				return bookDao.recommendBook();
-		}
-		return bookDao.listBook();
-	}
+	
 	
 	@Override
 	public List<BookModel> bookList(String listType) {

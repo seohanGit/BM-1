@@ -65,20 +65,18 @@
 <body>
 	<jsp:include page="nav.jsp" />
 	<!-- Page Content -->
-	<div align="center" class="container col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+	<div align="center" class="container col-xs-12  col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2" style="margin:2px">
 		<div align="center" >
-			<div align="left" class="row col-xs-12 col-sm-12 col-md-12 col-lg-12">
-				<!-- Blog Entries Column -->
-				<h1>기술 자료실</h1>
-			</div>
-			<div align="left" class="row" style="position: relative;height:25%;">
-				<div class="">
+			<div align="left" class="row" style="position: relative;height:25%; margin-top: 10px"> 
 					<!-- First Blog Post -->
+					<div style="width: 50%; float:left">
+						<h2>기술자료실</h2>
+					</div>
 					<div align="right">
 						<img src="/resources/img/background.jpg" style="width: 40%; height: 60%" />
 					</div>
 					<div align="left"
-						style="vertical-align: middle; position: absolute; bottom: 20%; right: 50%; width: 40%">
+						style="vertical-align: middle; position: absolute; bottom: 20%; right: 50%; width: 50%">
 						<form action="/searchBook" method="post">
 							<span class="input-group-btn"> <input type="text"
 								style="width: 85%; float: left" class="form-control" id="keyword"
@@ -89,8 +87,7 @@
 								</button>
 							</span>
 						</form>
-					</div>
-				</div>
+					</div> 
 			</div>
 			<div align="center" class="row" style="overflow: auto; height:25%; background-color:#EEEEEE; ;">
 				<div class="col-md-6 col-sm-12 col-xs-12"
@@ -99,19 +96,19 @@
 						style="float: left; display: block; text-align: center">
 						<a href="#" style="display: block"><img
 							src="/resources/img/btn2.png" style="width: 95%; margin: 10px"></a>
-						<a class="href" href="#" style="display: block">소장자료검색</a>
+						<a class="href" href="#" style="display: block">도서검색</a>
 					</div>
 					<div class="col-md-4 col-sm-4 col-xs-4"
 						style="float: left; display: block; text-align: center">
 						<a href="borrowList" style="display: block"><img
 							src="/resources/img/btn1.png" style="width: 95%; margin: 10px"></a>
-						<a class="href" href="borrowList" style="display: block">대출/예약연기</a>
+						<a class="href" href="borrowList" style="display: block">대출/연장/예약 조회</a>
 					</div>
 					<div class="col-md-4 col-sm-4 col-xs-4"
 						style="float: left; display: block; text-align: center">
 						<a href="request" style="display: block"><img
 							src="/resources/img/btn3.png" style="width: 95%; margin: 10px"></a>
-						<a class="href" href="request" style="display: block;">도서구매신청</a>
+						<a class="href" href="request" style="display: block;">자료구입신청</a>
 					</div>
 				</div>
 				<div class="col-md-6 col-sm-12 col-xs-12"
@@ -131,7 +128,7 @@
 					style="float: left; text-align: left; margin-bottom: 30px;  ">				
 					<div class="row"  >
 						<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8"><h3>신간도서</h3></div>
-						<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4"  ><a href="/searchBook?listType=new" >more...</a></div>
+						<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4"><a href="/searchBook?listType=new" >more...</a></div>
 					</div>
 					<c:forEach items="${newBook}" var="newBook" begin="0" end="2"
 						step="1" varStatus="status">
@@ -140,16 +137,14 @@
 								style="float: left; display: block; text-align: center;">
 								<c:choose>
 											<c:when test="${empty newBook.imageurl }">
-												<img src="/resources/img/noimage.png" height="100%" width="100%">
+												<img src="/resources/img/noimage.png" height="80%" width="80%">  
 											</c:when>
 											<c:otherwise>
-											 	<img src="${newBook.imageurl}" height="100%" width="100%">
+											 	<a onclick="window.open('/bookInfo?book_cd=${newBook.book_cd}','new','resizeble=yes scrollbars=yes, width=750, height=500');"><img src="${newBook.imageurl}" height="100%" width="100%"></a>
+											 	<a onclick="window.open('/bookInfo?book_cd=${newBook.book_cd}','new','resizeble=yes scrollbars=yes, width=750, height=500');">${newbook.title}</a>
 											</c:otherwise>
-									</c:choose>
-								<a href="#"
-									onclick="window.open('/bookInfo?book_cd=${newBook.book_cd}','new','resizeble=yes scrollbars=yes, width=750, height=500');">${newbook.title}</a>
-							</div>
-	
+									</c:choose>								
+							</div>							
 						</div>
 					</c:forEach>
 				</div>
@@ -166,18 +161,14 @@
 								style="float: left; display: block; text-align: center; ">
 								<c:choose>
 										<c:when test="${empty bestBook.imageurl }">
-											<img src="/resources/img/noimage.png" height="100%" width="100%">
+											<img src="/resources/img/noimage.png" height="80%" width="80%">
 										</c:when>
 										<c:otherwise>
-										 	<img src="${bestBook.imageurl}" height="100%" width="100%">
+										 	<a onclick="window.open('/bookInfo?book_cd=${bestBook.book_cd}','new','resizeble=yes scrollbars=yes, width=750, height=500');"><img src="${bestBook.imageurl}" height="100%" width="100%">${bestbook.title}</a>
+										 	<a onclick="window.open('/bookInfo?book_cd=${bestBook.book_cd}','new','resizeble=yes scrollbars=yes, width=750, height=500');">${bestbook.title}</a>
 										</c:otherwise>
-								</c:choose>
-								<a href="#"
-									onclick="window.open('/bookInfo?book_cd=${bestBook.book_cd}','new','resizeble=yes scrollbars=yes, width=750, height=500');">${newbook.title}</a>
-							</div>
-							<%-- 							<p class="caption">${newbook.author}</p> --%>
-							<%-- 							<p class="caption">입고일 : ${newbook.rcv_date}</p> --%>
-	
+								</c:choose> 
+							</div>  
 						</div>
 					</c:forEach>
 				</div>

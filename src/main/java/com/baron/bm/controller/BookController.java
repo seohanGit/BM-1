@@ -1,5 +1,6 @@
 package com.baron.bm.controller;
 
+import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -71,50 +72,56 @@ public class BookController {
 	}
  
 	@RequestMapping("/searchBook")
-	public ModelAndView searchBook(HttpServletRequest request, String keyword, String listType, String datepicker1, String datepicker2, String field,
+	public ModelAndView searchBook(HttpServletRequest request, 
+			String keyword, String listType, String datepicker1, String datepicker2, 
+			String field, String year, String month,
 			ModelAndView mav) throws NullPointerException {
-
-		List<CodeModel> BCodeList = new ArrayList<CodeModel>();
+		String permission = "";
+		List<BookModel> bookList = new ArrayList<BookModel>();		 
+		List<CodeModel> BCodeList = new ArrayList<CodeModel>(); 
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd"); 
+		Calendar cal = Calendar.getInstance();		 
+		
+		for (Cookie cookie : request.getCookies()) {
+			if (cookie.getName().equals("bm_permission")) {
+				permission = cookie.getValue(); 
+			}
+		} 
+		if (permission.equals("1")) {
+			mav.setViewName("book/bookSearchByAdmin"); 
+		} else {
+			
+		}
 		if (listType == null)  {
 			if (field == null){field = "title";}
-			List<SearchResult> bookList = bookservice.searchBook(field, keyword);
+			bookList = bookservice.searchBook(field, keyword);
 			mav.addObject("bookList", bookList);
 			mav.addObject("listType", "");
-		}else{
-			if ( datepicker1 == null){				
-				Calendar cal = Calendar.getInstance();				
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");				
+			mav.setViewName("book/bookSearch");
+		}else if(listType.equals("new")){
+			if (datepicker1== null || datepicker1.equals("")){
+				cal = Calendar.getInstance();				
 				Date date2 = cal.getTime();
 				cal.add(cal.MONTH, -1);
 				Date date1 = cal.getTime();
 				datepicker1 = sdf.format(date1); 
 				datepicker2 = sdf.format(date2);
 			}
-			List<BookModel> bookList = bookservice.listBook(listType, datepicker1, datepicker2);
-			mav.addObject("bookList", bookList);
-			mav.addObject("date1", datepicker1);
-			mav.addObject("date2", datepicker2);
-			mav.addObject("listType", listType);
-		} 
-
-		BCodeList = bookservice.selectBCodeList(); 
-		mav.addObject("BCodeList", BCodeList);
-		 
-		
-		String permission = "";
-		for (Cookie cookie : request.getCookies()) {
-			if (cookie.getName().equals("bm_permission")) {
-				permission = cookie.getValue();
-
-			}
-		} 
-		if (permission.equals("1")) {
-			mav.setViewName("book/bookSearchByAdmin");
-			return mav;
-		} else {
-			mav.setViewName("book/bookSearch");
-			return mav;
+			bookList = bookservice.listBook(listType, datepicker1, datepicker2,"");
+			mav.setViewName("book/listBook");
+		}else {			
+			bookList = bookservice.listBook(listType, datepicker1, datepicker2, year+month);
+			mav.setViewName("book/listBook");
 		}
+		mav.addObject("bookList", bookList);
+		mav.addObject("date1", datepicker1);
+		mav.addObject("date2", datepicker2); 
+		mav.addObject("listType", listType);
+		
+		BCodeList = bookservice.selectBCodeList(); 
+		mav.addObject("BCodeList", BCodeList); 
+	
+		return mav;	
 	}
 	
 		
@@ -144,8 +151,7 @@ public class BookController {
 	public String findBook(String keyword, String page, Model model, String type)
 			throws Exception {
 		List<BookModel> bookList;
-		BookModel book;
-		System.out.println(keyword);
+		BookModel book; 
 		
 		if(type.equals("isbn")){
 			book = requestservice.findBookOne(keyword);

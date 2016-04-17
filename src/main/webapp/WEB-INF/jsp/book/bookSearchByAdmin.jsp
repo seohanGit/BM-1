@@ -70,7 +70,8 @@
 						<div class="input-group right"
 							style="vertical-align: baseline; float: left; width: 80%">
 							<form action="/searchBook" method="post">
-								<span class="input-group-btn"> <input type="text"
+								<span class="input-group-btn"> 
+								<input type="text"
 									class="form-control" id="keyword" name="keyword"
 									placeholder="기술자료실 도서 검색 [ 소문자로 입력 ]">
 									<button class="btn btn-default" type="submit" id="btn_find">
@@ -100,7 +101,8 @@
 									<th>도서명</th>
 									<th class="hidden-xs td-genre">저자</th>
 									<th class="hidden-sm hidden-xs hidden-md td-author">분류</th>
-									<th style="width: 110px">대여상태</th>
+									<th style="width: 40px">추천</th>
+									<th style="width: 110px">대여상태</th>									
 									<th style="width: 230px"></th>
 								</tr>
 							</thead>
@@ -111,14 +113,29 @@
 							<tbody id="tablebody">
 								<c:forEach items="${bookList}" var="book" varStatus="loop">
 									<tr>
-										<td><input type="checkbox" name="book_cd"
-											value="${book.book_cd}"></td>
-										<td align="left"><a href="#"
+										<td class="book_cd" ><input type="checkbox" name="book_cd"
+											value="${book.book_cd}">${book.book_cd}</td>
+										<td class="title" align="left"><a href="#"
 											onclick="window.open('/bookInfo?book_cd=${book.book_cd}','new','resizeble=yes scrollbars=yes, width=850, height=850');">
 												${book.title }</a></td>
-										<td class="hidden-xs" align="left">${book.author}</td>
-										<td class="hidden-sm hidden-xs hidden-md"
+										<td class="hidden-xs author" align="left">${book.author}</td>
+										<td class="hidden-sm hidden-xs hidden-md b_group"
 											id="${book.b_group }" align="left">${book.b_group}</td>
+										
+										<td class="rcmdChk" align="left" >
+										<c:choose>
+											<c:when test="${book.rcmdChk=='1' }">
+												
+												<input  name="rcmdChk" value="1" type="checkbox" checked="checked" >										 
+<%-- 											onclick="location.href='/setRecommend?book_cd=${book.book_cd}&rcmdChk=0';"> --%>										
+											</c:when>
+											<c:otherwise>
+												<input  name="rcmdChk" value="0" type="checkbox" >
+<%-- 											onclick="location.href='/setRecommend?book_cd=${book.book_cd}&rcmdChk=1';">											 --%>
+											
+											</c:otherwise>											
+										</c:choose>	
+										 </td>
 										<c:choose>
 											<c:when test="${book.rentchk=='0'}">
 												<td align="left">대출가능</td>
@@ -188,7 +205,7 @@
 	</div>
 	<br>
 
-
+	<script src="/resources/js/book.js"></script>
 	<script src="/resources/js/common.js"></script>
 	<script src="/resources/js/metisMenu.min.js"></script>
 	<script src="/resources/js/jquery.dataTables.min.js"></script>

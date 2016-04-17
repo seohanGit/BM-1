@@ -33,4 +33,6 @@ public interface BookDao {
 	public List<BookModel> searchAuthor(String keyword); 
 	public List<BookModel> searchPublisher(String keyword);
 
+	public void setRecommend(BookModel bookmodel);
+
 }

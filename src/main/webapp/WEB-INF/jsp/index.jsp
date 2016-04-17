@@ -92,7 +92,7 @@
 						style="float: left; display: block; text-align: center">
 						<a href="#" style="display: block"><img
 							src="/resources/img/btn2.png" style="width: 95%; margin: 10px"></a>
-						<a class="href" href="#" style="display: block">도서검색</a>
+						<a class="href" href="searchBook?field=title&keyword=" style="display: block">도서검색</a>
 					</div>
 					<div class="col-md-4 col-sm-4 col-xs-4"
 						style="float: left; display: block; text-align: center">

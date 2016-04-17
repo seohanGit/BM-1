@@ -53,7 +53,7 @@
 					buttonImage : "/resources/img/calendar.gif",
 					buttonImageOnly : true,
 					buttonText : "Select date"
-				});				
+				});
 				$('.datepicker').datepicker("option", "dateFormat", "yymmdd");
 
 				$('#datepicker1').val(today);
@@ -65,7 +65,7 @@
 					$('#year').prepend(
 							'<option value="'+i+'">' + i + '</option>')
 							.selectpicker('refresh');
-				} 
+				}
 				for (var i = 1; i < 13; i++) {
 					if (i < 10) {
 						i = '0' + i;
@@ -75,7 +75,7 @@
 				}
 				$('#year').selectpicker('val', year);
 				$('#month').selectpicker('val', mm2);
-				$('.selectpicker').selectpicker('refresh'); 
+				$('.selectpicker').selectpicker('refresh');
 
 			});
 </script>
@@ -95,8 +95,7 @@
 						o a d i n g . . .</div>
 				</td>
 			</tr>
-		</table>
-
+		</table> 
 	</div>
 	<div id="divLoadBody" style="display: none;" class="container ">
 		<div class="col-md-12">
@@ -128,6 +127,12 @@
 											</div>
 										</div>
 									</c:when>
+									<c:when test="${listType=='recommend'}">
+
+										<div class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
+											<h2>추천도서</h2>
+										</div>
+									</c:when>
 									<c:otherwise>
 										<div class="col-lg-3 col-md-3 col-sm-7 col-xs-7">
 											<div style="margin: 5px">
@@ -137,10 +142,10 @@
 										<div class="row col-lg-8 col-md-8 col-sm-5 col-xs-5">
 											<select class="selectpicker bestpicker"
 												style="font-size: 14px; width: 100%" id="year" name="year">
-												
+
 											</select>년 <select class="selectpicker bestpicker"
 												style="font-size: 14px; width: 100%" id="month" name="month">
-												
+
 											</select>월
 										</div>
 										<div class="col-lg-12 col-md-12" style="margin-top: 3%;">
@@ -259,8 +264,8 @@
 	</div>
 	<script src="/resources/js/jquery/jquery.js"></script>
 	<script src="/resources/js/bootstrap.min.js"></script>
-	<script src="/resources/js/common.js"></script> 
-<script src="/resources/js/book.js"></script>
+	<script src="/resources/js/common.js"></script>
+	<script src="/resources/js/book.js"></script>
 	<script src="/resources/js/bootstrap-select.min.js"></script>
 	<script src="/resources/js/jquery.dataTables.min.js"></script>
 	<script src="/resources/js/dataTables.bootstrap.min.js"></script>

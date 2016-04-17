@@ -102,5 +102,10 @@ public class BookDaoImpl implements BookDao {
 	public List<BookModel> recommendBook() { 
 		return session.selectList(NAMESPACE + "recommendBook");
 	}
+	
+	@Override
+	public void setRecommend(BookModel bookmodel) { 
+		session.update(NAMESPACE + "setRecommend", bookmodel);
+	}
 
 }

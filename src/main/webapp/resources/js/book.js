@@ -38,7 +38,33 @@ $('.datepicker').change(function() {
 	});
 });
 
-// 
+$('.rcmdChk').on('click', function() {
+    var $row = $(this).closest('tr');
+    var $tds = $row.find('td');
+
+    var rcmdChk = "";
+    var bookcd = "";
+    var bookcd = $(this).closest('tr').children('td.book_cd').text();
+    var td_rcmdChk = $(this).closest('tr').children('td.rcmdChk').find('input:checkbox').is(':checked');
+    if (td_rcmdChk==true){
+    	td_rcmdChk = '1';
+    }else{
+    	td_rcmdChk = '0';
+    }
+    $.ajax({
+		type : "GET", // GET or POST
+		url : "/setRecommend", // URL
+		datatype : "xml", // html, xml, json, jsonp, script, text
+		data : {
+			book_cd : bookcd,
+			rcmdChk : td_rcmdChk
+		}, // parameters as plain object 
+		success : function(data, status) { // Ajax complete handelr 
+			alert('설정 완료');
+		}
+    });
+});
+
 $('#bestBook').click(function() {
 	$.ajax({
 

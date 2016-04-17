@@ -324,7 +324,7 @@ public class BookServiceImpl implements BookService {
 
 	@Override
 	public void setRecommend(BookModel bookmodel) {
-		//if (book)
+		bookDao.setRecommend(bookmodel);
 		
 	}
 

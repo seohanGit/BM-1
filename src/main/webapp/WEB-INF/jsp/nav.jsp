@@ -25,7 +25,7 @@
 		<div class="collapse navbar-collapse"
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav " role="menu">
-				<li><a href="searchBook?listType=">자료검색</a></li>
+				<li><a href="searchBook?keyword=">자료검색</a></li>
 				<li><a href="searchBook?listType=new">신간도서</a></li>
 <!-- 				<li><a href="board">게시판</a></li> -->
 				<li><a href="searchBook?listType=recommend">추천도서</a></li>

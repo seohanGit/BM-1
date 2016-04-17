@@ -90,14 +90,13 @@ public class BookController {
 		if (permission.equals("1")) {
 			mav.setViewName("book/bookSearchByAdmin"); 
 		} else {
-			
+			mav.setViewName("book/bookSearch");
 		}
-		if (listType == null)  {
+		if (listType==null)  {
 			if (field == null){field = "title";}
 			bookList = bookservice.searchBook(field, keyword);
 			mav.addObject("bookList", bookList);
 			mav.addObject("listType", "");
-			mav.setViewName("book/bookSearch");
 		}else if(listType.equals("new")){
 			if (datepicker1== null || datepicker1.equals("")){
 				cal = Calendar.getInstance();				
@@ -227,14 +226,16 @@ public class BookController {
 		}
 
 		bookservice.deleteBook(book_cd);
-		return "redirect:searchBook?listType=title&keyword=";
+		return "redirect:searchBook?listType=&keyword=";
 
 	}
 	
 	@RequestMapping("/setRecommend")
-	public String setRecommend(BookModel bookmodel) { 
+	public void setRecommend(String book_cd, String rcmdChk) { 
+		BookModel bookmodel = new BookModel();
+		bookmodel.setBook_cd(book_cd);
+		bookmodel.setRcmdChk(rcmdChk);
 		bookservice.setRecommend(bookmodel);
-		return "redirect:bookInfo";
 	}
 	
 	@RequestMapping("/modifyBookForm")

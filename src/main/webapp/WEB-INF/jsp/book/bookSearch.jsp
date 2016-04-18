@@ -123,7 +123,7 @@
 								<th class="hidden-xs hidden-sm td-genre">출판사</th>
 								<th class="hidden-xs td-genre" style="width: 120px">분류</th>
 								<th style="width: 160px">대여상태</th>
-								<th class="td-img"></th>
+								<th class="image"></th>
 							</tr>
 						</thead>
 

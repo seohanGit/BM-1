@@ -92,7 +92,7 @@ public class BookController {
 		} else {
 			mav.setViewName("book/bookSearch");
 		}
-		if (listType==null)  {
+		if (listType==null||listType.equals(""))  {
 			if (field == null){field = "title";}
 			bookList = bookservice.searchBook(field, keyword);
 			mav.addObject("bookList", bookList);
@@ -151,7 +151,7 @@ public class BookController {
 		} else {
 			
 		}
-		if (listType == null)  {
+		if (listType == null||listType.equals(""))  {
 			if (field == null){field = "title";}
 			bookList = bookservice.searchBook(field, keyword);
 			mav.addObject("bookList", bookList);

@@ -156,9 +156,9 @@ public class RequestController {
 			if (bookService.selectBook(book.getBook_cd()) == null) {
 				requestservice.confirmBuy(book);
 				requestservice.deleteRequest(book);
-				return "request/buySuccess";
+				return "redirect:request";
 			} else {
-				return "request/buyfail";
+				return "redirect:request";
 
 			}
 

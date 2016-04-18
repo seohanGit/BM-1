@@ -224,11 +224,13 @@
 													</c:when>
 													<c:when
 														test="${book.rentchk=='1' and book.reservechk=='0'}">
-														<td><p style="color: blue;">대출중</p> 반납일
+														<td><p style="color: blue;">대여요청중</p> 반납일
 															:${book.returndate}</td>
-														<td><button class="btn btn-default" type="button"
-																id="reservebook"
-																onClick="location.href='/reservation?book_cd=${book.book_cd}'">예약</button></td>
+														<td>
+<!-- 														<button class="btn btn-default" type="button" -->
+<!-- 																id="reservebook" -->
+<%-- 																onClick="location.href='/reservation?book_cd=${book.book_cd}'">예약</button> --%>
+																</td>
 													</c:when>
 													<c:when
 														test="${book.rentchk=='2' and book.reservechk=='1'}">

@@ -116,7 +116,7 @@
 								<td>
 									<button class="btn btn-default" type="submit"
 										onclick="window.open
-							('/requestbook?isbn=${book.isbn}','new','resizeble=yes scrollbars=yes, width=500, height=700');">
+							('/requestbook?isbn=${book.isbn}','new','resizeble=yes scrollbars=yes, width=500, height=800');">
 							구매요청</button>
 								</td>
 							</tr>

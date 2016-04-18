@@ -97,10 +97,10 @@
 						<table class="table table-striped table-bordered " id="dataTable">
 							<thead>
 								<tr>
-									<th class="td-chk"></th>
+									<th class="image"></th>
 									<th>도서명</th>
-									<th class="hidden-xs td-genre">저자</th>
-									<th class="hidden-sm hidden-xs hidden-md td-author">분류</th>
+									<th class="hidden-xs image">저자</th>
+									<th class="hidden-sm hidden-xs hidden-md author">분류</th>
 									<th style="width: 40px">추천</th>
 									<th style="width: 110px">대여상태</th>									
 									<th style="width: 230px"></th>

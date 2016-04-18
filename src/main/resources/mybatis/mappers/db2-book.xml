@@ -27,7 +27,7 @@
 
 	<select id="searchBook" parameterType="String" resultType="BookModel">
 		<bind name="keyword" value="'%' + _parameter + '%'" />
-		SELECT A.title, A.author, A.publish, A.b_group, A.rentchk, A.rcmdChk,
+		SELECT A.title, A.author, A.publish, A.b_group, A.rentchk, A.rcmdChk, A.imageurl,
 		A.reservechk, A.book_cd, B.returndate
 		FROM
 		TESTLIB.BOOKMST A LEFT OUTER
@@ -41,7 +41,7 @@
 	</select>
 	<select id="searchAuthor" parameterType="String" resultType="BookModel">
 		<bind name="keyword" value="'%' + _parameter + '%'" />
-		SELECT A.title, A.author, A.publish, A.b_group, A.rentchk, A.rcmdChk,
+		SELECT A.title, A.author, A.publish, A.b_group, A.rentchk, A.rcmdChk, A.imageurl,
 		A.reservechk, A.book_cd, B.returndate
 		FROM
 		TESTLIB.BOOKMST A LEFT OUTER
@@ -55,7 +55,7 @@
 	</select>
 	<select id="searchPublisher" parameterType="String" resultType="BookModel">
 		<bind name="keyword" value="'%' + _parameter + '%'" />
-		SELECT A.title, A.author, A.publish, A.b_group, A.rentchk, A.rcmdChk,
+		SELECT A.title, A.author, A.publish, A.b_group, A.rentchk, A.rcmdChk, A.imageurl,
 		A.reservechk, A.book_cd, B.returndate
 		FROM
 		TESTLIB.BOOKMST A LEFT OUTER
@@ -70,7 +70,7 @@
 
 	<select id="listBook" parameterType="String" resultType="BookModel">
 		SELECT
-		A.title, A.author, A.publish, A.b_group, A.rentchk, A.rcmdChk,
+		A.title, A.author, A.publish, A.b_group, A.rentchk, A.rcmdChk, A.imageurl,
 		A.reservechk, A.book_cd, B.returndate
 		FROM
 		TESTLIB.BOOKMST A LEFT OUTER
@@ -83,7 +83,7 @@
 	</select>	
 	<select id="newBook"  resultType="BookModel" parameterType="Dto">
 		SELECT
-		A.title, A.author, A.publish, A.b_group, A.rentchk,
+		A.title, A.author, A.publish, A.b_group, A.rentchk, A.imageurl,
 		A.reservechk, A.book_cd, b.returndate
 		FROM
 		TESTLIB.BOOKMST A  
@@ -95,20 +95,20 @@
 	
 	<select id="bestBook" resultType="BookModel" parameterType="Dto"> 
 		SELECT
-		title, author, b_group, a.publish, b.book_cd, a.rentchk, a.reservechk, A.rcmdChk,
+		title, author, b_group, a.publish, b.book_cd, a.rentchk, a.reservechk, A.rcmdChk, A.imageurl,
 		<![CDATA[case when b.returndate <> '' then b.returndate end as returnDate]]>
 		FROM
 		testlib.bookmst A 
 		inner join tESTLIB.BOOKrent B on a.book_cd = b.book_cd and a.rentchk = b.rentchk
 		where left(B.rentdate,6) = #{month}
-		group by title, author, b_group, a.publish, b.book_cd, a.rentchk, a.reservechk, A.rcmdChk, b.returndate
+		group by title, author, b_group, a.publish, b.book_cd, a.rentchk, a.reservechk, A.rcmdChk, b.returndate,  A.imageurl
 		ORDER
 		BY count(b.book_cd) DESC
 		FETCH first 10 rows only
 	</select>
 	<select id="recommendBook" parameterType="String" resultType="BookModel">
 		SELECT
-		A.title, A.author, A.publish, A.b_group, A.rentchk, A.rcmdChk,
+		A.title, A.author, A.publish, A.b_group, A.rentchk, A.rcmdChk, A.imageurl,
 		A.reservechk, A.book_cd, B.returndate
 		FROM
 		TESTLIB.BOOKMST A

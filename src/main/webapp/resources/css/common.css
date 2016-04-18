@@ -65,15 +65,15 @@ table thead .td-title {
 	text-transform: capitalize;
 }
 
-table  thead .td-author {
+table  thead .author {
 	width: 14%;
 }
 
-table thead .td-img {
+table thead .image {
 	width: 7%;
 }
 
-table   thead .td-genre {
+table   thead .genre {
 	width: 10%;
 }
 

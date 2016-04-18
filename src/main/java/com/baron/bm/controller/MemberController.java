@@ -81,7 +81,7 @@ public class MemberController {
 		param.setMonth(month);
 		String keyword = "";
 		List<BoardModel> notice = boardService.noticeList();
-		List<BookModel> bestBook = statisticService.selectBestBook(param);
+		List<BookModel> bestBook = bookService.listBook("recommend", "", "", "");
 		List<MemberModel> bestTeam = statisticService.selectBestTeam(year);
 		List<BookModel> newBook = statisticService.getNewbook();
 		List<BookModel> bookList = bookService.searchBook("title", keyword);

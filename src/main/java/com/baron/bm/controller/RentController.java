@@ -19,6 +19,7 @@ import com.baron.member.dao.BookDao;
 import com.baron.member.dao.JoinDao;
 import com.baron.member.dao.RentDao;
 import com.baron.member.model.BookModel;
+import com.baron.member.model.MemberModel;
 import com.baron.member.model.SmsModel;
 import com.baron.member.service.NotifiService;
 import com.baron.member.service.RentService;
@@ -97,8 +98,9 @@ public class RentController {
 				id = cookie.getValue();
 			}
 		}
-		if (rentservice.selectReservation(book_cd) != null) {
-			if (rentservice.selectReservation(book_cd).getId() == id)
+		BookModel reserveBook = rentservice.selectReservation(book_cd);
+		if (reserveBook != null) {
+			if (reserveBook.getId() == id)
 				rentservice.deleteReserve(book_cd); 
 		} 
 		return "redirect:borrowReqList";
@@ -116,8 +118,9 @@ public class RentController {
 		for (String book_cd : book_cdList) {
 			rentservice.confirmBorrowBook(book_cd);
 			notifiService.notifiRent(book_cd);
-			if (rentservice.selectReservation(book_cd) != null) {
-				if (rentservice.selectReservation(book_cd).getId() == id)
+			BookModel reserveBook = rentservice.selectReservation(book_cd);
+			if (reserveBook != null) {
+				if (reserveBook.getId() == id)
 					rentservice.deleteReserve(book_cd);
 
 			}
@@ -193,18 +196,22 @@ public class RentController {
 		cal = Calendar.getInstance();	
 		cal.add(cal.MONTH, +1);		
 		book.setReturndate(sdf.format(cal.getTime()));
-
-		if (rentservice.selectReservation(book_cd) == null) {
-			sms.setPhone(joinDao.selectMember(id).getMobi_no().substring(1));
-			sms.setTitle(bookDao.selectBook(book_cd).getTitle());
+		
+		MemberModel member =  joinDao.selectMember(id);
+		BookModel reserveBook = rentservice.selectReservation(book_cd);	
+		book= rentDao.selectBorrow(book_cd);
+		
+		if (reserveBook == null) {
+			sms.setPhone(member.getMobi_no().substring(1));
+			sms.setTitle(book.getTitle());
 
 			rentservice.extendBorrowBook(book);
 			notifiService.notifiExtend(sms);
 
-		} else if (rentservice.selectReservation(book_cd).getReservechk()
+		} else if (reserveBook.getReservechk()
 				.equals("0")) {
-			sms.setPhone(joinDao.selectMember(id).getMobi_no().substring(1));
-			sms.setTitle(rentDao.selectBorrow(book_cd).getTitle());
+			sms.setPhone(member.getMobi_no().substring(1));
+			sms.setTitle(book.getTitle());
 
 			rentservice.extendBorrowBook(book);
 			notifiService.notifiExtend(sms);
@@ -222,13 +229,14 @@ public class RentController {
 		
 
 		for (String book_cd : book_cdList) {
-			if (rentservice.selectReservation(book_cd) == null) {
+			BookModel reserveBook = rentservice.selectReservation(book_cd);	
+			if (reserveBook == null) {
 				BookModel book = new BookModel();
 				book.setBook_cd(book_cd);
 				cal.add(cal.MONTH, +1);		
 				book.setReturndate(sdf.format(cal.getTime()));				
 				rentservice.extendBorrowBook(book);
-			} else if (rentservice.selectReservation(book_cd).getReservechk()
+			} else if (reserveBook.getReservechk()
 					.equals("0")
 					&& rentservice.selectRent(book_cd).getExtendchk()
 							.equals("0")) {

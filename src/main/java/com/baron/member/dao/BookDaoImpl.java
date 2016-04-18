@@ -95,7 +95,7 @@ public class BookDaoImpl implements BookDao {
 
 	@Override
 	public List<BookModel> bestBook(Dto dto) { 
-		return session.selectList(NAMESPACE + "bestBook");
+		return session.selectList(NAMESPACE + "bestBook", dto);
 	}
 
 	@Override

@@ -95,7 +95,7 @@
 						o a d i n g . . .</div>
 				</td>
 			</tr>
-		</table> 
+		</table>
 	</div>
 	<div id="divLoadBody" style="display: none;" class="container ">
 		<div class="col-md-12">
@@ -182,21 +182,27 @@
 									id="dataTable">
 									<thead>
 										<tr>
-											<th class="hidden-xs hidden-sm hidden-md td-img">표지</th>
+											<th class="hidden-xs hidden-sm hidden-md image">표지</th>
 											<th>도서명</th>
-											<th class="hidden-xs hidden-sm hidden-md td-author">저자</th>
-											<th class="hidden-xs hidden-sm td-genre">출판사</th>
-											<th class="hidden-xs td-genre" style="width: 120px">분류</th>
-											<th class="td-author">대여상태</th>
-											<th class="td-img"></th>
+											<th class="hidden-xs hidden-sm hidden-md author">저자</th>
+											<th class="hidden-xs hidden-sm genre">출판사</th>
+											<th class="hidden-xs genre" style="width: 120px">분류</th>
+											<th class="author">대여상태</th>
+											<th class="image"></th>
 										</tr>
 									</thead>
 
 									<tbody>
 										<c:forEach items="${bookList}" var="book">
 											<tr>
-												<td class="hidden-xs hidden-sm hidden-md" align="left"><img
-													src="${book.imageurl}"></td>
+												<td class="hidden-xs hidden-sm hidden-md" align="left"><c:choose>
+														<c:when test="${empty book.imageurl }">
+															<img src="/resources/img/noimage.png" width="80%" >
+														</c:when>
+														<c:otherwise>
+															<img src="${book.imageurl}" width="80%">
+														</c:otherwise>
+													</c:choose></td>
 												<td align="left"><a href="#"
 													onclick="window.open('/bookInfo?book_cd=${book.book_cd}','new','resizeble=yes scrollbars=yes,  width=750, height=500');">
 														${book.title }</a></td>

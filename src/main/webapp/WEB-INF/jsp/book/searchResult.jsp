@@ -13,19 +13,19 @@
 					<th class="hidden-xs hidden-sm genre">출판사</th>
 					<th class="hidden-xs genre" style="width: 120px">분류</th>
 					<th class="author">대여상태</th>
-					<th class="td-img"></th>
+					<th class="image"></th>
 				</tr>
 			</thead>
 
 			<tbody>
 				<c:forEach items="${bookList}" var="book">
 					<tr>
-						<td class="hidden-xs hidden-sm hidden-md" align="left"><c:choose>
-								<c:when test="${empty book.imageurl }">
-									<img src="/resources/img/noimage.png"  >
+						<td class="hidden-xs hidden-sm hidden-md image" align="left" ><c:choose>
+								<c:when test="${empty book.imageurl }" >
+									<img src="/resources/img/noimage.png" style="width:90%" >
 								</c:when>
 								<c:otherwise>
-									<img src="${book.imageurl}">
+									<img src="${book.imageurl}"  style="width:90%">
 								</c:otherwise>
 							</c:choose></td>
 						<td align="left"><a href="#"

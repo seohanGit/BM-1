@@ -87,7 +87,7 @@
 		A.reservechk, A.book_cd, b.returndate
 		FROM
 		TESTLIB.BOOKMST A  
-		inner join tESTLIB.BOOKrent B on a.book_cd = b.book_cd and a.rentchk = b.rentchk
+		left outer join tESTLIB.BOOKrent B on a.book_cd = b.book_cd and a.rentchk = b.rentchk
 		where rcv_date between #{date1} and #{date2} and left(b_group,1) = 'B'
 		ORDER
 		BY rcv_date DESC

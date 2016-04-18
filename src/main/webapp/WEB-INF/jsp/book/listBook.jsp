@@ -195,12 +195,12 @@
 									<tbody>
 										<c:forEach items="${bookList}" var="book">
 											<tr>
-												<td class="hidden-xs hidden-sm hidden-md" align="left"><c:choose>
+												<td class="hidden-xs hidden-sm hidden-md image" align="left"><c:choose>
 														<c:when test="${empty book.imageurl }">
-															<img src="/resources/img/noimage.png" width="80%" >
+															<img src="/resources/img/noimage.png" style="width:90%" >
 														</c:when>
 														<c:otherwise>
-															<img src="${book.imageurl}" width="80%">
+															<img src="${book.imageurl}" style="width:90%">
 														</c:otherwise>
 													</c:choose></td>
 												<td align="left"><a href="#"

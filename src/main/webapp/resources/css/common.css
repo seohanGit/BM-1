@@ -61,23 +61,23 @@ div .right-end {
 	height: 100%;
 }
 
-table thead .td-title {
+table  .title {
 	text-transform: capitalize;
 }
 
-table  thead .author {
+table   .author {
 	width: 14%;
 }
 
-table thead .image {
-	width: 7%;
+table  .image {
+	width: 100px;
 }
 
-table   thead .genre {
+table   .genre {
 	width: 10%;
 }
 
-table  thead .td-date {
+table   .td-date {
 	width: 80px;
 }
 

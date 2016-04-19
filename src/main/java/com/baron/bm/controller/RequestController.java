@@ -53,22 +53,25 @@ public class RequestController {
 
 	@RequestMapping("/confirmRequest")
 	public String requestResult(BookModel model, HttpServletRequest request) {
-		
+		String id = "";
+		BookModel book = new BookModel();
+		book = model;
 		for (Cookie cookie : request.getCookies()) {
 			if (cookie.getName().equals("bm_id")) {
-				model.setId(cookie.getValue());
+				id =cookie.getValue();
+				book.setId(cookie.getValue());
 			}
 		}
 		MemberModel membermodel = joinService.selectMember(model.getId());  
 		String max = requestservice.selectMaxSer();
 
-		model.setReqdate(nowDate);
-		model.setKname(model.getKname().substring(0, 5).trim());
-		model.setBook_cd(model.getB_group().substring(0, 1)
-				+ model.getC_group().substring(0, 3) + "-");
-		model.setReq_cd("Book"  + "-"+ nowDate.toString()  + "-"+ max);
-
-		requestservice.requestBook(model, membermodel);
+		book.setReqdate(nowDate);
+		book.setKname(model.getKname().substring(0, 5).trim());
+		book.setBook_cd(book.getB_group().substring(0, 1)
+				+ book.getC_group().substring(0, 3) + "-");
+		book.setReq_cd("Book"  + "-"+ nowDate.toString()  + "-"+ max);
+		book.setId(id);
+		requestservice.requestBook(book, membermodel);
 
 		return "request/requestSuccess";
 	}
@@ -140,7 +143,7 @@ public class RequestController {
 
 	@RequestMapping("/confirmBuy")
 	public String confirmBuy(BookModel model) {
-		model.setRcv_date(nowDate);
+		model.setRcv_date(nowDate); 
 		requestservice.confirmBuy(model);
 		requestservice.deleteRequest(model);
 

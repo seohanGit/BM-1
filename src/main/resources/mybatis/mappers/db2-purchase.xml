@@ -19,7 +19,7 @@
 	<update id="deleteRequest" parameterType="BookModel">
 		UPDATE TESTLIB.BOOKREQ
 		SET
-		reqstatus='1', #{book_cd}
+		reqstatus='1', book_cd=#{book_cd}
 		WHERE req_cd= #{req_cd}
 	</update>
 
@@ -65,11 +65,10 @@
 	</select>
 	<select id="selectMaxSer" resultType="String">
 		SELECT
-		COALESCE(MAX(REQ_CD)+1,1) SER
+		COALESCE(MAX(right(REQ_CD,1))+1,1) SER
 		FROM TESTLIB.BOOKREQ A
 		WHERE REQDATE = VARCHAR_FORMAT(CURRENT
-		TIMESTAMP,
-		'YYYYMMDD')
+		TIMESTAMP,		'YYYYMMDD')
 	</select>
 
 	<update id="modifiReqBook" parameterType="BookModel">

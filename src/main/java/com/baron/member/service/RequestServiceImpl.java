@@ -65,7 +65,7 @@ public class RequestServiceImpl implements RequestService {
 
 		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
 
-		book.setId(member.getId()); 
+		//book.setId(member.getId()); 
 		requestDao.requestBook(book);
 		if (Integer.parseInt(book.getPrice()) > 100000){
 			approval.setChiefId(member.getChiefid());

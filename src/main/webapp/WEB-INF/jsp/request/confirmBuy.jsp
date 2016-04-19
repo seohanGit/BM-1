@@ -66,7 +66,7 @@ body {
 							</select>
 						</div>
 						<div class="right" style="width: 40%">
-							${book.book_cd}-
+							${book.book_cd}
 							<input type="text" class="form-control" id="book_cd"
 								name="book_cd" placeholder=""> 
 						</div>

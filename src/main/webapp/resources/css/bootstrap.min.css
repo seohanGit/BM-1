@@ -445,9 +445,7 @@ table {
 td, th {
 	padding: 0;
 	white-space: normal;
-	text-overflow: ellipsis;
-	word-break:keep-all;
-	
+	text-overflow: ellipsis; 
 }
 /*! Source: https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css */
 @media print {

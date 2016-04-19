@@ -57,14 +57,14 @@ body {
 						<table class="table table-striped table-bordered ">
 							<thead>
 								<tr class="title">
-									<th class="hidden-xs td-img">표지</th>
-									<th class="td-title">도서명</th>
-									<th class="hidden-xs td-genre">저자</th>
-									<th class="hidden-xs hidden-sm td-genre">분류</th>
-									<th class="hidden-xs td-genre">대여일</th>
-									<th class="td-genre">반납일</th>
-									<th class="td-genre">상태</th>
-									<th class="td-img"></th>
+									<th class="hidden-xs image">표지</th>
+									<th class="title">도서명</th>
+									<th class="hidden-xs author">저자</th>
+									<th class="hidden-xs hidden-sm author">분류</th>
+									<th class="hidden-xs td-date">대여일</th>
+									<th class="td-date">반납일</th>
+									<th class="genre">상태</th>
+									<th class="image"></th>
 								</tr>
 							</thead>
 

@@ -61,27 +61,39 @@ div .right-end {
 	height: 100%;
 }
 
-table  .title {
-	text-transform: capitalize;
+table .table .table-bordered {
+	margin-right: 10px;
+	padding-right: 10px;
 }
 
+table .title {
+	font-size: 15px;
+	font-weight: bold;
+	text-transform: capitalize;
+} 
 table th {
 	text-align: center;
 }
-table   .author {
-	width: 14%;
+table .author {
+	width: 14%; 
+	text-overflow:ellipsis; 
+	overflow:hidden;
+	white-space:nowrap;
 }
 
 table  .image {
 	width: 100px;
+	word-break:keep-all; 
 }
 
 table   .genre {
 	width: 10%;
+	word-break:keep-all; 
 }
 
 table   .td-date {
 	width: 80px;
+	word-break:keep-all; 
 }
 
 table thead .td-chk {
@@ -89,9 +101,9 @@ table thead .td-chk {
 }
 table .td-count {
 	width: 80px;
-	text-align: right;
-	
+	text-align: right; 
 }
+
 
 .table-admin {
 	font-size: 16px;
@@ -136,15 +148,6 @@ div .right>h4 {
 	font-size: 20px;
 }
 
-table .table .table-bordered {
-	margin-right: 10px;
-	padding-right: 10px;
-}
-
-table .title {
-	font-size: 15px;
-	font-weight: bold;
-}
 
 #nav-input {
 	margin-top: 5px;

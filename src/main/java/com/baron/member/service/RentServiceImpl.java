@@ -1,5 +1,7 @@
 package com.baron.member.service;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +17,10 @@ import com.baron.member.model.SmsModel;
 
 @Service
 public class RentServiceImpl implements RentService {
-	/*
-	 * 대여 예약 서비스
-	 */
+	Calendar cal = Calendar.getInstance();				
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");				
+	String nowDate = sdf.format(cal.getTime());
+	
 	@Autowired
 	private RentDao rentDao;
 
@@ -71,39 +74,44 @@ public class RentServiceImpl implements RentService {
 	@Override
 	public void confirmBorrowBook(String book_cd) {
 		String id = null;
-		if (rentDao.selectBook(book_cd) != null) {
-			String title = rentDao.selectBook(book_cd).getTitle();
-			id = rentDao.selectBorrow(book_cd).getId();
+		BookModel bookmodel = new BookModel(); 
+		bookmodel = rentDao.selectBook(book_cd);
+		bookmodel.setRentdate(nowDate);
+		cal = Calendar.getInstance();
+		cal.add(cal.DAY_OF_MONTH, 15);
+		bookmodel.setRetrundate(sdf.format(cal.getTime()));
+		if (bookmodel != null) {
+			String title = bookmodel.getTitle();
+			id = bookmodel.getId();
 			sms.setTitle(title);
-
-			if (joinDao.selectMember(id).getMobi_no() != null) {
-				sms.setPhone(joinDao.selectMember(id).getMobi_no().substring(1));
+			
+			MemberModel member = joinDao.selectMember(id);
+			if (member.getMobi_no() != null) {
+				sms.setPhone(member.getMobi_no().substring(1));
 				notifiDao.notifiRent(sms);
 			}
 		}
-		rentDao.confirmBorrowBook(book_cd);
+		rentDao.confirmBorrowBook(bookmodel);
 	}
 
 	@Override
-	public void returnBook(BookModel book) {
+	public void returnBook(BookModel book) { 
+		book.setReturndate(nowDate);
 		rentDao.returnBook(book);	
 	}
 
 	@Override
-	public List<BookModel> rentList() {
-		// TODO Auto-generated method stub
+	public List<BookModel> rentList() { 
 		return rentDao.rentListAll();
 	}
 
 	@Override
-	public List<BookModel> recordList(String id) {
-		// TODO Auto-generated method stub
+	public List<BookModel> recordList(String id) { 
 		return rentDao.recordList(id);
 	}
 
 	@Override
-	public List<BookModel> recordList() {
-		// TODO Auto-generated method stub
+	public List<BookModel> recordList() { 
 		return rentDao.recordListAll();
 	}
 
@@ -116,7 +124,9 @@ public class RentServiceImpl implements RentService {
 
 	@Override
 	public void extendBorrowBook(BookModel book) {
-
+		cal = Calendar.getInstance();	
+		cal.add(cal.DATE, +7);		
+		book.setReturndate(sdf.format(cal.getTime()));
 		rentDao.extendBorrowBook(book);
 	}
 

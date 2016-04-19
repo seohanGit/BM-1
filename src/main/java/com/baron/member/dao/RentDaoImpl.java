@@ -59,9 +59,9 @@ public class RentDaoImpl implements RentDao {
 	}
 
 	@Override
-	public void confirmBorrowBook(String book_cd) {
-		session.update(NAMESPACE + "confirmBorrowBook", book_cd);
-		session.update(NAMESPACE + "confirmBorrowBook1", book_cd);
+	public void confirmBorrowBook(BookModel book) {
+		session.update(NAMESPACE + "confirmBorrowBook", book);
+		session.update(NAMESPACE + "confirmBorrowBook1", book.getBook_cd());
 
 	}
 

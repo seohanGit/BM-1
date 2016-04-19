@@ -33,7 +33,7 @@ public interface RentDao {
 
 	void returnBook(BookModel book);
 
-	void confirmBorrowBook(String bookCode);
+	void confirmBorrowBook(BookModel bookmodel);
 
 	void extendBorrowBook(BookModel book);
 

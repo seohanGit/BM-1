@@ -131,7 +131,7 @@
 							<c:forEach items="${bookList}" var="book">
 								<tr>
 									<td align="left"><a href="#"
-										onclick="window.open('/bookInfo?book_cd=${book.book_cd}','new','resizeble=yes scrollbars=yes,  width=750, height=500');">
+										onclick="window.open('/bookInfo?book_cd=${book.book_cd}','new','resizeble=yes scrollbars=yes,  width=750, height=600');">
 											${book.title }</a></td>
 									<td class="hidden-xs hidden-sm hidden-md" align="left">${book.author }</td>
 									<td class="hidden-xs hidden-sm" align="left">${book.publish}</td>
@@ -149,8 +149,9 @@
 											<td></td>
 										</c:when>
 										<c:when test="${book.rentchk=='1' and book.reservechk=='0'}">
-											<td><p style="color: blue;">대여요청중</p> 반납일
-												:${book.returndate}</td>
+											<td><p style="color: blue;">대여요청중</p> 
+<%-- 											반납일 : ${book.returndate} --%>
+											</td>
 											<td>
 <!-- 											<button class="btn btn-default" type="button" -->
 <!-- 													id="reservebook" -->

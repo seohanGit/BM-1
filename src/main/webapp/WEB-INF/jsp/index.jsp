@@ -62,6 +62,7 @@
 	<jsp:include page="nav.jsp" />
 	<!-- Page Content -->
 	<div align="center" class="container col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2"   >
+	
 		<div align="center"  >
 			<div align="left" class="row" style="position:static; height:25%;  margin-top: 10px">  
 				<div style="width: 50%; float:left">
@@ -91,19 +92,19 @@
 					<div class="col-md-4 col-sm-4 col-xs-4"
 						style="float: left; padding: 5px">
 						<a href="#" style="display: block"><img
-							src="/resources/img/btn2.png" style="width: 95%; margin: 10px"></a>
+							src="/resources/img/searchbook.jpg" style="width: 95%; margin: 10px"></a>
 						<a class="href" href="searchBook?field=title&keyword=" style="display: block">자료검색</a>
 					</div>
 					<div class="col-md-4 col-sm-4 col-xs-4"
 						style="float: left; padding: 5px">
 						<a href="borrowList" style="display: block"><img
-							src="/resources/img/btn1.png" style="width: 95%; margin: 10px"></a>
+							src="/resources/img/mybook.jpg" style="width: 95%; margin: 10px"></a>
 						<a class="href" href="borrowList" style="display: block">대출/연장 조회</a>
 					</div>
 					<div class="col-md-4 col-sm-4 col-xs-4"
 						style="float: left; padding: 5px">
 						<a href="request" style="display: block"><img
-							src="/resources/img/btn3.png" style="width: 95%; margin: 10px"></a>
+							src="/resources/img/quickBan02.gif" style="width: 95%; margin: 10px"></a>
 						<a class="href" href="request" style="display: block;">자료구입신청</a>
 					</div>
 				</div>
@@ -121,7 +122,7 @@
 			</div>
 			<div align="center" class="row" style="position:static; height:30%; ">
 				<div class="col-md-6 col-sm-12 col-xs-12"
-					style="text-align: left; padding-bottom :40px; margin-bottom: 30px;position:static; height:100%;  ">				
+					style="text-align: left; padding-top :0px; margin-bottom: 30px;position:static; height:100%;  ">				
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="position:static; height:15%;  ">
 						<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8"><h3>신간도서</h3> 
 						<a href="/searchBook?listType=new" >more...</a></div>
@@ -129,35 +130,35 @@
 					<c:forEach items="${newBook}" var="newBook" begin="0" end="2"
 						step="1" varStatus="status">
 						
-						<div align="center" style="position:static; height:85%;  ">
+						<div align="center" style="position:static; height:75%;  ">
 							<div class="col-md-4 col-sm-4 col-xs-4" >
 								<div  ><c:choose>
 											<c:when test="${empty newBook.imageurl }">
-												<img src="/resources/img/noimage.png" height="100%" width="100%">  
+												<img src="/resources/img/noimage.png" height="90%" width="90%">  
 											</c:when>
 											<c:otherwise>
 											 	<a onclick="window.open('/bookInfo?book_cd=${newBook.book_cd}','new',
-											 	'resizeble=yes scrollbars=yes, width=750, height=500');">
-											 	<img src="${newBook.imageurl}" height="100%" width="100%"></a>											 	
+											 	'resizeble=yes scrollbars=yes, width=750, height=600');">
+											 	<img src="${newBook.imageurl}" height="90%" width="90%"></a>											 	
 											</c:otherwise>
 									</c:choose>
 								</div>
 								<div style="position:relative; height:20px ;">
 								<a onclick="window.open('/bookInfo?book_cd=${newBook.book_cd}','new',
-								'resizeble=yes scrollbars=yes, width=750, height=500');">${newBook.title}</a></div> 								
+								'resizeble=yes scrollbars=yes, width=750, height=600');">${newBook.title}</a></div> 								
 							</div>							
 						</div>
 					</c:forEach>
 				</div>
 				<div class="col-md-6 col-sm-12 col-xs-12"
-					style=" text-align: left; padding-bottom:40px; margin-bottom: 30px;position:static; height:100%;  ">
+					style=" text-align: left; padding-top:0px; margin-bottom: 30px;position:static; height:100%;  ">
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"  style="position:static; height:100%;  ">
 					<div class="col-md-8 col-sm-8 col-xs-8"><h3>추천도서</h3>
 					 <a href="searchBook?listType=recommend" >more...</a></div>
 					</div>
 					<c:forEach items="${bestBook}" var="bestBook" begin="0" end="2"
 						step="1" varStatus="status">
-						<div align="center" style="position:static; height:85%;  ">
+						<div align="center" style="position:static; height:75%;  ">
 							<div class="col-md-4 col-sm-4 col-xs-4"								>
 								<div >
 								<c:choose>
@@ -166,14 +167,14 @@
 										</c:when>
 										<c:otherwise>
 										 	<a onclick="window.open('/bookInfo?book_cd=${bestBook.book_cd}','new',
-										 	'resizeble=yes scrollbars=yes, width=750, height=500');">
-										 	<img src="${bestBook.imageurl}" height="100%" width="100%">${bestbook.title}</a>										 	
+										 	'resizeble=yes scrollbars=yes, width=750, height=600');">
+										 	<img src="${bestBook.imageurl}" height="90%" width="90%">${bestbook.title}</a>										 	
 										</c:otherwise>
 								</c:choose>
 								</div> 
 								<div style="position:relative; height:20px">
 								<a onclick="window.open('/bookInfo?book_cd=${bestBook.book_cd}','new',
-								'resizeble=yes scrollbars=yes, width=750, height=500');">${bestBook.title}</a></div>
+								'resizeble=yes scrollbars=yes, width=750, height=600');">${bestBook.title}</a></div>
 							</div>  
 						</div>
 					</c:forEach>

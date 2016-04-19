@@ -1,5 +1,8 @@
 package com.baron.member.service;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +16,9 @@ import com.baron.member.model.SmsModel;
 @Service
 public class NotifiServiceImpl implements NotifiService {
 
+	Calendar cal = Calendar.getInstance();				
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");				
+	String nowDate = sdf.format(cal.getTime());
 	@Autowired
 	private NotifiDao notifiDao;
 
@@ -64,13 +70,14 @@ public class NotifiServiceImpl implements NotifiService {
 	public void notifiReturnConfirm(String book_cd)  {
 		SmsModel sms = new SmsModel();		
 		BookModel book = rentDao.selectRent(book_cd);
-		String title = bookDao.selectBook(book_cd).getTitle();
+		String title = book.getTitle();
+
+		book.setReturndate(nowDate); 
 		sms.setTitle(title);
 		sms.setPhone("");
 		if(book.getMobi_no().length()>0){
 			sms.setPhone(book.getMobi_no().substring(1));
-		}
-		
+		} 
 		notifiDao.notifiReturnConfirm(sms);
 
 	}

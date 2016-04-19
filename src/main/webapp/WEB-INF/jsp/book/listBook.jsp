@@ -185,7 +185,7 @@
 											<th class="hidden-xs hidden-sm hidden-md image">표지</th>
 											<th>도서명</th>
 											<th class="hidden-xs hidden-sm hidden-md author">저자</th>
-											<th class="hidden-xs hidden-sm genre">출판사</th>
+											<th class="hidden-xs hidden-sm author">출판사</th>
 											<th class="hidden-xs genre" style="width: 120px">분류</th>
 											<th class="author">대여상태</th>
 											<th class="image">대출</th>
@@ -198,22 +198,22 @@
 												<td class="hidden-xs hidden-sm hidden-md image" align="left"><c:choose>
 														<c:when test="${empty book.imageurl }">
 															<a href="#"
-													onclick="window.open('/bookInfo?book_cd=${book.book_cd}','new','resizeble=yes scrollbars=yes,  width=750, height=500');">
+													onclick="window.open('/bookInfo?book_cd=${book.book_cd}','new','resizeble=yes scrollbars=yes,  width=750, height=600');">
 														<img src="/resources/img/noimage.png" style="width:90%" >${book.title }</a>
 														</c:when>
 														<c:otherwise>
 															<a href="#"
-													onclick="window.open('/bookInfo?book_cd=${book.book_cd}','new','resizeble=yes scrollbars=yes,  width=750, height=500');">														
+													onclick="window.open('/bookInfo?book_cd=${book.book_cd}','new','resizeble=yes scrollbars=yes,  width=750, height=600');">														
 														<img src="${book.imageurl}" style="width:90%">
 														</a>
 														</c:otherwise>
 													</c:choose></td>
 												<td align="left"><a href="#"
-													onclick="window.open('/bookInfo?book_cd=${book.book_cd}','new','resizeble=yes scrollbars=yes,  width=750, height=500');">
+													onclick="window.open('/bookInfo?book_cd=${book.book_cd}','new','resizeble=yes scrollbars=yes,  width=750, height=600');">
 														${book.title }</a></td>
-												<td class="hidden-xs hidden-sm hidden-md" align="left">${book.author }</td>
-												<td class="hidden-xs hidden-sm" align="left">${book.publish}</td>
-												<td class="hidden-xs td-genre" align="left">${book.b_group }</td>
+												<td class="hidden-xs hidden-sm hidden-md author" align="left">${book.author }</td>
+												<td class="hidden-xs hidden-sm author" align="left">${book.publish}</td>
+												<td class="hidden-xs genre" align="left">${book.b_group }</td>
 												<c:choose>
 													<c:when test="${book.rentchk=='0'}">
 														<td align="left"><mark>대출가능</mark></td>
@@ -229,8 +229,9 @@
 													</c:when>
 													<c:when
 														test="${book.rentchk=='1' and book.reservechk=='0'}">
-														<td><p style="color: blue;">대여요청중</p> 반납일
-															:${book.returndate}</td>
+														<td><p style="color: blue;">대여요청중</p> 
+<%-- 														반납일 : ${book.returndate} --%>
+														</td>
 														<td>
 <!-- 														<button class="btn btn-default" type="button" -->
 <!-- 																id="reservebook" -->

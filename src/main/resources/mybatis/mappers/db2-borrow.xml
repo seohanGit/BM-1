@@ -103,11 +103,11 @@
 
 	</update>
 
-	<update id="confirmBorrowBook" parameterType="String">
+	<update id="confirmBorrowBook" parameterType="BookModel">
 		UPDATE
 		TESTLIB.BOOKRENT
 		SET
-		RENTCHK = '2'
+		RENTCHK = '2', returndate=#{returndate}
 		WHERE BOOK_CD = #{book_cd} AND
 		RENTCHK='1'
 	</update>

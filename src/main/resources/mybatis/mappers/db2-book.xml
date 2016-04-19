@@ -36,7 +36,7 @@
 		B.rentchk
 		WHERE
 		LCASE(A.TITLE) like #{keyword} 
-		ORDER BY A.RENTCHK DESC, A.RCV_DATE DESC 
+		ORDER BY  A.RCV_DATE DESC , A.RENTCHK DESC
 		FETCH first 200 rows only
 	</select>
 	<select id="searchAuthor" parameterType="String" resultType="BookModel">
@@ -50,7 +50,7 @@
 		B.rentchk
 		WHERE
 		LCASE(A.AUTHOR) like #{keyword} 
-		ORDER BY A.RENTCHK DESC, A.RCV_DATE DESC 
+		ORDER BY A.RCV_DATE DESC , A.RENTCHK DESC
 		FETCH first 200 rows only
 	</select>
 	<select id="searchPublisher" parameterType="String" resultType="BookModel">
@@ -64,7 +64,7 @@
 		B.rentchk
 		WHERE
 		LCASE(A.PUBLISH) like #{keyword}
-		ORDER BY A.RENTCHK DESC, A.RCV_DATE DESC 
+		ORDER BY A.RCV_DATE DESC , A.RENTCHK DESC 
 		FETCH first 200 rows only
 	</select>
 
@@ -78,7 +78,7 @@
 		ON A.book_cd = B.book_cd AND A.rentchk =
 		B.rentchk
 		ORDER
-		BY rcv_date DESC
+		BY A.RCV_DATE DESC , A.RENTCHK DESC
 		FETCH first 200 rows only
 	</select>	
 	<select id="newBook"  resultType="BookModel" parameterType="Dto">
@@ -89,8 +89,7 @@
 		TESTLIB.BOOKMST A  
 		left outer join tESTLIB.BOOKrent B on a.book_cd = b.book_cd and a.rentchk = b.rentchk
 		where rcv_date between #{date1} and #{date2} and left(b_group,1) = 'B'
-		ORDER
-		BY rcv_date DESC
+		ORDER BY A.RCV_DATE DESC , A.RENTCHK DESC
 	</select>
 	
 	<select id="bestBook" resultType="BookModel" parameterType="Dto"> 
@@ -112,7 +111,7 @@
 		A.reservechk, A.book_cd, B.returndate
 		FROM
 		TESTLIB.BOOKMST A
-		inner join tESTLIB.BOOKrent B on a.book_cd = b.book_cd and a.rentchk = b.rentchk
+		left outer join tESTLIB.BOOKrent B on a.book_cd = b.book_cd and a.rentchk = b.rentchk
 		where A.rcmdchk = '1'
 	</select>	
 

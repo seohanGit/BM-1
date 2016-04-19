@@ -26,12 +26,7 @@ import com.baron.member.service.RentService;
 
 @Controller
 public class RentController {
-
-	
-	Calendar cal = Calendar.getInstance();				
-	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");				
-	String nowDate = sdf.format(cal.getTime());
-
+ 
 	@Autowired
 	RentService rentservice;
 
@@ -70,10 +65,6 @@ public class RentController {
 		book.setId(id);
 		book.setBook_cd(book_cd);
 		book.setRentchk("1");
-		book.setRentdate(nowDate);
-		cal = Calendar.getInstance();
-		cal.add(cal.DAY_OF_MONTH, 20);
-		book.setRetrundate(sdf.format(cal.getTime()));
 		BookModel chkbook = rentservice.selectBook(book_cd);
 		if (id != null) {
 			if (chkbook.getRentchk().equals("0")) {
@@ -90,7 +81,7 @@ public class RentController {
 
 	@RequestMapping(value = "/confirmBorrowBook", method = RequestMethod.GET)
 	public String confirmBorrowBook(HttpServletRequest request, String book_cd) {
-		String id = null;
+		String id = null; 
 		rentservice.confirmBorrowBook(book_cd);
 		notifiService.notifiRent(book_cd);
 		for (Cookie cookie : request.getCookies()) {
@@ -194,9 +185,7 @@ public class RentController {
 		
 		String id = book.getId();
 		SmsModel sms = new SmsModel();		
-		cal = Calendar.getInstance();	
-		cal.add(cal.DATE, +10);		
-		book.setReturndate(sdf.format(cal.getTime()));
+		
 		book.setBook_cd(book_cd);
 		
 		MemberModel member =  joinDao.selectMember(id);
@@ -233,17 +222,14 @@ public class RentController {
 			BookModel reserveBook = rentservice.selectReservation(book_cd);	
 			if (reserveBook == null) {
 				BookModel book = new BookModel();
-				book.setBook_cd(book_cd);
-				cal.add(cal.MONTH, +1);		
-				book.setReturndate(sdf.format(cal.getTime()));				
+				book.setBook_cd(book_cd);				
 				rentservice.extendBorrowBook(book);
 			} else if (reserveBook.getReservechk()
 					.equals("0")
 					&& rentservice.selectRent(book_cd).getExtendchk()
 							.equals("0")) {
 				BookModel book = new BookModel();
-				book.setBook_cd(book_cd);
-				book.setReturndate(nowDate);
+				book.setBook_cd(book_cd); 
 				rentservice.extendBorrowBook(book);
 			} else {
 				return "/rent/extendFail";
@@ -302,7 +288,6 @@ public class RentController {
 			if (checkBook.getRentchk().equals("2")) {
 				BookModel book = new BookModel();
 				book.setBook_cd(book_cd);
-				book.setReturndate(nowDate);
 				notifiService.notifiReturnConfirm(book_cd);
 				rentservice.returnBook(book);
 
@@ -321,7 +306,6 @@ public class RentController {
 
 		if (checkBook.getRentchk().equals("2")) {
 			book.setBook_cd(book_cd);
-			book.setReturndate(nowDate);
 			
 			notifiService.notifiReturnConfirm(book_cd);
 			rentservice.returnBook(book);

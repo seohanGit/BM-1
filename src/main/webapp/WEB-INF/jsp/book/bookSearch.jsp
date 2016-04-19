@@ -57,7 +57,7 @@
 	<jsp:include page="../nav.jsp" />
 	<div id="loadingBar"
 		style="background-color: #fff; position: absolute; top: 0; left: 0; width: 100%; height: 100%; text-align: center; margin: 0 auto; z-index: 100000;">
-		<table style="" 100%" height="100%" border='0' ; bgcolor='#fff'" >
+		<table style="width:100%; height:100%; border:0 ; bgcolor:#fff" >
 			<tr>
 				<td align="center">
 					<div style="text-align: center;">

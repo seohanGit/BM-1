@@ -190,16 +190,17 @@ public class RentController {
 
 	@RequestMapping("/extendBorrowBook")
 	public String extendBorrowBook(String book_cd, BookModel book) throws NullPointerException {
-		String id = rentservice.selectRent(book_cd).getId();
-		SmsModel sms = new SmsModel();
-		book.setBook_cd(book_cd);
+		book = rentservice.selectRent(book_cd);
+		
+		String id = book.getId();
+		SmsModel sms = new SmsModel();		
 		cal = Calendar.getInstance();	
-		cal.add(cal.MONTH, +1);		
+		cal.add(cal.DATE, +10);		
 		book.setReturndate(sdf.format(cal.getTime()));
+		book.setBook_cd(book_cd);
 		
 		MemberModel member =  joinDao.selectMember(id);
-		BookModel reserveBook = rentservice.selectReservation(book_cd);	
-		book= rentDao.selectBorrow(book_cd);
+		BookModel reserveBook = rentservice.selectReservation(book_cd);	 
 		
 		if (reserveBook == null) {
 			sms.setPhone(member.getMobi_no().substring(1));

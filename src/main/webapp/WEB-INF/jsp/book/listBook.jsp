@@ -84,7 +84,7 @@
 	<jsp:include page="../nav.jsp" />
 	<div id="loadingBar"
 		style="background-color: #fff; position: absolute; top: 0; left: 0; width: 100%; height: 100%; text-align: center; margin: 0 auto; z-index: 100000;">
-		<table style="" 100%" height="100%" border='0' ; bgcolor='#fff'" >
+		<table style="width:100%; height:100%; border:0 ; bgcolor:#fff" >
 			<tr>
 				<td align="center">
 					<div style="text-align: center;">
@@ -188,7 +188,7 @@
 											<th class="hidden-xs hidden-sm genre">출판사</th>
 											<th class="hidden-xs genre" style="width: 120px">분류</th>
 											<th class="author">대여상태</th>
-											<th class="image"></th>
+											<th class="image">대출</th>
 										</tr>
 									</thead>
 
@@ -197,10 +197,15 @@
 											<tr>
 												<td class="hidden-xs hidden-sm hidden-md image" align="left"><c:choose>
 														<c:when test="${empty book.imageurl }">
-															<img src="/resources/img/noimage.png" style="width:90%" >
+															<a href="#"
+													onclick="window.open('/bookInfo?book_cd=${book.book_cd}','new','resizeble=yes scrollbars=yes,  width=750, height=500');">
+														<img src="/resources/img/noimage.png" style="width:90%" >${book.title }</a>
 														</c:when>
 														<c:otherwise>
-															<img src="${book.imageurl}" style="width:90%">
+															<a href="#"
+													onclick="window.open('/bookInfo?book_cd=${book.book_cd}','new','resizeble=yes scrollbars=yes,  width=750, height=500');">														
+														<img src="${book.imageurl}" style="width:90%">
+														</a>
 														</c:otherwise>
 													</c:choose></td>
 												<td align="left"><a href="#"
@@ -283,9 +288,9 @@
 		$(document).ready(function() {
 			$('#dataTable').dataTable({
 				/* "pageLength" : 10, */
-				"pageLength" : 100,
+				"pageLength" : 20,
 				paging : true,
-				searching : false,
+				searching : true,
 				"columns" : [ null, null, null, {
 					"searchable" : false
 				}, {

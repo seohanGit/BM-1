@@ -55,11 +55,11 @@
 										<tr class="title">
 											<th class="td-chk"><input type="checkbox" id="allCheck" ></th>
 											<th>도서명</th>
-											<th class="td-genre">대여일</th>
-											<th class="td-genre hidden-xs">반납일</th>
+											<th class="genre">대여일</th>
+											<th class="genre hidden-xs">반납일</th>
 											<th class="hidden-xs" style="width: 150px">분류</th>
-											<th class="td-img">대여자</th>
-											<th class="td-img"></th> 
+											<th class="image">대여자</th>
+											<th class="image"></th> 
 										</tr>
 									</thead> 
 									<tbody>
@@ -111,10 +111,10 @@
 										<tr class="hidden-xs title">
 											<th class="td-chk"><input type="checkbox" id="allCheck"></th>
 											<th>도서명</th>
-											<th class="td-genre">반납일</th>
+											<th class="genre">반납일</th>
 											<th class="hidden-xs td-date">대여자</th>
-											<th class="td-img">반납</th>
-											<th class="td-img">연장</th>
+											<th class="image">반납</th>
+											<th class="image">연장</th>
 										</tr>
 									</thead>
 									<% SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");  %>

@@ -61,10 +61,10 @@ body {
 										<tr class="hidden-xs title">
 											<th class="td-chk"><input type="checkbox" id="allCheck"></th>
 											<th>도서명</th>
-											<th class="td-genre">반납일</th>
+											<th class="genre">반납일</th>
 											<th class="hidden-xs td-date">대여자</th>
-											<th class="td-img">반납</th>
-											<th class="td-img">연장</th>
+											<th class="image">반납</th>
+											<th class="image">연장</th>
 										</tr>
 									</thead>
 								<% SimpleDateFormat sdf =  new SimpleDateFormat("yyyyMMdd");
@@ -73,8 +73,7 @@ body {
 
 
 									<tbody>
-										<c:forEach items="${rentList}" var="rent" varStatus="loop">
-
+										<c:forEach items="${rentList}" var="rent" varStatus="loop"> 
 											<tr>
 												<td><input type="checkbox" name="book_cd"
 													value="${rent.book_cd}"></td>

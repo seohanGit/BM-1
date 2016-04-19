@@ -20,12 +20,17 @@
 			<tbody>
 				<c:forEach items="${bookList}" var="book">
 					<tr>
-						<td class="hidden-xs hidden-sm hidden-md image" align="left" ><c:choose>
-								<c:when test="${empty book.imageurl }" >
-									<img src="/resources/img/noimage.png" style="width:90%" >
+						<td class="hidden-xs hidden-sm hidden-md image" align="left"><c:choose>
+								<c:when test="${empty book.imageurl }">
+									<a href="#"
+										onclick="window.open('/bookInfo?book_cd=${book.book_cd}','new','resizeble=yes scrollbars=yes,  width=750, height=500');">
+										<img src="/resources/img/noimage.png" style="width: 90%">${book.title }</a>
 								</c:when>
 								<c:otherwise>
-									<img src="${book.imageurl}"  style="width:90%">
+									<a href="#"
+										onclick="window.open('/bookInfo?book_cd=${book.book_cd}','new','resizeble=yes scrollbars=yes,  width=750, height=500');">
+										<img src="${book.imageurl}" style="width: 90%">
+									</a>
 								</c:otherwise>
 							</c:choose></td>
 						<td align="left"><a href="#"

@@ -32,17 +32,19 @@
 
 						<c:when test="${book.rentchk=='1' and book.reservechk=='1'}">	예약중
 						</c:when>
-						<c:when test="${book.rentchk=='1' and book.reservechk=='0'}"> 대여요청중<button
-								class="btn btn-default" type="button" id="reservebook"
-								onClick="location.href='/reservation?book_cd=${book.book_cd}'">예약</button>
+						<c:when test="${book.rentchk=='1' and book.reservechk=='0'}"> 대여요청중
+<!-- 						<button -->
+<!-- 								class="btn btn-default" type="button" id="reservebook" -->
+<%-- 								onClick="location.href='/reservation?book_cd=${book.book_cd}'">예약</button> --%>
 						</c:when>
 
 						<c:when test="${book.rentchk=='2' and book.reservechk=='1'}">	예약중 	
 								
 						</c:when>
-						<c:when test="${book.rentchk=='2' and book.reservechk=='0'}"> 대출중 <button
-								class="btn btn-default" type="button" id="reservebook"
-								onClick="location.href='/reservation?book_cd=${book.book_cd}'">예약</button>
+						<c:when test="${book.rentchk=='2' and book.reservechk=='0'}"> 대출중
+<!-- 						 <button -->
+<!-- 								class="btn btn-default" type="button" id="reservebook" -->
+<%-- 								onClick="location.href='/reservation?book_cd=${book.book_cd}'">예약</button> --%>
 						</c:when>
 
 						<c:when test="${book.rentchk=='4'}">대출정지

@@ -38,7 +38,7 @@ body {
 				<table class="table table-bordered">
 					<thead class="title">
 						<tr>
-							<td class="td-author">등록일</td>
+							<td class="author">등록일</td>
 							<td>내용</td>
 						</tr>
 					</thead>

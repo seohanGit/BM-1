@@ -35,20 +35,16 @@
 
 								<th style="width: 20%;">제목</th>
 								<th >내용</th>
-								<th class="td-genre">작성자</th>
+								<th class="genre">작성자</th>
 								
-								<th class="td-date hidden-xs">최종 수정일</th>
-								<th class="td-genre"></th>
-
+								<th class="date hidden-xs">최종 수정일</th>
+								<th class="genre"></th>
 							</tr>
 
 						</thead>
 						<tbody>
 							<c:forEach items="${boardList}" var="board" varStatus="status">
-
 								<tr>
-
-
 									<td style="vertical-align: top;">${board.title}</td>
 									<td>${board.content}</td>
 									<td><c:choose>

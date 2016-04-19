@@ -102,7 +102,7 @@
 									<th class="hidden-xs image">저자</th>
 									<th class="hidden-sm hidden-xs hidden-md author">분류</th>
 									<th style="width: 40px">추천</th>
-									<th style="width: 110px">대여상태</th>									
+									<th style="width: 90px">대여상태</th>									
 									<th style="width: 230px"></th>
 								</tr>
 							</thead>

@@ -35,9 +35,9 @@
 					<table class="table table-bordered" id="dataTable">
 						<thead class="title">
 							<tr>
-								<td class="hidden-xs td-genre">등록일</td>
+								<td class="hidden-xs genre">등록일</td>
 								<td >내용</td>
-								<td class="td-genre"></td>
+								<td class="genre"></td>
 							</tr>
 						</thead>
 						<tbody>

@@ -68,7 +68,7 @@ body {
 						<div class="right" style="width: 40%">
 							${book.book_cd}
 							<input type="text" class="form-control" id="book_cd"
-								name="book_cd" placeholder=""> 
+								name="book_cd" placeholder="" required="required"> 
 						</div>
 					</div>
 
@@ -80,7 +80,7 @@ body {
 					<div class="form-group">
 						<label for="exampleInputPassword1">도서명</label> <input type="text"
 							class="form-control" id="title" name="title"
-							value="${book.title }">
+							value="${book.title }" required="required">
 					</div>
 					<div class="form-group">
 						<label for="exampleInputPassword1">수량</label> <input type="text"

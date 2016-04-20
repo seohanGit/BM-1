@@ -64,6 +64,25 @@ $('.rcmdChk').on('click', function() {
 		}
     });
 });
+$('.borrow').on('click', function() {
+    var $row = $(this).closest('tr');
+    var $tds = $row.find('td');
+ 
+    var bookcd = "";
+    var bookcd = $(this).val();
+    
+    $.ajax({
+		type : "GET", // GET or POST
+		url : "/borrowbook", // URL
+		datatype : "xml", // html, xml, json, jsonp, script, text
+		data : {
+			book_cd : bookcd 		}, // parameters as plain object 
+		success : function(data, status) { // Ajax complete handelr 
+			alert('대출되었습니다.');
+			
+		}
+    });
+});
 
 $('#bestBook').click(function() {
 	$.ajax({

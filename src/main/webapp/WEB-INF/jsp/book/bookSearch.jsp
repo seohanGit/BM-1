@@ -15,6 +15,7 @@
 <link href="/resources/css/bootstrap-select.min.css" rel="stylesheet">
 <link href="/resources/css/signin.css" rel="stylesheet">
 <link href="/resources/css/common.css" rel="stylesheet">
+	<script src="/resources/js/jquery/jquery.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		var today = new Date();
@@ -117,7 +118,7 @@
 				<div class="dataTable_wrapper">
 					<table class="table table-striped table-bordered " id="dataTable">
 						<thead>
-							<tr>
+							<tr> 
 								<th>도서명</th>
 								<th class="hidden-xs hidden-sm hidden-md td-author">저자</th>
 								<th class="hidden-xs hidden-sm td-genre">출판사</th>
@@ -129,7 +130,7 @@
 
 						<tbody>
 							<c:forEach items="${bookList}" var="book">
-								<tr>
+								<tr> 
 									<td align="left"><a href="#"
 										onclick="window.open('/bookInfo?book_cd=${book.book_cd}','new','resizeble=yes scrollbars=yes,  width=750, height=600');">
 											${book.title }</a></td>
@@ -139,9 +140,10 @@
 									<c:choose>
 										<c:when test="${book.rentchk=='0'}">
 											<td align="left"><mark>대출가능</mark></td>
-											<td align="left"><button class="btn btn-default"
-													type="button" id="borrowbook"
-													onClick="location.href='/borrowbook?book_cd=${book.book_cd}'; borrow();">대출</button></td>
+											<td align="left"><button class="btn btn-default borrow"
+													type="button" id="borrowbook" value="${book.book_cd}"
+													>대출</button></td>
+<%-- 													onClick="location.href='/borrowbook?book_cd=${book.book_cd}';" --%>
 										</c:when>
 
 										<c:when test="${book.rentchk=='1' and book.reservechk=='1'}">
@@ -190,6 +192,7 @@
 	<script src="/resources/js/jquery/jquery.js"></script>
 	<script src="/resources/js/bootstrap.min.js"></script>
 	<script src="/resources/js/common.js"></script>
+	<script src="/resources/js/book.js"></script>
 	<script src="/resources/js/bootstrap-select.min.js"></script>
 	<script src="/resources/js/jquery.dataTables.min.js"></script>
 	<script src="/resources/js/dataTables.bootstrap.min.js"></script>

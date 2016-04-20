@@ -14,13 +14,10 @@
 <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="/resources/css/common.css" rel="stylesheet">
 <link href="/resources/css/index.css" rel="stylesheet">
-<link href="/resources/css/bootstrap-select.min.css" rel="stylesheet">
-<script type="text/javascript" src="/resources/js/highchartTable.js"></script>
-<script type="text/javascript" src="/resources/js/highcharts.js"></script>
-<script> 
-
+<link href="/resources/css/bootstrap-select.min.css" rel="stylesheet"> 
+	<script src="/resources/js/jquery/jquery.js"></script> 
+<script>  
 	$document.ready(function() {
-
 		$('table.highchart').highchartTable();
 		var date = "${con.regisdate}"; 
 		if (date < now()) {
@@ -190,35 +187,11 @@
 	<!-- /.container -->
 	<!-- jQuery -->
 	<!-- Bootstrap Core JavaScript -->
-	<script src="/resources/js/jquery/jquery.js"></script>
-	<script src="/resources/js/jquery.dataTables.min.js"></script>
-	<script src="/resources/js/dataTables.bootstrap.min.js"></script>
+	<script src="/resources/js/jquery/jquery.js"></script> 
 	<script src="/resources/js/bootstrap.min.js"></script>
 	<script src="/resources/js/common.js"></script>
 	<script src="/resources/js/book.js"></script>
 	<script src="/resources/js/bootstrap-select.min.js"></script>
-	<script type="text/javascript">
-		$(document).ready(function() {
-			$('#dataTable').dataTable({
-				"language" : {
-					"url" : "dataTables.korean.lang"
-				},
-				/* "pageLength" : 10, */
-				"pageLength" : 20,
-				paging : true,
-				searching : false,
-				"columns" : [ null, null, null, {
-					"searchable" : false
-
-				}, {
-					"searchable" : false
-				}, {
-					"searchable" : false,
-
-				} ]
-
-			});
-		});
-	</script>
+	 
 </body>
 </html>

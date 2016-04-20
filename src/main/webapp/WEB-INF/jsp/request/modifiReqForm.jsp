@@ -39,11 +39,9 @@ body {
 						<table class="table table-striped table-bordered" id="dataTable"> 
 							<thead>
 								<tr class="title ">
-									<th class="td-genre">도서코드 수정</th> 
+									<th class="genre">도서코드 수정</th> 
 									<th>도서명</th>
-									<th class="hidden-sm hidden-xs hidden-md td-author">저자</th>
-									<!-- <th class="author">대분류</th>
-									<th class="author">소분류</th> -->
+									<th class="hidden-sm hidden-xs hidden-md  author">저자</th> 
 									<th class="td-date hidden-sm hidden-xs">가격</th>
 									<th class="td-date">수량</th> 
 								</tr>
@@ -51,50 +49,24 @@ body {
 							<tbody>
 								<c:forEach items="${bookList}" var="book" varStatus="status">
 									<tr>
-										<td>
+										<td >
 											<c:choose>
 												<c:when test="${book.reqstatus == 0}">
-													<input type="text" name="book_cd" value="${book.book_cd}"  style="width: 150px;">
+													<input type="text" name="book_cd" value="${book.book_cd}" >
 													<input type="hidden" name="req_cd" value="${book.req_cd}">
 												</c:when>
 												<c:otherwise>
-													<input style="width: 150px;" disabled="disabled" value="${book.book_cd}">
+													<input type="text" disabled="disabled" value="${book.book_cd}">
 													<input type="hidden" name="req_cd" value="${book.req_cd}">
 												</c:otherwise>
 											</c:choose>
 										</td>
 										<td><a href="${book.link}" tabindex="0">${book.title }</a></td>
-										<td class="hidden-sm hidden-xs hidden-md ">${book.author}</td>
-										<%-- 	<td><select name="b_group" tabindex="${status.index }">
-												<!-- <optgroup
-													label="대분류"> -->
-
-												<c:forEach items="${BCodeList }" var="b_code">
-													<option value="${b_code.code}">${b_code.code}-${b_code.name}</option>
-												</c:forEach>
-										</select></td>
-										<td><select name="c_group" tabindex="${status.index }">
-												<!-- <optgroup
-													label="소분류"> -->
-
-												<c:forEach items="${CCodeList }" var="c_code">
-													<option value="${c_code.code}">${c_code.code}-${c_code.name}
-												</c:forEach>
-										</select></td> --%>
-
-										<td class="hidden-sm hidden-xs" style="text-align: right; ">${book.price}원</td>
+										<td class="hidden-sm hidden-xs hidden-md author">${book.author}</td> 
+										<td class="hidden-sm hidden-xs " style="text-align: right; ">${book.price}원</td>
 									
 
-										<td align="center"><%-- <c:choose>
-												<c:when test="${book.reqstatus == 0}">
-													<input type="number" name="quantity" min="1"
-														placeholder="수량" style="width: 30px;" value="${book.quantity}">
-												</c:when>
-												<c:otherwise>
-													<input type="number" name="quantity" min="1"
-														value="${book.quantity}"  style="width: 30px;" readonly>
-												</c:otherwise>
-											</c:choose> --%>${book.quantity }</td>
+										<td align="center"> ${book.quantity }</td>
 
 									</tr>
 								</c:forEach>

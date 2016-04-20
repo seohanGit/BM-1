@@ -66,7 +66,7 @@ public class RentController {
 		book.setBook_cd(book_cd);
 		book.setRentchk("1");
 		BookModel chkbook = rentservice.selectBook(book_cd);
-		int cnt = rentDao.checkRentCount(book.getId());	
+		int cnt = rentDao.checkRentCount(book.getId());
 		
 		if (id != null) {
 			if (chkbook.getRentchk().equals("0")||cnt < 5) {

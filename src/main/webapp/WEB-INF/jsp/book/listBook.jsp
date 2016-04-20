@@ -110,17 +110,17 @@
 											<div class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
 												<h2>신간도서</h2>
 											</div>
-											<div class="col-lg-4 col-md-4 col-sm-6 col-xs-6"
+											<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6"
 												style="margin-top: 3%;">
-												<div class="input-group date " data-provide="datepicker">
+												<div class="input-group date" data-provide="datepicker">
 													<input class="datepicker" id="datepicker1"
 														name="datepicker1" type="text" value="${date1}">
 												</div>
 											</div>
 
-											<div class="col-lg-4 col-md-4 col-sm-6 col-xs-6"
+											<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6"
 												style="margin-top: 3%;">
-												<div class="input-group date  " data-provide="datepicker">
+												<div class=" date  " data-provide="datepicker">
 													<input class="datepicker" id="datepicker2"
 														name="datepicker2" type="text" value="${date2}">
 												</div>
@@ -147,29 +147,7 @@
 												style="font-size: 14px; width: 100%" id="month" name="month">
 
 											</select>월
-										</div>
-										<div class="col-lg-12 col-md-12" style="margin-top: 3%;">
-											<div style="float: left" align="left">
-												<select class="selectpicker"
-													style="font-size: 14px; margin-top: 10px; vertical-align: baseline;"
-													id="select"><option selected>전체
-														<c:forEach items="${BCodeList}" var="code">
-															<option value="${code.code}-${code.name}">${code.code}-${code.name}
-														</c:forEach></select>
-											</div>
-											<div class="input-group left"
-												style="vertical-align: baseline; float: left; width: 80%">
-
-												<span class="input-group-btn"> <input type="text"
-													class="form-control" id="keyword" name="keyword"
-													placeholder="기술자료실 도서 검색 [ 소문자로 입력 ]">
-													<button class="btn btn-default" type="submit" id="btn_find">
-														<span class="glyphicon glyphicon-search"></span>
-													</button>
-												</span>
-											</div>
-										</div>
-										<!-- 										</div> -->
+										</div>										
 									</c:otherwise>
 								</c:choose>
 							</div>
@@ -217,11 +195,9 @@
 												<c:choose>
 													<c:when test="${book.rentchk=='0'}">
 														<td align="left"><mark>대출가능</mark></td>
-														<td align="left"><button class="btn btn-default"
-																type="button" id="borrowbook"
-																onClick="location.href='/borrowbook?book_cd=${book.book_cd}'; borrow();">대출</button></td>
+														<td align="left"><button class="btn btn-default borrow"
+																type="button" id="borrowbook" value="${book.book_cd}">대출</button></td>
 													</c:when>
-
 													<c:when
 														test="${book.rentchk=='1' and book.reservechk=='1'}">
 														<td>예약중</td>
@@ -229,9 +205,7 @@
 													</c:when>
 													<c:when
 														test="${book.rentchk=='1' and book.reservechk=='0'}">
-														<td><p style="color: blue;">대여요청중</p> 
-<%-- 														반납일 : ${book.returndate} --%>
-														</td>
+														<td><p style="color: blue;">대여요청중</p>  	</td>
 														<td>
 <!-- 														<button class="btn btn-default" type="button" -->
 <!-- 																id="reservebook" -->
@@ -258,8 +232,8 @@
 														<td></td>
 													</c:when>
 													<c:otherwise>
-														<td></td>
-														<td></td>
+														<td>-</td>
+														<td>-</td>
 													</c:otherwise>
 												</c:choose>
 											</tr>
@@ -287,30 +261,20 @@
 	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$('#dataTable').dataTable({
-				/* "pageLength" : 10, */
-				"pageLength" : 20,
+			$('#dataTable').dataTable({ 
+				"pageLength" : 10,
 				paging : true,
 				searching : true,
-				"columns" : [ null, null, null, {
+				"columns" : [{
+					"searchable" : false
+				}, null, null, null, {
 					"searchable" : false
 				}, {
 					"searchable" : false
 				}, {
 					"searchable" : false,
-
 				} ]
-
 			});
-			/* .columnFilter({
-
-				aoColumns : [ null, null, null, {
-					type : "select"
-				}, {
-					type : "select",
-					values : [ '대여요청중', '대출', '대출' ]
-				}, null ]
-			}); */
 		});
 
 		var loadingBar = document.getElementById("loadingBar");
@@ -328,7 +292,6 @@
 					tr.hide();
 				}
 			})
-
 		});
 
 		$('.selectpicker').selectpicker();

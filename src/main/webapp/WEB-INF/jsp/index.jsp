@@ -55,20 +55,24 @@
 	String id = null;
 	session.setAttribute("id", id);
 %>
-<body style="background-color:#ffffe6;  ">
+<body style="background-color:#fffff5;  ">
 	<jsp:include page="nav.jsp" />
 	<!-- Page Content -->
 	<div align="center" class="container col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2"   >
 	
 		<div align="center"  >
-			<div align="left" class="row" style="position:static; height:25%;  margin-top: 10px">  
+			<div align="left" class="row" style="position:static; height:25%;  margin-top: 10px">   
 				<div style="width: 50%; float:left">
-					<h2>기술자료실</h2>
+					<img src="/resources/img/title.jpg">					
+					<h2 style="font-family:  ">SEOHAN LIBRARY</h2>
 				</div>
 				<div align="right">
 					<img src="/resources/img/background.jpg" style="width: 35%; height: 60%" />
 					<div align="left"
 					style="vertical-align: middle; position:absolute ; top: 20%; right: 50%; width: 45%">
+					<div style="width: 30%; float:left">
+						<img src="/resources/img/smartsearch.jpg">
+					</div>
 					<form action="/searchBook" method="post">
 						<span class="input-group-btn"> <input type="text"
 							style="width: 85%; float: left" class="form-control" id="keyword"

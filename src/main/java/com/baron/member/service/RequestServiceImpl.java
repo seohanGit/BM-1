@@ -120,8 +120,8 @@ public class RequestServiceImpl implements RequestService {
 	}
 
 	@Override
-	public BookModel selectBook(String req_cd) {
-		return requestDao.selectBook(req_cd);
+	public BookModel selectBook(BookModel book) {
+		return requestDao.selectBook(book);
 
 	}
 

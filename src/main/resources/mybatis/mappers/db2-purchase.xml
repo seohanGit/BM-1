@@ -20,14 +20,14 @@
 		UPDATE TESTLIB.BOOKREQ
 		SET
 		reqstatus='1', book_cd=#{book_cd}
-		WHERE req_cd= #{req_cd}
+		WHERE reqdate = #{reqdate} and  req_cd= #{req_cd}
 	</update>
 
 	<update id="rejectRequest" parameterType="String">
 		UPDATE TESTLIB.BOOKREQ
 		SET
 		reqstatus='2'
-		WHERE req_cd= #{req_cd}
+		WHERE reqdate = #{reqdate} and  req_cd= #{req_cd}
 	</update>
 
 	<select id="requestList" parameterType="String" resultType="BookModel">
@@ -54,18 +54,18 @@
 		DESC
 	</select>
 
-	<select id="selectRequest" parameterType="String" resultType="BookModel">
+	<select id="selectRequest" parameterType="BookModel" resultType="BookModel">
 		SELECT *
 		FROM TESTLIB.BOOKREQ A
 		INNER JOIN TPRLIB.GR_INSA B ON
 		A.id=B.ASABN
-		WHERE req_cd=#{req_cd}
+		WHERE reqdate = #{reqdate} and req_cd=#{req_cd} 
 		FETCH first 1 rows only
 
 	</select>
 	<select id="selectMaxSer" resultType="String">
 		SELECT
-		COALESCE(MAX(right(REQ_CD,1))+1,1) SER
+		COALESCE(MAX(REQ_CD)+1,1) SER
 		FROM TESTLIB.BOOKREQ A
 		WHERE REQDATE = VARCHAR_FORMAT(CURRENT
 		TIMESTAMP,		'YYYYMMDD')
@@ -75,7 +75,7 @@
 		UPDATE TESTLIB.BOOKREQ
 		SET
 		book_cd = #{book_cd} 
-		WHERE
+		WHERE reqdate = #{reqdate} and 
 		req_cd = #{req_cd}
 	</update>
 

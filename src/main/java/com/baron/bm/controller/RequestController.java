@@ -69,7 +69,7 @@ public class RequestController {
 		book.setKname(model.getKname().substring(0, 5).trim());
 		book.setBook_cd(book.getB_group().substring(0, 1)
 				+ book.getC_group().substring(0, 3) + "-");
-		book.setReq_cd("Book"  + "-"+ nowDate.toString()  + "-"+ max);
+		book.setReq_cd(max);
 		book.setId(id);
 		
 		requestservice.requestBook(book, membermodel);
@@ -129,10 +129,8 @@ public class RequestController {
 	}
 
 	@RequestMapping("/buyRequest")
-	public String buyRequest(String req_cd, Model model, BookModel book) {
-
-		book = requestservice.selectBook(req_cd);
-
+	public String buyRequest(String req_cd, Model model, BookModel book) { 
+		book = requestservice.selectBook(book); 
 		model.addAttribute("book", book);
 		return "request/confirmBuy";
 	}
@@ -152,13 +150,12 @@ public class RequestController {
 
 	@RequestMapping("/confirmBuyList")
 	public String confirmBuyList(
-			@RequestParam(value = "req_cd") List<String> req_cdList, 
+			@RequestParam(value = "req_cd") List<BookModel> bookList, 
 			@RequestParam(value = "book_cd") List<String> book_cdList) {
 		for (String book_cd :book_cdList){
 			
 		}
-		for (String req_cd : req_cdList) {
-			BookModel book = requestservice.selectBook(req_cd);
+		for (BookModel book : bookList) { 
 			if (bookService.selectBook(book.getBook_cd()) == null) {
 				requestservice.confirmBuy(book);
 				requestservice.deleteRequest(book);

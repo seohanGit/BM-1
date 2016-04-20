@@ -19,7 +19,7 @@
 		<div class="input-group right"
 			style="width: 40%; float: right; margin-right: 8%">
 			<span class="input-group-btn"> <input type="hidden" id="type"
-				name="type" value="isbn"> <input type="text"
+				name="type" value="isbn" > <input type="text"
 				class="form-control" id="keyword" name="keyword"
 				placeholder="인터파크 검색">
 				<button class="btn btn-default" type="submit" id="getBookInfo">
@@ -53,7 +53,7 @@
 							class="form-control" id="author" name="author" placeholder="저자">
 					</div>
 					<button type="submit" class="btn btn-default"
-						onClick="opener.document.location.href='/searchBook?listType=title&keyword='; formChk();opener.focus(); self.close(); ">확인</button>
+						onClick="formChk(); opener.focus(); self.close(); ">확인</button>
 				</form>
 			</div>
 

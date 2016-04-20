@@ -20,7 +20,7 @@ public interface RequestService {
 	 */
 	public BookModel findBookOne(String isbn) throws Exception;
 
-	public BookModel selectBook(String bookCode);
+	public BookModel selectBook(BookModel book);
 
 	public List<BookModel> requestRecord(String id);
 

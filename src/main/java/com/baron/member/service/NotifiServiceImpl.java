@@ -11,6 +11,7 @@ import com.baron.member.dao.JoinDao;
 import com.baron.member.dao.NotifiDao;
 import com.baron.member.dao.RentDao;
 import com.baron.member.model.BookModel;
+import com.baron.member.model.MemberModel;
 import com.baron.member.model.SmsModel;
 
 @Service
@@ -37,16 +38,20 @@ public class NotifiServiceImpl implements NotifiService {
 
 		BookModel book = rentDao.selectReservation(book_cd);
 		String title = rentDao.selectBook(book_cd).getTitle();
-		String mobi_no = book.getMobi_no().substring(1);
-
-		sms.setPhone(mobi_no);
+//		String mobi_no = book.getMobi_no().substring(1);
+//		sms.setPhone(mobi_no);
 		sms.setTitle(title);
 
 		notifiDao.notifiReser(sms);
 	}
 
 	@Override
-	public void notifiReq(SmsModel sms) { 
+	public void notifiReq(BookModel book) { 
+		SmsModel sms = new SmsModel();		
+		MemberModel member = joinDao.selectMember(book.getId());
+				
+		sms.setPhone(member.getMobi_no().substring(1));
+		sms.setTitle(book.getTitle());		
 		notifiDao.notifiReq(sms);
 	}
 
@@ -54,10 +59,10 @@ public class NotifiServiceImpl implements NotifiService {
 	public void notifiRent(String book_cd) {
 		SmsModel sms = new SmsModel();
 		BookModel book = rentDao.selectRent(book_cd);
-		String title = bookDao.selectBook(book_cd).getTitle();
-		String mobi_no = book.getMobi_no().substring(1);
-		sms.setPhone(mobi_no);
-		sms.setTitle(title);
+		MemberModel member = joinDao.selectMember(book.getId());
+				
+		sms.setPhone(member.getMobi_no().substring(1));
+		sms.setTitle(book.getTitle());
 		notifiDao.notifiRent(sms);
 	}
 
@@ -66,17 +71,19 @@ public class NotifiServiceImpl implements NotifiService {
 		notifiDao.notifiReturn(sms);
 	}
 
+
+	
 	@Override
 	public void notifiReturnConfirm(String book_cd)  {
 		SmsModel sms = new SmsModel();		
 		BookModel book = rentDao.selectRent(book_cd);
-		String title = book.getTitle();
-
+		MemberModel member = joinDao.selectMember(book.getId());
 		book.setReturndate(nowDate); 
-		sms.setTitle(title);
-		sms.setPhone("");
-		if(book.getMobi_no().length()>0){
-			sms.setPhone(book.getMobi_no().substring(1));
+		
+		sms.setTitle(book.getTitle()); 
+		
+		if(member.getMobi_no().length()>0){
+			sms.setPhone(member.getMobi_no().substring(1));
 		} 
 		notifiDao.notifiReturnConfirm(sms);
 

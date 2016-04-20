@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%><%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+	pageEncoding="UTF-8"%><%@ taglib prefix="c"
+	uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,33 +12,25 @@
 <title>도서 구매 요청</title>
 <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="/resources/css/bootstrap-select.min.css" rel="stylesheet">
-<link href="/resources/css/common.css" rel="stylesheet">
-
-<style type="text/css">
-body {
-	padding-top: 70px;
-}
-</style>
+<link href="/resources/css/common.css" rel="stylesheet"> 
 </head>
-<body>
-	<jsp:include page="../nav.jsp" />
+<body> 
 	<div class="container">
 		<h2>도서 구매 요청</h2>
 
 		<div class="panel panel-default">
 			<div style="float: left; width: 50%">
-				<input style="width: 60%; margin:20px; float:center " type="image" name="imageurl" src="${book.imageurl}">
+				<input style="width: 90%; margin: 20px; float: center" type="image"
+					name="imageurl" src="${book.imageurl}">
 				<h3>도서 정가 ${book.price }원</h3>
-			</div>
-			<div class="right" style="margin: 20px"></div>
+			</div> 
 
-			<form action="/confirmBuy" method="post" class="panel-body">
-				<div style="float: right; width: 48%;">					
+			<form action="/confirmBuy" method="post" class="panel-body" >
+				<div style="float: right; width: 48%;">
 					<label for="exampleInputEmail1">도서코드</label>
-						<div class="form-group">						
+					<div class="form-group">
 						<div style="float: left; width: 60%">
-							<select class="selectpicker"
-								 name="b_group">
+							<select class="selectpicker" name="b_group">
 								<optgroup label="대분류">
 									<option value="${book.b_group}" selected="selected">${book.b_group}
 									<option value="B-도서(단행본)">B-도서(단행본)
@@ -48,10 +41,12 @@ body {
 									<option value="S-규격/사전">S-규격/사전
 									<option value="T-논문">T-논문
 								</optgroup>
-							</select> <select class="selectpicker"
-								name="c_group">
+							</select>
+						</div>
+						<div class="right" style="width: 40%">
+							<select class="selectpicker" name="c_group">
 								<optgroup label="소분류">
-								<option value="${book.c_group}" selected="selected">${book.c_group}
+									<option value="${book.c_group}" selected="selected">${book.c_group}
 									<option value="010-일반">일반
 									<option value="020-기계공학">기계공학
 									<option value="030-재료/소재">재료/소재
@@ -65,13 +60,12 @@ body {
 								</optgroup>
 							</select>
 						</div>
-						<div class="right" style="width: 40%">
-							${book.book_cd}
-							<input type="text" class="form-control" id="book_cd"
-								name="book_cd" placeholder="" required="required"> 
-						</div>
 					</div>
-
+					<div class="form-group">
+						<label for="exampleInputEmail1">${book.book_cd}</label>  <input
+							type="text" class="form-control" id="book_cd" name="book_cd"
+							placeholder="" required="required">
+					</div>
 
 					<div class="form-group">
 						<label for="exampleInputEmail1">ISBN</label> <input type="text"
@@ -114,7 +108,7 @@ body {
 						value="${book.price}"> <input type="hidden" name="req_cd"
 						value="${book.req_cd}">
 
-					<button type="submit" class="btn btn-default">확인</button>
+					<button type="submit" class="btn btn-default" >확인</button>
 				</div>
 			</form>
 		</div>

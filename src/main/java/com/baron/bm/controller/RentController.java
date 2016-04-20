@@ -66,8 +66,10 @@ public class RentController {
 		book.setBook_cd(book_cd);
 		book.setRentchk("1");
 		BookModel chkbook = rentservice.selectBook(book_cd);
+		int cnt = rentDao.checkRentCount(book.getId());	
+		
 		if (id != null) {
-			if (chkbook.getRentchk().equals("0")) {
+			if (chkbook.getRentchk().equals("0")||cnt < 5) {
 				rentservice.borrowBook(book);
 				return "rent/borrowSuccess";
 			} else {
@@ -93,7 +95,7 @@ public class RentController {
 		if (reserveBook != null) {
 			if (reserveBook.getId() == id)
 				rentservice.deleteReserve(book_cd); 
-		} 
+		}
 		return "redirect:borrowReqList";
 	}
 

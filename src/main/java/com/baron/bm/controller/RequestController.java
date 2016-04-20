@@ -71,8 +71,10 @@ public class RequestController {
 				+ book.getC_group().substring(0, 3) + "-");
 		book.setReq_cd("Book"  + "-"+ nowDate.toString()  + "-"+ max);
 		book.setId(id);
+		
 		requestservice.requestBook(book, membermodel);
-
+		notifiService.notifiReq(book);
+		
 		return "request/requestSuccess";
 	}
 
@@ -130,12 +132,6 @@ public class RequestController {
 	public String buyRequest(String req_cd, Model model, BookModel book) {
 
 		book = requestservice.selectBook(req_cd);
-//		book.setB_group(book.getB_group().trim() + "-"
-//				+ requestservice.selectB_code(book.getB_group()).substring(0,1).trim());
-//		book.setC_group(book.getC_group() + "-"
-//				+ requestservice.selectC_code(book.getC_group()));
-		System.out.println(book.getB_group());
-		System.out.println(book.getC_group());
 
 		model.addAttribute("book", book);
 		return "request/confirmBuy";
@@ -144,16 +140,23 @@ public class RequestController {
 	@RequestMapping("/confirmBuy")
 	public String confirmBuy(BookModel model) {
 		model.setRcv_date(nowDate); 
-		requestservice.confirmBuy(model);
-		requestservice.deleteRequest(model);
-
-		return "redirect:request";
-
+		BookModel existbook = bookService.selectBook(model.getBook_cd());
+		if (existbook == null){
+			requestservice.confirmBuy(model);
+			requestservice.deleteRequest(model);
+			return "request/buySuccess";
+		}else{
+			return "redirect:requestfail";
+		} 
 	}
 
 	@RequestMapping("/confirmBuyList")
 	public String confirmBuyList(
-			@RequestParam(value = "req_cd") List<String> req_cdList) {
+			@RequestParam(value = "req_cd") List<String> req_cdList, 
+			@RequestParam(value = "book_cd") List<String> book_cdList) {
+		for (String book_cd :book_cdList){
+			
+		}
 		for (String req_cd : req_cdList) {
 			BookModel book = requestservice.selectBook(req_cd);
 			if (bookService.selectBook(book.getBook_cd()) == null) {
@@ -190,17 +193,6 @@ public class RequestController {
 			BookModel book = new BookModel();
 			book.setBook_cd(book_cdList.get(i));
 			book.setReq_cd(req_cdList.get(i));
-			/*
-			 * book.setB_group(requestservice. selectB_code
-			 * (book_cd.substring(0,1))); book.setC_group
-			 * (requestservice.selectC_code (book_cd.substring(1,4)));
-			 */
-			/*
-			 * String b_group = b_groupList.get(i); System.out.println(b_group);
-			 * book.setB_group(requestservice.selectB_code(b_group)); String
-			 * c_group = c_groupList.get(i); System.out.println(c_group);
-			 * book.setC_group(requestservice.selectC_code(c_group));
-			 */
 			requestservice.modifiBook(book);
 		}
 

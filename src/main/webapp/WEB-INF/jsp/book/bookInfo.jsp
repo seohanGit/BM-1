@@ -27,7 +27,7 @@
 						<c:when test="${book.rentchk=='0'}">
 							<mark>대출가능</mark>
 							<button class="btn btn-default" type="button" id="borrowbook"
-								onClick="opener.document.location.href='/borrowbook?book_cd=${book.book_cd}'; borrow(); opener.focus(); self.close();">대출</button>
+								onClick="location.href='/borrowbook?book_cd=${book.book_cd}'; opener.focus(); ">대출</button>
 						</c:when>
 
 						<c:when test="${book.rentchk=='1' and book.reservechk=='1'}">	예약중
@@ -96,43 +96,6 @@
 						</tr>
 					</table>
 				</div>
-				<%-- 
-
-
-				<label for="exampleInputEmail1">도서번호</label>
-				<h4>${ book.book_cd }</h4>
-			</div>
-
-			<div class="right form-group">
-				<label for="exampleInputPassword1">도서명</label>
-				<h4>${book.title}</h4>
-			</div>
-			<div class="right form-group">
-				<label for="exampleInputPassword1">분류</label>
-				<h4>${book.b_group}</h4>
-			</div>
-			<c:choose>
-				<c:when test="${book.publish == '' }">
-					<div></div>
-				</c:when>
-				<c:otherwise>
-					<div class="right form-group">
-						<label for="exampleInputPassword1">출판사</label>
-						<h4>${book.publish}</h4>
-					</div>
-				</c:otherwise>
-			</c:choose>
-			<c:choose>
-				<c:when test="${book.author == '' }">
-					<div></div>
-				</c:when>
-				<c:otherwise>
-					<div class="right form-group">
-						<label for="exampleInputPassword1">저자</label>
-						<h4>${book.author }</h4>
-					</div>
-				</c:otherwise>
-			</c:choose> --%>
 				<c:choose>
 					<c:when test="${book.summary == '' }">
 					</c:when>

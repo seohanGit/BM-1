@@ -248,10 +248,12 @@ public class BookController {
 				permission = cookie.getValue();
 				book = bookservice.selectBook(book_cd);
 				BCodeList = bookservice.selectBCodeList();
-				if (permission.equals("0"))
+				if (permission.equals("0")){
 					return "member/adminfail";
+				}
 			}
 		}
+		book_cd1=  book.getBook_cd();
 		model.addAttribute("BCodeList", BCodeList);
 		model.addAttribute("book", book);
 		return "book/modifyBook";
@@ -259,7 +261,7 @@ public class BookController {
 
 	@RequestMapping("/modifybook1")
 	public String modifybookresult(BookModel bookmodel) {
-		bookmodel.setBook_cd(book_cd1);
+		bookmodel.setBook_cd1(book_cd1);		
 		bookservice.updateBook(bookmodel);
 		return "book/modifybookresult";
 	}

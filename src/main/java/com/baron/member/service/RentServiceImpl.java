@@ -36,25 +36,21 @@ public class RentServiceImpl implements RentService {
 
 	@Override
 	public BookModel selectBook(String book_cd) {
-		// TODO Auto-generated method stub
 		return rentDao.selectBook(book_cd);
 	}
 
 	@Override
 	public void insertReservation(BookModel bookmodel) {
-		// TODO Auto-generated method stub
 		rentDao.insertReservation(bookmodel);
 	}
 
 	@Override
 	public BookModel selectReservation(String book_cd) {
-		// TODO Auto-generated method stub
 		return rentDao.selectReservation(book_cd);
 	}
 
 	@Override
 	public List<BookModel> borrowList(String id) {
-		
 		return rentDao.borrowList(id);
 	}
 
@@ -64,11 +60,9 @@ public class RentServiceImpl implements RentService {
 	}
 
 	@Override
-	public void borrowBook(BookModel bookmodel) {
-		
-		rentDao.borrowBook(bookmodel);
-		deleteReserve(bookmodel.getBook_cd());
-
+	public void borrowBook(BookModel bookmodel) { 
+			rentDao.borrowBook(bookmodel);		
+			deleteReserve(bookmodel.getBook_cd()); 
 	}
 
 	@Override
@@ -117,8 +111,6 @@ public class RentServiceImpl implements RentService {
 
 	@Override
 	public List<BookModel> reserveList() {
-		// TODO Auto-generated method stub
-
 		return rentDao.reservationListAll();
 	}
 

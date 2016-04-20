@@ -97,7 +97,7 @@ body {
 														<td>대기</td>
 														<td><button class="btn btn-sm btn-default"
 																type="button" id="buyBook"
-																onClick="location.href='buyRequest?req_cd=${book.req_cd}'">구매</button>
+																onClick="window.open('buyRequest?req_cd=${book.req_cd}','new','resizeble=yes scrollbars=yes,  width=750, height=730');">구매</button>
 
 															<button class="btn btn-sm btn-default" type="button"
 																onClick="location.href='rejectRequest?req_cd=${book.req_cd}'; del();">반려</button>

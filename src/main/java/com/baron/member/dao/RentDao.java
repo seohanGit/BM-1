@@ -59,6 +59,9 @@ public interface RentDao {
 
 	List<BookModel> delayList();
 
+	int checkRentCount(String id);
+ 
+
 
 
 }

@@ -168,4 +168,9 @@ public class RentDaoImpl implements RentDao {
 		return session.selectList(NAMESPACE + "selectDelayList");
 	}
 
+	@Override
+	public int checkRentCount(String id) {
+		return session.selectOne(NAMESPACE + "checkRentCount", id);
+	}
+
 }

@@ -2,5 +2,4 @@
     pageEncoding="UTF-8"%>
 <script>
 alert("중복된 도서코드입니다.");
-location.href="/requestList";
 </script>

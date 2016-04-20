@@ -60,7 +60,12 @@
 		first 1 rows
 		only
 	</select>
-
+	<select id="checkRentCount" resultType="int" parameterType="String">
+		SELECT count(*) cnt
+		FROM TESTLIB.BOOKRENT
+		WHERE id = #{id}		
+		AND rentchk='2' or rentchk='1'		
+	</select>
 	<insert id="borrowBook1" parameterType="BookModel">
 		INSERT INTO
 		TESTLIB.BOOKRENT
@@ -78,7 +83,6 @@
 		rentchk='1'
 		WHERE book_cd=#{book_cd}
 	</update>
-
 	<update id="stopBorrow" parameterType="String">
 		UPDATE TESTLIB.BOOKMST
 		SET
@@ -268,5 +272,5 @@
 		B.rentchk='2'
 		ORDER BY
 		B.returndate DESC
-	</select>
+	</select>	
 </mapper>

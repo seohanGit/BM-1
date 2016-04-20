@@ -62,7 +62,7 @@ public class EtcController {
 			bookmodel.setReturndate(format.format(bookmodel.getRetu_ymd()));
 
 			bookmodel.setBook_cd(bookmodel.getBook_cd());
-			bookmodel.setTeam_nm(bookmodel.getTeam_nm());
+//			bookmodel.setTeam_nm(bookmodel.getTeam_nm());
 			bookmodel.setId(bookmodel.getId());
 			System.out.println(bookmodel.getBook_cd() + bookmodel.getRentdate()
 					+ bookmodel.getReq_ymd());

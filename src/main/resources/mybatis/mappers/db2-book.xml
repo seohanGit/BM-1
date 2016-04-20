@@ -126,11 +126,12 @@
 	 <update id="updateBook" parameterType="BookModel">
 		UPDATE TESTLIB.BOOKMST
 		SET
-		TITLE=#{title} ,
+		TITLE=#{title},
 		publish=#{publish},
 		author=#{author},
-		imageurl=#{imageurl}
-		WHERE BOOK_CD=#{book_cd}
+		imageurl=#{imageurl},
+		book_cd=#{book_cd}
+		WHERE BOOK_CD=#{book_cd1}
 	</update>
 	
 

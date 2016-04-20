@@ -1,5 +1,6 @@
 package com.baron.member.service;
 
+import com.baron.member.model.BookModel;
 import com.baron.member.model.SmsModel;
 
 public interface NotifiService {
@@ -8,7 +9,7 @@ public interface NotifiService {
 
 	void notifiReturnConfirm(String book_cd);
 
-	void notifiReq(SmsModel sms);
+	void notifiReq(BookModel book);
 
 	void notifiRent(String book_cd);
 

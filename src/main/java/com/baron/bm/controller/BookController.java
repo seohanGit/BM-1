@@ -91,37 +91,15 @@ public class BookController {
 			mav.setViewName("book/bookSearchByAdmin"); 
 		} else {
 			mav.setViewName("book/bookSearch");
-		}
-		if (listType==null||listType.equals(""))  {
-			if (field == null){field = "title";}
-			bookList = bookservice.searchBook(field, keyword);
-			mav.addObject("bookList", bookList);
-			mav.addObject("listType", "");
-		}else if(listType.equals("new")){
-			if (datepicker1== null || datepicker1.equals("")){
-				cal = Calendar.getInstance();				
-				Date date2 = cal.getTime();
-				cal.add(cal.MONTH, -1);
-				Date date1 = cal.getTime();
-				datepicker1 = sdf.format(date1); 
-				datepicker2 = sdf.format(date2);
-			}
-			bookList = bookservice.listBook(listType, datepicker1, datepicker2,"");
-			mav.setViewName("book/listBook");
-		}else {		
-			if (year == null ){
-				year=sdf.format(cal.getTime()).substring(0, 4);
-				month=sdf.format(cal.getTime()).substring(4,6);
-			}
-			mav.addObject("year", year);
-			mav.addObject("month", month);
-			bookList = bookservice.listBook(listType, datepicker1, datepicker2, year+month);
-			mav.setViewName("book/listBook");
-		}
-		mav.addObject("bookList", bookList);
+		} 
+		
+		if (field == null){field = "title";}
+		bookList = bookservice.searchBook(field, keyword);
+		mav.addObject("bookList", bookList); 		  
 		mav.addObject("date1", datepicker1);
 		mav.addObject("date2", datepicker2); 
 		mav.addObject("listType", listType);
+		mav.addObject("keyword", keyword);
 		
 		BCodeList = bookservice.selectBCodeList(); 
 		mav.addObject("BCodeList", BCodeList); 
@@ -145,44 +123,49 @@ public class BookController {
 			if (cookie.getName().equals("bm_permission")) {
 				permission = cookie.getValue(); 
 			}
-		} 
-		if (permission.equals("1")) {
-			mav.setViewName("book/bookSearchByAdmin"); 
-		} else {
-			
+		}  
+		switch (listType) {			
+			case "new" :
+				if (datepicker1== null || datepicker1.equals("")){
+					cal = Calendar.getInstance();				
+					Date date2 = cal.getTime();
+					cal.add(cal.MONTH, -1);
+					Date date1 = cal.getTime();
+					datepicker1 = sdf.format(date1); 
+					datepicker2 = sdf.format(date2);
+				}
+				bookList = bookservice.listBook(listType, datepicker1, datepicker2,"");
+				mav.setViewName("book/searchResult");
+				break;
+			case "best" : 
+			case "recommend" :
+				if (year == null ){
+					year=sdf.format(cal.getTime()).substring(0, 4);
+					month=sdf.format(cal.getTime()).substring(4,6);
+				} 
+				mav.addObject("year", year);
+				mav.addObject("month", month);
+
+				bookList = bookservice.listBook(listType, "","", year+month);
+				mav.setViewName("book/searchResult");
+				break;
+			default :
+				if (field == null){field = "title";}
+				bookList = bookservice.searchBook(field, keyword);
+				mav.addObject("bookList", bookList);
+				if (permission.equals("1")) {
+					mav.setViewName("book/bookSearchByAdmin"); 
+				}else{
+					mav.setViewName("book/bookSearch");
+				}
+				break;
 		}
-		if (listType == null||listType.equals(""))  {
-			if (field == null){field = "title";}
-			bookList = bookservice.searchBook(field, keyword);
-			mav.addObject("bookList", bookList);
-			mav.addObject("listType", "");
-			mav.setViewName("book/bookSearch");
-		}else if(listType.equals("new")){
-			if (datepicker1== null || datepicker1.equals("")){
-				cal = Calendar.getInstance();				
-				Date date2 = cal.getTime();
-				cal.add(cal.MONTH, -1);
-				Date date1 = cal.getTime();
-				datepicker1 = sdf.format(date1); 
-				datepicker2 = sdf.format(date2);
-			}
-			bookList = bookservice.listBook(listType, datepicker1, datepicker2,"");
-			mav.setViewName("book/searchResult");
-		}else {		
-			if (year == null ){
-				year=sdf.format(cal.getTime()).substring(0, 4);
-				month=sdf.format(cal.getTime()).substring(4,6);
-			} 
-			mav.addObject("year", year);
-			mav.addObject("month", month);
-			
-			bookList = bookservice.listBook(listType, "","", year+month);
-			mav.setViewName("book/searchResult");
-		}
+		 
 		mav.addObject("bookList", bookList);
 		mav.addObject("date1", datepicker1);
-		mav.addObject("date2", datepicker2); 
+		mav.addObject("date2", datepicker2);  
 		mav.addObject("listType", listType);
+		mav.addObject("keyword", keyword);	
 		
 		BCodeList = bookservice.selectBCodeList(); 
 		mav.addObject("BCodeList", BCodeList); 

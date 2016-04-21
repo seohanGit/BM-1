@@ -68,11 +68,12 @@ public class RentServiceImpl implements RentService {
 	@Override
 	public void confirmBorrowBook(String book_cd) {
 		String id = null;
-		BookModel bookmodel = new BookModel(); 
-		bookmodel = rentDao.selectBook(book_cd);
-		bookmodel.setRentdate(nowDate);
 		cal = Calendar.getInstance();
 		cal.add(cal.DAY_OF_MONTH, 15);
+		
+		BookModel bookmodel = new BookModel(); 
+		bookmodel = rentDao.selectBorrow(book_cd);
+		bookmodel.setRentdate(nowDate);		
 		bookmodel.setRetrundate(sdf.format(cal.getTime()));
 		if (bookmodel != null) {
 			String title = bookmodel.getTitle();

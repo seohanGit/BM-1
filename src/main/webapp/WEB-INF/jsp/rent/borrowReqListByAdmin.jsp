@@ -15,14 +15,7 @@
 <title>대여 요청 현황</title>
 <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="/resources/css/signin.css" rel="stylesheet">
-<link href="/resources/css/common.css" rel="stylesheet"> 
-<script>
-	function del() {
-		alert("승인되었습니다.");
-	}
-</script>
-
-
+<link href="/resources/css/common.css" rel="stylesheet">  
 </head>
 
 <body class="main">
@@ -79,7 +72,7 @@
 													</c:choose></td>
 												<td><button class="btn btn-default btn-sm"
 														type="button" id="reservebook"
-														onClick="location.href='/confirmBorrowBook?book_cd=${book.book_cd1}'; ok();">승인</button>
+														onClick="location.href='/confirmBorrowBook?book_cd=${book.book_cd1}';  ">승인</button>
 												</td>
 											</tr>
 										</c:forEach>
@@ -164,7 +157,7 @@
 														test="${rent.reservechk=='0'||empty rent.reservechk}">
 														<td><button class="btn btn-default btn-sm"
 																type="button" id="reservebook"
-																onClick="location.href='/extendBorrowBook?book_cd=${rent.book_cd}'; extend();">연장</button></td>
+																onClick="location.href='/extendBorrowBook?book_cd=${rent.book_cd}';  ">연장</button></td>
 
 													</c:when>
 													<c:when test="${rent.reservechk=='1' }">

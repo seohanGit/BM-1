@@ -79,7 +79,6 @@ $('.borrow').on('click', function() {
 			book_cd : bookcd 		}, // parameters as plain object 
 		success : function(data, status) { // Ajax complete handelr 
 			alert('대출되었습니다.');
-			
 		}
     });
 });

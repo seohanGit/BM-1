@@ -55,7 +55,7 @@
 	String id = null;
 	session.setAttribute("id", id);
 %>
-<body style="background-color: #fffff5;">
+<body style="margin-left:5%; width: 90%; background-color: #fffff5;">
 	<jsp:include page="nav.jsp" />
 	<!-- Page Content -->
 	<div align="center"
@@ -65,10 +65,10 @@
 			<div align="center" class="row"
 				style=" margin-top: 10px">
 				<div class="col-md-7   col-lg-7  " align="left" >
-					<img src="/resources/img/title.gif">
+					<img src="/resources/img/title.png" style="width:60%" >
 					<!-- 					<h2 style="font-family:  ">SEOHAN LIBRARY</h2> -->
 				</div>
-				<div class="col-md-5   col-lg-5" align="left" style="float:right">
+				<div class="col-md-5   col-lg-5" align="right" style="float:right; padding: 0">
 					<img src="/resources/img/background.jpg"
 						style="width: 95%; "/>
 				</div>
@@ -94,7 +94,7 @@
 			</div>
 			<div align="center" class="row"
 				style="position: static; height: 23%; background-color: #EEEEEE; padding: 0px; margin: 5px">
-				<div class="col-lg-5 col-md-5 col-sm-12 col-xs-12"
+				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"
 					style="float: center; display: block;">
 					<div class="col-md-4 col-sm-4 col-xs-4"
 						style="float: left; padding: 5px">
@@ -115,7 +115,7 @@
 						<a class="href" href="request">자료구입신청</a>
 					</div>
 				</div>
-				<div class="col-lg-7 col-md-7 col-sm-12 col-xs-12"
+				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"
 					style="float: right; text-align: left;">
 					<a href="noticeList" style="font-size: 20px;">공지사항</a>
 					<ul class="list-group">
@@ -129,8 +129,8 @@
 			</div>
 			<div align="center" class="row"
 				style="position: static; height: 30%; padding: 0px; margin: 5px">
-				<div class="col-lg-5  col-md-5  col-sm-12 col-xs-12"
-					style="text-align: left; padding: 0px; margin-top: 0px; position: static; height: 100%;">
+				<div class="col-lg-6  col-md-6  col-sm-12 col-xs-12"
+					style="text-align: left; padding:0px;padding-right:3%; margin-top: 0px; position: static; height: 100%;">
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
 						style="position: static; height: 15%;">
 						<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
@@ -168,8 +168,8 @@
 					</c:forEach>
 				</div>
 				<div
-					class="col-lg-5 col-lg-offset-2 col-md-5 col-md-offset-2 col-sm-12 col-xs-12"
-					style="text-align: left; padding: 0px; margin-bottom: 30px; position: static; height: 100%;">
+					class="col-lg-6   col-md-6   col-sm-12 col-xs-12"
+					style="text-align: left; padding: 0px; padding-left:3%; margin-left:0; position: static; height: 100%;">
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
 						style="position: static; height: 100%;">
 						<div class="col-md-8 col-sm-8 col-xs-8">

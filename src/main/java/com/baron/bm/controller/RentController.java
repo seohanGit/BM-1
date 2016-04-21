@@ -69,11 +69,10 @@ public class RentController {
 		int cnt = rentDao.checkRentCount(book.getId());
 		
 		if (id != null) {
-			if (chkbook.getRentchk().equals("0")||cnt < 5) {
+			if (chkbook.getRentchk().equals("0") && cnt < 5) {
 				rentservice.borrowBook(book);
 				return "rent/borrowSuccess";
 			} else {
-
 				return "rent/borrowfail";
 			}
 		} else {
@@ -96,7 +95,7 @@ public class RentController {
 			if (reserveBook.getId() == id)
 				rentservice.deleteReserve(book_cd); 
 		}
-		return "redirect:borrowReqList";
+		return "confirmBorrowSuccess";
 	}
 
 	@RequestMapping("/confirmBorrowBookList")

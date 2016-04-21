@@ -20,8 +20,7 @@ public class RentDaoImpl implements RentDao {
 	private SqlSession session;
 
 	@Override
-	public BookModel selectBook(String book_cd) {
-
+	public BookModel selectBook(String book_cd) { 
 		return session.selectOne(NAMESPACE + "selectBook", book_cd);
 	}
 

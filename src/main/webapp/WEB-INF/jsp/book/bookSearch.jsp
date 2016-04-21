@@ -102,7 +102,9 @@
 									<div class="input-group left"
 										style="vertical-align: baseline; float: left; width: 80%">
 
-										<span class="input-group-btn"> <input type="text"
+										<span class="input-group-btn"> 
+										<input id="listType" name="listType" type="hidden" value="${listType }"> 
+										<input type="text"
 											class="form-control" id="keyword" name="keyword"
 											placeholder="기술자료실 도서 검색 [ 소문자로 입력 ]">
 											<button class="btn btn-default" type="submit" id="btn_find">
@@ -142,8 +144,8 @@
 											<td align="left"><mark>대출가능</mark></td>
 											<td align="left"><button class="btn btn-default borrow"
 													type="button" id="borrowbook" value="${book.book_cd}"
-													>대출</button></td>
-<%-- 													onClick="location.href='/borrowbook?book_cd=${book.book_cd}';" --%>
+													onClick="location.href='/searchBook?listType${listType}=&keyword=${keyword}'" >대출</button>
+													</td>													
 										</c:when>
 
 										<c:when test="${book.rentchk=='1' and book.reservechk=='1'}">
@@ -201,7 +203,7 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$('#dataTable').dataTable({
-				/* "pageLength" : 10, */
+				"bSort" : false,
 				"pageLength" : 100,
 				paging : true,
 				searching : false,

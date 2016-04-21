@@ -37,7 +37,7 @@
 					<ul class="dropdown-menu" role="menu">
 						<li><a href="#" id="borrowReqList">대여요청현황</a></li>
 						<li><a href="#" id="borrowList">대여현항</a></li>						
-						<li><a href="#" id="reserveList">예약현항</a></li>
+						<li><a href="#" id="reserveList">예약현황</a></li>
 						<li><a href="#" id="request">구매요청</a></li>
 						<li><a href="#" id="recordList">대여기록</a></li>
 						 

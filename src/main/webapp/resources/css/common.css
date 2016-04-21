@@ -20,6 +20,10 @@ footer {
 	-webkit-box-orient: vertical;
 }
 
+.href{
+	display: block; 
+	font-weight: bold;
+}
 #nav-input {
 	margin-top: 5px;
 	margin-right: 5px;

@@ -72,7 +72,7 @@
 					<img src="/resources/img/background.jpg"
 						style="width: 35%; height: 60%" />
 					<div align="left"
-						style="vertical-align: middle; position: absolute; top: 15%; right: 50%; width: 45%; height: 20%">
+						style="vertical-align: middle; position: absolute; top: 24%; right: 50%; width: 45%; height: 20%">
 						<div style="height:30%; top: 5%; float: left">
 							<img style="height:100%;"src="/resources/img/smartsearch.gif">
 						</div>
@@ -94,29 +94,29 @@
 
 			</div>
 			<div align="center" class="row"
-				style="position: static; height: 27%; background-color: #EEEEEE;">
+				style="position: static; height: 23%; background-color: #EEEEEE; padding: 0px; margin:5px">
 				<div class="col-lg-5 col-md-5 col-sm-12 col-xs-12"
 					style="float: center; display: block;">
 					<div class="col-md-4 col-sm-4 col-xs-4"
 						style="float: left; padding: 5px">
 						<a href="#" style="display: block"><img
-							src="/resources/img/quickBan04.gif"
+							src="/resources/img/btn01.jpg"
 							style="width: 80%; margin: 10px"></a> <a class="href"
-							href="searchBook?field=title&keyword=" style="display: block">자료검색</a>
+							href="searchBook?field=title&keyword=" >자료검색</a>
 					</div>
 					<div class="col-md-4 col-sm-4 col-xs-4"
 						style="float: left; padding: 5px">
 						<a href="borrowList" style="display: block"><img
-							src="/resources/img/quickBan03.gif"
+							src="/resources/img/btn02.jpg"
 							style="width: 80%; margin: 10px"></a> <a class="href"
-							href="borrowList" style="display: block">대출/연장 조회</a>
+							href="borrowList" >대출/연장 조회</a>
 					</div>
 					<div class="col-md-4 col-sm-4 col-xs-4"
 						style="float: left; padding: 5px">
 						<a href="request" style="display: block"><img
-							src="/resources/img/quickBan02.gif"
+							src="/resources/img/btn03.jpg"
 							style="width: 80%; margin: 10px"></a> <a class="href"
-							href="request" style="display: block;">자료구입신청</a>
+							href="request" >자료구입신청</a>
 					</div>
 				</div>
 				<div class="col-lg-7 col-md-7 col-sm-12 col-xs-12"
@@ -132,9 +132,9 @@
 				</div>
 			</div>
 			<div align="center" class="row"
-				style="position: static; height: 30%; padding-top: 0px;">
-				<div class="col-md-6 col-sm-12 col-xs-12"
-					style="text-align: left; padding-top: 0px; margin-top: 0px; position: static; height: 100%;">
+				style="position: static; height: 30%; padding: 0px; margin: 5px">
+				<div class="col-lg-5  col-md-5  col-sm-12 col-xs-12"
+					style="text-align: left; padding: 0px; margin-top: 0px; position: static; height: 100%;">
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
 						style="position: static; height: 15%;">
 						<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
@@ -146,18 +146,18 @@
 						step="1" varStatus="status">
 
 						<div align="center" style="position: static; height: 75%;">
-							<div class="col-md-4 col-sm-4 col-xs-4">
+							<div class="col-md-4 col-sm-4 col-xs-4" style="padding:3px">
 								<div>
 									<c:choose>
 										<c:when test="${empty newBook.imageurl }">
-											<img src="/resources/img/noimage.png" height="80%"
-												width="80%">
+											<img src="/resources/img/noimage.png" height="70%"
+												width="70%">
 										</c:when>
 										<c:otherwise>
 											<a
 												onclick="window.open('/bookInfo?book_cd=${newBook.book_cd}','new',
 											 	'resizeble=yes scrollbars=yes, width=750, height=600');">
-												<img src="${newBook.imageurl}" height="80%" width="80%">
+												<img src="${newBook.imageurl}" height="70%" width="70%">
 											</a>
 										</c:otherwise>
 									</c:choose>
@@ -171,8 +171,8 @@
 						</div>
 					</c:forEach>
 				</div>
-				<div class="col-md-6 col-sm-12 col-xs-12"
-					style="text-align: left; padding-top: 0px; margin-bottom: 30px; position: static; height: 100%;">
+				<div class="col-lg-5 col-lg-offset-2 col-md-5 col-md-offset-2 col-sm-12 col-xs-12"
+					style="text-align: left; padding: 0px; margin-bottom: 30px; position: static; height: 100%;">
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
 						style="position: static; height: 100%;">
 						<div class="col-md-8 col-sm-8 col-xs-8">
@@ -183,18 +183,18 @@
 					<c:forEach items="${bestBook}" var="bestBook" begin="0" end="2"
 						step="1" varStatus="status">
 						<div align="center" style="position: static; height: 75%;">
-							<div class="col-md-4 col-sm-4 col-xs-4">
+							<div class="col-md-4 col-sm-4 col-xs-4" style="padding:3px">
 								<div>
 									<c:choose>
 										<c:when test="${empty bestBook.imageurl }">
-											<img src="/resources/img/noimage.png" height="80%"
-												width="80%">
+											<img src="/resources/img/noimage.png" height="70%"
+												width="70%">
 										</c:when>
 										<c:otherwise>
 											<a
 												onclick="window.open('/bookInfo?book_cd=${bestBook.book_cd}','new',
 										 	'resizeble=yes scrollbars=yes, width=750, height=600');">
-												<img src="${bestBook.imageurl}" height="80%" width="80%">${bestbook.title}</a>
+												<img src="${bestBook.imageurl}" height="70%" width="70%">${bestbook.title}</a>
 										</c:otherwise>
 									</c:choose>
 								</div>

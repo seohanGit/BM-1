@@ -100,9 +100,9 @@
 					<a style="font-size :20px; margin: 1% ">Quick Menu</a></div>
 					<div class="col-md-4 col-sm-4 col-xs-4"
 						style="float: left; padding: 0px">
-						<a href="#" style="display: block"><img
+						<a href="searchBook?listType=&keyword=" style="display: block"><img
 							src="/resources/img/btn01.jpg" style="width: 50%; margin: 10px"></a>
-						<a class="href" href="searchBook?field=title&keyword=">자료검색</a>
+						<a class="href" href="searchBook?listType=&keyword=">자료검색</a>
 					</div>
 					<div class="col-md-4 col-sm-4 col-xs-4"
 						style="float: left; padding: 5px">

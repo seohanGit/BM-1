@@ -10,9 +10,9 @@
 //-->
 
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-	<div class="container">
+	<div class="container col-lg-offset-2 col-md-offset-2" style="padding-left:3%">
 		<!-- Brand and toggle get grouped for better mobile display -->
-		<div class="navbar-header">
+		<div class="  navbar-header">
 			<button type="button" class="navbar-toggle" data-toggle="collapse"
 				data-target="#bs-example-navbar-collapse-1">
 				<span class="sr-only">Toggle navigation</span> <span
@@ -25,7 +25,7 @@
 		<div class="collapse navbar-collapse"
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav " role="menu">
-				<li><a href="searchBook?keyword=">자료검색</a></li>
+				<li><a href="searchBook?listType=&keyword=">자료검색</a></li>
 				<li><a href="searchBook?listType=new&keyword=">신간도서</a></li>
 <!-- 				<li><a href="board">게시판</a></li> -->
 				<li><a href="searchBook?listType=recommend&keyword=">추천도서</a></li>

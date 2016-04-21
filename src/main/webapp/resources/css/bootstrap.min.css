@@ -5532,6 +5532,7 @@ border-radius
 
 .nav>li {
 	position: relative;
+	padding-left: 2%;
 }
 
 .nav>li>a {
@@ -5928,7 +5929,8 @@ border-radius
 
 .navbar-nav {
 	vertical-align: middle;
-	margin: 7.5px -15px
+	margin: 7.5px -15px;
+	width:80%;
 }
 
 .navbar-nav>li>a {

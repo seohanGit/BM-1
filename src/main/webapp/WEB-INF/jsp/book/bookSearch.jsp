@@ -122,10 +122,10 @@
 						<thead>
 							<tr> 
 								<th>도서명</th>
-								<th class="hidden-xs hidden-sm hidden-md td-author">저자</th>
-								<th class="hidden-xs hidden-sm td-genre">출판사</th>
-								<th class="hidden-xs td-genre" style="width: 120px">분류</th>
-								<th style="width: 160px">대여상태</th>
+								<th class="hidden-xs hidden-sm hidden-md author">저자</th>
+								<th class="hidden-xs hidden-sm genre">출판사</th>
+								<th class="hidden-xs genre" style="width: 120px">분류</th>
+								<th class="col-xs-3" >대여상태</th>
 								<th class="image"></th>
 							</tr>
 						</thead>
@@ -138,7 +138,7 @@
 											${book.title }</a></td>
 									<td class="hidden-xs hidden-sm hidden-md" align="left">${book.author }</td>
 									<td class="hidden-xs hidden-sm" align="left">${book.publish}</td>
-									<td class="hidden-xs td-genre" align="left">${book.b_group }</td>
+									<td class="hidden-xs genre" align="left">${book.b_group }</td>
 									<c:choose>
 										<c:when test="${book.rentchk=='0'}">
 											<td align="left"><mark>대출가능</mark></td>
@@ -167,8 +167,8 @@
 											<td></td>
 										</c:when>
 										<c:when test="${book.rentchk=='2' and book.reservechk=='0'}">
-											<td><p style="color: blue;">대출중</p> 반납일
-												:${book.returndate}</td>
+											<td><p style="color: blue;">대출중</p> <p class="hidden-xs">반납일
+												:${book.returndate}<p></td>
 											<td></td>
 										</c:when>
 										<c:when test="${book.rentchk=='4'}">

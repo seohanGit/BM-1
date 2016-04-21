@@ -26,10 +26,10 @@
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav " role="menu">
 				<li><a href="searchBook?keyword=">자료검색</a></li>
-				<li><a href="searchBook?listType=new">신간도서</a></li>
+				<li><a href="searchBook?listType=new&keyword=">신간도서</a></li>
 <!-- 				<li><a href="board">게시판</a></li> -->
-				<li><a href="searchBook?listType=recommend">추천도서</a></li>
-				<li><a href="searchBook?listType=best">베스트 도서</a></li>
+				<li><a href="searchBook?listType=recommend&keyword=">추천도서</a></li>
+				<li><a href="searchBook?listType=best&keyword=">베스트 도서</a></li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown" role="button" aria-expanded="false">${sessionScope.team_nm}
 						${sessionScope.kname} <span class="caret"></span>

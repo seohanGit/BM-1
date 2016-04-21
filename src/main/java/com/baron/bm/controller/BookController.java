@@ -92,7 +92,42 @@ public class BookController {
 		} else {
 			mav.setViewName("book/bookSearch");
 		} 
-		
+		switch (listType) {			
+			case "new" :
+				if (datepicker1== null || datepicker1.equals("")){
+					cal = Calendar.getInstance();				
+					Date date2 = cal.getTime();
+					cal.add(cal.MONTH, -1);
+					Date date1 = cal.getTime();
+					datepicker1 = sdf.format(date1); 
+					datepicker2 = sdf.format(date2);
+				}
+				bookList = bookservice.listBook(listType, datepicker1, datepicker2,"");
+				mav.setViewName("book/listBook");
+				break;
+			case "best" : 
+			case "recommend" :
+				if (year == null ){
+					year=sdf.format(cal.getTime()).substring(0, 4);
+					month=sdf.format(cal.getTime()).substring(4,6);
+				} 
+				mav.addObject("year", year);
+				mav.addObject("month", month);
+	
+				bookList = bookservice.listBook(listType, "","", year+month);
+				mav.setViewName("book/listBook");
+				break;
+			default :
+				if (field == null){field = "title";}
+				bookList = bookservice.searchBook(field, keyword);
+				mav.addObject("bookList", bookList);
+				if (permission.equals("1")) {
+					mav.setViewName("book/bookSearchByAdmin"); 
+				}else{
+					mav.setViewName("book/bookSearch");
+				}
+				break;
+		}
 		if (field == null){field = "title";}
 		bookList = bookservice.searchBook(field, keyword);
 		mav.addObject("bookList", bookList); 		  

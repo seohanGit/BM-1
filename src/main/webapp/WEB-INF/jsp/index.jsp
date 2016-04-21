@@ -63,7 +63,7 @@
 
 		<div align="center">
 			<div align="center" class="row"
-				style=" margin-top: 10px">
+				style=" margin-top: 3%">
 				<div class="col-md-7   col-lg-7  " align="left" >
 					<img src="/resources/img/title.png" style="width:60%" >
 					<!-- 					<h2 style="font-family:  ">SEOHAN LIBRARY</h2> -->
@@ -96,29 +96,31 @@
 				style="position: static; height: 23%; background-color: #EEEEEE; padding: 0px; margin: 5px">
 				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"
 					style="float: center; display: block;">
+					<div class="row" align="left" style="padding:0; margin-left: 4%">
+					<a style="font-size :20px; margin: 1% ">Quick Menu</a></div>
 					<div class="col-md-4 col-sm-4 col-xs-4"
-						style="float: left; padding: 5px">
+						style="float: left; padding: 0px">
 						<a href="#" style="display: block"><img
-							src="/resources/img/btn01.jpg" style="width: 80%; margin: 10px"></a>
+							src="/resources/img/btn01.jpg" style="width: 50%; margin: 10px"></a>
 						<a class="href" href="searchBook?field=title&keyword=">자료검색</a>
 					</div>
 					<div class="col-md-4 col-sm-4 col-xs-4"
 						style="float: left; padding: 5px">
 						<a href="borrowList" style="display: block"><img
-							src="/resources/img/btn02.jpg" style="width: 80%; margin: 10px"></a>
+							src="/resources/img/btn02.jpg" style="width: 50%; margin: 10px"></a>
 						<a class="href" href="borrowList">대출/연장 조회</a>
 					</div>
 					<div class="col-md-4 col-sm-4 col-xs-4"
 						style="float: left; padding: 5px">
 						<a href="request" style="display: block"><img
-							src="/resources/img/btn03.jpg" style="width: 80%; margin: 10px"></a>
+							src="/resources/img/btn03.jpg" style="width: 50%; margin: 10px"></a>
 						<a class="href" href="request">자료구입신청</a>
 					</div>
 				</div>
 				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"
 					style="float: right; text-align: left;">
 					<a href="noticeList" style="font-size: 20px;">공지사항</a>
-					<ul class="list-group">
+					<ul class="list-group" style="margin:1%; margin: 2%">
 						<c:forEach items="${noticeList}" var="notice" varStatus="status"
 							begin="0" end="0" step="1">
 							<li class="list-group-item"><textarea style="width: 100%;"
@@ -133,9 +135,11 @@
 					style="text-align: left; padding:0px;padding-right:3%; margin-top: 0px; position: static; height: 100%;">
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
 						style="position: static; height: 15%;">
-						<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+						<div class="col-lg-5 col-md-5 col-sm-8 col-xs-8">
 							<h3>신간도서</h3>
-							<a href="/searchBook?listType=new">more...</a>
+						</div>
+						<div class="col-lg-7 col-md-7 col-sm-4 col-xs-4" style="margin-top:6%">
+							<a href="/searchBook?listType=new&keyword=">more...</a>
 						</div>
 					</div>
 					<c:forEach items="${newBook}" var="newBook" begin="0" end="2"
@@ -172,9 +176,11 @@
 					style="text-align: left; padding: 0px; padding-left:3%; margin-left:0; position: static; height: 100%;">
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
 						style="position: static; height: 100%;">
-						<div class="col-md-8 col-sm-8 col-xs-8">
-							<h3>추천도서</h3>
-							<a href="searchBook?listType=recommend">more...</a>
+						<div class="col-lg-5 col-md-5 col-sm-8 col-xs-8">
+							<h3>추천도서</h3>							
+						</div>
+						<div class="col-lg-7 col-md-7 col-sm-4 col-xs-4" style="margin-top:6%">
+							<a href="/searchBook?listType=recommend&keyword=">more...</a>
 						</div>
 					</div>
 					<c:forEach items="${bestBook}" var="bestBook" begin="0" end="2"

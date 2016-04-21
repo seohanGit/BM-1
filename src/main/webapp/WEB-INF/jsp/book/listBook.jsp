@@ -140,7 +140,7 @@
 												<h2>베스트도서</h2>
 											</div>
 										</div>
-										<div class="row col-lg-8 col-md-8 col-sm-5 col-xs-5">
+										<div class="row col-lg-8 col-md-8 col-sm-5 col-xs-5" style="padding-top:2%">
 											<select class="selectpicker bestpicker"
 												style="font-size: 14px; width: 100%" id="year" name="year">
 

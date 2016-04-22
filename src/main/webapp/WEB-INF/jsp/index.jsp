@@ -108,7 +108,7 @@
 						style="float: left; padding: 5px">
 						<a href="borrowList" style="display: block"><img
 							src="/resources/img/btn02.jpg" style="width: 50%; margin: 10px"></a>
-						<a class="href" href="borrowList">대출/연장 조회</a>
+						<a class="href" href="borrowList">대출 조회</a>
 					</div>
 					<div class="col-md-4 col-sm-4 col-xs-4"
 						style="float: left; padding: 5px">

@@ -1,8 +1,9 @@
 package com.baron.bm.controller;
 
-import java.text.SimpleDateFormat;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.http.Cookie;
@@ -54,10 +55,10 @@ public class RentController {
 	
 	@RequestMapping("/borrowbook")
 	public String borrowBook(HttpServletRequest request, String book_cd,
-			BookModel book, String keyword, String listType) {
+			BookModel book, String keyword, String listType) throws UnsupportedEncodingException {
 		String id = null;
 		if(keyword==null){keyword="";}
-		if(listType==null)	{listType="";}
+		if(listType==null){listType="";} 
 		for (Cookie cookie : request.getCookies()) {
 			if (cookie.getName().equals("bm_id")) {
 				id = cookie.getValue();
@@ -72,7 +73,8 @@ public class RentController {
 		if (id != null) {
 			if (chkbook.getRentchk().equals("0") && cnt < 5) {
 				rentservice.borrowBook(book);
-				return "redirect:searchBook?listType="+listType+"&keyword="+keyword;
+				
+				return "redirect:searchBook?listType="+listType+"&keyword="+URLDecoder.decode(keyword, "UTF-8");
 			} else {
 				return "rent/borrowfail";
 			}

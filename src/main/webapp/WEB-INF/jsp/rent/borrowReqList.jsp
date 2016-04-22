@@ -20,9 +20,6 @@ body {
 	padding-top: 70px;
 }
 </style>
-
-
-
 </head>
 
 <body>
@@ -54,15 +51,15 @@ body {
 
 					<c:otherwise>
 						<h2>대여 요청 목록</h2>
-						<table class="table table-striped table-bordered ">
+						<table class="table table-striped table-bordered " >
 							<thead>
 								<tr class="title">
 									<th class="hidden-xs image">표지</th>
-									<th class="title">도서명</th>
+									<th >도서명</th>
 									<th class="hidden-xs author">저자</th>
 									<th class="hidden-xs hidden-sm author">분류</th>
-									<th class="hidden-xs td-date">대여일</th>
-									<th class="td-date">반납일</th>
+									<th class="hidden-xs genre">대여일</th>
+									<th class="genre">반납일</th>
 									<th class="genre">상태</th>
 									<th class="image"></th>
 								</tr>
@@ -73,18 +70,18 @@ body {
 							<tbody>
 								<c:forEach items="${bookList}" var="book" varStatus="loop">
 									<tr>
-										<td class="hidden-xs" align="left"><c:if
+										<td class="hidden-xs" align="center"><c:if
 												test="${!empty book.imageurl }">
 												<img style="width: 50px" src="${book.imageurl}">
 											</c:if></td>
 
-										<td class="td-title" align="left">${book.title }</td>
-										<td class="hidden-xs" align="left">${book.author }</td>
-										<td class="hidden-xs hidden-sm" align="left">${book.b_group}</td>
+										<td class="title" align="left">${book.title }</td>
+										<td class="hidden-xs " align="left">${book.author }</td>
+										<td class="hidden-xs hidden-sm " align="left">${book.b_group}</td>
 
 										
 										<td class="hidden-xs"> ${book.rentdate}  </td>
-										<td style="width: inherit;"> ${book.returndate}  </td>
+										<td > ${book.returndate}  </td>
 										<c:choose>
 											<c:when test="${book.rentchk=='1'}">
 												<td>요청중</td>

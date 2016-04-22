@@ -1,3 +1,4 @@
+
 $('.bestpicker').change(function() {
 	$.ajax({
 		type : "GET", // GET or POST
@@ -72,11 +73,39 @@ $('.borrow').on('click', function() {
     var keyword = $('#keyword').val();
     var bookcd = "";
     var bookcd = $(this).val();
-    keyword = escape(encodeURIComponent(keyword));
+    if (bookcd==''){
+    	bookcd = $('#book_cd').text();
+    	}
+    var enckeyword = encodeURI(keyword);
+    $.ajax({
+		type : "GET", // GET or POST
+		url : "/borrowbook", // URL
+		datatype : "xml", // html, xml, json, jsonp, script, text 
+		data : {
+			book_cd : bookcd,
+			listType : listType,
+			keyword : enckeyword }, // parameters as plain object 
+		success : function(data, status) { // Ajax complete handelr 
+			if(data=='fail'){ 
+				alert('대출이 불가합니다.');				 
+			}else{
+				alert('대출되었습니다.');
+			}
+			top.location.href='/searchBook?listType='+listType+'&keyword='+enckeyword;
+		}		
+    });
+    
+});
+$('.borrow1').on('click', function() { 
+ 
+    var listType = $('#listType').val();
+    var keyword = $('#keyword').val();  
+    var	bookcd = $('#book_cd').text();  
     $.ajax({
 		type : "GET", // GET or POST
 		url : "/borrowbook", // URL
 		datatype : "xml", // html, xml, json, jsonp, script, text
+		contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
 		data : {
 			book_cd : bookcd,
 			listType : listType,
@@ -86,11 +115,10 @@ $('.borrow').on('click', function() {
 				alert('대출이 불가합니다.');				 
 			}else{
 				alert('대출되었습니다.');
-			}
-			top.location.href='/searchBook?listType='+listType+'&keyword='+keyword;
+				self.close();
+			}			
 		}		
-    });
-    
+    });    
 });
 
 $('#bestBook').click(function() {

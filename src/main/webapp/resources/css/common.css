@@ -78,8 +78,11 @@ table .title {
 table th {
 	text-align: center;
 }
-table>tbody>tr>td .author {
-	width: 14%; 
+
+table .author {
+	width:15%;  
+}
+table>tbody>tr>td .author {  
 	text-overflow:ellipsis; 
 	overflow:hidden;
 	white-space:nowrap;

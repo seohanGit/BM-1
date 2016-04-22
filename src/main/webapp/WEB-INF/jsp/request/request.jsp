@@ -59,13 +59,13 @@
 								<thead>
 									<tr class=" title">
 
-										<th class="hidden-xs td-img">표지</th>
-										<th class="td-title">도서명</th>
-										<th class="hidden-xs td-author">저자</th>
+										<th class="hidden-xs image">표지</th>
+										<th class="title">도서명</th>
+										<th class="hidden-xs author">저자</th>
 										<th class="hidden-xs td-date">가격</th>
 										<th style="width: 50px">수량</th>
-										<th class="hidden-xs td-genre">요청일자</th>
-										<th class="td-img">상태</th>
+										<th class="hidden-xs genre">요청일자</th>
+										<th class="image">상태</th>
 
 									</tr>
 								</thead>

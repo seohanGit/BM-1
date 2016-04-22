@@ -1,5 +1,7 @@
 package com.baron.bm.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -71,11 +73,11 @@ public class BookController {
 		return "book/bookInfo";
 	}
  
-	@RequestMapping("/searchBook")
+	@RequestMapping(value = "/searchBook", produces = "application/text; charset=utf8" )
 	public ModelAndView searchBook(HttpServletRequest request, 
 			String keyword, String listType, String datepicker1, String datepicker2, 
 			String field, String year, String month,
-			ModelAndView mav) throws NullPointerException {
+			ModelAndView mav) throws NullPointerException, UnsupportedEncodingException {
 		String permission = "";
 		List<BookModel> bookList = new ArrayList<BookModel>();		 
 		List<CodeModel> BCodeList = new ArrayList<CodeModel>(); 
@@ -119,6 +121,7 @@ public class BookController {
 				break;
 			default :
 				if (field == null){field = "title";}
+				
 				bookList = bookservice.searchBook(field, keyword);
 				mav.addObject("bookList", bookList);
 				if (permission.equals("1")) {
@@ -127,9 +130,7 @@ public class BookController {
 					mav.setViewName("book/bookSearch");
 				}
 				break;
-		}
-		if (field == null){field = "title";}
-		bookList = bookservice.searchBook(field, keyword);
+		} 
 		mav.addObject("bookList", bookList); 		  
 		mav.addObject("date1", datepicker1);
 		mav.addObject("date2", datepicker2); 
@@ -143,7 +144,7 @@ public class BookController {
 	}
 	
 		
-	@RequestMapping("/bookList")
+	@RequestMapping(value ="/bookList" , produces = "application/text; charset=utf8")
 	public ModelAndView BookList(HttpServletRequest request, 
 			String keyword, String listType, String datepicker1, String datepicker2, 
 			String field, String year, String month,

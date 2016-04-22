@@ -111,7 +111,7 @@
 		UPDATE
 		TESTLIB.BOOKRENT
 		SET
-		RENTCHK = '2', returndate=#{returndate}
+		RENTCHK = '2', rentdate = ${rentdate}, returndate=#{returndate}
 		WHERE BOOK_CD = #{book_cd} AND
 		RENTCHK='1'
 	</update>

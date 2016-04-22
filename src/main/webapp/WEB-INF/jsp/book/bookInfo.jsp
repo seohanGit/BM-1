@@ -26,8 +26,8 @@
 					<c:choose>
 						<c:when test="${book.rentchk=='0'}">
 							<mark>대출가능</mark>
-							<button class="btn btn-default" type="button" id="borrowbook"
-								onClick="location.href='/borrowbook?book_cd=${book.book_cd}'; opener.focus(); self.close(); ">대출</button>
+							<button class="btn btn-default borrow1" type="button" id="borrowbook"
+								  >대출</button>
 						</c:when>
 
 						<c:when test="${book.rentchk=='1' and book.reservechk=='1'}">	예약중
@@ -76,7 +76,7 @@
 
 						<tr>
 							<th>도서번호</th>
-							<td>${ book.book_cd }</td>
+							<td id="book_cd">${ book.book_cd }</td>
 						</tr>
 						<tr>
 							<th>도서명</th>
@@ -111,5 +111,6 @@
 	<script src="/resources/js/jquery/jquery.js"></script>
 	<script src="/resources/js/bootstrap.min.js"></script>
 	<script src="/resources/js/common.js"></script>
+	<script src="/resources/js/book.js"></script>
 </body>
 </html>

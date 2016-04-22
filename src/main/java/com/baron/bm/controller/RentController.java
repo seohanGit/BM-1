@@ -54,9 +54,10 @@ public class RentController {
 	
 	@RequestMapping("/borrowbook")
 	public String borrowBook(HttpServletRequest request, String book_cd,
-			BookModel book) {
+			BookModel book, String keyword, String listType) {
 		String id = null;
-		// String late = null;
+		if(keyword==null){keyword="";}
+		if(listType==null)	{listType="";}
 		for (Cookie cookie : request.getCookies()) {
 			if (cookie.getName().equals("bm_id")) {
 				id = cookie.getValue();
@@ -71,7 +72,7 @@ public class RentController {
 		if (id != null) {
 			if (chkbook.getRentchk().equals("0") && cnt < 5) {
 				rentservice.borrowBook(book);
-				return "rent/borrowSuccess";
+				return "redirect:searchBook?listType="+listType+"&keyword="+keyword;
 			} else {
 				return "rent/borrowfail";
 			}
@@ -95,7 +96,7 @@ public class RentController {
 			if (reserveBook.getId() == id)
 				rentservice.deleteReserve(book_cd); 
 		}
-		return "confirmBorrowSuccess";
+		return "rent/confirmBorrowSuccess";
 	}
 
 	@RequestMapping("/confirmBorrowBookList")

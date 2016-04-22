@@ -104,6 +104,7 @@
 					<div class="col-md-12 col-lg-12">
 						<form action="/searchBook" method="post">
 							<input id="listType" name="listType" type="hidden" value="${listType }">
+							<input id="keyword" name="keyword" type="hidden" value="${keyword}">
 							<div class="col-md-12 col-lg-12">
 								<c:choose>
 									<c:when test="${listType=='new'}">
@@ -198,7 +199,7 @@
 														<td align="left"><mark>대출가능</mark></td>
 														<td align="left"><button class="btn btn-default borrow"
 																type="button" id="borrowbook" value="${book.book_cd}"
-																onClick="location.href='/searchBook?listType${listType}=&keyword=${keyword}'">대출</button></td>
+																>대출</button></td>
 													</c:when>
 													<c:when
 														test="${book.rentchk=='1' and book.reservechk=='1'}">

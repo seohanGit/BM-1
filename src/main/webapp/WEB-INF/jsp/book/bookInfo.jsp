@@ -27,7 +27,7 @@
 						<c:when test="${book.rentchk=='0'}">
 							<mark>대출가능</mark>
 							<button class="btn btn-default" type="button" id="borrowbook"
-								onClick="location.href='/borrowbook?book_cd=${book.book_cd}'; opener.focus(); ">대출</button>
+								onClick="location.href='/borrowbook?book_cd=${book.book_cd}'; opener.focus(); self.close(); ">대출</button>
 						</c:when>
 
 						<c:when test="${book.rentchk=='1' and book.reservechk=='1'}">	예약중

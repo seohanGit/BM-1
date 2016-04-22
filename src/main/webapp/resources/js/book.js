@@ -68,19 +68,29 @@ $('.borrow').on('click', function() {
     var $row = $(this).closest('tr');
     var $tds = $row.find('td');
  
+    var listType = $('#listType').val();
+    var keyword = $('#keyword').val();
     var bookcd = "";
     var bookcd = $(this).val();
-    
+    keyword = escape(encodeURIComponent(keyword));
     $.ajax({
 		type : "GET", // GET or POST
 		url : "/borrowbook", // URL
 		datatype : "xml", // html, xml, json, jsonp, script, text
 		data : {
-			book_cd : bookcd 		}, // parameters as plain object 
+			book_cd : bookcd,
+			listType : listType,
+			keyword : keyword }, // parameters as plain object 
 		success : function(data, status) { // Ajax complete handelr 
-			alert('대출되었습니다.');
-		}
+			if(data=='fail'){ 
+				alert('대출이 불가합니다.');				 
+			}else{
+				alert('대출되었습니다.');
+			}
+			top.location.href='/searchBook?listType='+listType+'&keyword='+keyword;
+		}		
     });
+    
 });
 
 $('#bestBook').click(function() {

@@ -78,7 +78,7 @@
 					</div>
 					<div style="width: 100%;   float: left">
 						<form action="/searchBook" method="post">
-							<span class="input-group-btn"> <input
+							<span class="input-group-btn"> <input type="hidden" name="listType" value=""><input
 								style="width: 85%; float: left" type="text" class="form-control"
 								id="keyword" name="keyword"
 								placeholder="기술자료실 도서 검색 [ 소문자로 입력 ]">

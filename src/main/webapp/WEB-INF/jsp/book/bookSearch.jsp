@@ -106,7 +106,7 @@
 										<input id="listType" name="listType" type="hidden" value="${listType }"> 
 										<input type="text"
 											class="form-control" id="keyword" name="keyword"
-											placeholder="기술자료실 도서 검색 [ 소문자로 입력 ]">
+											placeholder="기술자료실 도서 검색 [ 소문자로 입력 ]" value="${keyword }">
 											<button class="btn btn-default" type="submit" id="btn_find">
 												<span class="glyphicon glyphicon-search"></span>
 											</button>
@@ -144,7 +144,8 @@
 											<td align="left"><mark>대출가능</mark></td>
 											<td align="left"><button class="btn btn-default borrow"
 													type="button" id="borrowbook" value="${book.book_cd}"
-													onClick="location.href='/searchBook?listType${listType}=&keyword=${keyword}'" >대출</button>
+<%-- 													onClick="location.href='/borrowbook?book_cd=${book.book_cd}&listType=${listType}&keyword=${keyword}';"  --%>
+													>대출</button>
 													</td>													
 										</c:when>
 

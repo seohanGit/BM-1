@@ -78,7 +78,7 @@ table .title {
 table th {
 	text-align: center;
 }
-table .author {
+table>tbody>tr>td .author {
 	width: 14%; 
 	text-overflow:ellipsis; 
 	overflow:hidden;

@@ -125,8 +125,8 @@
 								<th class="hidden-xs hidden-sm hidden-md author">저자</th>
 								<th class="hidden-xs hidden-sm genre">출판사</th>
 								<th class="hidden-xs genre" style="width: 120px">분류</th>
-								<th class="col-xs-3" >대여상태</th>
-								<th class="image"></th>
+								<th class="col-xs-3 col-lg-2 col-md-2" >대여상태</th>
+								<th class="image">대출</th>
 							</tr>
 						</thead>
 
@@ -137,7 +137,7 @@
 										onclick="window.open('/bookInfo?book_cd=${book.book_cd}','new','resizeble=yes scrollbars=yes,  width=750, height=600');">
 											${book.title }</a></td>
 									<td class="hidden-xs hidden-sm hidden-md" align="left">${book.author }</td>
-									<td class="hidden-xs hidden-sm" align="left">${book.publish}</td>
+									<td class="hidden-xs hidden-sm author" align="left">${book.publish}</td>
 									<td class="hidden-xs genre" align="left">${book.b_group }</td>
 									<c:choose>
 										<c:when test="${book.rentchk=='0'}">

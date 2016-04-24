@@ -189,7 +189,9 @@ public class RequestController {
 		for (int i = 0; i < req_cdList.size()-1; i++) {
 			BookModel book = new BookModel();
 			book.setBook_cd(book_cdList.get(i));
-			book.setReq_cd(req_cdList.get(i));
+			String reqString[]= req_cdList.get(i).split("-");
+			book.setReqdate(reqString[0]);
+			book.setReq_cd(reqString[1]);
 			requestservice.modifiBook(book);
 		}
 

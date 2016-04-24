@@ -79,7 +79,7 @@ body {
 										<c:forEach items="${bookList}" var="book" varStatus="status">
 											<tr>
 												<td><input type="checkbox" name="req_cd"
-													value="${book.req_cd}"></td>
+													value="${book.reqdate}-${book.req_cd}"></td>
 												<td class="hidden-sm hidden-xs hidden-md ">${book.book_cd}</td>
 												<td class="td-title"><a href="${book.link}">${book.title }</a></td>
 
@@ -97,10 +97,10 @@ body {
 														<td>대기</td>
 														<td><button class="btn btn-sm btn-default"
 																type="button" id="buyBook"
-																onClick="window.open('buyRequest?req_cd=${book.req_cd}','new','resizeble=yes scrollbars=yes,  width=750, height=730');">구매</button>
+																onClick="window.open('buyRequest?req_cd=${book.req_cd}&reqdate=${book.reqdate}','new','resizeble=yes scrollbars=yes,  width=750, height=730');">구매</button>
 
 															<button class="btn btn-sm btn-default" type="button"
-																onClick="location.href='rejectRequest?req_cd=${book.req_cd}'; del();">반려</button>
+																onClick="location.href='rejectRequest?req_cd=${book.req_cd}&reqdate=${book.reqdate}'; del();">반려</button>
 														</td>
 													</c:when>
 													<c:when test="${book.reqstatus =='1'}">

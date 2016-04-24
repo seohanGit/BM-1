@@ -60,9 +60,7 @@ public class RequestDaoImpl implements RequestDao {
 	}
 
 	@Override
-	public void modifiBook(BookModel book) {
-		System.out.println(book.getB_group());
-		System.out.println(book.getReq_cd());
+	public void modifiBook(BookModel book) { 
 		session.update(NAMESPACE + "modifiReqBook", book);
 
 	}

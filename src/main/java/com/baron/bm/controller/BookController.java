@@ -66,9 +66,16 @@ public class BookController {
 	}
 
 	@RequestMapping("/bookInfo")
-	public String bookInfo(String book_cd, Model model, BookModel book) {
-		book = bookservice.selectBook(book_cd);
+	public String bookInfo(Model model, BookModel book,String listType, String keyword) {
+		if(book.getBook_cd()!=null){
+			book = bookservice.selectBook(book.getBook_cd());
+		}else if(book.getReq_cd()!=null){
+			book = requestservice.selectBook(book);
+		}
+		
 		model.addAttribute("book", book);
+		model.addAttribute("keyword", keyword);
+		model.addAttribute("listType", listType);
 
 		return "book/bookInfo";
 	}

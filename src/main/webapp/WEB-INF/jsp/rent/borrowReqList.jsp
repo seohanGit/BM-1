@@ -61,7 +61,7 @@ body {
 									<th class="hidden-xs genre">대여일</th>
 									<th class="genre">반납일</th>
 									<th class="genre">상태</th>
-									<th class="image"></th>
+									<th class="image">비고</th>
 								</tr>
 							</thead>
 

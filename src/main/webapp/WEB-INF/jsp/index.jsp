@@ -97,29 +97,29 @@
 				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"
 					style="float: center; display: block;">
 					<div class="row" align="left" style="padding:0; margin-left: 4%">
-					<a style="font-size :20px; margin: 1% ">Quick Menu</a></div>
+					<h5 style="font-size :20px; margin: 1%; color: #428BCA ">Quick Menu</h5></div>
 					<div class="col-md-4 col-sm-4 col-xs-4"
 						style="float: left; padding: 0px">
 						<a href="searchBook?listType=&keyword=" style="display: block"><img
-							src="/resources/img/btn01.jpg" style="width: 50%; margin: 10px"></a>
+							src="/resources/img/btn01.jpg" style="width: 70%; margin: 10px"></a>
 						<a class="href" href="searchBook?listType=&keyword=">자료검색</a>
 					</div>
 					<div class="col-md-4 col-sm-4 col-xs-4"
 						style="float: left; padding: 5px">
 						<a href="borrowList" style="display: block"><img
-							src="/resources/img/btn02.jpg" style="width: 50%; margin: 10px"></a>
+							src="/resources/img/btn02.jpg" style="width: 70%; margin: 10px"></a>
 						<a class="href" href="borrowList">대출 조회</a>
 					</div>
 					<div class="col-md-4 col-sm-4 col-xs-4"
 						style="float: left; padding: 5px">
 						<a href="request" style="display: block"><img
-							src="/resources/img/btn03.jpg" style="width: 50%; margin: 10px"></a>
+							src="/resources/img/btn03.jpg" style="width: 70%; margin: 10px"></a>
 						<a class="href" href="request">자료구입신청</a>
 					</div>
 				</div>
 				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"
 					style="float: right; text-align: left;">
-					<a href="noticeList" style="font-size: 20px;">공지사항</a>
+					<h5 href="noticeList" style="font-size: 20px; color: #428BCA">공지사항</h5>
 					<ul class="list-group" style="margin:1%; margin: 2%">
 						<c:forEach items="${noticeList}" var="notice" varStatus="status"
 							begin="0" end="0" step="1">

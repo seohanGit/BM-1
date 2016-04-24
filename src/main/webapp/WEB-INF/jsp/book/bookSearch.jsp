@@ -136,7 +136,7 @@
 							<c:forEach items="${bookList}" var="book">
 								<tr> 
 									<td align="left"><a href="#"
-										onclick="window.open('/bookInfo?book_cd=${book.book_cd}','new','resizeble=yes scrollbars=yes,  width=750, height=600');">
+										onclick="window.open('/bookInfo?book_cd=${book.book_cd}&keyword=${keyword }&listType=${listType }','new','resizeble=yes scrollbars=yes,  width=750, height=600');">
 											${book.title }</a></td>
 									<td class="hidden-xs hidden-sm hidden-md" align="left">${book.author }</td>
 									<td class="hidden-xs hidden-sm author" align="left">${book.publish}</td>
@@ -207,7 +207,7 @@
 		$(document).ready(function() {
 			$('#dataTable').dataTable({
 				"bSort" : false,
-				"pageLength" : 100,
+				"pageLength" : 10,
 				paging : true,
 				searching : false,
 				"columns" : [ null, null, null, {

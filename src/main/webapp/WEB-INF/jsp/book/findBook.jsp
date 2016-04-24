@@ -78,7 +78,8 @@
 							<span class="glyphicon glyphicon-search"></span>
 						</button>
 						<button class="btn btn-default"
-							onclick="location.href='/requestbook'; ">ISBN 미등록 도서</button>
+							onclick="window.open
+							('/requestbook?type=isbn&keyword=','new','resizeble=yes scrollbars=yes, width=500, height=700');">ISBN 미등록 도서</button>
 					</span>
 				</form>
 			</div>
@@ -107,7 +108,8 @@
 							<tr>
 								<td class="hidden-xs" style="width: 50px" align="left"><img
 									style="width: 50px" src="${book.imageurl}"></td>
-								<td class="td-title" align="left"><a href="${book.link}">${book.title}</a></td>
+								<td class="title" align="left"><a onclick="window.open
+									('${book.link}','new','resizeble=yes scrollbars=yes, width=500, height=800');" >${book.title}</a></td>
 								<td class="hidden-xs" align="left">${book.author }</td>
 								<td class="hidden-sm hidden-xs hidden-md" align="left">${book.b_group}</td>
 								<td class="hidden-xs" align="left">${book.publish}</td>

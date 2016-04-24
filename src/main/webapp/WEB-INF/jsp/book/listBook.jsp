@@ -178,18 +178,21 @@
 												<td class="hidden-xs hidden-sm hidden-md image" align="left"><c:choose>
 														<c:when test="${empty book.imageurl }">
 															<a href="#"
-													onclick="window.open('/bookInfo?book_cd=${book.book_cd}','new','resizeble=yes scrollbars=yes,  width=750, height=600');">
+													onclick="window.open('/bookInfo?book_cd=${book.book_cd}&keyword=${keyword }&listType=${listType }',
+															'new','resizeble=yes scrollbars=yes,  width=750, height=600');">
 														<img src="/resources/img/noimage.png" style="width:90%" >${book.title }</a>
 														</c:when>
 														<c:otherwise>
 															<a href="#"
-													onclick="window.open('/bookInfo?book_cd=${book.book_cd}','new','resizeble=yes scrollbars=yes,  width=750, height=600');">														
+													onclick="window.open('/bookInfo?book_cd=${book.book_cd}&keyword=${keyword }&listType=${listType }',
+															'new','resizeble=yes scrollbars=yes,  width=750, height=600');">														
 														<img src="${book.imageurl}" style="width:90%">
 														</a>
 														</c:otherwise>
 													</c:choose></td>
 												<td align="left"><a href="#"
-													onclick="window.open('/bookInfo?book_cd=${book.book_cd}','new','resizeble=yes scrollbars=yes,  width=750, height=600');">
+													onclick="window.open('/bookInfo?book_cd=${book.book_cd}&keyword=${keyword }&listType=${listType }',
+																'new','resizeble=yes scrollbars=yes,  width=750, height=600');">
 														${book.title }</a></td>
 												<td class="hidden-xs hidden-sm hidden-md author" align="left">${book.author }</td>
 												<td class="hidden-xs hidden-sm author" align="left">${book.publish}</td>

@@ -56,7 +56,9 @@
 			</div>
 			<div class="col-md-12 col-sm-12	col-xs-12">
 				<div class="col-md-4 col-sm-4	col-xs-4">
-
+					<input type="hidden" id="keyword" value="${keyword }">
+					<input type="hidden" id="listType" value="${listType }">
+					
 					<c:choose>
 						<c:when test="${empty book.imageurl }">
 							<div style="width: 100%;">
@@ -71,9 +73,7 @@
 					</c:choose>
 				</div>
 				<div class="col-md-8 col-sm-8 col-xs-8">
-
 					<table class="table table-bordered">
-
 						<tr>
 							<th>도서번호</th>
 							<td id="book_cd">${ book.book_cd }</td>

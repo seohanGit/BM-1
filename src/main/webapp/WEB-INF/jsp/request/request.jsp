@@ -79,7 +79,9 @@
 										</tr>
 										<tr>
 											<td style="width: 40%" align="left"><a
-												href="${book.link}">${book.title }</a></td>
+												onclick="window.open('/bookInfo?book_cd=${book.book_cd}',
+												'new','resizeble=yes scrollbars=yes,  width=750, height=600');"
+												>${book.title }</a></td>
 											<td style="width: 40%" align="left">${book.author }</td>
 										</tr>
 										<tr>
@@ -97,7 +99,9 @@
 												src="${book.imageurl}"></td>
 											<td class="td-title"><c:choose>
 													<c:when test="${not empty book.link}">
-														<a href="${book.link}">${book.title }</a>
+														<a 
+														onclick="window.open('/bookInfo?reqdate=${book.reqdate}&req_cd=${book.req_cd}',
+												'new','resizeble=yes scrollbars=yes,  width=750, height=600');">${book.title }</a>
 													</c:when>
 													<c:otherwise>
 													${book.title }

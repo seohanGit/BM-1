@@ -36,7 +36,7 @@
 		B.rentchk
 		WHERE
 		LCASE(A.TITLE) like #{keyword} 
-		ORDER BY  A.RCV_DATE DESC , A.RENTCHK DESC
+		ORDER BY  a.title 
 		FETCH first 200 rows only
 	</select>
 	<select id="searchAuthor" parameterType="String" resultType="BookModel">
@@ -50,7 +50,7 @@
 		B.rentchk
 		WHERE
 		LCASE(A.AUTHOR) like #{keyword} 
-		ORDER BY A.RCV_DATE DESC , A.RENTCHK DESC
+		ORDER BY a.title
 		FETCH first 200 rows only
 	</select>
 	<select id="searchPublisher" parameterType="String" resultType="BookModel">
@@ -64,7 +64,7 @@
 		B.rentchk
 		WHERE
 		LCASE(A.PUBLISH) like #{keyword}
-		ORDER BY A.RCV_DATE DESC , A.RENTCHK DESC 
+		ORDER BY a.title 
 		FETCH first 200 rows only
 	</select>
 
@@ -78,7 +78,7 @@
 		ON A.book_cd = B.book_cd AND A.rentchk =
 		B.rentchk
 		ORDER
-		BY A.RCV_DATE DESC , A.RENTCHK DESC
+		BY a.title
 		FETCH first 200 rows only
 	</select>	
 	<select id="newBook"  resultType="BookModel" parameterType="Dto">

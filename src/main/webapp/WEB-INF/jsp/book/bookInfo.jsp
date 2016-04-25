@@ -11,10 +11,40 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <title>도서정보 페이지</title>
+	<script src="/resources/js/jquery/jquery.js"></script>
+	<script src="/resources/js/bootstrap.min.js"></script> 
+	<script src="/resources/js/book.js"></script>
 <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="/resources/css/common.css" rel="stylesheet">
-<link href="/resources/css/signin.css" rel="stylesheet">
-
+<link href="/resources/css/signin.css" rel="stylesheet"> 
+<script type="text/javascript"> 
+$('.borrow1').on('click', function() {  
+    var listType = $('#listType').val();
+    var keyword = $('#keyword').val();  
+    var	bookcd = $('#book_cd').text();  
+    $.ajax({
+		type : "GET", // GET or POST
+		url : "/borrowbook", // URL
+		datatype : "xml", // html, xml, json, jsonp, script, text
+		contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+		data : {
+			book_cd : bookcd,
+			listType : listType,
+			keyword : keyword }, // parameters as plain object 
+		success : function(data, status) { // Ajax complete handelr 
+			if(data=='fail'){ 
+				alert('대출이 불가합니다.');				 
+			}else{
+				alert('대출되었습니다.');
+				if(listType!=''){
+					opener.location.href='/searchBook?listType='+listType+'&keyword='+keyword;
+				}
+				self.close();
+			}			
+		}		
+    });    
+});
+</script>
 </head>
 <body style="background-color: white;"> 
 		<div class="container">
@@ -108,9 +138,9 @@
 
 			</div>
 		</div> 
+</body>
 	<script src="/resources/js/jquery/jquery.js"></script>
 	<script src="/resources/js/bootstrap.min.js"></script>
 	<script src="/resources/js/common.js"></script>
 	<script src="/resources/js/book.js"></script>
-</body>
 </html>

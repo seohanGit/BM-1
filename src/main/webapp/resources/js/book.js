@@ -114,10 +114,8 @@ $('.borrow1').on('click', function() {
 			if(data=='fail'){ 
 				alert('대출이 불가합니다.');				 
 			}else{
-				alert('대출되었습니다.');
-				if(listType!=''){
-					opener.location.href='/searchBook?listType='+listType+'&keyword='+keyword;
-				}
+				alert('대출되었습니다.');				
+				opener.location.href='/searchBook?listType='+listType+'&keyword='+keyword;				
 				self.close();
 			}			
 		}		

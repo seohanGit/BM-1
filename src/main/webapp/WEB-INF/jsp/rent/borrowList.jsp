@@ -10,7 +10,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
-<title>대여 현황</title>
+<title>대출 현황</title>
 <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="/resources/css/signin.css" rel="stylesheet">
 <link href="/resources/css/common.css" rel="stylesheet">
@@ -31,25 +31,12 @@ body {
 	<div class="container">
 
 		<div class="row panel panel-default">
-			<h2>대여 현황</h2>
-			<br>
-			<div class="input-group" style="width: 95%">
-				<form action="/searchBook" method="post">
-					<span class="input-group-btn"> <input type="text"
-						class="form-control" id="keyword" name="keyword"
-						placeholder="기술자료실 도서 검색 [ 소문자로 입력 ]">
-						<button class="btn btn-default" type="submit" id="btn_find">
-							<span class="glyphicon glyphicon-search"></span>
-						</button>
-					</span>
-				</form>
-			</div>
-
-
+			<h2>대출 현황</h2>
+			<br> 
 			<div id="searchResultArea">
 				<c:choose>
 					<c:when test="${empty rentList}">
-						<h3>대여중인 도서가 없습니다.</h3>
+						<h3>대출중인 도서가 없습니다.</h3>
 					</c:when>
 
 					<c:otherwise>
@@ -95,7 +82,7 @@ body {
 												</td>
 											</c:when>
 											<c:when test="${book.rentchk=='2'}">
-												<td>대여중</td>
+												<td>대출중</td>
 												<td></td>
 											</c:when>
 										</c:choose>

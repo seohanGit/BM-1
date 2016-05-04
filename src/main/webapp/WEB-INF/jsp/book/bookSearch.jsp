@@ -56,7 +56,7 @@
 	});
 </script>
 </head>
-<body onload="parent.resizeTo(1400,1000);">
+<body>
 	<jsp:include page="../nav.jsp" />
 	<div id="loadingBar"
 		style="background-color: #fff; position: absolute; top: 0; left: 0; width: 100%; height: 100%; text-align: center; margin: 0 auto; z-index: 100000;">
@@ -136,7 +136,8 @@
 							<c:forEach items="${bookList}" var="book">
 								<tr> 
 									<td align="left"><a href="#"
-										onclick="window.open('/bookInfo?book_cd=${book.book_cd}&keyword=${keyword }&listType=${listType }','new','resizeble=yes scrollbars=yes,  width=750, height=600');">
+										onclick="window.open('/bookInfo?book_cd=${book.book_cd}&keyword=${keyword }&listType=${listType }',
+										'new','resizeble=yes scrollbars=yes,  width=750, height=600');">
 											${book.title }</a></td>
 									<td class="hidden-xs hidden-sm hidden-md" align="left">${book.author }</td>
 									<td class="hidden-xs hidden-sm author" align="left">${book.publish}</td>

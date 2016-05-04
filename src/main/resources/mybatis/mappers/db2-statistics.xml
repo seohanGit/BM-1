@@ -8,7 +8,7 @@
 
 		SELECT B.team_nm,
 		COUNT(*) AS count FROM
-		testlib.bookrent A INNER JOIN
+		sitlib.bookrent A INNER JOIN
 		tprlib.gr_insa B
 		ON A.id=B.asabn WHERE
 		left(A.rentdate,4) = #{year}
@@ -23,7 +23,7 @@
 
 	<select id="selectBookCount" resultType="BookModel">
 		SELECT COUNT(*) AS
-		count, b_group, (SELECT count(*) FROM testlib.bookmst) FROM testlib.bookmst GROUP BY b_group order by B_group
+		count, b_group, (SELECT count(*) FROM sitlib.bookmst) FROM sitlib.bookmst GROUP BY b_group order by B_group
 	</select>
 
 
@@ -38,7 +38,7 @@
 		first 1 rows only) AS team_nm,
 		COUNT(*) AS count
 		FROM
-		testlib.bookrent A
+		sitlib.bookrent A
 		INNER JOIN
 		tprlib.gr_insa B
 		ON
@@ -65,7 +65,7 @@
 		first 1 rows only) AS team_nm,
 		COUNT(*) AS count
 		FROM
-		testlib.bookrent A
+		sitlib.bookrent A
 		INNER JOIN
 		tprlib.gr_insa B
 		ON
@@ -84,7 +84,7 @@
 		SELECT COUNT(*)
 		count, substr(rentdate,5,2) AS month
 		FROM
-		testlib.bookrent
+		sitlib.bookrent
 		WHERE left(rentdate,4) = #{year}
 		GROUP BY
 		substr(rentdate,5,2)
@@ -95,7 +95,7 @@
 		count, B.b_group, substr(A.rentdate,5,2) AS
 		month
 		FROM
-		testlib.bookrent A INNER JOIN testlib.bookmst B
+		sitlib.bookrent A INNER JOIN sitlib.bookmst B
 		ON A.book_cd =
 		B.book_cd
 		WHERE left(A.rentdate,4) = #{year} AND substr(A.rentdate,5,2) =
@@ -107,8 +107,8 @@
 		SELECT COUNT(*)
 		count, B.b_group
 		FROM
-		testlib.bookrent A INNER JOIN
-		testlib.bookmst B
+		sitlib.bookrent A INNER JOIN
+		sitlib.bookmst B
 		ON A.book_cd =
 		B.book_cd
 		WHERE left(A.rentdate,4) =
@@ -123,8 +123,8 @@
 		B.book_cd,B.title,
 		B.author, B.b_group, B.imageurl
 		FROM
-		testlib.bookrent A INNER JOIN
-		testlib.bookmst B
+		sitlib.bookrent A INNER JOIN
+		sitlib.bookmst B
 		ON A.book_cd = B.book_cd
 		WHERE left(rentdate,4) = #{year} 
 		GROUP BY
@@ -138,8 +138,8 @@
 		B.book_cd,B.title,
 		B.author, B.b_group, B.imageurl
 		FROM
-		testlib.bookrent A INNER JOIN
-		testlib.bookmst B
+		sitlib.bookrent A INNER JOIN
+		sitlib.bookmst B
 		ON A.book_cd
 		= B.book_cd
 		WHERE left(rentdate,4) = #{year}
@@ -152,7 +152,7 @@
 		resultType="Dto">
 		SELECT SUM(DOUBLE(PRICE)) PRICE, substr(rcv_date,5,2) AS month,
 		count(rcv_date) count
-		FROM testlib.bookmst
+		FROM sitlib.bookmst
 		WHERE left(rcv_date,4) = #{year}
 		GROUP BY substr(rcv_date,5,2)
 	</select>

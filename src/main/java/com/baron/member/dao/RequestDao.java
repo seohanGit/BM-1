@@ -18,7 +18,7 @@ public interface RequestDao {
 
 	public List<BookModel> requestRecord(String id);
 
-	public void rejectRequest(String req_cd);
+	public void rejectRequest(BookModel book);
 
 	public void modifiBook(BookModel book);
 

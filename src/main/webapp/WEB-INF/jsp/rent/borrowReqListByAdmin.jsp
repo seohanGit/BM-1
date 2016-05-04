@@ -52,7 +52,7 @@
 											<th class="genre hidden-xs">반납일</th>
 											<th class="hidden-xs" style="width: 150px">분류</th>
 											<th class="image">대여자</th>
-											<th class="image"></th> 
+											<th class="image"style="width: 120px"></th> 
 										</tr>
 									</thead> 
 									<tbody>
@@ -65,7 +65,6 @@
 												<td align="left"> ${book.rentdate} </td>
 												<td class="hidden-xs" style="width: inherit;"> ${book.returndate} </td>
 												<td class="hidden-xs" align="left">${book.b_group }</td>
-
 												<td>${book_cd}<c:choose>
 														<c:when test="${empty book.kname}">${book.id}</c:when>
 														<c:otherwise>${book.kname}</c:otherwise>
@@ -73,6 +72,9 @@
 												<td><button class="btn btn-default btn-sm"
 														type="button" id="reservebook"
 														onClick="location.href='/confirmBorrowBook?book_cd=${book.book_cd1}';  ">승인</button>
+													<button class="btn btn-sm btn-default" type="button"
+														id="reservebook"
+														onClick="location.href='/cancleBorrowBook?book_cd=${book.book_cd}'; ">취소</button>
 												</td>
 											</tr>
 										</c:forEach>

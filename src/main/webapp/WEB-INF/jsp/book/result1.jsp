@@ -39,9 +39,9 @@
 					class="form-control" style="width: 80%;" name="price" id="price" min="0" required="required"
 					value="${book.price}">
 			</div>
-			<input type="hidden"
-					class="form-control" id="isbn" name="isbn"
-					value="${book.isbn}">
+			<input type="hidden" name="isbn" value="${book.isbn}">
+			<input type="hidden" name="imageurl" value="${book.imageurl}">
+			<input type="hidden" name="summary" value="${book.summary}">
 			<button type="submit" class="btn btn-default"
 			 onClick="formChk();   ">확인</button>
 <!-- 		  -->

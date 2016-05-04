@@ -38,6 +38,10 @@ public class RentServiceImpl implements RentService {
 	public BookModel selectBook(String book_cd) {
 		return rentDao.selectBook(book_cd);
 	}
+	@Override
+	public BookModel selectBorrow(String book_cd) {
+		return rentDao.selectBorrow(book_cd);
+	}
 
 	@Override
 	public void insertReservation(BookModel bookmodel) {

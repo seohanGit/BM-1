@@ -10,7 +10,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
-<title>대여 기록</title>
+<title>대출 기록</title>
 <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="/resources/css/signin.css" rel="stylesheet">
 <link href="/resources/css/common.css" rel="stylesheet">
@@ -31,13 +31,13 @@ body {
 	<div class="container ">
 
 		<div class="row panel panel-default">
-			<h2>대여 기록</h2>
+			<h2>대출 기록</h2>
 			
 			<br>
 			<div id="searchResultArea col-md-12 col-xs-12 col-sm-9">				
 				<c:choose>
 					<c:when test="${empty record}"> 
-						<h3>대여한 도서가 없습니다.</h3>
+						<h3>대출한 도서가 없습니다.</h3>
 					</c:when>
 					<c:otherwise> 
 						<div class="dataTable_wrapper"> 

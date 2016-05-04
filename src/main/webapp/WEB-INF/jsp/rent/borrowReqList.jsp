@@ -10,7 +10,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
-<title>대여 현황</title>
+<title>대출 현황</title>
 <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="/resources/css/signin.css" rel="stylesheet">
 <link href="/resources/css/common.css" rel="stylesheet">
@@ -28,21 +28,8 @@ body {
 	<div class="container">
 
 		<div class="row panel panel-default">
-			<h2>대여 요청 현황</h2>
-			<br>
-			<div class="input-group" style="width: 95%">
-				<form action="/searchBook" method="post">
-					<span class="input-group-btn"> <input type="text"
-						class="form-control" id="keyword" name="keyword"
-						placeholder="기술자료실 도서 검색 [ 소문자로 입력 ]">
-						<button class="btn btn-default" type="submit" id="btn_find">
-							<span class="glyphicon glyphicon-search"></span>
-						</button>
-					</span>
-				</form>
-			</div>
-
-
+			<h2>대출 요청 현황</h2>
+			<br>  
 			<div id="searchResultArea">
 				<c:choose>
 					<c:when test="${empty bookList}">
@@ -50,7 +37,7 @@ body {
 					</c:when>
 
 					<c:otherwise>
-						<h2>대여 요청 목록</h2>
+						<h2>대출 요청 목록</h2>
 						<table class="table table-striped table-bordered " >
 							<thead>
 								<tr class="title">
@@ -88,7 +75,7 @@ body {
 												<td>
 													<button class="btn btn-sm btn-default" type="button"
 														id="reservebook"
-														onClick="location.href='/cancleBorrowBook?book_cd=${book.book_cd}'; cancel();">취소</button>
+														onClick="location.href='/cancleBorrowBook?book_cd=${book.book_cd}'; ">취소</button>
 												</td>
 											</c:when>											
 										</c:choose>

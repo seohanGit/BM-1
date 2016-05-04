@@ -65,7 +65,7 @@
 			<div align="center" class="row"
 				style=" margin-top: 3%">
 				<div class="col-md-7   col-lg-7  " align="left" >
-					<img src="/resources/img/title.png" style="width:60%" >
+					<img src="/resources/img/title.png" style="width:55%; " >
 					<!-- 					<h2 style="font-family:  ">SEOHAN LIBRARY</h2> -->
 				</div>
 				<div class="col-md-5   col-lg-5" align="right" style="float:right; padding: 0">
@@ -108,7 +108,7 @@
 						style="float: left; padding: 5px">
 						<a href="borrowList" style="display: block"><img
 							src="/resources/img/btn02.jpg" style="width: 70%; margin: 10px"></a>
-						<a class="href" href="borrowList">대출 조회</a>
+						<a class="href" href="borrowList">대출 현황</a>
 					</div>
 					<div class="col-md-4 col-sm-4 col-xs-4"
 						style="float: left; padding: 5px">
@@ -163,9 +163,8 @@
 									</c:choose>
 								</div>
 								<div style="position: relative; height: 20px;">
-									<a
-										onclick="window.open('/bookInfo?book_cd=${newBook.book_cd}','new',
-								'resizeble=yes scrollbars=yes, width=750, height=600');">${newBook.title}</a>
+									<a	onclick="window.open('/bookInfo?book_cd=${newBook.book_cd}','new',
+										'resizeble=yes scrollbars=yes, width=750, height=600');">${newBook.title}</a>
 								</div>
 							</div>
 						</div>

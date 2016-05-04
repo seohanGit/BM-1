@@ -136,8 +136,8 @@ public class RequestServiceImpl implements RequestService {
 	}
 
 	@Override
-	public void rejectRequest(String req_cd) {
-		requestDao.rejectRequest(req_cd);
+	public void rejectRequest(BookModel book) {
+		requestDao.rejectRequest(book);
 
 	}
 

@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.baron.member.dao.BookDao;
 import com.baron.member.dao.JoinDao;
@@ -244,19 +245,24 @@ public class RentController {
 	}
 
 	@RequestMapping("/cancleBorrowBook")
-	public String cancleBorrowBook(String book_cd, BookModel bookmodel,
-			HttpServletRequest request, Model model) {
+	public ModelAndView cancleBorrowBook(String book_cd, BookModel bookmodel,
+			HttpServletRequest request, ModelAndView mav) {
 		String id = "";
-		bookmodel = rentservice.selectBook(book_cd);
+		bookmodel = rentservice.selectBorrow(book_cd);
 		for (Cookie cookie : request.getCookies()) {
-			if (cookie.getName().equals("bm_id"))
-				bookmodel.setId(cookie.getValue());
-				id = cookie.getValue();
+			if(cookie.getName().equals("bm_permission")){
+				if(cookie.getValue().equals("1")){
+					mav.setViewName("redirect:borrowReqList");
+				}else{
+					mav.setViewName("redirect:borrowReqList");
+				}
+			} 
 		}
 		rentservice.cancleBorrowBook(bookmodel);
 		List<BookModel> bookList = rentservice.borrowList(id);
-		model.addAttribute("bookList", bookList);
-		return "redirect:borrowReqList";
+		mav.addObject("bookList", bookList);
+		
+		return mav;
 	}
 
 	@RequestMapping("/rentListAll")
@@ -294,13 +300,8 @@ public class RentController {
 				book.setBook_cd(book_cd);
 				notifiService.notifiReturnConfirm(book_cd);
 				rentservice.returnBook(book);
-
-			} else {
-
-				return "rent/returnfail";
 			}
-		}
-
+		} 
 		return "redirect:borrowList";
 	}
 
@@ -316,7 +317,7 @@ public class RentController {
 			return "redirect:borrowList";
 		} else {
 
-			return "rent/returnfail";
+			return "redirect:borrowList";
 		}
 	}
 

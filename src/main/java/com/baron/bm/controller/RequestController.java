@@ -207,9 +207,8 @@ public class RequestController {
 	}
 
 	@RequestMapping("/rejectRequest")
-	public String rejectRequest(String req_cd) {
-
-		requestservice.rejectRequest(req_cd);
+	public String rejectRequest(BookModel book) {		
+		requestservice.rejectRequest(book);
 		return "redirect:request";
 	}
 }

@@ -5,7 +5,7 @@
 
 	<insert id="requestBook" parameterType="BookModel">
 		INSERT INTO
-		TESTLIB.BOOKREQ
+		sitlib.bookreqst
 		(id,reqdate,title,book_cd,price,author,quantity,b_group,c_group,link,
 		imageurl,isbn, publish, summary, req_cd, kname, reason, reqstatus)
 		VALUES
@@ -17,14 +17,14 @@
 	</insert>
 
 	<update id="deleteRequest" parameterType="BookModel">
-		UPDATE TESTLIB.BOOKREQ
+		UPDATE sitlib.bookreqst
 		SET
 		reqstatus='1', book_cd=#{book_cd}
 		WHERE reqdate = #{reqdate} and  req_cd= #{req_cd}
 	</update>
 
 	<update id="rejectRequest" parameterType="String">
-		UPDATE TESTLIB.BOOKREQ
+		UPDATE sitlib.bookreqst
 		SET
 		reqstatus='2'
 		WHERE reqdate = #{reqdate} and  req_cd= #{req_cd}
@@ -34,7 +34,7 @@
 		SELECT distinct B.title, B.imageurl, B.author, B.price, b.quantity, B.reqdate,
 		B.reqstatus, B.id, C.kname, B.book_cd, B.req_cd, B.link, B.b_group,
 		B.c_group
-		FROM TESTLIB.BOOKREQ B
+		FROM sitlib.bookreqst B
 		LEFT OUTER JOIN TPRLIB.GR_INSA C ON
 		B.id=C.ASABN
 		WHERE C.CO_GB = 'SEOHAN'
@@ -45,7 +45,7 @@
 	<select id="requestRecord" parameterType="String" resultType="BookModel">
 		SELECT *
 		FROM
-		TESTLIB.BOOKREQ A 
+		sitlib.bookreqst A 
 		WHERE A.id=#{id}  
 		ORDER
 		BY
@@ -56,7 +56,7 @@
 
 	<select id="selectRequest" parameterType="BookModel" resultType="BookModel">
 		SELECT *
-		FROM TESTLIB.BOOKREQ A
+		FROM sitlib.bookreqst A
 		INNER JOIN TPRLIB.GR_INSA B ON
 		A.id=B.ASABN
 		WHERE reqdate = #{reqdate} and req_cd=#{req_cd} 
@@ -66,13 +66,13 @@
 	<select id="selectMaxSer" resultType="String">
 		SELECT
 		COALESCE(MAX(REQ_CD)+1,1) SER
-		FROM TESTLIB.BOOKREQ A
+		FROM sitlib.bookreqst A
 		WHERE REQDATE = VARCHAR_FORMAT(CURRENT
 		TIMESTAMP,		'YYYYMMDD')
 	</select>
 
 	<update id="modifiReqBook" parameterType="BookModel">
-		UPDATE TESTLIB.BOOKREQ
+		UPDATE sitlib.bookreqst
 		SET
 		book_cd = #{book_cd} 
 		WHERE reqdate = #{reqdate} and 

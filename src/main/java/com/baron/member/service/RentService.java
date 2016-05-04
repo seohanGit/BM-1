@@ -62,4 +62,6 @@ public interface RentService {
 	
 
 	public List<BookModel> delayList();
+
+	BookModel selectBorrow(String book_cd);
 }

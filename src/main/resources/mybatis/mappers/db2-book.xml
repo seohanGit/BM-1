@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="euc-kr" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.baron.member.sqlModel">
-	<!-- TESTLIB.BOOKMST 관련 쿼리 -->
+	<!-- sitlib.bookmst 관련 쿼리 -->
 
 
 	<select id="selectBookAll" resultType="BookModel">
 		SELECT * FROM
-		TESTLIB.BOOKMST A
+		sitlib.bookmst A
 		ORDER BY RENTCHK
 	</select>
 
 	<insert id="insertBook" parameterType="BookModel">
 		INSERT INTO
-		TESTLIB.BOOKMST
+		sitlib.bookmst
 		(title, book_cd,b_group, c_group, publish,author,rentchk,imageurl,
 		rcv_date, isbn, price, summary, rcmdchk)
 		VALUES
@@ -22,7 +22,7 @@
 
 
 	<select id="selectBook" parameterType="String" resultType="BookModel">
-		SELECT * FROM TESTLIB.BOOKMST WHERE book_cd=#{book_cd} FETCH first 1 rows only
+		SELECT * FROM sitlib.bookmst WHERE book_cd=#{book_cd} FETCH first 1 rows only
 	</select>
 
 	<select id="searchBook" parameterType="String" resultType="BookModel">
@@ -30,8 +30,8 @@
 		SELECT A.title, A.author, A.publish, A.b_group, A.rentchk, A.rcmdChk, A.imageurl,
 		A.reservechk, A.book_cd, B.returndate
 		FROM
-		TESTLIB.BOOKMST A LEFT OUTER
-		JOIN testlib.bookrent B
+		sitlib.bookmst A LEFT OUTER
+		JOIN sitlib.bookrent B
 		ON A.book_cd = B.book_cd AND A.rentchk =
 		B.rentchk
 		WHERE
@@ -44,8 +44,8 @@
 		SELECT A.title, A.author, A.publish, A.b_group, A.rentchk, A.rcmdChk, A.imageurl,
 		A.reservechk, A.book_cd, B.returndate
 		FROM
-		TESTLIB.BOOKMST A LEFT OUTER
-		JOIN testlib.bookrent B
+		sitlib.bookmst A LEFT OUTER
+		JOIN sitlib.bookrent B
 		ON A.book_cd = B.book_cd AND A.rentchk =
 		B.rentchk
 		WHERE
@@ -58,8 +58,8 @@
 		SELECT A.title, A.author, A.publish, A.b_group, A.rentchk, A.rcmdChk, A.imageurl,
 		A.reservechk, A.book_cd, B.returndate
 		FROM
-		TESTLIB.BOOKMST A LEFT OUTER
-		JOIN testlib.bookrent B
+		sitlib.bookmst A LEFT OUTER
+		JOIN sitlib.bookrent B
 		ON A.book_cd = B.book_cd AND A.rentchk =
 		B.rentchk
 		WHERE
@@ -73,8 +73,8 @@
 		A.title, A.author, A.publish, A.b_group, A.rentchk, A.rcmdChk, A.imageurl,
 		A.reservechk, A.book_cd, B.returndate
 		FROM
-		TESTLIB.BOOKMST A LEFT OUTER
-		JOIN testlib.bookrent B
+		sitlib.bookmst A LEFT OUTER
+		JOIN sitlib.bookrent B
 		ON A.book_cd = B.book_cd AND A.rentchk =
 		B.rentchk
 		ORDER
@@ -86,8 +86,8 @@
 		A.title, A.author, A.publish, A.b_group, A.rentchk, A.imageurl,
 		A.reservechk, A.book_cd, b.returndate
 		FROM
-		TESTLIB.BOOKMST A  
-		left outer join tESTLIB.BOOKrent B on a.book_cd = b.book_cd and a.rentchk = b.rentchk
+		sitlib.bookmst A  
+		left outer join sitlib.BOOKrent B on a.book_cd = b.book_cd and a.rentchk = b.rentchk
 		where rcv_date between #{date1} and #{date2} and left(b_group,1) = 'B'
 		ORDER BY A.RCV_DATE DESC , A.RENTCHK DESC
 	</select>
@@ -97,8 +97,8 @@
 		title, author, b_group, a.publish, b.book_cd, a.rentchk, a.reservechk, A.rcmdChk, A.imageurl,
 		<![CDATA[case when b.returndate <> '' then b.returndate end as returnDate]]>
 		FROM
-		testlib.bookmst A 
-		inner join tESTLIB.BOOKrent B on a.book_cd = b.book_cd and a.rentchk = b.rentchk
+		sitlib.bookmst A 
+		inner join sitlib.BOOKrent B on a.book_cd = b.book_cd and a.rentchk = b.rentchk
 		where left(B.rentdate,6) = #{month}
 		group by title, author, b_group, a.publish, b.book_cd, a.rentchk, a.reservechk, A.rcmdChk, b.returndate,  A.imageurl
 		ORDER
@@ -110,21 +110,21 @@
 		A.title, A.author, A.publish, A.b_group, A.rentchk, A.rcmdChk, A.imageurl,
 		A.reservechk, A.book_cd, B.returndate
 		FROM
-		TESTLIB.BOOKMST A
-		left outer join tESTLIB.BOOKrent B on a.book_cd = b.book_cd and a.rentchk = b.rentchk
+		sitlib.bookmst A
+		left outer join sitlib.BOOKrent B on a.book_cd = b.book_cd and a.rentchk = b.rentchk
 		where A.rcmdchk = '1'
 	</select>	
 
 	<delete id="deleteBook" parameterType="String">
 		DELETE FROM
-		TESTLIB.BOOKMST
+		sitlib.bookmst
 		WHERE
 		BOOK_CD=#{book_cd}
 	</delete>
 
 
 	 <update id="updateBook" parameterType="BookModel">
-		UPDATE TESTLIB.BOOKMST
+		UPDATE sitlib.bookmst
 		SET
 		TITLE=#{title},
 		publish=#{publish},
@@ -137,7 +137,7 @@
 
 	<select id="getNewbook" resultType="BookModel">
 		SELECT *
-		FROM TESTLIB.BOOKMST 
+		FROM sitlib.bookmst 
 		WHERE rcv_date is not null and imageurl != '' 
 		ORDER BY
 		rcv_date DESC
@@ -145,7 +145,7 @@
 	</select>
 	
 	<update id="setRecommend" parameterType="BookModel">
-		UPDATE TESTLIB.BOOKMST
+		UPDATE sitlib.bookmst
 		SET
 		rcmdChk=#{rcmdChk}
 		WHERE BOOK_CD=#{book_cd}

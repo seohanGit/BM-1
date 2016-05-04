@@ -71,6 +71,7 @@
 							style="vertical-align: baseline; float: left; width: 80%">
 							<form action="/searchBook" method="post">
 								<span class="input-group-btn"> 
+								<input id="listType" name="listType" type="hidden" value="${listType }"> 
 								<input type="text"
 									class="form-control" id="keyword" name="keyword"
 									placeholder="기술자료실 도서 검색 [ 소문자로 입력 ]">
@@ -85,7 +86,9 @@
 							style="width: 20%; "> 
 							<button style="width: 100px; vertical-align: baseline;"
 								class="btn btn-default" type="button" id="insertBook"
-								onclick="window.open('/insertbookForm','new','resizeble=yes scrollbars=yes,  width=500, height=600');">도서추가</button>
+								onclick="window.open('/insertbookForm','new','resizeble=yes, scrollbars=yes, width=500, height=700');">
+								도서추가</button>
+										
 							<!-- 								<button style="width: 100px; vertical-align: baseline;" -->
 							<!-- 									class="btn btn-default" type="submit">대출정지</button> -->
 						</div>
@@ -105,18 +108,14 @@
 									<th style="width: 90px">대여상태</th>									
 									<th style="width: 230px"></th>
 								</tr>
-							</thead>
-							<%-- 
-						
- --%>
-
+							</thead> 
 							<tbody id="tablebody">
 								<c:forEach items="${bookList}" var="book" varStatus="loop">
 									<tr>
 										<td class="book_cd" ><input type="checkbox" name="book_cd"
 											value="${book.book_cd}">${book.book_cd}</td>
 										<td class="title" align="left"><a href="#"
-											onclick="window.open('/bookInfo?book_cd=${book.book_cd}','new','resizeble=yes scrollbars=yes, width=850, height=850');">
+											onclick="window.open('/bookInfo?book_cd=${book.book_cd}','new','resizeble=yes scrollbars=yes, width=750, height=600');">
 												${book.title }</a></td>
 										<td class="hidden-xs author" align="left">${book.author}</td>
 										<td class="hidden-sm hidden-xs hidden-md b_group"

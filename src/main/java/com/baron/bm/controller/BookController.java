@@ -293,7 +293,7 @@ public class BookController {
 	}
 	
 	@RequestMapping("/delayList")
-	public ModelAndView delayList(BookModel bookmodel,ModelAndView mav) { 
+	public ModelAndView delayList(BookModel bookmodel, ModelAndView mav) { 
 		List<BookModel> bookList = rentservice.delayList();
 		mav.addObject("bookList", bookList);
 		mav.setViewName("rent/delayList");		

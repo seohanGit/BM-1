@@ -112,6 +112,7 @@ public class EtcController {
 					bookmodel.setPublish(book.getPublish());
 					bookmodel.setImageurl(book.getImageurl());
 					bookmodel.setAuthor(book.getAuthor());
+					bookmodel.setSummary(book.getSummary());
 					bookservice.updateBook(bookmodel);
 				}
 			}

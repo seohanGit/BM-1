@@ -12,7 +12,7 @@
 		TPRLIB.GR_INSA C WHERE B.id=C.ASABN
 		FETCH
 		first 1 rows only) kname
-		FROM TESTLIB.BOOKBOARD B
+		FROM sitlib.BOOKBOARD B
 		WHERE
 		B.boardtype='0'
 		ORDER
@@ -22,7 +22,7 @@
 	<select id="selectBoardregister" resultType="BoardModel">
 		SELECT *
 		FROM
-		TESTLIB.BOOKBOARD
+		sitlib.BOOKBOARD
 		WHERE boardtype='0'
 		ORDER BY REGISDATE
 	</select>
@@ -36,7 +36,7 @@
 	<select id="selectBoardtitle" resultType="BoardModel">
 		SELECT *
 		FROM
-		TESTLIB.BOOKBOARD
+		sitlib.BOOKBOARD
 		WHERE boardtype='0'
 		ORDER BY title
 	</select>
@@ -44,13 +44,13 @@
 	<select id="selectBoardnum" parameterType="int" resultType="BoardModel">
 		SELECT *
 		FROM
-		TESTLIB.BOOKBOARD
+		sitlib.BOOKBOARD
 		WHERE boardnum=#{boardnum}
 
 	</select>
 	<insert id="insertBoard" parameterType="BoardModel">
 		INSERT INTO
-		TESTLIB.BOOKBOARD
+		sitlib.BOOKBOARD
 		(title,content,REGISDATE,modifidate,id,boardtype)
 		VALUES
 		(#{title},#{content},#{regisdate},#{modifidate},#{id}, #{boardType} )
@@ -58,13 +58,13 @@
 
 	<delete id="deleteBoard" parameterType="int">
 		DELETE FROM
-		TESTLIB.BOOKBOARD
+		sitlib.BOOKBOARD
 		WHERE
 		boardnum=#{boardnum}
 	</delete>
 
 	<update id="modifyBoard" parameterType="BoardModel">
-		UPDATE TESTLIB.BOOKBOARD
+		UPDATE sitlib.BOOKBOARD
 		SET
 		content=#{content}, title=#{title}, modifidate=#{modifidate}
 		WHERE
@@ -74,7 +74,7 @@
 	<select id="noticeList" resultType="BoardModel">
 		SELECT *
 		FROM
-		TESTLIB.BOOKBOARD
+		sitlib.BOOKBOARD
 		WHERE
 		boardtype='1'
 		ORDER BY
@@ -84,20 +84,20 @@
 	<insert id="insertNotice" parameterType="BoardModel">
 		
 		INSERT INTO
-		TESTLIB.BOOKBOARD
+		sitlib.BOOKBOARD
 		(title,content,REGISDATE,modifidate,id,boardtype)
 		VALUES
 		(#{title},#{content},#{regisdate},#{modifidate},#{id}, #{boardType})
 	</insert>
 	<delete id="deleteNotice" parameterType="int">
 		DELETE FROM
-		TESTLIB.BOOKBOARD
+		sitlib.BOOKBOARD
 		WHERE
 		boardnum=#{boardnum}
 	</delete>
 
 	<update id="modifyNotice" parameterType="BoardModel">
-		UPDATE TESTLIB.BOOKBOARD
+		UPDATE sitlib.BOOKBOARD
 		SET
 		content=#{content}, MODIFiDATE=#{modifidate}
 		WHERE

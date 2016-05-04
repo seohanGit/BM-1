@@ -2,5 +2,5 @@
     pageEncoding="UTF-8"%>
 <script>
 alert("이미 예약중 입니다.");
-location.href="/searchBook";
+location.href="/searchBook?listType=";
 </script>

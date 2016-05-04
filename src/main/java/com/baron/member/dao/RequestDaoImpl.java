@@ -54,8 +54,8 @@ public class RequestDaoImpl implements RequestDao {
 	}
 
 	@Override
-	public void rejectRequest(String req_cd) {
-		session.update(NAMESPACE + "rejectRequest", req_cd);
+	public void rejectRequest(BookModel book) {
+		session.update(NAMESPACE + "rejectRequest",book);
 
 	}
 

@@ -10,7 +10,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
-<title>구매요청 기록</title>
+<title>자료 구입신청</title>
 <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="/resources/css/signin.css" rel="stylesheet">
 <link href="/resources/css/common.css" rel="stylesheet">
@@ -26,7 +26,7 @@
 			<!-- Blog Entries Column -->
 
 			<div>
-				<h2>구매요청 목록</h2>
+				<h2>자료 구입신청</h2>
 
 				<div class="input-group" style="float: left; width: 70%">
 					<form action="/findBook" method="post">

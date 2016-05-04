@@ -183,7 +183,7 @@ public class MemberController {
 			if (adminchk) {
 				response.addCookie(new Cookie("bm_id", id));
 				response.addCookie(new Cookie("bm_permission", "1"));
-				mav.setViewName("redirect:admin");
+				mav.setViewName("redirect:index");
 
 				mav.addObject("permission", "1");
 				System.out.println();

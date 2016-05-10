@@ -27,11 +27,8 @@ import com.baron.member.service.StatisticService;
 public class BoardController {
 /**
  * 
- */
-	Calendar cal = Calendar.getInstance();				
-	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");				
-	Date nowDate = cal.getTime();
-	
+ */			
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");	
 	
 	@Autowired
 	private BoardService boardService;
@@ -63,6 +60,9 @@ public class BoardController {
 
 	@RequestMapping("/modifyBoard")
 	public String modifyBoard(BoardModel board) {
+		Calendar cal = Calendar.getInstance();				
+		Date nowDate = cal.getTime();
+		
 		board.setModifidate(sdf.format(nowDate));
 		boardService.modifyBoard(board);
 		return "redirect:boardList";
@@ -70,7 +70,9 @@ public class BoardController {
 
 	@RequestMapping("/boardsuccess")
 	public String boardsuccess(BoardModel model, HttpServletRequest request) {
-
+		Calendar cal = Calendar.getInstance();				
+		Date nowDate = cal.getTime();
+		
 		for (Cookie cookie : request.getCookies()) {
 			if (cookie.getName().equals("bm_id")) {
 				model.setId(cookie.getValue());
@@ -130,6 +132,9 @@ public class BoardController {
 
 	@RequestMapping("/insertNotice")
 	public String insertNotice(BoardModel boardmodel) {
+		Calendar cal = Calendar.getInstance();				
+		Date nowDate = cal.getTime();
+		
 		boardmodel.setRegisdate(sdf.format(nowDate));
 		boardmodel.setBoardType("1");
 		boardmodel.setId("admin");
@@ -145,6 +150,9 @@ public class BoardController {
 
 	@RequestMapping("/modifyNotice")
 	public String modifyNotice(BoardModel content) {
+		Calendar cal = Calendar.getInstance();				
+		Date nowDate = cal.getTime();
+		
 		content.setModifidate(sdf.format(nowDate));
 		boardService.modifyNotice(content);
 		return "redirect:noticeListByAdmin";

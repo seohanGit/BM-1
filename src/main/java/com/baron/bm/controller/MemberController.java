@@ -44,9 +44,7 @@ import com.baron.member.service.StatisticService;
 @Controller
 public class MemberController {
 
-	Calendar cal =  Calendar.getInstance();
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-	String nowDate = sdf.format(cal.getTime());
 	
 	@Autowired
 	private JoinService joinService;
@@ -318,6 +316,8 @@ public class MemberController {
 
 	@RequestMapping("/memberList")
 	public String memberList(Model model) {
+		Calendar cal =  Calendar.getInstance();
+		String nowDate = sdf.format(cal.getTime());
 		cal.add(cal.MONTH, -1);
 		String rentdate = sdf.format(cal);
 		List<MemberModel> memberList = joinService.memberList(rentdate);

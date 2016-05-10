@@ -31,10 +31,8 @@ import com.baron.member.service.RentService;
 import com.baron.member.service.RequestService;
 
 @Controller
-public class RequestController {
-	Calendar cal =  Calendar.getInstance();
-	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-	String nowDate = sdf.format(cal.getTime());
+public class RequestController { 
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd"); 
 	
 	@Autowired
 	private RequestService requestservice;
@@ -53,6 +51,9 @@ public class RequestController {
 
 	@RequestMapping("/confirmRequest")
 	public String requestResult(BookModel model, HttpServletRequest request) {
+		Calendar cal =  Calendar.getInstance();
+		String nowDate = sdf.format(cal.getTime());
+		
 		String id = "";
 		BookModel book = new BookModel();
 		book = model;
@@ -110,6 +111,8 @@ public class RequestController {
 	public String requestBook(HttpServletRequest request, Model model,
 			String isbn) throws Exception {
 		String id = null;
+		Calendar cal =  Calendar.getInstance();
+		String nowDate = sdf.format(cal.getTime());
 		BookModel book = requestservice.findBookOne(isbn);
 
 		for (Cookie cookie : request.getCookies()) {
@@ -137,6 +140,8 @@ public class RequestController {
 
 	@RequestMapping("/confirmBuy")
 	public String confirmBuy(BookModel model) {
+		Calendar cal =  Calendar.getInstance();
+		String nowDate = sdf.format(cal.getTime());		
 		model.setRcv_date(nowDate); 
 		BookModel existbook = bookService.selectBook(model.getBook_cd());
 		if (existbook == null){

@@ -39,10 +39,8 @@ public class BookController {
 
 	@Autowired
 	private RequestService requestservice;
-
-	Calendar cal = Calendar.getInstance();				
-	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");				
-	String nowDate = sdf.format(cal.getTime());
+		
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");	
 
 	@RequestMapping("/insertbookForm")
 	public String insertbook() throws Exception {
@@ -52,6 +50,8 @@ public class BookController {
 
 	@RequestMapping("/insertbook")
 	public String insertresult(BookModel model) {
+		Calendar cal = Calendar.getInstance();					
+		String nowDate = sdf.format(cal.getTime());
 		if (model.getIsbn().equals("")){
 			model.setRcv_date(nowDate); 
 			model.setQuantity(1);

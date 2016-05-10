@@ -182,7 +182,9 @@ a {
 }
 
 a:active, a:hover {
-	outline: 0
+	outline: 0;
+ cursor:pointer;
+
 }
 
 abbr[title] {

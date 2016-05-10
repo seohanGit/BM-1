@@ -66,7 +66,7 @@ public class BookController {
 	}
 
 	@RequestMapping("/bookInfo")
-	public String bookInfo(Model model, BookModel book,String listType, String keyword) {
+	public String bookInfo(Model model, BookModel book,String listType, String keyword, String main) {
 		if(book.getBook_cd()!=null){
 			book = bookservice.selectBook(book.getBook_cd());
 		}else if(book.getReq_cd()!=null){
@@ -76,8 +76,12 @@ public class BookController {
 		model.addAttribute("book", book);
 		model.addAttribute("keyword", keyword);
 		model.addAttribute("listType", listType);
-
-		return "book/bookInfo";
+		if(main==null){main="";}
+		switch(main){
+			case "Y" : return "book/bookInfo2";
+			
+			default : return "book/bookInfo";
+		}		
 	}
  
 	@RequestMapping(value = "/searchBook", produces = "application/text; charset=utf8" )

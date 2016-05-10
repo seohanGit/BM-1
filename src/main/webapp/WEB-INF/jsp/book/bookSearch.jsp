@@ -157,7 +157,7 @@
 											<td></td>
 										</c:when>
 										<c:when test="${book.rentchk=='1' and book.reservechk=='0'}">
-											<td><p style="color: blue;">대여요청중</p> 
+											<td><p style="color: blue;">대출요청중</p> 
 <%-- 											반납일 : ${book.returndate} --%>
 											</td>
 											<td>

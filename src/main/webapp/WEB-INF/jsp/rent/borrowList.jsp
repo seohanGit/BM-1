@@ -40,7 +40,7 @@ body {
 					</c:when>
 
 					<c:otherwise>
-						<h2>대여 도서 목록</h2>
+						<h2>대출 도서 목록</h2>
 						<table class="table table-striped table-bordered ">
 							<thead>
 								<tr class="title">

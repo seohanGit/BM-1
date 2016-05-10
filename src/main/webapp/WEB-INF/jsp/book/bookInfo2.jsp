@@ -18,32 +18,32 @@
 <link href="/resources/css/common.css" rel="stylesheet">
 <link href="/resources/css/signin.css" rel="stylesheet"> 
 <script type="text/javascript"> 
-// $('.borrow1').on('click', function() {  
-//     var listType = $('#listType').val();
-//     var keyword = $('#keyword').val();  
-//     var	bookcd = $('#book_cd').text();  
-//     $.ajax({
-// 		type : "GET", // GET or POST
-// 		url : "/borrowbook", // URL
-// 		datatype : "xml", // html, xml, json, jsonp, script, text
-// 		contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-// 		data : {
-// 			book_cd : bookcd,
-// 			listType : listType,
-// 			keyword : keyword }, // parameters as plain object 
-// 		success : function(data, status) { // Ajax complete handelr 
-// 			if(data=='fail'){ 
-// 				alert('대출이 불가합니다.');				 
-// 			}else{
-// 				alert('대출되었습니다.');
-// // 				if(listType!=''){
-// // 					opener.location.href='/searchBook?listType='+listType+'&keyword='+keyword;
-// // 				}
-// 				self.close();
-// 			}			
-// 		}		
-//     });    
-// });
+$('.borrow1').on('click', function() {  
+    var listType = $('#listType').val();
+    var keyword = $('#keyword').val();  
+    var	bookcd = $('#book_cd').text();  
+    $.ajax({
+		type : "GET", // GET or POST
+		url : "/borrowbook", // URL
+		datatype : "xml", // html, xml, json, jsonp, script, text
+		contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+		data : {
+			book_cd : bookcd,
+			listType : listType,
+			keyword : keyword }, // parameters as plain object 
+		success : function(data, status) { // Ajax complete handelr 
+			if(data=='fail'){ 
+				alert('대출이 불가합니다.');				 
+			}else{
+				alert('대출되었습니다.');
+// 				if(listType!=''){
+// 					opener.location.href='/searchBook?listType='+listType+'&keyword='+keyword;
+// 				}
+				self.close();
+			}			
+		}		
+    });    
+});
 </script>
 </head>
 <body style="background-color: white;"> 
@@ -56,7 +56,7 @@
 					<c:choose>
 						<c:when test="${book.rentchk=='0'}">
 							<mark>대출가능</mark>
-							<button class="btn btn-default borrow1" type="button" id="borrowbook"
+							<button class="btn btn-default borrow2" type="button" id="borrowbook"
 								  >대출</button>
 						</c:when>
 

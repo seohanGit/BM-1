@@ -19,10 +19,10 @@
 <script>
 	$(document).ready(function() {
 
-		var date = "${con.regisdate}";
-		if (date < now()) {
-			$("#notice").append(newicon);
-		}
+// 		var date = "${con.regisdate}";
+// 		if (date < now()) {
+// 			$("#notice").append(newicon);
+// 		}
 
 	});
 	var array = [ "a0", "a1", "a2", "a3", "a4", "a5", "a6", "a7", "a8", "a9" ];
@@ -99,7 +99,7 @@
 					<div class="row" align="left" style="padding:0; margin-left: 4%">
 					<h5 style="font-size :20px; margin: 1%; color: #428BCA ">Quick Menu</h5></div>
 					<div class="col-md-4 col-sm-4 col-xs-4"
-						style="float: left; padding: 0px">
+						style="float: left; padding: 5px">
 						<a href="searchBook?listType=&keyword=" style="display: block"><img
 							src="/resources/img/btn01.jpg" style="width: 70%; margin: 10px"></a>
 						<a class="href" href="searchBook?listType=&keyword=">자료검색</a>
@@ -155,7 +155,7 @@
 										</c:when>
 										<c:otherwise>
 											<a
-												onclick="window.open('/bookInfo?book_cd=${newBook.book_cd}','new',
+												onclick="window.open('/bookInfo?book_cd=${newBook.book_cd}&main=Y','new',
 											 	'resizeble=yes scrollbars=yes, width=750, height=600');">
 												<img src="${newBook.imageurl}" height="70%" width="70%">
 											</a>
@@ -163,7 +163,7 @@
 									</c:choose>
 								</div>
 								<div style="position: relative; height: 20px;">
-									<a	onclick="window.open('/bookInfo?book_cd=${newBook.book_cd}','new',
+									<a	onclick="window.open('/bookInfo?book_cd=${newBook.book_cd}&main=Y','new',
 										'resizeble=yes scrollbars=yes, width=750, height=600');">${newBook.title}</a>
 								</div>
 							</div>
@@ -194,7 +194,7 @@
 										</c:when>
 										<c:otherwise>
 											<a
-												onclick="window.open('/bookInfo?book_cd=${bestBook.book_cd}','new',
+												onclick="window.open('/bookInfo?book_cd=${bestBook.book_cd}&main=Y','new',
 										 	'resizeble=yes scrollbars=yes, width=750, height=600');">
 												<img src="${bestBook.imageurl}" height="70%" width="70%">${bestbook.title}</a>
 										</c:otherwise>
@@ -202,7 +202,7 @@
 								</div>
 								<div style="position: relative; height: 20px">
 									<a
-										onclick="window.open('/bookInfo?book_cd=${bestBook.book_cd}','new',
+										onclick="window.open('/bookInfo?book_cd=${bestBook.book_cd}&main=Y','new',
 								'resizeble=yes scrollbars=yes, width=750, height=600');">${bestBook.title}</a>
 								</div>
 							</div>

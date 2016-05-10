@@ -157,6 +157,7 @@ public class MemberController {
 		adminList.add("4150240");
 		adminList.add("4030243");
 		adminList.add("4130257");
+		adminList.add("4040187");
 		
 		if (joinService.login(id) == null) {
 			mav.setViewName("loginfail");

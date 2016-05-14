@@ -157,13 +157,13 @@ public class MemberController {
 		adminList.add("4130257");
 		adminList.add("4040187");
 		
-		if (joinService.login(id) == null) {
-			mav.setViewName("loginfail");
-		} else {
-			MemberModel membermodel = new MemberModel();
-			membermodel = joinService.login(id);
-			membermodel.setId(id);
-			
+		MemberModel membermodel = new MemberModel();
+		membermodel = joinService.login(id);
+		
+		if (membermodel.getKname() == null) {
+			mav.setViewName("/member/loginfail");
+		} else {	
+			membermodel.setId(id);			
 			mav.addObject("kname", membermodel.getKname());
 			mav.addObject("team_nm", membermodel.getTeam_nm());
 			mav.addObject("jikb", membermodel.getJikb());

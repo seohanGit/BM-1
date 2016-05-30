@@ -100,13 +100,13 @@
 						<table class="table table-striped table-bordered " id="dataTable">
 							<thead>
 								<tr>
-									<th class="image"></th>
+									<th class="image">도서코드</th>
 									<th>도서명</th>
 									<th class="hidden-xs image">저자</th>
 									<th class="hidden-sm hidden-xs hidden-md author">분류</th>
 									<th style="width: 40px">추천</th>
-									<th style="width: 90px">대여상태</th>									
-									<th style="width: 230px"></th>
+									<th style="width: 90px">대출상태</th>									
+									<th style="width: 230px">비고</th>
 								</tr>
 							</thead> 
 							<tbody id="tablebody">
@@ -152,7 +152,7 @@
 												</td>
 											</c:when>
 											<c:when test="${book.rentchk=='1'}">
-												<td><mark>대여요청중</mark></td>
+												<td><mark>대출요청중</mark></td>
 												<td><button class="btn btn-default btn-sm"
 														type="button" id="modifybook"
 														onclick="window.open('/modifyBookForm?book_cd=${book.book_cd}','new','resizeble=yes scrollbars=yes,  width=850, height=750');">도서수정</button>

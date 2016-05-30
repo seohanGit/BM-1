@@ -5,7 +5,7 @@
 
 <div style="margin-left: 10px">
 
-	<h3>Best 도서</h3>
+	<h3>베스트 도서</h3>
 
 	<table class="table-admin table table-striped "
 		style="width: 100%; table-layout: fixed;">

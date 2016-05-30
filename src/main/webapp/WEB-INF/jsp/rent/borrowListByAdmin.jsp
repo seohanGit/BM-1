@@ -12,7 +12,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
-<title>대여현황</title>
+<title>대출현황</title>
 <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="/resources/css/signin.css" rel="stylesheet">
 <link href="/resources/css/common.css" rel="stylesheet">
@@ -40,13 +40,13 @@ body {
 				
 				<br><div class="panel-body">
 					<div>
-						<h2>대여현황 목록</h2>
+						<h2>대출현황 목록</h2>
 					</div>
 
 					<c:choose>
 						<c:when test="${empty rentList}">
 							<div>
-								<h3>대여중인 도서가 없습니다.</h3>
+								<h3>대출중인 도서가 없습니다.</h3>
 							</div>
 						</c:when>
 						<c:otherwise>
@@ -61,8 +61,9 @@ body {
 										<tr class="hidden-xs title">
 											<th class="td-chk"><input type="checkbox" id="allCheck"></th>
 											<th>도서명</th>
+											<th class="genre">대출일</th>
 											<th class="genre">반납일</th>
-											<th class="hidden-xs td-date">대여자</th>
+											<th class="hidden-xs td-date">대출자</th>
 											<th class="image">반납</th>
 											<th class="image">연장</th>
 										</tr>
@@ -80,7 +81,7 @@ body {
 												<td align="left">${rent.title }</td>
 												<%-- 												<td class="hidden-xs" align="left"><fmt:formatDate type="date"
 														pattern="yyyy-MM-dd" value="${rent.rentdate }" /></td>
- --%>
+ --%>												<td align="left"> ${book.rentdate} </td>
 												<c:choose>
 													<c:when test="${rent.returndate < now}">
 														<td align="left"

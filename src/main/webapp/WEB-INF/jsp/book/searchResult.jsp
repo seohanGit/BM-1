@@ -24,7 +24,7 @@
 								<c:when test="${empty book.imageurl }">
 									<a href="#"
 										onclick="window.open('/bookInfo?book_cd=${book.book_cd}','new','resizeble=yes scrollbars=yes,  width=750, height=500');">
-										<img src="/resources/img/noimage.png" style="width: 90%">${book.title }</a>
+										<img src="/resources/img/noimage.png" style="width: 90%"> </a>
 								</c:when>
 								<c:otherwise>
 									<a href="#"

@@ -98,7 +98,7 @@
 		<![CDATA[case when b.returndate <> '' then b.returndate end as returnDate]]>
 		FROM
 		sitlib.bookmst A 
-		inner join sitlib.BOOKrent B on a.book_cd = b.book_cd and a.rentchk = b.rentchk
+		inner join sitlib.BOOKrent B on a.book_cd = b.book_cd 
 		where left(B.rentdate,6) = #{month}
 		group by title, author, b_group, a.publish, b.book_cd, a.rentchk, a.reservechk, A.rcmdChk, b.returndate,  A.imageurl
 		ORDER

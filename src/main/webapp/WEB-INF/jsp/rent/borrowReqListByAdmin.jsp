@@ -28,13 +28,13 @@
 				<br><div class="panel-body">
 
 					<div>
-						<h2>대여요청 목록</h2>
+						<h2>대출요청 목록</h2>
 					</div>
 
 					<c:choose>
 						<c:when test="${empty bookList}"> 
 							<div>
-								<h3>대여 요청한 도서가 없습니다.</h3>
+								<h3>대출 요청한 도서가 없습니다.</h3>
 							</div>
 						</c:when>
 						<c:otherwise>
@@ -48,10 +48,10 @@
 										<tr class="title">
 											<th class="td-chk"><input type="checkbox" id="allCheck" ></th>
 											<th>도서명</th>
-											<th class="genre">대여일</th>
-											<th class="genre hidden-xs">반납일</th>
+											<th class="genre">대출요청일</th>
+<!-- 											<th class="genre hidden-xs">반납일</th> -->
 											<th class="hidden-xs" style="width: 150px">분류</th>
-											<th class="image">대여자</th>
+											<th class="image">대출자</th>
 											<th class="image"style="width: 120px"></th> 
 										</tr>
 									</thead> 
@@ -63,7 +63,7 @@
 													value="${book.book_cd}"></td>
 												<td class="td-title" align="left">${book.title}</td>
 												<td align="left"> ${book.rentdate} </td>
-												<td class="hidden-xs" style="width: inherit;"> ${book.returndate} </td>
+<%-- 												<td class="hidden-xs" style="width: inherit;"> ${book.returndate} </td> --%>
 												<td class="hidden-xs" align="left">${book.b_group }</td>
 												<td>${book_cd}<c:choose>
 														<c:when test="${empty book.kname}">${book.id}</c:when>
@@ -85,13 +85,13 @@
 					</c:choose>
 					<hr>
 					<div>
-						<h2>대여현황 목록</h2>
+						<h2>대출현황 목록</h2>
 					</div>
 
 					<c:choose>
 						<c:when test="${empty rentList}">
 							<div>
-								<h3>대여중인 도서가 없습니다.</h3>
+								<h3>대출중인 도서가 없습니다.</h3>
 							</div>
 						</c:when>
 						<c:otherwise>
@@ -107,7 +107,7 @@
 											<th class="td-chk"><input type="checkbox" id="allCheck"></th>
 											<th>도서명</th>
 											<th class="genre">반납일</th>
-											<th class="hidden-xs td-date">대여자</th>
+											<th class="hidden-xs td-date">대출자</th>
 											<th class="image">반납</th>
 											<th class="image">연장</th>
 										</tr>

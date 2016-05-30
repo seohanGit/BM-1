@@ -29,15 +29,15 @@
 					</div>
 					<div class="right title">
 						<p align="right">
-							<button class="btn btn-default" type="button"
-								onClick="location.href='/writeNotice'">추가</button>
+<!-- 							<button class="btn btn-default" type="button" -->
+<!-- 								onClick="location.href='/writeNotice'">추가</button> -->
 					</div>
 					<table class="table table-bordered" id="dataTable">
 						<thead class="title">
 							<tr>
-								<td class="hidden-xs genre">등록일</td>
-								<td >내용</td>
-								<td class="genre"></td>
+								<th class="hidden-xs genre">등록일</th>
+								<th >내용</th>
+								<th class="genre"></th>
 							</tr>
 						</thead>
 						<tbody>

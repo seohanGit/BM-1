@@ -48,7 +48,7 @@ body {
 									<th class="title">도서명</th>
 									<th class="hidden-xs genre">저자</th>
 									<th class="hidden-xs hidden-sm genre">분류</th>
-									<th class="hidden-xs genre">대여일</th>
+									<th class="hidden-xs genre">대출일</th>
 									<th class="genre">반납일</th>
 									<th class="genre">상태</th>
 									<th class="image"></th>

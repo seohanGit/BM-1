@@ -8,7 +8,7 @@
 <br>
 <br>
 <div>
-	<h3>Best 사원</h3>
+	<h3>베스트 사원</h3>
 	<table class="table table-nobordered table-admin" cellpadding="3px"
 		style="width: 100%">
 		<tr class="table-admin">
@@ -25,7 +25,7 @@
 			</tr>
 		</c:forEach>
 	</table>
-	<h3>Best 부서</h3>
+	<h3>베스트 부서</h3>
 
 	<c:forEach items="${bestTeam}" var="team" begin="0" end="4">
 		<div class="progress">

@@ -31,6 +31,7 @@
 			<div class="panel panel-default ">
 				<form action="/insertbook" method="post" class="panel-body"
 					name="insertForm">
+					<input type="hidden" id="isbn"	name="isbn" value="" >
 					<div class="form-group">
 						<label for="exampleInputEmail1">도서번호</label> <input type="text"
 							class="form-control" id="book_cd" name="book_cd">

@@ -69,8 +69,7 @@ body {
 
 											<th class="hidden-sm hidden-xs hidden-md td-genre">요청일자</th>
 											<th class="td-img">상태</th>
-											<th class="td-genre"></th>
-
+											<th class="td-genre">비고</th> 
 										</tr>
 									</thead>
 

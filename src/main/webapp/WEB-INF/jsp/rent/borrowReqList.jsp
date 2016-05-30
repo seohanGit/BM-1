@@ -33,7 +33,7 @@ body {
 			<div id="searchResultArea">
 				<c:choose>
 					<c:when test="${empty bookList}">
-						<h3>대여 요청중인 도서가 없습니다.</h3>
+						<h3>대출 요청중인 도서가 없습니다.</h3>
 					</c:when>
 
 					<c:otherwise>
@@ -45,7 +45,7 @@ body {
 									<th >도서명</th>
 									<th class="hidden-xs author">저자</th>
 									<th class="hidden-xs hidden-sm author">분류</th>
-									<th class="hidden-xs genre">대여일</th>
+									<th class="hidden-xs genre">대출일</th>
 									<th class="genre">반납일</th>
 									<th class="genre">상태</th>
 									<th class="image">비고</th>

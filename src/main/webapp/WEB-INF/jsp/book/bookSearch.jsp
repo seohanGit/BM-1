@@ -96,9 +96,9 @@
 									<div style="float: left" align="left">
 										<select class="selectpicker"
 											style="font-size: 14px; margin-top: 10px; vertical-align: baseline;"
-											id="select"><option selected>전체
+											id="b_group" name="b_group"><option selected>전체
 												<c:forEach items="${BCodeList}" var="code">
-													<option value="${code.code}-${code.name}">${code.code}-${code.name}
+													<option  value="${code.code}-${code.name}">${code.code}-${code.name}
 												</c:forEach></select>
 									</div>
 									<div class="input-group left"
@@ -237,19 +237,7 @@
 
 		divLoadBody.style.display = "";
 		loadingBar.style.display = "none";
-		$("#select").change(function() {
-			var options = $(this).val();
-			$('#dataTable tbody tr').show();
-			$("#dataTable tbody tr").each(function() {
-				var tr = $(this);
-				var td = tr.find("td:eq(3)")
-				if (td.text() !== options) {
-					tr.hide();
-				}
-			})
-
-		});
-
+		  
 		$('.selectpicker').selectpicker();
 	</script>
 </body>

@@ -62,7 +62,7 @@
 						<div class="left" style="width: 20%;" align="right">
 							<select class="selectpicker"
 								style="font-size: 14px; margin-top: 10px; vertical-align: baseline;"
-								id="select"><option selected>전체
+								id="b_group"><option selected>전체
 									<c:forEach items="${BCodeList}" var="code">
 										<option value="${code.code}-${code.name}">${code.code}-${code.name}
 									</c:forEach></select>
@@ -244,22 +244,7 @@
 		divLoadBody.style.display = "";
 		loadingBar.style.display = "none";
 
-		$("#select").change(function() {
-			var options = $(this).val();
-			$('table tr').show();
-			 if(options == "전체"){
-				$('table tr').show();		
-			}else {
-				$("#dataTable tbody tr").each(function() {			
-					var tr = $(this);
-					var td = tr.find("td:eq(3)")
-					if (td.text() !== options) {
-						tr.hide();
-					} 
-				})
-			}
-
-		});
+		
 	</script>
 </body>
 </html>

@@ -24,9 +24,7 @@ function notifiReser() {
 
 $("#request").click(function() {
 	location.href = "/request"
-})
-
- 
+}) 
 $("#recordList").click(function() {
 	location.href = "/recordList"
 })

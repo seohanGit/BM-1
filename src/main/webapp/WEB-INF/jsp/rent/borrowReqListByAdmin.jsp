@@ -15,7 +15,7 @@
 <title>대여 요청 현황</title>
 <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="/resources/css/signin.css" rel="stylesheet">
-<link href="/resources/css/common.css" rel="stylesheet">  
+<link href="/resources/css/common.css" rel="stylesheet">
 </head>
 
 <body class="main">
@@ -24,15 +24,16 @@
 
 		<div class="col-xs-12"><jsp:include page="../menu.jsp" />
 			<div class="col-xs-12 panel panel-default">
-				
-				<br><div class="panel-body">
+
+				<br>
+				<div class="panel-body">
 
 					<div>
 						<h2>대출요청 목록</h2>
 					</div>
 
 					<c:choose>
-						<c:when test="${empty bookList}"> 
+						<c:when test="${empty bookList}">
 							<div>
 								<h3>대출 요청한 도서가 없습니다.</h3>
 							</div>
@@ -43,18 +44,19 @@
 									<button class="btn btn-default" type="submit" onclick="ok();">승인</button>
 								</div>
 
-								<table class="table table-striped table-bordered"> 
+								<table class="table table-striped table-bordered">
 									<thead>
 										<tr class="title">
-											<th class="td-chk"><input type="checkbox" id="allCheck" ></th>
+											<th class="td-chk"><input type="checkbox" id="allCheck"></th>
 											<th>도서명</th>
 											<th class="genre">대출요청일</th>
-<!-- 											<th class="genre hidden-xs">반납일</th> -->
+											<!-- 											<th class="genre hidden-xs">반납일</th> -->
 											<th class="hidden-xs" style="width: 150px">분류</th>
-											<th class="image">대출자</th>
-											<th class="image"style="width: 120px">비고</th> 
+											<th class="image">대출자</th> 
+											<th class="image"style="width: 120px">비고</th>  
+											<th class="image" style="width: 120px"></th> 
 										</tr>
-									</thead> 
+									</thead>
 									<tbody>
 										<c:forEach items="${bookList}" var="book" varStatus="loop">
 											<tr>
@@ -62,8 +64,8 @@
 												<td><input type="checkbox" name="book_cd"
 													value="${book.book_cd}"></td>
 												<td class="td-title" align="left">${book.title}</td>
-												<td align="left"> ${book.rentdate} </td>
-<%-- 												<td class="hidden-xs" style="width: inherit;"> ${book.returndate} </td> --%>
+												<td align="left">${book.rentdate}</td>
+												<%-- 												<td class="hidden-xs" style="width: inherit;"> ${book.returndate} </td> --%>
 												<td class="hidden-xs" align="left">${book.b_group }</td>
 												<td>${book_cd}<c:choose>
 														<c:when test="${empty book.kname}">${book.id}</c:when>
@@ -78,7 +80,7 @@
 												</td>
 											</tr>
 										</c:forEach>
-									</tbody> 
+									</tbody>
 								</table>
 							</form>
 						</c:otherwise>
@@ -113,9 +115,13 @@
 											<th class="image">연장</th>
 										</tr>
 									</thead>
-									<% SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");  %>
-									<% Calendar cal = Calendar.getInstance();  %>
-									<c:set var="now" value="<%=sdf.format(cal.getTime()) %>" />
+									<%
+										SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+									%>
+									<%
+										Calendar cal = Calendar.getInstance();
+									%>
+									<c:set var="now" value="<%=sdf.format(cal.getTime())%>" />
 
 
 									<tbody>
@@ -127,16 +133,17 @@
 												<td align="left">${rent.title }</td>
 												<%-- 												<td class="hidden-xs" align="left"><fmt:formatDate type="date"
 														pattern="yyyy-MM-dd" value="${rent.rentdate }" /></td>
---%>											<td align="left">${rent.rentdate}</td>
+<<<<<<< HEAD
+--%>											<td align="left">${rent.rentdate}</td> 
+												<td align="left">${rent.rentdate }</td> 
 												<c:choose>
 													<c:when test="${rent.returndate < now}">
 														<td align="left"
 															style="text-decoration: underline; text-align: right;"><mark>
-																${rent.returndate }	- 연체중
-															</mark></td>
+																${rent.returndate } - 연체중 </mark></td>
 													</c:when>
 													<c:otherwise>
-														<td align="left"> ${rent.returndate } </td>
+														<td align="left">${rent.returndate }</td>
 													</c:otherwise>
 												</c:choose>
 

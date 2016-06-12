@@ -40,7 +40,7 @@ import com.baron.member.service.BookService;
 import com.baron.member.service.JoinService;
 import com.baron.member.service.StatisticService;
 
-@SessionAttributes({ "kname", "jikb", "team_nm", "permission", "id", "chief", "chiefId" })
+@SessionAttributes({ "kname", "jikb", "team_nm", "permission", "id", "chief", "chiefId", "adminMode" })
 @Controller
 public class MemberController {
 
@@ -173,7 +173,8 @@ public class MemberController {
 			
 			session.setAttribute("id", membermodel.getId());
 			session.setAttribute("chief", membermodel.getChief());
-			session.setAttribute("chiefId", membermodel.getChiefid());    
+			session.setAttribute("chiefId", membermodel.getChiefid());
+			session.setAttribute("adminMode", "user"); 
 			for (String string : adminList) {
 				if (string.equals(id)) {
 					adminchk = true;
@@ -182,6 +183,7 @@ public class MemberController {
 			if (adminchk) {
 				response.addCookie(new Cookie("bm_id", id));
 				response.addCookie(new Cookie("bm_permission", "1"));
+				session.setAttribute("adminMode", "admin"); 
 				mav.setViewName("redirect:index");
 
 				mav.addObject("permission", "1");
@@ -278,15 +280,15 @@ public class MemberController {
 	}
 
 	@RequestMapping("/admin")
-	public String admin(HttpServletRequest request, Model model)
+	public String admin(HttpServletRequest request, HttpSession session, Model model)
 			throws Exception {
 		Dto param = new Dto();
 		param.setYear(year);
 		param.setMonth(month);
+		session.setAttribute("adminMode", "admin");
 		for (Cookie cookie : request.getCookies()) {
-			if (cookie.getName().equals("bm_permission")) {
-				System.out.println(cookie.getValue());
-				if ("1".equals(cookie.getValue())) {
+			if (cookie.getName().equals("bm_permission")) { 
+				if ( cookie.getValue().equals("1")) {
 
 					List<Dto> bestMember = statisticService
 							.selectBestPerson(param);

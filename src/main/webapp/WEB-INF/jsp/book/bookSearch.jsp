@@ -96,9 +96,9 @@
 									<div style="float: left" align="left">
 										<select class="selectpicker"
 											style="font-size: 14px; margin-top: 10px; vertical-align: baseline;"
-											id="select"><option selected>전체
+											id="b_group" name="b_group"><option selected>전체
 												<c:forEach items="${BCodeList}" var="code">
-													<option value="${code.code}-${code.name}">${code.code}-${code.name}
+													<option  value="${code.code}-${code.name}">${code.code}-${code.name}
 												</c:forEach></select>
 									</div>
 									<div class="input-group left"
@@ -127,7 +127,7 @@
 								<th class="hidden-xs hidden-sm hidden-md author">저자</th>
 								<th class="hidden-xs hidden-sm genre">출판사</th>
 								<th class="hidden-xs genre" style="width: 120px">분류</th>
-								<th class="col-xs-3 col-lg-2 col-md-2" >대여상태</th>
+								<th class="col-xs-3 col-lg-2 col-md-2" >대여상태</th> 
 								<th class="image">대출</th>
 							</tr>
 						</thead>
@@ -237,19 +237,7 @@
 
 		divLoadBody.style.display = "";
 		loadingBar.style.display = "none";
-		$("#select").change(function() {
-			var options = $(this).val();
-			$('#dataTable tbody tr').show();
-			$("#dataTable tbody tr").each(function() {
-				var tr = $(this);
-				var td = tr.find("td:eq(3)")
-				if (td.text() !== options) {
-					tr.hide();
-				}
-			})
-
-		});
-
+		  
 		$('.selectpicker').selectpicker();
 	</script>
 </body>

@@ -36,7 +36,7 @@
 		B.c_group
 		FROM sitlib.bookreqst B
 		LEFT OUTER JOIN TPRLIB.GR_INSA C ON
-		B.id=C.ASABN
+		B.id=C.ASABN and B.reqstatus='0'
 		WHERE C.CO_GB = 'SEOHAN'
 		ORDER BY
 		reqdate DESC, reqstatus asc
@@ -46,7 +46,7 @@
 		SELECT *
 		FROM
 		sitlib.bookreqst A 
-		WHERE A.id=#{id}  
+		WHERE A.id=#{id} and reqstatus='1'
 		ORDER
 		BY
 		A.reqstatus, 

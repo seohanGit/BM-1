@@ -25,9 +25,7 @@
 		SELECT COUNT(*) AS
 		count, b_group, (SELECT count(*) FROM sitlib.bookmst) FROM sitlib.bookmst GROUP BY b_group order by B_group
 	</select>
-
-
-
+ 
 	<select id="selectBestPerson" parameterType="Dto" resultType="Dto">
 		SELECT (SELECT kname
 		FROM tprlib.gr_insa WHERE asabn = A.id FETCH first

@@ -101,6 +101,7 @@ public class EtcController {
 		for (BookModel bookmodel : bookList) {
 			BookModel book = new BookModel();
 			book.setBook_cd(bookmodel.getBook_cd());
+			book.setBook_cd1 (bookmodel.getBook_cd());
 			isbn = bookmodel.getIsbn().trim();
 
 			if (isbn != null) {

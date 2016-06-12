@@ -27,6 +27,7 @@
 
 	<select id="searchBook" parameterType="String" resultType="BookModel">
 		<bind name="keyword" value="'%' + _parameter + '%'" />
+		<bind name="b_group" value="'%' + _parameter + '%'" />
 		SELECT A.title, A.author, A.publish, A.b_group, A.rentchk, A.rcmdChk, A.imageurl,
 		A.reservechk, A.book_cd, B.returndate
 		FROM
@@ -35,7 +36,8 @@
 		ON A.book_cd = B.book_cd AND A.rentchk =
 		B.rentchk
 		WHERE
-		LCASE(A.TITLE) like #{keyword} 
+		LCASE(A.TITLE) like #{keyword} and
+		LCASE(A.TITLE) like #{b_group} 
 		ORDER BY  a.title 
 		FETCH first 200 rows only
 	</select>
@@ -130,7 +132,8 @@
 		publish=#{publish},
 		author=#{author},
 		imageurl=#{imageurl},
-		book_cd=#{book_cd}
+		book_cd=#{book_cd},
+		summary=#{summary}
 		WHERE BOOK_CD=#{book_cd1}
 	</update>
 	

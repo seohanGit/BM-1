@@ -78,10 +78,8 @@ body {
 											<tr>
 												<td><input type="checkbox" name="book_cd"
 													value="${rent.book_cd}"></td>
-												<td align="left">${rent.title }</td>
-												<%-- 												<td class="hidden-xs" align="left"><fmt:formatDate type="date"
-														pattern="yyyy-MM-dd" value="${rent.rentdate }" /></td>
- --%>												<td align="left"> ${book.rentdate} </td>
+												<td align="left">${rent.title }</td> 
+ 												<td align="left"> ${rent.rentdate} </td>
 												<c:choose>
 													<c:when test="${rent.returndate < now}">
 														<td align="left"

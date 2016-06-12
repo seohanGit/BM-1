@@ -127,7 +127,7 @@
 								<th class="hidden-xs hidden-sm hidden-md author">저자</th>
 								<th class="hidden-xs hidden-sm genre">출판사</th>
 								<th class="hidden-xs genre" style="width: 120px">분류</th>
-								<th class="col-xs-3 col-lg-2 col-md-2" >대여상태</th>
+								<th class="col-xs-3 col-lg-2 col-md-2" >대여상태</th> 
 								<th class="image">대출</th>
 							</tr>
 						</thead>

@@ -97,17 +97,7 @@ public class RequestServiceImpl implements RequestService {
 			if (model.getQuantity() > 1) {
 				for (int i = 0; i < model.getQuantity(); i++) {
 					model.setBook_cd(model.getBook_cd().substring(0, 8));
-					model.setBook_cd(model.getBook_cd() + "(" + (i + 1) + ")");
-					System.out.println(model.getAuthor());
-					System.out.println(model.getB_group());
-					System.out.println(model.getC_group());
-					System.out.println(model.getBook_cd());
-					System.out.println(model.getImageurl());
-					System.out.println(model.getIsbn());
-					System.out.println(model.getPrice());
-					System.out.println(model.getPublish());
-					System.out.println(model.getTitle());
-					System.out.println(model.getSummary());
+					model.setBook_cd(model.getBook_cd() + "(" + (i + 1) + ")"); 
 
 					bookDao.insertBook(model);
 				}

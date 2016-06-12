@@ -130,7 +130,8 @@
 		publish=#{publish},
 		author=#{author},
 		imageurl=#{imageurl},
-		book_cd=#{book_cd}
+		book_cd=#{book_cd},
+		summary=#{summary}
 		WHERE BOOK_CD=#{book_cd1}
 	</update>
 	

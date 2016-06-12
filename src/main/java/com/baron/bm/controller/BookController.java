@@ -1,8 +1,6 @@
 package com.baron.bm.controller;
 
 import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -13,7 +11,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.support.SimpleCacheManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.baron.member.model.BookModel;
 import com.baron.member.model.CodeModel;
-import com.baron.member.model.SearchResult;
+import com.baron.member.model.Dto;
 import com.baron.member.service.BookService;
 import com.baron.member.service.RentService;
 import com.baron.member.service.RequestService;
@@ -86,8 +83,8 @@ public class BookController {
  
 	@RequestMapping(value = "/searchBook", produces = "application/text; charset=utf8" )
 	public ModelAndView searchBook(HttpServletRequest request, 
-			String keyword, String listType, String datepicker1, String datepicker2, 
-			String field, String year, String month,
+			Dto dto, String listType, String datepicker1, String datepicker2, 
+			 String year, String month,
 			ModelAndView mav) throws NullPointerException, UnsupportedEncodingException {
 		String permission = "";
 		List<BookModel> bookList = new ArrayList<BookModel>();		 
@@ -131,9 +128,9 @@ public class BookController {
 				mav.setViewName("book/listBook");
 				break;
 			default :
-				if (field == null){field = "title";}
+				if (dto.getField().equals("")){dto.setField("title");}
 				
-				bookList = bookservice.searchBook(field, keyword);
+				bookList = bookservice.searchBook(dto.getField(), dto.getKeyword());
 				mav.addObject("bookList", bookList);
 				if (permission.equals("1")) {
 					mav.setViewName("book/bookSearchByAdmin"); 
@@ -146,7 +143,7 @@ public class BookController {
 		mav.addObject("date1", datepicker1);
 		mav.addObject("date2", datepicker2); 
 		mav.addObject("listType", listType);
-		mav.addObject("keyword", keyword);
+		mav.addObject("keyword", dto.getKeyword());
 		
 		BCodeList = bookservice.selectBCodeList(); 
 		mav.addObject("BCodeList", BCodeList); 

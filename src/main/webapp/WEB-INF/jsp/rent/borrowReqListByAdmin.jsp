@@ -52,7 +52,7 @@
 <!-- 											<th class="genre hidden-xs">반납일</th> -->
 											<th class="hidden-xs" style="width: 150px">분류</th>
 											<th class="image">대출자</th>
-											<th class="image"style="width: 120px"></th> 
+											<th class="image"style="width: 120px">비고</th> 
 										</tr>
 									</thead> 
 									<tbody>
@@ -106,6 +106,7 @@
 										<tr class="hidden-xs title">
 											<th class="td-chk"><input type="checkbox" id="allCheck"></th>
 											<th>도서명</th>
+											<th class="genre">대출일</th>
 											<th class="genre">반납일</th>
 											<th class="hidden-xs td-date">대출자</th>
 											<th class="image">반납</th>
@@ -126,7 +127,7 @@
 												<td align="left">${rent.title }</td>
 												<%-- 												<td class="hidden-xs" align="left"><fmt:formatDate type="date"
 														pattern="yyyy-MM-dd" value="${rent.rentdate }" /></td>
- --%>
+--%>											<td align="left">${rent.rentdate}</td>
 												<c:choose>
 													<c:when test="${rent.returndate < now}">
 														<td align="left"

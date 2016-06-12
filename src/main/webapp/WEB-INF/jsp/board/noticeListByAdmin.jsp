@@ -29,43 +29,42 @@
 					</div>
 					<div class="right title">
 						<p align="right">
-<!-- 							<button class="btn btn-default" type="button" -->
-<!-- 								onClick="location.href='/writeNotice'">추가</button> -->
+							<!-- 							<button class="btn btn-default" type="button" -->
+							<!-- 								onClick="location.href='/writeNotice'">추가</button> -->
 					</div>
-					<table class="table table-bordered" id="dataTable">
-						<thead class="title">
-							<tr>
-								<th class="hidden-xs genre">등록일</th>
-								<th >내용</th>
-								<th class="genre"></th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach items="${noticeList}" var="notice" varStatus="status">
-								<form action="/modifyNotice" method="post">
+
+					<form action="/modifyNotice" method="post">
+						<table class="table table-bordered" id="dataTable">
+							<thead class="title">
+								<tr>
+									<th class="hidden-xs genre">등록일</th>
+									<th style="width: 80%">내용</th>
+									<th class="genre" hidden="true"></th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach items="${noticeList}" var="notice" varStatus="status">
 									<tr style="padding-bottom: 10px">
-										<td class="hidden-xs" width="15%" align="left">
-										${notice.regisdate}</td>
-										<td hidden="true"><input name="boardnum" value="${notice.boardnum}" hidden="true">
-										</td>
+										<td class="hidden-xs" width="10%" align="left">
+											${notice.regisdate}</td>
+										<td hidden="true"><input name="boardnum"
+											value="${notice.boardnum}" hidden="true"></td>
 										<td style="width: 80%; height: auto; padding-left: 10px"><textarea
 												class="content ellipsis" id="content" name="content"
 												style="width: 100%;" rows="5">${notice.content }</textarea>
 										</td>
-										<td><button class="btn btn-default btn-sm" type="submit"
-												id="modifyNotice">수정</button> 
+										<td style="width: 10%"><button
+												class="btn btn-default btn-sm" type="submit"
+												id="modifyNotice">수정</button>
 											<button class="btn btn-default btn-sm" type="button"
 												id="deleteNotice"
 												onClick="location.href='/deleteNotice?boardnum=${notice.boardnum}'">삭제</button>
 										</td>
-									</tr>
-								</form>
-
-
-
-							</c:forEach>
-						</tbody>
-					</table>
+									</tr> 
+								</c:forEach>
+							</tbody>
+						</table>
+					</form>
 				</div>
 
 

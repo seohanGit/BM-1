@@ -7,13 +7,16 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import javax.mail.Session;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.baron.member.model.BookModel;
@@ -22,7 +25,7 @@ import com.baron.member.model.Dto;
 import com.baron.member.service.BookService;
 import com.baron.member.service.RentService;
 import com.baron.member.service.RequestService;
-
+ 
 @Controller
 public class BookController {
 
@@ -82,7 +85,7 @@ public class BookController {
 	}
  
 	@RequestMapping(value = "/searchBook", produces = "application/text; charset=utf8" )
-	public ModelAndView searchBook(HttpServletRequest request, 
+	public ModelAndView searchBook(HttpServletRequest request,HttpSession session,  
 			Dto dto, String listType, String datepicker1, String datepicker2, 
 			 String year, String month,
 			ModelAndView mav) throws NullPointerException, UnsupportedEncodingException {
@@ -97,7 +100,7 @@ public class BookController {
 				permission = cookie.getValue(); 
 			}
 		} 
-		if (permission.equals("1")) {
+		if (session.getAttribute("adminMode").equals("admin")&& permission.equals("1")) {
 			mav.setViewName("book/bookSearchByAdmin"); 
 		} else {
 			mav.setViewName("book/bookSearch");
@@ -132,7 +135,7 @@ public class BookController {
 				
 				bookList = bookservice.searchBook(dto.getField(), dto.getKeyword());
 				mav.addObject("bookList", bookList);
-				if (permission.equals("1")) {
+				if (session.getAttribute("adminMode").equals("admin")&&  permission.equals("1")) {
 					mav.setViewName("book/bookSearchByAdmin"); 
 				}else{
 					mav.setViewName("book/bookSearch");
@@ -153,7 +156,7 @@ public class BookController {
 	
 		
 	@RequestMapping(value ="/bookList" , produces = "application/text; charset=utf8")
-	public ModelAndView BookList(HttpServletRequest request, 
+	public ModelAndView BookList(HttpServletRequest request, HttpSession session,
 			String keyword, String listType, String datepicker1, String datepicker2, 
 			String field, String year, String month,
 			ModelAndView mav) throws NullPointerException {
@@ -197,7 +200,7 @@ public class BookController {
 				if (field == null){field = "title";}
 				bookList = bookservice.searchBook(field, keyword);
 				mav.addObject("bookList", bookList);
-				if (permission.equals("1")) {
+				if (session.getAttribute("adminMode").equals("admin")&&permission.equals("1")) {
 					mav.setViewName("book/bookSearchByAdmin"); 
 				}else{
 					mav.setViewName("book/bookSearch");

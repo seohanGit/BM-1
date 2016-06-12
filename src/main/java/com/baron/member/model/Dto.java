@@ -20,7 +20,7 @@ public class Dto {
 	private String date1;
 	private String date2;
 	
-	private String field;
+	private String field = "";
 	private String keyword;
 	
 	public String getField() {

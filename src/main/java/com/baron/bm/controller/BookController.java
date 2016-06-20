@@ -51,7 +51,7 @@ public class BookController {
 	}
 
 	@RequestMapping("/insertbook")
-	public String insertresult(BookModel model) {
+	public String insertresult(BookModel model, HttpServletRequest request) {
 		Calendar cal = Calendar.getInstance();					
 		String nowDate = sdf.format(cal.getTime());
 		model.setRcv_date(nowDate); 
@@ -60,7 +60,7 @@ public class BookController {
 			model.setIsbn("");
 		}	
 		
-		bookservice.insertBook(model);
+		bookservice.insertBook(model, request);
 		return "book/insertbookresult";
 	}
 

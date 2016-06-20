@@ -3,6 +3,8 @@ package com.baron.member.service;
 import java.io.File;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.web.multipart.MultipartFile;
 
 import com.baron.member.model.BookModel;
@@ -11,7 +13,7 @@ import com.baron.member.model.Dto;
 
 public interface BookService {
 
-	public void insertBook(BookModel model);
+	public void insertBook(BookModel model, HttpServletRequest request) throws Exception;
 
 	public List<BookModel> searchBook(Dto dto);
 

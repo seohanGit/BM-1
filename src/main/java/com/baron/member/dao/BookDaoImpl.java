@@ -1,6 +1,7 @@
 package com.baron.member.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -29,6 +30,9 @@ public class BookDaoImpl implements BookDao {
 		session.insert(NAMESPACE + "insertBook", model);
 	}
 
+	public void insertFile(Map<String, Object> map) throws Exception{
+	    session.insert(NAMESPACE + "insertFile", map);
+	}
 	@Override
 	public List<BookModel> searchBook(Dto dto) {
 		return session.selectList(NAMESPACE + "searchBook", dto.getKeyword());

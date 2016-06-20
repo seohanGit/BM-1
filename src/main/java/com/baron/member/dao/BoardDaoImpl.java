@@ -28,7 +28,6 @@ public class BoardDaoImpl implements BoardDao {
 	@Override
 	public void insertBoard(BoardModel model) {
 		session.insert(NAMESPACE + "insertBoard", model);
-
 	}
 
 	@Override

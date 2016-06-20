@@ -20,7 +20,14 @@
 		#{rcv_date}, #{isbn}, #{price}, #{summary}, '')
 	</insert>
 
-
+	<insert id="insertFile" parameterType="hashmap">
+		update
+		sitlib.bookmst
+		set imageurl = #{fileName}
+		where
+		book_cd = #{book_cd}
+	</insert>
+	
 	<select id="selectBook" parameterType="String" resultType="BookModel">
 		SELECT * FROM sitlib.bookmst WHERE book_cd=#{book_cd} FETCH first 1 rows only
 	</select>

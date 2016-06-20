@@ -30,7 +30,7 @@
 		</div>
 		<div id="insertForm" class=" col-xs-12 col-sm-12">
 			<div class="panel panel-default ">
-				<form action="/insertbook" method="post" class="panel-body" modelAttribute="uploadFrom" enctype="multipart/form-data"
+				<form action="/insertbook" method="post" class="panel-body"  enctype="multipart/form-data"
 					name="insertForm">
 					<input type="hidden" id="isbn"	name="isbn" value="" >
 					<div class="form-group">

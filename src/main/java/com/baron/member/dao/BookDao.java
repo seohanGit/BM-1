@@ -1,6 +1,7 @@
 package com.baron.member.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.baron.member.model.BookModel;
 import com.baron.member.model.CodeModel;
@@ -10,7 +11,8 @@ import com.baron.member.model.SearchResult;
 
 public interface BookDao {
 	public void insertBook(BookModel model);
-
+	public void insertFile(Map<String, Object> map) throws Exception;
+	
 	public BookModel selectBook(String bookCode);
 
 	public void deleteBook(String booknum);

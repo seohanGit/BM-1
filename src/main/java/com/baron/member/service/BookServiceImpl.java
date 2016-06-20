@@ -18,15 +18,18 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
-import org.hibernate.validator.internal.util.logging.Log_.logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ContextAnnotationAutowireCandidateResolver;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.baron.bm.utils.FileUtils;
 import com.baron.member.dao.BookDao;
 import com.baron.member.dao.EtcDao;
 import com.baron.member.model.BookModel;
@@ -42,6 +45,9 @@ public class BookServiceImpl implements BookService {
 	String user = "ATTFL";
 	String pass = "EDPS";
 
+	@Resource(name="fileUtils")
+	private FileUtils fileUtils;
+	
 	@Autowired
 	private BookDao bookDao;
 
@@ -61,7 +67,7 @@ public class BookServiceImpl implements BookService {
 	}
 
 	@Override
-	public void insertBook(BookModel model) {
+	public void insertBook(BookModel model, HttpServletRequest request) throws Exception {
 		if (model.getQuantity() == 1) {
 			bookDao.insertBook(model);
 		} else if (model.getQuantity() > 1) {
@@ -69,7 +75,17 @@ public class BookServiceImpl implements BookService {
 				model.setBook_cd(model.getBook_cd() + "(" + (i + 1) + ")");
 				bookDao.insertBook(model);
 			}
+		}List<Map<String, Object>> list;
+		try {
+			list = fileUtils.parseInsertFileInfo(model, request);
+			for(int i=0, size=list.size(); i<size; i++){
+	            bookDao.insertFile(list.get(i));
+	        }
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+        
 	}
 
 	@Override
@@ -315,65 +331,18 @@ public class BookServiceImpl implements BookService {
 	public void setRecommend(BookModel bookmodel) {
 		bookDao.setRecommend(bookmodel);
 	}
+ 
 
 	@Override
-	public String download(MultipartFile file, String tid) throws Exception {
-		FTPClient ftpClient = new FTPClient();
-		try {
-			ftpClient.connect(server, port);
-			ftpClient.login(user, pass);
-			ftpClient.enterLocalPassiveMode();
-			ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
-
-			// APPROACH #1: using retrieveFile(String, OutputStream)
-			String remoteFile1 = "/SEOHAN/BOOKMST/" + file;
-			File downloadFile1 = new File("C:/TEMP/" + file);
-			OutputStream outputStream1 = new BufferedOutputStream(
-					new FileOutputStream(downloadFile1));
-			boolean success = ftpClient
-					.retrieveFile(remoteFile1, outputStream1);
-			outputStream1.close();
-		} catch (IOException ex) { 
-			ex.printStackTrace();
-		} finally {
-			try {
-				if (ftpClient.isConnected()) {
-					ftpClient.logout();
-					ftpClient.disconnect();
-				}
-			} catch (IOException ex) {
-				ex.printStackTrace();
-			}
-		}
+	public void uploadFile(MultipartFile file, String tid) throws Exception {
+		// TODO Auto-generated method stub
+		
 	}
 
-	public void uploadFile(File file, String tid) {
-
-		FTPClient ftpClient = new FTPClient();
-		try {
-
-			ftpClient.connect(server, port);
-			ftpClient.login(user, pass);
-			ftpClient.enterLocalPassiveMode();
-			ftpClient.setFileType(FTP.BINARY_FILE_TYPE); 
-
-			String firstRemoteFile = uploadFileName;
-			InputStream inputStream = new FileInputStream(file);
- 
-			boolean done = ftpClient.storeFile(firstRemoteFile, inputStream);
-			inputStream.close();  
-		} catch (IOException ex) { 
-			ex.printStackTrace();
-		} finally {
-			try {
-				if (ftpClient.isConnected()) {
-					ftpClient.logout();
-					ftpClient.disconnect();
-				}
-			} catch (IOException ex) {
-				ex.printStackTrace();
-			}
-		}
+	@Override
+	public String download(File file, String tid) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
  

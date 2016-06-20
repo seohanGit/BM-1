@@ -11,15 +11,12 @@
 
 
 
-<!-- 			<button class="btn btn-default  noborder" -->
-<!-- 				onclick="location.href='reserveList'">예약현황</button> -->
+			<!-- 			<button class="btn btn-default  noborder" -->
+			<!-- 				onclick="location.href='reserveList'">예약현황</button> -->
 			<button class="btn btn-default  noborder"
-				onclick="location.href='request'">구매요청</button>
-<button class="btn btn-default  noborder"
-				onclick="location.href='borrowReqList'">대여요청</button>
+				onclick="location.href='requestList'">구매요청</button>
 			<button class="btn btn-default  noborder"
-				onclick="location.href='delayList'">도서연체</button>
-			
+				onclick="location.href='borrowReqListAdmin'">대여요청</button>
 			<button class="btn btn-default  noborder"
 				onclick="location.href='recordList'">대여기록</button>
 			<button class="btn btn-default  noborder"
@@ -55,13 +52,13 @@
 			</div>
 			<div class="btn-group btn-group-xs">
 				<hr>
-<!-- 				<button class="btn btn-default  noborder" -->
-<!-- 					onclick="location.href='reservationListAll'">예약현황</button> -->
+				<!-- 				<button class="btn btn-default  noborder" -->
+				<!-- 					onclick="location.href='reservationListAll'">예약현황</button> -->
 
 				<button class="btn btn-default noborder"
 					onclick="location.href='request'">구매요청</button>
-<button class="btn btn-default  noborder"
-				onclick="location.href='borrowReqList'">대여요청</button>
+				<button class="btn btn-default  noborder"
+					onclick="location.href='borrowReqList'">대여요청</button>
 				<button class="btn btn-default  noborder"
 					onclick="location.href='delayList'">도서연체</button>
 				<button class="btn btn-default noborder"

@@ -80,8 +80,28 @@ public class RequestController {
 	}
 
 	@RequestMapping("/request")
-	public String request(HttpServletRequest request, Model model) {
-
+	public String request(HttpServletRequest request, Model model, HttpSession session) {
+		session.setAttribute("adminMode", "user");
+		List<BookModel> bookList = new ArrayList<BookModel>();
+		String id = null;
+		for (Cookie cookie : request.getCookies()) {
+			if (cookie.getName().equals("bm_id")) {
+				id = cookie.getValue();
+			}
+		}
+		if (id == "") {
+			return "getout";
+		} else {
+			bookList = requestservice.requestRecord(id);
+			System.out.println(id);
+			model.addAttribute("bookList", bookList);
+			return "request/request";		
+		}
+	}
+	
+	@RequestMapping("/requestList")
+	public String requestList(HttpServletRequest request, Model model) {
+		
 		List<BookModel> bookList = new ArrayList<BookModel>();
 		String id = null, permission = null;
 		for (Cookie cookie : request.getCookies()) {
@@ -106,7 +126,6 @@ public class RequestController {
 			}
 		}
 	}
-
 	@RequestMapping("/requestbook")
 	public String requestBook(HttpServletRequest request, Model model,
 			String isbn) throws Exception {

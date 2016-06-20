@@ -39,7 +39,7 @@
 						<li><a href="#" id="borrowList">대출현황</a></li>						
 <!-- 						<li><a href="#" id="reserveList">예약현황</a></li> -->
 						<li><a href="#" id="request">자료구입신청</a></li>
-						<li><a href="#" id="recordList">대출기록</a></li>
+						<li><a href="#" id="record">대출기록</a></li>
 						 
 					</ul></li>
 

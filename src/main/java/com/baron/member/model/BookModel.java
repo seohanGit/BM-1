@@ -40,11 +40,28 @@ public class BookModel {
 	private int total;
 	private String field;
 	private String rcmdChk;
-	
-
 	private String kname;
+	
+	private String file;
+	private String localFile;
 
 	
+	public String getFile() {
+		return file;
+	}
+
+	public void setFile(String file) {
+		this.file = file;
+	}
+
+	public String getLocalFile() {
+		return localFile;
+	}
+
+	public void setLocalFile(String localFile) {
+		this.localFile = localFile;
+	}
+
 	public String getKname() {
 		return kname;
 	}

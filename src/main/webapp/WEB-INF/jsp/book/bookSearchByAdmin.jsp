@@ -45,9 +45,7 @@
 
 	</div>
 	<div id="divLoadBody" style="display: none;" class="container">
-
 		<div class="col-md-12"><jsp:include page="../menu.jsp" />
-
 			<div class="panel panel-default">
 
 				<!-- /.panel-heading -->
@@ -60,7 +58,7 @@
 					<form action="/searchBook" method="post">
 						<div style="width: 70%; margin-right: 10px;">
 							<div class="left" style="width: 20%;" align="right">
-								<select class="selectpicker" 
+								<select class="selectpicker"
 									style="font-size: 14px; margin-top: 10px; vertical-align: baseline;"
 									id="b_group" name="b_group"><option selected>전체
 										<c:forEach items="${BCodeList}" var="code">
@@ -91,6 +89,8 @@
 							<!-- 									class="btn btn-default" type="submit">대출정지</button> -->
 						</div>
 					</form>
+				</div>
+				<div id="searchResultArea">
 					<form action="stopBorrowList" method="post">
 						<div class="dataTable_wrapper">
 							<div class="left"
@@ -194,52 +194,55 @@
 
 							</table>
 						</div>
+
 					</form>
+
 				</div>
 			</div>
-
 		</div>
-		<br>
 
-		<script src="/resources/js/book.js"></script>
-		<script src="/resources/js/common.js"></script>
-		<script src="/resources/js/metisMenu.min.js"></script>
-		<script src="/resources/js/jquery.dataTables.min.js"></script>
-		<script src="/resources/js/bootstrap-select.min.js"></script>
-		<script src="/resources/js/dataTables.bootstrap.min.js"></script>
-		<script src="/resources/js/jquery.dataTables.columnFilter.js"></script>
-		<script type="text/javascript">
-			$(document).ready(function() {
+	</div>
+	<br>
 
-				$('#dataTable').dataTable({
-					"pageLength" : 100,
-					paging : false,
-					searching : false,
-					"order" : [],
-					"columns" : [ {
-						"searchable" : false
-					}, null, null, {
-						"searchable" : false
-					}, {
-						"searchable" : false
-					}, {
-						"searchable" : false
-					} ]
+	<script src="/resources/js/book.js"></script>
+	<script src="/resources/js/common.js"></script>
+	<script src="/resources/js/metisMenu.min.js"></script>
+	<script src="/resources/js/jquery.dataTables.min.js"></script>
+	<script src="/resources/js/bootstrap-select.min.js"></script>
+	<script src="/resources/js/dataTables.bootstrap.min.js"></script>
+	<script src="/resources/js/jquery.dataTables.columnFilter.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
 
-				}).columnFilter({
-					aoColumns : [ null, null, null, {
-						type : "select"
-					}, {
-						type : "select"
-					}, null ]
-				});
+			$('#dataTable').dataTable({
+				"pageLength" : 100,
+				paging : false,
+				searching : false,
+				"order" : [],
+				"columns" : [ {
+					"searchable" : false
+				}, null, null, {
+					"searchable" : false
+				}, {
+					"searchable" : false
+				}, {
+					"searchable" : false
+				} ]
+
+			}).columnFilter({
+				aoColumns : [ null, null, null, {
+					type : "select"
+				}, {
+					type : "select"
+				}, null ]
 			});
+		});
 
-			var loadingBar = document.getElementById("loadingBar");
-			var divLoadBody = document.getElementById("divLoadBody");
+		var loadingBar = document.getElementById("loadingBar");
+		var divLoadBody = document.getElementById("divLoadBody");
 
-			divLoadBody.style.display = "";
-			loadingBar.style.display = "none";
-		</script>
+		divLoadBody.style.display = "";
+		loadingBar.style.display = "none";
+	</script>
 </body>
 </html>

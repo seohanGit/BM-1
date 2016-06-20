@@ -30,18 +30,18 @@ public class BookDaoImpl implements BookDao {
 	}
 
 	@Override
-	public List<BookModel> searchBook(String keyword) {
-		return session.selectList(NAMESPACE + "searchBook", keyword);
+	public List<BookModel> searchBook(Dto dto) {
+		return session.selectList(NAMESPACE + "searchBook", dto.getKeyword());
 	}
 
 	@Override
-	public List<BookModel> searchAuthor(String keyword) { 
-		return session.selectList(NAMESPACE + "searchAuthor", keyword);
+	public List<BookModel> searchAuthor(Dto dto) { 
+		return session.selectList(NAMESPACE + "searchAuthor", dto.getKeyword());
 	}
 
 	@Override
-	public List<BookModel> searchPublisher(String keyword) {
-		return session.selectList(NAMESPACE + "searchPublisher", keyword);
+	public List<BookModel> searchPublisher(Dto dto) {
+		return session.selectList(NAMESPACE + "searchPublisher", dto.getKeyword());
 	}
 	@Override
 	public BookModel selectBook(String book_cd) {

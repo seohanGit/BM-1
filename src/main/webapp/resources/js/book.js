@@ -235,26 +235,25 @@ $('#btn_bookList').click(function() {
  });
  $("#b_group").change(function() {
 	var options = $(this).val();
-	$('table tr').show();
-	 if(options == "전체"){
-		$('table tr').show();		
-	}else {
-		$("#dataTable tbody tr").each(function() {			
-			var tr = $(this);
-			var td = tr.find("td:eq(3)")
-			if (td.text() !== options) {
-				tr.hide();
-			} 
-		})
-	}
+//	$('table tr').show();
+//	 if(options == "전체"){
+//		$('table tr').show();		
+//	}else {
+//		$("#dataTable tbody tr").each(function() {			
+//			var tr = $(this);
+//			var td = tr.find("td:eq(3)")
+//			if (td.text() !== options) {
+//				tr.hide();
+//			} 
+//		})
+//	}
 	 $.ajax({ 
 		 type : "get", // get or post 
-		 url : "/searchBook",
+		 url : "/bookList",
 		 datatype : "json", // html, xml, json, jsonp, script,
 		 data : { 
 			 keyword : $('#keyword').val(),
-			 datepicker1 : $('#datepicker1').val(),
-			 datepicker2 : $('#datepicker2').val(),
+			 b_group : $('b_group').val()
 			 }, 
 		 success : function(data,status) {
 			 $('#dataTable_wrapper').empty().append(data);

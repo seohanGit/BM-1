@@ -57,6 +57,13 @@
 			<version>2.3.1</version>
 		</dependency>
 		<!-- LDAP 인증 -->
+		<!-- FTP -->
+		<dependency>
+		    <groupId>org.springframework.integration</groupId>
+		    <artifactId>spring-integration-ftp</artifactId>
+		    <version>4.2.0.RELEASE</version>
+		</dependency>
+
 
 		<!-- common-dbcp -->
 		<dependency>
@@ -166,7 +173,6 @@
 			<version>8.2-507.jdbc3</version>
 		</dependency>
 		<!-- DB2 connection -->
-
 
 		<!-- Logging depedencies -->
 		<!-- <dependency> <groupId>commons-logging</groupId> <artifactId>commons-logging</artifactId> 

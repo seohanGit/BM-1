@@ -73,16 +73,18 @@ public class MemberController {
 	}
 
 	@RequestMapping("/index")
-	public String index(Model model) throws Exception {
+	public String index(Model model, HttpSession session) throws Exception {
+		session.setAttribute("adminMode", "user");
 		Dto param = new Dto();
 		param.setYear(year);
 		param.setMonth(month);
-		String keyword = "";
+		param.setField("title");
+		param.setKeyword(""); 
 		List<BoardModel> notice = boardService.noticeList();
 		List<BookModel> bestBook = bookService.listBook("recommend", "", "", "");
 		List<MemberModel> bestTeam = statisticService.selectBestTeam(year);
 		List<BookModel> newBook = statisticService.getNewbook();
-		List<BookModel> bookList = bookService.searchBook("title", keyword);
+		List<BookModel> bookList = bookService.searchBook(param);
 		
 		model.addAttribute("bookList", bookList);
 		String permission = "";
@@ -129,16 +131,6 @@ public class MemberController {
 		String info = model.getTeam_nm() + model.getJikb() + model.getKname();
 		mav.addObject("info", info);
 		mav.addObject("permission", model.getPermission());
-		/*
-		 * model = joinService.login(model); if (model != null) {
-		 * System.out.println(model.getId() + model.getPermission());
-		 * response.addCookie(new Cookie("bm_id", model.getId()));
-		 * System.out.println(model.getId() + "login Success");
-		 * 
-		 * response.addCookie(new Cookie("bm_permission", model
-		 * .getPermission())); mav.addObject("result", true); } else {
-		 * mav.addObject("result", false); }
-		 */
 		return mav;
 	}
 
@@ -228,57 +220,7 @@ public class MemberController {
 
 		return "/member/identify";
 	}
-
-	@RequestMapping("/joinForm")
-	public String joinForm() {
-		return "/member/join";
-	}
-
-	@RequestMapping("/join")
-	public String join(@Valid MemberModel memberModel) throws Exception {
-		if (joinService.selectMemberById(memberModel.getId()) == 0) {
-			joinService.join(memberModel);
-			return "/member/joinSuccess";
-		} else
-			return "/member/joinFail";
-	}
-
-	@RequestMapping("/modify")
-	public String modifyidentity(String password, HttpServletRequest request,
-			Model model) {
-		String pass = null;
-
-		for (Cookie cookie : request.getCookies()) {
-			if (cookie.getName().equals("bm_id")) {
-				System.out.println(cookie.getValue() + "modify");
-				pass = joinService.identify(cookie.getValue());
-				MemberModel memberModel = new MemberModel();
-				memberModel.setId(cookie.getValue());
-				memberModel.setPassword(pass);
-				memberModel = joinService.login(memberModel.getId());
-				model.addAttribute("Member", memberModel);
-			}
-		}
-
-		return (pass.equals(password)) ? "/member/modifyidentity"
-				: "/member/identifyfail";
-	}
-
-	@RequestMapping("/modifySuccess")
-	public String modifySuccess(@Valid MemberModel model,
-			HttpServletRequest request) {
-
-		for (Cookie cookie : request.getCookies()) {
-			if (cookie.getName().equals("bm_id")) {
-				model.setId(cookie.getValue());
-			}
-		}
-
-		joinService.updateMember(model);
-
-		return "/member/modifySuccess";
-	}
-
+   
 	@RequestMapping("/admin")
 	public String admin(HttpServletRequest request, HttpSession session, Model model)
 			throws Exception {

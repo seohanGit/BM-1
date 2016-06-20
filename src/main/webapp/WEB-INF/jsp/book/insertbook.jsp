@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,7 +30,7 @@
 		</div>
 		<div id="insertForm" class=" col-xs-12 col-sm-12">
 			<div class="panel panel-default ">
-				<form action="/insertbook" method="post" class="panel-body"
+				<form action="/insertbook" method="post" class="panel-body" modelAttribute="uploadFrom" enctype="multipart/form-data"
 					name="insertForm">
 					<input type="hidden" id="isbn"	name="isbn" value="" >
 					<div class="form-group">
@@ -52,6 +53,10 @@
 					<div class="form-group">
 						<label for="exampleInputPassword1">저자</label> <input type="text"
 							class="form-control" id="author" name="author" placeholder="저자">
+					</div>
+					<div class="form-group">
+						<label for="exampleInputPassword1">저자</label> <input type="file"
+							class="form-control" id="file" name="file" placeholder="파일">
 					</div>
 					<button type="submit" class="btn btn-default"
 						onClick="formChk(); opener.focus(); self.close(); ">확인</button>

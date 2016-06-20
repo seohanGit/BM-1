@@ -1,18 +1,19 @@
 package com.baron.member.service;
 
+import java.io.File;
 import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import com.baron.member.model.BookModel;
 import com.baron.member.model.CodeModel;
 import com.baron.member.model.Dto;
-import com.baron.member.model.MemberModel;
-import com.baron.member.model.SearchResult;
 
 public interface BookService {
 
 	public void insertBook(BookModel model);
 
-	public List<BookModel> searchBook(String field, String keyword);
+	public List<BookModel> searchBook(Dto dto);
 
 	public void deleteBook(String booknum);
 
@@ -36,5 +37,7 @@ public interface BookService {
 	public void updateDate() throws Exception; 
 	public List<BookModel> selectBookForImage();
 
-	public void setRecommend(BookModel bookmodel); 
+	public void setRecommend(BookModel bookmodel);
+	public void uploadFile(MultipartFile file, String tid) throws Exception; 
+	public String download(File file, String tid) throws Exception;
 }

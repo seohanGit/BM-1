@@ -29,9 +29,9 @@ public interface BookDao {
 	public List<CodeModel> selectBCodeList();
 	public List<CodeModel> selectCCodeList();
 
-	public List<BookModel> searchBook(String keyword); 
-	public List<BookModel> searchAuthor(String keyword); 
-	public List<BookModel> searchPublisher(String keyword);
+	public List<BookModel> searchBook(Dto dto); 
+	public List<BookModel> searchAuthor(Dto dto); 
+	public List<BookModel> searchPublisher(Dto dto);
 
 	public void setRecommend(BookModel bookmodel);
 

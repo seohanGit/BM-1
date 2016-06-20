@@ -17,33 +17,7 @@
 <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="/resources/css/common.css" rel="stylesheet">
 <link href="/resources/css/signin.css" rel="stylesheet"> 
-<script type="text/javascript"> 
-// $('.borrow1').on('click', function() {  
-//     var listType = $('#listType').val();
-//     var keyword = $('#keyword').val();  
-//     var	bookcd = $('#book_cd').text();  
-//     $.ajax({
-// 		type : "GET", // GET or POST
-// 		url : "/borrowbook", // URL
-// 		datatype : "xml", // html, xml, json, jsonp, script, text
-// 		contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-// 		data : {
-// 			book_cd : bookcd,
-// 			listType : listType,
-// 			keyword : keyword }, // parameters as plain object 
-// 		success : function(data, status) { // Ajax complete handelr 
-// 			if(data=='fail'){ 
-// 				alert('대출이 불가합니다.');				 
-// 			}else{
-// 				alert('대출되었습니다.');
-// // 				if(listType!=''){
-// // 					opener.location.href='/searchBook?listType='+listType+'&keyword='+keyword;
-// // 				}
-// 				self.close();
-// 			}			
-// 		}		
-//     });    
-// });
+<script type="text/javascript">  
 </script>
 </head>
 <body style="background-color: white;"> 

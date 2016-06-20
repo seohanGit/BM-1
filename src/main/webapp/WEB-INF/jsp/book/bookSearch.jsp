@@ -1,7 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" 
-	pageEncoding="UTF-8"%> 
-<% request.setCharacterEncoding("utf-8"); %>
-<% response.setContentType("text/html; charset=utf-8"); %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%
+	request.setCharacterEncoding("utf-8");
+%>
+<%
+	response.setContentType("text/html; charset=utf-8");
+%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
@@ -17,7 +21,7 @@
 <link href="/resources/css/bootstrap-select.min.css" rel="stylesheet">
 <link href="/resources/css/signin.css" rel="stylesheet">
 <link href="/resources/css/common.css" rel="stylesheet">
-	<script src="/resources/js/jquery/jquery.js"></script>
+<script src="/resources/js/jquery/jquery.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		var today = new Date();
@@ -60,7 +64,7 @@
 	<jsp:include page="../nav.jsp" />
 	<div id="loadingBar"
 		style="background-color: #fff; position: absolute; top: 0; left: 0; width: 100%; height: 100%; text-align: center; margin: 0 auto; z-index: 100000;">
-		<table style="width:100%; height:100%; border:0 ; bgcolor:#fff" >
+		<table style="width: 100%; height: 100%; border: 0; bgcolor: #fff">
 			<tr>
 				<td align="center">
 					<div style="text-align: center;">
@@ -98,16 +102,15 @@
 											style="font-size: 14px; margin-top: 10px; vertical-align: baseline;"
 											id="b_group" name="b_group"><option selected>전체
 												<c:forEach items="${BCodeList}" var="code">
-													<option  value="${code.code}-${code.name}">${code.code}-${code.name}
+													<option value="${code.code}-${code.name}">${code.code}-${code.name}
 												</c:forEach></select>
 									</div>
 									<div class="input-group left"
 										style="vertical-align: baseline; float: left; width: 80%">
 
-										<span class="input-group-btn"> 
-										<input id="listType" name="listType" type="hidden" value="${listType }"> 
-										<input type="text"
-											class="form-control" id="keyword" name="keyword"
+										<span class="input-group-btn"> <input id="listType"
+											name="listType" type="hidden" value="${listType }"> <input
+											type="text" class="form-control" id="keyword" name="keyword"
 											placeholder="기술자료실 도서 검색 [ 소문자로 입력 ]" value="${keyword }">
 											<button class="btn btn-default" type="submit" id="btn_find">
 												<span class="glyphicon glyphicon-search"></span>
@@ -119,22 +122,24 @@
 						</form>
 					</div>
 				</div>
+			</div>
+			<div id="searchResultArea">
 				<div class="dataTable_wrapper">
 					<table class="table table-striped table-bordered " id="dataTable">
 						<thead>
-							<tr> 
+							<tr>
 								<th>도서명</th>
 								<th class="hidden-xs hidden-sm hidden-md author">저자</th>
 								<th class="hidden-xs hidden-sm genre">출판사</th>
 								<th class="hidden-xs genre" style="width: 120px">분류</th>
-								<th class="col-xs-3 col-lg-2 col-md-2" >대여상태</th> 
+								<th class="col-xs-3 col-lg-2 col-md-2">대여상태</th>
 								<th class="image">대출</th>
 							</tr>
 						</thead>
 
 						<tbody>
 							<c:forEach items="${bookList}" var="book">
-								<tr> 
+								<tr>
 									<td align="left"><a href="#"
 										onclick="window.open('/bookInfo?book_cd=${book.book_cd}&keyword=${keyword }&listType=${listType }',
 										'new','resizeble=yes scrollbars=yes,  width=750, height=600');">
@@ -146,10 +151,9 @@
 										<c:when test="${book.rentchk=='0'}">
 											<td align="left"><mark>대출가능</mark></td>
 											<td align="left"><button class="btn btn-default borrow"
-													type="button" id="borrowbook" value="${book.book_cd}"
-<%-- 													onClick="location.href='/borrowbook?book_cd=${book.book_cd}&listType=${listType}&keyword=${keyword}';"  --%>
+													type="button" id="borrowbook" value="${book.book_cd}"<%-- 													onClick="location.href='/borrowbook?book_cd=${book.book_cd}&listType=${listType}&keyword=${keyword}';"  --%>
 													>대출</button>
-													</td>													
+											</td>
 										</c:when>
 
 										<c:when test="${book.rentchk=='1' and book.reservechk=='1'}">
@@ -157,22 +161,21 @@
 											<td></td>
 										</c:when>
 										<c:when test="${book.rentchk=='1' and book.reservechk=='0'}">
-											<td><p style="color: blue;">대출요청중</p> 
-<%-- 											반납일 : ${book.returndate} --%>
+											<td><p style="color: blue;">대출요청중</p> <%-- 											반납일 : ${book.returndate} --%>
 											</td>
 											<td>
-<!-- 											<button class="btn btn-default" type="button" -->
-<!-- 													id="reservebook" -->
-<%-- 													onClick="location.href='/reservation?book_cd=${book.book_cd}'">예약</button> --%>
-													</td>
+												<!-- 											<button class="btn btn-default" type="button" -->
+												<!-- 													id="reservebook" --> <%-- 													onClick="location.href='/reservation?book_cd=${book.book_cd}'">예약</button> --%>
+											</td>
 										</c:when>
 										<c:when test="${book.rentchk=='2' and book.reservechk=='1'}">
 											<td>예약중</td>
 											<td></td>
 										</c:when>
 										<c:when test="${book.rentchk=='2' and book.reservechk=='0'}">
-											<td><p style="color: blue;">대출중</p> <p class="hidden-xs">반납일
-												:${book.returndate}<p></td>
+											<td><p style="color: blue;">대출중</p>
+												<p class="hidden-xs">반납일 :${book.returndate}
+												<p></td>
 											<td></td>
 										</c:when>
 										<c:when test="${book.rentchk=='4'}">
@@ -237,7 +240,7 @@
 
 		divLoadBody.style.display = "";
 		loadingBar.style.display = "none";
-		  
+
 		$('.selectpicker').selectpicker();
 	</script>
 </body>

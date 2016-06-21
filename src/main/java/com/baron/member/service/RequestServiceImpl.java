@@ -83,8 +83,7 @@ public class RequestServiceImpl implements RequestService {
 			approval.setDescription1("[도서구매신청]");
 			approval.setDescription2(model.getReason());
 			approval.setNowDate(nowDate);
-			approval.setId(member.getId());
-			
+			approval.setId(member.getId());			
 			requestDao.approveChief(approval);
 			
 			model.setReqstatus("3");

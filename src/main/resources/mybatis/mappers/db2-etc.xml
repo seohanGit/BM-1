@@ -30,9 +30,7 @@
 
 	<select id="copyDate" resultType="BookModel">
 		SELECT
-		Left(A.rece_ymd,
-		4)||'-'||substring(A.rece_ymd,5,2)||'-'||substring(A.rece_ymd, 7,2) as
-		rcv_date, book_cd from sitlib.bookmst A WHERE rece_ymd
+		rece_ymd rcv_date, book_cd from sitlib.bookmst A WHERE rece_ymd
 		is not null AND
 		price is not null AND rece_ymd != ''AND price!='0'
 		ORDER BY RECE_YMD
@@ -40,7 +38,7 @@
 	</select>
 
 	<update id="updateDate" parameterType="BookModel">
-		UPDATE testlib.bookmst SET
+		UPDATE sitlib.bookmst SET
 		rcv_date = #{rcv_date} WHERE book_cd=#{book_cd}
 	</update>
 
@@ -48,21 +46,18 @@
 	<select id="copyRent" resultType="BookModel">
 
 		SELECT DISTINCT A.SABUN AS id ,
-		Left(A.req_ymd,
-		4)||'-'||substring(A.req_ymd,5,2)||'-'||substring(A.req_ymd, 7,2) AS
 		req_ymd,
-		B.book_cd AS book_cd, Left(A.retu_ymd,
-		4)||'-'||substring(A.retu_ymd,5,2)||'-'||substring(A.retu_ymd, 7,2) AS
+		B.book_cd AS book_cd, 
 		retu_ymd,
 		A.dept_no AS dept_nm
-		FROM sitlib.bookreq A INNER JOIN
+		FROM sitlib.bookreqst A INNER JOIN
 		sitlib.bookreqhis
 		B ON A.SABUN = B.SABUN AND A.req_ymd = B.req_ymd
 	</select>
 
 	<insert id="backupRecord" parameterType="BookModel">
 		INSERT INTO
-		TESTLIB.BOOKRENT
+		sitlib.BOOKRENT
 		(ID, RENTDATE, RETURNDATE, team_nm, book_cd)
 		VALUES(#{id},
 		#{rentdate},
@@ -71,7 +66,7 @@
 
 	<select id="selectBookForImage" resultType="BookModel">
 		SELECT isbn, book_cd FROM
-		testlib.bookmst
-		where    title is null 
+		sitlib.bookmst
+		where summary is null and left(b_group,1) = 'B'
 	</select>
 </mapper>

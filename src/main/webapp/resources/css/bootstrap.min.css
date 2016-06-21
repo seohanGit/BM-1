@@ -182,7 +182,9 @@ a {
 }
 
 a:active, a:hover {
-	outline: 0
+	outline: 0;
+ cursor:pointer;
+
 }
 
 abbr[title] {
@@ -444,10 +446,8 @@ table {
 
 td, th {
 	padding: 0;
-	white-space: nowrap;
-	text-overflow: ellipsis;
-	overflow: hidden;
-	
+	white-space: normal;
+	text-overflow: ellipsis; 
 }
 /*! Source: https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css */
 @media print {
@@ -1833,16 +1833,13 @@ pre code {
 	overflow-y: scroll
 }
 
-.container {
-	padding-right: 15px;
-	padding-left: 15px;
+.container { 
 	margin-right: auto;
 	margin-left: auto
 }
 
 @media ( min-width :768px) {
-	.container {
-		width: 750px
+	.container { 
 	}
 }
 
@@ -2588,7 +2585,7 @@ caption {
 }
 
 th {
-	text-align: left
+	text-align: center;
 }
 
 .table {
@@ -5537,6 +5534,7 @@ border-radius
 
 .nav>li {
 	position: relative;
+	padding-left: 2%;
 }
 
 .nav>li>a {
@@ -5933,7 +5931,8 @@ border-radius
 
 .navbar-nav {
 	vertical-align: middle;
-	margin: 7.5px -15px
+	margin: 7.5px -15px;
+	width:80%;
 }
 
 .navbar-nav>li>a {

@@ -12,7 +12,7 @@
 		TPRLIB.GR_INSA C WHERE B.id=C.ASABN
 		FETCH
 		first 1 rows only) kname
-		FROM TESTLIB.BOOKBOARD B
+		FROM sitlib.BOOKBOARD B
 		WHERE
 		B.boardtype='0'
 		ORDER
@@ -22,7 +22,7 @@
 	<select id="selectBoardregister" resultType="BoardModel">
 		SELECT *
 		FROM
-		TESTLIB.BOOKBOARD
+		sitlib.BOOKBOARD
 		WHERE boardtype='0'
 		ORDER BY REGISDATE
 	</select>
@@ -36,7 +36,7 @@
 	<select id="selectBoardtitle" resultType="BoardModel">
 		SELECT *
 		FROM
-		TESTLIB.BOOKBOARD
+		sitlib.BOOKBOARD
 		WHERE boardtype='0'
 		ORDER BY title
 	</select>
@@ -44,29 +44,29 @@
 	<select id="selectBoardnum" parameterType="int" resultType="BoardModel">
 		SELECT *
 		FROM
-		TESTLIB.BOOKBOARD
+		sitlib.BOOKBOARD
 		WHERE boardnum=#{boardnum}
 
 	</select>
 	<insert id="insertBoard" parameterType="BoardModel">
 		INSERT INTO
-		TESTLIB.BOOKBOARD
-		(title,content,REGISDATE,modifidate,id)
+		sitlib.BOOKBOARD
+		(title,content,REGISDATE,modifidate,id,boardtype)
 		VALUES
-		(#{title},#{content},CURRENT DATE,CURRENT DATE,#{id})
+		(#{title},#{content},#{regisdate},#{modifidate},#{id}, #{boardType} )
 	</insert>
 
 	<delete id="deleteBoard" parameterType="int">
 		DELETE FROM
-		TESTLIB.BOOKBOARD
+		sitlib.BOOKBOARD
 		WHERE
 		boardnum=#{boardnum}
 	</delete>
 
 	<update id="modifyBoard" parameterType="BoardModel">
-		UPDATE TESTLIB.BOOKBOARD
+		UPDATE sitlib.BOOKBOARD
 		SET
-		content=#{content}, title=#{title}, modifidate=CURRENT DATE
+		content=#{content}, title=#{title}, modifidate=#{modifidate}
 		WHERE
 		boardnum=#{boardnum}
 	</update>
@@ -74,7 +74,7 @@
 	<select id="noticeList" resultType="BoardModel">
 		SELECT *
 		FROM
-		TESTLIB.BOOKBOARD
+		sitlib.BOOKBOARD
 		WHERE
 		boardtype='1'
 		ORDER BY
@@ -82,23 +82,24 @@
 	</select>
 
 	<insert id="insertNotice" parameterType="BoardModel">
+		
 		INSERT INTO
-		TESTLIB.BOOKBOARD
-		(content, REGISDATE)
+		sitlib.BOOKBOARD
+		(title,content,REGISDATE,modifidate,id,boardtype)
 		VALUES
-		(#{content}, CURRENT DATE)
+		(#{title},#{content},#{regisdate},#{modifidate},#{id}, #{boardType})
 	</insert>
-	<delete id="deleteNotice" parameterType="String">
+	<delete id="deleteNotice" parameterType="int">
 		DELETE FROM
-		TESTLIB.BOOKBOARD
+		sitlib.BOOKBOARD
 		WHERE
 		boardnum=#{boardnum}
 	</delete>
 
 	<update id="modifyNotice" parameterType="BoardModel">
-		UPDATE TESTLIB.BOOKBOARD
+		UPDATE sitlib.BOOKBOARD
 		SET
-		content=#{content}, MODIFYDATE=CURRENT DATE
+		content=#{content}, MODIFiDATE=#{modifidate}
 		WHERE
 		boardnum=#{boardnum}
 	</update>

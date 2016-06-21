@@ -36,14 +36,14 @@ public class RequestDaoImpl implements RequestDao {
 	}
 
 	@Override
-	public void deleteRequest(String req_cd) {
+	public void deleteRequest(BookModel model) {
 		// TODO Auto-generated method stub
-		session.update(NAMESPACE + "deleteRequest", req_cd);
+		session.update(NAMESPACE + "deleteRequest", model);
 	}
 
 	@Override
-	public BookModel selectBook(String req_cd) {
-		return session.selectOne(NAMESPACE + "selectRequest", req_cd);
+	public BookModel selectBook(BookModel model) {
+		return session.selectOne(NAMESPACE + "selectRequest", model);
 
 	}
 
@@ -54,15 +54,13 @@ public class RequestDaoImpl implements RequestDao {
 	}
 
 	@Override
-	public void rejectRequest(String req_cd) {
-		session.update(NAMESPACE + "rejectRequest", req_cd);
+	public void rejectRequest(BookModel book) {
+		session.update(NAMESPACE + "rejectRequest",book);
 
 	}
 
 	@Override
-	public void modifiBook(BookModel book) {
-		System.out.println(book.getB_group());
-		System.out.println(book.getReq_cd());
+	public void modifiBook(BookModel book) { 
 		session.update(NAMESPACE + "modifiReqBook", book);
 
 	}

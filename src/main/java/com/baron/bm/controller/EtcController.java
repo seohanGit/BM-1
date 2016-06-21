@@ -55,14 +55,14 @@ public class EtcController {
 
 		bookList = rentservice.copyRent();
 
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
 
 		for (BookModel bookmodel : bookList) {
-			bookmodel.setRentdate(format.parse(bookmodel.getReq_ymd()));
-			bookmodel.setReturndate(format.parse(bookmodel.getRetu_ymd()));
+			bookmodel.setRentdate(format.format(bookmodel.getReq_ymd()));
+			bookmodel.setReturndate(format.format(bookmodel.getRetu_ymd()));
 
 			bookmodel.setBook_cd(bookmodel.getBook_cd());
-			bookmodel.setTeam_nm(bookmodel.getTeam_nm());
+//			bookmodel.setTeam_nm(bookmodel.getTeam_nm());
 			bookmodel.setId(bookmodel.getId());
 			System.out.println(bookmodel.getBook_cd() + bookmodel.getRentdate()
 					+ bookmodel.getReq_ymd());
@@ -101,6 +101,7 @@ public class EtcController {
 		for (BookModel bookmodel : bookList) {
 			BookModel book = new BookModel();
 			book.setBook_cd(bookmodel.getBook_cd());
+			book.setBook_cd1 (bookmodel.getBook_cd());
 			isbn = bookmodel.getIsbn().trim();
 
 			if (isbn != null) {
@@ -112,6 +113,7 @@ public class EtcController {
 					bookmodel.setPublish(book.getPublish());
 					bookmodel.setImageurl(book.getImageurl());
 					bookmodel.setAuthor(book.getAuthor());
+					bookmodel.setSummary(book.getSummary());
 					bookservice.updateBook(bookmodel);
 				}
 			}

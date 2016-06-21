@@ -5,14 +5,14 @@ import java.util.Date;
 public class BookModel {
 	private String book_cd;
 	private String book_cd1;
-
+ 
 	private String b_group;
 	private String c_group;
 	private int quantity;
 
-	private java.util.Date rentdate;
-	private java.util.Date returndate;
-	private Date reser_date;
+	private String rentdate;
+	private String returndate;
+	private String reser_date;
 	private String title;
 	private String imageurl;
 	private String publish;
@@ -21,28 +21,54 @@ public class BookModel {
 	private String link;
 	private String isbn;
 	private String summary;
+	private String reason;
 	private int totalResults;
 
 	private String rentchk;
 	private String reservechk;
+	private String req_ymd;
+	private String retu_ymd;
 
 	private String rcv_date;
 	private String reqstatus;
-	private Date reqdate;
+	private String reqdate;
 	private String req_cd;
-
-	private String sabun;
-	private String id;
-	private String kname;
-	private String team_nm;
-	private String reason;
 	private int count;
-	private String req_ymd;
-	private String retu_ymd;
-	private String mobi_no;
+	private String id;
 
 	private String extendchk;
 	private int total;
+	private String field;
+	private String rcmdChk;
+	private String kname;
+	
+	private String file;
+	private String localFile;
+
+	
+	public String getFile() {
+		return file;
+	}
+
+	public void setFile(String file) {
+		this.file = file;
+	}
+
+	public String getLocalFile() {
+		return localFile;
+	}
+
+	public void setLocalFile(String localFile) {
+		this.localFile = localFile;
+	}
+
+	public String getKname() {
+		return kname;
+	}
+
+	public void setKname(String kname) {
+		this.kname = kname;
+	}
 
 	public String getReason() {
 		return reason;
@@ -52,6 +78,54 @@ public class BookModel {
 		this.reason = reason;
 	}
 
+	public String getReq_ymd() {
+		return req_ymd;
+	}
+
+	public void setReq_ymd(String req_ymd) {
+		this.req_ymd = req_ymd;
+	}
+
+	public String getRetu_ymd() {
+		return retu_ymd;
+	}
+
+	public void setRetu_ymd(String retu_ymd) {
+		this.retu_ymd = retu_ymd;
+	}
+
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getRcmdChk() {
+		return rcmdChk;
+	}
+
+	public void setRcmdChk(String rcmdChk) {
+		this.rcmdChk = rcmdChk;
+	}
+
+	public String getField() {
+		return field;
+	}
+
+	public void setField(String field) {
+		this.field = field;
+	}
+ 
 	public int getTotal() {
 		return total;
 	}
@@ -66,15 +140,7 @@ public class BookModel {
 
 	public void setExtendchk(String extendchk) {
 		this.extendchk = extendchk;
-	}
-
-	public String getMobi_no() {
-		return mobi_no;
-	}
-
-	public void setMobi_no(String mobi_no) {
-		this.mobi_no = mobi_no;
-	}
+	} 
 
 	public int getTotalResults() {
 		return totalResults;
@@ -83,50 +149,12 @@ public class BookModel {
 	public void setTotalResults(int totalResults) {
 		this.totalResults = totalResults;
 	}
-
-	public String getRetu_ymd() {
-		return retu_ymd;
-	}
-
-	public int getCount() {
-		return count;
-	}
-
-	public void setCount(int count) {
-		this.count = count;
-	}
-
-	public void setRetu_ymd(String retu_ymd) {
-		this.retu_ymd = retu_ymd;
-	}
-
-	public void setReq_ymd(String req_ymd) {
-		this.req_ymd = req_ymd;
-	}
-
-	public String getReq_ymd() {
-		return req_ymd;
-	}
+ 
 
 	public String getBook_cd1() {
 		return book_cd1;
 	}
-
-	public String getTeam_nm() {
-		return team_nm;
-	}
-
-	public void setTeam_nm(String team_nm) {
-		this.team_nm = team_nm;
-	}
-
-	public String getKname() {
-		return kname;
-	}
-
-	public void setKname(String kname) {
-		this.kname = kname;
-	}
+ 
 
 	public String getReq_cd() {
 		return req_cd;
@@ -135,36 +163,29 @@ public class BookModel {
 	public void setReq_cd(String req_cd) {
 		this.req_cd = req_cd;
 	}
+ 
 
-	public String getSabun() {
-		return sabun;
-	}
-
-	public void setSabun(String sabun) {
-		this.sabun = sabun;
-	}
-
-	public java.util.Date getRentdate() {
+	public String getRentdate() {
 		return rentdate;
 	}
 
-	public void setRentdate(java.util.Date date) {
+	public void setRentdate(String date) {
 		this.rentdate = date;
 	}
 
-	public Date getReser_date() {
+	public String getReser_date() {
 		return reser_date;
 	}
 
-	public void setReser_date(Date reser_date) {
+	public void setReser_date(String reser_date) {
 		this.reser_date = reser_date;
 	}
 
-	public Date getReqdate() {
+	public String getReqdate() {
 		return reqdate;
 	}
 
-	public void setReqdate(Date reqdate) {
+	public void setReqdate(String reqdate) {
 		this.reqdate = reqdate;
 	}
 
@@ -272,16 +293,9 @@ public class BookModel {
 	public void setIsbn(String isbn) {
 		this.isbn = isbn;
 	}
+ 
 
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public void setReturndate(java.util.Date date) {
+	public void setReturndate(String date) {
 		this.returndate = date;
 	}
 
@@ -291,16 +305,7 @@ public class BookModel {
 
 	public void setLink(String link) {
 		this.link = link;
-	}
-
-	public String getReserid() {
-		return id;
-	}
-
-	public void setReserid(String reserid) {
-		this.id = reserid;
-	}
-
+	} 
 	public String getImageurl() {
 		return imageurl;
 	}
@@ -309,11 +314,11 @@ public class BookModel {
 		this.imageurl = imageurl;
 	}
 
-	public java.util.Date getReturndate() {
+	public String getReturndate() {
 		return returndate;
 	}
 
-	public void setRetrundate(Date returndate) {
+	public void setRetrundate(String returndate) {
 		this.returndate = returndate;
 	}
 
@@ -325,4 +330,7 @@ public class BookModel {
 		this.c_group = c_group;
 	}
 
+	public void setBook_cd1(String book_cd1) {
+		this.book_cd1 = book_cd1;
+	}
 }

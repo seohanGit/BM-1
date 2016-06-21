@@ -1,10 +1,14 @@
 package com.baron.bm.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,18 +16,20 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.baron.member.dao.BookDao;
 import com.baron.member.dao.JoinDao;
 import com.baron.member.dao.RentDao;
 import com.baron.member.model.BookModel;
+import com.baron.member.model.MemberModel;
 import com.baron.member.model.SmsModel;
 import com.baron.member.service.NotifiService;
 import com.baron.member.service.RentService;
 
 @Controller
 public class RentController {
-
+ 
 	@Autowired
 	RentService rentservice;
 
@@ -37,11 +43,13 @@ public class RentController {
 	@Autowired
 	private JoinDao joinDao;
 
+	
 	@RequestMapping("/borrowbook")
 	public String borrowBook(HttpServletRequest request, String book_cd,
-			BookModel book) {
+			BookModel book, String keyword, String listType) throws UnsupportedEncodingException {
 		String id = null;
-		// String late = null;
+		if(keyword==null){keyword="";}
+		if(listType==null){listType="";} 
 		for (Cookie cookie : request.getCookies()) {
 			if (cookie.getName().equals("bm_id")) {
 				id = cookie.getValue();
@@ -51,12 +59,14 @@ public class RentController {
 		book.setBook_cd(book_cd);
 		book.setRentchk("1");
 		BookModel chkbook = rentservice.selectBook(book_cd);
+		int cnt = rentDao.checkRentCount(book.getId());
+		
 		if (id != null) {
-			if (chkbook.getRentchk().equals("0")) {
+			if (chkbook.getRentchk().equals("0") && cnt < 5) {
 				rentservice.borrowBook(book);
-				return "rent/borrowSuccess";
+				
+				return "redirect:searchBook?listType="+listType+"&keyword="+URLDecoder.decode(keyword, "UTF-8");
 			} else {
-
 				return "rent/borrowfail";
 			}
 		} else {
@@ -66,7 +76,7 @@ public class RentController {
 
 	@RequestMapping(value = "/confirmBorrowBook", method = RequestMethod.GET)
 	public String confirmBorrowBook(HttpServletRequest request, String book_cd) {
-		String id = null;
+		String id = null; 
 		rentservice.confirmBorrowBook(book_cd);
 		notifiService.notifiRent(book_cd);
 		for (Cookie cookie : request.getCookies()) {
@@ -74,13 +84,12 @@ public class RentController {
 				id = cookie.getValue();
 			}
 		}
-		if (rentservice.selectReservation(book_cd) != null) {
-			if (rentservice.selectReservation(book_cd).getId() == id)
-				rentservice.deleteReserve(book_cd);
-
+		BookModel reserveBook = rentservice.selectReservation(book_cd);
+		if (reserveBook != null) {
+			if (reserveBook.getId() == id)
+				rentservice.deleteReserve(book_cd); 
 		}
-
-		return "redirect:borrowList";
+		return "rent/confirmBorrowSuccess";
 	}
 
 	@RequestMapping("/confirmBorrowBookList")
@@ -95,17 +104,33 @@ public class RentController {
 		for (String book_cd : book_cdList) {
 			rentservice.confirmBorrowBook(book_cd);
 			notifiService.notifiRent(book_cd);
-			if (rentservice.selectReservation(book_cd) != null) {
-				if (rentservice.selectReservation(book_cd).getId() == id)
+			BookModel reserveBook = rentservice.selectReservation(book_cd);
+			if (reserveBook != null) {
+				if (reserveBook.getId() == id)
 					rentservice.deleteReserve(book_cd);
 
 			}
 		}
-		return "redirect:borrowList";
+		return "redirect:borrowReqList";
 	}
 
 	@RequestMapping("/borrowReqList")
 	public String borrowReqList(HttpServletRequest request, Model model) {
+		String id = null;
+		for (Cookie cookie : request.getCookies()) {
+			if (cookie.getName().equals("bm_id")) {
+				id = cookie.getValue();
+			}
+		} 
+		List<BookModel> bookList = rentservice.borrowList(id);
+		List<BookModel> rentList = rentservice.rentList(id);
+		model.addAttribute("bookList", bookList);
+		model.addAttribute("rentList", rentList);
+		return "rent/borrowReqList";  
+	}
+	@RequestMapping("/borrowReqListAdmin")
+	public String borrowReqListAdmin(HttpServletRequest request, Model model, HttpSession session) {
+		session.setAttribute("adminMode", "admin");
 		String id = null;
 		for (Cookie cookie : request.getCookies()) {
 			if (cookie.getName().equals("bm_id")) {
@@ -116,16 +141,18 @@ public class RentController {
 			if (cookie.getName().equals("bm_permission")) {
 				if (cookie.getValue().equals("1")) {
 					List<BookModel> bookList = rentservice.borrowList();
+					List<BookModel> rentList = rentservice.rentList();
 					model.addAttribute("bookList", bookList);
+					model.addAttribute("rentList", rentList);
 					return "rent/borrowReqListByAdmin";
-
 				} else if (cookie.getValue().equals("0")) {
 					List<BookModel> bookList = rentservice.borrowList(id);
+					List<BookModel> rentList = rentservice.rentList(id);
 					model.addAttribute("bookList", bookList);
+					model.addAttribute("rentList", rentList);
 					return "rent/borrowReqList";
 				}
 			}
-
 		}
 		return null;
 	}
@@ -135,10 +162,19 @@ public class RentController {
 		String id = null;
 		for (Cookie cookie : request.getCookies()) { 
 			if (cookie.getName().equals("bm_id")) {
-
 				id = cookie.getValue();
-				System.out.println(id);
-
+			}
+		}
+			List<BookModel> rentList = rentservice.rentList(id);
+			model.addAttribute("rentList", rentList);
+			return "rent/borrowList";		
+	}
+	@RequestMapping("/borrowListAdmin")
+	public String borrowListAdmin(HttpServletRequest request, Model model) {
+		String id = null;
+		for (Cookie cookie : request.getCookies()) { 
+			if (cookie.getName().equals("bm_id")) {
+				id = cookie.getValue();
 			}
 		}
 		for (Cookie cookie : request.getCookies()) {
@@ -153,31 +189,36 @@ public class RentController {
 					model.addAttribute("rentList", rentList);
 					return "rent/borrowList";
 				}
-			}
-
-		}
-
+			} 
+		} 
 		return null;
 	}
 
 	@RequestMapping("/extendBorrowBook")
-	public String extendBorrowBook(String book_cd) {
-		String id = rentservice.selectRent(book_cd).getId();
-		SmsModel sms = new SmsModel();
+	public String extendBorrowBook(String book_cd, BookModel book) throws NullPointerException {
+		book = rentservice.selectRent(book_cd);
+		
+		String id = book.getId();
+		SmsModel sms = new SmsModel();		
+		
+		book.setBook_cd(book_cd);
+		
+		MemberModel member =  joinDao.selectMember(id);
+		BookModel reserveBook = rentservice.selectReservation(book_cd);	 
+		
+		if (reserveBook == null) {
+			sms.setPhone(member.getMobi_no().substring(1));
+			sms.setTitle(book.getTitle());
 
-		if (rentservice.selectReservation(book_cd) == null) {
-			sms.setPhone(joinDao.selectMember(id).getMobi_no().substring(1));
-			sms.setTitle(bookDao.selectBook(book_cd).getTitle());
-
-			rentservice.extendBorrowBook(book_cd);
+			rentservice.extendBorrowBook(book);
 			notifiService.notifiExtend(sms);
 
-		} else if (rentservice.selectReservation(book_cd).getReservechk()
+		} else if (reserveBook.getReservechk()
 				.equals("0")) {
-			sms.setPhone(joinDao.selectMember(id).getMobi_no().substring(1));
-			sms.setTitle(rentDao.selectBorrow(book_cd).getTitle());
+			sms.setPhone(member.getMobi_no().substring(1));
+			sms.setTitle(book.getTitle());
 
-			rentservice.extendBorrowBook(book_cd);
+			rentservice.extendBorrowBook(book);
 			notifiService.notifiExtend(sms);
 
 		} else {
@@ -190,15 +231,21 @@ public class RentController {
 	public String extendBookList(
 			@RequestParam(value = "book_cd") List<String> book_cdList,
 			Model model) {
+		
 
 		for (String book_cd : book_cdList) {
-			if (rentservice.selectReservation(book_cd) == null) {
-				rentservice.extendBorrowBook(book_cd);
-			} else if (rentservice.selectReservation(book_cd).getReservechk()
+			BookModel reserveBook = rentservice.selectReservation(book_cd);	
+			if (reserveBook == null) {
+				BookModel book = new BookModel();
+				book.setBook_cd(book_cd);				
+				rentservice.extendBorrowBook(book);
+			} else if (reserveBook.getReservechk()
 					.equals("0")
 					&& rentservice.selectRent(book_cd).getExtendchk()
 							.equals("0")) {
-				rentservice.extendBorrowBook(book_cd);
+				BookModel book = new BookModel();
+				book.setBook_cd(book_cd); 
+				rentservice.extendBorrowBook(book);
 			} else {
 				return "/rent/extendFail";
 			}
@@ -208,16 +255,24 @@ public class RentController {
 	}
 
 	@RequestMapping("/cancleBorrowBook")
-	public String cancleBorrowBook(String book_cd, BookModel bookmodel,
-			HttpServletRequest request) {
-		bookmodel = rentservice.selectBook(book_cd);
+	public ModelAndView cancleBorrowBook(String book_cd, BookModel bookmodel,
+			HttpServletRequest request, ModelAndView mav) {
+		String id = "";
+		bookmodel = rentservice.selectBorrow(book_cd);
 		for (Cookie cookie : request.getCookies()) {
-			if (cookie.getName().equals("bm_id"))
-				bookmodel.setId(cookie.getValue());
+			if(cookie.getName().equals("bm_permission")){
+				if(cookie.getValue().equals("1")){
+					mav.setViewName("redirect:borrowReqList");
+				}else{
+					mav.setViewName("redirect:borrowReqList");
+				}
+			} 
 		}
 		rentservice.cancleBorrowBook(bookmodel);
-
-		return "redirect:borrowList";
+		List<BookModel> bookList = rentservice.borrowList(id);
+		mav.addObject("bookList", bookList);
+		
+		return mav;
 	}
 
 	@RequestMapping("/rentListAll")
@@ -238,28 +293,19 @@ public class RentController {
 		}
 
 	}
-
-	/*
-	 * @RequestMapping("/returnListAll") public String returnListAll(Model
-	 * model) { List<BookModel> bookList = new ArrayList<BookModel>(); bookList
-	 * = rentservice.returnListAll(); model.addAttribute("bookList", bookList);
-	 * return "rent/returnList"; }
-	 */@RequestMapping("/returnBookList")
+	@RequestMapping("/returnBookList")
 	public String returnManyBook(
 			@RequestParam(value = "book_cd") List<String> book_cdList) {
 
 		for (String book_cd : book_cdList) {
 			BookModel checkBook = rentservice.selectBook(book_cd);
 			if (checkBook.getRentchk().equals("2")) {
+				BookModel book = new BookModel();
+				book.setBook_cd(book_cd);
 				notifiService.notifiReturnConfirm(book_cd);
-				rentservice.returnBook(book_cd);
-
-			} else {
-
-				return "rent/returnfail";
+				rentservice.returnBook(book);
 			}
-		}
-
+		} 
 		return "redirect:borrowList";
 	}
 
@@ -268,13 +314,14 @@ public class RentController {
 		BookModel checkBook = rentservice.selectBook(book_cd);
 
 		if (checkBook.getRentchk().equals("2")) {
-
+			book.setBook_cd(book_cd);
+			
 			notifiService.notifiReturnConfirm(book_cd);
-			rentservice.returnBook(book_cd);
+			rentservice.returnBook(book);
 			return "redirect:borrowList";
 		} else {
 
-			return "rent/returnfail";
+			return "redirect:borrowList";
 		}
 	}
 
@@ -282,14 +329,14 @@ public class RentController {
 	public String recoverBook(String book_cd) {
 		rentservice.recoverBook(book_cd);
 
-		return "redirect:bookList";
+		return "redirect:searchBook?listType=title&keyword=";
 	}
 
 	@RequestMapping("stopBorrow")
 	public String stopBorrow(String book_cd) {
 		rentservice.stopBorrow(book_cd);
 
-		return "redirect:bookList";
+		return "redirect:searchBook?listType=title&keyword";
 	}
 
 	@RequestMapping("/stopBorrowList")
@@ -316,6 +363,18 @@ public class RentController {
 	 * book_cdList.get(i); rentservice.returnBook(book_cd); } return
 	 * "member/admin"; }
 	 */
+	@RequestMapping("/record")
+	public String record(HttpServletRequest request, Model model) { 
+		String id = null; 
+		for (Cookie cookie : request.getCookies()) {
+			if (cookie.getName().equals("bm_id")) {
+				id = cookie.getValue();
+			}  
+		} 
+		List<BookModel> record = rentservice.recordList(id);
+		model.addAttribute("record", record);
+		return "rent/record";
+	}
 	@RequestMapping("/recordList")
 	public String recordList(HttpServletRequest request, Model model) {
 

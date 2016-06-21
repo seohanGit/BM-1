@@ -1,8 +1,10 @@
 package com.baron.bm.controller;
 
 import java.awt.print.Book;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.Cookie;
@@ -25,7 +27,9 @@ import com.baron.member.service.StatisticService;
 public class BoardController {
 /**
  * 
- */
+ */			
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");	
+	
 	@Autowired
 	private BoardService boardService;
 
@@ -56,19 +60,26 @@ public class BoardController {
 
 	@RequestMapping("/modifyBoard")
 	public String modifyBoard(BoardModel board) {
+		Calendar cal = Calendar.getInstance();				
+		Date nowDate = cal.getTime();
+		
+		board.setModifidate(sdf.format(nowDate));
 		boardService.modifyBoard(board);
-
 		return "redirect:boardList";
 	}
 
 	@RequestMapping("/boardsuccess")
 	public String boardsuccess(BoardModel model, HttpServletRequest request) {
-
+		Calendar cal = Calendar.getInstance();				
+		Date nowDate = cal.getTime();
+		
 		for (Cookie cookie : request.getCookies()) {
 			if (cookie.getName().equals("bm_id")) {
 				model.setId(cookie.getValue());
 			}
 		}
+		model.setModifidate(sdf.format(nowDate));
+		model.setBoardType("0");
 		boardService.insertBoard(model);
 		return "board/boardsuccess";
 	}
@@ -115,11 +126,18 @@ public class BoardController {
 
 	@RequestMapping("/writeNotice")
 	public String writeNotice() {
+		
 		return "board/insertNotice";
 	}
 
 	@RequestMapping("/insertNotice")
 	public String insertNotice(BoardModel boardmodel) {
+		Calendar cal = Calendar.getInstance();				
+		Date nowDate = cal.getTime();
+		
+		boardmodel.setRegisdate(sdf.format(nowDate));
+		boardmodel.setBoardType("1");
+		boardmodel.setId("admin");
 		boardService.insertNotice(boardmodel);
 		return "redirect:noticeListByAdmin";
 	}
@@ -132,6 +150,10 @@ public class BoardController {
 
 	@RequestMapping("/modifyNotice")
 	public String modifyNotice(BoardModel content) {
+		Calendar cal = Calendar.getInstance();				
+		Date nowDate = cal.getTime();
+		
+		content.setModifidate(sdf.format(nowDate));
 		boardService.modifyNotice(content);
 		return "redirect:noticeListByAdmin";
 	}

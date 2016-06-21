@@ -31,11 +31,11 @@ public interface RentDao {
 
 	void borrowBook(BookModel bookmodel);
 
-	void returnBook(String bookCode);
+	void returnBook(BookModel book);
 
-	void confirmBorrowBook(String bookCode);
+	void confirmBorrowBook(BookModel bookmodel);
 
-	void extendBorrowBook(String bookCode);
+	void extendBorrowBook(BookModel book);
 
 	void cancleBorrowBook(String bookCode);
 
@@ -56,6 +56,11 @@ public interface RentDao {
 	void deleteReserve(String book_cd);
 
 	List<BookModel> rentList(String id);
+
+	List<BookModel> delayList();
+
+	int checkRentCount(String id);
+ 
 
 
 

@@ -7,6 +7,7 @@
 
 package com.baron.bm.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Hashtable;
@@ -39,9 +40,11 @@ import com.baron.member.service.BookService;
 import com.baron.member.service.JoinService;
 import com.baron.member.service.StatisticService;
 
-@SessionAttributes({ "kname", "jikb", "team_nm", "permission", "id", "chief", "chiefId" })
+@SessionAttributes({ "kname", "jikb", "team_nm", "permission", "id", "chief", "chiefId", "adminMode" })
 @Controller
 public class MemberController {
+
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 	
 	@Autowired
 	private JoinService joinService;
@@ -55,9 +58,9 @@ public class MemberController {
 	@Autowired
 	private StatisticService statisticService;
 
-	String year = Integer.toString(Calendar.getInstance().get(Calendar.YEAR));
-	String month = Integer.toString(Calendar.getInstance().get(Calendar.MONTH));
-
+	String year = Integer.toString(Calendar.getInstance().get(Calendar.YEAR)); 
+	String month = String.format("%02d", Calendar.getInstance().get(Calendar.MONTH));
+	
 	@RequestMapping("/test")
 	public String test(Model model) {
 		System.out.println(joinService.test());
@@ -70,23 +73,25 @@ public class MemberController {
 	}
 
 	@RequestMapping("/index")
-	public String index(Model model) throws Exception {
+	public String index(Model model, HttpSession session) throws Exception {
+		session.setAttribute("adminMode", "user");
 		Dto param = new Dto();
 		param.setYear(year);
 		param.setMonth(month);
-		String keyword = "";
+		param.setField("title");
+		param.setKeyword(""); 
 		List<BoardModel> notice = boardService.noticeList();
-		List<BookModel> bestBook = statisticService.selectBestBook(param);
+		List<BookModel> bestBook = bookService.listBook("recommend", "", "", "");
 		List<MemberModel> bestTeam = statisticService.selectBestTeam(year);
 		List<BookModel> newBook = statisticService.getNewbook();
-		List<SearchResult> bookList = bookService.searchBook("title", keyword);
+		List<BookModel> bookList = bookService.searchBook(param);
 		
 		model.addAttribute("bookList", bookList);
 		String permission = "";
 		model.addAttribute("noticeList", notice);
 		model.addAttribute("bestBook", bestBook);
 		model.addAttribute("bestTeam", bestTeam);
-		model.addAttribute("newbook", newBook);
+		model.addAttribute("newBook", newBook);
 		return "index";
 	}
 
@@ -126,16 +131,6 @@ public class MemberController {
 		String info = model.getTeam_nm() + model.getJikb() + model.getKname();
 		mav.addObject("info", info);
 		mav.addObject("permission", model.getPermission());
-		/*
-		 * model = joinService.login(model); if (model != null) {
-		 * System.out.println(model.getId() + model.getPermission());
-		 * response.addCookie(new Cookie("bm_id", model.getId()));
-		 * System.out.println(model.getId() + "login Success");
-		 * 
-		 * response.addCookie(new Cookie("bm_permission", model
-		 * .getPermission())); mav.addObject("result", true); } else {
-		 * mav.addObject("result", false); }
-		 */
 		return mav;
 	}
 
@@ -152,14 +147,15 @@ public class MemberController {
 		adminList.add("4150240");
 		adminList.add("4030243");
 		adminList.add("4130257");
+		adminList.add("4040187");
 		
-		if (joinService.login(id) == null) {
-			mav.setViewName("loginfail");
-		} else {
-			MemberModel membermodel = new MemberModel();
-			membermodel = joinService.login(id);
-			membermodel.setId(id);
-			
+		MemberModel membermodel = new MemberModel();
+		membermodel = joinService.login(id);
+		
+		if (membermodel.getKname() == null) {
+			mav.setViewName("/member/loginfail");
+		} else {	
+			membermodel.setId(id);			
 			mav.addObject("kname", membermodel.getKname());
 			mav.addObject("team_nm", membermodel.getTeam_nm());
 			mav.addObject("jikb", membermodel.getJikb());
@@ -169,7 +165,8 @@ public class MemberController {
 			
 			session.setAttribute("id", membermodel.getId());
 			session.setAttribute("chief", membermodel.getChief());
-			session.setAttribute("chiefId", membermodel.getChiefid());    
+			session.setAttribute("chiefId", membermodel.getChiefid());
+			session.setAttribute("adminMode", "user"); 
 			for (String string : adminList) {
 				if (string.equals(id)) {
 					adminchk = true;
@@ -178,7 +175,8 @@ public class MemberController {
 			if (adminchk) {
 				response.addCookie(new Cookie("bm_id", id));
 				response.addCookie(new Cookie("bm_permission", "1"));
-				mav.setViewName("redirect:startAdmin");
+				session.setAttribute("adminMode", "admin"); 
+				mav.setViewName("redirect:index");
 
 				mav.addObject("permission", "1");
 				System.out.println();
@@ -186,7 +184,7 @@ public class MemberController {
 			} else {
 				response.addCookie(new Cookie("bm_id", id));
 				response.addCookie(new Cookie("bm_permission", "0"));
-				mav.setViewName("redirect:start");
+				mav.setViewName("redirect:index");
 
 				mav.addObject("permission", "0");
 
@@ -222,67 +220,17 @@ public class MemberController {
 
 		return "/member/identify";
 	}
-
-	@RequestMapping("/joinForm")
-	public String joinForm() {
-		return "/member/join";
-	}
-
-	@RequestMapping("/join")
-	public String join(@Valid MemberModel memberModel) throws Exception {
-		if (joinService.selectMemberById(memberModel.getId()) == 0) {
-			joinService.join(memberModel);
-			return "/member/joinSuccess";
-		} else
-			return "/member/joinFail";
-	}
-
-	@RequestMapping("/modify")
-	public String modifyidentity(String password, HttpServletRequest request,
-			Model model) {
-		String pass = null;
-
-		for (Cookie cookie : request.getCookies()) {
-			if (cookie.getName().equals("bm_id")) {
-				System.out.println(cookie.getValue() + "modify");
-				pass = joinService.identify(cookie.getValue());
-				MemberModel memberModel = new MemberModel();
-				memberModel.setId(cookie.getValue());
-				memberModel.setPassword(pass);
-				memberModel = joinService.login(memberModel.getId());
-				model.addAttribute("Member", memberModel);
-			}
-		}
-
-		return (pass.equals(password)) ? "/member/modifyidentity"
-				: "/member/identifyfail";
-	}
-
-	@RequestMapping("/modifySuccess")
-	public String modifySuccess(@Valid MemberModel model,
-			HttpServletRequest request) {
-
-		for (Cookie cookie : request.getCookies()) {
-			if (cookie.getName().equals("bm_id")) {
-				model.setId(cookie.getValue());
-			}
-		}
-
-		joinService.updateMember(model);
-
-		return "/member/modifySuccess";
-	}
-
+   
 	@RequestMapping("/admin")
-	public String admin(HttpServletRequest request, Model model)
+	public String admin(HttpServletRequest request, HttpSession session, Model model)
 			throws Exception {
 		Dto param = new Dto();
 		param.setYear(year);
 		param.setMonth(month);
+		session.setAttribute("adminMode", "admin");
 		for (Cookie cookie : request.getCookies()) {
-			if (cookie.getName().equals("bm_permission")) {
-				System.out.println(cookie.getValue());
-				if ("1".equals(cookie.getValue())) {
+			if (cookie.getName().equals("bm_permission")) { 
+				if ( cookie.getValue().equals("1")) {
 
 					List<Dto> bestMember = statisticService
 							.selectBestPerson(param);
@@ -312,7 +260,11 @@ public class MemberController {
 
 	@RequestMapping("/memberList")
 	public String memberList(Model model) {
-		List<MemberModel> memberList = joinService.memberList();
+		Calendar cal =  Calendar.getInstance();
+		String nowDate = sdf.format(cal.getTime());
+		cal.add(cal.MONTH, -1);
+		String rentdate = sdf.format(cal);
+		List<MemberModel> memberList = joinService.memberList(rentdate);
 		model.addAttribute("memberList", memberList);
 		return "/member/memberList";
 	}

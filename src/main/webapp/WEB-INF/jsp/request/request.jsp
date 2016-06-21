@@ -10,21 +10,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
-<title>구매요청 기록</title>
+<title>자료 구입신청</title>
 <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="/resources/css/signin.css" rel="stylesheet">
 <link href="/resources/css/common.css" rel="stylesheet">
-
-<style type="text/css">
-body {
-	padding-top: 70px;
-}
-</style>
-
+ 
 
 </head>
 
-<body>
+<body class="main">
 	<jsp:include page="../nav.jsp" />
 	<div class="container">
 
@@ -32,10 +26,11 @@ body {
 			<!-- Blog Entries Column -->
 
 			<div>
-				<h2>구매요청 목록</h2>
+				<h2>자료 구입신청</h2>
 
 				<div class="input-group" style="float: left; width: 70%">
 					<form action="/findBook" method="post">
+						<input type="hidden" name="type" value="">
 						<span class="input-group-btn"> <input type="text"
 							class="form-control" id="query" name="keyword"
 							placeholder="검색가능도서 - ISBN, 도서명, 저자 검색">
@@ -45,9 +40,11 @@ body {
 						</span>
 					</form>
 				</div>
-				<div style="float: right;">
+				<div style="float: right;"> 
 					<button class="btn btn-default" type="button"
-						onclick="location.href='/requestbook'; ">ISBN 미보유 도서</button>
+						onclick="window.open
+							('/requestbook?type=isbn&keyword=','new','resizeble=yes scrollbars=yes, width=500, height=700');">
+							ISBN 미보유 도서</button>
 				</div>
 				<br>
 				<div style="margin-top: 20px; padding-top: 20px">
@@ -62,13 +59,13 @@ body {
 								<thead>
 									<tr class=" title">
 
-										<th class="hidden-xs td-img">표지</th>
-										<th class="td-title">도서명</th>
-										<th class="hidden-xs td-author">저자</th>
+										<th class="hidden-xs image">표지</th>
+										<th class="title">도서명</th>
+										<th class="hidden-xs author">저자</th>
 										<th class="hidden-xs td-date">가격</th>
 										<th style="width: 50px">수량</th>
-										<th class="hidden-xs td-genre">요청일자</th>
-										<th class="td-img">상태</th>
+										<th class="hidden-xs genre">요청일자</th>
+										<th class="image">상태</th>
 
 									</tr>
 								</thead>
@@ -82,7 +79,9 @@ body {
 										</tr>
 										<tr>
 											<td style="width: 40%" align="left"><a
-												href="${book.link}">${book.title }</a></td>
+												onclick="window.open('/bookInfo?book_cd=${book.book_cd}',
+												'new','resizeble=yes scrollbars=yes,  width=750, height=600');"
+												>${book.title }</a></td>
 											<td style="width: 40%" align="left">${book.author }</td>
 										</tr>
 										<tr>
@@ -100,7 +99,9 @@ body {
 												src="${book.imageurl}"></td>
 											<td class="td-title"><c:choose>
 													<c:when test="${not empty book.link}">
-														<a href="${book.link}">${book.title }</a>
+														<a 
+														onclick="window.open('/bookInfo?reqdate=${book.reqdate}&req_cd=${book.req_cd}',
+												'new','resizeble=yes scrollbars=yes,  width=750, height=600');">${book.title }</a>
 													</c:when>
 													<c:otherwise>
 													${book.title }
@@ -110,8 +111,7 @@ body {
 											<td class="hidden-xs">${book.author}</td>
 											<td>${book.price}원</td>
 											<td align="center">${book.quantity}</td>
-											<td class="hidden-xs"><fmt:formatDate type="date"
-													pattern="yyyy-MM-dd" value="${book.reqdate}" /></td>
+											<td class="hidden-xs"> ${book.reqdate}</td>
 											<c:choose>
 												<c:when test="${book.reqstatus=='0'}">
 													<td>대기</td>

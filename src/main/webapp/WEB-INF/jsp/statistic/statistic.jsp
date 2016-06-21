@@ -1,3 +1,6 @@
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.time.Year"%>
+<%@page import="java.util.Calendar"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -76,9 +79,13 @@ body {
 					<select class="selectpicker"
 						style="height: 22px; vertical-align: bottom; width: 100px"
 						id="year">
-						<option value="2015" selected>2015
-						<option value="2014">2014
-						<option value="2013">2013
+						<%Calendar cal = Calendar.getInstance(); 
+						SimpleDateFormat sdf = new SimpleDateFormat("yyyy");%>
+						<option value="<%=sdf.format(cal.getTime()) %>" selected><%=sdf.format(cal.getTime()) %>
+						<%cal.add(cal.YEAR, -1); %>
+						<option value="<%=sdf.format(cal.getTime()) %>"><%=sdf.format(cal.getTime()) %>
+						<%cal.add(cal.YEAR, -1); %>
+						<option value="<%=sdf.format(cal.getTime()) %>"><%=sdf.format(cal.getTime()) %>
 					</select> <select class="selectpicker"
 						style="height: 22px; vertical-align: bottom;" id="month">
 						<option value="1">1

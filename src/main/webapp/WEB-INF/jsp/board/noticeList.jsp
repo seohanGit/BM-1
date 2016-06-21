@@ -38,15 +38,14 @@ body {
 				<table class="table table-bordered">
 					<thead class="title">
 						<tr>
-							<td class="td-author">등록일</td>
+							<td class="author">등록일</td>
 							<td>내용</td>
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach items="${noticeList}" var="notice" varStatus="status">
 							<tr style="padding-bottom: 10px">
-								<td align="left"><fmt:formatDate
-										value="${notice.regisdate}" pattern="yyyy-MM-dd" /></td>
+								<td align="left">${notice.regisdate}</td>
 
 								<td style="width: 80%; height: auto; padding-left: 10px"><textarea
 										class="content ellipsis" id="content" name="content"

@@ -10,14 +10,6 @@ public class SearchResult {
 	private String b_group;
 	private String c_group;
 
-	public String getC_group() {
-		return c_group;
-	}
-
-	public void setC_group(String c_group) {
-		this.c_group = c_group;
-	}
-
 	private int quantity;
 
 	private String id;
@@ -32,13 +24,21 @@ public class SearchResult {
 	private String isbn;
 	private String summary;
 	private String rcv_date;
-	private Date returndate;
+	private String returndate;
 
-	public Date getReturndate() {
+	public String getC_group() {
+		return c_group;
+	}
+
+	public void setC_group(String c_group) {
+		this.c_group = c_group;
+	}
+
+	public String getReturndate() {
 		return returndate;
 	}
 
-	public void setReturndate(Date returndate) {
+	public void setReturndate(String returndate) {
 		this.returndate = returndate;
 	}
 

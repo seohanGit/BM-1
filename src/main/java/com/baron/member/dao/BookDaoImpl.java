@@ -1,6 +1,7 @@
 package com.baron.member.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -29,19 +30,22 @@ public class BookDaoImpl implements BookDao {
 		session.insert(NAMESPACE + "insertBook", model);
 	}
 
+	public void insertFile(Map<String, Object> map) throws Exception{
+	    session.insert(NAMESPACE + "insertFile", map);
+	}
 	@Override
-	public List<SearchResult> searchBook(String keyword) {
-		return session.selectList(NAMESPACE + "searchBook", keyword);
+	public List<BookModel> searchBook(Dto dto) {
+		return session.selectList(NAMESPACE + "searchBook", dto);
 	}
 
 	@Override
-	public List<SearchResult> searchAuthor(String keyword) { 
-		return session.selectList(NAMESPACE + "searchAuthor", keyword);
+	public List<BookModel> searchAuthor(Dto dto) { 
+		return session.selectList(NAMESPACE + "searchAuthor", dto.getKeyword());
 	}
 
 	@Override
-	public List<SearchResult> searchPublisher(String keyword) {
-		return session.selectList(NAMESPACE + "searchPublisher", keyword);
+	public List<BookModel> searchPublisher(Dto dto) {
+		return session.selectList(NAMESPACE + "searchPublisher", dto.getKeyword());
 	}
 	@Override
 	public BookModel selectBook(String book_cd) {
@@ -84,27 +88,28 @@ public class BookDaoImpl implements BookDao {
 	}
 
 	@Override
-	public List<CodeModel> selectCCodeList() {
-
+	public List<CodeModel> selectCCodeList() { 
 		return session.selectList(NAMESPACE + "selectC_codeList");
 	}
 
 	@Override
-	public List<BookModel> newBook(Dto dto) {
-		// TODO Auto-generated method stub
+	public List<BookModel> newBook(Dto dto) { 
 		return session.selectList(NAMESPACE + "newBook", dto);
 	}
 
 	@Override
-	public List<BookModel> bestBook() {
-		// TODO Auto-generated method stub
-		return session.selectList(NAMESPACE + "bestBook");
+	public List<BookModel> bestBook(Dto dto) { 
+		return session.selectList(NAMESPACE + "bestBook", dto);
 	}
 
 	@Override
-	public List<BookModel> recommendBook() {
-		// TODO Auto-generated method stub
+	public List<BookModel> recommendBook() { 
 		return session.selectList(NAMESPACE + "recommendBook");
+	}
+	
+	@Override
+	public void setRecommend(BookModel bookmodel) { 
+		session.update(NAMESPACE + "setRecommend", bookmodel);
 	}
 
 }

@@ -35,29 +35,24 @@
 
 								<th style="width: 20%;">제목</th>
 								<th >내용</th>
-								<th class="td-genre">작성자</th>
+								<th class="genre">작성자</th>
 								
-								<th class="td-date hidden-xs">최종 수정일</th>
-								<th class="td-genre"></th>
-
+								<th class="date hidden-xs">최종 수정일</th>
+								<th class="genre"></th>
 							</tr>
 
 						</thead>
 						<tbody>
 							<c:forEach items="${boardList}" var="board" varStatus="status">
-
 								<tr>
-
-
 									<td style="vertical-align: top;">${board.title}</td>
-									<td>${board.title}</td>
+									<td>${board.content}</td>
 									<td><c:choose>
 											<c:when test="${empty board.kname}">${board.id}</c:when>
 											<c:otherwise>${board.kname}</c:otherwise>
 										</c:choose></td>
-									<td class=" hidden-xs"><fmt:formatDate
-											value="${board.modifidate}" pattern="yyyy-MM-dd" /></td>
-
+									<td class=" hidden-xs">
+									${board.modifidate}</td>
 									<td>
 										<button class="btn btn-default btn-sm" type="submit"
 											id="modifyBoard"

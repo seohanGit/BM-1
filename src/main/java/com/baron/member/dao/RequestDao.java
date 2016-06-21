@@ -10,15 +10,15 @@ public interface RequestDao {
 
 	public void requestBook(BookModel model);
 
-	public List<BookModel> requestList();
+	public List<BookModel> requestList( );
 
-	public void deleteRequest(String req_cd);
+	public void deleteRequest(BookModel model);
 
-	public BookModel selectBook(String req_cd);
+	public BookModel selectBook(BookModel book);
 
 	public List<BookModel> requestRecord(String id);
 
-	public void rejectRequest(String req_cd);
+	public void rejectRequest(BookModel book);
 
 	public void modifiBook(BookModel book);
 

@@ -6,10 +6,18 @@ public class BoardModel {
 	private int boardnum;
 	private String title;
 	private String content;
-	private Date regisdate;
-	private Date modifidate;
+	private String regisdate;
+	private String modifidate;
 	private String id;
 	private String kname;
+	private String boardType;
+	public String getBoardType() {
+		return boardType;
+	}
+
+	public void setBoardType(String boardType) {
+		this.boardType = boardType;
+	}
 
 	public String getKname() {
 		return kname;
@@ -43,19 +51,19 @@ public class BoardModel {
 		this.content = content;
 	}
 
-	public Date getRegisdate() {
+	public String getRegisdate() {
 		return regisdate;
 	}
 
-	public void setRegisdate(Date regisdate) {
+	public void setRegisdate(String regisdate) {
 		this.regisdate = regisdate;
 	}
 
-	public Date getModifidate() {
+	public String getModifidate() {
 		return modifidate;
 	}
 
-	public void setModifidate(Date modifidate) {
+	public void setModifidate(String modifidate) {
 		this.modifidate = modifidate;
 	}
 

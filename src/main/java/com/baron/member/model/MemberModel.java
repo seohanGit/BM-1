@@ -13,13 +13,13 @@ public class MemberModel {
 	private String email;
 	private String mobi_no;
 	private String permission;
-	private Date endday;
+	private String endday;
 
 	private int count;
 	private String content;
 
-	private Date borrowdate;
-	private Date returndate;
+	private String borrowdate;
+	private String returndate;
 	private String jikb;
 	private String co_gb;
 	private String team_nm;
@@ -96,19 +96,19 @@ public class MemberModel {
 		this.jikb = jikb;
 	}
 
-	public Date getBorrowdate() {
+	public String getBorrowdate() {
 		return borrowdate;
 	}
 
-	public void setBorrowdate(Date borrowdate) {
+	public void setBorrowdate(String borrowdate) {
 		this.borrowdate = borrowdate;
 	}
 
-	public Date getReturndate() {
+	public String getReturndate() {
 		return returndate;
 	}
 
-	public void setReturndate(Date returndate) {
+	public void setReturndate(String returndate) {
 		this.returndate = returndate;
 	}
 
@@ -128,11 +128,11 @@ public class MemberModel {
 		this.count = count;
 	}
 
-	public Date getEndday() {
+	public String getEndday() {
 		return endday;
 	}
 
-	public void setEndday(Date endday) {
+	public void setEndday(String endday) {
 		this.endday = endday;
 	}
 

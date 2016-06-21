@@ -33,6 +33,7 @@
 		<caption >연간 예산 현황</caption>
 		<thead>
 			<tr>
+				<th>월</th>
 				<c:forEach items="${SumPurchase}" var="SumPurchase" begin="0"
 					end="11" varStatus="status">
 					<th>${SumPurchase.month}월</th>
@@ -41,12 +42,14 @@
 		</thead>
 		<tbody>
 			<tr>
+				<td>구매권수</td>
 				<c:forEach items="${SumPurchase}" var="SumPurchase" begin="0"
 					end="11" varStatus="status">
 					<td class="td-count">${SumPurchase.count}권</td>
 				</c:forEach>
 			</tr>
 			<tr>
+				<td>사용예산</td>
 				<c:forEach items="${SumPurchase}" var="SumPurchase" begin="0"
 					end="11" varStatus="status">
 					<td class="td-count">${SumPurchase.price}원</td>

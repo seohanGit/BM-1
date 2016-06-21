@@ -6,15 +6,15 @@
 	<!-- 예약상태 '1' = 예약 -->
 	<insert id="insertReservation" parameterType="BookModel">
 		INSERT INTO
-		testlib.bookreser(id, book_cd, reser_date, reservechk)
+		sitlib.bookreser(id, book_cd, reser_date, reservechk)
 		VALUES(#{id},
-		#{book_cd}, (SELECT returndate FROM testlib.bookrent WHERE book_cd =
+		#{book_cd}, (SELECT returndate FROM sitlib.bookrent WHERE book_cd =
 		#{book_cd} AND (rentchk='1' OR rentchk='2'))+ 2 day, 1)
 	</insert>
 
 	<insert id="insertReservation1" parameterType="String">
 		UPDATE
-		testlib.bookmst
+		sitlib.bookmst
 		SET
 		reservechk='1'
 		WHERE book_cd=#{book_cd}
@@ -22,14 +22,14 @@
 
 	<update id="updateReservation" parameterType="String">
 		UPDATE
-		testlib.bookmst SET
+		sitlib.bookmst SET
 		rentchk='1', reservechk='0' WHERE
 		book_cd=#{book_cd}
 	</update>
 
 	<delete id="deleteReserve" parameterType="String">
 		DELETE FROM
-		testlib.bookreser
+		sitlib.bookreser
 		WHERE book_cd = #{book_cd}
 	</delete>
 
@@ -38,7 +38,7 @@
 	<select id="selectReservation" parameterType="String"
 		resultType="BookModel">
 		SELECT *
-		FROM testlib.bookreser A INNER JOIN tprlib.gr_insa
+		FROM sitlib.bookreser A INNER JOIN tprlib.gr_insa
 		B
 		ON A.id = B.asabn
 		WHERE
@@ -48,11 +48,11 @@
 
 	<select id="reservationList" parameterType="String" resultType="BookModel">
 		SELECT B.RETURNDATE, C.KNAME, D.TITLE, D.AUTHOR, A.BOOK_CD,
-		A.RESER_DATE, D.B_GROUP, D.rentchk FROM testlib.bookreser A
-		Left outer join testlib.bookrent B on A.id = B.id and A.book_cd =
+		A.RESER_DATE, D.B_GROUP, D.rentchk FROM sitlib.bookreser A
+		Left outer join sitlib.bookrent B on A.id = B.id and A.book_cd =
 		B.book_cd
 		inner join TPRLIB.GR_INSA C on A.id = C.asabn
-		left outer join testlib.bookmst D on A.book_cd = D.book_cd where co_gb =
+		left outer join sitlib.bookmst D on A.book_cd = D.book_cd where co_gb =
 		'SEOHAN' and B.rentchk in (0, 1, 2, 3) and A.reservechk='1'
 		AND A.id = #{id}
 	</select>
@@ -62,8 +62,8 @@
 		B.id, B.reser_date, A.title, A.b_group, A.rentchk, (SELECT kname FROM
 		tprlib.gr_insa WHERE asabn=B.id FETCH first 1 rows only) AS kname
 		FROM
-		testlib.bookmst A INNER
-		JOIN testlib.bookreser B
+		sitlib.bookmst A INNER
+		JOIN sitlib.bookreser B
 		ON A.book_cd=B.book_cd
 		AND
 		A.reservechk=B.reservechk

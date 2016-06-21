@@ -1,8 +1,14 @@
 package com.baron.member.service;
 
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -12,52 +18,42 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.commons.net.ftp.FTP;
+import org.apache.commons.net.ftp.FTPClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.baron.bm.utils.FileUtils;
 import com.baron.member.dao.BookDao;
 import com.baron.member.dao.EtcDao;
 import com.baron.member.model.BookModel;
 import com.baron.member.model.CodeModel;
 import com.baron.member.model.Dto;
-import com.baron.member.model.SearchResult;
 
 //입력을 받는 컨트롤러 클래스와 데이터베이스를 처리하는 다오 클래스 사아에 비지니스 로직이나 트랜잭션을 처리하는 클래스
 @Service
 public class BookServiceImpl implements BookService {
 
+	String server = "175.200.81.11";
+	int port = 21;
+	String user = "ATTFL";
+	String pass = "EDPS";
+
+	@Resource(name="fileUtils")
+	private FileUtils fileUtils;
+	
 	@Autowired
 	private BookDao bookDao;
 
 	@Autowired
 	private EtcDao etcDao;
 
-	/*
-	 * @Override public List<BookModel> getNewbook() throws Exception {
-	 * List<BookModel> bookList = new ArrayList<BookModel>();
-	 * 
-	 * URL url = getNewbookUrl();
-	 * 
-	 * XmlDom xmlDom = new XmlDom(); bookList =
-	 * xmlDom.getBooklist(url.openStream());
-	 * 
-	 * return bookList;
-	 * 
-	 * }
-	 */
-
-	/*
-	 * @Override public List<BookModel> pagenation(String keyword, String page)
-	 * throws Exception { List<BookModel> bookList = new ArrayList<BookModel>();
-	 * 
-	 * URL url = getPageUrl(keyword, page);
-	 * 
-	 * XmlDom xmlDom = new XmlDom(); bookList =
-	 * xmlDom.getBooklist(url.openStream());
-	 * 
-	 * return bookList; }
-	 */
 	@Override
 	public List<BookModel> findBook(String keyword) throws Exception {
 		List<BookModel> bookList = new ArrayList<BookModel>();
@@ -71,29 +67,64 @@ public class BookServiceImpl implements BookService {
 	}
 
 	@Override
-	public void insertBook(BookModel model) {
+	public void insertBook(BookModel model, HttpServletRequest request)  {
 		if (model.getQuantity() == 1) {
 			bookDao.insertBook(model);
-		} else if (model.getQuantity() != 1) {
+		} else if (model.getQuantity() > 1) {
 			for (int i = 0; i < model.getQuantity(); i++) {
 				model.setBook_cd(model.getBook_cd() + "(" + (i + 1) + ")");
 				bookDao.insertBook(model);
 			}
+		}List<Map<String, Object>> list;
+		try {
+			list = fileUtils.parseInsertFileInfo(model, request);
+			for(int i=0, size=list.size(); i<size; i++){
+	            bookDao.insertFile(list.get(i));
+	        }
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
+	}
 
+	@Override
+	public List<BookModel> searchBook(Dto dto) {
+		dto.setKeyword(dto.getKeyword().trim());
+		dto.setB_group(dto.getB_group().trim());
+		if(dto.getB_group().equals("전체")){
+			dto.setB_group("");
+		}else{
+			dto.setB_group(dto.getB_group().substring(0, 1));
+		}
+		if (dto.getField().equals("title")) {
+			return bookDao.searchBook(dto);
+		} else if (dto.getField().equals("author")) {
+			return bookDao.searchAuthor(dto);
+		} else if (dto.getField().equals("publish")) {
+			return bookDao.searchPublisher(dto);
+		} else {
+			return bookDao.searchBook(dto);
 		}
 	}
 
 	@Override
-	public List<SearchResult> searchBook(String field, String keyword) {
-		if(field=="title"){
-			return bookDao.searchBook(keyword);
-		}else if(field=="author"){
-			return bookDao.searchAuthor(keyword);
-		}else {
-			return bookDao.searchPublisher(keyword);
+	public List<BookModel> listBook(String listType, String datepicker1,
+			String datepicker2, String month) {
+
+		Dto dto = new Dto();
+		dto.setDate1(datepicker1);
+		dto.setDate2(datepicker2);
+		dto.setMonth(month);
+		switch (listType) {
+		case "new":
+			return bookDao.newBook(dto);
+		case "best":
+			return bookDao.bestBook(dto);
+		case "recommend":
+			return bookDao.recommendBook();
 		}
-		
-		
+		return bookDao.listBook();
 	}
 
 	@Override
@@ -229,28 +260,10 @@ public class BookServiceImpl implements BookService {
 	 */
 
 	@Override
-	public List<BookModel> listBook(String listType, String datepicker1, String datepicker2) {  
-		  
-		Dto dto = new Dto();
-		dto.setDate1(datepicker1);
-		dto.setDate2(datepicker2);
-		
-		switch (listType) {
-			case "new":			
-				return bookDao.newBook(dto);
-			case "best":	
-				return bookDao.bestBook();
-			case "recommend":
-				return bookDao.recommendBook();
-		}
-		return bookDao.listBook();
-	}
-	
-	@Override
 	public List<BookModel> bookList(String listType) {
 		return bookDao.listBook();
 	}
-	
+
 	@Override
 	public List<BookModel> selectBookAll() {
 
@@ -300,7 +313,7 @@ public class BookServiceImpl implements BookService {
 
 		for (BookModel book : bookList) {
 			SimpleDateFormat format = new SimpleDateFormat();
-			if (isThisDateValid(book.getRcv_date(), "yyyy-MM-dd")) {
+			if (isThisDateValid(book.getRcv_date(), "yyyyMMdd")) {
 				etcDao.updateDate(book);
 			} else {
 				try {
@@ -320,5 +333,24 @@ public class BookServiceImpl implements BookService {
 	public List<BookModel> selectBookForImage() {
 		return etcDao.selectBookForImage();
 	}
-	
+
+	@Override
+	public void setRecommend(BookModel bookmodel) {
+		bookDao.setRecommend(bookmodel);
+	}
+ 
+
+	@Override
+	public void uploadFile(MultipartFile file, String tid) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String download(File file, String tid) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+ 
 }

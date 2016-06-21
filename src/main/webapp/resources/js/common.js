@@ -24,11 +24,7 @@ function notifiReser() {
 
 $("#request").click(function() {
 	location.href = "/request"
-})
-
-$("#insertBook").click(function() {
-	location.href = "/insertbookForm"
-})
+}) 
 $("#recordList").click(function() {
 	location.href = "/recordList"
 })
@@ -69,21 +65,6 @@ $('.board .btn').click(function() {
 });
 
 
-$('#blackList').click(function() {
-	$.ajax({
-		type : "GET", // GET or POST
-		url : "/searchBlack", // URL
-		datatype : "xml", // html, xml, json, jsonp, script, text
-		error : function() { // Ajax error handler
-			alert('ajax failed');
-		},
-		success : function(data, status) { // Ajax complete handelr]
-			$('#image3').fadeOut();
-			$('#personResultArea').empty().append(data);
-		}
-	});
-
-})
 
 
 // ///////////////////////////////리스트

@@ -20,8 +20,7 @@ public class RentDaoImpl implements RentDao {
 	private SqlSession session;
 
 	@Override
-	public BookModel selectBook(String book_cd) {
-
+	public BookModel selectBook(String book_cd) { 
 		return session.selectOne(NAMESPACE + "selectBook", book_cd);
 	}
 
@@ -51,17 +50,17 @@ public class RentDaoImpl implements RentDao {
 	}
 
 	@Override
-	public void returnBook(String book_cd) {
+	public void returnBook(BookModel book) {
 
-		session.update(NAMESPACE + "returnBook", book_cd);
-		session.update(NAMESPACE + "returnBook1", book_cd);
+		session.update(NAMESPACE + "returnBook", book);
+		session.update(NAMESPACE + "returnBook1", book);
 
 	}
 
 	@Override
-	public void confirmBorrowBook(String book_cd) {
-		session.update(NAMESPACE + "confirmBorrowBook", book_cd);
-		session.update(NAMESPACE + "confirmBorrowBook1", book_cd);
+	public void confirmBorrowBook(BookModel book) {
+		session.update(NAMESPACE + "confirmBorrowBook", book);
+		session.update(NAMESPACE + "confirmBorrowBook1", book.getBook_cd());
 
 	}
 
@@ -86,8 +85,8 @@ public class RentDaoImpl implements RentDao {
 	}
 
 	@Override
-	public void extendBorrowBook(String book_cd) {
-		session.update(NAMESPACE + "extendBorrowBook", book_cd);
+	public void extendBorrowBook(BookModel book) {
+		session.update(NAMESPACE + "extendBorrowBook", book);
 
 	}
 
@@ -161,6 +160,16 @@ public class RentDaoImpl implements RentDao {
 	public void deleteReserve(String book_cd) {
 		session.delete(NAMESPACE + "deleteReserve", book_cd);
 
+	}
+
+	@Override
+	public List<BookModel> delayList() { 
+		return session.selectList(NAMESPACE + "selectDelayList");
+	}
+
+	@Override
+	public int checkRentCount(String id) {
+		return session.selectOne(NAMESPACE + "checkRentCount", id);
 	}
 
 }

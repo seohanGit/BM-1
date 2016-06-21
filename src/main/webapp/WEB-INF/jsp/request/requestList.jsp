@@ -31,11 +31,7 @@ body {
 
 		<div class="col-md-12"><jsp:include page="../menu.jsp" />
 			<div class="col-xs-12 panel panel-default">
-				<div class="panel-body">
-
-					<!-- Blog Entries Column -->
-
-
+				<div class="panel-body"> 
 					<c:choose>
 						<c:when test="${empty bookList}">
 							<div>
@@ -73,8 +69,7 @@ body {
 
 											<th class="hidden-sm hidden-xs hidden-md td-genre">요청일자</th>
 											<th class="td-img">상태</th>
-											<th class="td-genre"></th>
-
+											<th class="td-genre">비고</th> 
 										</tr>
 									</thead>
 
@@ -83,7 +78,7 @@ body {
 										<c:forEach items="${bookList}" var="book" varStatus="status">
 											<tr>
 												<td><input type="checkbox" name="req_cd"
-													value="${book.req_cd}"></td>
+													value="${book.reqdate}-${book.req_cd}"></td>
 												<td class="hidden-sm hidden-xs hidden-md ">${book.book_cd}</td>
 												<td class="td-title"><a href="${book.link}">${book.title }</a></td>
 
@@ -94,18 +89,17 @@ body {
 														<c:when test="${empty book.kname}">${book.id}</c:when>
 														<c:otherwise>${book.kname}</c:otherwise>
 													</c:choose></td>
-												<td class="hidden-sm hidden-xs hidden-md "><fmt:formatDate
-														type="date" pattern="yyyy-MM-dd" value="${book.reqdate}" /></td>
+												<td class="hidden-sm hidden-xs hidden-md ">${book.reqdate}</td>
 
 												<c:choose>
 													<c:when test="${book.reqstatus =='0'}">
 														<td>대기</td>
 														<td><button class="btn btn-sm btn-default"
 																type="button" id="buyBook"
-																onClick="location.href='buyRequest?req_cd=${book.req_cd}'">구매</button>
+																onClick="window.open('buyRequest?req_cd=${book.req_cd}&reqdate=${book.reqdate}','new','resizeble=yes scrollbars=yes,  width=750, height=730');">구매</button>
 
 															<button class="btn btn-sm btn-default" type="button"
-																onClick="location.href='rejectRequest?req_cd=${book.req_cd}'; del();">반려</button>
+																onClick="location.href='rejectRequest?req_cd=${book.req_cd}&reqdate=${book.reqdate}'; del();">반려</button>
 														</td>
 													</c:when>
 													<c:when test="${book.reqstatus =='1'}">
@@ -118,10 +112,7 @@ body {
 														<td></td>
 
 													</c:when>
-												</c:choose>
-
-
-
+												</c:choose> 
 											</tr>
 										</c:forEach>
 									</tbody>

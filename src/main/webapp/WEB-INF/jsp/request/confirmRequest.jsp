@@ -13,14 +13,9 @@
 <link href="/resources/css/common.css" rel="stylesheet">
 <link href="/resources/css/bootstrap-select.min.css" rel="stylesheet">
 <script src="/resources/js/jquery/jquery.js"></script>
-<style type="text/css">
-body {
-	padding-top: 70px;
-}
-</style>
+ 
 </head>
 <body>
-	<jsp:include page="../nav.jsp" />
 	<div class="container">
 		<h2>도서 구매 요청</h2>
 		<div class="panelpanel-default">
@@ -87,7 +82,7 @@ body {
 					</div>
 					<div class="form-group">
 						<label for="exampleInputPassword1">신청 사유</label> <input
-							type="text" class="form-control" name="reason" id="reason">
+							type="text" class="form-control" name="reason" id="reason" required="required">
 					</div>
 					<div class="form-group">
 						<label for="exampleInputPassword1">구매요청자</label> <input

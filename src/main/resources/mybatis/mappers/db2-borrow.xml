@@ -14,7 +14,7 @@
 		TPRLIB.GR_INSA C WHERE B.id=C.ASABN FETCH
 		first 1 rows only) kname
 		FROM
-		TESTLIB.BOOKMST A INNER JOIN TESTLIB.BOOKRENT B
+		sitlib.bookmst A INNER JOIN sitlib.BOOKRENT B
 		ON
 		A.book_cd=B.book_cd
 		WHERE
@@ -26,7 +26,7 @@
 
 	<select id="borrowList" resultType="BookModel" parameterType="String">
 		SELECT *
-		FROM TESTLIB.BOOKMST A, TESTLIB.BOOKRENT B
+		FROM sitlib.bookmst A, sitlib.BOOKRENT B
 		WHERE B.id = #{id}
 		AND
 		B.rentchk='1' AND
@@ -37,7 +37,7 @@
 
 	<select id="selectBorrow" resultType="BookModel" parameterType="String">
 		SELECT *
-		FROM TESTLIB.BOOKRENT A INNER JOIN tprlib.gr_insa
+		FROM sitlib.BOOKRENT A INNER JOIN tprlib.gr_insa
 		B
 		ON A.id =
 		B.asabn
@@ -50,7 +50,7 @@
 
 	<select id="selectRent" resultType="BookModel" parameterType="String">
 		SELECT *
-		FROM TESTLIB.BOOKRENT A INNER JOIN tprlib.gr_insa
+		FROM sitlib.BOOKRENT A INNER JOIN tprlib.gr_insa
 		B
 		ON A.id =
 		B.asabn
@@ -60,14 +60,17 @@
 		first 1 rows
 		only
 	</select>
-
+	<select id="checkRentCount" resultType="int" parameterType="String">
+		SELECT count(*) cnt
+		FROM sitlib.BOOKRENT
+		WHERE id = #{id}		
+		AND (rentchk='2' or rentchk='1')		
+	</select>
 	<insert id="borrowBook1" parameterType="BookModel">
 		INSERT INTO
-		TESTLIB.BOOKRENT
+		sitlib.BOOKRENT
 		(book_cd, rentdate, returndate, rentchk, id, team_nm)
-		VALUES(#{book_cd}, current
-		date,
-		current date + 20 day,
+		VALUES(#{book_cd}, #{rentdate},		#{returndate},
 		1, #{id}, (SELECT
 		team_nm FROM tprlib.gr_insa WHERE asabn=#{id} FETCH first 1 rows
 		only))
@@ -75,21 +78,20 @@
 
 	<update id="borrowBook2" parameterType="String">
 		UPDATE
-		TESTLIB.BOOKMST
+		sitlib.bookmst
 		SET
 		rentchk='1'
 		WHERE book_cd=#{book_cd}
 	</update>
-
 	<update id="stopBorrow" parameterType="String">
-		UPDATE TESTLIB.BOOKMST
+		UPDATE sitlib.bookmst
 		SET
 		rentchk='4'
 		WHERE
 		book_cd=#{book_cd}
 	</update>
 	<update id="stopBorrow1" parameterType="String">
-		UPDATE TESTLIB.BOOKRENT
+		UPDATE sitlib.BOOKRENT
 		SET
 		rentchk='4'
 		WHERE
@@ -97,7 +99,7 @@
 	</update>
 
 	<update id="recoverBook" parameterType="String">
-		UPDATE TESTLIB.BOOKMST A
+		UPDATE sitlib.bookmst A
 		SET
 		A.rentchk='0'
 		WHERE
@@ -105,59 +107,59 @@
 
 	</update>
 
-	<update id="confirmBorrowBook" parameterType="String">
+	<update id="confirmBorrowBook" parameterType="BookModel">
 		UPDATE
-		TESTLIB.BOOKRENT
+		sitlib.BOOKRENT
 		SET
-		RENTCHK = '2'
+		RENTCHK = '2', rentdate = ${rentdate}, returndate=#{returndate}
 		WHERE BOOK_CD = #{book_cd} AND
 		RENTCHK='1'
 	</update>
 
 	<update id="confirmBorrowBook1" parameterType="String">
 		UPDATE
-		TESTLIB.BOOKMST
+		sitlib.bookmst
 		SET
 		rentchk='2'
 		WHERE book_cd=#{book_cd}
 	</update>
 	<!-- <update id="upPoint" parameterType="String"> UPDATE BOOKMEMBER SET 
 		numborrow = numborrow + 1 WHERE id = #{id} </update> -->
-	<update id="returnBook" parameterType="String">
+	<update id="returnBook" parameterType="BookModel">
 		UPDATE
-		TESTLIB.BOOKRENT
+		sitlib.BOOKRENT
 		SET
 		rentchk='3',
-		returndate=current date
+		returndate=#{returndate}
 		WHERE
 		book_cd=#{book_cd} AND
 		RENTCHK='2'
 	</update>
 	<update id="returnBook1" parameterType="String">
-		UPDATE TESTLIB.BOOKMST
+		UPDATE sitlib.bookmst
 		SET
 		rentchk='0'
 		WHERE
 		book_cd=#{book_cd}
 	</update>
-	<!-- <update id="confirmReturnBook" parameterType="String"> UPDATE TESTLIB.BOOKMST 
-		A INNER JOIN TESTLIB.BOOKRENT B ON A.rentchk = B.rentchk SET A.rentchk='0', 
+	<!-- <update id="confirmReturnBook" parameterType="String"> UPDATE sitlib.bookmst 
+		A INNER JOIN sitlib.BOOKRENT B ON A.rentchk = B.rentchk SET A.rentchk='0', 
 		B.rentchk='0' WHERE A.book_cd=#{book_cd} AND B.book_cd=#{book_cd} </update> -->
 	<select id="returnListAll" resultType="BookModel">
 		SELECT *
 		FROM
-		TESTLIB.BOOKMST A INNER JOIN
-		TESTLIB.BOOKRENT B
+		sitlib.bookmst A INNER JOIN
+		sitlib.BOOKRENT B
 		ON A.book_cd=B.book_cd
 		WHERE B.rentchk='2' AND
-		days(B.returndate) - days(current date)=5
+		right(B.returndate,2) - right(#{returndate},2)=5
 	</select>
 
-	<update id="extendBorrowBook" parameterType="String">
+	<update id="extendBorrowBook" parameterType="BookModel">
 		UPDATE
-		TESTLIB.BOOKRENT
+		sitlib.BOOKRENT
 		SET
-		returndate = current date +20 day, extendchk = '1'
+		returndate = #{returndate}, extendchk = '1'
 		WHERE
 		book_cd=#{book_cd}
 		AND
@@ -166,7 +168,7 @@
 
 	<update id="cancelBorrowBook" parameterType="String">
 		UPDATE
-		TESTLIB.BOOKMST
+		sitlib.bookmst
 		SET
 		rentchk='0'
 		WHERE
@@ -175,7 +177,7 @@
 
 	<delete id="deleteBorrowBook" parameterType="BookModel">
 		DELETE FROM
-		TESTLIB.BOOKRENT
+		sitlib.BOOKRENT
 		WHERE book_cd=#{book_cd} AND id=#{id}
 	</delete>
 
@@ -190,7 +192,7 @@
 		first 1 rows
 		only) kname
 		FROM
-		TESTLIB.BOOKMST A, TESTLIB.BOOKRENT B
+		sitlib.bookmst A, sitlib.BOOKRENT B
 		WHERE
 		A.book_cd=B.book_cd AND
 		B.rentchk='2'
@@ -201,16 +203,15 @@
 	</select>
 
 	<select id="rentList" parameterType="String" resultType="BookModel">
-		SELECT
-		A.title, B.rentdate, B.returndate, B.id, B.book_cd, A.rentchk,
-		A.reservechk,(SELECT
+		SELECT  
+		A.*, B.rentdate, B.returndate, B.id, (SELECT
 		C.KNAME FROM
 		TPRLIB.GR_INSA C WHERE B.id=C.ASABN
 		FETCH
 		first 1 rows
 		only) kname FROM
-		TESTLIB.BOOKMST A INNER JOIN
-		TESTLIB.BOOKRENT B
+		sitlib.bookmst A INNER JOIN
+		sitlib.BOOKRENT B
 		ON A.book_cd=B.book_cd
 		WHERE
 		B.id= #{id} AND
@@ -222,12 +223,12 @@
 	</select>
 	<!-- <![CDATA[B.returndate > current date]]> -->
 
-	<!-- <delete id="deleteRecord" parameterType="String"> DELETE ON TESTLIB.BOOKRENT 
+	<!-- <delete id="deleteRecord" parameterType="String"> DELETE ON sitlib.BOOKRENT 
 		WHERE DELETE ON reserve WHERE id=#{id} AND book_cd=#{book_cd} </delete> -->
 	<select id="recordList" parameterType="String" resultType="BookModel">
 		SELECT A.title, B.rentdate, B.id, B.returndate, A.book_cd, A.author
 		FROM
-		TESTLIB.BOOKMST A INNER JOIN TESTLIB.BOOKRENT B ON
+		sitlib.bookmst A INNER JOIN sitlib.BOOKRENT B ON
 		A.book_cd=B.book_cd
 		WHERE <!-- (B.returndate BETWEEN date_sub(current date, 
 			interval 90 day) AND current date) AND -->
@@ -245,7 +246,7 @@
 		TPRLIB.GR_INSA C WHERE B.id=C.ASABN FETCH
 		first 1 rows only) kname
 		FROM
-		TESTLIB.BOOKMST A INNER JOIN TESTLIB.BOOKRENT B ON
+		sitlib.bookmst A INNER JOIN sitlib.BOOKRENT B ON
 		A.book_cd=B.book_cd
 		WHERE <!-- (B.returndate BETWEEN date_sub(current date, 
 			interval 90 day) AND current date) AND -->
@@ -255,9 +256,21 @@
 	</select>
 
 	<update id="deleteRecord" parameterType="BookModel">
-		UPDATE TESTLIB.BOOKRENT
+		UPDATE sitlib.BOOKRENT
 		SET RENTCHK='6'
 		WHERE book_cd=#{book_cd} AND id=#{id} AND rentchk='3'
 	</update>
-
+	<select id="selectDelayList" resultType="BookModel">
+		SELECT A.title, B.rentdate, B.returndate, A.b_group, (SELECT C.KNAME
+		FROM
+		TPRLIB.GR_INSA C WHERE B.id=C.ASABN FETCH
+		first 1 rows only) kname
+		FROM
+		sitlib.bookmst A INNER JOIN sitlib.BOOKRENT B ON
+		A.book_cd=B.book_cd
+		WHERE <![CDATA[B.returndate < VARCHAR_FORMAT(CURRENT	TIMESTAMP, 'YYYYMMDD')]]> AND
+		B.rentchk='2'
+		ORDER BY
+		B.returndate DESC
+	</select>	
 </mapper>

@@ -13,11 +13,10 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
 
 	<util:properties id="common" location="classpath:/common.xml" />
-
-	<import resource="classpath:spring/applicationContext-dao-config.xml" />
-
-	<context:component-scan base-package="com.baron" />
-
+ 	
+ 	<import resource="classpath:spring/applicationContext-dao-config.xml"/>
+ 	<context:component-scan base-package="com.baron"/>
+ 	
 	<task:scheduler id="taskScheduler" />
 	<task:executor id="taskExecutor" pool-size="1" />
 	<task:annotation-driven executor="taskExecutor"

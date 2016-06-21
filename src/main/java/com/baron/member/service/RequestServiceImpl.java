@@ -7,15 +7,11 @@ import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.text.Format;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import javax.mail.Session;
-import javax.servlet.http.HttpSession;
-
-import org.exolab.castor.xml.dtd.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +27,10 @@ import com.baron.member.model.SmsModel;
 
 @Service
 public class RequestServiceImpl implements RequestService {
+	Calendar cal =  Calendar.getInstance();
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");	
+	String nowDate = sdf.format(cal.getTime());
+	
 	@Autowired
 	private RequestDao requestDao;
 
@@ -47,46 +47,50 @@ public class RequestServiceImpl implements RequestService {
 	NotifiDao notifiDao;
 
 	@Override
-	public List<BookModel> requestList() {
-		// TODO Auto-generated method stub
+	public List<BookModel> requestList() { 
+//		cal.add(cal.MONTH, -1);
+//		String monthago = sdf.format(cal.getTime());
 		return requestDao.requestList();
 	}
 
 	@Override
-	public void deleteRequest(String req_cd) {
-		requestDao.deleteRequest(req_cd);
+	public void deleteRequest(BookModel model) {
+		requestDao.deleteRequest(model);
 	}
 
 	@Override
-	public void requestBook(BookModel book, MemberModel member ) {
-		ApprovalModel approval = new ApprovalModel();
-		Date date = new Date();
+	public void requestBook(BookModel model  ) {
+		ApprovalModel approval = new ApprovalModel(); 
+		Calendar cal =  Calendar.getInstance();
+		
+		MemberModel member = new MemberModel();
+		String nowDate = sdf.format(cal.getTime());  		
+		String max = selectMaxSer();
 
-		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
-
-		book.setId(member.getId());
-//		book.setB_group(requestDao.convertB_code(book.getB_group().substring(0,1)).trim()+"-"+book.getB_group());
-//
-//		if (book.getC_group() != null) {
-//			book.setC_group(requestDao.convertC_code(book.getC_group()
-//					.substring(0,3)).trim()+"-"+book.getC_group());
-//		}else{
-//			book.setC_group("");
-//		}
-//		book.setBook_cd(book.getB_group()+book.getC_group() + "-");
-		requestDao.requestBook(book);
-		if (Integer.parseInt(book.getPrice()) > 100000){
-			approval.setChiefId(member.getChiefid());
+		member = joinDao.selectMember(model.getId());   
+		model.setReqdate(nowDate);
+		model.setKname(model.getKname().substring(0, 5).trim());
+		model.setBook_cd(model.getB_group().substring(0, 1)
+				+ model.getC_group().substring(0, 3) + "-");
+		model.setReq_cd(String.format("%02d", max));
+		model.setReqstatus("0");
+		
+		if (Integer.parseInt(model.getPrice()) > 100000){
 			approval.setCompanyGroup(member.getCo_gb());
-			approval.setDescription1("[도서구매신청]");
-			approval.setDescription2(book.getReason());
 			approval.setTableName("BOOKREQ");
+			approval.setDocumentId(model.getReqdate() + "-" + model.getReq_cd());
+			approval.setChiefId(member.getChiefid());
+			approval.setDescription1("[도서구매신청]");
+			approval.setDescription2(model.getReason());
+			approval.setNowDate(nowDate);
 			approval.setId(member.getId());
-			approval.setNowDate(format.format(date));
-			approval.setDocumentId(book.getReq_cd());
 			
 			requestDao.approveChief(approval);
-		}
+			
+			model.setReqstatus("3");
+		} 
+		requestDao.requestBook(model);
+		
 	}
 
 	@Override
@@ -105,17 +109,7 @@ public class RequestServiceImpl implements RequestService {
 			if (model.getQuantity() > 1) {
 				for (int i = 0; i < model.getQuantity(); i++) {
 					model.setBook_cd(model.getBook_cd().substring(0, 8));
-					model.setBook_cd(model.getBook_cd() + "(" + (i + 1) + ")");
-					System.out.println(model.getAuthor());
-					System.out.println(model.getB_group());
-					System.out.println(model.getC_group());
-					System.out.println(model.getBook_cd());
-					System.out.println(model.getImageurl());
-					System.out.println(model.getIsbn());
-					System.out.println(model.getPrice());
-					System.out.println(model.getPublish());
-					System.out.println(model.getTitle());
-					System.out.println(model.getSummary());
+					model.setBook_cd(model.getBook_cd() + "(" + (i + 1) + ")"); 
 
 					bookDao.insertBook(model);
 				}
@@ -127,6 +121,42 @@ public class RequestServiceImpl implements RequestService {
 		}
 	}
 
+	@Override
+	public BookModel selectBook(BookModel book) {
+		return requestDao.selectBook(book);
+
+	}
+
+	@Override
+	public List<BookModel> requestRecord(String id) { 
+		return requestDao.requestRecord(id);
+	}
+
+	@Override
+	public void modifiBook(BookModel book) {
+		requestDao.modifiBook(book);
+	}
+
+	@Override
+	public void rejectRequest(BookModel book) {
+		requestDao.rejectRequest(book);
+
+	}
+
+	@Override
+	public String selectB_code(String b_group) {
+		return requestDao.selectB_code(b_group);
+	}
+
+	@Override
+	public String selectC_code(String c_group) {
+		return requestDao.selectC_code(c_group);
+	}
+
+	@Override
+	public String selectMaxSer() {
+		return requestDao.selectMaxSer();
+	}
 	/*
 	 * @Override public BookModel getRequestBook(String isbn, String id, int
 	 * quantity) throws Exception, IOException { BookModel book = new
@@ -188,42 +218,5 @@ public class RequestServiceImpl implements RequestService {
 
 		br.close();
 	}
-
-	@Override
-	public BookModel selectBook(String req_cd) {
-		return requestDao.selectBook(req_cd);
-
-	}
-
-	@Override
-	public List<BookModel> requestRecord(String id) {
-		// TODO Auto-generated method stub
-		return requestDao.requestRecord(id);
-	}
-
-	@Override
-	public void modifiBook(BookModel book) {
-		requestDao.modifiBook(book);
-	}
-
-	@Override
-	public void rejectRequest(String req_cd) {
-		requestDao.rejectRequest(req_cd);
-
-	}
-
-	@Override
-	public String selectB_code(String b_group) {
-		return requestDao.selectB_code(b_group);
-	}
-
-	@Override
-	public String selectC_code(String c_group) {
-		return requestDao.selectC_code(c_group);
-	}
-
-	@Override
-	public String selectMaxSer() {
-		return requestDao.selectMaxSer();
-	}
+ 
 }

@@ -2,6 +2,7 @@ package com.baron.bm.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -30,8 +31,9 @@ import com.baron.member.service.RentService;
 import com.baron.member.service.RequestService;
 
 @Controller
-public class RequestController {
-
+public class RequestController { 
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd"); 
+	
 	@Autowired
 	private RequestService requestservice;
 
@@ -48,34 +50,43 @@ public class RequestController {
 	private BookService bookService;
 
 	@RequestMapping("/confirmRequest")
-	public String requestResult(BookModel model, HttpServletRequest request) {
-		Date date = new Date();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-		String now = sdf.format(date);
+	public String requestResult(BookModel model, HttpServletRequest request) {		
+		String id = "";		
 		for (Cookie cookie : request.getCookies()) {
 			if (cookie.getName().equals("bm_id")) {
+				id =cookie.getValue();
 				model.setId(cookie.getValue());
 			}
 		}
-		MemberModel membermodel = new MemberModel();
-		membermodel = joinService.selectMember(model.getId());
-		membermodel.setId(model.getId());
-		String max = requestservice.selectMaxSer();
-
-		model.setKname(model.getKname().substring(0, 5).trim());
-		model.setBook_cd(model.getB_group().substring(0, 1)
-				+ model.getC_group().substring(0, 3) + "-");
-
-		model.setReq_cd("Book" + now.toString() + max);
-
-		requestservice.requestBook(model, membermodel);
-
-		return "redirect:request";
+		requestservice.requestBook(model);
+		notifiService.notifiReq(model);
+		
+		return "request/requestSuccess";
 	}
 
 	@RequestMapping("/request")
-	public String request(HttpServletRequest request, Model model) {
-
+	public String request(HttpServletRequest request, Model model, HttpSession session) {
+		session.setAttribute("adminMode", "user");
+		List<BookModel> bookList = new ArrayList<BookModel>();
+		String id = null;
+		for (Cookie cookie : request.getCookies()) {
+			if (cookie.getName().equals("bm_id")) {
+				id = cookie.getValue();
+			}
+		}
+		if (id == "") {
+			return "getout";
+		} else {
+			bookList = requestservice.requestRecord(id);
+			System.out.println(id);
+			model.addAttribute("bookList", bookList);
+			return "request/request";		
+		}
+	}
+	
+	@RequestMapping("/requestList")
+	public String requestList(HttpServletRequest request, Model model) {
+		
 		List<BookModel> bookList = new ArrayList<BookModel>();
 		String id = null, permission = null;
 		for (Cookie cookie : request.getCookies()) {
@@ -89,7 +100,7 @@ public class RequestController {
 			return "getout";
 		} else {
 			if (permission.equals("1")) {
-				bookList = requestservice.requestList();
+				bookList = requestservice.requestList(); 
 				model.addAttribute("bookList", bookList);
 				return "request/requestList";
 			} else {
@@ -100,16 +111,18 @@ public class RequestController {
 			}
 		}
 	}
-
 	@RequestMapping("/requestbook")
 	public String requestBook(HttpServletRequest request, Model model,
 			String isbn) throws Exception {
 		String id = null;
+		Calendar cal =  Calendar.getInstance();
+		String nowDate = sdf.format(cal.getTime());
 		BookModel book = requestservice.findBookOne(isbn);
 
 		for (Cookie cookie : request.getCookies()) {
 			if (cookie.getName().equals("bm_id")) {
 				id = cookie.getValue();
+				book.setReqdate(nowDate);
 				book.setId(id);
 			}
 		}
@@ -123,41 +136,41 @@ public class RequestController {
 	}
 
 	@RequestMapping("/buyRequest")
-	public String buyRequest(String req_cd, Model model, BookModel book) {
-
-		book = requestservice.selectBook(req_cd);
-		book.setB_group(book.getB_group().trim() + "-"
-				+ requestservice.selectB_code(book.getB_group()).trim());
-		book.setC_group(book.getC_group() + "-"
-				+ requestservice.selectC_code(book.getC_group()));
-		System.out.println(book.getB_group());
-		System.out.println(book.getC_group());
-
+	public String buyRequest(String req_cd, Model model, BookModel book) { 
+		book = requestservice.selectBook(book); 
 		model.addAttribute("book", book);
 		return "request/confirmBuy";
 	}
 
 	@RequestMapping("/confirmBuy")
 	public String confirmBuy(BookModel model) {
-
-		requestservice.confirmBuy(model);
-		requestservice.deleteRequest(model.getReq_cd());
-
-		return "redirect:request";
-
+		Calendar cal =  Calendar.getInstance();
+		String nowDate = sdf.format(cal.getTime());		
+		model.setRcv_date(nowDate); 
+		BookModel existbook = bookService.selectBook(model.getBook_cd());
+		if (existbook == null){
+			requestservice.confirmBuy(model);
+			requestservice.deleteRequest(model);
+			return "request/buySuccess";
+		}else{
+			return "redirect:requestfail";
+		} 
 	}
 
 	@RequestMapping("/confirmBuyList")
 	public String confirmBuyList(
-			@RequestParam(value = "req_cd") List<String> req_cdList) {
-		for (String req_cd : req_cdList) {
-			BookModel book = requestservice.selectBook(req_cd);
+			@RequestParam(value = "req_cd") List<BookModel> bookList, 
+			@RequestParam(value = "book_cd") List<String> book_cdList) {
+		for (String book_cd :book_cdList){
+			
+		}
+		for (BookModel book : bookList) { 
 			if (bookService.selectBook(book.getBook_cd()) == null) {
 				requestservice.confirmBuy(book);
-				requestservice.deleteRequest(book.getReq_cd());
-				return "request/buySuccess";
+				requestservice.deleteRequest(book);
+				return "redirect:request";
 			} else {
-				return "request/buyfail";
+				return "redirect:request";
 
 			}
 
@@ -185,18 +198,9 @@ public class RequestController {
 		for (int i = 0; i < req_cdList.size()-1; i++) {
 			BookModel book = new BookModel();
 			book.setBook_cd(book_cdList.get(i));
-			book.setReq_cd(req_cdList.get(i));
-			/*
-			 * book.setB_group(requestservice. selectB_code
-			 * (book_cd.substring(0,1))); book.setC_group
-			 * (requestservice.selectC_code (book_cd.substring(1,4)));
-			 */
-			/*
-			 * String b_group = b_groupList.get(i); System.out.println(b_group);
-			 * book.setB_group(requestservice.selectB_code(b_group)); String
-			 * c_group = c_groupList.get(i); System.out.println(c_group);
-			 * book.setC_group(requestservice.selectC_code(c_group));
-			 */
+			String reqString[]= req_cdList.get(i).split("-");
+			book.setReqdate(reqString[0]);
+			book.setReq_cd(reqString[1]);
 			requestservice.modifiBook(book);
 		}
 
@@ -205,14 +209,15 @@ public class RequestController {
 
 	@RequestMapping("/deleteRequest")
 	public String deleteRequest(String req_cd) {
-		requestservice.deleteRequest(req_cd);
+		BookModel book = new BookModel();
+		book.setReq_cd(req_cd);
+		requestservice.deleteRequest(book);
 		return "redirect:request";
 	}
 
 	@RequestMapping("/rejectRequest")
-	public String rejectRequest(String req_cd) {
-
-		requestservice.rejectRequest(req_cd);
+	public String rejectRequest(BookModel book) {		
+		requestservice.rejectRequest(book);
 		return "redirect:request";
 	}
 }

@@ -10,9 +10,9 @@ public interface RequestService {
 
 	public List<BookModel> requestList();
 
-	public void deleteRequest(String bookCode);
+	public void deleteRequest(BookModel model);
 
-	public void requestBook(BookModel model, MemberModel member);
+	public void requestBook(BookModel model);
 
 	/*
 	 * public BookModel getRequestBook(String isbn, String id, int quantity)
@@ -20,11 +20,11 @@ public interface RequestService {
 	 */
 	public BookModel findBookOne(String isbn) throws Exception;
 
-	public BookModel selectBook(String bookCode);
+	public BookModel selectBook(BookModel book);
 
 	public List<BookModel> requestRecord(String id);
 
-	public void rejectRequest(String req_cd);
+	public void rejectRequest(BookModel book);
 
 	public void modifiBook(BookModel book);
 

@@ -24,7 +24,7 @@ public interface RentService {
 
 	public void cancleBorrowBook(BookModel bookmodel);
 
-	public void returnBook(String book_cd);
+	public void returnBook(BookModel bookmodel);
 
 	public void confirmBorrowBook(String book_cd);
 
@@ -33,7 +33,7 @@ public interface RentService {
 
 	public List<BookModel> rentList(String id);
 
-	public void extendBorrowBook(String book_cd);
+	public void extendBorrowBook(BookModel bookmodel);
 
 	public void stopBorrow(String book_cd);
 
@@ -59,4 +59,9 @@ public interface RentService {
 	public List<BookModel> reserveList(String id);
 
 	public void deleteReserve(String book_cd);
+	
+
+	public List<BookModel> delayList();
+
+	BookModel selectBorrow(String book_cd);
 }

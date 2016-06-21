@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>  
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
@@ -16,13 +16,6 @@
 <link href="/resources/css/signin.css" rel="stylesheet">
 <link href="/resources/css/common.css" rel="stylesheet">
 <script src="/resources/js/jquery/jquery.js"></script>
-<script src="/resources/js/bootstrap.min.js"></script>
-<script src="/resources/js/common.js"></script>
-<script src="/resources/js/bootstrap-select.min.js"></script>
-<script src="/resources/js/jquery.dataTables.min.js"></script>
-<script src="/resources/js/dataTables.bootstrap.min.js"></script>
-<script src="/resources/js/jquery.dataTables.columnFilter.js"></script>
-<script src="/resources/js/bootstrap-datepicker.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		var today = new Date();
@@ -61,11 +54,11 @@
 	});
 </script>
 </head>
-<body onload="parent.resizeTo(1400,1000);">
+<body>
 	<jsp:include page="../nav.jsp" />
 	<div id="loadingBar"
 		style="background-color: #fff; position: absolute; top: 0; left: 0; width: 100%; height: 100%; text-align: center; margin: 0 auto; z-index: 100000;">
-		<table width="100%" height="100%" border="0" bgcolor="#fff">
+		<table style="width: 100%; height: 100%; border: 0; bgcolor: #fff">
 			<tr>
 				<td align="center">
 					<div style="text-align: center;">
@@ -83,176 +76,137 @@
 		<div class="col-md-12">
 			<div class="panel panel-default ">
 				<div class="panel-body">
-					<div  class="col-md-12 col-lg-12">
-						<h2>도서검색 목록</h2>
-					</div>
 					<div class="col-md-12 col-lg-12">
 						<form action="/searchBook" method="post">
-							<div class="row">
-								<div class="col-lg-2 col-md-2">
-									<div class="input-group date " data-provide="datepicker"
-										style="width: 140px;">
-										<input id="datepicker1" type="text" class="form-control" value="${date1}">
-										<div class="input-group-addon">
-											<span class="glyphicon glyphicon-th"></span>
+							<div class="col-md-12 col-lg-12">
+								<c:choose>
+									<c:when test="${listType=='new'}">
+
+									</c:when>
+									<c:otherwise>
+
+										<div class="col-lg-3 col-md-3">
+											<h2>도서 목록</h2>
 										</div>
+									</c:otherwise>
+								</c:choose>
+								<div class="col-lg-12 col-md-12" style="margin-top: 3%;">
+									<div style="float: left" align="left">
+										<select class="selectpicker"
+											style="font-size: 14px; margin-top: 10px; vertical-align: baseline;"
+											id="b_group" name="b_group"><option selected>전체
+												<c:forEach items="${BCodeList}" var="code">
+													<option value="${code.code}-${code.name}">${code.code}-${code.name}
+												</c:forEach></select>
 									</div>
-								</div>
-								<div class="col-lg-2 col-md-2">
-									<div class="input-group date  " data-provide="datepicker"
-										style="width: 140px;">
-										<input id="datepicker2" type="text" class="form-control" value="${date2}">
-										<div class="input-group-addon">
-											<span class="glyphicon glyphicon-th"></span>
-										</div>
+									<div class="input-group left"
+										style="vertical-align: baseline; float: left; width: 80%">
+
+										<span class="input-group-btn"> <input id="listType"
+											name="listType" type="hidden" value="${listType }"> <input
+											type="text" class="form-control" id="keyword" name="keyword"
+											placeholder="기술자료실 도서 검색 [ 소문자로 입력 ]" value="${keyword }">
+											<button class="btn btn-default" type="submit" id="btn_find">
+												<span class="glyphicon glyphicon-search"></span>
+											</button>
+										</span>
 									</div>
-								</div>
-								<div class="col-lg-3 col-md-3">
-									<div class="input-group  ">
-										<input type="radio" name="field" value="title" checked>
-										제목 <input type="radio" name="field" value="author">
-										저자 <input type="radio" name="field" value="publisher">
-										출판사
-									</div>
-								</div>
-							</div>
-							<div class="row">
-								<div align="left" style="float: left; width: 136px;">
-									<select class="selectpicker" style="font-size: 14px"
-										id="select" name="b_group">
-										<optgroup label="대분류">
-											<option value="B-도서(단행본)">B-도서(단행본)
-												<option value="E-기타매체">E-기타매체
-											
-											<option value="J-정기간행물">J-정기간행물
-											
-											<option value="P-특허자료">P-특허자료
-											
-											<option value="R-보고서">R-보고서
-											
-											<option value="S-규격/사전">S-규격/사전
-											
-											<option value="T-논문">T-논문
-										
-										</optgroup>
-									</select>
-								</div>
-								<div align="right" style="float: left; width: 70%;">
-									<span class="input-group-btn"> <input type="text"
-										style="width: 100%; float: left" class="form-control"
-										id="keyword" name="keyword"
-										placeholder="기술자료실 도서 검색 [ 소문자로 입력 ]">
-										<button class="btn btn-default" type="submit" id="btn_find">
-											<span class="glyphicon glyphicon-search"></span>
-										</button></span>
 								</div>
 							</div>
 						</form>
 					</div>
-
-					<!-- <div class="input-group"
-							style="width: 20%; vertical-align: baseline; float: right; margin-right: 30px;">
-							<select class="selectpicker"
-								style="width: 10%; font-size: 14px; margin-top: 10px; vertical-align: baseline;"
-								id="select">
-								<optgroup label="대분류">
-									<option value="B-도서(단행본)">B-도서(단행본)
-									<option value="E-기타매체">E-기타매체
-									<option value="J-정기간행물">J-정기간행물
-									<option value="P-특허자료">P-특허자료
-									<option value="R-보고서">R-보고서
-									<option value="S-규격/사전">S-규격/사전
-									<option value="T-논문">T-논문
-								</optgroup>
-							</select>
-						</div> -->
 				</div>
-				<div class="dataTable_wrapper">
-					<table class="table table-striped table-bordered " id="dataTable"> 
-						<thead>
-							<tr> 
-								<th>도서명</th> 
-								<th class="hidden-xs hidden-sm hidden-md td-author">저자</th>
-								<th class="hidden-xs hidden-sm td-genre">출판사</th>
-								<th class="hidden-xs td-genre" style="width: 120px">분류</th>
-								<th style="width: 100px">대여상태</th> 
-								<th class="td-img"></th>
-							</tr>
-						</thead>
 
-						<tbody>
-
-							<c:forEach items="${bookList}" var="book">
-
+				<div id="searchResultArea">
+					<div class="dataTable_wrapper">
+						<table class="table table-striped table-bordered " id="dataTable">
+							<thead>
 								<tr>
-
-									<td align="left"><a href="#"
-										onclick="window.open('/bookInfo?book_cd=${book.book_cd}','new','resizeble=yes scrollbars=yes,  width=850, height=850');">
-											${book.title }</a></td>
-									<td class="hidden-xs hidden-sm hidden-md" align="left">${book.author }</td>
-									<td class="hidden-xs hidden-sm" align="left">${book.publish}</td>
-									<td class="hidden-xs td-genre" align="left">${book.b_group }</td>
-									<c:choose>
-										<c:when test="${book.rentchk=='0'}">
-											<td align="left"><mark>대출가능</mark></td>
-											<td align="left"><button class="btn btn-default"
-													type="button" id="borrowbook"
-													onClick="location.href='/borrowbook?book_cd=${book.book_cd}'; borrow();">대출</button></td>
-										</c:when>
-
-										<c:when test="${book.rentchk=='1' and book.reservechk=='1'}">
-											<td>예약중</td>
-											<td></td>
-										</c:when>
-										<c:when test="${book.rentchk=='1' and book.reservechk=='0'}">
-											<td>~ <fmt:formatDate type="date" pattern="MM-dd"
-													value="${book.returndate}" /></td>
-											<td><button class="btn btn-default" type="button"
-													id="reservebook"
-													onClick="location.href='/reservation?book_cd=${book.book_cd}'">예약</button></td>
-										</c:when>
-
-										<c:when test="${book.rentchk=='2' and book.reservechk=='1'}">
-											<td>예약중</td>
-											<td></td>
-										</c:when>
-										<c:when test="${book.rentchk=='2' and book.reservechk=='0'}">
-											<td>~ <fmt:formatDate type="date" pattern="MM-dd"
-													value="${book.returndate}" /></td>
-											<td><button class="btn btn-default" type="button"
-													id="reservebook"
-													onClick="location.href='/reservation?book_cd=${book.book_cd}'">예약</button></td>
-										</c:when>
-
-										<c:when test="${book.rentchk=='4'}">
-											<td>대출 정지</td>
-											<td></td>
-
-
-										</c:when>
-										<c:when test="${book.rentchk=='5'}">
-											<td>예약중</td>
-											<td></td>
-										</c:when>
-									</c:choose>
+									<th>도서명</th>
+									<th class="hidden-xs hidden-sm hidden-md author">저자</th>
+									<th class="hidden-xs hidden-sm genre">출판사</th>
+									<th class="hidden-xs genre" style="width: 120px">분류</th>
+									<th class="col-xs-3 col-lg-2 col-md-2">대여상태</th>
+									<th class="image">대출</th>
 								</tr>
+							</thead>
+
+							<tbody>
+								<c:forEach items="${bookList}" var="book">
+									<tr>
+										<td align="left"><a href="#"
+											onclick="window.open('/bookInfo?book_cd=${book.book_cd}&keyword=${keyword }&listType=${listType }',
+										'new','resizeble=yes scrollbars=yes,  width=750, height=600');">
+												${book.title }</a></td>
+										<td class="hidden-xs hidden-sm hidden-md" align="left">${book.author }</td>
+										<td class="hidden-xs hidden-sm author" align="left">${book.publish}</td>
+										<td class="hidden-xs genre" align="left">${book.b_group }</td>
+										<c:choose>
+											<c:when test="${book.rentchk=='0'}">
+												<td align="left"><mark>대출가능</mark></td>
+												<td align="left"><button class="btn btn-default borrow"
+														type="button" id="borrowbook" value="${book.book_cd}"<%-- 													onClick="location.href='/borrowbook?book_cd=${book.book_cd}&listType=${listType}&keyword=${keyword}';"  --%>
+													>대출</button>
+												</td>
+											</c:when>
+
+											<c:when test="${book.rentchk=='1' and book.reservechk=='1'}">
+												<td>예약중</td>
+												<td></td>
+											</c:when>
+											<c:when test="${book.rentchk=='1' and book.reservechk=='0'}">
+												<td><p style="color: blue;">대출요청중</p> <%-- 											반납일 : ${book.returndate} --%>
+												</td>
+												<td>
+													<!-- 											<button class="btn btn-default" type="button" -->
+													<!-- 													id="reservebook" --> <%-- 													onClick="location.href='/reservation?book_cd=${book.book_cd}'">예약</button> --%>
+												</td>
+											</c:when>
+											<c:when test="${book.rentchk=='2' and book.reservechk=='1'}">
+												<td>예약중</td>
+												<td></td>
+											</c:when>
+											<c:when test="${book.rentchk=='2' and book.reservechk=='0'}">
+												<td><p style="color: blue;">대출중</p>
+													<p class="hidden-xs">반납일 :${book.returndate}
+													<p></td>
+												<td></td>
+											</c:when>
+											<c:when test="${book.rentchk=='4'}">
+												<td>대출 정지</td>
+												<td></td>
+											</c:when>
+											<c:when test="${book.rentchk=='5'}">
+												<td>예약중</td>
+												<td></td>
+											</c:when>
+										</c:choose>
+									</tr>
 
 
-							</c:forEach>
+								</c:forEach>
 
-						</tbody>
-					</table>
+							</tbody>
+						</table>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	</div>
-
+	<script src="/resources/js/jquery/jquery.js"></script>
+	<script src="/resources/js/bootstrap.min.js"></script>
+	<script src="/resources/js/common.js"></script>
+	<script src="/resources/js/book.js"></script>
+	<script src="/resources/js/bootstrap-select.min.js"></script>
+	<script src="/resources/js/jquery.dataTables.min.js"></script>
+	<script src="/resources/js/dataTables.bootstrap.min.js"></script>
+	<script src="/resources/js/jquery.dataTables.columnFilter.js"></script>
+	<script src="/resources/js/bootstrap-datepicker.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$('#dataTable').dataTable({
-				/* "pageLength" : 10, */
-				"pageLength" : 100,
+				"bSort" : false,
+				"pageLength" : 10,
 				paging : true,
 				searching : false,
 				"columns" : [ null, null, null, {
@@ -281,20 +235,8 @@
 
 		divLoadBody.style.display = "";
 		loadingBar.style.display = "none";
-		$("#select").change(function() {
-			var options = $(this).val();
-			$('#dataTable tbody tr').show();
-			$("#dataTable tbody tr").each(function() {
-				var tr = $(this);
-				var td = tr.find("td:eq(3)")
-				if (td.text() !== options) {
-					tr.hide();
-				}
-			})
-
-		});
 
 		$('.selectpicker').selectpicker();
-	</script></bo
-											dy>
+	</script>
+</body>
 </html>

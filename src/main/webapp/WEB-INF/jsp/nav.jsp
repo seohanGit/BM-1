@@ -10,9 +10,9 @@
 //-->
 
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-	<div class="container">
+	<div class="container col-lg-offset-2 col-md-offset-2" style="padding-left:3%">
 		<!-- Brand and toggle get grouped for better mobile display -->
-		<div class="navbar-header">
+		<div class="  navbar-header">
 			<button type="button" class="navbar-toggle" data-toggle="collapse"
 				data-target="#bs-example-navbar-collapse-1">
 				<span class="sr-only">Toggle navigation</span> <span
@@ -25,31 +25,25 @@
 		<div class="collapse navbar-collapse"
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav " role="menu">
-				<li><a href="searchBook?listType=">자료검색</a></li>
-				<li><a href="searchBook?listType=new">신간도서</a></li>
-				<li><a href="board">게시판</a></li>
-				<li><a href="searchBook?listType=recommend">이달의 추천도서</a></li>
-				<li><a href="searchBook?listType=best">베스트 도서</a></li>
+				<li><a href="searchBook?listType=&keyword=">자료검색</a></li>
+				<li><a href="searchBook?listType=new&keyword=">신간도서</a></li>
+<!-- 				<li><a href="board">게시판</a></li> -->
+				<li><a href="searchBook?listType=recommend&keyword=">추천도서</a></li>
+				<li><a href="searchBook?listType=best&keyword=">베스트 도서</a></li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown" role="button" aria-expanded="false">${sessionScope.team_nm}
 						${sessionScope.kname} <span class="caret"></span>
 				</a>
 					<ul class="dropdown-menu" role="menu">
-						<li><a href="#" id="borrowReqList">대여요청현황</a></li>
-						<li><a href="#" id="borrowList">대여현항</a></li>						
-						<li><a href="#" id="reserveList">예약현항</a></li>
-						<li><a href="#" id="request">구매요청</a></li>
-						<li><a href="#" id="recordList">대여기록</a></li>
-						
-						<!-- <li><a href="#" data-toggle="modal" data-target="#myModal">사용자정보수정</a></li>
-						<li class="divider"></li>
-
-						<li><a href="#" id="logout" name="logout">종료 <span
-								class="glyphicon glyphicon-chevron-right"></span>
-						</a></li> -->
+						<li><a href="#" id="borrowReqList">대출요청현황</a></li>
+						<li><a href="#" id="borrowList">대출현황</a></li>						
+<!-- 						<li><a href="#" id="reserveList">예약현황</a></li> -->
+						<li><a href="#" id="request">자료구입신청</a></li>
+						<li><a href="#" id="record">대출기록</a></li>
+						 
 					</ul></li>
 
-				<li style="padding-right: 40px">&nbsp;&nbsp;</li>
+				
 				<c:choose>
 					<c:when test="${sessionScope.permission ==1}">
 						<li style="font-size: 9px"><a href="admin">관리자페이지</a></li>

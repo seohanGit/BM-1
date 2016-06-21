@@ -1,4 +1,4 @@
-body {
+body .main {
 	padding-top: 70px;
 	/* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
 }
@@ -20,6 +20,10 @@ footer {
 	-webkit-box-orient: vertical;
 }
 
+.href{
+	display: block; 
+	font-weight: bold;
+}
 #nav-input {
 	margin-top: 5px;
 	margin-right: 5px;
@@ -44,7 +48,7 @@ div .right {
 
 div .title {
 	width: 100%;
-	text-align: center;
+/* 	text-align: center; */
 	font-size: xx-large;
 }
 
@@ -61,24 +65,42 @@ div .right-end {
 	height: 100%;
 }
 
-table thead .td-title {
+table .table .table-bordered {
+	margin-right: 10px;
+	padding-right: 10px;
+}
+
+table .title {
+	font-size: 15px;
+	font-weight: bold;
 	text-transform: capitalize;
+} 
+table th {
+	text-align: center;
 }
 
-table  thead .td-author {
-	width: 14%;
+table .author {
+	width:15%;  
+}
+table>tbody>tr>td .author {  
+	text-overflow:ellipsis; 
+	overflow:hidden;
+	white-space:nowrap;
 }
 
-table thead .td-img {
-	width: 7%;
+table  .image {
+	width: 100px;
+	word-break:keep-all; 
 }
 
-table   thead .td-genre {
+table   .genre {
 	width: 10%;
+	word-break:keep-all; 
 }
 
-table  thead .td-date {
+table   .td-date {
 	width: 80px;
+	word-break:keep-all; 
 }
 
 table thead .td-chk {
@@ -86,9 +108,9 @@ table thead .td-chk {
 }
 table .td-count {
 	width: 80px;
-	text-align: right;
-	
+	text-align: right; 
 }
+
 
 .table-admin {
 	font-size: 16px;
@@ -125,7 +147,7 @@ div .right>h4 {
 }
 
 .row {
-	padding: 15px;
+	padding: 10px;
 }
 
 #page {
@@ -133,15 +155,6 @@ div .right>h4 {
 	font-size: 20px;
 }
 
-table .table .table-bordered {
-	margin-right: 10px;
-	padding-right: 10px;
-}
-
-table .title {
-	font-size: 15px;
-	font-weight: bold;
-}
 
 #nav-input {
 	margin-top: 5px;

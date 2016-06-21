@@ -70,7 +70,7 @@
 			<h2>인터파크 검색</h2>
 			<div class="input-group "
 				style="width: 30%; float: right; margin-right: 20%">
-				<form action="/findBook" method="post">
+				<form action="/findBook" method="post"><input type="hidden" name="type" value="">
 					<span class="input-group-btn"> <input type="text"
 						class="form-control" id="query" name="keyword"
 						placeholder="인터파크 검색">
@@ -78,7 +78,8 @@
 							<span class="glyphicon glyphicon-search"></span>
 						</button>
 						<button class="btn btn-default"
-							onclick="location.href='/requestbook'; ">ISBN 미등록 도서</button>
+							onclick="window.open
+							('/requestbook?type=isbn&keyword=','new','resizeble=yes scrollbars=yes, width=500, height=700');">ISBN 미등록 도서</button>
 					</span>
 				</form>
 			</div>
@@ -87,19 +88,18 @@
 					onclick="location.href='/requestbook'; ">미등록 도서 구매</button>
 			</div> -->
 			<div class="dataTable_wrapper">
-
 				<table class="table table-striped table-bordered"
 					style="width =: 90%; bordercolor: #fff" id="dataTable">
 
 					<thead>
 						<tr>
-							<td class="hidden-xs td-img">표지</td>
+							<td class="hidden-xs image">표지</td>
 							<td>도서명</td>
-							<td class="hidden-xs td-author">저자</td>
-							<td class="hidden-sm hidden-xs hidden-md td-genre">분류</td>
-							<td class="hidden-xs td-genre">출판사</td>
+							<td class="hidden-xs author">저자</td>
+							<td class="hidden-sm hidden-xs hidden-md genre">분류</td>
+							<td class="hidden-xs genre">출판사</td>
 							<td class="td-date">가격</td>
-							<td class="td-genre">구매요청</td>
+							<td class="genre">구매요청</td>
 						</tr>
 					</thead>
 
@@ -108,14 +108,17 @@
 							<tr>
 								<td class="hidden-xs" style="width: 50px" align="left"><img
 									style="width: 50px" src="${book.imageurl}"></td>
-								<td class="td-title" align="left"><a href="${book.link}">${book.title}</a></td>
+								<td class="title" align="left"><a onclick="window.open
+									('${book.link}','new','resizeble=yes scrollbars=yes, width=500, height=800');" >${book.title}</a></td>
 								<td class="hidden-xs" align="left">${book.author }</td>
 								<td class="hidden-sm hidden-xs hidden-md" align="left">${book.b_group}</td>
 								<td class="hidden-xs" align="left">${book.publish}</td>
 								<td align="left">${book.price}원</td>
 								<td>
 									<button class="btn btn-default" type="submit"
-										onclick="location.href='/requestbook?isbn=${book.isbn}'; ">구매요청</button>
+										onclick="window.open
+							('/requestbook?isbn=${book.isbn}','new','resizeble=yes scrollbars=yes, width=500, height=800');">
+							구매요청</button>
 								</td>
 							</tr>
 						</c:forEach>

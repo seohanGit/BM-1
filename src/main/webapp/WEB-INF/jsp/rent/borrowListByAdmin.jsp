@@ -1,3 +1,5 @@
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Calendar" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -10,7 +12,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
-<title>대여현황</title>
+<title>대출현황</title>
 <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="/resources/css/signin.css" rel="stylesheet">
 <link href="/resources/css/common.css" rel="stylesheet">
@@ -38,13 +40,13 @@ body {
 				
 				<br><div class="panel-body">
 					<div>
-						<h2>대여현황 목록</h2>
+						<h2>대출현황 목록</h2>
 					</div>
 
 					<c:choose>
 						<c:when test="${empty rentList}">
 							<div>
-								<h3>대여중인 도서가 없습니다.</h3>
+								<h3>대출중인 도서가 없습니다.</h3>
 							</div>
 						</c:when>
 						<c:otherwise>
@@ -59,38 +61,36 @@ body {
 										<tr class="hidden-xs title">
 											<th class="td-chk"><input type="checkbox" id="allCheck"></th>
 											<th>도서명</th>
-											<th class="td-genre">반납일</th>
-											<th class="hidden-xs td-date">대여자</th>
-											<th class="td-img">반납</th>
-											<th class="td-img">연장</th>
+											<th class="genre">대출일</th>
+											<th class="genre">반납일</th>
+											<th class="hidden-xs td-date">대출자</th>
+											<th class="image">반납</th>
+											<th class="image">연장</th>
 										</tr>
 									</thead>
-
-									<c:set var="now" value="<%=new java.util.Date()%>" />
+								<% SimpleDateFormat sdf =  new SimpleDateFormat("yyyyMMdd");
+								Calendar cal = Calendar.getInstance(); %>
+									<c:set var="now" value="<%= sdf.format(cal.getTime())%>" />
 
 
 									<tbody>
-										<c:forEach items="${rentList}" var="rent" varStatus="loop">
-
+										<c:forEach items="${rentList}" var="rent" varStatus="loop"> 
 											<tr>
 												<td><input type="checkbox" name="book_cd"
 													value="${rent.book_cd}"></td>
-												<td align="left">${rent.title }</td>
-												<%-- 												<td class="hidden-xs" align="left"><fmt:formatDate type="date"
-														pattern="yyyy-MM-dd" value="${rent.rentdate }" /></td>
- --%>
+												<td align="left">${rent.title }</td> 
+ 												<td align="left"> ${rent.rentdate} </td>
 												<c:choose>
 													<c:when test="${rent.returndate < now}">
 														<td align="left"
 															style="text-decoration: underline; text-align: right;"><mark>
-																<fmt:formatDate type="date" pattern="yyyy-MM-dd"
-																	value="${rent.returndate }" />
-																- 연체중
+<%-- 																 <%String.format("yyyyMMdd" , "${rent.returndate}");%>  --%>
+																${rent.returndate} - 연체중
 															</mark></td>
 													</c:when>
 													<c:otherwise>
-														<td align="left"><fmt:formatDate type="date"
-																pattern="yyyy-MM-dd" value="${rent.returndate }" /></td>
+														<td align="left">${rent.returndate} </td>
+<%-- 														<%String.format("yyyyMMdd","${rent.returndate}");%> --%>
 													</c:otherwise>
 												</c:choose>
 

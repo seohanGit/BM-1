@@ -17,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.baron.member.dao.JoinDao;
 import com.baron.member.model.BookModel;
@@ -112,7 +113,7 @@ public class RequestController {
 		}
 	}
 	@RequestMapping("/requestbook")
-	public String requestBook(HttpServletRequest request, Model model,
+	public String requestBook(HttpSession session, HttpServletRequest request, Model model,
 			String isbn) throws Exception {
 		String id = null;
 		Calendar cal =  Calendar.getInstance();
@@ -126,7 +127,9 @@ public class RequestController {
 				book.setId(id);
 			}
 		}
-
+		
+		model.addAttribute("cheif",session.getAttribute("cheif") );
+		model.addAttribute("cheifid",session.getAttribute("cheifid") );
 		if (isbn != null) {
 			model.addAttribute("book", book);
 			return "request/confirmRequest";

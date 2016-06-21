@@ -23,7 +23,7 @@
 				<div id="top"> 
 					<div class="form-group left" style="width: 50%">
 						<label for="exampleInputPassword1">대분류</label> <select
-							class="selectpicker" name="b_group">
+							class="selectpicker form-control" name="b_group">
 							<optgroup label="대분류">
 								<option value="B-도서(단행본)">B-도서(단행본)
 								<option value="E-기타매체">E-기타매체
@@ -37,7 +37,7 @@
 					</div>
 					<div class="form-group right" style="width: 50%;">
 						<label for="exampleInputPassword1">소분류</label> <select
-							class="selectpicker" name="c_group" style="width: 80%;">
+							class="selectpicker form-control" name="c_group" style="width: 80%;">
 							<optgroup label="소분류">
 
 								<option value="010-일반">일반

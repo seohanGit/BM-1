@@ -92,11 +92,18 @@ public class BookServiceImpl implements BookService {
 	public List<BookModel> searchBook(Dto dto) {
 		dto.setKeyword(dto.getKeyword().trim());
 		dto.setB_group(dto.getB_group().trim());
-		if(dto.getB_group().equals("전체")){
+		switch (dto.getB_group()){
+		case "전체": 
 			dto.setB_group("");
-		}else{
+			break;
+		case "":
+			dto.setB_group("");
+			break;
+		default:
 			dto.setB_group(dto.getB_group().substring(0, 1));
+			break;
 		}
+		 
 		if (dto.getField().equals("title")) {
 			return bookDao.searchBook(dto);
 		} else if (dto.getField().equals("author")) {

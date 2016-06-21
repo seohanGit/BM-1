@@ -80,8 +80,7 @@
 		UPDATE sitlib.bookreqst
 		SET
 		book_cd = #{book_cd} 
-		WHERE reqdate = #{reqdate} and 
-		req_cd = #{req_cd}
+		WHERE reqdate = #{reqdate} and 		req_cd = #{req_cd}
 	</update>
 
 	<delete id="deleteApproval" parameterType="ApprovalModel">

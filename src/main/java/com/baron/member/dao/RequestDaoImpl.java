@@ -93,7 +93,7 @@ public class RequestDaoImpl implements RequestDao {
 	@Override
 	public void approveChief(ApprovalModel approval) {
 		session.insert(NAMESPACE + "insertApproval");
-		session.delete(NAMESPACE + "deleteApproval");
+		//session.delete(NAMESPACE + "deleteApproval");
 		
 	}
 }

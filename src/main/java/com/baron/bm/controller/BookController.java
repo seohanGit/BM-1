@@ -93,6 +93,7 @@ public class BookController {
 		List<CodeModel> BCodeList = new ArrayList<CodeModel>(); 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd"); 
 		Calendar cal = Calendar.getInstance();		 
+		BCodeList = bookservice.selectBCodeList(); 
 		
 		for (Cookie cookie : request.getCookies()) {
 			if (cookie.getName().equals("bm_permission")) {
@@ -129,11 +130,7 @@ public class BookController {
 				
 				bookList = bookservice.searchBook(dto);
 				mav.addObject("bookList", bookList);
-				if (session.getAttribute("adminMode").equals("admin")&&  permission.equals("1")) {
-					mav.setViewName("book/bookSearchByAdmin"); 
-				}else{
-					mav.setViewName("book/bookSearch");
-				}
+				mav.setViewName("book/bookSearch"); 
 				break;
 		} 
 		mav.addObject("bookList", bookList); 		  
@@ -141,9 +138,9 @@ public class BookController {
 		mav.addObject("date2", datepicker2); 
 		mav.addObject("listType", listType);
 		mav.addObject("keyword", dto.getKeyword());
-		
-		BCodeList = bookservice.selectBCodeList(); 
 		mav.addObject("BCodeList", BCodeList); 
+		mav.addObject("b_group", dto.getB_group());
+		
 	
 		return mav;	
 	}
@@ -161,7 +158,8 @@ public class BookController {
 		BCodeList = bookservice.selectBCodeList(); 
 		mav.addObject("bookList", bookList);    
 		mav.addObject("listType", listType);
-		mav.addObject("keyword", dto.getKeyword()); 
+		mav.addObject("keyword", dto.getKeyword());
+		mav.addObject("b_group", dto.getB_group());
 		mav.addObject("BCodeList", BCodeList); 
 		mav.setViewName("book/bookSearchByAdmin");  
 	

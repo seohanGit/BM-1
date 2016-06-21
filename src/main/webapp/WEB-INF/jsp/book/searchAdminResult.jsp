@@ -96,6 +96,10 @@
 											onClick="location.href='/deletebook?book_cd=${book.book_cd}'; del();">도서삭제</button>
 									</td>
 								</c:when>
+								<c:otherwise>
+									<td></td>
+									<td></td>
+								</c:otherwise>
 							</c:choose>
 
 

@@ -67,7 +67,7 @@ public class BookServiceImpl implements BookService {
 	}
 
 	@Override
-	public void insertBook(BookModel model, HttpServletRequest request) throws Exception {
+	public void insertBook(BookModel model, HttpServletRequest request)  {
 		if (model.getQuantity() == 1) {
 			bookDao.insertBook(model);
 		} else if (model.getQuantity() > 1) {
@@ -90,6 +90,13 @@ public class BookServiceImpl implements BookService {
 
 	@Override
 	public List<BookModel> searchBook(Dto dto) {
+		dto.setKeyword(dto.getKeyword().trim());
+		dto.setB_group(dto.getB_group().trim());
+		if(dto.getB_group().equals("전체")){
+			dto.setB_group("");
+		}else{
+			dto.setB_group(dto.getB_group().substring(0, 1));
+		}
 		if (dto.getField().equals("title")) {
 			return bookDao.searchBook(dto);
 		} else if (dto.getField().equals("author")) {

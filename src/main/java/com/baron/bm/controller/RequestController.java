@@ -50,31 +50,16 @@ public class RequestController {
 	private BookService bookService;
 
 	@RequestMapping("/confirmRequest")
-	public String requestResult(BookModel model, HttpServletRequest request) {
-		Calendar cal =  Calendar.getInstance();
-		String nowDate = sdf.format(cal.getTime());
-		
-		String id = "";
-		BookModel book = new BookModel();
-		book = model;
+	public String requestResult(BookModel model, HttpServletRequest request) {		
+		String id = "";		
 		for (Cookie cookie : request.getCookies()) {
 			if (cookie.getName().equals("bm_id")) {
 				id =cookie.getValue();
-				book.setId(cookie.getValue());
+				model.setId(cookie.getValue());
 			}
 		}
-		MemberModel membermodel = joinService.selectMember(model.getId());  
-		String max = requestservice.selectMaxSer();
-
-		book.setReqdate(nowDate);
-		book.setKname(model.getKname().substring(0, 5).trim());
-		book.setBook_cd(book.getB_group().substring(0, 1)
-				+ book.getC_group().substring(0, 3) + "-");
-		book.setReq_cd(max);
-		book.setId(id);
-		
-		requestservice.requestBook(book, membermodel);
-		notifiService.notifiReq(book);
+		requestservice.requestBook(model);
+		notifiService.notifiReq(model);
 		
 		return "request/requestSuccess";
 	}

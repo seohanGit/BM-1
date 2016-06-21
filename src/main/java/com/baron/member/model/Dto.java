@@ -6,7 +6,7 @@ public class Dto {
 	private String year;
 	private String kname;
 	private int price;
-	private String b_group;
+	private String b_group ="";
 	private String team_nm;
 
 	private String string1;
@@ -21,7 +21,7 @@ public class Dto {
 	private String date2;
 	
 	private String field = "";
-	private String keyword;
+	private String keyword ="";
 	
 	public String getField() {
 		return field;

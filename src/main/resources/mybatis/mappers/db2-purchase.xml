@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.baron.member.sqlModel">
-	<!-- 구매요청, 대여 관련 커리 -->
-
+<!-- 구매요청, 대여 관련 커리 
+	status 
+	'0' 구매신청
+	'1' 구매 완료
+	'2' 구매 반려
+	'3' 팀장 결재중
+-->
 	<insert id="requestBook" parameterType="BookModel">
 		INSERT INTO
 		sitlib.bookreqst
@@ -13,7 +18,7 @@
 		#{reqdate},
 		#{title},#{book_cd},#{price},#{author},#{quantity},#{b_group},#{c_group},#{link},
 		#{imageurl},#{isbn}, #{publish}, #{summary}, #{req_cd}, #{kname},
-		#{reason}, '0')
+		#{reason}, #{reqstatus})
 	</insert>
 
 	<update id="deleteRequest" parameterType="BookModel">

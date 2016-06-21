@@ -12,7 +12,7 @@ public interface RequestService {
 
 	public void deleteRequest(BookModel model);
 
-	public void requestBook(BookModel model, MemberModel member);
+	public void requestBook(BookModel model);
 
 	/*
 	 * public BookModel getRequestBook(String isbn, String id, int quantity)

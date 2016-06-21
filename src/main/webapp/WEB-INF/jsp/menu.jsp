@@ -23,7 +23,7 @@
 				onclick="location.href='noticeListByAdmin'">공지사항</button>
 
 			<button class="btn btn-default  noborder"
-				onclick="location.href='searchBook?listType=&keyword='">도서목록</button>
+				onclick="location.href='searchBookAdmin?listType=&keyword='">도서목록</button>
 			<!-- 	<button class="btn btn-default  noborder" 
 			onclick="location.href='memberList'">사원목록</button> -->
 			<button class="btn btn-default  noborder"

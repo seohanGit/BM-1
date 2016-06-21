@@ -59,26 +59,38 @@ public class RequestServiceImpl implements RequestService {
 	}
 
 	@Override
-	public void requestBook(BookModel book, MemberModel member ) {
-		ApprovalModel approval = new ApprovalModel();
-		Date date = new Date();
+	public void requestBook(BookModel model  ) {
+		ApprovalModel approval = new ApprovalModel(); 
+		Calendar cal =  Calendar.getInstance();
+		
+		MemberModel member = new MemberModel();
+		String nowDate = sdf.format(cal.getTime());  		
+		String max = selectMaxSer();
 
-		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
-
-		//book.setId(member.getId()); 
-		requestDao.requestBook(book);
-		if (Integer.parseInt(book.getPrice()) > 100000){
-			approval.setChiefId(member.getChiefid());
+		member = joinDao.selectMember(model.getId());   
+		model.setReqdate(nowDate);
+		model.setKname(model.getKname().substring(0, 5).trim());
+		model.setBook_cd(model.getB_group().substring(0, 1)
+				+ model.getC_group().substring(0, 3) + "-");
+		model.setReq_cd(String.format("%02d", max));
+		model.setReqstatus("0");
+		
+		if (Integer.parseInt(model.getPrice()) > 100000){
 			approval.setCompanyGroup(member.getCo_gb());
-			approval.setDescription1("[도서구매신청]");
-			approval.setDescription2(book.getReason());
 			approval.setTableName("BOOKREQ");
+			approval.setDocumentId(model.getReqdate() + "-" + model.getReq_cd());
+			approval.setChiefId(member.getChiefid());
+			approval.setDescription1("[도서구매신청]");
+			approval.setDescription2(model.getReason());
+			approval.setNowDate(nowDate);
 			approval.setId(member.getId());
-			approval.setNowDate(format.format(date));
-			approval.setDocumentId(book.getReq_cd());
 			
 			requestDao.approveChief(approval);
-		}
+			
+			model.setReqstatus("3");
+		} 
+		requestDao.requestBook(model);
+		
 	}
 
 	@Override

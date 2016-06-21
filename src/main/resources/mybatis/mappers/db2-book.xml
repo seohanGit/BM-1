@@ -32,10 +32,8 @@
 		SELECT * FROM sitlib.bookmst WHERE book_cd=#{book_cd} FETCH first 1 rows only
 	</select>
 
-	<select id="searchBook" parameterType="String" resultType="BookModel">
-		<bind name="keyword" value="'%' + _parameter + '%'" />
-		<bind name="b_group" value="'%' + _parameter + '%'" />
-		SELECT A.title, A.author, A.publish, A.b_group, A.rentchk, A.rcmdChk, A.imageurl,
+	<select id="searchBook" parameterType="Dto" resultType="BookModel"> 
+		<![CDATA[SELECT A.title, A.author, A.publish, A.b_group, A.rentchk, A.rcmdChk, A.imageurl,
 		A.reservechk, A.book_cd, B.returndate
 		FROM
 		sitlib.bookmst A LEFT OUTER
@@ -43,10 +41,10 @@
 		ON A.book_cd = B.book_cd AND A.rentchk =
 		B.rentchk
 		WHERE
-		LCASE(A.TITLE) like #{keyword} and
-		LCASE(A.TITLE) like #{b_group} 
-		ORDER BY  a.title 
-		FETCH first 200 rows only
+		LCASE(A.TITLE) like  '%' || #{keyword} ||'%' and
+		LEFT(A.b_group,1) = #{b_group}
+		ORDER BY  a.book_cd desc 
+		FETCH first 200 rows only]]>
 	</select>
 	<select id="searchAuthor" parameterType="String" resultType="BookModel">
 		<bind name="keyword" value="'%' + _parameter + '%'" />

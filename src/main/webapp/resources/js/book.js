@@ -252,8 +252,9 @@ $('#btn_bookList').click(function() {
 		 url : "/bookList",
 		 datatype : "json", // html, xml, json, jsonp, script,
 		 data : { 
+			 listType : '',
 			 keyword : $('#keyword').val(),
-			 b_group : $('b_group').val()
+			 b_group : options
 			 }, 
 		 success : function(data,status) {
 			 $('#dataTable_wrapper').empty().append(data);

@@ -35,7 +35,7 @@ public class BookDaoImpl implements BookDao {
 	}
 	@Override
 	public List<BookModel> searchBook(Dto dto) {
-		return session.selectList(NAMESPACE + "searchBook", dto.getKeyword());
+		return session.selectList(NAMESPACE + "searchBook", dto);
 	}
 
 	@Override

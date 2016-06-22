@@ -178,8 +178,7 @@ public class RequestServiceImpl implements RequestService {
 		getApiTest(url);
 
 		XmlDom xmlDom = new XmlDom();
-		book = xmlDom.getBook(url.openStream());
-		System.out.println(url);
+		book = xmlDom.getBook(url.openStream()); 
 
 		return book;
 	}

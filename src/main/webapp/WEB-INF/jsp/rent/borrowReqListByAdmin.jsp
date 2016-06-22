@@ -52,9 +52,9 @@
 											<th class="genre">대출요청일</th>
 											<!-- 											<th class="genre hidden-xs">반납일</th> -->
 											<th class="hidden-xs" style="width: 150px">분류</th>
-											<th class="image">대출자</th> 
-											<th class="image"style="width: 120px">비고</th>  
-											<th class="image" style="width: 120px"></th> 
+											<th class="image">대출자</th>
+											<th class="image" style="width: 120px">비고</th>
+											<!-- 											<th class="image" style="width: 120px"></th>  -->
 										</tr>
 									</thead>
 									<tbody>
@@ -64,8 +64,13 @@
 												<td><input type="checkbox" name="book_cd"
 													value="${book.book_cd}"></td>
 												<td class="td-title" align="left">${book.title}</td>
-												<td align="left">${book.rentdate}</td>
-												<%-- 												<td class="hidden-xs" style="width: inherit;"> ${book.returndate} </td> --%>
+												<td align="left"><c:choose>
+														<c:when test="${not empty  book.rentdate}">
+															<fmt:parseDate value="${book.rentdate}000000"
+																pattern="yyyyMMddHHmmss" var="rentDate" scope="page" />
+															<fmt:formatDate value="${rentDate}" pattern="yyyy-MM-dd" />
+														</c:when>
+													</c:choose></td>
 												<td class="hidden-xs" align="left">${book.b_group }</td>
 												<td>${book_cd}<c:choose>
 														<c:when test="${empty book.kname}">${book.id}</c:when>
@@ -111,8 +116,8 @@
 											<th class="genre">대출일</th>
 											<th class="genre">반납일</th>
 											<th class="hidden-xs td-date">대출자</th>
-											<th class="image">반납</th>
-											<th class="image">연장</th>
+											<th class="shortlen">반납</th>
+											<th class="shortlen">연장</th>
 										</tr>
 									</thead>
 									<%
@@ -123,27 +128,40 @@
 									%>
 									<c:set var="now" value="<%=sdf.format(cal.getTime())%>" />
 
-
 									<tbody>
 										<c:forEach items="${rentList}" var="rent" varStatus="loop">
-
 											<tr>
 												<td><input type="checkbox" name="book_cd"
 													value="${rent.book_cd}"></td>
 												<td align="left">${rent.title }</td>
-												<%-- 												<td class="hidden-xs" align="left"><fmt:formatDate type="date"
-														pattern="yyyy-MM-dd" value="${rent.rentdate }" /></td>
-<<<<<<< HEAD
---%>											<td align="left">${rent.rentdate}</td> 
-												<td align="left">${rent.rentdate }</td> 
+												<td align="left">
 												<c:choose>
-													<c:when test="${rent.returndate < now}">
+														<c:when test="${not empty rent.rentdate}">
+															<fmt:parseDate value="${rent.rentdate}000000"
+																pattern="yyyyMMddHHmmss" var="rentDate" scope="page" />
+															<fmt:formatDate value="${rentDate}" pattern="yyyy-MM-dd" />
+														</c:when>
+													</c:choose>
+													</td>
+												<c:choose>
+													<c:when
+														test="${rent.returndate < now}&& ${not empty rent.returndate}">
 														<td align="left"
 															style="text-decoration: underline; text-align: right;"><mark>
-																${rent.returndate } - 연체중 </mark></td>
+
+																<fmt:parseDate value="${rent.returndate}000000"
+																	pattern="yyyyMMddHHmmss" var="returnDate" scope="page" />
+																<fmt:formatDate value="${returnDate}"
+																	pattern="yyyy-MM-dd" />
+																- 연체중
+															</mark></td>
 													</c:when>
 													<c:otherwise>
-														<td align="left">${rent.returndate }</td>
+														<td align="left"><fmt:parseDate
+																value="${rent.returndate}000000"
+																pattern="yyyyMMddHHmmss" var="returnDate" scope="page" />
+															<fmt:formatDate value="${returnDate}"
+																pattern="yyyy-MM-dd" /></td>
 													</c:otherwise>
 												</c:choose>
 

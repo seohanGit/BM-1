@@ -107,14 +107,9 @@
 			var price = $('#price').val();
 			if (price > 100000) {
 				alert("100,000원 이상 도서 구매시 팀장 결재 필요합니다.");
-				$('#cheif').show();
-				/* $('#top').append("<select name="chief" >");
-				$('#top')
-						.append(
-								"<option value="${member.chief}" selected>${member.chief}");
-				$('#top').append("</select>"); */
+				$('#chief').show(); 
 			} else {
-				$('#cheif').hide();
+				$('#chief').hide();
 			}
 			if ($('quantity').val() > 5) {
 				alert("5권이상은 선행기획팀 서하림 사원에게 문의하십시오.")

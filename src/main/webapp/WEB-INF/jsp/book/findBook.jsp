@@ -82,11 +82,7 @@
 							('/requestbook?type=isbn&keyword=','new','resizeble=yes scrollbars=yes, width=500, height=700');">ISBN 미등록 도서</button>
 					</span>
 				</form>
-			</div>
-			<!-- <div style="width: 16%; float: right" align="right">
-				<button class="btn btn-default"
-					onclick="location.href='/requestbook'; ">미등록 도서 구매</button>
-			</div> -->
+			</div> 
 			<div class="dataTable_wrapper">
 				<table class="table table-striped table-bordered"
 					style="width =: 90%; bordercolor: #fff" id="dataTable">
@@ -117,7 +113,7 @@
 								<td>
 									<button class="btn btn-default" type="submit"
 										onclick="window.open
-							('/requestbook?isbn=${book.isbn}','new','resizeble=yes scrollbars=yes, width=500, height=800');">
+							('/requestbook?isbn=${book.isbn}','new','resizeble=yes scrollbars=yes, width=600, height=600');">
 							구매요청</button>
 								</td>
 							</tr>

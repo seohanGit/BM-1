@@ -60,16 +60,15 @@ body {
 										<tr class="title ">
 
 											<th class="td-chk"><input type="checkbox" id="allCheck" ></th>
-											<th class="hidden-sm hidden-xs hidden-md td-author">도서코드</th>
+											<th class="hidden-sm hidden-xs hidden-md genre">도서코드</th>
 											<th>도서명</th>
 
-											<th class="hidden-sm hidden-xs td-date">가격</th>
-											<th class="td-img">수량</th>
-											<th class="hidden-xs td-date">신청</th>
-
-											<th class="hidden-sm hidden-xs hidden-md td-genre">요청일자</th>
-											<th class="td-img">상태</th>
-											<th class="td-genre">비고</th> 
+											<th class="hidden-sm hidden-xs genre">가격</th>
+											<th class="td-date">수량</th>
+											<th class="hidden-xs td-date">신청</th> 
+											<th class="hidden-sm hidden-xs hidden-md genre">요청일자</th>
+											<th class="genre">상태</th>
+											<th class="genre">비고</th> 
 										</tr>
 									</thead>
 
@@ -77,23 +76,29 @@ body {
 									<tbody>
 										<c:forEach items="${bookList}" var="book" varStatus="status">
 											<tr>
-												<td><input type="checkbox" name="req_cd"
+												<td align="center"><input type="checkbox" name="req_cd"
 													value="${book.reqdate}-${book.req_cd}"></td>
-												<td class="hidden-sm hidden-xs hidden-md ">${book.book_cd}</td>
-												<td class="td-title"><a href="${book.link}">${book.title }</a></td>
+												<td class="hidden-sm hidden-xs hidden-md "  >${book.book_cd}</td>
+												<td class="td-title" align="center"><a href="${book.link}">${book.title }</a></td>
 
 
-												<td class="hidden-sm hidden-xs  ">${book.price}원</td>
-												<td align="center">${book.quantity}</td>
-												<td class=" hidden-xs  "><c:choose>
+												<td class="hidden-sm hidden-xs " align="right">
+												<fmt:formatNumber value="${book.price}" type="currency"/>
+												원</td>
+												<td align="center" >
+												<fmt:formatNumber value="${book.quantity}"  />
+												</td>
+												<td class="hidden-xs" align="center"><c:choose>
 														<c:when test="${empty book.kname}">${book.id}</c:when>
 														<c:otherwise>${book.kname}</c:otherwise>
 													</c:choose></td>
-												<td class="hidden-sm hidden-xs hidden-md ">${book.reqdate}</td>
-
+												<td class="hidden-sm hidden-xs hidden-md" align="center">
+												<fmt:parseDate value="${book.reqdate}000000" pattern="yyyyMMddHHmmss" var="reqDate" scope="page"/>  
+												<fmt:formatDate value="${reqDate}" pattern="yyyy-MM-dd"/>
+												</td>
 												<c:choose>
 													<c:when test="${book.reqstatus =='0'}">
-														<td>대기</td>
+														<td align="center">대기</td>
 														<td><button class="btn btn-sm btn-default"
 																type="button" id="buyBook"
 																onClick="window.open('buyRequest?req_cd=${book.req_cd}&reqdate=${book.reqdate}','new','resizeble=yes scrollbars=yes,  width=750, height=730');">구매</button>
@@ -103,12 +108,12 @@ body {
 														</td>
 													</c:when>
 													<c:when test="${book.reqstatus =='1'}">
-														<td class="ok" align="left">승인</td>
-														<td></td>
+														<td class="ok" align="center">승인</td>
+														<td ></td>
 
 													</c:when>
 													<c:when test="${book.reqstatus =='2'}">
-														<td class="no">반려</td>
+														<td align="center" class="no">반려</td>
 														<td></td>
 
 													</c:when>

@@ -118,8 +118,8 @@ public class RequestController {
 		String id = null;
 		Calendar cal =  Calendar.getInstance();
 		String nowDate = sdf.format(cal.getTime());
+		
 		BookModel book = requestservice.findBookOne(isbn);
-
 		for (Cookie cookie : request.getCookies()) {
 			if (cookie.getName().equals("bm_id")) {
 				id = cookie.getValue();

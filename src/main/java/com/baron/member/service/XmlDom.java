@@ -101,6 +101,7 @@ public class XmlDom {
 			book.setB_group(getCategoryName(getChildren(element, "categoryId")));
 			book.setPublish(getChildren(element, "publisher"));
 			book.setSummary(getChildren(element, "description"));
+			System.out.println(getChildren(element, "description"));
 
 		}
 		return book;

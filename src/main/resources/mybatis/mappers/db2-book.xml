@@ -41,8 +41,8 @@
 		ON A.book_cd = B.book_cd AND A.rentchk =
 		B.rentchk
 		WHERE
-		LCASE(A.TITLE) like  '%' || #{keyword} ||'%' and
-		LEFT(A.b_group,1) = #{b_group}
+		LCASE(A.TITLE) like  '%' || #{keyword} ||'%'  
+		AND left(A.b_group,1) like '%' || #{b_group} ||'%'  
 		ORDER BY  a.book_cd desc 
 		FETCH first 200 rows only]]>
 	</select>

@@ -30,7 +30,7 @@ public interface RequestDao {
 
 	String convertC_code(String c_group);
 
-	public String selectMaxSer();
+	public int selectMaxSer();
 
 	public void approveChief(ApprovalModel approval);
 }

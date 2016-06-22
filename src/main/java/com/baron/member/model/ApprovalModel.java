@@ -6,6 +6,7 @@ public class ApprovalModel {
 	private String companyGroup;
 	private String tableName;
 	private String documentId;
+	private String chief;
 	private String chiefId;
 	private String description1;
 	private String description2;
@@ -28,6 +29,12 @@ public class ApprovalModel {
 	}
 	public void setDocumentId(String documentId) {
 		this.documentId = documentId;
+	}
+	public String getChief() {
+		return chief;
+	}
+	public void setChief(String chief) {
+		this.chief = chief;
 	}
 	public String getChiefId() {
 		return chiefId;

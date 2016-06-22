@@ -86,13 +86,13 @@ public class RequestDaoImpl implements RequestDao {
 	}
 
 	@Override
-	public String selectMaxSer() {
-		return session.selectOne(NAMESPACE + "selectMaxSer"); 
+	public int selectMaxSer() {
+		return Integer.parseInt(session.selectOne(NAMESPACE + "selectMaxSer")); 
 	}
 
 	@Override
 	public void approveChief(ApprovalModel approval) {
-		session.insert(NAMESPACE + "insertApproval");
+		session.insert(NAMESPACE + "insertApproval", approval);
 		//session.delete(NAMESPACE + "deleteApproval");
 		
 	}

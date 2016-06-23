@@ -13,7 +13,7 @@ footer {
 
 .ellipsis {
 	overflow: hidden;
-	text-overflow: ellipsis;
+	text-overflow: ellipsis; 
 	-o-text-overflow: ellipsis;
 	display: -webkit-box;
 	-webkit-line-clamp: 5;
@@ -88,11 +88,19 @@ table>tbody>tr>td .author {
 	white-space:nowrap;
 }
 
-table  .image {
+table  .midlen {
 	width: 100px;
 	word-break:keep-all; 
 }
+table  .shortlen {
+	width: 60px;
+	word-break:keep-all; 
+}
 
+table  .longlen {
+	width: 130px;
+	word-break:keep-all; 
+}
 table   .genre {
 	width: 10%;
 	word-break:keep-all; 

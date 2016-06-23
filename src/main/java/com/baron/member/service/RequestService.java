@@ -34,6 +34,6 @@ public interface RequestService {
 
 	public void confirmBuy(BookModel model);
 
-	public String selectMaxSer();
+	public int selectMaxSer();
 
 }

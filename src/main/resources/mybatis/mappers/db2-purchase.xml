@@ -91,7 +91,7 @@
 	</delete>
 
 	<insert id="insertApproval" parameterType="ApprovalModel">
-		insert into FILIB.GAPPRMP (CO_GB, TABLE_NM, DOCU_NO, NOW_SABUN, CLS_NM, TITLE_NM, CRT_YMD, CRT_SABN )
-		values(#{companyGroup}, #{tableName}, #{documentId}, #{chief}, #{description1}, #{discription2}, #{nowdate}, #{id} )
+		insert into FILIB.GAPPRMP (CO_GB, TABLE_NM, DOCU_NO, NOW_ASABN, CLS_NM, TITLE_NM, CRT_YMD, CRT_SABN )
+		values(#{companyGroup}, #{tableName}, #{documentId}, #{chiefId}, #{description1}, #{description2}, #{nowDate}, #{id} )
 	</insert>
 </mapper>

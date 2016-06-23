@@ -13,34 +13,31 @@
 <link href="/resources/css/common.css" rel="stylesheet">
 <link href="/resources/css/bootstrap-select.min.css" rel="stylesheet">
 <script src="/resources/js/jquery/jquery.js"></script>
- 
+
 </head>
 <body>
 	<div class="container">
 		<h2>도서 구매 요청</h2>
 		<div class="panelpanel-default">
 			<form action="/confirmRequest" method="post" class="panel-body">
-				<div id="top">
+				<div class="col-md-4 col-sm-4	col-xs-4 ">
 					<input type="image" name="imageurl" src="${book.imageurl}">
-					
-					<div class="form-group">
-						<label for="exampleInputEmail1">ISBN</label> <input type="number" maxlength="13"
-							class="form-control" id="isbn" name="isbn" value="${book.isbn}"
-							readonly="readonly">
+				</div>
+				<div class=" col-md-8 col-sm-8	col-xs-8">
+					<div class="col-md-12 col-sm-12	col-xs-12">
+						ISBN <input type="number" maxlength="13" class="form-control"
+							id="isbn" name="isbn" value="${book.isbn}" readonly="readonly">
 					</div>
-					<div class="form-group">
-						<label for="exampleInputPassword1">도서명</label> <input type="text"
-							class="form-control" id="title" name="title"
-							value="${book.title }" readonly="readonly">
+					<div class="col-md-12 col-sm-12	col-xs-12">
+						도서명 <input type="text" class="form-control" id="title"
+							name="title" value="${book.title }" readonly="readonly">
 					</div>
-					<div class="form-group">
-						<label for="exampleInputPassword1">저자</label> <input type="text"
-							class="form-control" id="author" name="author"
-							value="${book.author }" readonly="readonly">
+					<div class="col-md-12 col-sm-12	col-xs-12">
+						저자 <input type="text" class="form-control" id="author"
+							name="author" value="${book.author }" readonly="readonly">
 					</div>
-					<div class="form-group left" style="width: 50%">
-						<label for="exampleInputPassword1">대분류</label> <select
-							class="selectpicker" name="b_group">
+					<div class="col-md-7 col-sm-7	col-xs-7 left">
+						대분류 <select class="selectpicker form-control" name="b_group">
 							<optgroup label="대분류">
 								<option value="B-도서(단행본)">B-도서(단행본)
 								<option value="E-기타매체">E-기타매체
@@ -52,10 +49,8 @@
 							</optgroup>
 						</select>
 					</div>
-					<div class="form-group right" style="width: 50%;">
-						<label for="exampleInputPassword1">소분류</label> 
-						<select
-							class="selectpicker" name="c_group">
+					<div class="col-md-5 col-sm-5	col-xs-5 right">
+						소분류 <select class="selectpicker form-control" name="c_group">
 							<optgroup label="소분류">
 								<option value="010-일반">일반
 								<option value="020-기계공학">기계공학
@@ -69,42 +64,40 @@
 								<option value="100-기타">기타
 							</optgroup>
 						</select>
-					</div>					
-					
+					</div>
+
 					<br>
-					<div class="form-group">
-						<label for="exampleInputPassword1">구매요청자</label> <input
-						type="number" class="form-control" name="price" id="price" value="${book.price}" readonly="readonly">
+
+					<div class="col-md-6 col-sm-6	col-xs-6">
+						가격<input type="number" class="form-control" name="price"
+							id="price" value="${book.price}" readonly="readonly">
 					</div>
-					<div class="form-group">
-						<label for="exampleInputPassword1">수량</label> <input type="number"
-							class="form-control" id="quantity" name="quantity" value="1">
+					<div class="col-md-6 col-sm-6	col-xs-6">
+						수량<input type="number" class="form-control" id="quantity"
+							name="quantity" value="1">
 					</div>
-					<div class="form-group">
-						<label for="exampleInputPassword1">신청 사유</label> <input
-							type="text" class="form-control" name="reason" id="reason" required="required">
+					<div class="col-md-12 col-sm-12	col-xs-12">
+						신청 사유<input type="text" class="form-control" name="reason"
+							id="reason" required="required">
 					</div>
-					<div class="form-group">
-						<label for="exampleInputPassword1">구매요청자</label> <input
-							type="text" class="form-control" id="kname" name="kname"
-							value="${sessionScope.kname}" readonly="readonly">
+					<div class="col-md-6 col-sm-6	col-xs-6">
+						구매요청자<input type="text" class="form-control" id="kname"
+							name="kname" value="${sessionScope.kname}" readonly="readonly">
 					</div>
-					<%-- 
-				<div class="form-group">
-					<label for="exampleInputPassword1">저자</label> <input type="text"
-						class="form-control" id="author" name="author"
-						value="${book.author}">
-				</div>
-				 --%>
-					<input type="hidden" name="imageurl" value="${book.imageurl }">
-					<input type="hidden" name="link" value="${book.link}"> <input
-						type="hidden" name="publish" value="${book.publish}"><input
-						type="hidden" name="summary" value="${book.summary}">
-					<input type="hidden" name="id" value="${book.id}">
-					<button type="submit" class="btn btn-default">확인</button>
-					<%-- <select name="chief">
-						<option value="${member.chief}" selected>${member.chief}
-					</select> --%>
+					<div id="chief" class="col-md-6 col-sm-6	col-xs-6">
+						결재자 <select class="selectpicker form-control" name="chief">
+							<option value="${sessionScope.chief}"  selected>${sessionScope.chief}
+						</select>
+					</div>
+					<div class="col-md-12 col-sm-12 col-xs-12">
+						<input type="hidden" name="imageurl" value="${book.imageurl }">
+						<input type="hidden" name="link" value="${book.link}"> <input
+							type="hidden" name="publish" value="${book.publish}"><input
+							type="hidden" name="summary" value="${book.summary}"> <input
+							type="hidden" name="id" value="${book.id}">
+						확인
+						<button type="submit" class="btn btn-default form-control">확인</button>
+					</div>
 				</div>
 			</form>
 		</div>
@@ -114,18 +107,16 @@
 			var price = $('#price').val();
 			if (price > 100000) {
 				alert("100,000원 이상 도서 구매시 팀장 결재 필요합니다.");
-				/* $('#top').append("<select name="chief" >");
-				$('#top')
-						.append(
-								"<option value="${member.chief}" selected>${member.chief}");
-				$('#top').append("</select>"); */
+				$('#chief').show(); 
+			} else {
+				$('#chief').hide();
 			}
 			if ($('quantity').val() > 5) {
 				alert("5권이상은 선행기획팀 서하림 사원에게 문의하십시오.")
 			}
 		});
 	</script>
-		<script src="/resources/js/bootstrap-select.min.js"></script>
+	<script src="/resources/js/bootstrap-select.min.js"></script>
 	<script src="/resources/js/bootstrap.min.js"></script>
 	<script src="/resources/js/jquery/jquery.js"></script>
 	<script src="/resources/js/common.js"></script>

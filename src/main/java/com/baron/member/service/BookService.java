@@ -13,7 +13,7 @@ import com.baron.member.model.Dto;
 
 public interface BookService {
 
-	public void insertBook(BookModel model, HttpServletRequest request)  ;
+	public void insertBook(BookModel model)  ;
 
 	public List<BookModel> searchBook(Dto dto);
 

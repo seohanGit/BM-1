@@ -7,7 +7,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import javax.mail.Session;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -16,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -51,17 +50,19 @@ public class BookController {
 	}
 
 	@RequestMapping("/insertbook")
-	public String insertresult(BookModel model, HttpServletRequest request) {
+	public ModelAndView insertresult(ModelAndView mav, BookModel model ) {
 		Calendar cal = Calendar.getInstance();					
 		String nowDate = sdf.format(cal.getTime());
+		
 		model.setRcv_date(nowDate); 
 		model.setQuantity(1);
 		if (model.getIsbn().equals("")){			
 			model.setIsbn("");
 		}	
 		
-		bookservice.insertBook(model, request);
-		return "book/insertbookresult";
+		bookservice.insertBook(model);
+		mav.setViewName("book/insertbookresult");
+		return mav;
 	}
 
 	@RequestMapping("/bookInfo")

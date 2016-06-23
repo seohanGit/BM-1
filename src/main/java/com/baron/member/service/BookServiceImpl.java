@@ -22,7 +22,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
- 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -43,9 +43,9 @@ public class BookServiceImpl implements BookService {
 	String user = "ATTFL";
 	String pass = "EDPS";
 
-	@Resource(name="fileUtils")
+	@Resource(name = "fileUtils")
 	private FileUtils fileUtils;
-	
+
 	@Autowired
 	private BookDao bookDao;
 
@@ -65,7 +65,27 @@ public class BookServiceImpl implements BookService {
 	}
 
 	@Override
-	public void insertBook(BookModel model, HttpServletRequest request)  {
+	public void insertBook(BookModel model) {
+		List<Map<String, Object>> list;
+
+		MultipartFile uploadfile = model.getFile();
+		if (uploadfile != null) {
+			String fileName = uploadfile.getOriginalFilename();
+			model.setFilename(fileName);
+			try {
+				// 1. FileOutputStream 사용
+				// byte[] fileData = file.getBytes();
+				// FileOutputStream output = new FileOutputStream("C:/images/" +
+				// fileName);
+				// output.write(fileData);
+
+				// 2. File 사용
+				File file = new File("C:/images/" + fileName);
+				uploadfile.transferTo(file);
+			} catch (IOException e) {
+				e.printStackTrace();
+			} // try - catch
+		} // if
 		if (model.getQuantity() == 1) {
 			bookDao.insertBook(model);
 		} else if (model.getQuantity() > 1) {
@@ -73,17 +93,7 @@ public class BookServiceImpl implements BookService {
 				model.setBook_cd(model.getBook_cd() + "(" + (i + 1) + ")");
 				bookDao.insertBook(model);
 			}
-		}List<Map<String, Object>> list;
-		try {
-			list = fileUtils.parseInsertFileInfo(model, request);
-			for(int i=0, size=list.size(); i<size; i++){
-	            bookDao.insertFile(list.get(i));
-	        }
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
-        
 	}
 
 	@Override
@@ -91,30 +101,30 @@ public class BookServiceImpl implements BookService {
 		dto.setKeyword(dto.getKeyword().trim());
 		dto.setB_group(dto.getB_group().trim());
 		dto.setC_group(dto.getC_group().trim());
-		
-		switch (dto.getB_group()){
-		case "전체": 
+
+		switch (dto.getB_group()) {
+		case "전체":
 			dto.setB_group("");
 			break;
-		case "": 
+		case "":
 			dto.setB_group("");
 			break;
 		default:
 			dto.setB_group(dto.getB_group().substring(0, 1));
 			break;
 		}
-		switch (dto.getC_group()){
-		case "전체": 
+		switch (dto.getC_group()) {
+		case "전체":
 			dto.setC_group("");
-			break;		
-		case "": 
+			break;
+		case "":
 			dto.setC_group("");
 			break;
 		default:
 			dto.setC_group(dto.getC_group().substring(0, 3));
 			break;
 		}
-		
+
 		if (dto.getField().equals("title")) {
 			return bookDao.searchBook(dto);
 		} else if (dto.getField().equals("author")) {
@@ -356,12 +366,30 @@ public class BookServiceImpl implements BookService {
 	public void setRecommend(BookModel bookmodel) {
 		bookDao.setRecommend(bookmodel);
 	}
- 
 
 	@Override
 	public void uploadFile(MultipartFile file, String tid) throws Exception {
-		// TODO Auto-generated method stub
-		
+		ftpClient = new FTPClient();
+
+		ftpClient.setControlKeepAliveTimeout(DEFAULT_FTP_KEEP_ALIVE_TIMEOUT);
+		ftpClient.setConnectTimeout(DEFAULT_FTP_CONNECTION_TIMEOUT);
+		try {
+			ftpClient.connect(SERVER, PORT);
+			ftpClient.login(USER, PASSWORD);
+			ftpClient.enterLocalPassiveMode();
+			ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
+		} catch (SocketException e) {
+			e.printStackTrace();
+			logger.error("FtpClient initializing is failed. error={}",
+					LogManager.makeLog(e.getMessage(), e));
+		} catch (IOException e) {
+			e.printStackTrace();
+			logger.error("FtpClient initializing is failed.error={}",
+					LogManager.makeLog(e.getMessage(), e));
+		}
+		logger.info("FTPClient initializing is OK. staus={}, connection={}",
+				ftpClient.isAvailable(), ftpClient.isConnected());
+
 	}
 
 	@Override
@@ -370,5 +398,4 @@ public class BookServiceImpl implements BookService {
 		return null;
 	}
 
- 
 }

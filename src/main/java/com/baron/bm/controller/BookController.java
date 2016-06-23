@@ -90,10 +90,12 @@ public class BookController {
 		session.setAttribute("adminMode", "user");
 		String permission = "";
 		List<BookModel> bookList = new ArrayList<BookModel>();		 
-		List<CodeModel> BCodeList = new ArrayList<CodeModel>(); 
+		List<CodeModel> BCodeList = bookservice.selectBCodeList();
+		List<CodeModel> CCodeList = bookservice.selectCCodeList(); 
+		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd"); 
 		Calendar cal = Calendar.getInstance();		 
-		BCodeList = bookservice.selectBCodeList(); 
+		 
 		
 		for (Cookie cookie : request.getCookies()) {
 			if (cookie.getName().equals("bm_permission")) {
@@ -139,7 +141,9 @@ public class BookController {
 		mav.addObject("listType", listType);
 		mav.addObject("keyword", dto.getKeyword());
 		mav.addObject("BCodeList", BCodeList); 
+		mav.addObject("CCodeList", CCodeList); 
 		mav.addObject("b_group", dto.getB_group());
+		mav.addObject("c_group", dto.getC_group());
 		
 	
 		return mav;	
@@ -149,18 +153,19 @@ public class BookController {
 			Dto dto, String listType, String datepicker1, String datepicker2, 
 			 String year, String month,
 			ModelAndView mav) throws NullPointerException, UnsupportedEncodingException { 
-		List<BookModel> bookList = new ArrayList<BookModel>();		 
-		List<CodeModel> BCodeList = new ArrayList<CodeModel>();  
+		List<BookModel> bookList = new ArrayList<BookModel>();	
+		List<CodeModel> BCodeList = bookservice.selectBCodeList(); 
+		List<CodeModel> CCodeList = bookservice.selectCCodeList(); 
 		session.setAttribute("adminMode", "admin");
 		
 		if (dto.getField().equals("")){dto.setField("title");}
 		bookList = bookservice.searchBook(dto);
-		BCodeList = bookservice.selectBCodeList(); 
 		mav.addObject("bookList", bookList);    
 		mav.addObject("listType", listType);
 		mav.addObject("keyword", dto.getKeyword());
 		mav.addObject("b_group", dto.getB_group());
-		mav.addObject("BCodeList", BCodeList); 
+		mav.addObject("BCodeList", BCodeList);
+		mav.addObject("CCodeList", CCodeList); 
 		mav.setViewName("book/bookSearchByAdmin");  
 	
 		return mav;	

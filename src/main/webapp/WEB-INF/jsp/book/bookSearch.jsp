@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>  
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
@@ -90,17 +90,17 @@
 										</div>
 									</c:otherwise>
 								</c:choose>
-								<div class="col-lg-12 col-md-12" style="margin-top: 3%;">
-									<div style="float: left" align="left">
-										<select class="selectpicker"
+								<div class="col-lg-12 col-md-12" style="margin: 3%;">
+									<div style="float: left; width:20%" >
+										<select class="selectpicker form-control"
 											style="font-size: 14px; margin-top: 10px; vertical-align: baseline;"
 											id="b_group" name="b_group"><option selected>전체
 												<c:forEach items="${BCodeList}" var="code">
 													<option value="${code.code}-${code.name}">${code.code}-${code.name}
 												</c:forEach></select>
 									</div>
-									<div class="input-group left"
-										style="vertical-align: baseline; float: left; width: 80%">
+									<div class="input-group"
+										style="vertical-align: baseline; float: left; width: 70%">
 
 										<span class="input-group-btn"> <input id="listType"
 											name="listType" type="hidden" value="${listType }"> <input
@@ -114,79 +114,81 @@
 								</div>
 							</div>
 						</form>
-					</div> 
+					</div>
 
-				<div id="searchResultArea">
-					<div class="dataTable_wrapper">
-						<table class="table table-striped table-bordered " id="dataTable">
-							<thead>
-								<tr>
-									<th>도서명</th>
-									<th class="hidden-xs hidden-sm hidden-md author">저자</th>
-									<th class="hidden-xs hidden-sm genre">출판사</th>
-									<th class="hidden-xs genre" style="width: 120px">분류</th>
-									<th class="col-xs-3 col-lg-2 col-md-2">대여상태</th>
-									<th class="image">대출</th>
-								</tr>
-							</thead>
-
-							<tbody>
-								<c:forEach items="${bookList}" var="book">
+					<div id="searchResultArea">
+						<div class="dataTable_wrapper">
+							<table class="table table-striped table-bordered " id="dataTable">
+								<thead>
 									<tr>
-										<td align="left"><a href="#"
-											onclick="window.open('/bookInfo?book_cd=${book.book_cd}&keyword=${keyword }&listType=${listType }',
-										'new','resizeble=yes scrollbars=yes,  width=750, height=600');">
-												${book.title }</a></td>
-										<td class="hidden-xs hidden-sm hidden-md" align="left">${book.author }</td>
-										<td class="hidden-xs hidden-sm author" align="left">${book.publish}</td>
-										<td class="hidden-xs genre" align="left">${book.b_group }</td>
-										<c:choose>
-											<c:when test="${book.rentchk=='0'}">
-												<td align="left"><mark>대출가능</mark></td>
-												<td align="left"><button class="btn btn-default borrow"
-														type="button" id="borrowbook" value="${book.book_cd}"<%-- 													onClick="location.href='/borrowbook?book_cd=${book.book_cd}&listType=${listType}&keyword=${keyword}';"  --%>
-													>대출</button>
-												</td>
-											</c:when>
-
-											<c:when test="${book.rentchk=='1' and book.reservechk=='1'}">
-												<td>예약중</td>
-												<td></td>
-											</c:when>
-											<c:when test="${book.rentchk=='1' and book.reservechk=='0'}">
-												<td><p style="color: blue;">대출요청중</p> <%-- 											반납일 : ${book.returndate} --%>
-												</td>
-												<td>
-													<!-- 											<button class="btn btn-default" type="button" -->
-													<!-- 													id="reservebook" --> <%-- 													onClick="location.href='/reservation?book_cd=${book.book_cd}'">예약</button> --%>
-												</td>
-											</c:when>
-											<c:when test="${book.rentchk=='2' and book.reservechk=='1'}">
-												<td>예약중</td>
-												<td></td>
-											</c:when>
-											<c:when test="${book.rentchk=='2' and book.reservechk=='0'}">
-												<td><p style="color: blue;">대출중</p>
-													<p class="hidden-xs">반납일 :${book.returndate}
-													<p></td>
-												<td></td>
-											</c:when>
-											<c:when test="${book.rentchk=='4'}">
-												<td>대출 정지</td>
-												<td></td>
-											</c:when>
-											<c:when test="${book.rentchk=='5'}">
-												<td>예약중</td>
-												<td></td>
-											</c:when>
-										</c:choose>
+										<th>도서명</th>
+										<th class="hidden-xs hidden-sm hidden-md genre">저자</th>
+										<th class="hidden-xs hidden-sm genre">출판사</th>
+										<th class="hidden-xs genre" style="width: 120px">분류</th>
+										<th class="col-xs-3 col-lg-2 col-md-2">대여상태</th>
+										<th class="genre">대출</th>
 									</tr>
+								</thead>
+
+								<tbody>
+									<c:forEach items="${bookList}" var="book">
+										<tr>
+											<td align="left"><a href="#"
+												onclick="window.open('/bookInfo?book_cd=${book.book_cd}&keyword=${keyword }&listType=${listType }',
+										'new','resizeble=yes scrollbars=yes,  width=750, height=600');">
+													${book.title }</a></td>
+											<td class="hidden-xs hidden-sm hidden-md" >${book.author }</td>
+											<td class="hidden-xs hidden-sm ">${book.publish}</td>
+											<td class="hidden-xs " >${book.b_group }</td>
+											<c:choose>
+												<c:when test="${book.rentchk=='0'}">
+													<td ><mark>대출가능</mark></td>
+													<td ><button
+															class="btn btn-default borrow" type="button"
+															id="borrowbook" value="${book.book_cd}"<%-- 													onClick="location.href='/borrowbook?book_cd=${book.book_cd}&listType=${listType}&keyword=${keyword}';"  --%>
+													>대출</button>
+													</td>
+												</c:when>
+
+												<c:when test="${book.rentchk=='1' and book.reservechk=='1'}">
+													<td>예약중</td>
+													<td></td>
+												</c:when>
+												<c:when test="${book.rentchk=='1' and book.reservechk=='0'}">
+													<td><p style="color: blue;">대출요청중</p> <%-- 											반납일 : ${book.returndate} --%>
+													</td>
+													<td>
+														<!-- 											<button class="btn btn-default" type="button" -->
+														<!-- 													id="reservebook" --> <%-- 													onClick="location.href='/reservation?book_cd=${book.book_cd}'">예약</button> --%>
+													</td>
+												</c:when>
+												<c:when test="${book.rentchk=='2' and book.reservechk=='1'}">
+													<td>예약중</td>
+													<td></td>
+												</c:when>
+												<c:when test="${book.rentchk=='2' and book.reservechk=='0'}">
+													<td><p style="color: blue;">대출중</p>
+														<p class="hidden-xs">반납일 :${book.returndate}
+														<p></td>
+													<td></td>
+												</c:when>
+												<c:when test="${book.rentchk=='4'}">
+													<td>대출 정지</td>
+													<td></td>
+												</c:when>
+												<c:when test="${book.rentchk=='5'}">
+													<td>예약중</td>
+													<td></td>
+												</c:when>
+											</c:choose>
+										</tr>
 
 
-								</c:forEach>
+									</c:forEach>
 
-							</tbody>
-						</table>
+								</tbody>
+							</table>
+						</div>
 					</div>
 				</div>
 			</div>

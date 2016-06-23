@@ -263,6 +263,25 @@ $("#b_group").change(function() {
 			b_group : options
 		},
 		success : function(data, status) {
+			$('#searchResultArea').empty().append(data);			
+		}// ajax complete handelr gourl(url);
+	}); // parameters as plain
+	 
+});
+
+$("#c_group").change(function() {
+	var options = $(this).val(); 
+	$.ajax({
+		type : "get", // get or post
+		url : "/bookList",
+		datatype : "json", // html, xml, json, jsonp, script,
+		data : {
+			listType : '',
+			keyword : $('#keyword').val(),
+			b_group : $('#b_group').val(),
+			c_group : options
+		},
+		success : function(data, status) {
 			$('#searchResultArea').empty().append(data);
 		}// ajax complete handelr gourl(url);
 	}); // parameters as plain

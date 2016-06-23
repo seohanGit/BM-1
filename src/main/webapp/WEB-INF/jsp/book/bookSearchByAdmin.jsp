@@ -56,17 +56,27 @@
 						<h2>도서목록</h2>
 					</div>
 					<form action="/searchBookAdmin" method="post">
-						<div style="width: 70%; margin-right: 10px;">
-							<div class="left" style="width: 20%;" align="right">
-								<select class="selectpicker"
-									style="font-size: 14px; margin-top: 10px; vertical-align: baseline;"
-									id="b_group" name="b_group"><option selected>전체
-										<c:forEach items="${BCodeList}" var="code">
-											<option value="${code.code}-${code.name}">${code.code}-${code.name}
-										</c:forEach></select>
+						<div style="width: 80%; margin-right: 10px;">
+							<div class="left" style="width: 50%;" align="right">
+								<div style="float:left; width: 40%;">
+									<select class="selectpicker form-control"
+										style="font-size: 14px; margin-top: 10px; vertical-align: baseline;"
+										id="b_group" name="b_group"><option selected>전체
+											<c:forEach items="${BCodeList}" var="code">
+												<option value="${code.code}-${code.name}">${code.code}-${code.name}
+											</c:forEach></select>
+								</div>
+								<div style="float:right;width: 60%;">
+									<select class="selectpicker form-control"
+										style="font-size: 14px; margin-top: 10px; vertical-align: baseline;"
+										id="c_group" name="c_group"><option selected>전체
+											<c:forEach items="${CCodeList}" var="code">
+												<option value="${code.code}-${code.name}">${code.code}-${code.name}
+											</c:forEach></select>
+								</div>
 							</div>
 							<div class="input-group right"
-								style="vertical-align: baseline; float: left; width: 80%">
+								style="vertical-align: baseline; float: left; width: 50%">
 
 								<span class="input-group-btn"> <input id="listType"
 									name="listType" type="hidden" value="${listType }"> <input

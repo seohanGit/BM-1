@@ -6,7 +6,9 @@ public class Dto {
 	private String year;
 	private String kname;
 	private int price;
-	private String b_group ="";
+	private String b_group = "";
+	private String c_group = "";
+
 	private String team_nm;
 
 	private String string1;
@@ -19,10 +21,10 @@ public class Dto {
 
 	private String date1;
 	private String date2;
-	
+
 	private String field = "";
-	private String keyword ="";
-	
+	private String keyword = "";
+
 	public String getField() {
 		return field;
 	}
@@ -69,6 +71,14 @@ public class Dto {
 
 	public void setB_group(String b_group) {
 		this.b_group = b_group;
+	}
+
+	public String getC_group() {
+		return c_group;
+	}
+
+	public void setC_group(String c_group) {
+		this.c_group = c_group;
 	}
 
 	public int getPrice() {
@@ -157,5 +167,5 @@ public class Dto {
 
 	public void setString3(String string3) {
 		this.string3 = string3;
-	}	
+	}
 }

@@ -209,8 +209,7 @@ public class BookController {
 				break;
 			default :				
 				bookList = bookservice.searchBook(dto);
-				mav.addObject("bookList", bookList);
-				mav.setViewName("book/searchResult");
+				mav.addObject("bookList", bookList); 
 				if (session.getAttribute("adminMode").equals("admin")&&permission.equals("1")) {
 					mav.setViewName("book/searchAdminResult"); 
 				}else{

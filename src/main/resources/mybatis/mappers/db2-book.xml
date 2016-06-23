@@ -33,7 +33,8 @@
 	</select>
 
 	<select id="searchBook" parameterType="Dto" resultType="BookModel"> 
-		<![CDATA[SELECT A.title, A.author, A.publish, A.b_group, A.rentchk, A.rcmdChk, A.imageurl,
+		 <bind name="keyword" value="'%' + _parameter.getKeyword() + '%'" />
+		SELECT A.title, A.author, A.publish, A.b_group, A.rentchk, A.rcmdChk, A.imageurl,
 		A.reservechk, A.book_cd, B.returndate
 		FROM
 		sitlib.bookmst A LEFT OUTER
@@ -41,10 +42,12 @@
 		ON A.book_cd = B.book_cd AND A.rentchk =
 		B.rentchk
 		WHERE
-		LCASE(A.TITLE) like  '%' || #{keyword} ||'%' and
-		LEFT(A.b_group,1) = #{b_group}
+		LCASE(A.TITLE) like  #{keyword}    
+		<if test="b_group != ''">
+		AND left(A.b_group,1) = #{b_group}  
+		</if>
 		ORDER BY  a.book_cd desc 
-		FETCH first 200 rows only]]>
+		FETCH first 200 rows only
 	</select>
 	<select id="searchAuthor" parameterType="String" resultType="BookModel">
 		<bind name="keyword" value="'%' + _parameter + '%'" />

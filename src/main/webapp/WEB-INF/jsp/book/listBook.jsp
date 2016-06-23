@@ -164,11 +164,11 @@
 										<tr>
 											<th class="hidden-xs hidden-sm hidden-md image">표지</th>
 											<th>도서명</th>
-											<th class="hidden-xs hidden-sm hidden-md author">저자</th>
-											<th class="hidden-xs hidden-sm author">출판사</th>
+											<th class="hidden-xs hidden-sm hidden-md genre">저자</th>
+											<th class="hidden-xs hidden-sm genre">출판사</th>
 											<th class="hidden-xs genre" style="width: 120px">분류</th>
-											<th class="author">대여상태</th>
-											<th class="image">대출</th>
+											<th class="genre">대여상태</th>
+											<th class="genre">대출</th>
 										</tr>
 									</thead>
 

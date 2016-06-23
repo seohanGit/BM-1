@@ -94,10 +94,10 @@ public class BookServiceImpl implements BookService {
 		dto.setB_group(dto.getB_group().trim());
 		switch (dto.getB_group()){
 		case "전체": 
-			dto.setB_group(" ");
+			dto.setB_group("");
 			break;
 		case "":
-			dto.setB_group(" ");
+			dto.setB_group("");
 			break;
 		default:
 			dto.setB_group(dto.getB_group().substring(0, 1));

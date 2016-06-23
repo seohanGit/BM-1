@@ -114,8 +114,7 @@
 								</div>
 							</div>
 						</form>
-					</div>
-				</div>
+					</div> 
 
 				<div id="searchResultArea">
 					<div class="dataTable_wrapper">

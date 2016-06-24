@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,33 +38,21 @@
 							name="author" value="${book.author }" readonly="readonly">
 					</div>
 					<div class="col-md-7 col-sm-7	col-xs-7 left">
-						대분류 <select class="selectpicker form-control" name="b_group">
-							<optgroup label="대분류">
-								<option value="B-도서(단행본)">B-도서(단행본)
-								<option value="E-기타매체">E-기타매체
-								<option value="J-정기간행물">J-정기간행물
-								<option value="P-특허자료">P-특허자료
-								<option value="R-보고서">R-보고서
-								<option value="S-규격/사전">S-규격/사전
-								<option value="T-논문">T-논문
-							</optgroup>
+						대분류 <select class="selectpicker form-control"
+							style="font-size: 14px; margin-top: 10px; vertical-align: baseline;"
+							id="b_group" name="b_group">
+							<c:forEach items="${BCodeList}" var="code">
+								<option value="${code.code}-${code.name}">${code.code}-${code.name}
+							</c:forEach>
 						</select>
 					</div>
 					<div class="col-md-5 col-sm-5	col-xs-5 right">
-						소분류 <select class="selectpicker form-control" name="c_group">
-							<optgroup label="소분류">
-								<option value="010-일반">일반
-								<option value="020-기계공학">기계공학
-								<option value="030-재료/소재">재료/소재
-								<option value="040-전기/전자제어">전기/전자제어
-								<option value="050-소음/진동/NVH">소음/진동/NVH
-								<option value="060-CAD/CAE/PLM">CAD/CAE/PLM
-								<option value="070-자동차">자동차
-								<option value="080-산업공학/품질">산업공학/품질
-								<option value="090-컴퓨터/OA">컴퓨터/OA
-								<option value="100-기타">기타
-							</optgroup>
-						</select>
+						소분류 <select class="selectpicker form-control"
+							style="font-size: 14px; margin-top: 10px; vertical-align: baseline;"
+							id="c_group" name="c_group"> 
+								<c:forEach items="${CCodeList}" var="code">
+									<option value="${code.code}-${code.name}">${code.code}-${code.name}
+								</c:forEach></select>
 					</div>
 
 					<br>
@@ -86,7 +75,7 @@
 					</div>
 					<div id="chief" class="col-md-6 col-sm-6	col-xs-6">
 						결재자 <select class="selectpicker form-control" name="chief">
-							<option value="${sessionScope.chief}"  selected>${sessionScope.chief}
+							<option value="${sessionScope.chief}" selected>${sessionScope.chief}
 						</select>
 					</div>
 					<div class="col-md-12 col-sm-12 col-xs-12">
@@ -94,8 +83,7 @@
 						<input type="hidden" name="link" value="${book.link}"> <input
 							type="hidden" name="publish" value="${book.publish}"><input
 							type="hidden" name="summary" value="${book.summary}"> <input
-							type="hidden" name="id" value="${book.id}">
-						확인
+							type="hidden" name="id" value="${book.id}"> 확인
 						<button type="submit" class="btn btn-default form-control">확인</button>
 					</div>
 				</div>
@@ -107,7 +95,7 @@
 			var price = $('#price').val();
 			if (price > 100000) {
 				alert("100,000원 이상 도서 구매시 팀장 결재 필요합니다.");
-				$('#chief').show(); 
+				$('#chief').show();
 			} else {
 				$('#chief').hide();
 			}

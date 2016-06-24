@@ -70,9 +70,7 @@ public class BookModel {
 
 	public void setFile(MultipartFile file) {
 		this.file = file;
-	}
- 
-
+	} 
 	public String getKname() {
 		return kname;
 	}

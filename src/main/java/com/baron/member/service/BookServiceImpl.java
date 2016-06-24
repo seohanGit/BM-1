@@ -38,11 +38,6 @@ import com.baron.member.model.Dto;
 @Service
 public class BookServiceImpl implements BookService {
 
-	String server = "175.200.81.11";
-	int port = 21;
-	String user = "ATTFL";
-	String pass = "EDPS";
-
 	@Resource(name = "fileUtils")
 	private FileUtils fileUtils;
 
@@ -66,22 +61,16 @@ public class BookServiceImpl implements BookService {
 
 	@Override
 	public void insertBook(BookModel model) {
-		List<Map<String, Object>> list;
 
+		String dir = "/SEOHAN/BOOKMST/";
 		MultipartFile uploadfile = model.getFile();
 		if (uploadfile != null) {
-			String fileName = uploadfile.getOriginalFilename();
+			String fileName = model.getBook_cd() + "-"
+					+ uploadfile.getOriginalFilename();
 			model.setFilename(fileName);
+			model.setImageurl(fileName); 
 			try {
-				// 1. FileOutputStream 사용
-				// byte[] fileData = file.getBytes();
-				// FileOutputStream output = new FileOutputStream("C:/images/" +
-				// fileName);
-				// output.write(fileData);
-
-				// 2. File 사용
-				File file = new File("C:/images/" + fileName);
-				uploadfile.transferTo(file);
+				fileUtils.upload(dir, uploadfile, fileName);
 			} catch (IOException e) {
 				e.printStackTrace();
 			} // try - catch
@@ -368,34 +357,19 @@ public class BookServiceImpl implements BookService {
 	}
 
 	@Override
-	public void uploadFile(MultipartFile file, String tid) throws Exception {
-		ftpClient = new FTPClient();
+	public void downLoad(String fileName) {
 
-		ftpClient.setControlKeepAliveTimeout(DEFAULT_FTP_KEEP_ALIVE_TIMEOUT);
-		ftpClient.setConnectTimeout(DEFAULT_FTP_CONNECTION_TIMEOUT);
-		try {
-			ftpClient.connect(SERVER, PORT);
-			ftpClient.login(USER, PASSWORD);
-			ftpClient.enterLocalPassiveMode();
-			ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
-		} catch (SocketException e) {
+    	FileUtils util = new FileUtils();   
+    	try {
+			util.download("/SEOHAN/BOOKMST/", fileName);
+		} catch (NullPointerException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
-			logger.error("FtpClient initializing is failed. error={}",
-					LogManager.makeLog(e.getMessage(), e));
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
-			logger.error("FtpClient initializing is failed.error={}",
-					LogManager.makeLog(e.getMessage(), e));
-		}
-		logger.info("FTPClient initializing is OK. staus={}, connection={}",
-				ftpClient.isAvailable(), ftpClient.isConnected());
-
-	}
-
-	@Override
-	public String download(File file, String tid) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
+		} 
+		
+	} 
 
 }

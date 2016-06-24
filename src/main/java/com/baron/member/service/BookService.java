@@ -39,7 +39,7 @@ public interface BookService {
 	public void updateDate() throws Exception; 
 	public List<BookModel> selectBookForImage();
 
-	public void setRecommend(BookModel bookmodel);
-	public void uploadFile(MultipartFile file, String tid) throws Exception; 
-	public String download(File file, String tid) throws Exception;
+	public void setRecommend(BookModel bookmodel); 
+	
+	public void downLoad(String fileName);
 }

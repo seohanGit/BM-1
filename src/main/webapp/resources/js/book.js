@@ -260,6 +260,7 @@ $("#b_group").change(function() {
 		data : {
 			listType : '',
 			keyword : $('#keyword').val(),
+			c_group : $('#c_group').val(),
 			b_group : options
 		},
 		success : function(data, status) {
@@ -286,7 +287,8 @@ $("#c_group").change(function() {
 		}// ajax complete handelr gourl(url);
 	}); // parameters as plain
 	 
-});
+}); 
+
 $('#getBookInfo').click(function() {
 	$.ajax({
 		type : "GET", // GET or POST

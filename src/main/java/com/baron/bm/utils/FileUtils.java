@@ -2,7 +2,12 @@ package com.baron.bm.utils;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -10,16 +15,17 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
- 
+
+import org.apache.commons.net.ftp.FTPClient;
+import org.apache.commons.net.ftp.FTPClientConfig;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.baron.member.model.BookModel;
-import com.ibm.as400.access.FTP;
 
 @Component("fileUtils")
-public class FileUtils {
+public class FileUtils   {
 	private static final String filePath = "C:\\temp\\file\\";
 
 	public List<Map<String, Object>> parseInsertFileInfo(BookModel book,
@@ -62,133 +68,127 @@ public class FileUtils {
 			}
 		}
 		return list;
-	}package util;
+	}
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.SocketException;
+	/**
+	 * @author haneulnoon
+	 * @since 2009-09-10
+	 *
+	 */
 
-import org.apache.commons.net.ftp.FTPClient;
-import org.apache.commons.net.ftp.FTPClientConfig;
+	private FTPClient client = null;
 
-/**
- * @author haneulnoon
- * @since 2009-09-10
- *
- */
-public class FTPUtil implements UsingFTP {
+	/**
+	 * 서버와 연결에 필요한 값들을 가져와 초기화 시킴
+	 *
+	 * @param host
+	 *            서버 주소
+	 * @param userName
+	 *            접속에 사용될 아이디
+	 * @param password
+	 *            비밀번호
+	 * @param port
+	 *            포트번호
+	 */
+	public void init() {
+		String host = "175.200.81.11";
+		String userName="ATTFL";
+		String password="EDPS";
+		int port= 21;
+		client = new FTPClient();
+		client.setControlEncoding("euc-kr"); // 한글 encoding....
 
-    private FTPClient client = null;
+		FTPClientConfig config = new FTPClientConfig();
+		client.configure(config);
+		try {
+			client.connect(host, port);
+			client.login(userName, password);
+		} catch (SocketException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
-    /**
-     * 서버와 연결에 필요한 값들을 가져와 초기화 시킴
-     *
-     * @param host
-     *            서버 주소
-     * @param userName
-     *            접속에 사용될 아이디
-     * @param password
-     *            비밀번호
-     * @param port
-     *            포트번호
-     */
-    public void init(String host, String userName, String password, int port) {
-        client = new FTPClient();
-        client.setControlEncoding("euc-kr"); // 한글 encoding....
+	}
 
-        FTPClientConfig config = new FTPClientConfig();
-        client.configure(config);
-        try {
-            client.connect(host, port);
-            client.login(userName, password);
-        } catch (SocketException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+	/**
+	 * 하나의 파일을 업로드 한다.
+	 *
+	 * @param dir
+	 *            저장시킬 주소(서버)
+	 * @param uploadfile
+	 *            저장할 파일
+	 * @throws IOException 
+	 * @throws IllegalStateException 
+	 */
+	public void upload(String dir, MultipartFile uploadfile, String fileName) throws IllegalStateException, IOException {		 
+		InputStream in = null; 
+		try {
+			init();
+			in = uploadfile.getInputStream();
+			client.storeFile(dir + fileName, in);
+			
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				in.close();
+				disconnection();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 
-    }
+	/**
+	 * 하나의 파일을 다운로드 한다.
+	 *
+	 * @param dir
+	 *            저장할 경로(서버)
+	 * @param downloadFileName
+	 *            다운로드할 파일
+	 * @param path
+	 *            저장될 공간
+	 * @throws IOException 
+	 */
+	public FileOutputStream download(String dir, String downloadFileName) throws NullPointerException, IOException { 
+		String path ="c:/temp/" + downloadFileName;
+		FileOutputStream out = null; 
+		InputStream in = null;
+		dir += downloadFileName;
+		try {
+			init();
+			in = client.retrieveFileStream(dir);
+			out = new FileOutputStream(new File(path));
+			int i;
+			while ((i = in.read()) != -1) {
+				out.write(i);
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (in!=null){in.close();}
+ 			if (out!=null){out.close();} 
+			disconnection();
+		}
+		return out;
+	};
 
-    /**
-     * 하나의 파일을 업로드 한다.
-     *
-     * @param dir
-     *            저장시킬 주소(서버)
-     * @param file
-     *            저장할 파일
-     */
-    public void upload(String dir, File file) {
+	/**
+	 * 서버와의 연결을 끊는다.
+	 */
+	public void disconnection() {
+		try {
+			client.logout();
+			if (client.isConnected()) {
+				client.disconnect();
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
-        InputStream in = null;
-
-        try {
-            in = new FileInputStream(file);
-            client.storeFile(dir + file.getName(), in);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                in.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    /**
-     * 하나의 파일을 다운로드 한다.
-     *
-     * @param dir
-     *            저장할 경로(서버)
-     * @param downloadFileName
-     *            다운로드할 파일
-     * @param path
-     *            저장될 공간
-     */
-    public void download(String dir, String downloadFileName, String path) {
-
-        FileOutputStream out = null;
-        InputStream in = null;
-        dir += downloadFileName;
-        try {
-            in = client.retrieveFileStream(dir);
-            out = new FileOutputStream(new File(path));
-            int i;
-            while ((i = in.read()) != -1) {
-                out.write(i);
-            }
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } finally {
-            try {
-                in.close();
-                out.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-    };
-
-    /**
-     * 서버와의 연결을 끊는다.
-     */
-    public void disconnection() {
-        try {
-            client.logout();
-            if (client.isConnected()) {
-                client.disconnect();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    
 	}
 }

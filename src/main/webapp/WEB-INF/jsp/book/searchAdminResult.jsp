@@ -10,10 +10,10 @@
 			<table class="table table-striped table-bordered " id="dataTable">
 				<thead>
 					<tr>
-						<th class="image">도서코드</th>
+						<th class="genre">도서코드</th>
 						<th>도서명</th>
-						<th class="hidden-xs image">저자</th>
-						<th class="hidden-sm hidden-xs hidden-md author">분류</th>
+						<th class="hidden-xs genre">저자</th>
+						<th class="hidden-sm hidden-xs hidden-md genre">분류</th>
 						<th style="width: 40px">추천</th>
 						<th style="width: 90px">대출상태</th>
 						<th style="width: 230px">비고</th>
@@ -27,11 +27,11 @@
 							<td class="title" align="left"><a href="#"
 								onclick="window.open('/bookInfo?book_cd=${book.book_cd}','new','resizeble=yes scrollbars=yes, width=750, height=600');">
 									${book.title }</a></td>
-							<td class="hidden-xs author" align="left">${book.author}</td>
+							<td class="hidden-xs "  >${book.author}</td>
 							<td class="hidden-sm hidden-xs hidden-md b_group"
-								id="${book.b_group }" align="left">${book.b_group}</td>
+								id="${book.b_group }"  >${book.b_group}</td>
 
-							<td class="rcmdChk" align="left"><c:choose>
+							<td class="rcmdChk" align="center" ><c:choose>
 									<c:when test="${book.rcmdChk=='1' }">
 
 										<input name="rcmdChk" value="1" type="checkbox"
@@ -46,7 +46,7 @@
 								</c:choose></td>
 							<c:choose>
 								<c:when test="${book.rentchk=='0'}">
-									<td align="left">대출가능</td>
+									<td align="center">대출가능</td>
 									<td>
 										<button class="btn btn-default btn-sm" type="button"
 											id="deletebook"

@@ -58,15 +58,33 @@
 		</dependency>
 		<!-- LDAP 인증 -->
 		<!-- FTP -->
-
-
+		<dependency>
+			<groupId>org.apache.ftpserver</groupId>
+			<artifactId>ftpserver-core</artifactId>
+			<version>1.0.6</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.2.1</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>1.4</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-net</groupId>
+			<artifactId>commons-net</artifactId>
+			<version>2.0</version>
+		</dependency>
 		<!-- common-dbcp -->
 		<dependency>
 			<groupId>commons-dbcp</groupId>
 			<artifactId>commons-dbcp</artifactId>
 			<version>1.4</version>
 		</dependency>
-
 		<dependency>
 			<groupId>javax.xml.bind</groupId>
 			<artifactId>com.springsource.javax.xml.bind</artifactId>
@@ -87,12 +105,14 @@
 			<artifactId>com.springsource.javax.inject</artifactId>
 			<version>1.0.0</version>
 		</dependency>
+
 		<!-- xmlPullParser -->
 		<dependency>
 			<groupId>xmlpull</groupId>
 			<artifactId>xmlpull</artifactId>
 			<version>1.1.3.4d_b4_min</version>
 		</dependency>
+
 		<!-- mybatis -->
 		<dependency>
 			<groupId>org.mybatis</groupId>
@@ -104,6 +124,7 @@
 			<artifactId>mybatis-spring</artifactId>
 			<version>1.2.2</version>
 		</dependency>
+
 		<!-- Spring depedencies -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -129,6 +150,7 @@
 			<artifactId>com.springsource.net.sf.ehcache</artifactId>
 			<version>1.6.2</version>
 		</dependency>
+
 		<!-- DBMS dependecies -->
 		<dependency>
 			<groupId>net.sf.jt400</groupId>
@@ -208,6 +230,7 @@
 			<artifactId>hsqldb</artifactId>
 			<version>2.2.6</version>
 		</dependency>
+
 		<!-- Web dependencies -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -267,21 +290,6 @@
 			<version>1.4.1</version>
 		</dependency>
 
-		<dependency>
-			<groupId>commons-fileupload</groupId>
-			<artifactId>commons-fileupload</artifactId>
-			<version>1.2.1</version>
-		</dependency>
-		<dependency>
-			<groupId>commons-io</groupId>
-			<artifactId>commons-io</artifactId>
-			<version>1.4</version>
-		</dependency>
-		<dependency>
-			<groupId>commons-dbcp</groupId>
-			<artifactId>commons-dbcp</artifactId>
-			<version>1.4</version>
-		</dependency>
 
 		<!-- mysql -->
 		<dependency>

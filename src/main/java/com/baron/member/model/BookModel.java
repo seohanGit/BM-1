@@ -2,6 +2,8 @@ package com.baron.member.model;
 
 import java.util.Date;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class BookModel {
 	private String book_cd;
 	private String book_cd1;
@@ -42,26 +44,33 @@ public class BookModel {
 	private String rcmdChk;
 	private String kname;
 	
-	private String file;
-	private String localFile;
+	private MultipartFile file;
+	private String filename, localpath;
 
-	
-	public String getFile() {
+	 
+	public String getFilename() {
+		return filename;
+	}
+
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
+
+	public String getLocalpath() {
+		return localpath;
+	}
+
+	public void setLocalpath(String localpath) {
+		this.localpath = localpath;
+	}
+
+	public MultipartFile getFile() {
 		return file;
 	}
 
-	public void setFile(String file) {
+	public void setFile(MultipartFile file) {
 		this.file = file;
-	}
-
-	public String getLocalFile() {
-		return localFile;
-	}
-
-	public void setLocalFile(String localFile) {
-		this.localFile = localFile;
-	}
-
+	} 
 	public String getKname() {
 		return kname;
 	}

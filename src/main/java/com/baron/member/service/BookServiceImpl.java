@@ -1,14 +1,8 @@
 package com.baron.member.service;
 
-import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -18,11 +12,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
- 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -38,14 +30,9 @@ import com.baron.member.model.Dto;
 @Service
 public class BookServiceImpl implements BookService {
 
-	String server = "175.200.81.11";
-	int port = 21;
-	String user = "ATTFL";
-	String pass = "EDPS";
-
-	@Resource(name="fileUtils")
+	@Resource(name = "fileUtils")
 	private FileUtils fileUtils;
-	
+
 	@Autowired
 	private BookDao bookDao;
 
@@ -65,7 +52,21 @@ public class BookServiceImpl implements BookService {
 	}
 
 	@Override
-	public void insertBook(BookModel model, HttpServletRequest request)  {
+	public void insertBook(BookModel model) {
+
+		String dir = "/SEOHAN/BOOKMST/";
+		MultipartFile uploadfile = model.getFile();
+		if (uploadfile != null) {
+			String fileName = model.getBook_cd() + "-"
+					+ uploadfile.getOriginalFilename();
+			model.setFilename(fileName);
+			model.setImageurl(fileName); 
+			try {
+				fileUtils.upload(dir, uploadfile, fileName);
+			} catch (IOException e) {
+				e.printStackTrace();
+			} // try - catch
+		} // if
 		if (model.getQuantity() == 1) {
 			bookDao.insertBook(model);
 		} else if (model.getQuantity() > 1) {
@@ -73,17 +74,7 @@ public class BookServiceImpl implements BookService {
 				model.setBook_cd(model.getBook_cd() + "(" + (i + 1) + ")");
 				bookDao.insertBook(model);
 			}
-		}List<Map<String, Object>> list;
-		try {
-			list = fileUtils.parseInsertFileInfo(model, request);
-			for(int i=0, size=list.size(); i<size; i++){
-	            bookDao.insertFile(list.get(i));
-	        }
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
-        
 	}
 
 	@Override
@@ -91,30 +82,30 @@ public class BookServiceImpl implements BookService {
 		dto.setKeyword(dto.getKeyword().trim());
 		dto.setB_group(dto.getB_group().trim());
 		dto.setC_group(dto.getC_group().trim());
-		
-		switch (dto.getB_group()){
-		case "전체": 
+
+		switch (dto.getB_group()) {
+		case "전체":
 			dto.setB_group("");
 			break;
-		case "": 
+		case "":
 			dto.setB_group("");
 			break;
 		default:
 			dto.setB_group(dto.getB_group().substring(0, 1));
 			break;
 		}
-		switch (dto.getC_group()){
-		case "전체": 
+		switch (dto.getC_group()) {
+		case "전체":
 			dto.setC_group("");
-			break;		
-		case "": 
+			break;
+		case "":
 			dto.setC_group("");
 			break;
 		default:
 			dto.setC_group(dto.getC_group().substring(0, 3));
 			break;
 		}
-		
+
 		if (dto.getField().equals("title")) {
 			return bookDao.searchBook(dto);
 		} else if (dto.getField().equals("author")) {
@@ -356,19 +347,21 @@ public class BookServiceImpl implements BookService {
 	public void setRecommend(BookModel bookmodel) {
 		bookDao.setRecommend(bookmodel);
 	}
- 
 
 	@Override
-	public void uploadFile(MultipartFile file, String tid) throws Exception {
-		// TODO Auto-generated method stub
+	public void downLoad(String fileName) {
+
+    	FileUtils util = new FileUtils();   
+    	try {
+			util.download("/SEOHAN/BOOKMST/", fileName);
+		} catch (NullPointerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
 		
-	}
+	} 
 
-	@Override
-	public String download(File file, String tid) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
- 
 }

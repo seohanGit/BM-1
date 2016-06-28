@@ -13,7 +13,7 @@ import com.baron.member.model.Dto;
 
 public interface BookService {
 
-	public void insertBook(BookModel model, HttpServletRequest request)  ;
+	public void insertBook(BookModel model)  ;
 
 	public List<BookModel> searchBook(Dto dto);
 
@@ -39,7 +39,7 @@ public interface BookService {
 	public void updateDate() throws Exception; 
 	public List<BookModel> selectBookForImage();
 
-	public void setRecommend(BookModel bookmodel);
-	public void uploadFile(MultipartFile file, String tid) throws Exception; 
-	public String download(File file, String tid) throws Exception;
+	public void setRecommend(BookModel bookmodel); 
+	
+	public void downLoad(String fileName);
 }

@@ -43,10 +43,10 @@
 		B.rentchk
 		WHERE
 		LCASE(A.TITLE) like  #{keyword}    
-		<if test="b_group != '' and b_group != null ">
+		<if test="b_group != '' and b_group != null and b_group != '전체' ">
 		AND left(A.b_group,1) = #{b_group}  
 		</if>
-		<if test="c_group != '' and c_group != null ">
+		<if test="c_group != '' and c_group != null and c_group != '전체'">
 		AND left(A.c_group,3) = #{c_group}  
 		</if>		
 		ORDER BY  a.book_cd desc 

@@ -25,8 +25,8 @@ function notifiReser() {
 $("#request").click(function() {
 	location.href = "/request"
 }) 
-$("#recordList").click(function() {
-	location.href = "/recordList"
+$("#record").click(function() {
+	location.href = "/record"
 })
 $("#statistic").click(function() {
 	location.href = "/statistic"
@@ -47,7 +47,9 @@ $("#noticeListByAdmin").click(function() {
 $("#bookList").click(function() {
 	location.href = "/bookList"
 })
-
+$("#board").click(function() {
+	location.href = "/board"
+})
 $("#boardList").click(function() {
 	location.href = "/boardList"
 })

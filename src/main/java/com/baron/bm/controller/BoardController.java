@@ -40,6 +40,14 @@ public class BoardController {
 		return "board/board";
 	}
 
+
+	@RequestMapping("/boardList")
+	public String boardList(Model model) {
+		List<BoardModel> boardList = boardService.selectBoard();
+		model.addAttribute("boardList", boardList);
+		return "board/boardList";
+	}
+
 	@RequestMapping("/boardwrite")
 	public String writeboard() {
 		return "board/boardinsert";
@@ -96,14 +104,6 @@ public class BoardController {
 		}
 		return "board/selectboard";
 	}
-
-	@RequestMapping("/boardList")
-	public String boardList(Model model) {
-		List<BoardModel> boardList = boardService.selectBoard();
-		model.addAttribute("boardList", boardList);
-		return "board/boardList";
-	}
-
 	@RequestMapping("/noticeListByAdmin")
 	public String noticeListByAdmin(Model model) {
 		List<BoardModel> noticeList = boardService.noticeList();

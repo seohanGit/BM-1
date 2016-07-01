@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,58 +12,72 @@
 <meta name="author" content="">
 <title>추천 게시판</title>
 <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
+<link href="/resources/css/bootstrap-select.min.css" rel="stylesheet">
+<link href="/resources/css/dataTables.bootstrap.min.css" rel="stylesheet">
+<link href="/resources/css/signin.css" rel="stylesheet">
 <link href="/resources/css/common.css" rel="stylesheet">
 </head>
 <body>
 	<jsp:include page="../nav.jsp" />
 	<!-- Page Content -->
-	<div class="container">
-		<div class="row row-offcanvas row-offcanvas-right">
-			<div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
-				<div class="wrapper" id="jumbotron">
-					<div class="left">
-					<br>
-						<h2> &nbsp;추천 게시판</h2>
-						
+	<div id="divLoadBody" class="container">
+		<div class="col-md-12">
+			<div class="panel panel-default ">
+				<div class="panel-body">
+					<div class="col-md-7 col-lg-7">
+						<h2>&nbsp;추천 게시판</h2>
 					</div>
-					<div class="well right-end">
-						<ul class="nav"> 
-							<li class="active"><a href="boardwrite">추천 글쓰기</a></li>
-							<li><a href="#" id="register">등록일자순</a></li>
-							<li><a href="#" id="title">제목순</a></li>
-						</ul>
+					<div style="float: right; margin-top: 15px"
+						class="col-md-5 col-lg-5">
+						<button style="float: right; paddig-top: 15px"
+							class="btn btn-default" onclick="location.href='/boardwrite'">
+							글쓰기</button>
 					</div>
-					<!--/.well -->
-
-				</div>
-
-				<div class="row" id="bulletin">
-					<c:forEach items="${boardList}" var="board">
-						<div class="board col-6 col-sm-6 col-lg-6">
-							<h2>${board.title}</h2>
-							<p class="content ellipsis">${board.content}</p>
-							<p>
-								<a class="btn btn-default">펼쳐보기 »</a>
-							</p>
+					<div id="searchResultArea">
+						<div class="dataTable_wrapper">
+							<table class="table table-bordered" id="dataTable">
+								<thead>
+									<tr>
+										<td class="genre">등록일</td>
+										<td>제목</td>
+										<td class="genre">작성자</td>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach items="${boardList}" var="board" varStatus="status">
+										<tr style="padding-bottom: 10px">
+											<td align="left"><fmt:parseDate
+													value="${board.modifidate}000000" pattern="yyyyMMddHHmmss"
+													var="modifidate" scope="page" /> <fmt:formatDate
+													value="${modifidate}" pattern="yyyy-MM-dd" /></td>
+											<td><a
+												href="/selectBoardnum?boardnum=${board.boardnum }"
+												id="title">${board.title}</a></td>
+											<td align="left">${board.kname}</td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
 						</div>
-					</c:forEach>
+					</div>
 				</div>
-
-				<!--/row-->
 			</div>
-			<!--/span-->
-
-			<!--/span-->
 		</div>
-		<!--/row-->
-		<hr>
-		<footer> </footer>
 	</div>
-	<!-- /.container -->
-	<!-- jQuery -->
 	<script src="/resources/js/jquery/jquery.js"></script>
-	<script src="/resources/js/common.js"></script>
-	<script src="/resources/js/bootstrap.min.js"></script>
+	<script src="/resources/js/jquery.dataTables.min.js"></script>
+	<script src="/resources/js/dataTables.bootstrap.min.js"></script>
 	<script src="/resources/js/board.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#dataTable').dataTable({
+				"bSort" : false,
+				"pageLength" : 10,
+				paging : true,
+				searching : true,
+				info : false
+			});
+		});
+	</script>
 </body>
 </html>

@@ -14,6 +14,7 @@
 <meta name="author" content="">
 <title>대여 요청 현황</title>
 <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
+<link href="/resources/css/dataTables.bootstrap.min.css" rel="stylesheet">
 <link href="/resources/css/signin.css" rel="stylesheet">
 <link href="/resources/css/common.css" rel="stylesheet">
 </head>

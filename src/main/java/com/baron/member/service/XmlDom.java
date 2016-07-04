@@ -95,7 +95,7 @@ public class XmlDom {
 			book.setTitle(getChildren(element, "title"));
 			book.setLink(getChildren(element, "link"));
 			book.setImageurl(getChildren(element, "coverSmallUrl"));
-			book.setPrice(getChildren(element, "priceSales"));
+			book.setPrice(Integer.parseInt(getChildren(element, "priceSales")));
 			book.setAuthor(getChildren(element, "author"));
 			book.setIsbn(getChildren(element, "isbn"));
 			book.setB_group(getCategoryName(getChildren(element, "categoryId")));
@@ -126,7 +126,7 @@ public class XmlDom {
 			book.setTitle(getChildren(element, "title"));
 			book.setLink(getChildren(element, "link"));
 			book.setImageurl(getChildren(element, "coverSmallUrl"));
-			book.setPrice(getChildren(element, "priceSales"));
+			book.setPrice(Integer.parseInt(getChildren(element, "priceSales")));
 			book.setAuthor(getChildren(element, "author"));
 			book.setIsbn(getChildren(element, "isbn"));
 			book.setB_group(getCategoryName(getChildren(element, "categoryId")));

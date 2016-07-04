@@ -38,11 +38,11 @@
 					<input type="hidden" id="isbn" name="isbn" value="">
 					<div class="form-group">
 						<label for="exampleInputEmail1">도서번호</label> <input type="text"
-							class="form-control" id="book_cd" name="book_cd">
+							class="form-control" id="book_cd" name="book_cd"  required="required" >
 					</div>
 					<div class="form-group">
 						<label for="exampleInputPassword1">도서명</label> <input type="text"
-							class="form-control" id="title" name="title" placeholder="도서명">
+							class="form-control" id="title" name="title" placeholder="도서명"  required="required">
 					</div>
 					<div class="col-md-7 col-sm-7	col-xs-7 left">
 						<label for="exampleInputPassword1">대분류</label> <select
@@ -64,21 +64,31 @@
 							</c:forEach>
 						</select>
 					</div>
-					<div class="form-group">
+					<div class="col-md-6 col-sm-6	col-xs-6">
 						<label for="exampleInputPassword1">출판사</label> <input type="text"
 							class="form-control" id="publish" name="publish"
-							placeholder="출판사">
+							placeholder="출판사"  required="required">
 					</div>
-					<div class="form-group">
+					<div class="col-md-6 col-sm-6	col-xs-6">
 						<label for="exampleInputPassword1">저자</label> <input type="text"
 							class="form-control" id="author" name="author" placeholder="저자">
 					</div>
 					<div class="form-group">
-						<label for="exampleInputPassword1">저자</label> <input type="file"
+						<label for="exampleInputPassword1">요약</label> <input type="text"
+							class="form-control" id="summary" name="summary" placeholder="요약" >
+					</div>
+					<div class="form-group">
+						<label for="exampleInputPassword1">가격</label><input type="number"
+							class="form-control" name="price" id="price" placeholder="0"  required="required" >
+					</div>
+					<div class="form-group file">
+						<label for="exampleInputPassword1">파일</label> <input type="file"
 							class="form-control" id="file" name="file" placeholder="파일">
 					</div>
-					<button type="submit" class="btn btn-default"
-						onClick="formChk(); opener.focus(); self.close(); ">확인</button>
+					<div class="col-md-12 col-sm-12 col-xs-12">
+						<button type="submit" class="btn btn-default"
+							onClick="formChk(); opener.focus(); self.close(); ">확인</button>
+					</div>
 				</form>
 			</div>
 
@@ -87,6 +97,9 @@
 
 	</div>
 	<script type="text/javascript">
+		$(document).ready(function() {
+			$('.file').hide();
+		});
 		function formChk() {
 			var book_cd = $('#book_cd').val();
 			var title = $('#title').val();
@@ -94,10 +107,8 @@
 			var author = $('#author').val();
 			var publish = $('#publish').val();
 			var price = $('#price').val();
-			var reason = $('#reason').val();
-
-			title.attr("required", true);
-
+			var reason = $('#reason').val(); 
+  
 			if (book_cd == '') {
 				alert('도서명을 입력하시기 바랍니다.');
 				book_cd.focus();
@@ -123,19 +134,28 @@
 				return true;
 			}
 		}
-		$('#b_group').change(function(){
-			var book_cd =this.value.substr(0,1) + $('#c_group').val().substr(0,3)+'-';
-			$('#book_cd').val(book_cd);
-			$('#book_cd').focus();
-		})
-		$('#c_group').change(function(){
-			var book_cd =$('#b_group').val().substr(0,1)+this.value.substr(0,3)+'-';
-			$('#book_cd').val(book_cd);
-			$('#book_cd').focus();
-		})
+		$('#b_group').change(
+				function() {
+					var book_cd = this.value.substr(0, 1)
+							+ $('#c_group').val().substr(0, 3) + '-';
+					$('#book_cd').val(book_cd);
+					$('#book_cd').focus();
+					if ($('#b_group').val().substr(0, 1) == "F") {
+						$('.file').show();
+					} else {
+						$('.file').hide();
+					}
+				})
+		$('#c_group').change(
+				function() {
+					var book_cd = $('#b_group').val().substr(0, 1)
+							+ this.value.substr(0, 3) + '-';
+					$('#book_cd').val(book_cd);
+					$('#book_cd').focus();
+				})
 	</script>
 	<script src="/resources/js/bootstrap.min.js"></script>
 	<script src="/resources/js/jquery/jquery.js"></script>
-	<script src="/resources/js/common.js"></script> 
+	<script src="/resources/js/common.js"></script>
 </body>
 </html>

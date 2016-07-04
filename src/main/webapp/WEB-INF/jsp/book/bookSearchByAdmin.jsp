@@ -220,25 +220,18 @@
 		</div>
 	</div>
 	<br>
-
-	<script src="/resources/js/book.js"></script>
-	<script src="/resources/js/common.js"></script>
-	<script src="/resources/js/metisMenu.min.js"></script>
-	<script src="/resources/js/jquery.dataTables.min.js"></script>
-	<script src="/resources/js/bootstrap-select.min.js"></script>
-	<script src="/resources/js/dataTables.bootstrap.min.js"></script>
-	<script src="/resources/js/jquery.dataTables.columnFilter.js"></script>
-	<script type="text/javascript">
+<script type="text/javascript">
 		$(document).ready(function() {
-
 			$('#dataTable').dataTable({
 				"pageLength" : 100,
-				paging : false,
+				paging : true,
 				searching : false,
 				"order" : [],
 				"columns" : [ {
 					"searchable" : false
 				}, null, null, {
+					"searchable" : false
+				}, {
 					"searchable" : false
 				}, {
 					"searchable" : false
@@ -251,7 +244,7 @@
 					type : "select"
 				}, {
 					type : "select"
-				}, null ]
+				}, null , null ]
 			});
 		});
 
@@ -261,5 +254,13 @@
 		divLoadBody.style.display = "";
 		loadingBar.style.display = "none";
 	</script>
+	<script src="/resources/js/book.js"></script>
+	<script src="/resources/js/common.js"></script>
+	<script src="/resources/js/metisMenu.min.js"></script>
+	<script src="/resources/js/jquery.dataTables.min.js"></script>
+	<script src="/resources/js/bootstrap-select.min.js"></script>
+	<script src="/resources/js/dataTables.bootstrap.min.js"></script>
+	<script src="/resources/js/jquery.dataTables.columnFilter.js"></script>
+	
 </body>
 </html>

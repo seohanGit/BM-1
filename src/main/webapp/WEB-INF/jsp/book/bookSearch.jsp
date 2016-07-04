@@ -13,47 +13,10 @@
 <title>도서 목록</title>
 <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="/resources/css/bootstrap-select.min.css" rel="stylesheet">
-<link href="/resources/css/dataTables.bootstrap.min.css" rel="stylesheet">
+<link href="/resources/css/dataTables.bootstrap.min.css"
+	rel="stylesheet">
 <link href="/resources/css/signin.css" rel="stylesheet">
 <link href="/resources/css/common.css" rel="stylesheet">
-<script src="/resources/js/jquery/jquery.js"></script>
-<script type="text/javascript">
-	$(document).ready(function() {
-		var today = new Date();
-		var today2 = new Date();
-		var dd = today.getDate();
-		var mm = today.getMonth(); //January is 0!
-		var yyyy = today.getFullYear();
-		var dd2 = today.getDate();
-		var mm2 = today.getMonth() + 1; //January is 0!
-		var yyyy2 = today.getFullYear();
-		if (dd > 29) {
-		}
-		if (dd < 10) {
-			dd = '0' + dd
-		}
-		if (mm < 10) {
-			mm = '0' + mm
-		}
-		today = yyyy + '-' + mm + '-' + dd;
-		if (dd2 < 10) {
-			dd2 = '0' + dd2
-		}
-		if (mm2 < 10) {
-			mm2 = '0' + mm2
-		}
-		today2 = yyyy2 + '-' + mm2 + '-' + dd2;
-
-		$('#datePicker1').attr('value', today);
-		$('#datePicker2').attr('value', today2);
-
-		$.fn.datepicker.defaults.format = "yyyymmdd";
-		$('.datepicker').datepicker({
-			format : "yy-mm-dd"
-		});
-
-	});
-</script>
 </head>
 <body>
 	<jsp:include page="../nav.jsp" />
@@ -92,7 +55,7 @@
 									</c:otherwise>
 								</c:choose>
 								<div class="col-lg-12 col-md-12" style="margin: 3%;">
-									<div style="float: left; width:20%" >
+									<div style="float: left; width: 20%">
 										<select class="selectpicker form-control"
 											style="font-size: 14px; margin-top: 10px; vertical-align: baseline;"
 											id="b_group" name="b_group"><option selected>전체
@@ -138,15 +101,14 @@
 												onclick="window.open('/bookInfo?book_cd=${book.book_cd}&keyword=${keyword }&listType=${listType }',
 										'new','resizeble=yes scrollbars=yes,  width=750, height=600');">
 													${book.title }</a></td>
-											<td class="hidden-xs hidden-sm hidden-md" >${book.author }</td>
+											<td class="hidden-xs hidden-sm hidden-md">${book.author }</td>
 											<td class="hidden-xs hidden-sm ">${book.publish}</td>
-											<td class="hidden-xs " >${book.b_group }</td>
+											<td class="hidden-xs ">${book.b_group }</td>
 											<c:choose>
 												<c:when test="${book.rentchk=='0'}">
-													<td ><mark>대출가능</mark></td>
-													<td ><button
-															class="btn btn-default borrow" type="button"
-															id="borrowbook" value="${book.book_cd}"<%-- 													onClick="location.href='/borrowbook?book_cd=${book.book_cd}&listType=${listType}&keyword=${keyword}';"  --%>
+													<td><mark>대출가능</mark></td>
+													<td><button class="btn btn-default borrow"
+															type="button" id="borrowbook" value="${book.book_cd}"<%-- 													onClick="location.href='/borrowbook?book_cd=${book.book_cd}&listType=${listType}&keyword=${keyword}';"  --%>
 													>대출</button>
 													</td>
 												</c:when>
@@ -206,6 +168,38 @@
 	<script src="/resources/js/bootstrap-datepicker.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
+			var today = new Date();
+			var today2 = new Date();
+			var dd = today.getDate();
+			var mm = today.getMonth(); //January is 0!
+			var yyyy = today.getFullYear();
+			var dd2 = today.getDate();
+			var mm2 = today.getMonth() + 1; //January is 0!
+			var yyyy2 = today.getFullYear();
+			if (dd > 29) {
+			}
+			if (dd < 10) {
+				dd = '0' + dd
+			}
+			if (mm < 10) {
+				mm = '0' + mm
+			}
+			today = yyyy + '-' + mm + '-' + dd;
+			if (dd2 < 10) {
+				dd2 = '0' + dd2
+			}
+			if (mm2 < 10) {
+				mm2 = '0' + mm2
+			}
+			today2 = yyyy2 + '-' + mm2 + '-' + dd2;
+
+			$('#datePicker1').attr('value', today);
+			$('#datePicker2').attr('value', today2);
+
+			$.fn.datepicker.defaults.format = "yyyymmdd";
+			$('.datepicker').datepicker({
+				format : "yy-mm-dd"
+			});
 			$('#dataTable').dataTable({
 				"bSort" : false,
 				"pageLength" : 10,
@@ -216,20 +210,9 @@
 				}, {
 					"searchable" : false
 				}, {
-					"searchable" : false,
-
+					"searchable" : false
 				} ]
-
 			});
-			/* .columnFilter({
-
-				aoColumns : [ null, null, null, {
-					type : "select"
-				}, {
-					type : "select",
-					values : [ '대여요청중', '대출', '대출' ]
-				}, null ]
-			}); */
 		});
 
 		var loadingBar = document.getElementById("loadingBar");

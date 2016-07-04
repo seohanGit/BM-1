@@ -66,11 +66,13 @@ public class RequestServiceImpl implements RequestService {
 		MemberModel member = new MemberModel();
 		String nowDate = sdf.format(cal.getTime());  		
 		int max = selectMaxSer();
-		String maxser = String.format("%02d",max);
+		String maxser = String.format("%03d",max);
 
 		member = joinDao.selectMember(model.getId()); 
 		member.setId(model.getId());
 		
+		model.setB_group(model.getB_group().trim());
+		model.setC_group(model.getC_group().trim());
 		model.setReqdate(nowDate);
 		model.setKname(model.getKname());
 		model.setBook_cd(model.getB_group().substring(0, 1)
@@ -78,7 +80,7 @@ public class RequestServiceImpl implements RequestService {
 		model.setReq_cd(maxser);
 		model.setReqstatus("0");
 		
-		if (Integer.parseInt(model.getPrice()) > 100000){
+		if (model.getPrice() > 100000){
 			approval.setCompanyGroup(member.getCo_gb());
 			approval.setTableName("BOOKREQ");
 			approval.setDocumentId(model.getReqdate() + "-" + model.getReq_cd());

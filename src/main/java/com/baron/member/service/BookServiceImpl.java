@@ -56,7 +56,9 @@ public class BookServiceImpl implements BookService {
 
 		String dir = "/SEOHAN/BOOKMST/";
 		MultipartFile uploadfile = model.getFile();
-		if (uploadfile != null) {
+		if (uploadfile.getOriginalFilename().equals("")){
+			model.setImageurl("");
+		}		else{
 			String fileName = model.getBook_cd() + "-"
 					+ uploadfile.getOriginalFilename();
 			model.setFilename(fileName);
@@ -68,6 +70,8 @@ public class BookServiceImpl implements BookService {
 			} // try - catch
 		} // if
 		if (model.getQuantity() == 1) {
+			model.setB_group(model.getB_group().trim());
+			model.setC_group(model.getC_group().trim());
 			bookDao.insertBook(model);
 		} else if (model.getQuantity() > 1) {
 			for (int i = 0; i < model.getQuantity(); i++) {

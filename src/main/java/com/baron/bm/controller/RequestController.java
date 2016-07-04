@@ -3,28 +3,21 @@ package com.baron.bm.controller;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.scripting.xmltags.TrimSqlNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
-import com.baron.member.dao.JoinDao;
 import com.baron.member.model.BookModel;
 import com.baron.member.model.CodeModel;
-import com.baron.member.model.Dto;
-import com.baron.member.model.MemberModel;
-import com.baron.member.model.SmsModel;
 import com.baron.member.service.BookService;
 import com.baron.member.service.JoinService;
 import com.baron.member.service.NotifiService;
@@ -48,7 +41,7 @@ public class RequestController {
 	private RentService rentService;
 
 	@Autowired
-	private BookService bookService;
+	private BookService bookservice;
 
 	@RequestMapping("/confirmRequest")
 	public String requestResult(BookModel model, HttpServletRequest request) {		
@@ -120,6 +113,8 @@ public class RequestController {
 		String nowDate = sdf.format(cal.getTime());
 		
 		BookModel book = requestservice.findBookOne(isbn);
+		List<CodeModel> BCodeList = bookservice.selectBCodeList();
+		List<CodeModel> CCodeList = bookservice.selectCCodeList();
 		for (Cookie cookie : request.getCookies()) {
 			if (cookie.getName().equals("bm_id")) {
 				id = cookie.getValue();
@@ -130,6 +125,8 @@ public class RequestController {
 		
 		model.addAttribute("cheif",session.getAttribute("cheif") );
 		model.addAttribute("cheifid",session.getAttribute("cheifid") );
+		model.addAttribute("BCodeList", BCodeList);
+		model.addAttribute("CCodeList", CCodeList);
 		if (isbn != null) {
 			model.addAttribute("book", book);
 			return "request/confirmRequest";
@@ -150,7 +147,7 @@ public class RequestController {
 		Calendar cal =  Calendar.getInstance();
 		String nowDate = sdf.format(cal.getTime());		
 		model.setRcv_date(nowDate); 
-		BookModel existbook = bookService.selectBook(model.getBook_cd());
+		BookModel existbook = bookservice.selectBook(model.getBook_cd());
 		if (existbook == null){
 			requestservice.confirmBuy(model);
 			requestservice.deleteRequest(model);
@@ -168,7 +165,7 @@ public class RequestController {
 			
 		}
 		for (BookModel book : bookList) { 
-			if (bookService.selectBook(book.getBook_cd()) == null) {
+			if (bookservice.selectBook(book.getBook_cd()) == null) {
 				requestservice.confirmBuy(book);
 				requestservice.deleteRequest(book);
 				return "redirect:request";
@@ -184,8 +181,8 @@ public class RequestController {
 	@RequestMapping("modifiReqForm")
 	public String modifiForm(Model model) {
 		List<BookModel> bookList = requestservice.requestList();
-		List<CodeModel> BCodeList = bookService.selectBCodeList();
-		List<CodeModel> CCodeList = bookService.selectCCodeList();
+		List<CodeModel> BCodeList = bookservice.selectBCodeList();
+		List<CodeModel> CCodeList = bookservice.selectCCodeList();
 
 		model.addAttribute("bookList", bookList);
 		model.addAttribute("BCodeList", BCodeList);

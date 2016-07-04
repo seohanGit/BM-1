@@ -19,7 +19,7 @@ public class BookModel {
 	private String imageurl;
 	private String publish;
 	private String author;
-	private String price;
+	private int price;
 	private String link;
 	private String isbn;
 	private String summary;
@@ -255,11 +255,11 @@ public class BookModel {
 		this.author = author;
 	}
 
-	public String getPrice() {
+	public int getPrice() {
 		return price;
 	}
 
-	public void setPrice(String price) {
+	public void setPrice(int price) {
 		this.price = price;
 	}
 

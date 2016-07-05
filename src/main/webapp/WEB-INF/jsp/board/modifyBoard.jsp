@@ -13,6 +13,7 @@
 <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="/resources/css/signin.css" rel="stylesheet">
 <link href="/resources/css/common.css" rel="stylesheet">
+<script src="/resources/js/jquery/jquery.js"></script>
 </head>
 <body>
 	<jsp:include page="../nav.jsp" />
@@ -28,14 +29,15 @@
 						id="title" name="title" placeholder="도서명" value="${board.title }">
 				</div>
 				<textarea class="form-control" placeholder="감상평" rows="10"
-					id="content" name="content" onkeydown="setLine(this);">${board.content}</textarea>
+					id="content" name="content" onkeydown="setLine(this);">${board.content}
+				 </textarea>
 
-				<input type="hidden" name="boardnum"
-					value="${board.boardnum}">
-					<button type="submit" class="btn btn-default">확인</button>
-					<button class="btn btn-default">취소</button>
-				</form>
-			
+				<input type="hidden" name="boardnum" value="${board.boardnum}">
+				 <br>
+				<button id="ok" type="submit" class="btn btn-default">확인</button>
+				<button id="cancel" class="btn btn-default">취소</button>
+			</form>
+
 		</div>
 	</div>
 	<script>
@@ -48,9 +50,18 @@
 
 			txa.rows = new_line;
 		}
-		function del() {
-			alert("승인되었습니다.");
-		}
+
+		$(document).ready(function() {
+			var boardid = "${board.id}";
+			var id = "${ id}";
+			if (boardid == id) {
+				$('ok').show();
+				$('cancel').show();
+			} else {
+				$('#ok').hide();
+				$('#cancel').hide();
+			}
+		});
 	</script>
 </body>
 </html>

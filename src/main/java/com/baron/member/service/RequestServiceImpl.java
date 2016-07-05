@@ -105,6 +105,8 @@ public class RequestServiceImpl implements RequestService {
 
 		sms.setTitle(model.getTitle());
 		sms.setPhone(mobi_no);
+		model.setB_group(model.getB_group().trim());
+		model.setC_group(model.getC_group().trim());
 		model.setBook_cd(model.getB_group().substring(0, 1)
 				+ model.getC_group().substring(0, 3) + "-" + model.getBook_cd());
 		

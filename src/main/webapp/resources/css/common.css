@@ -83,6 +83,7 @@ table .author {
 	width:15%;  
 }
 table>tbody>tr>td .author {  
+	width: 100px;
 	text-overflow:ellipsis; 
 	overflow:hidden;
 	white-space:nowrap;

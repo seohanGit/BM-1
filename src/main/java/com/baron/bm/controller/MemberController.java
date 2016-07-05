@@ -163,6 +163,7 @@ public class MemberController {
 			mav.addObject("chiefId", membermodel.getChiefid());
 			mav.addObject("id", membermodel.getId());
 			
+			
 			session.setAttribute("id", membermodel.getId());
 			session.setAttribute("chief", membermodel.getChief());
 			session.setAttribute("chiefId", membermodel.getChiefid());

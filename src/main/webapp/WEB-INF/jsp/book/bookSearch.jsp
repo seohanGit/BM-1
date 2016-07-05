@@ -17,6 +17,7 @@
 	rel="stylesheet">
 <link href="/resources/css/signin.css" rel="stylesheet">
 <link href="/resources/css/common.css" rel="stylesheet">
+
 </head>
 <body>
 	<jsp:include page="../nav.jsp" />

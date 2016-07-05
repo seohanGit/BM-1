@@ -73,9 +73,13 @@
 		</table>
 	</div>
 </div>
-<script src="/resources/js/jquery.dataTables.min.js"></script>
-<script src="/resources/js/dataTables.bootstrap.min.js"></script>
-<script src="/resources/js/jquery.dataTables.columnFilter.js"></script>
+	<script src="/resources/js/book.js"></script>
+	<script src="/resources/js/common.js"></script>
+	<script src="/resources/js/metisMenu.min.js"></script>
+	<script src="/resources/js/jquery.dataTables.min.js"></script>
+	<script src="/resources/js/bootstrap-select.min.js"></script>
+	<script src="/resources/js/dataTables.bootstrap.min.js"></script>
+	<script src="/resources/js/jquery.dataTables.columnFilter.js"></script>
 <script type="text/javascript">
 		$(document).ready(function() {
 			$('#dataTable').dataTable({

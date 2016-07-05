@@ -137,8 +137,12 @@ public class RequestController {
 
 	@RequestMapping("/buyRequest")
 	public String buyRequest(String req_cd, Model model, BookModel book) { 
+		List<CodeModel> BCodeList = bookservice.selectBCodeList();
+		List<CodeModel> CCodeList = bookservice.selectCCodeList();
 		book = requestservice.selectBook(book); 
 		model.addAttribute("book", book);
+		model.addAttribute("BCodeList", BCodeList);
+		model.addAttribute("CCodeList", CCodeList);
 		return "request/confirmBuy";
 	}
 
@@ -146,15 +150,10 @@ public class RequestController {
 	public String confirmBuy(BookModel model) {
 		Calendar cal =  Calendar.getInstance();
 		String nowDate = sdf.format(cal.getTime());		
-		model.setRcv_date(nowDate); 
-		BookModel existbook = bookservice.selectBook(model.getBook_cd());
-		if (existbook == null){
-			requestservice.confirmBuy(model);
-			requestservice.deleteRequest(model);
-			return "request/buySuccess";
-		}else{
-			return "redirect:requestfail";
-		} 
+		model.setRcv_date(nowDate);  
+		requestservice.confirmBuy(model);
+		requestservice.deleteRequest(model);
+		return "request/requestSuccess"; 
 	}
 
 	@RequestMapping("/confirmBuyList")
@@ -168,9 +167,9 @@ public class RequestController {
 			if (bookservice.selectBook(book.getBook_cd()) == null) {
 				requestservice.confirmBuy(book);
 				requestservice.deleteRequest(book);
-				return "redirect:request";
+				return "redirect:requestList";
 			} else {
-				return "redirect:request";
+				return "redirect:requestList";
 
 			}
 

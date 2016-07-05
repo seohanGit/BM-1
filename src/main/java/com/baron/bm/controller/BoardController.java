@@ -1,8 +1,6 @@
 package com.baron.bm.controller;
 
-import java.awt.print.Book;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -11,25 +9,25 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.baron.member.model.BoardModel;
-import com.baron.member.model.BookModel;
-import com.baron.member.model.Dto;
-import com.baron.member.model.MemberModel;
 import com.baron.member.service.BoardService;
-import com.baron.member.service.StatisticService;
 
+@SessionAttributes({ "kname", "jikb", "team_nm", "permission", "id",
+		"chief", "chiefId", "adminMode" })
 @Controller
 public class BoardController {
-/**
+	/**
  * 
- */			
-	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");	
-	
+ */
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+
 	@Autowired
 	private BoardService boardService;
 
@@ -39,7 +37,6 @@ public class BoardController {
 		model.addAttribute("boardList", boardList);
 		return "board/board";
 	}
-
 
 	@RequestMapping("/boardList")
 	public String boardList(Model model) {
@@ -60,17 +57,24 @@ public class BoardController {
 	}
 
 	@RequestMapping("/selectBoardnum")
-	public String selectBoardnum(int boardnum, Model model, BoardModel board) {
-		board = boardService.selectBoardnum(boardnum);
+	public String selectBoardnum(int boardnum, Model model, BoardModel board, HttpServletRequest request) {		
+		String id =""; 
+		for (Cookie cookie : request.getCookies()) {
+			if (cookie.getName().equals("bm_id")) {
+				id = cookie.getValue();
+			}
+		}		
+		board = boardService.selectBoardnum(boardnum); 
+		model.addAttribute("id", id);
 		model.addAttribute("board", board);
 		return "board/modifyBoard";
 	}
 
 	@RequestMapping("/modifyBoard")
 	public String modifyBoard(BoardModel board) {
-		Calendar cal = Calendar.getInstance();				
+		Calendar cal = Calendar.getInstance();
 		Date nowDate = cal.getTime();
-		
+
 		board.setModifidate(sdf.format(nowDate));
 		boardService.modifyBoard(board);
 		return "redirect:boardList";
@@ -78,9 +82,9 @@ public class BoardController {
 
 	@RequestMapping("/boardsuccess")
 	public String boardsuccess(BoardModel model, HttpServletRequest request) {
-		Calendar cal = Calendar.getInstance();				
+		Calendar cal = Calendar.getInstance();
 		Date nowDate = cal.getTime();
-		
+
 		for (Cookie cookie : request.getCookies()) {
 			if (cookie.getName().equals("bm_id")) {
 				model.setId(cookie.getValue());
@@ -104,6 +108,7 @@ public class BoardController {
 		}
 		return "board/selectboard";
 	}
+
 	@RequestMapping("/noticeListByAdmin")
 	public String noticeListByAdmin(Model model) {
 		List<BoardModel> noticeList = boardService.noticeList();
@@ -126,15 +131,15 @@ public class BoardController {
 
 	@RequestMapping("/writeNotice")
 	public String writeNotice() {
-		
+
 		return "board/insertNotice";
 	}
 
 	@RequestMapping("/insertNotice")
 	public String insertNotice(BoardModel boardmodel) {
-		Calendar cal = Calendar.getInstance();				
+		Calendar cal = Calendar.getInstance();
 		Date nowDate = cal.getTime();
-		
+
 		boardmodel.setRegisdate(sdf.format(nowDate));
 		boardmodel.setBoardType("1");
 		boardmodel.setId("admin");
@@ -150,14 +155,12 @@ public class BoardController {
 
 	@RequestMapping("/modifyNotice")
 	public String modifyNotice(BoardModel content) {
-		Calendar cal = Calendar.getInstance();				
+		Calendar cal = Calendar.getInstance();
 		Date nowDate = cal.getTime();
-		
+
 		content.setModifidate(sdf.format(nowDate));
 		boardService.modifyNotice(content);
 		return "redirect:noticeListByAdmin";
 	}
-
-	
 
 }

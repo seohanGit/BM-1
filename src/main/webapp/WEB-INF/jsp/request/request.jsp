@@ -59,45 +59,23 @@
 								<thead>
 									<tr class=" title">
 
-										<th class="hidden-xs image">표지</th>
+										<th class="hidden-xs genre">표지</th>
 										<th class="title">도서명</th>
 										<th class="hidden-xs author">저자</th>
-										<th class="hidden-xs td-date">가격</th>
+										<th class="hidden-xs genre">가격</th>
 										<th style="width: 50px">수량</th>
 										<th class="hidden-xs genre">요청일자</th>
-										<th class="image">상태</th>
+										<th class="genre">상태</th>
 
 									</tr>
 								</thead>
 
-								<c:forEach items="${bookList}" var="book" varStatus="status">
-
-									<tbody class="visible-xs" style="width: 100%">
-										<tr>
-											<td rowspan="4" style="width: 50px" align="left"><img
-												style="width: 50px" src="${book.imageurl}"></td>
-										</tr>
-										<tr>
-											<td style="width: 40%" align="left"><a
-												onclick="window.open('/bookInfo?book_cd=${book.book_cd}',
-												'new','resizeble=yes scrollbars=yes,  width=750, height=600');"
-												>${book.title }</a></td>
-											<td style="width: 40%" align="left">${book.author }</td>
-										</tr>
-										<tr>
-											<td>${book.b_group}</td>
-											<td>요청자 : ${book.id}</td>
-										</tr>
-										<tr>
-											<td>${book.price}원</td>
-											<td>수량 : ${book.quantity}</td>
-										</tr>
-									</tbody>
+								<c:forEach items="${bookList}" var="book" varStatus="status"> 
 									<tbody class="hidden-xs">
 										<tr>
-											<td class="hidden-xs"><img style="width: 50px"
+											<td align="center" class="hidden-xs"><img style="width: 50px"
 												src="${book.imageurl}"></td>
-											<td class="td-title"><c:choose>
+											<td align="left" class="td-title"><c:choose>
 													<c:when test="${not empty book.link}">
 														<a 
 														onclick="window.open('/bookInfo?reqdate=${book.reqdate}&req_cd=${book.req_cd}',
@@ -108,19 +86,19 @@
 													</c:otherwise>
 												</c:choose>
 												</td>
-											<td class="hidden-xs">${book.author}</td>
+											<td align="center" class="hidden-xs">${book.author}</td>
 											<td>${book.price}원</td>
 											<td align="center">${book.quantity}</td>
-											<td class="hidden-xs"> ${book.reqdate}</td>
+											<td align="center" class="hidden-xs"> ${book.reqdate}</td>
 											<c:choose>
 												<c:when test="${book.reqstatus=='0'}">
-													<td>대기</td>
+													<td align="center" >대기</td>
 												</c:when>
 												<c:when test="${book.reqstatus=='1'}">
-													<td class="ok">승인</td>
+													<td align="center" class="ok">승인</td>
 												</c:when>
 												<c:when test="${book.reqstatus=='2'}">
-													<td class="no">반려</td>
+													<td align="center" class="no">반려</td>
 												</c:when>
 											</c:choose>
 										</tr>

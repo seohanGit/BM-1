@@ -277,7 +277,7 @@ public class BookController {
 	}
 
 	@RequestMapping("/deletebook")
-	public String deleteBook(String book_cd, HttpServletRequest request) {
+	public String deleteBook(String keyword, String book_cd, HttpServletRequest request) {
 		String permission;
 
 		for (Cookie cookie : request.getCookies()) {
@@ -292,7 +292,7 @@ public class BookController {
 		}
 
 		bookservice.deleteBook(book_cd);
-		return "redirect:searchBook?listType=&keyword=";
+		return "redirect:searchBookAdmin?listType=&keyword="+keyword;
 
 	}
 

@@ -49,7 +49,7 @@
 		<if test="c_group != '' and c_group != null and c_group != 'ÀüÃ¼'">
 		AND left(A.c_group,3) = #{c_group}  
 		</if>		
-		ORDER BY  a.book_cd desc 
+		ORDER BY  a.rcv_date desc
 		FETCH first 200 rows only
 	</select>
 	<select id="searchAuthor" parameterType="String" resultType="BookModel">

@@ -14,7 +14,8 @@
 <link href="/resources/css/signin.css" rel="stylesheet">
 <link href="/resources/css/common.css" rel="stylesheet">
 <link href="/resources/css/bootstrap-select.min.css" rel="stylesheet">
-<link href="/resources/css/dataTables.bootstrap.min.css" rel="stylesheet">
+<link href="/resources/css/dataTables.bootstrap.min.css"
+	rel="stylesheet">
 <script src="/resources/js/jquery/jquery.js"></script>
 <script src="/resources/js/bootstrap.min.js"></script>
 <script>
@@ -59,7 +60,7 @@
 					<form action="/searchBookAdmin" method="post">
 						<div style="width: 80%; margin-right: 10px;">
 							<div class="left" style="width: 50%;" align="right">
-								<div style="float:left; width: 40%;">
+								<div style="float: left; width: 40%;">
 									<select class="selectpicker form-control"
 										style="font-size: 14px; margin-top: 10px; vertical-align: baseline;"
 										id="b_group" name="b_group"><option selected>전체
@@ -67,7 +68,7 @@
 												<option value="${code.code}-${code.name}">${code.code}-${code.name}
 											</c:forEach></select>
 								</div>
-								<div style="float:right;width: 60%;">
+								<div style="float: right; width: 60%;">
 									<select class="selectpicker form-control"
 										style="font-size: 14px; margin-top: 10px; vertical-align: baseline;"
 										id="c_group" name="c_group"><option selected>전체
@@ -126,9 +127,9 @@
 												<td class="title" align="left"><a href="#"
 													onclick="window.open('/bookInfo?book_cd=${book.book_cd}','new','resizeble=yes scrollbars=yes, width=750, height=600');">
 														${book.title }</a></td>
-												<td class="hidden-xs"  >${book.author}</td>
+												<td class="hidden-xs genre">${book.author}</td>
 												<td class="hidden-sm hidden-xs hidden-md b_group"
-													id="${book.b_group }" >${book.b_group}</td>
+													id="${book.b_group }">${book.b_group}</td>
 
 												<td class="rcmdChk" align="center"><c:choose>
 														<c:when test="${book.rcmdChk=='1' }">
@@ -149,7 +150,7 @@
 														<td>
 															<button class="btn btn-default btn-sm" type="button"
 																id="deletebook"
-																onClick="location.href='/deletebook?book_cd=${book.book_cd}'; del();">도서삭제</button>
+																onClick="location.href='/deletebook?book_cd=${book.book_cd}&keyword=${keyword}'; del();">도서삭제</button>
 															<button class="btn btn-default btn-sm" type="button"
 																id="reservebook"
 																onClick="location.href='/stopBorrow?book_cd=${book.book_cd}'">대출정지</button>
@@ -160,7 +161,7 @@
 														</td>
 													</c:when>
 													<c:when test="${book.rentchk=='1'}">
-														<td><mark>대출요청중</mark></td>
+														<td align="center"><mark>대출요청중</mark></td>
 														<td><button class="btn btn-default btn-sm"
 																type="button" id="modifybook"
 																onclick="window.open('/modifyBookForm?book_cd=${book.book_cd}','new','resizeble=yes scrollbars=yes,  width=850, height=750');">도서수정</button>
@@ -170,7 +171,7 @@
 														</td>
 													</c:when>
 													<c:when test="${book.rentchk=='2'}">
-														<td>대출중</td>
+														<td align="center">대출중</td>
 														<td><button class="btn btn-default btn-sm"
 																type="button" id="modifybook"
 																onclick="window.open('/modifyBookForm?book_cd=${book.book_cd}','new','resizeble=yes scrollbars=yes,  width=850, height=750');">도서수정</button>
@@ -180,13 +181,13 @@
 														</td>
 													</c:when>
 													<c:when test="${book.rentchk=='4'}">
-														<td><mark>대출정지</mark></td>
+														<td align="center"><mark>대출정지</mark></td>
 														<td><button class="btn btn-default btn-sm"
 																type="button" id="modifybook"
 																onClick="location.href='/recoverBook?book_cd=${book.book_cd}'">대출재개</button></td>
 													</c:when>
 													<c:when test="${book.rentchk=='5'}">
-														<td><mark>예약중</mark></td>
+														<td align="center"><mark>예약중</mark></td>
 														<td><button class="btn btn-default btn-sm"
 																type="button" id="modifybook"
 																onclick="window.open('/modifyBookForm?book_cd=${book.book_cd}','new','resizeble=yes scrollbars=yes,  width=850, height=750');">도서수정</button>
@@ -220,7 +221,14 @@
 		</div>
 	</div>
 	<br>
-<script type="text/javascript">
+	<script src="/resources/js/book.js"></script>
+	<script src="/resources/js/common.js"></script>
+	<script src="/resources/js/metisMenu.min.js"></script>
+	<script src="/resources/js/jquery.dataTables.min.js"></script>
+	<script src="/resources/js/bootstrap-select.min.js"></script>
+	<script src="/resources/js/dataTables.bootstrap.min.js"></script>
+	<script src="/resources/js/jquery.dataTables.columnFilter.js"></script>
+	<script type="text/javascript">
 		$(document).ready(function() {
 			$('#dataTable').dataTable({
 				"pageLength" : 100,
@@ -244,7 +252,7 @@
 					type : "select"
 				}, {
 					type : "select"
-				}, null , null ]
+				}, null, null ]
 			});
 		});
 
@@ -254,13 +262,6 @@
 		divLoadBody.style.display = "";
 		loadingBar.style.display = "none";
 	</script>
-	<script src="/resources/js/book.js"></script>
-	<script src="/resources/js/common.js"></script>
-	<script src="/resources/js/metisMenu.min.js"></script>
-	<script src="/resources/js/jquery.dataTables.min.js"></script>
-	<script src="/resources/js/bootstrap-select.min.js"></script>
-	<script src="/resources/js/dataTables.bootstrap.min.js"></script>
-	<script src="/resources/js/jquery.dataTables.columnFilter.js"></script>
-	
+
 </body>
 </html>

@@ -163,7 +163,7 @@
 									id="dataTable">
 									<thead>
 										<tr>
-											<th class="hidden-xs hidden-sm hidden-md image">표지</th>
+											<th class="hidden-xs hidden-sm hidden-md genre">표지</th>
 											<th>도서명</th>
 											<th class="hidden-xs hidden-sm hidden-md genre">저자</th>
 											<th class="hidden-xs hidden-sm genre">출판사</th>
@@ -176,7 +176,7 @@
 									<tbody>
 										<c:forEach items="${bookList}" var="book">
 											<tr>
-												<td class="hidden-xs hidden-sm hidden-md image" align="left"><c:choose>
+												<td class="hidden-xs hidden-sm hidden-md genre" align="left"><c:choose>
 														<c:when test="${empty book.imageurl }">
 															<a href="#"
 													onclick="window.open('/bookInfo?book_cd=${book.book_cd}&keyword=${keyword }&listType=${listType }',

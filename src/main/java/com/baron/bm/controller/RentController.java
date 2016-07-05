@@ -89,7 +89,7 @@ public class RentController {
 			if (reserveBook.getId() == id)
 				rentservice.deleteReserve(book_cd); 
 		}
-		return "rent/confirmBorrowSuccess";
+		return "redirect:borrowReqListAdmin";
 	}
 
 	@RequestMapping("/confirmBorrowBookList")
@@ -111,7 +111,7 @@ public class RentController {
 
 			}
 		}
-		return "redirect:borrowReqList";
+		return "redirect:borrowReqListAdmin";
 	}
 
 	@RequestMapping("/borrowReqList")
@@ -167,7 +167,7 @@ public class RentController {
 		}
 			List<BookModel> rentList = rentservice.rentList(id);
 			model.addAttribute("rentList", rentList);
-			return "rent/borrowList";		
+			return "rent/borrowReqList";		
 	}
 	@RequestMapping("/borrowListAdmin")
 	public String borrowListAdmin(HttpServletRequest request, Model model) {
@@ -182,12 +182,12 @@ public class RentController {
 				if (cookie.getValue().equals("1")) {
 					List<BookModel> rentList = rentservice.rentList();
 					model.addAttribute("rentList", rentList);
-					return "rent/borrowListByAdmin";
+					return "rent/borrowReqListAdmin";
 
 				} else if (cookie.getValue().equals("0")) {
 					List<BookModel> rentList = rentservice.rentList(id);
 					model.addAttribute("rentList", rentList);
-					return "rent/borrowList";
+					return "rent/borrowReqList";
 				}
 			} 
 		} 
@@ -259,12 +259,12 @@ public class RentController {
 			HttpServletRequest request, ModelAndView mav) {
 		String id = "";
 		bookmodel = rentservice.selectBorrow(book_cd);
-		for (Cookie cookie : request.getCookies()) {
+		for (Cookie cookie : request.getCookies()) { 
 			if(cookie.getName().equals("bm_permission")){
 				if(cookie.getValue().equals("1")){
-					mav.setViewName("redirect:borrowReqList");
+					mav.setViewName("redirect:borrowReqListAdmin");
 				}else{
-					mav.setViewName("redirect:borrowReqList");
+					mav.setViewName("redirect:borrowReqListAdmin ");
 				}
 			} 
 		}
@@ -306,7 +306,7 @@ public class RentController {
 				rentservice.returnBook(book);
 			}
 		} 
-		return "redirect:borrowList";
+		return "redirect:borrowReqListAdmin";
 	}
 
 	@RequestMapping("/returnBook")
@@ -318,10 +318,10 @@ public class RentController {
 			
 			notifiService.notifiReturnConfirm(book_cd);
 			rentservice.returnBook(book);
-			return "redirect:borrowList";
+			return "redirect:borrowReqList";
 		} else {
 
-			return "redirect:borrowList";
+			return "redirect:borrowReqListAdmin";
 		}
 	}
 
@@ -349,20 +349,7 @@ public class RentController {
 		}
 		return "redirect:rentListAll";
 	}
-
-	/*
-	 * @RequestMapping("/confirmReturnBook") public String
-	 * confirmReturnBook(String book_cd) {
-	 * 
-	 * rentservice.confirmReturnBook(book_cd); return "member/admin"; }
-	 * 
-	 * @RequestMapping("/confirmReturnBookList") public String
-	 * confirmReturnBookList(List<String> book_cdList) {
-	 * 
-	 * for (int i = 0; i < book_cdList.size(); i++) { String book_cd =
-	 * book_cdList.get(i); rentservice.returnBook(book_cd); } return
-	 * "member/admin"; }
-	 */
+ 
 	@RequestMapping("/record")
 	public String record(HttpServletRequest request, Model model) { 
 		String id = null; 

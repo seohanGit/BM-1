@@ -90,7 +90,7 @@
 
 					<thead>
 						<tr>
-							<td class="hidden-xs image">표지</td>
+							<td class="hidden-xs genre">표지</td>
 							<td>도서명</td>
 							<td class="hidden-xs author">저자</td>
 							<td class="hidden-sm hidden-xs hidden-md genre">분류</td>

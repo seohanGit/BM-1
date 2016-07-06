@@ -77,7 +77,7 @@ public class BoardController {
 
 		board.setModifidate(sdf.format(nowDate));
 		boardService.modifyBoard(board);
-		return "redirect:boardList";
+		return "redirect:board";
 	}
 
 	@RequestMapping("/boardsuccess")

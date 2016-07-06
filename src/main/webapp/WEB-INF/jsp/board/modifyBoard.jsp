@@ -6,9 +6,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="">
-<meta name="author" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1"> 
 <title>게시글 수정</title>
 <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="/resources/css/signin.css" rel="stylesheet">
@@ -53,7 +51,7 @@
 
 		$(document).ready(function() {
 			var boardid = "${board.id}";
-			var id = "${ id}";
+			var id = "${id}";
 			if (boardid == id) {
 				$('ok').show();
 				$('cancel').show();

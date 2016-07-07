@@ -17,10 +17,10 @@ import com.baron.member.model.SmsModel;
 
 @Service
 public class RentServiceImpl implements RentService {
-	Calendar cal = Calendar.getInstance();				
-	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");				
+	Calendar cal = Calendar.getInstance();
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 	String nowDate = sdf.format(cal.getTime());
-	
+
 	@Autowired
 	private RentDao rentDao;
 
@@ -38,6 +38,7 @@ public class RentServiceImpl implements RentService {
 	public BookModel selectBook(String book_cd) {
 		return rentDao.selectBook(book_cd);
 	}
+
 	@Override
 	public BookModel selectBorrow(String book_cd) {
 		return rentDao.selectBorrow(book_cd);
@@ -64,9 +65,17 @@ public class RentServiceImpl implements RentService {
 	}
 
 	@Override
-	public void borrowBook(BookModel bookmodel) { 
+	public boolean borrowBook(BookModel bookmodel) { 
+		BookModel chkbook = selectBook(bookmodel.getBook_cd());
+		int cnt = rentDao.checkRentCount(bookmodel.getId());
+
+		if (chkbook.getRentchk().equals("0") && cnt < 6) {
 			rentDao.borrowBook(bookmodel);		
-			deleteReserve(bookmodel.getBook_cd()); 
+			deleteReserve(bookmodel.getBook_cd());
+			return true;
+		}else{
+			return false;
+		}
 	}
 
 	@Override
@@ -74,16 +83,16 @@ public class RentServiceImpl implements RentService {
 		String id = null;
 		cal = Calendar.getInstance();
 		cal.add(cal.DAY_OF_MONTH, 15);
-		
-		BookModel bookmodel = new BookModel(); 
+
+		BookModel bookmodel = new BookModel();
 		bookmodel = rentDao.selectBorrow(book_cd);
-		bookmodel.setRentdate(nowDate);		
+		bookmodel.setRentdate(nowDate);
 		bookmodel.setRetrundate(sdf.format(cal.getTime()));
 		if (bookmodel != null) {
 			String title = bookmodel.getTitle();
 			id = bookmodel.getId();
 			sms.setTitle(title);
-			
+
 			MemberModel member = joinDao.selectMember(id);
 			if (member.getMobi_no() != null) {
 				sms.setPhone(member.getMobi_no().substring(1));
@@ -94,23 +103,23 @@ public class RentServiceImpl implements RentService {
 	}
 
 	@Override
-	public void returnBook(BookModel book) { 
+	public void returnBook(BookModel book) {
 		book.setReturndate(nowDate);
-		rentDao.returnBook(book);	
+		rentDao.returnBook(book);
 	}
 
 	@Override
-	public List<BookModel> rentList() { 
+	public List<BookModel> rentList() {
 		return rentDao.rentListAll();
 	}
 
 	@Override
-	public List<BookModel> recordList(String id) { 
+	public List<BookModel> recordList(String id) {
 		return rentDao.recordList(id);
 	}
 
 	@Override
-	public List<BookModel> recordList() { 
+	public List<BookModel> recordList() {
 		return rentDao.recordListAll();
 	}
 
@@ -121,8 +130,8 @@ public class RentServiceImpl implements RentService {
 
 	@Override
 	public void extendBorrowBook(BookModel book) {
-		cal = Calendar.getInstance();	
-		cal.add(cal.DATE, +7);		
+		cal = Calendar.getInstance();
+		cal.add(cal.DATE, +7);
 		book.setReturndate(sdf.format(cal.getTime()));
 		rentDao.extendBorrowBook(book);
 	}
@@ -153,18 +162,18 @@ public class RentServiceImpl implements RentService {
 	}
 
 	@Override
-	public List<BookModel> reserveList(String id) { 
+	public List<BookModel> reserveList(String id) {
 		return rentDao.reservationList(id);
 
 	}
 
 	@Override
-	public MemberModel selectMember(String id) { 
+	public MemberModel selectMember(String id) {
 		return joinDao.selectMember(id);
 	}
 
 	@Override
-	public List<BookModel> copyRent() { 
+	public List<BookModel> copyRent() {
 		return rentDao.copyRent();
 	}
 
@@ -174,7 +183,7 @@ public class RentServiceImpl implements RentService {
 	}
 
 	@Override
-	public BookModel selectRent(String book_cd) { 
+	public BookModel selectRent(String book_cd) {
 		return rentDao.selectRent(book_cd);
 	}
 
@@ -185,11 +194,12 @@ public class RentServiceImpl implements RentService {
 	}
 
 	@Override
-	public List<BookModel> rentList(String id) { 
+	public List<BookModel> rentList(String id) {
 		return rentDao.rentList(id);
 	}
+
 	@Override
-	public List<BookModel> delayList() { 
+	public List<BookModel> delayList() {
 		return rentDao.delayList();
 	}
 }

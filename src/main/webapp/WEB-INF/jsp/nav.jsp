@@ -10,7 +10,8 @@
 //-->
 
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-	<div class="container col-lg-offset-2 col-md-offset-2" style="padding-left:3%">
+	<div class="container col-lg-offset-2 col-md-offset-2"
+		style="padding-left: 3%">
 		<!-- Brand and toggle get grouped for better mobile display -->
 		<div class="  navbar-header">
 			<button type="button" class="navbar-toggle" data-toggle="collapse"
@@ -36,8 +37,7 @@
 				</a>
 					<ul class="dropdown-menu" role="menu">
 						<li><a href="#" id="borrowReqList">대출요청현황</a></li>
-						<li><a href="#" id="borrowList">대출현황</a></li>						
-<!-- 						<li><a href="#" id="board">게시판</a></li> -->
+						<li><a href="#" id="borrowList">대출현황</a></li>
 						<li><a href="#" id="request">자료구입신청</a></li>
 						<li><a href="#" id="record">대출기록</a></li>
 					</ul></li>
@@ -85,3 +85,38 @@
 	<!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
+
+<script src="/resources/js/jquery/jquery.js"></script>
+<script>
+	$("#request").click(function() {
+		location.href = "/request"
+	})
+	$("#record").click(function() {
+		location.href = "/record"
+	})
+	$("#statistic").click(function() {
+		location.href = "/statistic"
+	})
+	$("#reserveList").click(function() {
+		location.href = "/reserveList"
+	})
+	$("#borrowList").click(function() {
+		location.href = "/borrowList"
+	})
+	$("#borrowReqList").click(function() {
+		location.href = "/borrowReqList"
+	})
+	$("#noticeListByAdmin").click(function() {
+		location.href = "/noticeListByAdmin"
+	})
+
+	$("#bookList").click(function() {
+		location.href = "/bookList"
+	})
+	$("#board").click(function() {
+		location.href = "/board"
+	})
+	$("#boardList").click(function() {
+		location.href = "/boardList"
+	})
+</script>

@@ -12,7 +12,8 @@
 <meta name="author" content="">
 <title>대출 현황</title>
 <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
-<link href="/resources/css/dataTables.bootstrap.min.css" rel="stylesheet">
+<link href="/resources/css/dataTables.bootstrap.min.css"
+	rel="stylesheet">
 <link href="/resources/css/signin.css" rel="stylesheet">
 <link href="/resources/css/common.css" rel="stylesheet">
 
@@ -30,7 +31,7 @@ body {
 
 		<div class="row panel panel-default">
 			<h2>대출 요청 현황</h2>
-			<br>  
+			<br>
 			<div id="searchResultArea">
 				<c:choose>
 					<c:when test="${empty bookList}">
@@ -39,17 +40,17 @@ body {
 
 					<c:otherwise>
 						<h2>대출 요청 목록</h2>
-						<table class="table table-striped table-bordered " >
+						<table class="table table-striped table-bordered ">
 							<thead>
 								<tr class="title">
-									<th class="hidden-xs image">표지</th>
-									<th >도서명</th>
+									<th class="hidden-xs genre">표지</th>
+									<th>도서명</th>
 									<th class="hidden-xs author">저자</th>
-									<th class="hidden-xs hidden-sm author">분류</th>
+									<th class="hidden-xs hidden-sm genre">분류</th>
 									<th class="hidden-xs genre">대출일</th>
 									<th class="genre">반납일</th>
 									<th class="genre">상태</th>
-									<th class="image">비고</th>
+									<th class="genre">비고</th>
 								</tr>
 							</thead>
 
@@ -67,18 +68,22 @@ body {
 										<td class="hidden-xs " align="left">${book.author }</td>
 										<td class="hidden-xs hidden-sm " align="left">${book.b_group}</td>
 
-										
-										<td class="hidden-xs"> ${book.rentdate}  </td>
-										<td > ${book.returndate}  </td>
+
+										<td class="hidden-xs">${book.rentdate}</td>
+										<td>${book.returndate}</td>
 										<c:choose>
 											<c:when test="${book.rentchk=='1'}">
 												<td>요청중</td>
 												<td>
 													<button class="btn btn-sm btn-default" type="button"
 														id="reservebook"
-														onClick="location.href='/cancleBorrowBook?book_cd=${book.book_cd}'; ">취소</button>
+														onClick="location.href='/cancleBorrowBook?book_cd=${book.book_cd}'; cancel();">취소</button>
 												</td>
-											</c:when>											
+											</c:when>
+											<c:when test="${book.rentchk=='2'}">
+												<td>대출중</td>
+												<td></td>
+											</c:when>
 										</c:choose>
 									</tr>
 								</c:forEach>
@@ -88,7 +93,7 @@ body {
 						</table>
 					</c:otherwise>
 				</c:choose>
-				
+
 
 
 			</div>

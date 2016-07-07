@@ -53,8 +53,8 @@
 											<th class="genre">대출요청일</th>
 											<!-- 											<th class="genre hidden-xs">반납일</th> -->
 											<th class="hidden-xs" style="width: 150px">분류</th>
-											<th class="image">대출자</th>
-											<th class="image" style="width: 120px">비고</th>
+											<th class="genre">대출자</th>
+											<th class="genre" style="width: 120px">비고</th>
 											<!-- 											<th class="image" style="width: 120px"></th>  -->
 										</tr>
 									</thead>
@@ -82,7 +82,7 @@
 														onClick="location.href='/confirmBorrowBook?book_cd=${book.book_cd1}';  ">승인</button>
 													<button class="btn btn-sm btn-default" type="button"
 														id="reservebook"
-														onClick="location.href='/cancleBorrowBook?book_cd=${book.book_cd}'; ">취소</button>
+														onClick="location.href='/cancleBorrowBookAdmin?book_cd=${book.book_cd}&id=${book.id}'; ">취소</button>
 												</td>
 											</tr>
 										</c:forEach>

@@ -16,9 +16,9 @@
 			<button class="btn btn-default  noborder"
 				onclick="location.href='requestList'">구매요청</button>
 			<button class="btn btn-default  noborder"
-				onclick="location.href='borrowReqListAdmin'">대여요청</button>
+				onclick="location.href='borrowReqListAdmin'">대출요청</button>
 			<button class="btn btn-default  noborder"
-				onclick="location.href='recordList'">대여기록</button>
+				onclick="location.href='recordList'">대출기록</button>
 			<button class="btn btn-default  noborder"
 				onclick="location.href='noticeListByAdmin'">공지사항</button>
 
@@ -58,11 +58,11 @@
 				<button class="btn btn-default noborder"
 					onclick="location.href='request'">구매요청</button>
 				<button class="btn btn-default  noborder"
-					onclick="location.href='borrowReqList'">대여요청</button>
+					onclick="location.href='borrowReqList'">대출요청</button>
 				<button class="btn btn-default  noborder"
 					onclick="location.href='delayList'">도서연체</button>
 				<button class="btn btn-default noborder"
-					onclick="location.href='recordList'">대여기록</button>
+					onclick="location.href='recordList'">대출기록</button>
 			</div>
 		</div>
 	</div>

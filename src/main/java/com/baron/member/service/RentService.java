@@ -20,7 +20,7 @@ public interface RentService {
 
 	public List<BookModel> borrowList();
 
-	public void borrowBook(BookModel bookmodel);
+	public boolean borrowBook(BookModel bookmodel);
 
 	public void cancleBorrowBook(BookModel bookmodel);
 

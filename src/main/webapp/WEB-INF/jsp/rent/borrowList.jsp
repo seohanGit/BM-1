@@ -45,7 +45,7 @@ body {
 						<table class="table table-striped table-bordered ">
 							<thead>
 								<tr class="title">
-									<th class="hidden-xs image">표지</th>
+									<th class="hidden-xs genre">표지</th>
 									<th class="title">도서명</th>
 									<th class="hidden-xs genre">저자</th>
 									<th class="hidden-xs hidden-sm genre">분류</th>
@@ -59,7 +59,7 @@ body {
 
 
 							<tbody>
-								<c:forEach items="${rentList}" var="book" varStatus="loop">
+								<c:forEach items="${bookList}" var="book" varStatus="loop">
 									<tr>
 										<td class="hidden-xs" align="left"><c:if
 												test="${!empty book.imageurl }">

@@ -22,37 +22,6 @@ function notifiReser() {
 }
 
 
-$("#request").click(function() {
-	location.href = "/request"
-}) 
-$("#record").click(function() {
-	location.href = "/record"
-})
-$("#statistic").click(function() {
-	location.href = "/statistic"
-})
-$("#reserveList").click(function() {
-	location.href = "/reserveList"
-})
-$("#borrowList").click(function() {
-	location.href = "/borrowList"
-})
-$("#borrowReqList").click(function() {
-	location.href = "/borrowReqList"
-})
-$("#noticeListByAdmin").click(function() {
-	location.href = "/noticeListByAdmin"
-})
-
-$("#bookList").click(function() {
-	location.href = "/bookList"
-})
-$("#board").click(function() {
-	location.href = "/board"
-})
-$("#boardList").click(function() {
-	location.href = "/boardList"
-})
 
 $("#allCheck").click(function() {
 	if ($("#allCheck").prop("checked")) {
@@ -68,61 +37,4 @@ $('.board .btn').click(function() {
 
 
 
-
-// ///////////////////////////////리스트
-/*
- * $('#borrowList').click(function() { $.ajax({ type : "GET", // GET or POST url :
- * "/borrowList", // URL datatype : "xml", // html, xml, json, jsonp, script,
- * text // parameters as plain object error : function() { // Ajax error handler
- * alert('ajax failed'); }, success : function(data, status) { // Ajax complete
- * handelr $('#goodPhrase').fadeOut(); $('#image1').fadeOut();
- * $('#image2').fadeOut(); $('#searchResultArea').empty().append(data); } });
- * });
- * 
- * $('#borrowListAll').click(function() { $.ajax({ type : "GET", // GET or POST
- * url : "/borrowListAll", // URL datatype : "xml", // html, xml, json, jsonp,
- * script, text // parameters as plain object error : function() { // Ajax error
- * handler alert('ajax failed'); }, success : function(data, status) { // Ajax
- * complete handelr $('#image1').fadeOut(); $('#image2').fadeOut();
- * $('#searchResultArea').empty().append(data); } }); });
- * 
- * $('#returnListAll').click(function() { $.ajax({ type : "GET", // GET or POST
- * url : "/returnListAll", // URL datatype : "xml", // html, xml, json, jsonp,
- * script, text // parameters as plain object error : function() { // Ajax error
- * handler alert('ajax failed'); }, success : function(data, status) { // Ajax
- * complete handelr $('#image1').fadeOut(); $('#image2').fadeOut();
- * $('#searchResultArea').empty().append(data); } }); });
- */
-/*
- * $('#rentListAll').click(function() { $.ajax({ type : "GET", // GET or POST
- * url : "/rentListAll", // URL datatype : "xml", // html, xml, json, jsonp,
- * script, text // parameters as plain object error : function() { // Ajax error
- * handler alert('ajax failed'); }, success : function(data, status) { // Ajax
- * complete handelr $('#image1').fadeOut(); $('#image2').fadeOut();
- * $('#searchResultArea').empty().append(data); } }); });
- *//*
-	 * $('#requestList').click(function() { $.ajax({ type : "GET", // GET or
-	 * POST url : "/requestList", // URL datatype : "xml", // html, xml, json,
-	 * jsonp, script, text error : function() { // Ajax error handler
-	 * alert('ajax failed'); }, success : function(data, status) { // Ajax
-	 * complete handelr] $('#image1').fadeOut(); $('#image2').fadeOut();
-	 * $('#searchResultArea').empty().append(data); } }); })
-	 */
-/*
- * $('#btn_bookList').click(function() { $.ajax({ type : "GET", // GET or POST
- * url : "/bookList", // URL datatype : "xml", // html, xml, json, jsonp,
- * script, text error : function() { // Ajax error handler alert('ajax failed'); },
- * success : function(data, status) { // Ajax complete handelr
- * $('#goodPhrase').fadeOut(); $('#image1').fadeOut(); $('#image2').fadeOut();
- * $('#searchResultArea').empty().append(data); } }); });
- */
-
-/*
- * $('#btn_next').click(function() { $.ajax({ type : "GET", // GET or POST url :
- * "/findBook", // URL datatype : "xml", // html, xml, json, jsonp, script, text
- * data : { keyword : $('#pagenum').val() }, // parameters as plain object error :
- * function() { // Ajax error handler alert('에러'); }, success : function(data,
- * status) { // Ajax complete handelr $('#searchResultArea').fadeOut();
- * $('#searchResultArea').empty().append(data); } }); });
- */
-
+ 

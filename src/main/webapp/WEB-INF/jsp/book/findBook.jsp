@@ -11,7 +11,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <title>인터파크 검색</title>
-<link href="/resources/css/bootstrap.min.css" rel="stylesheet">
+<link href="/resources/css/bootstrap.css" rel="stylesheet">
 <link href="/resources/css/dataTables.bootstrap.min.css" rel="stylesheet">
 <link href="/resources/css/common.css" rel="stylesheet">
 <link href="/resources/css/index.css" rel="stylesheet">
@@ -106,7 +106,7 @@
 								<td class="hidden-xs" style="width: 50px" align="left"><img
 									style="width: 50px" src="${book.imageurl}"></td>
 								<td class="title" align="left"><a onclick="window.open
-									('${book.link}','new','resizeble=yes scrollbars=yes, width=500, height=800');" >${book.title}</a></td>
+									('${book.link}','new','resizeble=yes scrollbars=yes, width=1200, height=1000');" >${book.title}</a></td>
 								<td class="hidden-xs" align="left">${book.author }</td>
 								<td class="hidden-sm hidden-xs hidden-md" align="left">${book.b_group}</td>
 								<td class="hidden-xs" align="left">${book.publish}</td>

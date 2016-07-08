@@ -10,7 +10,7 @@
 //-->
 
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-	<div class="container col-lg-offset-2 col-md-offset-2"
+	<div class="container col-lg-offset-1  "
 		style="padding-left: 3%">
 		<!-- Brand and toggle get grouped for better mobile display -->
 		<div class="  navbar-header">

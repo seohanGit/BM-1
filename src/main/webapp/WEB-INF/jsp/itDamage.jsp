@@ -14,8 +14,7 @@
 <link href="/resources/css/common.css" rel="stylesheet">
 <link href="/resources/css/index.css" rel="stylesheet">
 </head>
-<body>
-	<jsp:include page="nav.jsp" />
+<body> 
 	<!-- Page Content -->
 	<div class="row">
 		<!-- Blog Entries Column -->

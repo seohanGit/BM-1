@@ -31,12 +31,12 @@
 
 							<c:forEach items="${List}" var="List" varStatus="loop"> 
 								<tr align="left">
-									<td>${List.gsgubn}</td>
-									<td>${List.jteam}</td>
-									<td>${List.jname}</td>
-									<td>${List.jtel}</td>
+									<td class="genre">${List.gsgubn}</td>
+									<td class="genre">${List.jteam}</td>
+									<td class="genre">${List.jname}</td>
+									<td class="longlen">${List.jtel}</td>
 									<td>${List.jtxt}</td> 
-									<td><button class="btn btn-default btn-sm"
+									<td class="genre"><button class="btn btn-default btn-sm"
 														type="button" id="endDamage"
 														onClick="location.href='/endDamage?gsgubn=${List.gsgubn}&jtime=${List.jtime}';  ">완료</button>
 														</td>

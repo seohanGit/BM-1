@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.baron.member.model.BookModel;
+import com.baron.member.model.ItDamage;
 
 @Repository
 public class EtcDaoImpl implements EtcDao {
@@ -44,5 +45,16 @@ public class EtcDaoImpl implements EtcDao {
 	@Override
 	public List<BookModel> selectBookForImage() {
 		return session.selectList(NAMESPACE + "selectBookForImage");
+	}
+
+	@Override
+	public List<ItDamage> itDamageList() {
+		 
+		return session.selectList(NAMESPACE + "selectItDamage");
+	}
+
+	@Override
+	public void endDamage(ItDamage itDamage) {
+		session.update(NAMESPACE + "endDamage", itDamage);
 	}
 }

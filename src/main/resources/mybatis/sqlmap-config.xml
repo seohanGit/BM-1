@@ -10,6 +10,7 @@
 		<typeAlias type="com.baron.member.model.SearchResult" alias="SearchResult" />
 		<typeAlias type="com.baron.member.model.SmsModel" alias="SmsModel" />
 		<typeAlias type="com.baron.member.model.CodeModel" alias="CodeModel" />
+		<typeAlias type="com.baron.member.model.ItDamage" alias="ItDamage" />
 		<typeAlias type="com.baron.member.model.ApprovalModel"
 			alias="ApprovalModel" />
 	</typeAliases>

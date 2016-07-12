@@ -27,6 +27,16 @@
 		TIMESTAMP,
 		'YYYYMMDD') AND GUBN = 'A'
 	</select>
+	
+	<select id="selectItDamage" resultType="ItDamage"> 
+		SELECT * FROM SITLIB.IT_MST_HIS2 WHERE CTIME = ''
+	</select>
+	<update id="endDamage" parameterType="ItDamage">
+		UPDATE SITLIB.IT_MST_HIS2 SET
+		ctime = ${ctime} 
+		WHERE gsgubn=#{gsgubn} and jtime = #{jtime}
+	</update>		
+	
 
 	<select id="copyDate" resultType="BookModel">
 		SELECT

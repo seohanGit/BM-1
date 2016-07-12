@@ -10,8 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.baron.member.model.BookModel;
+import com.baron.member.model.ItDamage;
 import com.baron.member.service.BookService;
 import com.baron.member.service.EtcService;
 import com.baron.member.service.RentService;
@@ -49,6 +51,22 @@ public class EtcController {
 		return "food";
 	}
 
+	@RequestMapping("/itdamage")
+	public ModelAndView iddamage(ModelAndView mav) { 
+		List<ItDamage> damageList = new ArrayList<ItDamage>();  
+		damageList = etcService.damageList();
+		mav.addObject("List", damageList); 
+		mav.setViewName("itDamage");
+		return mav;
+	}
+	
+	@RequestMapping("/endDamage")
+	public String endDamage(ModelAndView mav, ItDamage itDamage) {  
+		etcService.endDamage(itDamage); 
+
+		return "redirect:itdamage";
+	}
+	
 	@RequestMapping("/backupRecord")
 	public String backupRecord(HttpServletRequest request) throws Exception {
 		List<BookModel> bookList = new ArrayList<BookModel>();

@@ -102,8 +102,8 @@
 												onclick="window.open('/bookInfo?book_cd=${book.book_cd}&keyword=${keyword }&listType=${listType }',
 										'new','resizeble=yes scrollbars=yes,  width=750, height=600');">
 													${book.title }</a></td>
-											<td class="hidden-xs hidden-sm hidden-md">${book.author }</td>
-											<td class="hidden-xs hidden-sm ">${book.publish}</td>
+											<td class="hidden-xs hidden-sm hidden-md"><nobr>${book.author }</nobr></td>
+											<td class="hidden-xs hidden-sm "><nobr>${book.publish}</nobr></td>
 											<td class="hidden-xs ">${book.b_group }</td>
 											<c:choose>
 												<c:when test="${book.rentchk=='0'}">

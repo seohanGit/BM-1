@@ -59,12 +59,12 @@
 								<thead>
 									<tr class=" title">
 
-										<th class="hidden-xs genre">표지</th>
+										<th class="hidden-xs midlen">표지</th>
 										<th class="title">도서명</th>
 										<th class="hidden-xs author">저자</th>
-										<th class="hidden-xs genre">가격</th>
+										<th class="hidden-xs midlen">가격</th>
 										<th style="width: 50px">수량</th>
-										<th class="hidden-xs genre">요청일자</th>
+										<th class="hidden-xs longlen">요청일자</th>
 										<th class="genre">상태</th>
 
 									</tr>
@@ -87,9 +87,11 @@
 												</c:choose>
 												</td>
 											<td align="center" class="hidden-xs">${book.author}</td>
-											<td>${book.price}원</td>
+											<td align="right" >${book.price}원</td>
 											<td align="center">${book.quantity}</td>
-											<td align="center" class="hidden-xs"> ${book.reqdate}</td>
+											<td align="center" class="hidden-xs"><fmt:parseDate value="${book.reqdate}000000"
+														pattern="yyyyMMddHHmmss" var="reqDate" scope="page" /> <fmt:formatDate
+														value="${reqDate}" pattern="yyyy-MM-dd" /> </td>
 											<c:choose>
 												<c:when test="${book.reqstatus=='0'}">
 													<td align="center" >대기</td>

@@ -176,12 +176,12 @@
 									<tbody>
 										<c:forEach items="${bookList}" var="book">
 											<tr>
-												<td class="hidden-xs hidden-sm hidden-md genre" align="left"><c:choose>
+												<td class="hidden-xs hidden-sm hidden-md genre" align="left" ><c:choose>
 														<c:when test="${empty book.imageurl }">
 															<a href="#"
 													onclick="window.open('/bookInfo?book_cd=${book.book_cd}&keyword=${keyword }&listType=${listType }',
 															'new','resizeble=yes scrollbars=yes,  width=750, height=600');">
-														<img src="/resources/img/noimage.png" style="width:90%" > </a>
+														<img src="/resources/img/noimage.png" style="width: 50px" > </a>
 														</c:when>
 														<c:otherwise>
 															<a href="#"
@@ -195,8 +195,8 @@
 													onclick="window.open('/bookInfo?book_cd=${book.book_cd}&keyword=${keyword }&listType=${listType }',
 																'new','resizeble=yes scrollbars=yes,  width=750, height=600');">
 														${book.title }</a></td>
-												<td class="hidden-xs hidden-sm hidden-md genre" align="left">${book.author }</td>
-												<td class="hidden-xs hidden-sm genre" align="left">${book.publish}</td>
+												<td class="hidden-xs hidden-sm hidden-md genre" align="left"><nobr>${book.author }</nobr></td>
+												<td class="hidden-xs hidden-sm genre" align="left"><nobr>${book.publish}</nobr></td>
 												<td class="hidden-xs genre" align="left">${book.b_group }</td>
 												<c:choose>
 													<c:when test="${book.rentchk=='0'}">

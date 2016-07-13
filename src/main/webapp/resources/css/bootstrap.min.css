@@ -447,7 +447,8 @@ table {
 td, th {
 	padding: 0;
 	white-space: normal;
-	text-overflow: ellipsis; 
+	text-overflow: clip; 
+	overflow: auto;
 }
 /*! Source: https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css */
 @media print {
@@ -1852,7 +1853,6 @@ pre code {
 @media ( min-width :1200px) {
 	.container {
 		width: 1170px;
-		    padding-left: 10%;
 	}
 }
 
@@ -5856,9 +5856,10 @@ border-radius
 	z-index: 1030
 }
 
-@media ( min-width :768px) {
+@media ( min-width :1199px) {
 	.navbar-fixed-top, .navbar-fixed-bottom {
-		border-radius: 0
+		border-radius: 0;
+		    padding-left: 10%;
 	}
 }
 

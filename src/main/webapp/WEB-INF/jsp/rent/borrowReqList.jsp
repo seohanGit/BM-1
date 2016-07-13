@@ -65,7 +65,7 @@ body {
 											</c:if></td>
 
 										<td class="title" align="left">${book.title }</td>
-										<td class="hidden-xs " align="left">${book.author }</td>
+										<td class="hidden-xs " align="left"><nobr>${book.author}</nobr></td>
 										<td class="hidden-xs hidden-sm " align="left">${book.b_group}</td>
 
 

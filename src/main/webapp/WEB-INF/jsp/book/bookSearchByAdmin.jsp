@@ -127,7 +127,7 @@
 												<td class="title" align="left"><a href="#"
 													onclick="window.open('/bookInfo?book_cd=${book.book_cd}','new','resizeble=yes scrollbars=yes, width=750, height=600');">
 														${book.title }</a></td>
-												<td class="hidden-xs genre">${book.author}</td>
+												<td class="hidden-xs genre"><nobr>${book.author }</nobr></td>
 												<td class="hidden-sm hidden-xs hidden-md b_group"
 													id="${book.b_group }">${book.b_group}</td>
 

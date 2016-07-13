@@ -49,7 +49,7 @@
 		SELECT *
 		FROM
 		sitlib.bookreqst A 
-		WHERE A.id=#{id} and reqstatus='1'
+		WHERE A.id=#{id} 
 		ORDER
 		BY
 		A.reqstatus, 

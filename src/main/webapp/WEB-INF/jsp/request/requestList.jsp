@@ -64,11 +64,11 @@ body {
 											<th>도서명</th>
 
 											<th class="hidden-sm hidden-xs genre">가격</th>
-											<th class="td-date">수량</th>
-											<th class="hidden-xs td-date">신청</th>
+											<th class="shortlen">수량</th>
+											<th class="hidden-xs midlen">신청</th>
 											<th class="hidden-sm hidden-xs hidden-md genre">요청일자</th>
 											<th class="genre">상태</th>
-											<th class="genre">비고</th>
+											<th class="longlen">비고</th>
 										</tr>
 									</thead>
 

@@ -1845,13 +1845,14 @@ pre code {
 
 @media ( min-width :992px) {
 	.container {
-		width: 970px
+/* 		width: 970px */
 	}
 }
 
 @media ( min-width :1200px) {
 	.container {
-		width: 1170px
+		width: 1170px;
+		    padding-left: 10%;
 	}
 }
 
@@ -5761,13 +5762,13 @@ border-radius
 	border: 1px solid transparent
 }
 
-@media ( min-width :768px) {
+@media ( min-width :1024px) {
 	.navbar {
 		border-radius: 4px
 	}
 }
 
-@media ( min-width :768px) {
+@media ( min-width :1024px) {
 	.navbar-header {
 		float: left
 	}
@@ -5787,7 +5788,7 @@ border-radius
 	overflow-y: auto
 }
 
-@media ( min-width :768px) {
+@media ( min-width :1025px) {
 	.navbar-collapse {
 		width: auto;
 		border-top: 0;
@@ -5829,7 +5830,7 @@ border-radius
 	margin-left: -15px
 }
 
-@media ( min-width :768px) {
+@media ( min-width :1024px) {
 	.container>.navbar-header, .container-fluid>.navbar-header, .container>.navbar-collapse,
 		.container-fluid>.navbar-collapse {
 		margin-right: 0;
@@ -5842,7 +5843,7 @@ border-radius
 	border-width: 0 0 1px
 }
 
-@media ( min-width :768px) {
+@media ( min-width :1024px) {
 	.navbar-static-top {
 		border-radius: 0
 	}
@@ -5923,7 +5924,7 @@ border-radius
 	margin-top: 4px
 }
 
-@media ( min-width :768px) {
+@media ( min-width :1025px) {
 	.navbar-toggle {
 		display: none
 	}
@@ -5932,7 +5933,7 @@ border-radius
 .navbar-nav {
 	vertical-align: middle;
 	margin: 7.5px -15px;
-	width:80%;
+	width:85%;
 }
 
 .navbar-nav>li>a {

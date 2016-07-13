@@ -59,7 +59,7 @@ public class MemberController {
 	private StatisticService statisticService;
 
 	String year = Integer.toString(Calendar.getInstance().get(Calendar.YEAR)); 
-	String month = String.format("%02d", Calendar.getInstance().get(Calendar.MONTH));
+	String month = String.format("%02d", Calendar.getInstance().get(Calendar.MONTH)+1);
 	
 	@RequestMapping("/test")
 	public String test(Model model) {
@@ -237,13 +237,11 @@ public class MemberController {
 							.selectBestPerson(param);
 					List<BookModel> bestBook = statisticService
 							.selectBestBook(param);
-					// List<BookModel> newBook = bookService.getNewbook();
 					List<MemberModel> bestTeam = statisticService
 							.selectBestTeam(year);
 
 					model.addAttribute("bestMember", bestMember);
 					model.addAttribute("bestBook", bestBook);
-					// model.addAttribute("newbook", newBook);
 					model.addAttribute("bestTeam", bestTeam);
 
 					return "/member/admin";

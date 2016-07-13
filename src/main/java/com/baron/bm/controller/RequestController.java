@@ -217,6 +217,6 @@ public class RequestController {
 	@RequestMapping("/rejectRequest")
 	public String rejectRequest(BookModel book) {		
 		requestservice.rejectRequest(book);
-		return "redirect:request";
+		return "redirect:requestList";
 	}
 }

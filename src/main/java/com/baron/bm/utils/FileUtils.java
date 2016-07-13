@@ -24,7 +24,7 @@ import com.baron.member.model.BookModel;
 
 @Component("fileUtils")
 public class FileUtils   {
-	private static final String filePath = "C:\\temp\\file\\";
+	private static final String filePath = "C:\temp\file\\";
 
 	public List<Map<String, Object>> parseInsertFileInfo(BookModel book,
 			HttpServletRequest request) throws Exception {

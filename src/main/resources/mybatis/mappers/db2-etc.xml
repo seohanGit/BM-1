@@ -6,7 +6,7 @@
 	<select id="selectdinner" resultType="String">
 		SELECT MENU
 		FROM
-		SITLIB.SFOODTABLE
+		SITLIB.FOODTABLE
 		WHERE GDATE = VARCHAR_FORMAT(CURRENT
 		TIMESTAMP,
 		'YYYYMMDD') AND GUBN = 'C'
@@ -14,7 +14,7 @@
 	<select id="selectlunch" resultType="String">
 		SELECT MENU
 		FROM
-		SITLIB.SFOODTABLE
+		SITLIB.FOODTABLE
 		WHERE GDATE = VARCHAR_FORMAT(CURRENT
 		TIMESTAMP,
 		'YYYYMMDD') AND GUBN = 'B'
@@ -22,7 +22,7 @@
 	<select id="selectbreakfast" resultType="String">
 		SELECT MENU
 		FROM
-		SITLIB.SFOODTABLE
+		SITLIB.FOODTABLE
 		WHERE GDATE = VARCHAR_FORMAT(CURRENT
 		TIMESTAMP,
 		'YYYYMMDD') AND GUBN = 'A'

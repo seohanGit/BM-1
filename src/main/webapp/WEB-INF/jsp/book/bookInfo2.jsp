@@ -95,6 +95,11 @@ $('.borrow1').on('click', function() {
 								<img style="width: 100%;" src="/resources/img/noimage.png">
 							</div>
 						</c:when>
+						<c:when test="${book.b_group=='F-PDF'}">
+							<div style="width: 100%;">
+								<img style="width: 100%;" src="/resources/img/pdf.jpg">
+							</div>
+						</c:when>						
 						<c:otherwise>
 							<div style="width: 100%;">
 								<img style="width: 100%;" src="${book.imageurl}">

@@ -4,6 +4,9 @@
 	<div id="insertForm" class=" col-xs-12 col-sm-12">
 		<div class="panel panel-default ">
 		<form action="/insertbook" method="post" class="panel-body" onsubmit="formChk(); return false">
+			<div class="form-group  ">
+				<input type="image" name="imageurl" src="${book.imageurl}">
+			</div>
 			<div class="form-group">
 				<label for="exampleInputEmail1">도서번호</label> <input type="text"
 					class="form-control" id="book_cd" name="book_cd" 
@@ -39,8 +42,8 @@
 					class="form-control" style="width: 80%;" name="price" id="price" min="0" required="required"
 					value="${book.price}">
 			</div>
-			<input type="hidden" name="isbn" value="${book.isbn}">
-			<input type="hidden" name="imageurl" value="${book.imageurl}">
+			<input type="hidden" name="isbn" value="${book.isbn}"> 
+			<input type="hidden" name="link" value="${book.link}"> 
 			<input type="hidden" name="summary" value="${book.summary}">
 			<button type="submit" class="btn btn-default"
 			 onClick="formChk();   ">확인</button>

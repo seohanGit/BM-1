@@ -110,7 +110,7 @@
 			var reason = $('#reason').val(); 
   
 			if (book_cd == '') {
-				alert('도서명을 입력하시기 바랍니다.');
+				alert('도서번호을 입력하시기 바랍니다.');
 				book_cd.focus();
 				return false;
 			} else if (title == '') {
@@ -157,5 +157,6 @@
 	<script src="/resources/js/bootstrap.min.js"></script>
 	<script src="/resources/js/jquery/jquery.js"></script>
 	<script src="/resources/js/common.js"></script>
+	<script src="/resources/js/book.js"></script>
 </body>
 </html>

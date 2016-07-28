@@ -10,7 +10,8 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <title>전산고장신고</title>
-<link rel="SHORTCUT ICON" href="/somepath/myicon.ico"/>
+<link rel="SHORTCUT ICON" href="/resources/img/seohanico.gif"/>
+<link href="/resources/img/seohanico.jpg" rel="apple-touch-icon" sizes="180x180" />
 <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="/resources/css/common.css" rel="stylesheet">
 <link href="/resources/css/index.css" rel="stylesheet">
@@ -34,7 +35,7 @@
 									<td class="genre">${List.gsgubn}</td>
 									<td class="genre">${List.jteam}</td>
 									<td class="genre">${List.jname}</td>
-									<td class="longlen">${List.jtel}</td>
+									<td class="longlen"><a href="tel:${List.jtel}">${List.jtel}</a></td>
 									<td>${List.jtxt}</td> 
 									<td class="genre"><button class="btn btn-default btn-sm"
 														type="button" id="endDamage"

@@ -78,6 +78,6 @@
 	<select id="selectBookForImage" resultType="BookModel">
 		SELECT isbn, book_cd FROM
 		sitlib.bookmst
-		where summary is null and left(b_group,1) = 'B'
+		where (summary is null or summary = '' or imageurl = '' or imageurl is null ) and left(b_group,1) in('B','J')
 	</select>
 </mapper>

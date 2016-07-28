@@ -17,15 +17,7 @@
 <link href="/resources/css/dataTables.bootstrap.min.css"
 	rel="stylesheet">
 <script src="/resources/js/jquery/jquery.js"></script>
-<script src="/resources/js/bootstrap.min.js"></script>
-<script>
-	function del() {
-		alert("삭제되었습니다.");
-
-	}
-</script>
-
-
+<script src="/resources/js/bootstrap.min.js"></script>  
 </head>
 
 <body>
@@ -94,7 +86,7 @@
 						<div class="input-group right" align="right" style="width: 20%;">
 							<button style="width: 100px; vertical-align: baseline;"
 								class="btn btn-default" type="button" id="insertBook"
-								onclick="window.open('/insertbookForm','new','resizeble=yes, scrollbars=yes, width=500, height=700');">
+								onclick="window.open('/insertbookForm','new','resizeble=yes, scrollbars=yes, width=500, height=850');">
 								도서추가</button>
 
 							<!-- 								<button style="width: 100px; vertical-align: baseline;" -->

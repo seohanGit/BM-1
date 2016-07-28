@@ -103,7 +103,7 @@ body {
 						<option value="" selected>연간조회
 					</select>
 					<button class="btn btn-sm" id="rentByMonth" type="button">연간
-						대여 현황</button>
+						대출 현황</button>
 					<button class="btn btn-sm" id="purchaseMonth" type="button">연간
 						예산 현황</button>
 					<button class="btn btn-sm" id="bookCount" type="button">보유
@@ -111,11 +111,11 @@ body {
 					<button class="btn btn-sm" id="teamCount" type="button">
 						팀별 현황</button>
 					<button class="btn btn-sm" id="rankGroupByB" type="button">분류별
-						대여 순위</button>
+						대출 순위</button>
 					<button class="btn btn-sm" id="rankGroupByBook" type="button">도서별
-						대여 순위</button>
+						대출 순위</button>
 					<button class="btn btn-sm" id="rentByPerson" type="button">개인별
-						대여 순위</button>
+						대출 순위</button>
 
 					<div id="chart" class="row" style="width: 49%; float: left">
 

@@ -295,7 +295,7 @@ $('#getBookInfo').click(function() {
 		url : "/findBook", // URL
 		datatype : "json", // html, xml, json, jsonp, script, text
 		data : {
-			keyword : $('#keyword').val(),
+			keyword : $('#isbn').val(),
 			type : $('#type').val()
 		},
 		error : function() { // Ajax error handler

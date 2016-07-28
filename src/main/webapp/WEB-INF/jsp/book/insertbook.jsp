@@ -20,29 +20,28 @@
 		<div class="left">
 			<h2>도서 추가 페이지</h2>
 		</div>
-		<div class="input-group right"
-			style="width: 40%; float: right; margin-right: 8%">
-			<span class="input-group-btn"> <input type="hidden" id="type"
-				name="type" value="isbn"> <input type="text"
-				class="form-control" id="keyword" name="keyword"
-				placeholder="인터파크 검색">
-				<button class="btn btn-default" type="submit" id="getBookInfo">
-					<span class="glyphicon glyphicon-search"></span>
-				</button>
-			</span>
-		</div>
 		<div id="insertForm" class=" col-xs-12 col-sm-12">
 			<div class="panel panel-default ">
 				<form action="/insertbook" method="post" class="panel-body"
 					enctype="multipart/form-data" name="insertForm">
-					<input type="hidden" id="isbn" name="isbn" value="">
+					<div class="form-group">
+						<label for="exampleInputEmail1">ISBN</label> <input style="width:80%; display:-webkit-inline-box;"
+							 class="form-control" type="text" id="isbn"
+							name="isbn" required="required">
+					<button style="width:10%" class="btn btn-default" type="submit" id="getBookInfo">
+						<span class="glyphicon glyphicon-search"></span>
+					</button>
+
+					</div>
 					<div class="form-group">
 						<label for="exampleInputEmail1">도서번호</label> <input type="text"
-							class="form-control" id="book_cd" name="book_cd"  required="required" >
+							class="form-control" id="book_cd" name="book_cd"
+							required="required">
 					</div>
 					<div class="form-group">
 						<label for="exampleInputPassword1">도서명</label> <input type="text"
-							class="form-control" id="title" name="title" placeholder="도서명"  required="required">
+							class="form-control" id="title" name="title" placeholder="도서명"
+							required="required">
 					</div>
 					<div class="col-md-7 col-sm-7	col-xs-7 left">
 						<label for="exampleInputPassword1">대분류</label> <select
@@ -67,7 +66,7 @@
 					<div class="col-md-6 col-sm-6	col-xs-6">
 						<label for="exampleInputPassword1">출판사</label> <input type="text"
 							class="form-control" id="publish" name="publish"
-							placeholder="출판사"  required="required">
+							placeholder="출판사" required="required">
 					</div>
 					<div class="col-md-6 col-sm-6	col-xs-6">
 						<label for="exampleInputPassword1">저자</label> <input type="text"
@@ -75,11 +74,12 @@
 					</div>
 					<div class="form-group">
 						<label for="exampleInputPassword1">요약</label> <input type="text"
-							class="form-control" id="summary" name="summary" placeholder="요약" >
+							class="form-control" id="summary" name="summary" placeholder="요약">
 					</div>
 					<div class="form-group">
 						<label for="exampleInputPassword1">가격</label><input type="number"
-							class="form-control" name="price" id="price" placeholder="0"  required="required" >
+							class="form-control" name="price" id="price" placeholder="0"
+							required="required">
 					</div>
 					<div class="form-group file">
 						<label for="exampleInputPassword1">파일</label> <input type="file"
@@ -107,8 +107,8 @@
 			var author = $('#author').val();
 			var publish = $('#publish').val();
 			var price = $('#price').val();
-			var reason = $('#reason').val(); 
-  
+			var reason = $('#reason').val();
+
 			if (book_cd == '') {
 				alert('도서번호을 입력하시기 바랍니다.');
 				book_cd.focus();

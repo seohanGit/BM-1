@@ -24,6 +24,7 @@
 			<div class="panel panel-default ">
 				<form action="/insertbook" method="post" class="panel-body"
 					enctype="multipart/form-data" name="insertForm">
+					<input type="hidden" id="type" value="isbn">
 					<div class="form-group">
 						<label for="exampleInputEmail1">ISBN</label> <input style="width:80%; display:-webkit-inline-box;"
 							 class="form-control" type="text" id="isbn"

@@ -45,7 +45,8 @@ public class BookController {
 	private RequestService requestservice;
 
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-
+	SimpleDateFormat sdftime = new SimpleDateFormat("yyyyMMddHHmmss");
+	
 	@RequestMapping("/insertbookForm")
 	public ModelAndView insertbook() throws Exception {
 		ModelAndView mav = new ModelAndView();
@@ -60,7 +61,7 @@ public class BookController {
 	@RequestMapping("/insertbook")
 	public ModelAndView insertresult(ModelAndView mav, BookModel model) {
 		Calendar cal = Calendar.getInstance();
-		String nowDate = sdf.format(cal.getTime());
+		String nowDate = sdftime.format(cal.getTime());
 
 		model.setRcv_date(nowDate);
 		model.setQuantity(1);

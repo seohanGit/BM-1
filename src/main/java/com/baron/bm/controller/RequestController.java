@@ -27,6 +27,7 @@ import com.baron.member.service.RequestService;
 @Controller
 public class RequestController { 
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd"); 
+	SimpleDateFormat sdftime = new SimpleDateFormat("yyyyMMddHHmmss");
 	
 	@Autowired
 	private RequestService requestservice;
@@ -149,7 +150,7 @@ public class RequestController {
 	@RequestMapping("/confirmBuy")
 	public String confirmBuy(BookModel model) {
 		Calendar cal =  Calendar.getInstance();
-		String nowDate = sdf.format(cal.getTime());		
+		String nowDate = sdftime.format(cal.getTime());		
 		model.setRcv_date(nowDate);  
 		requestservice.confirmBuy(model);
 		requestservice.deleteRequest(model);

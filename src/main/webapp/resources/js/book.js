@@ -302,9 +302,8 @@ $('#getBookInfo').click(function() {
 			alert('ajax failed');
 		},
 		success : function(data, status) { // Ajax complete handelr]
-			$('#insertForm').fadeOut();
-			$('#insertForm').empty();
-			$('#searchResultArea').empty().append(data);
+			
+			$('#insertForm').empty().append(data);
 		}
 	});
 

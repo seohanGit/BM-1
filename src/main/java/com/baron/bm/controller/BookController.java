@@ -259,22 +259,27 @@ public class BookController {
 	}
 
 	@RequestMapping("/findBook")
-	public String findBook(String keyword, String page, Model model, String type)
+	public ModelAndView findBook(String keyword, String page, ModelAndView mav, String type)
 			throws Exception {
 		List<BookModel> bookList;
 		BookModel book;
+		List<CodeModel> BCodeList = bookservice.selectBCodeList();
+		List<CodeModel> CCodeList = bookservice.selectCCodeList();
+		mav.addObject("BCodeList", BCodeList);
+		mav.addObject("CCodeList", CCodeList);
 
 		if (type.equals("isbn")) {
 			book = requestservice.findBookOne(keyword);
-			model.addAttribute("book", book);
-			model.addAttribute("keyword", keyword);
-			return "book/result1";
+			mav.addObject("book", book);
+			mav.addObject("keyword", keyword);
+			mav.setViewName( "book/result1");
 		} else {
 			bookList = bookservice.findBook(keyword);
-			model.addAttribute("bookList", bookList);
-			model.addAttribute("keyword", keyword);
-			return "book/findBook";
+			mav.addObject("bookList", bookList);
+			mav.addObject("keyword", keyword);
+			mav.setViewName( "book/findBook");
 		}
+		return mav;
 	}
 
 	@RequestMapping("/deletebook")

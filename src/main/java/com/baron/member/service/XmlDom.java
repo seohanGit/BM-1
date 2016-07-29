@@ -102,7 +102,10 @@ public class XmlDom {
 			book.setPublish(getChildren(element, "publisher"));
 			book.setSummary(getChildren(element, "description"));
 			System.out.println(getChildren(element, "description"));
-
+			 
+		}
+		if (list.getLength() == 0 ){
+			book.setTitle("");
 		}
 		return book;
 	}

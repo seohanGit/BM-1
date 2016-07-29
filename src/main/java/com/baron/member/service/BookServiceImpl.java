@@ -56,9 +56,8 @@ public class BookServiceImpl implements BookService {
 
 		String dir = "/SEOHAN/BOOKMST/";
 		MultipartFile uploadfile = model.getFile();
-		if (uploadfile.getOriginalFilename().equals("")){
-			model.setImageurl("");
-		}		else{
+		if (uploadfile == null){}
+		else{
 			String fileName = model.getBook_cd() + "-"
 					+ uploadfile.getOriginalFilename();
 			model.setFilename(fileName);

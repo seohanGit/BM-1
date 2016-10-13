@@ -9,14 +9,13 @@
 	<!-- 대여관련 쿼리 -->
 	<select id="borrowListAll" resultType="BookModel">
 		SELECT A.title,
-		B.rentdate, B.returndate, A.b_group, B.id, B.book_cd, (SELECT C.KNAME
-		FROM
-		TPRLIB.GR_INSA C WHERE B.id=C.ASABN FETCH
+		B.rentdate, B.returndate, A.b_group, B.id, B.book_cd, 
+		(
+		SELECT C.KNAME FROM TPRLIB.GR_INSA C WHERE B.id=C.ASABN FETCH
 		first 1 rows only) kname
 		FROM
-		sitlib.bookmst A INNER JOIN sitlib.BOOKRENT B
-		ON
-		A.book_cd=B.book_cd
+		sitlib.bookmst A 
+		INNER JOIN sitlib.BOOKRENT B ON A.book_cd=B.book_cd
 		WHERE
 		B.rentchk='1'
 		ORDER BY
@@ -25,7 +24,7 @@
 	</select>
 
 	<select id="borrowList" resultType="BookModel" parameterType="String">
-		SELECT *
+		SELECT A.TITLE, A.IMAGEURL, A.B_GROUP, A.C_GROUP, A.AUTHOR, B.*
 		FROM sitlib.bookmst A, sitlib.BOOKRENT B
 		WHERE B.id = #{id}
 		AND
@@ -37,10 +36,9 @@
 
 	<select id="selectBorrow" resultType="BookModel" parameterType="String">
 		SELECT *
-		FROM sitlib.BOOKRENT A INNER JOIN tprlib.gr_insa
-		B
-		ON A.id =
-		B.asabn
+		FROM sitlib.BOOKRENT A 
+		INNER JOIN SITLIB.BOOKMST BK ON A.BOOK_CD= BK.BOOK_CD
+		INNER JOIN TPRLIB.GR_INSA B	ON A.id = B.asabn
 		WHERE A.book_cd = #{book_cd}
 		AND A.rentchk='1'
 		FETCH
@@ -49,11 +47,10 @@
 	</select>
 
 	<select id="selectRent" resultType="BookModel" parameterType="String">
-		SELECT *
-		FROM sitlib.BOOKRENT A INNER JOIN tprlib.gr_insa
-		B
-		ON A.id =
-		B.asabn
+		SELECT *		
+		FROM sitlib.BOOKRENT A 
+		INNER JOIN SITLIB.BOOKMST BK ON A.BOOK_CD= BK.BOOK_CD
+		INNER JOIN tprlib.gr_insa B ON A.id =	B.asabn		
 		WHERE A.book_cd = #{book_cd}
 		AND A.rentchk='2'
 		FETCH
@@ -111,8 +108,8 @@
 		UPDATE
 		sitlib.BOOKRENT
 		SET
-		RENTCHK = '2', rentdate = ${rentdate}, returndate=#{returndate}
-		WHERE BOOK_CD = #{book_cd} AND
+		RENTCHK = '2', returndate=#{returndate}
+		WHERE BOOK_CD = #{book_cd} AND rentdate = ${rentdate} AND
 		RENTCHK='1'
 	</update>
 
@@ -178,7 +175,7 @@
 	<delete id="deleteBorrowBook" parameterType="BookModel">
 		DELETE FROM
 		sitlib.BOOKRENT
-		WHERE book_cd=#{book_cd} AND id=#{id}
+		WHERE book_cd=#{book_cd} AND id=#{id} AND RENTCHK = '1'
 	</delete>
 
 	<select id="rentListAll" resultType="BookModel">

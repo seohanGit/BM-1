@@ -53,6 +53,9 @@ public class RentController {
 	public String borrowBook(HttpServletRequest request, String book_cd,
 			BookModel book, String keyword, String listType) throws UnsupportedEncodingException {
 		String id = null;
+		Calendar cal = Calendar.getInstance();
+		String nowDate = sdf.format(cal.getTime());
+		
 		if(keyword==null){keyword="";}
 		if(listType==null){listType="";} 
 		for (Cookie cookie : request.getCookies()) {
@@ -78,8 +81,7 @@ public class RentController {
 	@RequestMapping(value = "/confirmBorrowBook", method = RequestMethod.GET)
 	public String confirmBorrowBook(HttpServletRequest request, String book_cd) {
 		String id = null; 
-		rentservice.confirmBorrowBook(book_cd);
-		notifiService.notifiRent(book_cd);
+		rentservice.confirmBorrowBook(book_cd); 
 		for (Cookie cookie : request.getCookies()) {
 			if (cookie.getName().equals("bm_id")) {
 				id = cookie.getValue();
@@ -103,8 +105,7 @@ public class RentController {
 			}
 		}
 		for (String book_cd : book_cdList) {
-			rentservice.confirmBorrowBook(book_cd);
-			notifiService.notifiRent(book_cd);
+			rentservice.confirmBorrowBook(book_cd); 
 			BookModel reserveBook = rentservice.selectReservation(book_cd);
 			if (reserveBook != null) {
 				if (reserveBook.getId() == id)
@@ -168,31 +169,7 @@ public class RentController {
 			List<BookModel> bookList = rentservice.rentList(id);
 			model.addAttribute("bookList", bookList);
 			return "rent/borrowList"; 
-	}
-//	@RequestMapping("/borrowListAdmin")
-//	public String borrowListAdmin(HttpServletRequest request, Model model) {
-//		String id = null;
-//		for (Cookie cookie : request.getCookies()) { 
-//			if (cookie.getName().equals("bm_id")) {
-//				id = cookie.getValue();
-//			}
-//		}
-//		for (Cookie cookie : request.getCookies()) {
-//			if (cookie.getName().equals("bm_permission")) {
-//				if (cookie.getValue().equals("1")) {
-//					List<BookModel> rentList = rentservice.rentList();
-//					model.addAttribute("rentList", rentList);
-//					return "rent/borrowReqListAdmin";
-//
-//				} else if (cookie.getValue().equals("0")) {
-//					List<BookModel> rentList = rentservice.rentList(id);
-//					model.addAttribute("rentList", rentList);
-//					return "rent/borrowReqList";
-//				}
-//			} 
-//		} 
-//		return null;
-//	}
+	} 
 
 	@RequestMapping("/extendBorrowBook")
 	public String extendBorrowBook(String book_cd, BookModel book) throws NullPointerException {
@@ -230,9 +207,7 @@ public class RentController {
 	@RequestMapping("/extendBookList")
 	public String extendBookList(
 			@RequestParam(value = "book_cd") List<String> book_cdList,
-			Model model) {
-		
-
+			Model model) { 
 		for (String book_cd : book_cdList) {
 			BookModel reserveBook = rentservice.selectReservation(book_cd);	
 			if (reserveBook == null) {
@@ -257,6 +232,13 @@ public class RentController {
 	@RequestMapping("/cancleBorrowBook")
 	public ModelAndView cancleBorrowBook(String book_cd, BookModel bookmodel,
 			HttpServletRequest request, ModelAndView mav) {  
+		String id = "";
+		for (Cookie cookie : request.getCookies()) { 
+			if (cookie.getName().equals("bm_id")) {
+				id = cookie.getValue();
+			}
+		}
+		bookmodel.setId(id);
 		rentservice.cancleBorrowBook(bookmodel);
 		List<BookModel> bookList = rentservice.borrowList(bookmodel.getId());
 		mav.addObject("bookList", bookList);
@@ -306,14 +288,8 @@ public class RentController {
 
 	@RequestMapping("/returnBook")
 	public String returnBook(String book_cd, BookModel book) {
-		BookModel checkBook = rentservice.selectBook(book_cd); 
-		if (checkBook.getRentchk().equals("2")) {
-			book.setBook_cd(book_cd);
-			
-			notifiService.notifiReturnConfirm(book_cd);
-			rentservice.returnBook(book);
-			
-		}
+		rentservice.returnBook(book);
+		
 		return "redirect:borrowReqListAdmin";
 	}
 	@RequestMapping("/returnBookList")

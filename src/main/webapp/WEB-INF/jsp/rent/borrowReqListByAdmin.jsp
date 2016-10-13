@@ -166,10 +166,12 @@
 													</c:otherwise>
 												</c:choose>
 
-												<td class="hidden-xs"><c:choose>
+												<td class="hidden-xs">
+													<c:choose>
 														<c:when test="${empty rent.kname}">${rent.id}</c:when>
 														<c:otherwise>${rent.kname}</c:otherwise>
-													</c:choose></td>
+													</c:choose>
+												</td>
 												<%-- 
 							<td><button class="btn btn-default" type="button"
 									id="extendbook"
@@ -178,7 +180,7 @@
  --%>
 												<td><button class="btn btn-default btn-sm"
 														type="button" id="reservebook"
-														onClick="location.href='/returnBook?book_cd=${rent.book_cd}'; re_turn();">반납</button>
+														onClick="location.href='/returnBook?book_cd=${rent.book_cd}&id=${rent.id}'; re_turn();">반납</button>
 												</td>
 
 												<c:choose>

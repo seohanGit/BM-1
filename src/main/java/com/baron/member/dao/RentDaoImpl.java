@@ -31,9 +31,7 @@ public class RentDaoImpl implements RentDao {
 	}
 
 	@Override
-	public List<BookModel> borrowList(String id) {
-
-		System.out.println(id + "dao");
+	public List<BookModel> borrowList(String id) { 
 		return session.selectList(NAMESPACE + "borrowList", id);
 	}
 

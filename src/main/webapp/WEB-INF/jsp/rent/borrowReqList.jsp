@@ -84,6 +84,10 @@ body {
 												<td>대출중</td>
 												<td></td>
 											</c:when>
+											<c:otherwise>
+												<td>대출취소</td>
+												<td></td>
+											</c:otherwise>
 										</c:choose>
 									</tr>
 								</c:forEach>

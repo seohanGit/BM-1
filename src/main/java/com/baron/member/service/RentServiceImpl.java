@@ -4,6 +4,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.print.DocFlavor.STRING;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,9 +19,7 @@ import com.baron.member.model.SmsModel;
 
 @Service
 public class RentServiceImpl implements RentService {
-	Calendar cal = Calendar.getInstance();
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-	String nowDate = sdf.format(cal.getTime());
 
 	@Autowired
 	private RentDao rentDao;
@@ -80,22 +80,22 @@ public class RentServiceImpl implements RentService {
 
 	@Override
 	public void confirmBorrowBook(String book_cd) {
-		String id = null;
-		cal = Calendar.getInstance();
+		String id = null, smsNo = "";
+		Calendar cal = Calendar.getInstance();
+		String nowDate = sdf.format(cal.getTime());
 		cal.add(cal.DAY_OF_MONTH, 15);
 
 		BookModel bookmodel = new BookModel();
 		bookmodel = rentDao.selectBorrow(book_cd);
-		bookmodel.setRentdate(nowDate);
+		
 		bookmodel.setRetrundate(sdf.format(cal.getTime()));
-		if (bookmodel != null) {
-			String title = bookmodel.getTitle();
+		if (bookmodel != null) { 
 			id = bookmodel.getId();
-			sms.setTitle(title);
-
 			MemberModel member = joinDao.selectMember(id);
 			if (member.getMobi_no() != null) {
-				sms.setPhone(member.getMobi_no().substring(1));
+				smsNo = member.getMobi_no().substring(1);				
+				sms.setTitle(bookmodel.getTitle());
+				sms.setPhone(smsNo);
 				notifiDao.notifiRent(sms);
 			}
 		}
@@ -104,8 +104,21 @@ public class RentServiceImpl implements RentService {
 
 	@Override
 	public void returnBook(BookModel book) {
-		book.setReturndate(nowDate);
-		rentDao.returnBook(book);
+		Calendar cal = Calendar.getInstance();
+		String nowDate = sdf.format(cal.getTime());
+		String smsNo = "";
+		BookModel checkBook = rentDao.selectBook(book.getBook_cd()); 
+		if (checkBook.getRentchk().equals("2")) {
+			book.setReturndate(nowDate);
+			rentDao.returnBook(book);
+			MemberModel member = joinDao.selectMember(book.getId());
+			if (member.getMobi_no() != null) {
+				smsNo = member.getMobi_no().substring(1);				
+				sms.setTitle(checkBook.getTitle());
+				sms.setPhone(smsNo);
+				notifiDao.notifiReturnConfirm(sms);
+			}
+		}		
 	}
 
 	@Override
@@ -130,7 +143,7 @@ public class RentServiceImpl implements RentService {
 
 	@Override
 	public void extendBorrowBook(BookModel book) {
-		cal = Calendar.getInstance();
+		Calendar cal = Calendar.getInstance();
 		cal.add(cal.DATE, +7);
 		book.setReturndate(sdf.format(cal.getTime()));
 		rentDao.extendBorrowBook(book);
@@ -140,7 +153,6 @@ public class RentServiceImpl implements RentService {
 	public void cancleBorrowBook(BookModel bookmodel) {
 		rentDao.cancleBorrowBook(bookmodel.getBook_cd());
 		rentDao.deleteBorrowBook(bookmodel);
-
 	}
 
 	@Override

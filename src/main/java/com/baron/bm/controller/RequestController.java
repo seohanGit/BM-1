@@ -72,8 +72,7 @@ public class RequestController {
 		if (id == "") {
 			return "getout";
 		} else {
-			bookList = requestservice.requestRecord(id);
-			System.out.println(id);
+			bookList = requestservice.requestRecord(id); 
 			model.addAttribute("bookList", bookList);
 			return "request/request";		
 		}

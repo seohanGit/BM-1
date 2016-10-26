@@ -62,7 +62,6 @@ body {
 											<th class="td-chk"><input type="checkbox" id="allCheck"></th>
 											<th class="hidden-sm hidden-xs hidden-md genre">도서코드</th>
 											<th>도서명</th>
-
 											<th class="hidden-sm hidden-xs genre">가격</th>
 											<th class="shortlen">수량</th>
 											<th class="hidden-xs midlen">신청</th>
@@ -71,8 +70,6 @@ body {
 											<th class="longlen">비고</th>
 										</tr>
 									</thead>
-
-
 									<tbody>
 										<c:forEach items="${bookList}" var="book" varStatus="status">
 											<tr>
@@ -82,8 +79,6 @@ body {
 												<td class="td-title" align="center"><a
 													onclick="window.open
 									('${book.link}','new','resizeble=yes scrollbars=yes, width=1200, height=1000');">${book.title}</a></td>
-
-
 												<td class="hidden-sm hidden-xs " align="right"><fmt:formatNumber
 														value="${book.price}" type="currency" /> 원</td>
 												<td align="center"><fmt:formatNumber
@@ -111,7 +106,6 @@ body {
 													<c:when test="${book.reqstatus =='1'}">
 														<td class="ok" align="center">승인</td>
 														<td></td>
-
 													</c:when>
 													<c:when test="${book.reqstatus =='2'}">
 														<td align="center" class="no">반려</td>

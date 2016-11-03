@@ -23,43 +23,13 @@
 <script type="text/javascript">
 	$(document).ready(
 			function() {
-				var today = new Date();
-				var today2 = new Date();
-				today.setDate(today.getDate() - 30);
-				var dd = today.getDate();
-				var mm = today.getMonth() + 1; //January is 0!
-				var yyyy = today.getFullYear();
-				var dd2 = today2.getDate();
-				var mm2 = today2.getMonth() + 1; //January is 0!
-				var yyyy2 = today2.getFullYear();
-				if (dd > 29) {
-				}
-				if (dd < 10) {
-					dd = '0' + dd
-				}
-				if (mm < 10) {
-					mm = '0' + mm
-				}
-				today = yyyy + mm + dd;
-				if (dd2 < 10) {
-					dd2 = '0' + dd2
-				}
-				if (mm2 < 10) {
-					mm2 = '0' + mm2
-				}
-				today2 = yyyy2 + mm2 + dd2;
-
 				$('.datepicker').datepicker({
 					showOn : "button",
 					buttonImage : "/resources/img/calendar.gif",
 					buttonImageOnly : true,
 					buttonText : "Select date"
 				});
-				$('.datepicker').datepicker("option", "dateFormat", "yymmdd");
-
-				$('#datepicker1').val(today);
-				$('#datepicker2').val(today2);
-
+				
 				var myDate = new Date();
 				var year = myDate.getFullYear();
 				for (var i = 2000; i < year + 1; i++) {
@@ -77,7 +47,6 @@
 				$('#year').selectpicker('val', year);
 				$('#month').selectpicker('val', mm2);
 				$('.selectpicker').selectpicker('refresh');
-
 			});
 </script>
 </head>
@@ -123,7 +92,7 @@
 
 											<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6"
 												style="margin-top: 3%;">
-												<div class=" date  " data-provide="datepicker">
+												<div class="input-group date" data-provide="datepicker">
 													<input class="datepicker" id="datepicker2"
 														name="datepicker2" type="text" value="${date2}">
 												</div>

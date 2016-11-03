@@ -14,7 +14,12 @@
 <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="/resources/css/signin.css" rel="stylesheet">
 <link href="/resources/css/common.css" rel="stylesheet">
-
+<link href="/resources/css/bootstrap-select.min.css" rel="stylesheet">
+<link href="/resources/css/dataTables.bootstrap.min.css"
+	rel="stylesheet">
+<script src="/resources/js/jquery/jquery.js"></script>
+<script src="/resources/js/bootstrap.min.js"></script>
+ 
 
 <style type="text/css">
 body {
@@ -54,15 +59,13 @@ body {
 									<button class="btn btn-default" type="button"
 										onClick="location.href='modifiReqForm'">수정</button>
 								</div>
-								<table class="table table-striped table-bordered" id="dataTable">
-
+								<table class="table table-striped table-bordered" id="dataTable"> 
 									<thead>
-										<tr class="title ">
-
+										<tr class="title "> 
 											<th class="td-chk"><input type="checkbox" id="allCheck"></th>
 											<th class="hidden-sm hidden-xs hidden-md genre">도서코드</th>
 											<th>도서명</th>
-											<th class="hidden-sm hidden-xs genre">가격</th>
+											<th class="hidden-sm hidden-xs longlen">가격</th>
 											<th class="shortlen">수량</th>
 											<th class="hidden-xs midlen">신청</th>
 											<th class="hidden-sm hidden-xs hidden-md genre">요청일자</th>
@@ -79,8 +82,9 @@ body {
 												<td class="td-title" align="center"><a
 													onclick="window.open
 									('${book.link}','new','resizeble=yes scrollbars=yes, width=1200, height=1000');">${book.title}</a></td>
-												<td class="hidden-sm hidden-xs " align="right"><fmt:formatNumber
-														value="${book.price}" type="currency" /> 원</td>
+												<td class="hidden-sm hidden-xs" align="center">
+												<fmt:formatNumber
+														value="${book.price}"/>원</td>
 												<td align="center"><fmt:formatNumber
 														value="${book.quantity}" /></td>
 												<td class="hidden-xs" align="center"><c:choose>
@@ -115,9 +119,7 @@ body {
 												</c:choose>
 											</tr>
 										</c:forEach>
-									</tbody>
-
-
+									</tbody> 
 								</table>
 							</form>
 						</c:otherwise>
@@ -132,11 +134,30 @@ body {
 	<script src="/resources/js/bootstrap.min.js"></script>
 	<script src="/resources/js/common.js"></script>
 	<script src="/resources/js/jquery.dataTables.min.js"></script>
-	<script src="/resources/js/dataTables.bootstrap.min.js"></script>
-	<script>
-		function del() {
-			alert("삭제되었습니다.");
-		}
-	</script>
+	<script src="/resources/js/dataTables.bootstrap.min.js"></script> 
+	<script type="text/javascript"> 
+// 		$(document).ready(function() {
+// 			$('#dataTable').dataTable({
+// 				"pageLength" : 10,
+// 				paging : true,
+// 				"columns" : [ null, null,  {
+// 					"searchable" : false
+// 				}, {
+// 					"searchable" : false
+// 				}, {
+// 					"searchable" : false
+// 				}, null,null,null,null ]
+// 			});
+// 		});
+		$(document).ready(function() {
+			var table = $('#dataTable').DataTable({
+				"pageLength" : 1000,
+				paging : true,
+				"order" : [] 
+			});
+
+			new $.fn.dataTable.FixedHeader(table);
+		});
+	</script> 
 </body>
 </html>

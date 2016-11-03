@@ -10,6 +10,7 @@ import java.net.URLEncoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -52,19 +53,25 @@ public class BookServiceImpl implements BookService {
 	}
 
 	@Override
-	public void insertBook(BookModel model) {
-
+	public void insertBook(BookModel model) { 
+		model.setQuantity(1);
+		if (model.getIsbn().equals("")) {
+			model.setIsbn("");
+		}
+		//model.setSummary(model.getSummary().substring(0, 500));
 		String dir = "/SEOHAN/BOOKMST/";
 		MultipartFile uploadfile = model.getFile();
 		if (uploadfile == null){}
 		else{
 			String fileName = model.getBook_cd() + "-"
 					+ uploadfile.getOriginalFilename();
-			model.setFilename(fileName);
-			model.setImageurl(fileName); 
 			try {
 				fileUtils.upload(dir, uploadfile, fileName);
+				model.setFilename(fileName);
+				model.setImageurl(fileName); 
 			} catch (IOException e) {
+				model.setFilename("");
+				model.setImageurl(""); 
 				e.printStackTrace();
 			} // try - catch
 		} // if

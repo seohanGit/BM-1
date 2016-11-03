@@ -26,7 +26,7 @@
 					enctype="multipart/form-data" name="insertForm">
 					<input type="hidden" id="type" value="isbn">
 					<div class="form-group">
-						<label for="exampleInputEmail1">ISBN</label> <input style="width:80%; display:-webkit-inline-box;"
+						<label style="width:10%;" for="exampleInputEmail1">ISBN</label> <input style="width:70%; display:-webkit-inline-box;"
 							 class="form-control" type="text" id="isbn"
 							name="isbn" required="required">
 					<button style="width:10%" class="btn btn-default" type="submit" id="getBookInfo">

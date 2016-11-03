@@ -17,7 +17,7 @@
 		rcv_date, isbn, price, summary, rcmdchk)
 		VALUES
 		(#{title},#{book_cd},#{b_group}, #{c_group}, #{publish},#{author},'0', #{imageurl},
-		#{rcv_date}, #{isbn}, #{price}, #{summary}, 0)
+		#{rcv_date}, #{isbn}, #{price}, #{summary}, '0')
 	</insert>
 
 	<insert id="insertFile" parameterType="hashmap">

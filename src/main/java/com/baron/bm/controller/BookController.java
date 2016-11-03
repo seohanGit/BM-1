@@ -62,13 +62,7 @@ public class BookController {
 	public ModelAndView insertresult(ModelAndView mav, BookModel model) {
 		Calendar cal = Calendar.getInstance();
 		String nowDate = sdftime.format(cal.getTime());
-
 		model.setRcv_date(nowDate);
-		model.setQuantity(1);
-		if (model.getIsbn().equals("")) {
-			model.setIsbn("");
-		}
-
 		bookservice.insertBook(model);
 		mav.setViewName("book/insertbookresult");
 		return mav;
@@ -111,24 +105,25 @@ public class BookController {
 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 		Calendar cal = Calendar.getInstance();
+		cal = Calendar.getInstance();
+		Date date2 = cal.getTime();
+		cal.add(cal.MONTH, -1);
+		Date date1 = cal.getTime();
 
 		for (Cookie cookie : request.getCookies()) {
 			if (cookie.getName().equals("bm_permission")) {
 				permission = cookie.getValue();
 			}
 		}
+		
 		switch (listType) {
 		case "new":
 			if (datepicker1 == null || datepicker1.equals("")) {
-				cal = Calendar.getInstance();
-				Date date2 = cal.getTime();
-				cal.add(cal.MONTH, -1);
-				Date date1 = cal.getTime();
 				datepicker1 = sdf.format(date1);
 				datepicker2 = sdf.format(date2);
 			}
 			bookList = bookservice.listBook(listType, datepicker1, datepicker2,
-					"");
+					""); 
 			mav.setViewName("book/listBook");
 			break;
 		case "best":
@@ -196,12 +191,16 @@ public class BookController {
 			HttpSession session, Dto dto, String listType, String datepicker1,
 			String datepicker2, String year, String month, ModelAndView mav)
 			throws NullPointerException {
+		
 		String permission = "";
 		List<BookModel> bookList = new ArrayList<BookModel>();
 		List<CodeModel> BCodeList = new ArrayList<CodeModel>();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 		Calendar cal = Calendar.getInstance();
-		
+		cal = Calendar.getInstance();
+		Date date2 = cal.getTime();
+		cal.add(cal.MONTH, -1);
+		Date date1 = cal.getTime();
 		
 		for (Cookie cookie : request.getCookies()) {
 			if (cookie.getName().equals("bm_permission")) {
@@ -210,11 +209,7 @@ public class BookController {
 		}
 		switch (listType) {
 		case "new":
-			if (datepicker1 == null || datepicker1.equals("")) {
-				cal = Calendar.getInstance();
-				Date date2 = cal.getTime();
-				cal.add(cal.MONTH, -1);
-				Date date1 = cal.getTime();
+			if (datepicker1 == null || datepicker1.equals("")) {				
 				datepicker1 = sdf.format(date1);
 				datepicker2 = sdf.format(date2);
 			}

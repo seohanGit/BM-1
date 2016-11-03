@@ -6,8 +6,16 @@
 	<form action="/insertbook" method="post" class="panel-body"
 		onsubmit="formChk(); return false">
 		<div class="form-group  ">
-			<input type="image" name="imageurl" src="${book.imageurl}" value="${book.imageurl}">
+			<img src="${book.imageurl}"  >
 		</div>
+		<div class="form-group">
+						<label style="width:10%;" for="exampleInputEmail1">ISBN</label> <input style="width:70%; display:-webkit-inline-box;"
+							 class="form-control" type="text" id="isbn"
+							name="isbn" value="${book.isbn }" required="required">
+					<button style="width:10%" class="btn btn-default" type="submit" id="getBookInfo">
+						<span class="glyphicon glyphicon-search"></span>
+					</button>
+					</div> 
 		<div class="form-group">
 			<label for="exampleInputEmail1">도서번호</label> <input type="text"
 				class="form-control" id="book_cd" name="book_cd" required="required">
@@ -57,14 +65,34 @@
 			<label for="exampleInputPassword1">가격</label> <input type="number"
 				class="form-control" style="width: 80%;" name="price" id="price"
 				min="0" required="required" value="${book.price}">
-		</div>
-		<input type="hidden" name="isbn" value="${book.isbn}"> <input
+		</div><input
 			type="hidden" name="link" value="${book.link}"> <input
-			type="hidden" name="summary" value="${book.summary}">
-		<button type="submit" class="btn btn-default" onClick="formChk();   ">확인</button>
+			type="hidden" name="summary" value="${book.summary}">			
+			<input type="hidden" name="imageurl"  value="${book.imageurl}">
+		<button type="submit" class="btn btn-default" onClick="formChk()" >확인</button>
 		<!-- 		  -->
 	</form>
 </div>
-
+<script type="text/javascript">
+	$('#b_group').change(
+			function() {
+				var book_cd = this.value.substr(0, 1)
+						+ $('#c_group').val().substr(0, 3) + '-';
+				$('#book_cd').val(book_cd);
+				$('#book_cd').focus();
+				if ($('#b_group').val().substr(0, 1) == "F") {
+					$('.file').show();
+				} else {
+					$('.file').hide();
+				}
+			})
+	$('#c_group').change(
+			function() {
+				var book_cd = $('#b_group').val().substr(0, 1)
+						+ this.value.substr(0, 3) + '-';
+				$('#book_cd').val(book_cd);
+				$('#book_cd').focus();
+			})
+</script>
 <script src="/resources/js/bootstrap.min.js"></script>
 <script src="/resources/js/jquery/jquery.js"></script>

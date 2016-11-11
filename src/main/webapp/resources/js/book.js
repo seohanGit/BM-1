@@ -94,7 +94,7 @@ $('.borrow').on(
 					if (data == 'fail') {
 						alert('대출이 불가합니다.');
 					} else {
-						alert('대출되었습니다.');
+						alert('대출승인요청되었습니다.');
 					}
 					top.location.href = '/searchBook?listType=' + listType
 							+ '&keyword=' + enckeyword;
@@ -128,7 +128,7 @@ $('.borrow1')
 									if (data == 'fail') {
 										alert('대출이 불가합니다.');
 									} else {
-										alert('대출되었습니다.');
+										alert('대출승인요청되었습니다.');
 										opener.location.href = '/searchBook?listType='
 												+ listType
 												+ '&keyword='
@@ -157,7 +157,7 @@ $('.borrow2').on('click', function() {
 			if (data == 'fail') {
 				alert('대출이 불가합니다.');
 			} else {
-				alert('대출되었습니다.');
+				alert('대출승인요청되었습니다.');
 				self.close();
 			}
 		}

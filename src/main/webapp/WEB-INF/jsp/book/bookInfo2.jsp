@@ -35,7 +35,7 @@ $('.borrow1').on('click', function() {
 			if(data=='fail'){ 
 				alert('대출이 불가합니다.');				 
 			}else{
-				alert('대출되었습니다.');
+				alert('대출승인 요청되었습니다.');
 // 				if(listType!=''){
 // 					opener.location.href='/searchBook?listType='+listType+'&keyword='+keyword;
 // 				}

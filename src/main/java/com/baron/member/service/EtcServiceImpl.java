@@ -12,29 +12,27 @@ import com.baron.member.model.ItDamage;
 
 @Service
 public class EtcServiceImpl implements EtcService {
-	Calendar cal = Calendar.getInstance();
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-	String nowDate = sdf.format(cal.getTime());
 
 	@Autowired
 	private EtcDao etcdao;
 
 	@Override
-	public List<String> dinnerList() {
+	public List<String> dinnerList(String nowDate) {
 
-		return etcdao.dinnerList();
+		return etcdao.dinnerList(nowDate);
 	}
 
 	@Override
-	public List<String> lunchList() {
+	public List<String> lunchList(String nowDate) {
 
-		return etcdao.lunchList();
+		return etcdao.lunchList(nowDate);
 	}
 
 	@Override
-	public List<String> breakfastList() {
+	public List<String> breakfastList(String nowDate) {
 
-		return etcdao.breakfastList();
+		return etcdao.breakfastList(nowDate);
 	}
 
 	@Override
@@ -43,7 +41,10 @@ public class EtcServiceImpl implements EtcService {
 	}
 
 	@Override
-	public void endDamage(ItDamage itDamage) {
+	public void endDamage(ItDamage itDamage) { 
+		Calendar cal = Calendar.getInstance();
+		String nowDate = sdf.format(cal.getTime());
+		 
 		itDamage.setCtime(nowDate);
 		 etcdao.endDamage(itDamage);		
 	}

@@ -84,14 +84,18 @@ body {
 												<c:choose>
 													<c:when test="${rent.returndate < now}">
 														<td align="left"
-															style="text-decoration: underline; text-align: right;"><mark>
-<%-- 																 <%String.format("yyyyMMdd" , "${rent.returndate}");%>  --%>
-																${rent.returndate} - 연체중
+															style="text-decoration: underline; text-align: right;"><mark> 
+																<fmt:parseDate
+													value="${rent.returndate}000000" pattern="yyyyMMddHHmmss"
+													var="rentDate" scope="page" /> <fmt:formatDate
+													value="${rentDate}" pattern="yyyy-MM-dd" /> - 연체중
 															</mark></td>
 													</c:when>
 													<c:otherwise>
-														<td align="left">${rent.returndate} </td>
-<%-- 														<%String.format("yyyyMMdd","${rent.returndate}");%> --%>
+														<td align="left"><fmt:parseDate
+													value="${rent.returndate}000000" pattern="yyyyMMddHHmmss"
+													var="returnDate" scope="page" /> <fmt:formatDate
+													value="${returnDate}" pattern="yyyy-MM-dd" /> </td> 
 													</c:otherwise>
 												</c:choose>
 

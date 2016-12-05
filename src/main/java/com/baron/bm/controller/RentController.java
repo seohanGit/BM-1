@@ -123,10 +123,8 @@ public class RentController {
 				id = cookie.getValue();
 			}
 		} 
-		List<BookModel> bookList = rentservice.borrowList(id);
-		List<BookModel> rentList = rentservice.rentList(id);
-		model.addAttribute("bookList", bookList);
-		model.addAttribute("rentList", rentList);
+		List<BookModel> bookList = rentservice.borrowList(id); 
+		model.addAttribute("bookList", bookList); 
 		return "rent/borrowReqList";  
 	}
 	@RequestMapping("/borrowReqListAdmin")

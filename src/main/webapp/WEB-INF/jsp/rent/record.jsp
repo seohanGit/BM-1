@@ -32,22 +32,22 @@ body {
 
 		<div class="row panel panel-default">
 			<h2>대출 기록</h2>
-			
+
 			<br>
-			<div id="searchResultArea col-md-12 col-xs-12 col-sm-9">				
+			<div id="searchResultArea col-md-12 col-xs-12 col-sm-9">
 				<c:choose>
-					<c:when test="${empty record}"> 
+					<c:when test="${empty record}">
 						<h3>대출한 도서가 없습니다.</h3>
 					</c:when>
-					<c:otherwise> 
-						<div class="dataTable_wrapper"> 
+					<c:otherwise>
+						<div class="dataTable_wrapper">
 							<table class="table table-striped table-bordered" id="dataTable">
 								<thead>
 									<tr class=" title">
-										<th class="td-title">도서명</th>
-										<th class="hidden-xs td-author">저자</th>
-										<th class="hidden-xs td-genre">대여일</th>
-										<th class="td-genre">반납일</th>
+										<th class="title">도서명</th>
+										<th class="hidden-xs longlen">저자</th>
+										<th class="hidden-xs midlen">대출일</th>
+										<th class="midlen">반납일</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -55,8 +55,14 @@ body {
 										<tr>
 											<td class="td-title" align="left">${record.title }</td>
 											<td class="hidden-xs" align="left">${record.author}</td>
-											<td class="hidden-xs" align="left">${record.rentdate }</td>
-											<td align="left"> ${record.returndate }</td>
+											<td class="hidden-xs" align="left"><fmt:parseDate
+													value="${record.rentdate}000000" pattern="yyyyMMddHHmmss"
+													var="rentDate" scope="page" /> <fmt:formatDate
+													value="${rentDate}" pattern="yyyy-MM-dd" /></td>
+											<td align="left"><fmt:parseDate
+													value="${record.returndate}000000" pattern="yyyyMMddHHmmss"
+													var="returndate" scope="page" /> <fmt:formatDate
+													value="${returndate}" pattern="yyyy-MM-dd" /></td>
 										</tr>
 
 									</c:forEach>
@@ -85,7 +91,7 @@ body {
 				ordering : true,
 				info : false,
 				searching : false,
-				"columns" : [  null, null, {
+				"columns" : [ null, null, {
 					"searchable" : false
 				}, {
 					"searchable" : false
@@ -98,7 +104,6 @@ body {
 
 		divLoadBody.style.display = "";
 		loadingBar.style.display = "none";
-
-		</script>
+	</script>
 </body>
 </html>

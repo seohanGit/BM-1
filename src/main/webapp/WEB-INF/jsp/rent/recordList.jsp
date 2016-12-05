@@ -15,10 +15,11 @@
 <link href="/resources/css/signin.css" rel="stylesheet">
 <link href="/resources/css/common.css" rel="stylesheet">
 <link href="/resources/css/bootstrap-select.min.css" rel="stylesheet">
-<link href="/resources/css/dataTables.bootstrap.min.css" rel="stylesheet">
+<link href="/resources/css/dataTables.bootstrap.min.css"
+	rel="stylesheet">
 <script src="/resources/js/jquery/jquery.js"></script>
 <script src="/resources/js/bootstrap.min.js"></script>
- 
+
 <script type="text/javascript">
 	
 </script>
@@ -54,14 +55,14 @@
 					<!-- 
 			기록 검색<button type="button" onclick="location.href='/insertRecord'">삽입</button>
 			 -->
-					<div class="dataTable_wrapper"> 
+					<div class="dataTable_wrapper">
 						<table class="table table-striped table-bordered" id="dataTable">
 							<thead>
 								<tr class="  title">
 									<th class="td-title">도서명</th>
 									<th class="td-date">대여자</th>
 									<th class="hidden-sm hidden-xs hidden-md td-author">분류</th>
-									<th class="td-author hidden-xs">대여일</th>
+									<th class="td-author hidden-xs">대출일</th>
 									<th class="td-author">반납일</th>
 									<!-- <th class="td-img">삭제</th> -->
 								</tr>
@@ -80,8 +81,14 @@
 											</c:choose></td>
 										<td class="hidden-sm hidden-xs hidden-md" id="b_group"
 											align="left">${book.b_group}</td>
-										<td class="hidden-xs" align="left"> ${book.rentdate } </td>
-										<td align="left">${book.returndate } </td>
+										<td class="hidden-xs" align="left"><fmt:parseDate
+												value="${record.rentdate}000000" pattern="yyyyMMddHHmmss"
+												var="rentDate" scope="page" /> <fmt:formatDate
+												value="${rentDate}" pattern="yyyy-MM-dd" /></td>
+										<td align="left"><fmt:parseDate
+												value="${record.returnDate}000000" pattern="yyyyMMddHHmmss"
+												var="returnDate" scope="page" /> <fmt:formatDate
+												value="${returnDate}" pattern="yyyy-MM-dd" /></td>
 
 
 										<%-- <td><button class="btn btn-default btn-sm" type="button"

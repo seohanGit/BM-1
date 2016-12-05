@@ -2,6 +2,8 @@ package com.baron.bm.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -34,16 +36,27 @@ public class EtcController {
 	@Autowired
 	private RequestService requestservice;
 
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+	SimpleDateFormat formatsdf = new SimpleDateFormat("yyyy-MM-dd");
+	
 	@RequestMapping("/food")
-	public String todayFood(Model model) {
-
+	public String todayFood(Model model, String datepicker) {
+		Calendar cal = Calendar.getInstance();
+		String nowDate = sdf.format(cal.getTime());
+		
+		if (datepicker!= null ){
+			nowDate =  datepicker;
+		}
+		
 		List<String> breakfastList = new ArrayList<String>();
 		List<String> lunchList = new ArrayList<String>();
 		List<String> dinnerList = new ArrayList<String>();
-		breakfastList = etcService.breakfastList();
-		lunchList = etcService.lunchList();
-		dinnerList = etcService.dinnerList();
+		breakfastList = etcService.breakfastList(nowDate);
+		lunchList = etcService.lunchList(nowDate);
+		dinnerList = etcService.dinnerList(nowDate);
 
+		nowDate= nowDate.substring(0, 4) + "-" +nowDate.substring(4, 6)+"-"+nowDate.substring(6, 8);
+		model.addAttribute("date", nowDate);
 		model.addAttribute("List1", breakfastList);
 		model.addAttribute("List2", lunchList);
 		model.addAttribute("List3", dinnerList);
@@ -61,7 +74,7 @@ public class EtcController {
 	}
 	
 	@RequestMapping("/endDamage")
-	public String endDamage(ModelAndView mav, ItDamage itDamage) {  
+	public String endDamage(ModelAndView mav, ItDamage itDamage) { 
 		etcService.endDamage(itDamage); 
 
 		return "redirect:itdamage";

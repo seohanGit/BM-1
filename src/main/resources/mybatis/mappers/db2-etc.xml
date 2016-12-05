@@ -3,29 +3,23 @@
 <mapper namespace="com.baron.member.sqlModel">
 
 	<!-- 코드 관련 쿼리 -->
-	<select id="selectdinner" resultType="String">
+	<select id="selectdinner" resultType="String" parameterType="String">
 		SELECT MENU
 		FROM
 		SITLIB.FOODTABLE
-		WHERE GDATE = VARCHAR_FORMAT(CURRENT
-		TIMESTAMP,
-		'YYYYMMDD') AND GUBN = 'C'
+		WHERE GDATE = #{nowDate} AND GUBN = 'C'
 	</select>
-	<select id="selectlunch" resultType="String">
+	<select id="selectlunch" resultType="String" parameterType="String">
 		SELECT MENU
 		FROM
 		SITLIB.FOODTABLE
-		WHERE GDATE = VARCHAR_FORMAT(CURRENT
-		TIMESTAMP,
-		'YYYYMMDD') AND GUBN = 'B'
+		WHERE GDATE = #{nowDate} AND GUBN = 'B'
 	</select>
-	<select id="selectbreakfast" resultType="String">
+	<select id="selectbreakfast" resultType="String" parameterType="String">
 		SELECT MENU
 		FROM
 		SITLIB.FOODTABLE
-		WHERE GDATE = VARCHAR_FORMAT(CURRENT
-		TIMESTAMP,
-		'YYYYMMDD') AND GUBN = 'A'
+		WHERE GDATE = #{nowDate} AND GUBN = 'A'
 	</select>
 	
 	<select id="selectItDamage" resultType="ItDamage"> 

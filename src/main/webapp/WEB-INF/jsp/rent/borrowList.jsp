@@ -36,7 +36,7 @@ body {
 			<br> 
 			<div id="searchResultArea">
 				<c:choose>
-					<c:when test="${empty rentList}">
+					<c:when test="${empty bookList}">
 						<h3>대출중인 도서가 없습니다.</h3>
 					</c:when>
 
@@ -47,11 +47,11 @@ body {
 								<tr class="title">
 									<th class="hidden-xs genre">표지</th>
 									<th class="title">도서명</th>
-									<th class="hidden-xs genre">저자</th>
-									<th class="hidden-xs hidden-sm genre">분류</th>
-									<th class="hidden-xs genre">대출일</th>
-									<th class="genre">반납일</th>
-									<th class="genre">상태</th>
+									<th class="hidden-xs longlen">저자</th>
+									<th class="hidden-xs hidden-sm longlen">분류</th>
+									<th class="hidden-xs author">대출일</th>
+									<th class="author">반납일</th>
+									<th class="author">상태</th>
 									<th class="image"></th>
 								</tr>
 							</thead>
@@ -71,8 +71,14 @@ body {
 										<td class="hidden-xs hidden-sm" align="left">${book.b_group}</td>
 
 
-										<td class="hidden-xs"> ${book.rentdate}</td>
-										<td style="width: inherit;">${book.returndate}</td>
+										<td class="hidden-xs"> <fmt:parseDate
+													value="${book.rentdate}000000" pattern="yyyyMMddHHmmss"
+													var="rentDate" scope="page" /> <fmt:formatDate
+													value="${rentDate}" pattern="yyyy-MM-dd" /></td>
+										<td style="width: inherit;"><fmt:parseDate
+													value="${book.returndate}000000" pattern="yyyyMMddHHmmss"
+													var="returnDate" scope="page" /> <fmt:formatDate
+													value="${returnDate}" pattern="yyyy-MM-dd" /></td>
 										<c:choose>
 											<c:when test="${book.rentchk=='1'}">
 												<td>요청중</td>

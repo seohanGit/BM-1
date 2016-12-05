@@ -13,6 +13,26 @@
 <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="/resources/css/common.css" rel="stylesheet">
 <link href="/resources/css/index.css" rel="stylesheet">
+<link href="/resources/css/bootstrap-select.min.css" rel="stylesheet">
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+	
+<script src="/resources/js/jquery/jquery.js"></script>
+<script src="/resources/js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('.datepicker').datepicker({
+			showOn : "button",
+			buttonImage : "/resources/img/calendar.gif",
+			buttonImageOnly : true,
+			buttonText : "Select date",
+			dateFormat : "yy-mm-dd"		
+			}
+		);
+	});
+	
+</script>
 </head>
 <body>
 	<jsp:include page="nav.jsp" />
@@ -25,15 +45,15 @@
 
 			<!-- /.panel-heading -->
 			<div class="panel-body">
+				날짜
+				<div class="input-group date" data-provide="datepicker">
+					<input class="datepicker" id="datepicker" name="datepicker"
+						type="text" value="${date}">
+				</div>
 				<div class="dataTable_wrapper">
-	아침
+					아침
 					<table class="table table-striped table-bordered " id="dataTable">
-
-						<%-- 
-						
- --%>
 						<tbody>
-
 							<c:forEach items="${List1}" var="food" varStatus="loop">
 
 
@@ -84,17 +104,12 @@
 	<!-- /.row -->
 	<hr>
 
-	<!-- /.container -->
-	<!-- jQuery -->
-	<script src="/resources/js/jquery/jquery.js"></script>
-	<!-- Bootstrap Core JavaScript -->
-	<script src="/resources/js/bootstrap.min.js"></script>
-	<script src="/resources/js/common.js"></script>
 
-	<script src="/resources/js/common.js"></script>
-	<script src="/resources/js/metisMenu.min.js"></script>
-	<script src="/resources/js/jquery.dataTables.min.js"></script>
-	<script src="/resources/js/dataTables.bootstrap.min.js"></script>
+	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+	<script src="/resources/js/etc.js"></script>
+	<script type="text/javascript">
+		
+	</script>
 
 </body>
 </html>

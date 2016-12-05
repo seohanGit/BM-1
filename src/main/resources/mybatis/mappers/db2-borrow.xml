@@ -232,7 +232,7 @@
 		B.id=#{id} AND
 		B.rentchk='3'
 		ORDER BY
-		B.returndate DESC
+		B.rentdate DESC
 	</select>
 
 
@@ -249,7 +249,7 @@
 			interval 90 day) AND current date) AND -->
 		B.rentchk='3'
 		ORDER BY
-		B.returndate DESC
+		B.rentdate DESC
 	</select>
 
 	<update id="deleteRecord" parameterType="BookModel">

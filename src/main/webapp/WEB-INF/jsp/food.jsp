@@ -16,91 +16,76 @@
 <link href="/resources/css/bootstrap-select.min.css" rel="stylesheet">
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-	
+
 <script src="/resources/js/jquery/jquery.js"></script>
 <script src="/resources/js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
-	$(document).ready(function() {
-		$('.datepicker').datepicker({
-			showOn : "button",
-			buttonImage : "/resources/img/calendar.gif",
-			buttonImageOnly : true,
-			buttonText : "Select date",
-			dateFormat : "yy-mm-dd"		
-			}
-		);
-	});
-	
+// 	$(document).ready(function() {
+// 		$('.datepicker').datepicker({ 
+// 			dateFormat : "yy-mm-dd"
+// 		});
+// 	});
 </script>
 </head>
 <body>
-	<jsp:include page="nav.jsp" />
-	<!-- Page Content -->
-	<div class="row">
-		<!-- Blog Entries Column -->
-		<!-- Blog Sidebar Widgets Column -->
-
-		<div class="panel panel-default">
-
-			<!-- /.panel-heading -->
-			<div class="panel-body">
-				날짜
-				<div class="input-group date" data-provide="datepicker">
-					<input class="datepicker" id="datepicker" name="datepicker"
-						type="text" value="${date}">
-				</div>
-				<div class="dataTable_wrapper">
-					아침
-					<table class="table table-striped table-bordered " id="dataTable">
-						<tbody>
-							<c:forEach items="${List1}" var="food" varStatus="loop">
-
-
-								<tr align="left">
-									<td>${food}</td>
-								</tr>
+	<div class="container col-lg-offset-1  " style="margin-left: 3%">
+		<div class="row">
+			<div class="panel panel-default">
+				<div class="panel-body  ">
+					날짜
+					<div class="col-sm-12 col-md-12">
+						<div class="col-sm-4 col-md-4">
+							<div class="input-group date " data-provide="datepicker">
+								<input class="datepicker " id="datepicker" name="datepicker"
+									style="width: 100%" type="date" value="${date}">
+							</div>
+						</div>						 
+					</div>
+					<div class="dataTable_wrapper">
+						아침
+						<table class="table table-striped table-bordered " id="dataTable">
+							<tbody>
+								<c:forEach items="${List1}" var="food" varStatus="loop">
+									<tr align="left">
+										<td>${food}</td>
+									</tr>
 
 
-							</c:forEach>
-						</tbody>
-					</table>
-					<hr>
-					점심
-					<table class="table table-striped table-bordered ">
-						<tbody>
-							<c:forEach items="${List2}" var="food" varStatus="loop">
+								</c:forEach>
+							</tbody>
+						</table>
+						<hr>
+						점심
+						<table class="table table-striped table-bordered ">
+							<tbody>
+								<c:forEach items="${List2}" var="food" varStatus="loop">
 
 
-								<tr align="left">
-									<td>${food}</td>
-								</tr>
-							</c:forEach>
-						</tbody>
+									<tr align="left">
+										<td>${food}</td>
+									</tr>
+								</c:forEach>
+							</tbody>
 
-					</table>
-					<hr>
-					저녁
-					<table class="table table-striped table-bordered ">
-						<tbody>
-							<c:forEach items="${List3}" var="food" varStatus="loop">
+						</table>
+						<hr>
+						저녁
+						<table class="table table-striped table-bordered ">
+							<tbody>
+								<c:forEach items="${List3}" var="food" varStatus="loop">
+									<tr align="left">
+										<td>${food}</td>
+									</tr>
+								</c:forEach>
+							</tbody>
 
-
-								<tr align="left">
-									<td>${food}</td>
-
-
-								</tr>
-							</c:forEach>
-
-						</tbody>
-
-					</table>
+						</table>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-
 	<!-- /.row -->
 	<hr>
 
@@ -110,6 +95,5 @@
 	<script type="text/javascript">
 		
 	</script>
-
 </body>
 </html>

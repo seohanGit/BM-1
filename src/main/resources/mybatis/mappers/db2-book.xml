@@ -101,7 +101,7 @@
 		FROM
 		sitlib.bookmst A  
 		left outer join sitlib.BOOKrent B on a.book_cd = b.book_cd and a.rentchk = b.rentchk
-		where rcv_date between #{date1} and #{date2} and left(b_group,1) = 'B'
+		where rcv_date between #{date1} and #{date2} 
 		ORDER BY A.RCV_DATE DESC , A.RENTCHK DESC
 	</select>
 	

@@ -258,31 +258,11 @@ public class BookServiceImpl implements BookService {
 
 		br.close();
 	}
-
-	/*
-	 * private URL getIsbnUrl(String keyword) throws
-	 * UnsupportedEncodingException, MalformedURLException { String key =
-	 * "B0F933E2847C6447203572CCC68F824A1054E7EF0D966C7B95245288CE95E300";
-	 * String addr = "http://book.interpark.com/api/search.api?"; String
-	 * parameter = "";
-	 * 
-	 * key = URLEncoder.encode(key, "UTF-8"); keyword =
-	 * URLEncoder.encode(keyword, "UTF-8"); parameter = parameter + "&" +
-	 * "query=" + keyword; parameter = parameter + "&" + "queryType=isbn";
-	 * parameter = parameter + "&" + "maxResults=1";
-	 * 
-	 * addr = addr + "key=" + key + parameter;
-	 * 
-	 * URL url = new URL(addr); return url;
-	 * 
-	 * }
-	 */
-
+ 
 	@Override
 	public List<BookModel> bookList(String listType) {
 		return bookDao.listBook();
-	}
-
+	} 
 	@Override
 	public List<BookModel> selectBookAll() {
 

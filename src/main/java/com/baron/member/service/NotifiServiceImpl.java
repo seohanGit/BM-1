@@ -17,9 +17,7 @@ import com.baron.member.model.SmsModel;
 @Service
 public class NotifiServiceImpl implements NotifiService {
 
-	Calendar cal = Calendar.getInstance();				
-	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");				
-	String nowDate = sdf.format(cal.getTime());
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 	@Autowired
 	private NotifiDao notifiDao;
 
@@ -37,9 +35,7 @@ public class NotifiServiceImpl implements NotifiService {
 		SmsModel sms = new SmsModel();
 
 		BookModel book = rentDao.selectReservation(book_cd);
-		String title = rentDao.selectBook(book_cd).getTitle();
-//		String mobi_no = book.getMobi_no().substring(1);
-//		sms.setPhone(mobi_no);
+		String title = rentDao.selectBook(book_cd).getTitle(); 
 		sms.setTitle(title);
 
 		notifiDao.notifiReser(sms);
@@ -51,7 +47,7 @@ public class NotifiServiceImpl implements NotifiService {
 		MemberModel member = joinDao.selectMember(book.getId());
 				
 		sms.setPhone(member.getMobi_no().substring(1));
-		sms.setTitle(book.getTitle());		
+		sms.setTitle(book.getTitle().substring(0,15));		
 		notifiDao.notifiReq(sms);
 	}
 
@@ -62,7 +58,7 @@ public class NotifiServiceImpl implements NotifiService {
 		MemberModel member = joinDao.selectMember(book.getId());
 				
 		sms.setPhone(member.getMobi_no().substring(1));
-		sms.setTitle(book.getTitle());
+		sms.setTitle(book.getTitle().substring(0,15));
 		notifiDao.notifiRent(sms);
 	}
 
@@ -74,17 +70,13 @@ public class NotifiServiceImpl implements NotifiService {
 
 	
 	@Override
-	public void notifiReturnConfirm(String book_cd)  {
+	public void notifiReturnConfirm(String book_cd)  { 
 		SmsModel sms = new SmsModel();		
 		BookModel book = rentDao.selectRent(book_cd);
-		MemberModel member = joinDao.selectMember(book.getId());
-		book.setReturndate(nowDate); 
+		MemberModel member = joinDao.selectMember(book.getId()); 
 		
-		sms.setTitle(book.getTitle()); 
-		
-		if(member.getMobi_no().length()>0){
-			sms.setPhone(member.getMobi_no().substring(1));
-		} 
+		sms.setTitle(book.getTitle().substring(0,15));  
+		sms.setPhone(member.getMobi_no().substring(1)); 
 		notifiDao.notifiReturnConfirm(sms);
 
 	}

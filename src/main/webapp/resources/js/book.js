@@ -33,6 +33,7 @@ $('.datepicker').change(function() {
 			alert('ajax failed');
 		},
 		success : function(data, status) { // Ajax complete handelr
+			
 			$('#searchResultArea').empty().append(data);
 		}
 	});

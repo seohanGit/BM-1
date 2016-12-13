@@ -215,6 +215,8 @@ public class BookController {
 			}
 			bookList = bookservice.listBook(listType, datepicker1, datepicker2,
 					"");
+//			mav.addObject("datepicker1", datepicker1);
+//			mav.addObject("datepicker2", datepicker2);
 			mav.setViewName("book/searchResult");
 			break;
 		case "best":

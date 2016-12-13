@@ -227,8 +227,7 @@
 		FROM
 		sitlib.bookmst A INNER JOIN sitlib.BOOKRENT B ON
 		A.book_cd=B.book_cd
-		WHERE <!-- (B.returndate BETWEEN date_sub(current date, 
-			interval 90 day) AND current date) AND -->
+		WHERE  
 		B.id=#{id} AND
 		B.rentchk='3'
 		ORDER BY
@@ -245,8 +244,7 @@
 		FROM
 		sitlib.bookmst A INNER JOIN sitlib.BOOKRENT B ON
 		A.book_cd=B.book_cd
-		WHERE <!-- (B.returndate BETWEEN date_sub(current date, 
-			interval 90 day) AND current date) AND -->
+		WHERE  
 		B.rentchk='3'
 		ORDER BY
 		B.rentdate DESC

@@ -81,12 +81,12 @@
 											</c:choose></td>
 										<td class="hidden-sm hidden-xs hidden-md" id="b_group"
 											align="left">${book.b_group}</td>
-										<td class="hidden-xs" align="left"><fmt:parseDate
-												value="${record.rentdate}000000" pattern="yyyyMMddHHmmss"
+										<td class="hidden-xs" align="center"><fmt:parseDate
+												value="${book.rentdate}000000" pattern="yyyyMMddHHmmss"
 												var="rentDate" scope="page" /> <fmt:formatDate
 												value="${rentDate}" pattern="yyyy-MM-dd" /></td>
-										<td align="left"><fmt:parseDate
-												value="${record.returnDate}000000" pattern="yyyyMMddHHmmss"
+										<td align="center"><fmt:parseDate
+												value="${book.returndate}000000" pattern="yyyyMMddHHmmss"
 												var="returnDate" scope="page" /> <fmt:formatDate
 												value="${returnDate}" pattern="yyyy-MM-dd" /></td>
 

@@ -27,7 +27,8 @@
 					showOn : "button",
 					buttonImage : "/resources/img/calendar.gif",
 					buttonImageOnly : true,
-					buttonText : "Select date"
+					buttonText : "Select date",
+					dateFormat: 'yymmdd'
 				});
 				
 				var myDate = new Date();

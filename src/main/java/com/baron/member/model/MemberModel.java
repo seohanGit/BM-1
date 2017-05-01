@@ -24,15 +24,33 @@ public class MemberModel {
 	private String co_gb;
 	private String team_nm;
 	private String chief;
-	private String chiefid;
-
+	private String chiefid; 
 
 	private int max;
 
 	private String year;
 	private String month;
 
+	private String adminChk;
+	private String serviceName;
 	
+	
+	public String getAdminChk() {
+		return adminChk;
+	}
+
+	public void setAdminChk(String adminChk) {
+		this.adminChk = adminChk;
+	}
+
+	public String getServiceName() {
+		return serviceName;
+	}
+
+	public void setServiceName(String serviceName) {
+		this.serviceName = serviceName;
+	}
+
 	public String getChief() {
 		return chief;
 	}

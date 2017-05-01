@@ -10,7 +10,7 @@ public interface JoinService {
 
 	public boolean join(MemberModel memberModel);
 
-	public MemberModel login(String id);
+	public MemberModel login(MemberModel memberModel);
 
 	public String identify(String id);
 

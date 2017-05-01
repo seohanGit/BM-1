@@ -9,7 +9,9 @@ public interface JoinDao {
 	public int selectMemberById(MemberModel model);
 
 	public void insertMember(MemberModel memberModel);
-
+	
+	public MemberModel login(MemberModel memberModel);
+	
 	public MemberModel selectMember(String id);
 	
 	public String selectPass(String id);

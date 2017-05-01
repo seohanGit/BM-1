@@ -38,25 +38,25 @@ public class JoinDaoImpl implements JoinDao {
 		session.insert(NAMESPACE + "insertMember", model);
 	}
 
-	@Override
-	public MemberModel selectMember(String id) {
 
+	@Override
+	public MemberModel login(MemberModel memberModel) { 
+		return session.selectOne(NAMESPACE + "login", memberModel);
+	}
+	@Override
+	public MemberModel selectMember(String id) { 
 		return session.selectOne(NAMESPACE + "selectMember", id);
 	}
 
 	@Override
-	public String selectPass(String id) {
-
+	public String selectPass(String id) { 
 		return session.selectOne(NAMESPACE + "selectPass", id);
 	}
 
 	@Override
 	public void updateMember(MemberModel model) {
-		session.update(NAMESPACE + "updateMember", model);
-
-	}
-
-
+		session.update(NAMESPACE + "updateMember", model); 
+	} 
 	@Override
 	public int selectMaxGrade() {
 		// TODO Auto-generated method stub
@@ -70,14 +70,12 @@ public class JoinDaoImpl implements JoinDao {
 	}
 
 	@Override
-	public List<MemberModel> selectMemberList() {
-		// TODO Auto-generated method stub
+	public List<MemberModel> selectMemberList() { 
 		return session.selectList(NAMESPACE + "selectMemberList");
 	}
 
 	@Override
-	public List<String> test() {
-		// TODO Auto-generated method stub
+	public List<String> test() { 
 		return session.selectList(NAMESPACE + "test");
 	}
 

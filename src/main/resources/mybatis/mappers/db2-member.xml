@@ -37,6 +37,27 @@
 		WHERE id = #{id}
 	</update>
 
+	<select id="login" resultType="MemberModel"
+		parameterType="MemberModel">
+		select mst.co_gb, mst.kname, mst.team_nm, mst.jikb, 
+				coalesce(tmj.kname, mst.kname) as chief, coalesce(tmj.asabn, mst.asabn) as chiefId, mst.mobi_no,
+				coalesce(MODIFY_FL,'') ADMINCHK
+                 from (
+                 select * from tprlib.GR_INSA where RETI_GB not in ('R') and ASABN=#{id} AND JIKB != '' AND TEAM_NM != ''
+                 )MST  
+                  left outer join (
+                  select * from AALIB.GR_EMP 
+                  where RETI_GB not in ('R') and CO_GB in ('SEOHAN','KAMTEC') and FAGB_CD in ('3','6') and JIKC_CD in ('13')
+                  ) TMJ 
+                  on MST.ASOSK=TMJ.ASOSK and MST.CO_GB=TMJ.CO_GB and tmj.kname != '' 			
+				left outer join (
+					SELECT A.* FROM AALIB.MENU_PERMISSION A
+		        	INNER JOIN AALIB.MAIN_MENU B  ON A.PRG_NO = B.PRG_NO AND A.GROUP_GB = B.GROUP_GB    AND B.FILE_CD =  #{serviceName}
+	        	) A ON MST.CO_GB = A.GROUP_GB AND MST.ASABN = A.ASABN
+				order by MODIFY_FL DESC, co_gb desc
+                FETCH first 1 rows only
+	</select>
+
 	<select id="selectMember" resultType="MemberModel"
 		parameterType="String">
 		select mst.co_gb, mst.kname, mst.team_nm, mst.jikb, 

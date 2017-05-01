@@ -101,38 +101,38 @@ public class MemberController {
 		return "start";
 	}
 
-	@RequestMapping("/login")
-	public ModelAndView login(HttpServletResponse response, MemberModel model) {
-
-		// LDAP Context
-		String url = "LDAP://iseohan.com:389";
-		Hashtable<String, String> env = new Hashtable<String, String>();
-		env.put(Context.INITIAL_CONTEXT_FACTORY,
-				"com.sun.jndi.ldap.LdapCtxFactory");
-		env.put(Context.PROVIDER_URL, url);
-		env.put(Context.SECURITY_AUTHENTICATION, "none");
-
-		env.put(Context.SECURITY_PRINCIPAL, model.getId());
-		env.put(Context.SECURITY_CREDENTIALS, model.getPassword());
-
-		try {
-			DirContext ctx = new InitialDirContext(env);
-			Object obj = new Object();
-			// want to print all users from the LDAP server
-			System.out.println(obj.toString());
-			ctx.close();
-		} catch (NamingException e) {
-			e.printStackTrace();
-		}
-
-		ModelAndView mav = new ModelAndView("/member/loginResult");
-		joinService.login(model.getId());
-
-		String info = model.getTeam_nm() + model.getJikb() + model.getKname();
-		mav.addObject("info", info);
-		mav.addObject("permission", model.getPermission());
-		return mav;
-	}
+//	@RequestMapping("/login")
+//	public ModelAndView login(HttpServletResponse response, MemberModel model) {
+//
+//		// LDAP Context
+//		String url = "LDAP://iseohan.com:389";
+//		Hashtable<String, String> env = new Hashtable<String, String>();
+//		env.put(Context.INITIAL_CONTEXT_FACTORY,
+//				"com.sun.jndi.ldap.LdapCtxFactory");
+//		env.put(Context.PROVIDER_URL, url);
+//		env.put(Context.SECURITY_AUTHENTICATION, "none");
+//
+//		env.put(Context.SECURITY_PRINCIPAL, model.getId());
+//		env.put(Context.SECURITY_CREDENTIALS, model.getPassword());
+//
+//		try {
+//			DirContext ctx = new InitialDirContext(env);
+//			Object obj = new Object();
+//			// want to print all users from the LDAP server
+//			System.out.println(obj.toString());
+//			ctx.close();
+//		} catch (NamingException e) {
+//			e.printStackTrace();
+//		}
+//
+//		ModelAndView mav = new ModelAndView("/member/loginResult");
+//		joinService.login(model.getId());
+//
+//		String info = model.getTeam_nm() + model.getJikb() + model.getKname();
+//		mav.addObject("info", info);
+//		mav.addObject("permission", model.getPermission());
+//		return mav;
+//	}
 
 	// 서한 주소용 서버
 	// MEMBER TABLE (사번, 권한) 에서 사번, 권한 대조 후 로그인
@@ -141,16 +141,12 @@ public class MemberController {
 	@RequestMapping("/autologin")
 	public ModelAndView login2(HttpServletResponse response,
 			HttpServletRequest request, HttpSession session, ModelAndView mav, String id) {
-		Boolean	 adminchk = false;
-		List<String> adminList = new ArrayList<String>();
-		adminList.add("4150266");
-		adminList.add("4150240");
-		adminList.add("4030243");
-		adminList.add("4130257");
-		adminList.add("4040187");
+		String adminchk = ""; 
 		
 		MemberModel membermodel = new MemberModel();
-		membermodel = joinService.login(id);
+		membermodel.setId(id);
+		membermodel.setServiceName("공통20_연구소통합관리메뉴");
+		membermodel = joinService.login(membermodel) ;
 		
 		if (membermodel.getKname() == null) {
 			mav.setViewName("/member/loginfail");
@@ -162,18 +158,14 @@ public class MemberController {
 			mav.addObject("chief", membermodel.getChief());
 			mav.addObject("chiefId", membermodel.getChiefid());
 			mav.addObject("id", membermodel.getId());
-			
+			adminchk = membermodel.getAdminChk();
 			
 			session.setAttribute("id", membermodel.getId());
 			session.setAttribute("chief", membermodel.getChief());
 			session.setAttribute("chiefId", membermodel.getChiefid());
 			session.setAttribute("adminMode", "user"); 
-			for (String string : adminList) {
-				if (string.equals(id)) {
-					adminchk = true;
-				}
-			}
-			if (adminchk) {
+			 
+			if (adminchk.equals("Y")) {
 				response.addCookie(new Cookie("bm_id", id));
 				response.addCookie(new Cookie("bm_permission", "1"));
 				session.setAttribute("adminMode", "admin"); 

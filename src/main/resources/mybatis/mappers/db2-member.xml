@@ -54,7 +54,7 @@
 					SELECT A.* FROM AALIB.MENU_PERMISSION A
 		        	INNER JOIN AALIB.MAIN_MENU B  ON A.PRG_NO = B.PRG_NO AND A.GROUP_GB = B.GROUP_GB    AND B.FILE_CD =  #{serviceName}
 	        	) A ON MST.CO_GB = A.GROUP_GB AND MST.ASABN = A.ASABN
-				order by MODIFY_FL DESC, co_gb desc
+				order by MODIFY_FL, co_gb desc
                 FETCH first 1 rows only
 	</select>
 

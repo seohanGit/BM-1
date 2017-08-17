@@ -92,15 +92,15 @@ public class XmlDom {
 			book.setTotalResults(totalResults);
 
 			Element element = (Element) list.item(0);
-			book.setTitle(getChildren(element, "title"));
+			book.setTitle(getChildren(element, "title").replace("'",""));
 			book.setLink(getChildren(element, "link"));
 			book.setImageurl(getChildren(element, "coverSmallUrl"));
 			book.setPrice(Integer.parseInt(getChildren(element, "priceSales")));
-			book.setAuthor(getChildren(element, "author"));
+			book.setAuthor(getChildren(element, "author").replace("'",""));
 			book.setIsbn(getChildren(element, "isbn"));
 			book.setB_group(getCategoryName(getChildren(element, "categoryId")));
-			book.setPublish(getChildren(element, "publisher"));
-			book.setSummary(getChildren(element, "description"));
+			book.setPublish(getChildren(element, "publisher").replace("'",""));
+			book.setSummary(getChildren(element, "description").replace("‘","").replace("’", ""));
 			System.out.println(getChildren(element, "description"));
 			 
 		}

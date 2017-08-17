@@ -56,5 +56,6 @@ public class EtcDaoImpl implements EtcDao {
 	@Override
 	public void endDamage(ItDamage itDamage) {
 		session.update(NAMESPACE + "endDamage", itDamage);
+		session.update(NAMESPACE + "endDamage2", itDamage);
 	}
 }

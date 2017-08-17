@@ -40,7 +40,7 @@
 		FROM sitlib.bookreqst B
 		LEFT OUTER JOIN TPRLIB.GR_INSA C ON
 		B.id=C.ASABN  
-		WHERE C.CO_GB = 'SEOHAN'
+		WHERE C.CO_GB = 'SEOHAN' and REQSTATUS IN ('0','1')
 		ORDER BY
 		reqdate DESC, reqstatus asc
 	</select>

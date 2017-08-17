@@ -47,7 +47,7 @@ public class NotifiServiceImpl implements NotifiService {
 		MemberModel member = joinDao.selectMember(book.getId());
 				
 		sms.setPhone(member.getMobi_no().substring(1));
-		sms.setTitle(book.getTitle().substring(0,15));		
+		sms.setTitle(book.getTitle());		
 		notifiDao.notifiReq(sms);
 	}
 
@@ -58,7 +58,7 @@ public class NotifiServiceImpl implements NotifiService {
 		MemberModel member = joinDao.selectMember(book.getId());
 				
 		sms.setPhone(member.getMobi_no().substring(1));
-		sms.setTitle(book.getTitle().substring(0,15));
+		sms.setTitle(book.getTitle());
 		notifiDao.notifiRent(sms);
 	}
 
@@ -75,7 +75,7 @@ public class NotifiServiceImpl implements NotifiService {
 		BookModel book = rentDao.selectRent(book_cd);
 		MemberModel member = joinDao.selectMember(book.getId()); 
 		
-		sms.setTitle(book.getTitle().substring(0,15));  
+		sms.setTitle(book.getTitle());  
 		sms.setPhone(member.getMobi_no().substring(1)); 
 		notifiDao.notifiReturnConfirm(sms);
 

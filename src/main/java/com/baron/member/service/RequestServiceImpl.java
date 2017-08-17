@@ -74,7 +74,7 @@ public class RequestServiceImpl implements RequestService {
 		model.setB_group(model.getB_group().trim());
 		model.setC_group(model.getC_group().trim());
 		model.setReqdate(nowDate);
-		model.setKname(model.getKname());
+		model.setKname(model.getKname().trim());
 		model.setBook_cd(model.getB_group().substring(0, 1)
 				+ model.getC_group().substring(0, 3) + "-");
 		model.setReq_cd(maxser);

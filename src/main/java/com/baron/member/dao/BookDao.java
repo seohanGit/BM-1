@@ -36,5 +36,6 @@ public interface BookDao {
 	public List<BookModel> searchPublisher(Dto dto);
 
 	public void setRecommend(BookModel bookmodel);
+	public String getMaxSer(BookModel bookmodel);
 
 }

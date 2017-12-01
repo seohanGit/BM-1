@@ -24,11 +24,13 @@
 			<div class="panel panel-default ">
 				<form action="/insertbook" method="post" class="panel-body"
 					enctype="multipart/form-data" name="insertForm">
+					
 					<input type="hidden" id="type" value="isbn">
+					
 					<div class="form-group">
 						<label style="width:10%;" for="exampleInputEmail1">ISBN</label> <input style="width:70%; display:-webkit-inline-box;"
 							 class="form-control" type="text" id="isbn"
-							name="isbn" required="required">
+							name="isbn"  >
 					<button style="width:10%" class="btn btn-default" type="submit" id="getBookInfo">
 						<span class="glyphicon glyphicon-search"></span>
 					</button>
@@ -37,7 +39,7 @@
 					<div class="form-group">
 						<label for="exampleInputEmail1">도서번호</label> <input type="text"
 							class="form-control" id="book_cd" name="book_cd"
-							required="required">
+							required="required"  disabled>
 					</div>
 					<div class="form-group">
 						<label for="exampleInputPassword1">도서명</label> <input type="text"
@@ -91,10 +93,8 @@
 							onClick="formChk(); opener.focus(); self.close(); ">확인</button>
 					</div>
 				</form>
-			</div>
-
-		</div>
-		<div id="searchResultArea"></div>
+			</div> 
+		</div> 
 
 	</div>
 	<script type="text/javascript">

@@ -54,10 +54,10 @@ public class BookServiceImpl implements BookService {
 
 	@Override
 	public void insertBook(BookModel model) { 
-		model.setQuantity(1);
-		if (model.getIsbn().equals("")) {
-			model.setIsbn("");
-		}
+		model.setQuantity(1); 
+		model.setB_group(model.getB_group().trim());
+		model.setC_group(model.getC_group().trim());
+		
 		//model.setSummary(model.getSummary().substring(0, 500));
 		String dir = "/SEOHAN/BOOKMST/";
 		MultipartFile uploadfile = model.getFile();
@@ -74,10 +74,9 @@ public class BookServiceImpl implements BookService {
 				model.setImageurl(""); 
 				e.printStackTrace();
 			} // try - catch
-		} // if
+		} // if 
+		model.setBook_cd(model.getB_group().substring(0,1) + model.getC_group().substring(0,3) + "-" + bookDao.getMaxSer(model)); 
 		if (model.getQuantity() == 1) {
-			model.setB_group(model.getB_group().trim());
-			model.setC_group(model.getC_group().trim());
 			bookDao.insertBook(model);
 		} else if (model.getQuantity() > 1) {
 			for (int i = 0; i < model.getQuantity(); i++) {

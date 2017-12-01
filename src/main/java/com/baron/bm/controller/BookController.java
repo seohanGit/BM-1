@@ -268,8 +268,7 @@ public class BookController {
 		if (type.equals("isbn")) {
 			book = requestservice.findBookOne(keyword);
 			mav.addObject("book", book);
-			mav.addObject("keyword", keyword);
-			mav.setViewName( "book/result1");
+			mav.addObject("keyword", keyword); 
 		} else {
 			bookList = bookservice.findBook(keyword);
 			mav.addObject("bookList", bookList);

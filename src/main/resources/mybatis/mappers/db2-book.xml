@@ -37,12 +37,10 @@
 		SELECT A.title, A.author, A.publish, A.b_group, A.rentchk, A.rcmdChk, A.imageurl,
 		A.reservechk, A.book_cd, B.returndate
 		FROM
-		sitlib.bookmst A LEFT OUTER
-		JOIN sitlib.bookrent B
-		ON A.book_cd = B.book_cd AND A.rentchk =
-		B.rentchk
+		sitlib.bookmst A 
+		LEFT OUTER	JOIN sitlib.bookrent B	ON A.book_cd = B.book_cd AND A.rentchk = B.rentchk
 		WHERE
-		LCASE(A.TITLE) like  #{keyword}    
+		UCASE(A.TITLE) like  #{keyword}    
 		<if test="b_group != '' and b_group != null and b_group != 'ÀüÃ¼' ">
 		AND left(A.b_group,1) = #{b_group}  
 		</if>
@@ -147,8 +145,6 @@
 		summary=#{summary}
 		WHERE BOOK_CD=#{book_cd1}
 	</update>
-	
-
 	<select id="getNewbook" resultType="BookModel">
 		SELECT *
 		FROM sitlib.bookmst 
@@ -164,4 +160,12 @@
 		rcmdChk=#{rcmdChk}
 		WHERE BOOK_CD=#{book_cd}
 	</update>
+	<select id="getMaxSer"  resultType="String" parameterType="BookModel">
+		SELECT
+		coalesce(RIGHT(TRIM('00'||MAX(SUBSTR(BOOK_CD, 6, 3)) + 1),3),'001') MAXSER 
+		FROM SITLIB.BOOKMST
+		WHERE 
+		 b_group= #{b_group}
+		AND  c_group = #{c_group}  
+	</select>
 </mapper>

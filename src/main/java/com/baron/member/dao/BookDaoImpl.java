@@ -112,4 +112,9 @@ public class BookDaoImpl implements BookDao {
 		session.update(NAMESPACE + "setRecommend", bookmodel);
 	}
 
+	@Override
+	public String getMaxSer(BookModel bookmodel) {  
+		return session.selectOne(NAMESPACE + "getMaxSer", bookmodel);
+	}
+	
 }

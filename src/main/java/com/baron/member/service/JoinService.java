@@ -6,29 +6,23 @@ import com.baron.member.model.BookModel;
 import com.baron.member.model.ContentModel;
 import com.baron.member.model.MemberModel;
 
-
-
 public interface JoinService {
 
 	public boolean join(MemberModel memberModel);
-	
-	public MemberModel login(MemberModel MemberModel);
-	
+
+	public MemberModel login(MemberModel memberModel);
+
 	public String identify(String id);
-	
+
 	public void updateMember(MemberModel model);
-
-	public List<MemberModel> selectBlack();
-
-	public List<MemberModel> selectLate();
-
-	public List<MemberModel> selectBest();
-
-	public List<ContentModel> selectContent();
 
 	public int selectMaxGrade();
 
-	public List<BookModel> selectBestBook();
-
+	public MemberModel selectMember(String id);
+	
 	public int selectMemberById(String id);
+
+	public List<MemberModel> memberList(String rentdate);
+
+	public List<String> test();
 }

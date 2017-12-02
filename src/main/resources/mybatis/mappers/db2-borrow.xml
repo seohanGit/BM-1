@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baron.member.sqlModel">
+
+	<!-- rentchk = '0' 대여가능 '1' 대여요청중 '2' 대여중 '3' 반납된 도서 '4' 대출정지 reservechk 
+		= '0' 예약 X '1' 예약중 -->
+
+
+	<!-- 대여관련 쿼리 -->
+	<select id="borrowListAll" resultType="BookModel">
+		SELECT A.title,
+		B.rentdate, B.returndate, A.b_group, B.id, B.book_cd, 
+		(
+		SELECT C.KNAME FROM TPRLIB.GR_INSA C WHERE B.id=C.ASABN FETCH
+		first 1 rows only) kname
+		FROM
+		sitlib.bookmst A 
+		INNER JOIN sitlib.BOOKRENT B ON A.book_cd=B.book_cd
+		WHERE
+		B.rentchk='1'
+		ORDER BY
+		B.rentchk
+		DESC
+	</select>
+
+	<select id="borrowList" resultType="BookModel" parameterType="String">
+		SELECT A.TITLE, A.IMAGEURL, A.B_GROUP, A.C_GROUP, A.AUTHOR, B.*
+		FROM sitlib.bookmst A, sitlib.BOOKRENT B
+		WHERE B.id = #{id}
+		AND
+		B.rentchk='1' AND
+		A.book_cd=B.book_cd
+		ORDER BY
+		B.rentdate DESC
+	</select>
+
+	<select id="selectBorrow" resultType="BookModel" parameterType="String">
+		SELECT *
+		FROM sitlib.BOOKRENT A 
+		INNER JOIN SITLIB.BOOKMST BK ON A.BOOK_CD= BK.BOOK_CD
+		INNER JOIN TPRLIB.GR_INSA B	ON A.id = B.asabn
+		WHERE A.book_cd = #{book_cd}
+		AND A.rentchk='1'
+		FETCH
+		first 1 rows
+		only
+	</select>
+
+	<select id="selectRent" resultType="BookModel" parameterType="String">
+		SELECT *		
+		FROM sitlib.BOOKRENT A 
+		INNER JOIN SITLIB.BOOKMST BK ON A.BOOK_CD= BK.BOOK_CD
+		INNER JOIN tprlib.gr_insa B ON A.id =	B.asabn		
+		WHERE A.book_cd = #{book_cd}
+		AND A.rentchk='2'
+		FETCH
+		first 1 rows
+		only
+	</select>
+	<select id="checkRentCount" resultType="int" parameterType="String">
+		SELECT count(*) cnt
+		FROM sitlib.BOOKRENT
+		WHERE id = #{id}		
+		AND (rentchk='2' or rentchk='1')		
+	</select>
+	<insert id="borrowBook1" parameterType="BookModel">
+		INSERT INTO
+		sitlib.BOOKRENT
+		(book_cd, rentdate, returndate, rentchk, id, team_nm)
+		VALUES(#{book_cd}, #{rentdate},		#{returndate},
+		1, #{id}, (SELECT
+		team_nm FROM tprlib.gr_insa WHERE asabn=#{id} FETCH first 1 rows
+		only))
+	</insert>
+
+	<update id="borrowBook2" parameterType="String">
+		UPDATE
+		sitlib.bookmst
+		SET
+		rentchk='1'
+		WHERE book_cd=#{book_cd}
+	</update>
+	<update id="stopBorrow" parameterType="String">
+		UPDATE sitlib.bookmst
+		SET
+		rentchk='4'
+		WHERE
+		book_cd=#{book_cd}
+	</update>
+	<update id="stopBorrow1" parameterType="String">
+		UPDATE sitlib.BOOKRENT
+		SET
+		rentchk='4'
+		WHERE
+		book_cd=#{book_cd}
+	</update>
+
+	<update id="recoverBook" parameterType="String">
+		UPDATE sitlib.bookmst A
+		SET
+		A.rentchk='0'
+		WHERE
+		A.book_cd=#{book_cd} AND A.rentchk='4'
+
+	</update>
+
+	<update id="confirmBorrowBook" parameterType="BookModel">
+		UPDATE
+		sitlib.BOOKRENT
+		SET
+		RENTCHK = '2', returndate=#{returndate}
+		WHERE BOOK_CD = #{book_cd} AND rentdate = ${rentdate} AND
+		RENTCHK='1'
+	</update>
+
+	<update id="confirmBorrowBook1" parameterType="String">
+		UPDATE
+		sitlib.bookmst
+		SET
+		rentchk='2'
+		WHERE book_cd=#{book_cd}
+	</update>
+	<!-- <update id="upPoint" parameterType="String"> UPDATE BOOKMEMBER SET 
+		numborrow = numborrow + 1 WHERE id = #{id} </update> -->
+	<update id="returnBook" parameterType="BookModel">
+		UPDATE
+		sitlib.BOOKRENT
+		SET
+		rentchk='3',
+		returndate=#{returndate}
+		WHERE
+		book_cd=#{book_cd} AND
+		RENTCHK='2'
+	</update>
+	<update id="returnBook1" parameterType="String">
+		UPDATE sitlib.bookmst
+		SET
+		rentchk='0'
+		WHERE
+		book_cd=#{book_cd}
+	</update>
+	<!-- <update id="confirmReturnBook" parameterType="String"> UPDATE sitlib.bookmst 
+		A INNER JOIN sitlib.BOOKRENT B ON A.rentchk = B.rentchk SET A.rentchk='0', 
+		B.rentchk='0' WHERE A.book_cd=#{book_cd} AND B.book_cd=#{book_cd} </update> -->
+	<select id="returnListAll" resultType="BookModel">
+		SELECT *
+		FROM
+		sitlib.bookmst A INNER JOIN
+		sitlib.BOOKRENT B
+		ON A.book_cd=B.book_cd
+		WHERE B.rentchk='2' AND
+		right(B.returndate,2) - right(#{returndate},2)=5
+	</select>
+
+	<update id="extendBorrowBook" parameterType="BookModel">
+		UPDATE
+		sitlib.BOOKRENT
+		SET
+		returndate = #{returndate}, extendchk = '1'
+		WHERE
+		book_cd=#{book_cd}
+		AND
+		rentchk='2'
+	</update>
+
+	<update id="cancelBorrowBook" parameterType="String">
+		UPDATE
+		sitlib.bookmst
+		SET
+		rentchk='0'
+		WHERE
+		book_cd=#{book_cd} AND rentchk='1'
+	</update>
+
+	<delete id="deleteBorrowBook" parameterType="BookModel">
+		DELETE FROM
+		sitlib.BOOKRENT
+		WHERE book_cd=#{book_cd} AND id=#{id} AND RENTCHK = '1'
+	</delete>
+
+	<select id="rentListAll" resultType="BookModel">
+		SELECT A.title, B.rentdate,
+		B.returndate, B.id, B.book_cd, A.rentchk,
+		A.reservechk,(SELECT
+		C.KNAME
+		FROM
+		TPRLIB.GR_INSA C WHERE B.id=C.ASABN
+		FETCH
+		first 1 rows
+		only) kname
+		FROM
+		sitlib.bookmst A, sitlib.BOOKRENT B
+		WHERE
+		A.book_cd=B.book_cd AND
+		B.rentchk='2'
+		ORDER BY
+		B.rentchk DESC,
+		B.rentdate
+		DESC
+	</select>
+
+	<select id="rentList" parameterType="String" resultType="BookModel">
+		SELECT  
+		A.*, B.rentdate, B.returndate, B.id, (SELECT
+		C.KNAME FROM
+		TPRLIB.GR_INSA C WHERE B.id=C.ASABN
+		FETCH
+		first 1 rows
+		only) kname FROM
+		sitlib.bookmst A INNER JOIN
+		sitlib.BOOKRENT B
+		ON A.book_cd=B.book_cd
+		WHERE
+		B.id= #{id} AND
+		B.rentchk='2'
+		ORDER BY
+		B.rentchk DESC,
+		B.rentdate
+		DESC
+	</select>
+	<!-- <![CDATA[B.returndate > current date]]> -->
+
+	<!-- <delete id="deleteRecord" parameterType="String"> DELETE ON sitlib.BOOKRENT 
+		WHERE DELETE ON reserve WHERE id=#{id} AND book_cd=#{book_cd} </delete> -->
+	<select id="recordList" parameterType="String" resultType="BookModel">
+		SELECT A.title, B.rentdate, B.id, B.returndate, A.book_cd, A.author
+		FROM
+		sitlib.bookmst A INNER JOIN sitlib.BOOKRENT B ON
+		A.book_cd=B.book_cd
+		WHERE  
+		B.id=#{id} AND
+		B.rentchk='3'
+		ORDER BY
+		B.rentdate DESC
+	</select>
+
+
+
+	<select id="recordListAll" resultType="BookModel">
+		SELECT A.title, B.rentdate, B.returndate, A.b_group, (SELECT C.KNAME
+		FROM
+		TPRLIB.GR_INSA C WHERE B.id=C.ASABN FETCH
+		first 1 rows only) kname
+		FROM
+		sitlib.bookmst A INNER JOIN sitlib.BOOKRENT B ON
+		A.book_cd=B.book_cd
+		WHERE  
+		B.rentchk='3'
+		ORDER BY
+		B.rentdate DESC
+	</select>
+
+	<update id="deleteRecord" parameterType="BookModel">
+		UPDATE sitlib.BOOKRENT
+		SET RENTCHK='6'
+		WHERE book_cd=#{book_cd} AND id=#{id} AND rentchk='3'
+	</update>
+	<select id="selectDelayList" resultType="BookModel">
+		SELECT A.title, B.rentdate, B.returndate, A.b_group, (SELECT C.KNAME
+		FROM
+		TPRLIB.GR_INSA C WHERE B.id=C.ASABN FETCH
+		first 1 rows only) kname
+		FROM
+		sitlib.bookmst A INNER JOIN sitlib.BOOKRENT B ON
+		A.book_cd=B.book_cd
+		WHERE <![CDATA[B.returndate < VARCHAR_FORMAT(CURRENT	TIMESTAMP, 'YYYYMMDD')]]> AND
+		B.rentchk='2'
+		ORDER BY
+		B.returndate DESC
+	</select>	
+</mapper>

@@ -1,84 +1,40 @@
-$('#btn_search').click(function() {
-	$.ajax({
-		type:"GET",							// GET or POST
-		url:"/searchBook",						// URL
-		datatype:"xml",						// html, xml, json, jsonp, script, text
-		data:{keyword:$('#keyword').val()},			// parameters as plain object
-		error:function() {						// Ajax error handler
-			alert('ajax failed');
-		},
-		success:function(data, status) {	// Ajax complete handelr
-			$('#image1').fadeOut();
-			$('#image2').fadeOut();
-			$('#searchResultArea').empty().append(data);
-		}
-	});
-});
 
+function del() {
+	alert("삭제되었습니다.");
+}
+function rentStop() {
+	alert("대출정지 되었습니다.");
+}
+function borrow() {
+	alert("대출 요청되었습니다.");
+}
+function cancel() {
+	alert("취소되었습니다.");
+}
+function ok() {
+	alert("승인되었습니다.");
+}
+function re_turn() {
+	alert("반납되었습니다.");
+}
+function notifiReser() {
+	alert("예약알림문자가 전송되었습니다.");
+}
+
+
+
+$("#allCheck").click(function() {
+	if ($("#allCheck").prop("checked")) {
+		$("input[type=checkbox]").prop("checked", true);
+	} else {
+		$("input[type=checkbox]").prop("checked", false);
+	}
+
+})
 $('.board .btn').click(function() {
 	$(this).parent().parent().find('.content').toggleClass('ellipsis');
 });
 
-$('#blackList').click(function() {
-	$.ajax({
-		type:"GET",							// GET or POST
-		url:"/searchBlack",						// URL
-		datatype:"xml",						// html, xml, json, jsonp, script, text
-		error:function() {						// Ajax error handler
-			alert('ajax failed');
-		},
-		success:function(data, status) {	// Ajax complete handelr]
-			$('#image3').fadeOut();
-			$('#personResultArea').empty().append(data);
-		}
-	});
-	
-})
 
-$('#late').click(function() {
-	$.ajax({
-		type:"GET",							// GET or POST
-		url:"/searchLate",						// URL
-		datatype:"xml",						// html, xml, json, jsonp, script, text
-		error:function() {						// Ajax error handler
-			alert('ajax failed');
-		},
-		success:function(data, status) {	// Ajax complete handelr]
-			$('#image3').fadeOut();
-			$('#personResultArea').empty().append(data);
-		}
-	});
-	
-})
 
-$('#register').click(function() {
-	$.ajax({
-		type:"GET",							// GET or POST
-		url:"/selectboard",						// URL
-		datatype:"xml",		
-		data:{per:"register"},// html, xml, json, jsonp, script, text
-		error:function() {						// Ajax error handler
-			alert('ajax failed');
-		},
-		success:function(data, status) {	// Ajax complete handelr]
-			$('#bulletin').empty().append(data);
-		}
-	});
-	
-})
-
-$('#title').click(function() {
-	$.ajax({
-		type:"GET",							// GET or POST
-		url:"/selectboard",						// URL
-		datatype:"xml",		
-		data:{per:"title"},// html, xml, json, jsonp, script, text
-		error:function() {						// Ajax error handler
-			alert('ajax failed');
-		},
-		success:function(data, status) {	// Ajax complete handelr]
-			$('#bulletin').empty().append(data);
-		}
-	});
-	
-})
+ 

@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+<!-- SELECT * FROM testlib.bookmst WHERE isbn like '978896%'
+
+SELECT asgub AS code, asdes AS name FROM salib.acoderp
+		WHERE adgub='BD' ORDER BY asgub
+
+		SELECT asgub AS code, asdes AS name FROM salib.acoderp
+		WHERE adgub='BS' ORDER BY asgub
+
+		SELECT * FROM testlib.bookreser WHERE reservechk='1'
+
+		SELECT COUNT(*) AS count, b_group FROM testlib.bookmst GROUP BY b_group
+
+			SELECT COUNT(*) AS count,
+		B.book_cd,
+		(SELECT title FROM testlib.bookmst WHERE book_cd =
+		B.book_cd) AS title,
+		(SELECT author FROM testlib.bookmst WHERE book_cd
+		= B.book_cd) AS
+		author, (SELECT b_group FROM testlib.bookmst WHERE
+		book_cd
+		= B.book_cd) AS
+		b_group
+		FROM testlib.bookrent A INNER JOIN
+		testlib.bookmst B
+		ON A.book_cd
+		= B.book_cd
+		WHERE rentdate > current date - 1 year
+		GROUP BY B.book_cd
+		ORDER BY
+		count DESC
+
+		SELECT COUNT(*) count, month(A.rentdate) AS month, B.title
+		FROM testlib.bookrent A 
+		INNER JOIN testlib.bookmst B ON A.book_cd = B.book_cd 
+		GROUP BY month(A.rentdate), B.title
+		ORDER BY month
+
+SELECT (SELECT kname FROM tprlib.gr_insa WHERE asabn = A.id FETCH first 1 rows only) kname , 
+		A.book_cd,
+		COUNT(*) AS count, 
+		(SELECT title FROM testlib.bookmst WHERE book_cd =A.book_cd) AS title, 
+		(SELECT author	FROM testlib.bookmst WHERE book_cd = A.book_cd) AS author, 
+		month(A.rentdate) AS month
+		FROM
+		testlib.bookrent A INNER JOIN tprlib.gr_insa	B 
+		ON A.id = B.asabn 
+		WHERE
+		A.rentdate > current date - 12 month 
+		GROUP BY
+		A.id, A.book_cd, month(A.rentdate) 
+		ORDER BY
+		month, count DESC 
+
+		SELECT (SELECT kname FROM tprlib.gr_insa WHERE asabn = A.id FETCH first 1 rows only) kname , 
+		COUNT(*) AS count, 
+		month(A.rentdate) AS month
+		FROM
+		testlib.bookrent A INNER JOIN tprlib.gr_insa	B 
+		ON A.id = B.asabn 
+		WHERE year(A.rentdate) = '2015'
+		GROUP BY
+		A.id, month(A.rentdate)
+		ORDER BY
+		month, count DESC
+		 
+		SELECT SUM(DOUBLE(PRICE)) PRICE, month(rcv_date) AS month, count(rcv_date) count 
+		FROM testlib.bookmst 
+		WHERE year(rcv_date) = '2014'
+		GROUP BY month(rcv_date)
+
+		SELECT * 
+		FROM sitlib.bookmst 
+		ORDER BY rece_ymd desc 
+		
+SELECT Left(A.rece_ymd, 4)||'-'||substring(A.rece_ymd,5,2)||'-'||substring(A.rece_ymd, 7,2) as
+		rcv_date from sitlib.bookmst A ORDER BY A.rece_ymd DESC
+
+select * from sitlib.bookmst where rece_ymd is not null AND price is not null AND rece_ymd != ''AND price!='0'  ORDER BY  RECE_YMD DESC, PRICE DESC
+
+
+		select * from testlib.bookmst where rcv_date = '2014-11-26' 
+
+SELECT SUM(DOUBLE(PRICE)) PRICE, month(rcv_date) AS month, count(rcv_date) count FROM testlib.bookmst WHERE year(rcv_date)='2014' GROUP BY month(rcv_date) 
+
+update sitlib.bookmst Set rece_ymd = '20140801' where rece_ymd = '2014.8'  
+
+SELECT COUNT(*)
+		count, B.b_group, month(A.rentdate) AS month
+		FROM
+		testlib.bookrent A INNER JOIN testlib.bookmst B
+		ON A.book_cd = B.book_cd
+		WHERE year(A.rentdate) = '2014'AND month(A.rentdate) = '10'
+		GROUP BY month(A.rentdate), B.b_group
+		ORDER BY month
+
+update testlib.bookmst Set rcv_date = '2014-11-26' where year(rcv_date) = '2104'  
+
+select * from testlib.bookmst where 
+		WHERE year(rcv_date) = '2015' 
+
+		
+		SELECT B.team_nm,
+		COUNT(*) AS count FROM
+		testlib.bookrent A INNER JOIN
+		tprlib.gr_insa B
+		ON A.id=B.asabn WHERE
+		year(A.rentdate) = '2014'
+		GROUP
+		BY
+		B.team_nm ORDER
+		BY count DESC
+		
+	SELECT COUNT(*)
+		count, B.b_group
+		FROM
+		testlib.bookrent A INNER JOIN testlib.bookmst B
+		ON A.book_cd =
+		B.book_cd
+		WHERE year(A.rentdate) = '2015'
+		GROUP BY  B.b_group
+
+	SELECT (SELECT kname
+		FROM tprlib.gr_insa WHERE asabn = A.id FETCH first 1 rows only) kname
+		,
+		COUNT(*) AS count
+		FROM
+		testlib.bookrent A
+		INNER JOIN tprlib.gr_insa B
+		ON A.id = B.asabn
+		WHERE year(A.rentdate) =
+		'2015'
+		GROUP BY
+		A.id
+		ORDER BY
+		count DESC
+
+		SELECT 
+		(SELECT kname FROM
+		tprlib.gr_insa WHERE asabn = A.asabn FETCH first 1
+		rows only) AS
+		kname,
+		(SELECT team_nm FROM tprlib.gr_insa WHERE asabn =
+		A.asabn FETCH
+		first 1 rows only) AS team_nm,
+		A.asabn AS id, 
+		(SELECT
+		COUNT(*) FROM
+		testlib.BOOKRENT B WHERE year(B.rentdate) = year(current date) AND
+		B.id
+		= A.asabn) AS count 
+		FROM tprlib.gr_insa AS A GROUP BY
+		A.asabn ORDER
+		BY
+		count DESC
+CREATE TABLE TESTLIB.BOOKBOARD (
+BOARDNUM INTEGER NOT NULL ,
+TITLE
+VARCHAR(500) CCSID 933 DEFAULT NULL ,
+CONTENT VARCHAR(1000) CCSID 933
+DEFAULT NULL ,
+REGISDATE TIMESTAMP DEFAULT NULL ,
+MODIFIDATE TIMESTAMP
+DEFAULT NULL ,
+ID VARCHAR(45) CCSID 933 DEFAULT NULL ,
+CONSTRAINT
+TESTLIB.Q_SITLIB_BOOKBOARD_BOARDNUM_00001 PRIMARY KEY( BOARDNUM ) )
+;
+
+GRANT ALTER , DELETE , INDEX , INSERT , REFERENCES , SELECT , UPDATE
+ON
+TESTLIB.BOOKBOARD TO KFKMF WITH GRANT OPTION ;
+
+CREATE TABLE
+TESTLIB.BOOKMEMBER (
+"ID" VARCHAR(30) CCSID 933 NOT NULL ,
+PASS
+VARCHAR(20) CCSID 933 NOT NULL ,
+NAME VARCHAR(20) CCSID 933 NOT NULL ,
+EMAIL VARCHAR(45) CCSID 933 DEFAULT NULL ,
+CELL VARCHAR(20) CCSID 933 NOT
+NULL ,
+PHONE VARCHAR(20) CCSID 933 DEFAULT NULL ,
+PERMISSION INTEGER
+DEFAULT 0 ,
+TEAM VARCHAR(20) CCSID 933 DEFAULT NULL )
+;
+
+GRANT ALTER ,
+DELETE , INDEX , INSERT , REFERENCES , SELECT , UPDATE
+ON
+TESTLIB.BOOKMEMBER TO KFKMF WITH GRANT OPTION ;
+
+CREATE TABLE
+TESTLIB.BOOKNOTICE (
+NOTICENUM INTEGER NOT NULL ,
+TITLE VARCHAR(500) CCSID
+933 DEFAULT NULL ,
+"CONTENT" VARCHAR(1000) CCSID 933 DEFAULT NULL ,
+REGISDATE TIMESTAMP DEFAULT NULL ,
+MODIFIDATE TIMESTAMP DEFAULT NULL ,
+"ID" VARCHAR(45) CCSID 933 DEFAULT NULL ,
+CONSTRAINT
+TESTLIB.Q_SITLIB_BOOKBOARD_NOTICENUM_00001 PRIMARY KEY( NOTICENUM ) )
+;
+
+GRANT ALTER , DELETE , INDEX , INSERT , REFERENCES , SELECT , UPDATE
+ON
+TESTLIB.BOOKNOTICE TO KFKMF WITH GRANT OPTION ;
+
+CREATE TABLE
+TESTLIB.BOOKRENT (
+"ID" VARCHAR(45) CCSID 933 DEFAULT NULL ,
+RENTDATE DATE
+DEFAULT NULL ,
+BOOK_CD VARCHAR(45) CCSID 933 NOT NULL ,
+RETURNDATE DATE
+DEFAULT NULL ,
+RENTCHK INTEGER DEFAULT 1 )
+;
+
+GRANT ALTER , DELETE , INDEX ,
+INSERT , REFERENCES , SELECT , UPDATE
+ON TESTLIB.BOOKRENT TO KFKMF WITH
+GRANT OPTION ;
+
+CREATE TABLE TESTLIB.BOOKREQ (
+"ID" VARCHAR(45) CCSID 933
+DEFAULT NULL ,
+REQDATE DATE DEFAULT NULL ,
+BOOK_CD VARCHAR(45) CCSID 933
+NOT NULL ,
+TITLE VARCHAR(45) CCSID 933 DEFAULT NULL ,
+AUTHOR VARCHAR(45)
+CCSID 933 DEFAULT NULL ,
+PUBLISH VARCHAR(45) CCSID 933 DEFAULT NULL ,
+B_GROUP VARCHAR(45) CCSID 933 DEFAULT NULL ,
+LINK VARCHAR(300) CCSID 933
+DEFAULT NULL ,
+IMAGEURL VARCHAR(300) CCSID 933 DEFAULT NULL ,
+ISBN
+CHAR(14) CCSID 933 DEFAULT NULL ,
+PRICE INTEGER DEFAULT NULL ,
+QUANTITY
+BIGINT DEFAULT NULL ,
+C_GROUP VARCHAR(45) CCSID 933 DEFAULT NULL ,
+"SUMMARY" VARCHAR(1000) CCSID 933 DEFAULT NULL ,
+REQ_CD BIGINT NOT NULL )
+;
+
+GRANT ALTER , DELETE , INDEX , INSERT , REFERENCES , SELECT , UPDATE
+ON
+TESTLIB.BOOKREQ TO KFKMF WITH GRANT OPTION ;
+
+
+CREATE TABLE
+TESTLIB.BOOKRESER (
+"ID" VARCHAR(40) CCSID 933 DEFAULT NULL ,
+BOOK_CD VARCHAR(45) CCSID 933 DEFAULT NULL ,
+RESER_DATE DATE DEFAULT NULL ,
+RESERVECHK VARCHAR(4) CCSID 933 DEFAULT NULL )
+;
+
+GRANT ALTER , DELETE , INDEX , INSERT , REFERENCES , SELECT , UPDATE
+ON TESTLIB.BOOKRESER TO KFKMF WITH GRANT OPTION ;
+
+
+
+CREATE TABLE
+TESTLIB.BOOKMST (
+ISBN CHAR(13) CCSID 933 NOT NULL ,
+BOOK_CD CHAR(13) CCSID 933 NOT NULL ,
+SUNBO NUMERIC(3, 0) NOT NULL ,
+TITLE VARCHAR(300) CCSID 933 DEFAULT NULL ,
+AUTHOR VARCHAR(100) CCSID 933 DEFAULT NULL ,
+PUBLISH VARCHAR(100) CCSID 933 DEFAULT NULL ,
+PRICE CHAR(10) CCSID 933 DEFAULT NULL ,
+"SUMMARY" VARCHAR(1000) CCSID 933 DEFAULT NULL ,
+B_GROUP VARCHAR(30) CCSID 933 DEFAULT NULL ,
+C_GROUP VARCHAR(30) CCSID 933 DEFAULT NULL ,
+RCV_DATE CHAR(8) CCSID 933 DEFAULT NULL ,
+RENTCHK INTEGER NOT NULL DEFAULT 0 ,
+RESERVECHK INTEGER NOT NULL DEFAULT 0 ,
+GRADE INTEGER NOT NULL DEFAULT 0 ,
+IMAGEURL VARCHAR(2083) CCSID 1208 NORMALIZED DEFAULT NULL )
+;
+
+GRANT ALTER , DELETE , INDEX , INSERT , REFERENCES , SELECT , UPDATE
+ON TESTLIB.BOOKMST TO KFKMF WITH GRANT OPTION ;
+ -->

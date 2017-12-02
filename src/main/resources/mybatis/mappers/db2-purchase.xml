@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baron.member.sqlModel">
+<!-- 구매요청, 대여 관련 커리 
+	status 
+	'0' 구매신청
+	'1' 구매 완료
+	'2' 구매 반려
+	'3' 팀장 결재중
+-->
+	<insert id="requestBook" parameterType="BookModel">
+		INSERT INTO
+		sitlib.bookreqst
+		(id,	reqdate,	title,	book_cd,  price,	author,	quantity,	b_group,	c_group,	link,
+		imageurl,	isbn, 	publish, 	summary,	 req_cd, 	kname, 	reason, 	reqstatus, chiefok)
+		VALUES
+		(#{id},#{reqdate},#{title},#{book_cd},#{price},#{author},#{quantity},#{b_group},#{c_group},#{link},
+		#{imageurl},#{isbn}, #{publish}, #{summary}, #{req_cd}, #{kname},#{reason}, #{reqstatus}, 0
+		)
+	</insert>
+
+	<update id="deleteRequest" parameterType="BookModel">
+		UPDATE sitlib.bookreqst
+		SET
+		reqstatus='1', book_cd=#{book_cd}
+		WHERE reqdate = #{reqdate} and  req_cd= #{req_cd}
+	</update>
+
+	<update id="rejectRequest" parameterType="String">
+		UPDATE sitlib.bookreqst
+		SET
+		reqstatus='2'
+		WHERE reqdate = #{reqdate} and  req_cd= #{req_cd}
+	</update>
+
+	<select id="requestList" parameterType="String" resultType="BookModel">
+		SELECT distinct B.title, B.imageurl, B.author, B.price, b.quantity, B.reqdate,
+		B.reqstatus, B.id, C.kname, B.book_cd, B.req_cd, B.link, B.b_group,
+		B.c_group
+		FROM sitlib.bookreqst B
+		LEFT OUTER JOIN TPRLIB.GR_INSA C ON
+		B.id=C.ASABN  
+		WHERE C.CO_GB = 'SEOHAN' and REQSTATUS IN ('0','1')
+		ORDER BY
+		reqdate DESC, reqstatus asc
+	</select>
+
+	<select id="requestRecord" parameterType="String" resultType="BookModel">
+		SELECT *
+		FROM
+		sitlib.bookreqst A 
+		WHERE A.id=#{id} 
+		ORDER
+		BY
+		A.reqstatus, 
+		A.reqdate
+		DESC
+	</select>
+
+	<select id="selectRequest" parameterType="BookModel" resultType="BookModel">
+		SELECT *
+		FROM sitlib.bookreqst A
+		INNER JOIN TPRLIB.GR_INSA B ON
+		A.id=B.ASABN
+		WHERE reqdate = #{reqdate} and req_cd=#{req_cd} 
+		FETCH first 1 rows only
+
+	</select>
+	<select id="selectMaxSer" resultType="String">
+		SELECT
+		COALESCE(MAX(REQ_CD)+1,1) SER
+		FROM sitlib.bookreqst A
+		WHERE REQDATE = VARCHAR_FORMAT(CURRENT
+		TIMESTAMP,		'YYYYMMDD')
+	</select>
+
+	<update id="modifiReqBook" parameterType="BookModel">
+		UPDATE sitlib.bookreqst
+		SET
+		book_cd = #{book_cd} 
+		WHERE reqdate = #{reqdate} and 		req_cd = #{req_cd}
+	</update>
+
+	<delete id="deleteApproval" parameterType="ApprovalModel">
+		delete from
+		FILIB.GAPPRMP where CO_GB=#{companyGroup} and TABLE_NM=#{tableName}
+		and
+		DOCU_NO=#{documentId}
+	</delete>
+
+	<insert id="insertApproval" parameterType="ApprovalModel">
+		insert into FILIB.GAPPRMP (CO_GB, TABLE_NM, DOCU_NO, NOW_ASABN, CLS_NM, TITLE_NM, CRT_YMD, CRT_SABN )
+		values(#{companyGroup}, #{tableName}, #{documentId}, #{chiefId}, #{description1}, #{description2}, #{nowDate}, #{id} )
+	</insert>
+</mapper>

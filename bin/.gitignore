@@ -1,0 +1,14 @@
+/target/
+/target/
+/.classpath
+/.classpath.rej
+/.gitignore
+/.project
+/.settings/
+/jt400.jar
+<<<<<<< HEAD
+=======
+/lib/
+>>>>>>> 88957b87d8426a59e59292fa63356c26058a66b1
+/pom.xml
+/src/

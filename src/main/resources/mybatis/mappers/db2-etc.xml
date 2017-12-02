@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baron.member.sqlModel">
+
+	<!-- 코드 관련 쿼리 -->
+	<select id="selectdinner" resultType="String" parameterType="String">
+		SELECT MENU
+		FROM
+		SITLIB.FOODTABLE
+		WHERE GDATE = #{nowDate} AND GUBN = 'C'
+	</select>
+	<select id="selectlunch" resultType="String" parameterType="String">
+		SELECT MENU
+		FROM
+		SITLIB.FOODTABLE
+		WHERE GDATE = #{nowDate} AND GUBN = 'B'
+	</select>
+	<select id="selectbreakfast" resultType="String" parameterType="String">
+		SELECT MENU
+		FROM
+		SITLIB.FOODTABLE
+		WHERE GDATE = #{nowDate} AND GUBN = 'A'
+	</select>
+	
+	<select id="selectItDamage" resultType="ItDamage"> 
+		SELECT * FROM SITLIB.IT_DAMAGE WHERE CTIME = '' order by JTIME DESC
+	</select>
+	
+	<update id="endDamage" parameterType="ItDamage">
+		UPDATE SITLIB.IT_MST_HIS2 SET
+		ctime = ${ctime} 
+		WHERE jtime = #{jtime}
+	</update>		
+	<update id="endDamage2" parameterType="ItDamage">
+		UPDATE SITLIB.IT_DAMAGE 
+		SET ctime = ${ctime} 
+		WHERE jtime = #{jtime}
+	</update>
+
+	<select id="copyDate" resultType="BookModel">
+		SELECT
+		rece_ymd rcv_date, book_cd from sitlib.bookmst A WHERE rece_ymd
+		is not null AND
+		price is not null AND rece_ymd != ''AND price!='0'
+		ORDER BY RECE_YMD
+		DESC, PRICE DESC
+	</select>
+
+	<update id="updateDate" parameterType="BookModel">
+		UPDATE sitlib.bookmst SET
+		rcv_date = #{rcv_date} WHERE book_cd=#{book_cd}
+	</update>
+
+
+	<select id="copyRent" resultType="BookModel">
+
+		SELECT DISTINCT A.SABUN AS id ,
+		req_ymd,
+		B.book_cd AS book_cd, 
+		retu_ymd,
+		A.dept_no AS dept_nm
+		FROM sitlib.bookreqst A INNER JOIN
+		sitlib.bookreqhis
+		B ON A.SABUN = B.SABUN AND A.req_ymd = B.req_ymd
+	</select>
+
+	<insert id="backupRecord" parameterType="BookModel">
+		INSERT INTO
+		sitlib.BOOKRENT
+		(ID, RENTDATE, RETURNDATE, team_nm, book_cd)
+		VALUES(#{id},
+		#{rentdate},
+		#{returndate}, #{team_nm}, #{book_cd})
+	</insert>
+
+	<select id="selectBookForImage" resultType="BookModel">
+		SELECT isbn, book_cd FROM
+		sitlib.bookmst
+		where (summary is null or summary = '' or imageurl = '' or imageurl is null ) and left(b_group,1) in('B','J')
+	</select>
+</mapper>

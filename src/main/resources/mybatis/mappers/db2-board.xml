@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baron.member.sqlModel">
+
+	<!-- Board 관련 쿼리 -->
+
+
+
+	<select id="selectBoard" resultType="BoardModel">
+		SELECT B.title, B.id, B.content,
+		B.modifidate, B.boardnum, (SELECT C.KNAME FROM
+		TPRLIB.GR_INSA C WHERE B.id=C.ASABN
+		FETCH
+		first 1 rows only) kname
+		FROM sitlib.BOOKBOARD B
+		WHERE
+		B.boardtype='0'
+		ORDER
+		BY B.modifidate
+	</select>
+
+	<select id="selectBoardregister" resultType="BoardModel">
+		SELECT *
+		FROM
+		sitlib.BOOKBOARD
+		WHERE boardtype='0'
+		ORDER BY REGISDATE
+	</select>
+
+	<select id="selectMaxGrade" resultType="int">
+		SELECT MAX(grade)
+		FROM
+		BOOKMST
+	</select>
+
+	<select id="selectBoardtitle" resultType="BoardModel">
+		SELECT *
+		FROM
+		sitlib.BOOKBOARD
+		WHERE boardtype='0'
+		ORDER BY title
+	</select>
+
+	<select id="selectBoardnum" parameterType="int" resultType="BoardModel">
+		SELECT *
+		FROM
+		sitlib.BOOKBOARD
+		WHERE boardnum=#{boardnum}
+
+	</select>
+	<insert id="insertBoard" parameterType="BoardModel">
+		INSERT INTO
+		sitlib.BOOKBOARD
+		(title,content,REGISDATE,modifidate,id,boardtype)
+		VALUES
+		(#{title},#{content},#{regisdate},#{modifidate},#{id}, #{boardType} )
+	</insert>
+
+	<delete id="deleteBoard" parameterType="int">
+		DELETE FROM
+		sitlib.BOOKBOARD
+		WHERE
+		boardnum=#{boardnum}
+	</delete>
+
+	<update id="modifyBoard" parameterType="BoardModel">
+		UPDATE sitlib.BOOKBOARD
+		SET
+		content=#{content}, title=#{title}, modifidate=#{modifidate}
+		WHERE
+		boardnum=#{boardnum}
+	</update>
+
+	<select id="noticeList" resultType="BoardModel">
+		SELECT *
+		FROM
+		sitlib.BOOKBOARD
+		WHERE
+		boardtype='1'
+		ORDER BY
+		REGISDATE desc
+	</select>
+
+	<insert id="insertNotice" parameterType="BoardModel">
+		
+		INSERT INTO
+		sitlib.BOOKBOARD
+		(title,content,REGISDATE,modifidate,id,boardtype)
+		VALUES
+		(#{title},#{content},#{regisdate},#{modifidate},#{id}, #{boardType})
+	</insert>
+	<delete id="deleteNotice" parameterType="int">
+		DELETE FROM
+		sitlib.BOOKBOARD
+		WHERE
+		boardnum=#{boardnum}
+	</delete>
+
+	<update id="modifyNotice" parameterType="BoardModel">
+		UPDATE sitlib.BOOKBOARD
+		SET
+		content=#{content}, MODIFiDATE=#{modifidate}
+		WHERE
+		boardnum=#{boardnum}
+	</update>
+
+
+
+
+
+
+
+</mapper>

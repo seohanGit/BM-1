@@ -43,10 +43,10 @@ public class JoinDaoImplTest {
 	@Test
 	public void testInsertMember() throws Exception {
 		MemberModel model = new MemberModel();
-		model.setId("ksh90115");
-		model.setName("강성현");
+		model.setId("900601");
+		model.setKname("민상훈");
 		model.setPassword("1234");
-		model.setCell("01054482230");
+		model.setMobi_no("01067766160");
 		
 		joinDao.insertMember(model);
 	}

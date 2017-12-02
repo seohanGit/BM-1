@@ -1,0 +1,6325 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+
+<script type="text/javascript"
+	src="code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="/resources/js/highcharts.js"></script>
+<script type="text/javascript"
+	src="cdn.datatables.net/1.10.6/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" class="init">
+	$(document).ready(
+			function() {
+				$('#example').dataTable({
+					"paging" : false,
+					"ordering" : false,
+					"info" : false
+				});
+
+				$('#container2').highcharts(
+						{
+							chart : {
+								defaultSeriesType : 'bar'
+							},
+							xAxis : {
+								categories : [ 'Jan', 'Feb', 'Mar', 'Apr',
+										'May', 'Jun', 'Jul', 'Aug', 'Sep',
+										'Oct', 'Nov', 'Dec' ]
+							},
+							yAxis : {},
+							legend : {
+								layout : 'vertical',
+								floating : true,
+								backgroundColor : '#FFFFFF',
+								align : 'right',
+								verticalAlign : 'top',
+								y : 60,
+								x : -60
+							},
+							tooltip : {
+								formatter : function() {
+									return '<b>' + this.series.name
+											+ '</b><br/>' + this.x + ': '
+											+ this.y;
+								}
+							},
+							plotOptions : {},
+							series : [ {
+								data : [ 29.9, 71.5, 106.4, 129.2, 144.0,
+										176.0, 135.6, 148.5, 216.4, 194.1,
+										95.6, 54.4 ]
+							} ]
+						})
+			});
+</script>
+</head>
+<body>
+	<div id="container2" style="height: 300px"></div>
+
+	<table id="example" class="display" cellspacing="0" width="100%">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Position</th>
+				<th>Office</th>
+				<th>Age</th>
+				<th>Start date</th>
+				<th>Salary</th>
+			</tr>
+		</thead>
+
+		<tfoot>
+			<tr>
+				<th>Name</th>
+				<th>Position</th>
+				<th>Office</th>
+				<th>Age</th>
+				<th>Start date</th>
+				<th>Salary</th>
+			</tr>
+		</tfoot>
+
+		<tbody>
+			<tr>
+				<td>Tiger Nixon</td>
+				<td>System Architect</td>
+				<td>Edinburgh</td>
+				<td>61</td>
+				<td>2011/04/25</td>
+				<td>$320,800</td>
+			</tr>
+			<tr>
+				<td>Garrett Winters</td>
+				<td>Accountant</td>
+				<td>Tokyo</td>
+				<td>63</td>
+				<td>2011/07/25</td>
+				<td>$170,750</td>
+			</tr>
+			<tr>
+				<td>Ashton Cox</td>
+				<td>Junior Technical Author</td>
+				<td>San Francisco</td>
+				<td>66</td>
+				<td>2009/01/12</td>
+				<td>$86,000</td>
+			</tr>
+			<tr>
+				<td>Cedric Kelly</td>
+				<td>Senior Javascript Developer</td>
+				<td>Edinburgh</td>
+				<td>22</td>
+				<td>2012/03/29</td>
+				<td>$433,060</td>
+			</tr>
+			<tr>
+				<td>Airi Satou</td>
+				<td>Accountant</td>
+				<td>Tokyo</td>
+				<td>33</td>
+				<td>2008/11/28</td>
+				<td>$162,700</td>
+			</tr>
+			<tr>
+				<td>Brielle Williamson</td>
+				<td>Integration Specialist</td>
+				<td>New York</td>
+				<td>61</td>
+				<td>2012/12/02</td>
+				<td>$372,000</td>
+			</tr>
+			<tr>
+				<td>Herrod Chandler</td>
+				<td>Sales Assistant</td>
+				<td>San Francisco</td>
+				<td>59</td>
+				<td>2012/08/06</td>
+				<td>$137,500</td>
+			</tr>
+			<tr>
+				<td>Rhona Davidson</td>
+				<td>Integration Specialist</td>
+				<td>Tokyo</td>
+				<td>55</td>
+				<td>2010/10/14</td>
+				<td>$327,900</td>
+			</tr>
+			<tr>
+				<td>Colleen Hurst</td>
+				<td>Javascript Developer</td>
+				<td>San Francisco</td>
+				<td>39</td>
+				<td>2009/09/15</td>
+				<td>$205,500</td>
+			</tr>
+			<tr>
+				<td>Sonya Frost</td>
+				<td>Software Engineer</td>
+				<td>Edinburgh</td>
+				<td>23</td>
+				<td>2008/12/13</td>
+				<td>$103,600</td>
+			</tr>
+			<tr>
+				<td>Jena Gaines</td>
+				<td>Office Manager</td>
+				<td>London</td>
+				<td>30</td>
+				<td>2008/12/19</td>
+				<td>$90,560</td>
+			</tr>
+			<tr>
+				<td>Quinn Flynn</td>
+				<td>Support Lead</td>
+				<td>Edinburgh</td>
+				<td>22</td>
+				<td>2013/03/03</td>
+				<td>$342,000</td>
+			</tr>
+			<tr>
+				<td>Charde Marshall</td>
+				<td>Regional Director</td>
+				<td>San Francisco</td>
+				<td>36</td>
+				<td>2008/10/16</td>
+				<td>$470,600</td>
+			</tr>
+			<tr>
+				<td>Haley Kennedy</td>
+				<td>Senior Marketing Designer</td>
+				<td>London</td>
+				<td>43</td>
+				<td>2012/12/18</td>
+				<td>$313,500</td>
+			</tr>
+			<tr>
+				<td>Tatyana Fitzpatrick</td>
+				<td>Regional Director</td>
+				<td>London</td>
+				<td>19</td>
+				<td>2010/03/17</td>
+				<td>$385,750</td>
+			</tr>
+			<tr>
+				<td>Michael Silva</td>
+				<td>Marketing Designer</td>
+				<td>London</td>
+				<td>66</td>
+				<td>2012/11/27</td>
+				<td>$198,500</td>
+			</tr>
+			<tr>
+				<td>Paul Byrd</td>
+				<td>Chief Financial Officer (CFO)</td>
+				<td>New York</td>
+				<td>64</td>
+				<td>2010/06/09</td>
+				<td>$725,000</td>
+			</tr>
+			<tr>
+				<td>Gloria Little</td>
+				<td>Systems Administrator</td>
+				<td>New York</td>
+				<td>59</td>
+				<td>2009/04/10</td>
+				<td>$237,500</td>
+			</tr>
+			<tr>
+				<td>Bradley Greer</td>
+				<td>Software Engineer</td>
+				<td>London</td>
+				<td>41</td>
+				<td>2012/10/13</td>
+				<td>$132,000</td>
+			</tr>
+			<tr>
+				<td>Dai Rios</td>
+				<td>Personnel Lead</td>
+				<td>Edinburgh</td>
+				<td>35</td>
+				<td>2012/09/26</td>
+				<td>$217,500</td>
+			</tr>
+			<tr>
+				<td>Jenette Caldwell</td>
+				<td>Development Lead</td>
+				<td>New York</td>
+				<td>30</td>
+				<td>2011/09/03</td>
+				<td>$345,000</td>
+			</tr>
+			<tr>
+				<td>Yuri Berry</td>
+				<td>Chief Marketing Officer (CMO)</td>
+				<td>New York</td>
+				<td>40</td>
+				<td>2009/06/25</td>
+				<td>$675,000</td>
+			</tr>
+			<tr>
+				<td>Caesar Vance</td>
+				<td>Pre-Sales Support</td>
+				<td>New York</td>
+				<td>21</td>
+				<td>2011/12/12</td>
+				<td>$106,450</td>
+			</tr>
+			<tr>
+				<td>Doris Wilder</td>
+				<td>Sales Assistant</td>
+				<td>Sidney</td>
+				<td>23</td>
+				<td>2010/09/20</td>
+				<td>$85,600</td>
+			</tr>
+			<tr>
+				<td>Angelica Ramos</td>
+				<td>Chief Executive Officer (CEO)</td>
+				<td>London</td>
+				<td>47</td>
+				<td>2009/10/09</td>
+				<td>$1,200,000</td>
+			</tr>
+			<tr>
+				<td>Gavin Joyce</td>
+				<td>Developer</td>
+				<td>Edinburgh</td>
+				<td>42</td>
+				<td>2010/12/22</td>
+				<td>$92,575</td>
+			</tr>
+			<tr>
+				<td>Jennifer Chang</td>
+				<td>Regional Director</td>
+				<td>Singapore</td>
+				<td>28</td>
+				<td>2010/11/14</td>
+				<td>$357,650</td>
+			</tr>
+			<tr>
+				<td>Brenden Wagner</td>
+				<td>Software Engineer</td>
+				<td>San Francisco</td>
+				<td>28</td>
+				<td>2011/06/07</td>
+				<td>$206,850</td>
+			</tr>
+			<tr>
+				<td>Fiona Green</td>
+				<td>Chief Operating Officer (COO)</td>
+				<td>San Francisco</td>
+				<td>48</td>
+				<td>2010/03/11</td>
+				<td>$850,000</td>
+			</tr>
+			<tr>
+				<td>Shou Itou</td>
+				<td>Regional Marketing</td>
+				<td>Tokyo</td>
+				<td>20</td>
+				<td>2011/08/14</td>
+				<td>$163,000</td>
+			</tr>
+			<tr>
+				<td>Michelle House</td>
+				<td>Integration Specialist</td>
+				<td>Sidney</td>
+				<td>37</td>
+				<td>2011/06/02</td>
+				<td>$95,400</td>
+			</tr>
+			<tr>
+				<td>Suki Burks</td>
+				<td>Developer</td>
+				<td>London</td>
+				<td>53</td>
+				<td>2009/10/22</td>
+				<td>$114,500</td>
+			</tr>
+			<tr>
+				<td>Prescott Bartlett</td>
+				<td>Technical Author</td>
+				<td>London</td>
+				<td>27</td>
+				<td>2011/05/07</td>
+				<td>$145,000</td>
+			</tr>
+			<tr>
+				<td>Gavin Cortez</td>
+				<td>Team Leader</td>
+				<td>San Francisco</td>
+				<td>22</td>
+				<td>2008/10/26</td>
+				<td>$235,500</td>
+			</tr>
+			<tr>
+				<td>Martena Mccray</td>
+				<td>Post-Sales support</td>
+				<td>Edinburgh</td>
+				<td>46</td>
+				<td>2011/03/09</td>
+				<td>$324,050</td>
+			</tr>
+			<tr>
+				<td>Unity Butler</td>
+				<td>Marketing Designer</td>
+				<td>San Francisco</td>
+				<td>47</td>
+				<td>2009/12/09</td>
+				<td>$85,675</td>
+			</tr>
+			<tr>
+				<td>Howard Hatfield</td>
+				<td>Office Manager</td>
+				<td>San Francisco</td>
+				<td>51</td>
+				<td>2008/12/16</td>
+				<td>$164,500</td>
+			</tr>
+			<tr>
+				<td>Hope Fuentes</td>
+				<td>Secretary</td>
+				<td>San Francisco</td>
+				<td>41</td>
+				<td>2010/02/12</td>
+				<td>$109,850</td>
+			</tr>
+			<tr>
+				<td>Vivian Harrell</td>
+				<td>Financial Controller</td>
+				<td>San Francisco</td>
+				<td>62</td>
+				<td>2009/02/14</td>
+				<td>$452,500</td>
+			</tr>
+			<tr>
+				<td>Timothy Mooney</td>
+				<td>Office Manager</td>
+				<td>London</td>
+				<td>37</td>
+				<td>2008/12/11</td>
+				<td>$136,200</td>
+			</tr>
+			<tr>
+				<td>Jackson Bradshaw</td>
+				<td>Director</td>
+				<td>New York</td>
+				<td>65</td>
+				<td>2008/09/26</td>
+				<td>$645,750</td>
+			</tr>
+			<tr>
+				<td>Olivia Liang</td>
+				<td>Support Engineer</td>
+				<td>Singapore</td>
+				<td>64</td>
+				<td>2011/02/03</td>
+				<td>$234,500</td>
+			</tr>
+			<tr>
+				<td>Bruno Nash</td>
+				<td>Software Engineer</td>
+				<td>London</td>
+				<td>38</td>
+				<td>2011/05/03</td>
+				<td>$163,500</td>
+			</tr>
+			<tr>
+				<td>Sakura Yamamoto</td>
+				<td>Support Engineer</td>
+				<td>Tokyo</td>
+				<td>37</td>
+				<td>2009/08/19</td>
+				<td>$139,575</td>
+			</tr>
+			<tr>
+				<td>Thor Walton</td>
+				<td>Developer</td>
+				<td>New York</td>
+				<td>61</td>
+				<td>2013/08/11</td>
+				<td>$98,540</td>
+			</tr>
+			<tr>
+				<td>Finn Camacho</td>
+				<td>Support Engineer</td>
+				<td>San Francisco</td>
+				<td>47</td>
+				<td>2009/07/07</td>
+				<td>$87,500</td>
+			</tr>
+			<tr>
+				<td>Serge Baldwin</td>
+				<td>Data Coordinator</td>
+				<td>Singapore</td>
+				<td>64</td>
+				<td>2012/04/09</td>
+				<td>$138,575</td>
+			</tr>
+			<tr>
+				<td>Zenaida Frank</td>
+				<td>Software Engineer</td>
+				<td>New York</td>
+				<td>63</td>
+				<td>2010/01/04</td>
+				<td>$125,250</td>
+			</tr>
+			<tr>
+				<td>Zorita Serrano</td>
+				<td>Software Engineer</td>
+				<td>San Francisco</td>
+				<td>56</td>
+				<td>2012/06/01</td>
+				<td>$115,000</td>
+			</tr>
+			<tr>
+				<td>Jennifer Acosta</td>
+				<td>Junior Javascript Developer</td>
+				<td>Edinburgh</td>
+				<td>43</td>
+				<td>2013/02/01</td>
+				<td>$75,650</td>
+			</tr>
+			<tr>
+				<td>Cara Stevens</td>
+				<td>Sales Assistant</td>
+				<td>New York</td>
+				<td>46</td>
+				<td>2011/12/06</td>
+				<td>$145,600</td>
+			</tr>
+			<tr>
+				<td>Hermione Butler</td>
+				<td>Regional Director</td>
+				<td>London</td>
+				<td>47</td>
+				<td>2011/03/21</td>
+				<td>$356,250</td>
+			</tr>
+			<tr>
+				<td>Lael Greer</td>
+				<td>Systems Administrator</td>
+				<td>London</td>
+				<td>21</td>
+				<td>2009/02/27</td>
+				<td>$103,500</td>
+			</tr>
+			<tr>
+				<td>Jonas Alexander</td>
+				<td>Developer</td>
+				<td>San Francisco</td>
+				<td>30</td>
+				<td>2010/07/14</td>
+				<td>$86,500</td>
+			</tr>
+			<tr>
+				<td>Shad Decker</td>
+				<td>Regional Director</td>
+				<td>Edinburgh</td>
+				<td>51</td>
+				<td>2008/11/13</td>
+				<td>$183,000</td>
+			</tr>
+			<tr>
+				<td>Michael Bruce</td>
+				<td>Javascript Developer</td>
+				<td>Singapore</td>
+				<td>29</td>
+				<td>2011/06/27</td>
+				<td>$183,000</td>
+			</tr>
+			<tr>
+				<td>Donna Snider</td>
+				<td>Customer Support</td>
+				<td>New York</td>
+				<td>27</td>
+				<td>2011/01/25</td>
+				<td>$112,000</td>
+			</tr>
+		</tbody>
+	</table>
+
+
+	<!-- Navigation -->
+
+
+	</div>
+	<!-- /.modal -->
+	<script type="text/javascript">
+		$("#select").change(function() {
+			var options = $(this).val();
+			$("#dataTable tr").each(function() {
+				var tr = $(this);
+				var td = tr.find("td:eq(2)")
+				if (td.text() !== options) {
+					tr.hide();
+				}
+			})
+
+		});
+	</script>
+	<select id="select">
+		<optgroup label="대분류">
+			<option value="B-도서(단행본)">B-도서(단행본)
+			<option value="E-기타매체">E-기타매체
+			<option value="J-정기간행물">J-정기간행물
+			<option value="P-특허자료">P-특허자료
+			<option value="R-보고서">R-보고서
+			<option value="S-규격/사전">S-규격/사전
+			<option value="T-논문">T-논문
+		</optgroup>
+	</select>
+	<div id="divLoadBody" style="display: none;" class="container">
+		<div class="col-md-12">
+			<h2 class="page-header">
+				관리자 페이지 <small>Admin</small>
+			</h2>
+			<!-- First Blog Post -->
+			<div align="left" style="width: 98%"></div>
+			<div class="col-xs-12 panel panel-default">
+				<div class="panel-body">
+					<div>
+						<h2>대여 기록</h2>
+					</div>
+					<!-- 
+			기록 검색<button type="button" onclick="location.href='/insertRecord'">삽입</button>
+			 -->
+
+					<table class="table table-striped table-bordered" id="dataTable">
+						<thead>
+							<tr class="  title">
+								<th>도서명</th>
+								<th class="td-date">대여자</th>
+								<th class="hidden-sm hidden-xs hidden-md td-author">분류</th>
+								<th class="td-author hidden-xs">대여일</th>
+								<th class="td-author">반납일</th>
+
+
+								<!-- <th class="td-img">삭제</th> -->
+
+
+
+
+
+							</tr>
+						</thead>
+
+
+						<tbody>
+
+
+							<tr>
+
+								<td align="left">열역학</td>
+								<td>이지성</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-05-08</td>
+								<td align="left">2015-06-07</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">꾸뻬 씨의 시간 여행</td>
+								<td>홍대규</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-05-08</td>
+								<td align="left">2015-06-07</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">총 균 쇠 (무기 병균 금속은 인류의 운명을 어떻게 바꿨는가)</td>
+								<td>유영승</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-05-08</td>
+								<td align="left">2015-06-07</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">자동차 소프트웨어 공학 (원칙 프로세스 방법 틀)</td>
+								<td>장성동</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-05-07</td>
+								<td align="left">2015-06-06</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">CMMI 기본과 실천 (생산성과 품질이 향상되는 프로세스 개선의 모든 것)</td>
+								<td>장성동</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-05-07</td>
+								<td align="left">2015-06-06</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">스마트카 소프트웨어 엔지니어링 (자동차 임베디드 소프트웨어 개발 프로세스와
+									기술 입문)</td>
+								<td>장성동</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-05-07</td>
+								<td align="left">2015-06-06</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">새로쓴 소프트웨어 공학</td>
+								<td>장성동</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-05-07</td>
+								<td align="left">2015-06-06</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">유한요소해석 (알기쉬운, FINITE ELEMINT ANALYSIS)</td>
+								<td>조호선</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-05-06</td>
+								<td align="left">2015-06-05</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">꾸뻬 씨의 사랑 여행</td>
+								<td>이나라</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-05-06</td>
+								<td align="left">2015-06-05</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">꾸뻬 씨의 시간 여행</td>
+								<td>이나라</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-05-06</td>
+								<td align="left">2015-06-05</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">꾸뻬 씨의 행복 여행</td>
+								<td>이나라</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-05-06</td>
+								<td align="left">2015-06-05</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">소음.진동 기사.산업기사 필기 (2015)</td>
+								<td>고유곤</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-05-06</td>
+								<td align="left">2015-06-05</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">Minitab 예제 중심의 실험계획법 (현장 사례 중심 Mintab
+									실무완성)</td>
+								<td>고유곤</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-05-06</td>
+								<td align="left">2015-06-05</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">MINITAB을 이용한 다구찌 기법 활용</td>
+								<td>고유곤</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-05-06</td>
+								<td align="left">2015-06-05</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">CMMI의 이해 (프로세스 개선을 위한 접근 방법)</td>
+								<td>장성동</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-05-06</td>
+								<td align="left">2015-06-05</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">기계재료 가공법</td>
+								<td>윤광수</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-04-29</td>
+								<td align="left">2015-05-29</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">기계요소설계</td>
+								<td>손석무</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-04-29</td>
+								<td align="left">2015-05-29</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">CNC 선반 프로그램과 가공</td>
+								<td>장근호</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-05-13</td>
+								<td align="left">2015-05-27</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">기계요소설계</td>
+								<td>정다운</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-05-11</td>
+								<td align="left">2015-05-25</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">일반기계기사 필기 + 주요과목 기계공학 핸드북 (2015)</td>
+								<td>김지황</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-04-23</td>
+								<td align="left">2015-05-23</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">특이점이 온다 (기술이 인간을 초월하는 순간)</td>
+								<td>유영승</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-04-23</td>
+								<td align="left">2015-05-23</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">KS 핸드북 철강 Ⅰ</td>
+								<td>반원규</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">S-규격/사전</td>
+								<td class="hidden-xs" align="left">2015-04-22</td>
+								<td align="left">2015-05-22</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">끌리는 사람은 1%가 다르다</td>
+								<td>민상훈</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-05-19</td>
+								<td align="left">2015-05-20</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">Powertrain Systems Nvh (Paperback)</td>
+								<td>민상훈</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">T-논문</td>
+								<td class="hidden-xs" align="left">2015-05-20</td>
+								<td align="left">2015-05-20</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">모던 웹을 위한 JavaScript + jQuery 입문 (자바스크립트에서
+									제이쿼리, 제이쿼리 모바일까지 한 권으로 끝낸다)</td>
+								<td>민상훈</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-05-19</td>
+								<td align="left">2015-05-20</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">CATIA를 이용한 부품설계 중급</td>
+								<td>정다운</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-05-18</td>
+								<td align="left">2015-05-19</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">개미 4 (제3부 개미혁명)</td>
+								<td>박완석</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-05-03</td>
+								<td align="left">2015-05-17</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">자전거 타고 제주여행 (제주도 자전거여행 완벽 가이드북)</td>
+								<td>장근호</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-04-15</td>
+								<td align="left">2015-05-15</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">된다 된다 나는 된다 (일과 인생이 술술 풀리는 자기암시법)</td>
+								<td>정다운</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-05-15</td>
+								<td align="left">2015-05-15</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">사장으로 산다는 것 (사장이 차마 말하지 못한)</td>
+								<td>정다운</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-05-15</td>
+								<td align="left">2015-05-15</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">무탄트 메시지 (그 곳에선 나 혼자만 이상한 사람이었다)</td>
+								<td>김신성</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-04-14</td>
+								<td align="left">2015-05-14</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">Handbook of Materials Selection</td>
+								<td>류동한</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-04-13</td>
+								<td align="left">2015-05-13</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">개미 1 (제1부 개미)</td>
+								<td>박완석</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-04-29</td>
+								<td align="left">2015-05-13</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">기계도면 보는법 작성법</td>
+								<td>이필웅</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-04-10</td>
+								<td align="left">2015-05-10</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">최신 공작기계</td>
+								<td>이필웅</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-04-08</td>
+								<td align="left">2015-05-08</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">KS규격에 따른 기계설계 및 도면해석</td>
+								<td>이필웅</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-04-08</td>
+								<td align="left">2015-05-08</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">총 균 쇠 (무기 병균 금속은 인류의 운명을 어떻게 바꿨는가)</td>
+								<td>유영승</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-04-08</td>
+								<td align="left">2015-05-08</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">자동차 섀시공학</td>
+								<td>최수용</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-04-23</td>
+								<td align="left">2015-05-07</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">기계공학 용어사전</td>
+								<td>최수용</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">S-규격/사전</td>
+								<td class="hidden-xs" align="left">2015-04-23</td>
+								<td align="left">2015-05-07</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">스마트카 소프트웨어 엔지니어링 (자동차 임베디드 소프트웨어 개발 프로세스와
+									기술 입문)</td>
+								<td>장성동</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-04-21</td>
+								<td align="left">2015-05-05</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">CMMI의 이해 (프로세스 개선을 위한 접근 방법)</td>
+								<td>장성동</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-04-21</td>
+								<td align="left">2015-05-05</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">CMMI 기본과 실천 (생산성과 품질이 향상되는 프로세스 개선의 모든 것)</td>
+								<td>장성동</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-04-21</td>
+								<td align="left">2015-05-05</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">자동차 소프트웨어 공학 (원칙 프로세스 방법 틀)</td>
+								<td>장성동</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-04-21</td>
+								<td align="left">2015-05-05</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">국제 주물결함 도해집</td>
+								<td>반원규</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-04-20</td>
+								<td align="left">2015-05-04</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">유한요소해석 (알기쉬운, FINITE ELEMINT ANALYSIS)</td>
+								<td>조호선</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-04-20</td>
+								<td align="left">2015-05-04</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">꾸뻬 씨의 시간 여행</td>
+								<td>홍대규</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-04-20</td>
+								<td align="left">2015-05-04</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">오늘 내가 살아갈 이유</td>
+								<td>홍대규</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-04-20</td>
+								<td align="left">2015-05-04</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">코스모스</td>
+								<td>유영승</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-04-01</td>
+								<td align="left">2015-05-01</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">도면해독 이론과 실제</td>
+								<td>정다운</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-04-17</td>
+								<td align="left">2015-05-01</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">기계요소설계</td>
+								<td>정다운</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-04-17</td>
+								<td align="left">2015-05-01</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">개미 4 (제3부 개미혁명)</td>
+								<td>박완석</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-04-17</td>
+								<td align="left">2015-05-01</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">자동차부품 피로 내구 해석</td>
+								<td>고유곤</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-03-31</td>
+								<td align="left">2015-04-30</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">한 번은 독해져라 (흔들리는 당신을 위한 김진애 박사의 인생 10강)</td>
+								<td>정희웅</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-03-31</td>
+								<td align="left">2015-04-30</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">자전거 타고 제주여행 (제주도 자전거여행 완벽 가이드북)</td>
+								<td>장근호</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-04-16</td>
+								<td align="left">2015-04-30</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">EBS 한국사능력검정시험 고급 (2015)</td>
+								<td>정민욱</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-03-30</td>
+								<td align="left">2015-04-29</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">개미 1 (제1부 개미)</td>
+								<td>박완석</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-04-13</td>
+								<td align="left">2015-04-27</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">개미 2 (제2부 개미의 날)</td>
+								<td>박완석</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-04-13</td>
+								<td align="left">2015-04-27</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">사물인터넷 (클라우드와 빅데이터를 뛰어넘는 거대한 연결)</td>
+								<td>장성동</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-03-27</td>
+								<td align="left">2015-04-26</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">KUO의 자동제어</td>
+								<td>장성동</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-03-27</td>
+								<td align="left">2015-04-26</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">위대한 나의 발견 강점혁명</td>
+								<td>박지훈</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-03-26</td>
+								<td align="left">2015-04-25</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">열역학</td>
+								<td>손석무</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-03-24</td>
+								<td align="left">2015-04-23</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">기계요소설계</td>
+								<td>손석무</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-03-24</td>
+								<td align="left">2015-04-23</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">특이점이 온다 (기술이 인간을 초월하는 순간)</td>
+								<td>유영승</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-03-24</td>
+								<td align="left">2015-04-23</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">기계공작법</td>
+								<td>정다운</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-04-08</td>
+								<td align="left">2015-04-22</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">창문 넘어 도망친 100세 노인 (요나스 요나손 장편소설)</td>
+								<td>이재석</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-03-23</td>
+								<td align="left">2015-04-22</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">제조공정설계</td>
+								<td>정다운</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-04-08</td>
+								<td align="left">2015-04-22</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">어떤 계정과목일까</td>
+								<td>윤광수</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-04-08</td>
+								<td align="left">2015-04-22</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">기계재료 가공법</td>
+								<td>윤광수</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-04-08</td>
+								<td align="left">2015-04-22</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">스마트한 생각들 (사람의 마음을 움직이는 52가지 심리법칙)</td>
+								<td>민상훈</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-04-07</td>
+								<td align="left">2015-04-21</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">CATIA V5 기초와 응용 (Ver 5.9)</td>
+								<td>김지황</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-04-02</td>
+								<td align="left">2015-04-16</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">공차해석</td>
+								<td>이원혁</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-03-11</td>
+								<td align="left">2015-04-10</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">무탄트 메시지 (그 곳에선 나 혼자만 이상한 사람이었다)</td>
+								<td>김신성</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-03-11</td>
+								<td align="left">2015-04-10</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">잉글피쉬 기초영어 1 (말하기 기술 편,영어스피킹, 뭐 쉽게 할 수 있는
+									방법 없냐고?)</td>
+								<td>김신성</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-03-11</td>
+								<td align="left">2015-04-10</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">60일 완성 박코치 실전 영발음 (결과로 말하는 실전회화 트레이닝)</td>
+								<td>김신성</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-03-11</td>
+								<td align="left">2015-04-10</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">인문의 바다에 빠져라 1</td>
+								<td>윤광수</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-03-10</td>
+								<td align="left">2015-04-09</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">인문의 바다에 빠져라 2 (서양미술사)</td>
+								<td>윤광수</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-03-10</td>
+								<td align="left">2015-04-09</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">지식재산의 이해 (지식재산 입문)</td>
+								<td>손석무</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-03-10</td>
+								<td align="left">2015-04-09</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">개미 1 (제1부 개미)</td>
+								<td>박완석</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-03-26</td>
+								<td align="left">2015-04-09</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">개미 2 (제2부 개미의 날)</td>
+								<td>박완석</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-03-26</td>
+								<td align="left">2015-04-09</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">백설공주에게 죽음을 (타우누스 시리즈. 4)</td>
+								<td>박완석</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-03-09</td>
+								<td align="left">2015-04-08</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">총 균 쇠 (무기 병균 금속은 인류의 운명을 어떻게 바꿨는가)</td>
+								<td>유영승</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-03-09</td>
+								<td align="left">2015-04-08</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">사전제품 품질기획 및 관리계획서APQP</td>
+								<td>남정현</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-03-20</td>
+								<td align="left">2015-04-03</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">신차부품 개발 프로세스 실무</td>
+								<td>남정현</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-03-20</td>
+								<td align="left">2015-04-03</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">코스모스</td>
+								<td>유영승</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-03-03</td>
+								<td align="left">2015-04-02</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">제3인류 4 (베르나르 베르베르 장편소설)</td>
+								<td>유영승</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-02-27</td>
+								<td align="left">2015-03-29</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">강한 것이 아름답다 (라인을 잡는 단 하나의 운동)</td>
+								<td>장성동</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-02-25</td>
+								<td align="left">2015-03-27</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">한 번은 독해져라 (흔들리는 당신을 위한 김진애 박사의 인생 10강)</td>
+								<td>정희웅</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-03-13</td>
+								<td align="left">2015-03-27</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">위대한 나의 발견 강점혁명</td>
+								<td>박지훈</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-03-10</td>
+								<td align="left">2015-03-24</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">스마트카 소프트웨어 엔지니어링 (자동차 임베디드 소프트웨어 개발 프로세스와
+									기술 입문)</td>
+								<td>장성동</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-03-10</td>
+								<td align="left">2015-03-24</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">사물인터넷 (클라우드와 빅데이터를 뛰어넘는 거대한 연결)</td>
+								<td>장성동</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-03-10</td>
+								<td align="left">2015-03-24</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">자동차 전자제어 스마트 자동차</td>
+								<td>장성동</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-03-09</td>
+								<td align="left">2015-03-23</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">팀 프로젝트를 위한 컴퓨터 활용 테크닉</td>
+								<td>장성동</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-03-09</td>
+								<td align="left">2015-03-23</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">정글만리 1 (조정래 장편소설, 양장본 HardCover)</td>
+								<td>권철웅</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-02-17</td>
+								<td align="left">2015-03-19</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">정글만리 2 (조정래 장편소설, 양장본 HardCover)</td>
+								<td>권철웅</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-02-17</td>
+								<td align="left">2015-03-19</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">제3인류 2 (베르나르 베르베르 장편소설)</td>
+								<td>이재석</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-02-17</td>
+								<td align="left">2015-03-19</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">버티는 삶에 관하여 (허지웅 에세이)</td>
+								<td>이영주</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-02-27</td>
+								<td align="left">2015-03-13</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">10년째 안되는 영어 말문, 나는 한국에서 튼다</td>
+								<td>윤광수</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-02-27</td>
+								<td align="left">2015-03-13</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">한 번은 독해져라 (흔들리는 당신을 위한 김진애 박사의 인생 10강)</td>
+								<td>정희웅</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-02-26</td>
+								<td align="left">2015-03-12</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">모터의 테크놀로지 (Color로 보는 모터의 진화와 비밀)</td>
+								<td>장성동</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-02-23</td>
+								<td align="left">2015-03-09</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">하이브리드 전기자동차</td>
+								<td>장성동</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-02-23</td>
+								<td align="left">2015-03-09</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">설계방법론</td>
+								<td>박현진</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-02-04</td>
+								<td align="left">2015-03-06</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">해외직구 따라잡기 ([개정판]몰테일과 함께하는)</td>
+								<td>장근호</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-01-22</td>
+								<td align="left">2015-02-21</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">꾸뻬 씨의 인생 여행 (파리의 정신과 의사)</td>
+								<td>조계일</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-01-22</td>
+								<td align="left">2015-02-21</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">모터팬 타이어 테크놀로지 (Motor Fan)</td>
+								<td>윤동영</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-01-21</td>
+								<td align="left">2015-02-20</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">Motor Fan 드라이브라인 4WD 종감속기어 (모터팬,사진 일러스트로
+									보는 꿈의 자동차 기술)</td>
+								<td>윤동영</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-01-21</td>
+								<td align="left">2015-02-20</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">Motor Fan 디젤엔진의 테크놀로지 (모터팬,꿈의 자동차 기술)</td>
+								<td>윤동영</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-01-21</td>
+								<td align="left">2015-02-20</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">모터 팬 일러스트레이티드 조향 제동 쇽업소버 (사진 일러스트로 보는 꿈의
+									자동차 기술)</td>
+								<td>윤동영</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-01-21</td>
+								<td align="left">2015-02-20</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">모터 팬자동변속기 & CVT (Motor Fan)</td>
+								<td>윤동영</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-01-21</td>
+								<td align="left">2015-02-20</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">Motor Fan 트랜스미션 오늘과 내일 (Motor Fan
+									illustrated Transmission)</td>
+								<td>윤동영</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-01-21</td>
+								<td align="left">2015-02-20</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">버티는 삶에 관하여 (허지웅 에세이)</td>
+								<td>이영주</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-02-05</td>
+								<td align="left">2015-02-19</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">제3인류 3 (베르나르 베르베르 장편소설)</td>
+								<td>유영승</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-01-19</td>
+								<td align="left">2015-02-18</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">공차해석</td>
+								<td>이원혁</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-02-04</td>
+								<td align="left">2015-02-18</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">6시그마 프로젝트 추진도구</td>
+								<td>장성동</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-02-04</td>
+								<td align="left">2015-02-18</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">현대실험계획법</td>
+								<td>장성동</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-02-04</td>
+								<td align="left">2015-02-18</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">예제중심의 실험계획법</td>
+								<td>장성동</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-02-04</td>
+								<td align="left">2015-02-18</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">상대성 이론이란 무엇인가?</td>
+								<td>오병기</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-02-02</td>
+								<td align="left">2015-02-16</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">엑셀 좀 하는 엑셀 매크로 & VBA 자동화 프로그래밍</td>
+								<td>윤광수</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-01-13</td>
+								<td align="left">2015-02-12</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">인생이 빛나는 정리의 마법 (진짜 인생은 정리 후에 시작된다)</td>
+								<td>박정률</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-01-13</td>
+								<td align="left">2015-02-12</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">계산이 빨라지는 인도 베다수학 (기적의 연산법)</td>
+								<td>윤광수</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-01-12</td>
+								<td align="left">2015-02-11</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">삼한지 1 (밤이 깊을수록 별은 빛나고)</td>
+								<td>윤광수</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-01-12</td>
+								<td align="left">2015-02-11</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">제3인류 1 (베르나르 베르베르 장편소설)</td>
+								<td>이재석</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-01-12</td>
+								<td align="left">2015-02-11</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">습관의 힘 (반복되는 행동이 만드는 극적인 변화)</td>
+								<td>김정환</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-12-30</td>
+								<td align="left">2015-01-29</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">설계방법론</td>
+								<td>박현진</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-12-29</td>
+								<td align="left">2015-01-28</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">유한요소해석 (알기쉬운, FINITE ELEMINT ANALYSIS)</td>
+								<td>유창범</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-12-29</td>
+								<td align="left">2015-01-28</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">ANSYS 활용안내서-유한요소해석입문과 선형해석 -7판</td>
+								<td>유창범</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-12-29</td>
+								<td align="left">2015-01-28</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">EXCEL을 이용한 유한요소해석</td>
+								<td>유창범</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-12-29</td>
+								<td align="left">2015-01-28</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">상대성 이론이란 무엇인가?</td>
+								<td>오병기</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-01-13</td>
+								<td align="left">2015-01-27</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">정글만리 3 (조정래 장편소설, 양장본 HardCover)</td>
+								<td>오병기</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-01-13</td>
+								<td align="left">2015-01-27</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">매력적인 장 여행 (제2의 뇌, 장에 관한 놀라운 지식 프로젝트)</td>
+								<td>오병기</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-01-13</td>
+								<td align="left">2015-01-27</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">전기기계 (2015)</td>
+								<td>장근호</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-01-13</td>
+								<td align="left">2015-01-27</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">변화와 혁신, 창조를 위한 기술경영</td>
+								<td>선향선</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-01-13</td>
+								<td align="left">2015-01-27</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">Digital Control Systems (Hardcover)</td>
+								<td>장성동</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-01-12</td>
+								<td align="left">2015-01-26</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">임베디드 컨트롤 시스템</td>
+								<td>장성동</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-01-12</td>
+								<td align="left">2015-01-26</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">매입자석 동기모터의 설계 및 제어</td>
+								<td>장성동</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-01-12</td>
+								<td align="left">2015-01-26</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">정글만리 2 (조정래 장편소설, 양장본 HardCover)</td>
+								<td>오병기</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2015-01-09</td>
+								<td align="left">2015-01-23</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">꾸뻬 씨의 인생 여행 (파리의 정신과 의사)</td>
+								<td>조계일</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-12-22</td>
+								<td align="left">2015-01-21</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">20대 경제생활 첫걸음 (바로바로 써먹는 생활 속 경제지식 101,첫 월급
+									관리부터 명품족이 되기까지)</td>
+								<td>조계일</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-12-22</td>
+								<td align="left">2015-01-21</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">제3인류 2 (베르나르 베르베르 장편소설)</td>
+								<td>유영승</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-12-22</td>
+								<td align="left">2015-01-21</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">기계공작법</td>
+								<td>박동준</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-12-19</td>
+								<td align="left">2015-01-18</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">Motor Fan 트랜스미션 오늘과 내일 (Motor Fan
+									illustrated Transmission)</td>
+								<td>윤동영</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-12-17</td>
+								<td align="left">2015-01-16</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">Motor Fan 드라이브라인 4WD 종감속기어 (모터팬,사진 일러스트로
+									보는 꿈의 자동차 기술)</td>
+								<td>윤동영</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-12-17</td>
+								<td align="left">2015-01-16</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">모터 팬자동변속기 & CVT (Motor Fan)</td>
+								<td>윤동영</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-12-17</td>
+								<td align="left">2015-01-16</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">Motor Fan 디젤엔진의 테크놀로지 (모터팬,꿈의 자동차 기술)</td>
+								<td>윤동영</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-12-17</td>
+								<td align="left">2015-01-16</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">모터 팬 일러스트레이티드 조향 제동 쇽업소버 (사진 일러스트로 보는 꿈의
+									자동차 기술)</td>
+								<td>윤동영</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-12-17</td>
+								<td align="left">2015-01-16</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">모터팬 타이어 테크놀로지 (Motor Fan)</td>
+								<td>윤동영</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-12-17</td>
+								<td align="left">2015-01-16</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">해외직구 따라잡기 ([개정판]몰테일과 함께하는)</td>
+								<td>이상유</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-12-10</td>
+								<td align="left">2015-01-09</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">정밀측정공학</td>
+								<td>변장섭</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-12-02</td>
+								<td align="left">2015-01-01</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">설계방법론</td>
+								<td>박현진</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-11-25</td>
+								<td align="left">2014-12-25</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">유한요소해석 (알기쉬운, FINITE ELEMINT ANALYSIS)</td>
+								<td>박현진</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-11-25</td>
+								<td align="left">2014-12-25</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">ANSYS 활용안내서-유한요소해석입문과 선형해석 -7판</td>
+								<td>박현진</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-11-25</td>
+								<td align="left">2014-12-25</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">습관의 힘 (반복되는 행동이 만드는 극적인 변화)</td>
+								<td>김정환</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-11-25</td>
+								<td align="left">2014-12-25</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">PM을 위한 프로젝트 실전 로드맵</td>
+								<td>박정률</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-11-22</td>
+								<td align="left">2014-12-22</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">R&D 프로젝트관리</td>
+								<td>박정률</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-11-22</td>
+								<td align="left">2014-12-22</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">제3인류 1 (베르나르 베르베르 장편소설)</td>
+								<td>유영승</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-11-19</td>
+								<td align="left">2014-12-19</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">강한 것이 아름답다 (라인을 잡는 단 하나의 운동)</td>
+								<td>이상유</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-12-02</td>
+								<td align="left">2014-12-16</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">하루 4분 타바타 트레이닝</td>
+								<td>이상유</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-12-02</td>
+								<td align="left">2014-12-16</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">내가 나를 낫게 한다 (깨우고 바라보고 두드리는 6단계 셀프 명상 치유법)</td>
+								<td>이상유</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-12-02</td>
+								<td align="left">2014-12-16</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">창문 넘어 도망친 100세 노인 (요나스 요나손 장편소설)</td>
+								<td>장근호</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-11-05</td>
+								<td align="left">2014-12-05</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">엔지니어의 인문학 수업 (르네상스인을 꿈꾸는 공학도를 위한 필수교양)</td>
+								<td>박완석</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-11-18</td>
+								<td align="left">2014-12-02</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">팀워크</td>
+								<td>이철범</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-11-18</td>
+								<td align="left">2014-12-02</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">제3인류 2 (베르나르 베르베르 장편소설)</td>
+								<td>박완석</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-11-18</td>
+								<td align="left">2014-12-02</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">내가 나를 낫게 한다 (깨우고 바라보고 두드리는 6단계 셀프 명상 치유법)</td>
+								<td>김세리</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-10-28</td>
+								<td align="left">2014-11-27</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">하루 4분 타바타 트레이닝</td>
+								<td>김세리</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-10-28</td>
+								<td align="left">2014-11-27</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">강한 것이 아름답다 (라인을 잡는 단 하나의 운동)</td>
+								<td>김세리</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-10-28</td>
+								<td align="left">2014-11-27</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">사진학강의</td>
+								<td>장근호</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-10-27</td>
+								<td align="left">2014-11-26</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">60일 완성 박코치 실전 영발음 (결과로 말하는 실전회화 트레이닝)</td>
+								<td>김신성</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-10-27</td>
+								<td align="left">2014-11-26</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">금형재료</td>
+								<td>이상유</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-11-11</td>
+								<td align="left">2014-11-25</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">최신 사출금형설계</td>
+								<td>이상유</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-11-11</td>
+								<td align="left">2014-11-25</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">습관의 힘 (반복되는 행동이 만드는 극적인 변화)</td>
+								<td>김정환</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-10-22</td>
+								<td align="left">2014-11-21</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">ANSYS 활용안내서-유한요소해석입문과 선형해석 -7판</td>
+								<td>박현진</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-10-22</td>
+								<td align="left">2014-11-21</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">유한요소해석 (알기쉬운, FINITE ELEMINT ANALYSIS)</td>
+								<td>박현진</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-10-22</td>
+								<td align="left">2014-11-21</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">설계방법론</td>
+								<td>박현진</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-10-22</td>
+								<td align="left">2014-11-21</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">수입자동차 부품투시도 (세계명차 장치별 도해수록)</td>
+								<td>윤동영</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-11-07</td>
+								<td align="left">2014-11-21</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">Motor Fan 가솔린 디젤 엔진의 기술과 전략 (모터팬,엔진출력 연비향상
+									배기가스 저감기술)</td>
+								<td>윤동영</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-11-07</td>
+								<td align="left">2014-11-21</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">Motor Fan EV전기자동차 기초& HYBRID하이브리드 재정의
+									(모터팬, 사진 일러스트로 보는 꿈의 자동차 기술)</td>
+								<td>윤동영</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-11-07</td>
+								<td align="left">2014-11-21</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">Motor Fan 하이브리드의 진화</td>
+								<td>윤동영</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-11-07</td>
+								<td align="left">2014-11-21</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">Motor Fan 엔진 테크놀로지 (모터팬, 사진 일러스트로 보는 꿈의
+									자동차 기술)</td>
+								<td>윤동영</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-11-07</td>
+								<td align="left">2014-11-21</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">R&D부문 (DFSS) 시그마리더(GB)</td>
+								<td>임채홍</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-10-16</td>
+								<td align="left">2014-11-15</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">알기쉬운 다구찌기법 (기초부터현장적용까지)</td>
+								<td>임채홍</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-10-16</td>
+								<td align="left">2014-11-15</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">자본주의 사용설명서 (EBS 다큐프라임)</td>
+								<td>김신성</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-10-14</td>
+								<td align="left">2014-11-13</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">나의 한국현대사 (1959-2014, 55년의 기록)</td>
+								<td>남정현</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-10-10</td>
+								<td align="left">2014-11-09</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">창문 넘어 도망친 100세 노인 (요나스 요나손 장편소설)</td>
+								<td>장근호</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-10-10</td>
+								<td align="left">2014-11-09</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">제3인류 1 (베르나르 베르베르 장편소설)</td>
+								<td>이재석</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-10-08</td>
+								<td align="left">2014-11-07</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">한 번은 독해져라 (흔들리는 당신을 위한 김진애 박사의 인생 10강)</td>
+								<td>박지훈</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-10-24</td>
+								<td align="left">2014-11-07</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">Esd : Failure Mechanisms and Models
+									(Failure Mechanisms and Models)</td>
+								<td>심의수</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-10-22</td>
+								<td align="left">2014-11-05</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">인생이 빛나는 정리의 마법 (진짜 인생은 정리 후에 시작된다)</td>
+								<td>변장섭</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-10-02</td>
+								<td align="left">2014-11-01</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">발명 특허 (실전으로 배우는)</td>
+								<td>유영승</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">P-특허자료</td>
+								<td class="hidden-xs" align="left">2014-10-01</td>
+								<td align="left">2014-10-31</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">내가 나를 낫게 한다 (깨우고 바라보고 두드리는 6단계 셀프 명상 치유법)</td>
+								<td>김세리</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-09-26</td>
+								<td align="left">2014-10-26</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">하루 4분 타바타 트레이닝</td>
+								<td>김세리</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-09-26</td>
+								<td align="left">2014-10-26</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">습관의 힘 (반복되는 행동이 만드는 극적인 변화)</td>
+								<td>김정환</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-09-24</td>
+								<td align="left">2014-10-24</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">60일 완성 박코치 실전 영발음 (결과로 말하는 실전회화 트레이닝)</td>
+								<td>김신성</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-09-22</td>
+								<td align="left">2014-10-22</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">R&D부문(DFSS)6시그마리더 (GB)</td>
+								<td>장성동</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-09-17</td>
+								<td align="left">2014-10-17</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">다이어트 진화론 (인류 역사에서 찾아낸 가장 스마트한 다이어트)</td>
+								<td>장성동</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-09-17</td>
+								<td align="left">2014-10-17</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">MINITAB을 이용한 다구찌 기법 활용</td>
+								<td>장성동</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-09-17</td>
+								<td align="left">2014-10-17</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">자동차 속이보인다</td>
+								<td>김정환</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-09-15</td>
+								<td align="left">2014-10-15</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">자전거정비 정비완성편</td>
+								<td>권철웅</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-09-12</td>
+								<td align="left">2014-10-12</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">자본주의 사용설명서 (EBS 다큐프라임)</td>
+								<td>김신성</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-09-12</td>
+								<td align="left">2014-10-12</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">사진학강의</td>
+								<td>장근호</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-09-12</td>
+								<td align="left">2014-10-12</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">긍정심리학 (마틴 셀리그만의)</td>
+								<td>장근호</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-09-02</td>
+								<td align="left">2014-10-02</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">나의 한국현대사 (1959-2014, 55년의 기록)</td>
+								<td>남정현</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-09-01</td>
+								<td align="left">2014-10-01</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">강한 것이 아름답다 (라인을 잡는 단 하나의 운동)</td>
+								<td>김세리</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-09-01</td>
+								<td align="left">2014-10-01</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">인생이 빛나는 정리의 마법 (진짜 인생은 정리 후에 시작된다)</td>
+								<td>변장섭</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-09-17</td>
+								<td align="left">2014-10-01</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">국내외 전기차 충전기술 인프라 관련 사업 실태와 전기차 개조 튜닝 시장동향과
+									전망</td>
+								<td>장성동</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-09-15</td>
+								<td align="left">2014-09-29</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">절대지식 일본고전 (한권으로 읽는 일본의 모든 것)</td>
+								<td>오병기</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-09-12</td>
+								<td align="left">2014-09-26</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">동영상으로 배우는 CATIA Knowledgeware 1 (지식기반설계)</td>
+								<td>방재근</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-08-19</td>
+								<td align="left">2014-09-18</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">동영상으로 배우는 CATIA Knowledgeware 2 (지식기반설계)</td>
+								<td>방재근</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-08-19</td>
+								<td align="left">2014-09-18</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">소음.진동 기사.산업기사 필기 (2015)</td>
+								<td>고유곤</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-08-19</td>
+								<td align="left">2014-09-18</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">하루 4분 타바타 트레이닝</td>
+								<td>김세리</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-08-14</td>
+								<td align="left">2014-09-13</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">내가 나를 낫게 한다 (깨우고 바라보고 두드리는 6단계 셀프 명상 치유법)</td>
+								<td>김세리</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-08-14</td>
+								<td align="left">2014-09-13</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">자동차 속이보인다</td>
+								<td>김정환</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-08-14</td>
+								<td align="left">2014-09-13</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">창문 넘어 도망친 100세 노인 (요나스 요나손 장편소설)</td>
+								<td>김신성</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-08-29</td>
+								<td align="left">2014-09-12</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">인생이 빛나는 정리의 마법 (진짜 인생은 정리 후에 시작된다)</td>
+								<td>김정환</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-08-12</td>
+								<td align="left">2014-09-11</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">60일 완성 박코치 실전 영발음 (결과로 말하는 실전회화 트레이닝)</td>
+								<td>김신성</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-08-28</td>
+								<td align="left">2014-09-11</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">항상 나를 가로막는 나에게 (왜 우리는 언제나 같은 곳에서 넘어지는가)</td>
+								<td>김신성</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-08-28</td>
+								<td align="left">2014-09-11</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">절대지식 일본고전 (한권으로 읽는 일본의 모든 것)</td>
+								<td>오병기</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-08-20</td>
+								<td align="left">2014-09-03</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">Motor Fan 가솔린 디젤 엔진의 기술과 전략 (모터팬,엔진출력 연비향상
+									배기가스 저감기술)</td>
+								<td>장성동</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-08-18</td>
+								<td align="left">2014-09-01</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">Motor Fan EV전기자동차 기초& HYBRID하이브리드 재정의
+									(모터팬, 사진 일러스트로 보는 꿈의 자동차 기술)</td>
+								<td>장성동</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-08-18</td>
+								<td align="left">2014-09-01</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">Motor Fan 엔진 테크놀로지 (모터팬, 사진 일러스트로 보는 꿈의
+									자동차 기술)</td>
+								<td>장성동</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-08-18</td>
+								<td align="left">2014-09-01</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">정글만리 1 (조정래 장편소설, 양장본 HardCover)</td>
+								<td>이재석</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-08-01</td>
+								<td align="left">2014-08-31</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">항상 나를 가로막는 나에게 (왜 우리는 언제나 같은 곳에서 넘어지는가)</td>
+								<td>김신성</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-08-14</td>
+								<td align="left">2014-08-28</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">60일 완성 박코치 실전 영발음 (결과로 말하는 실전회화 트레이닝)</td>
+								<td>김신성</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-08-14</td>
+								<td align="left">2014-08-28</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">강한 것이 아름답다 (라인을 잡는 단 하나의 운동)</td>
+								<td>김세리</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-08-12</td>
+								<td align="left">2014-08-26</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">마하바라타 3 (전쟁)</td>
+								<td>윤광수</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-07-23</td>
+								<td align="left">2014-08-22</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">마하바라타 4 (해방)</td>
+								<td>윤광수</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-07-23</td>
+								<td align="left">2014-08-22</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">100명 중 98명이 틀리는 한글 맞춤법 (한국어 사용자의 필독서)</td>
+								<td>윤광수</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-07-18</td>
+								<td align="left">2014-08-17</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">절대지식 세계고전</td>
+								<td>윤광수</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-07-18</td>
+								<td align="left">2014-08-17</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">마하바라타 1 (주사위가 던져지다)</td>
+								<td>윤광수</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-07-15</td>
+								<td align="left">2014-08-14</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">창문 넘어 도망친 100세 노인 (요나스 요나손 장편소설)</td>
+								<td>윤광수</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-07-31</td>
+								<td align="left">2014-08-14</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">신도 버린 사람들</td>
+								<td>윤광수</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-07-31</td>
+								<td align="left">2014-08-14</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">한국 근현대사를 읽는다</td>
+								<td>윤광수</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-07-31</td>
+								<td align="left">2014-08-14</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">절대지식 일본고전 (한권으로 읽는 일본의 모든 것)</td>
+								<td>오병기</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-07-31</td>
+								<td align="left">2014-08-14</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">우리가 미처 몰랐던 터키 역사기행</td>
+								<td>김정환</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-07-11</td>
+								<td align="left">2014-08-10</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">정글만리 1 (조정래 장편소설, 양장본 HardCover)</td>
+								<td>윤광수</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-07-10</td>
+								<td align="left">2014-08-09</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">정글만리 2 (조정래 장편소설, 양장본 HardCover)</td>
+								<td>윤광수</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-07-10</td>
+								<td align="left">2014-08-09</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">정글만리 3 (조정래 장편소설, 양장본 HardCover)</td>
+								<td>윤광수</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-07-10</td>
+								<td align="left">2014-08-09</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">멈추면, 비로소 보이는 것들 (혜민 스님과 함께하는 내 마음 다시보기)</td>
+								<td>선향선</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-07-24</td>
+								<td align="left">2014-08-07</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">1cm+ (인생에 필요한 1cm를 찾아가는 크리에이티브한 여정)</td>
+								<td>선향선</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-07-24</td>
+								<td align="left">2014-08-07</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">어떤 하루</td>
+								<td>선향선</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-07-24</td>
+								<td align="left">2014-08-07</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">유머화술, 남을웃기는 사람이 무조건 뜬다</td>
+								<td>선향선</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-07-24</td>
+								<td align="left">2014-08-07</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">강한 것이 아름답다 (라인을 잡는 단 하나의 운동)</td>
+								<td>김세리</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-07-21</td>
+								<td align="left">2014-08-04</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">남자는 힘이다 (맛스타드림 포스 근육 만들기 강좌)</td>
+								<td>김정환</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-06-23</td>
+								<td align="left">2014-07-23</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">동영상으로 배우는 CATIA Knowledgeware 1 (지식기반설계)</td>
+								<td>방재근</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-07-04</td>
+								<td align="left">2014-07-18</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">동영상으로 배우는 CATIA Knowledgeware 2 (지식기반설계)</td>
+								<td>방재근</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-07-04</td>
+								<td align="left">2014-07-18</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">그림으로 보는 상대성 이론과 양자역학</td>
+								<td>이재석</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-06-12</td>
+								<td align="left">2014-07-12</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">만화로 쉽게 배우는 양자역학 (대우주 속 마이크로 세상을 파헤치자)</td>
+								<td>이재석</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-06-11</td>
+								<td align="left">2014-07-11</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">소음.진동 기사.산업기사 필기 (2015)</td>
+								<td>고유곤</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-06-09</td>
+								<td align="left">2014-07-09</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">몸이 먼저다 (나를 사랑하는 가장 확실한 결심)</td>
+								<td>김세리</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-06-23</td>
+								<td align="left">2014-07-07</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">정글만리 2 (조정래 장편소설, 양장본 HardCover)</td>
+								<td>오병기</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-06-20</td>
+								<td align="left">2014-07-04</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">성공하는 사람들의 원가마인드</td>
+								<td>윤광수</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-06-02</td>
+								<td align="left">2014-07-02</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">원가회계</td>
+								<td>윤광수</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-06-02</td>
+								<td align="left">2014-07-02</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">이것이 힉스다 (21세기 최대의 과학 혁명)</td>
+								<td>오병기</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-06-12</td>
+								<td align="left">2014-06-26</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">정글만리 1 (조정래 장편소설, 양장본 HardCover)</td>
+								<td>오병기</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-06-10</td>
+								<td align="left">2014-06-24</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">말공부 (2500년 인문고전에서 찾은)</td>
+								<td>장근호</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-06-10</td>
+								<td align="left">2014-06-24</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">설득의 심리학 (사람의 마음을 사로잡는 6가지 불변의 원칙)</td>
+								<td>이재석</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-05-20</td>
+								<td align="left">2014-06-19</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">정글만리 2 (조정래 장편소설, 양장본 HardCover)</td>
+								<td>오병기</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-06-05</td>
+								<td align="left">2014-06-19</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">신도 버린 사람들</td>
+								<td>오병기</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-06-05</td>
+								<td align="left">2014-06-19</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">정글만리 3 (조정래 장편소설, 양장본 HardCover)</td>
+								<td>유영승</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-06-03</td>
+								<td align="left">2014-06-17</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">몸이 먼저다 (나를 사랑하는 가장 확실한 결심)</td>
+								<td>김세리</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-06-03</td>
+								<td align="left">2014-06-17</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">보이지 않는 지능 (최상의 해답은 대중 속에 있다)</td>
+								<td>유창범</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-05-16</td>
+								<td align="left">2014-06-15</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">남자는 힘이다 (맛스타드림 포스 근육 만들기 강좌)</td>
+								<td>유창범</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-05-13</td>
+								<td align="left">2014-06-12</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">강한 것이 아름답다 (라인을 잡는 단 하나의 운동)</td>
+								<td>유창범</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-05-13</td>
+								<td align="left">2014-06-12</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">이것이 힉스다 (21세기 최대의 과학 혁명)</td>
+								<td>오병기</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-05-27</td>
+								<td align="left">2014-06-10</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">정글만리 1 (조정래 장편소설, 양장본 HardCover)</td>
+								<td>오병기</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-05-26</td>
+								<td align="left">2014-06-09</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">인생수업 (잘 물든 단풍은 봄꽃보다 아름답다)</td>
+								<td>박정률</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-05-09</td>
+								<td align="left">2014-06-08</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">동영상으로 배우는 CATIA Knowledgeware 1 (지식기반설계)</td>
+								<td>방재근</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-05-07</td>
+								<td align="left">2014-06-06</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">동영상으로 배우는 CATIA Knowledgeware 2 (지식기반설계)</td>
+								<td>방재근</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-05-07</td>
+								<td align="left">2014-06-06</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">동영상으로 배우는 CATIA Knowledgeware 3 (지식기반설계)</td>
+								<td>방재근</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-05-07</td>
+								<td align="left">2014-06-06</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">자동차 소프트웨어 공학 (원칙 프로세스 방법 틀)</td>
+								<td>장성동</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-05-23</td>
+								<td align="left">2014-06-06</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">임베디드 C코드 생성 (Simulink 활용)</td>
+								<td>장성동</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-05-23</td>
+								<td align="left">2014-06-06</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">MATLAB 완벽가이드</td>
+								<td>장성동</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-05-22</td>
+								<td align="left">2014-06-05</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">센서이론과 실험</td>
+								<td>장성동</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-05-22</td>
+								<td align="left">2014-06-05</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">자석과 모터 핸드북</td>
+								<td>장성동</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-05-22</td>
+								<td align="left">2014-06-05</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">정글만리 3 (조정래 장편소설, 양장본 HardCover)</td>
+								<td>유영승</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-04-29</td>
+								<td align="left">2014-05-29</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">친환경자동차</td>
+								<td>박완석</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-04-29</td>
+								<td align="left">2014-05-29</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">절대지식 중국고전</td>
+								<td>김세범</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-05-12</td>
+								<td align="left">2014-05-26</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">초끈이론의 진실 (이론 입자물리학의 역사와 현주소)</td>
+								<td>오병기</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-05-08</td>
+								<td align="left">2014-05-22</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">친환경자동차 그린카 동향과 기술개발 전략</td>
+								<td>박완석</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-04-15</td>
+								<td align="left">2014-05-15</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">구글 완전 정복 (스마트워커의 구글 100% 활용법,실전편)</td>
+								<td>김정환</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-04-15</td>
+								<td align="left">2014-05-15</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">정글만리 2 (조정래 장편소설, 양장본 HardCover)</td>
+								<td>유영승</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-04-14</td>
+								<td align="left">2014-05-14</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">돈이 모이는 생활의 법칙 (푼돈을 목돈으로 만드는 소비습관 개조 프로젝트)</td>
+								<td>김정환</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-04-11</td>
+								<td align="left">2014-05-11</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">Fluid Power with Applications (7th
+									International Edition/ Hardcover)</td>
+								<td>손석무</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-04-11</td>
+								<td align="left">2014-05-11</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">초끈이론의 진실 (이론 입자물리학의 역사와 현주소)</td>
+								<td>오병기</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-04-21</td>
+								<td align="left">2014-05-05</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">총 균 쇠 (무기 병균 금속은 인류의 운명을 어떻게 바꿨는가)</td>
+								<td>오병기</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-04-15</td>
+								<td align="left">2014-04-29</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">정글만리 3 (조정래 장편소설, 양장본 HardCover)</td>
+								<td>박정률</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-04-15</td>
+								<td align="left">2014-04-29</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">설득의 심리학 (사람의 마음을 사로잡는 6가지 불변의 원칙)</td>
+								<td>박정률</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-04-15</td>
+								<td align="left">2014-04-29</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">정글만리 1 (조정래 장편소설, 양장본 HardCover)</td>
+								<td>유영승</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-03-28</td>
+								<td align="left">2014-04-27</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">자동차 진화의 비밀을 알고싶다 (차세대 자동차 테크놀로지)</td>
+								<td>이재석</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-03-26</td>
+								<td align="left">2014-04-25</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">기계도면의 그리는 법 읽는 법</td>
+								<td>윤광수</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-03-26</td>
+								<td align="left">2014-04-25</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">원가회계</td>
+								<td>윤광수</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-03-26</td>
+								<td align="left">2014-04-25</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">언어천재 조승연의 이야기 인문학</td>
+								<td>윤광수</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-03-26</td>
+								<td align="left">2014-04-25</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">과학혁명의 구조 (출간 50주년 기념)</td>
+								<td>오병기</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-04-11</td>
+								<td align="left">2014-04-25</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">우주의 구조 (시간과 공간 그 근원을 찾아서)</td>
+								<td>오병기</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-04-11</td>
+								<td align="left">2014-04-25</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">Noise And Vibration Analysis - Signal
+									Analysis Andexperimental Procedures (Signal Analysis and
+									Experimental Procedures)</td>
+								<td>고유곤</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-03-20</td>
+								<td align="left">2014-04-19</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">알기쉬운 자동차 진동소음의 이해</td>
+								<td>고유곤</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-03-20</td>
+								<td align="left">2014-04-19</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">소음과 진동(2)</td>
+								<td>고유곤</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-03-20</td>
+								<td align="left">2014-04-19</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">인문학은 밥이다 (매일 힘이 되는 진짜 공부)</td>
+								<td>장근호</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-03-19</td>
+								<td align="left">2014-04-18</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">정글만리 2 (조정래 장편소설, 양장본 HardCover)</td>
+								<td>박정률</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-03-27</td>
+								<td align="left">2014-04-10</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">정글만리 3 (조정래 장편소설, 양장본 HardCover)</td>
+								<td>박정률</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-03-27</td>
+								<td align="left">2014-04-10</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">Newton Highlight 현대 물리학 3대 이론 (상대성 이론 양자론
+									초끈 이론)</td>
+								<td>오병기</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-03-26</td>
+								<td align="left">2014-04-09</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">과학혁명의 구조 (출간 50주년 기념)</td>
+								<td>오병기</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-03-26</td>
+								<td align="left">2014-04-09</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">우주의 구조 (시간과 공간 그 근원을 찾아서)</td>
+								<td>오병기</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-03-20</td>
+								<td align="left">2014-04-03</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">설득의 심리학 (사람의 마음을 사로잡는 6가지 불변의 원칙)</td>
+								<td>박정률</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-03-19</td>
+								<td align="left">2014-04-02</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">인생수업 (잘 물든 단풍은 봄꽃보다 아름답다)</td>
+								<td>오병기</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-03-17</td>
+								<td align="left">2014-03-31</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">총 균 쇠 (무기 병균 금속은 인류의 운명을 어떻게 바꿨는가)</td>
+								<td>진도영</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-02-26</td>
+								<td align="left">2014-03-28</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">하룻밤에 읽는 한국사 (근현대편)</td>
+								<td>윤광수</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-02-25</td>
+								<td align="left">2014-03-27</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">회사에서 바로 통하는 엑셀 함수 활용 사전</td>
+								<td>윤광수</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-02-25</td>
+								<td align="left">2014-03-27</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">정글만리 1 (조정래 장편소설, 양장본 HardCover)</td>
+								<td>박정률</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-03-03</td>
+								<td align="left">2014-03-17</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">설득의 심리학 (사람의 마음을 사로잡는 6가지 불변의 원칙)</td>
+								<td>박정률</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-02-11</td>
+								<td align="left">2014-03-13</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">알기쉬운 자동차 진동소음의 이해</td>
+								<td>고유곤</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-02-10</td>
+								<td align="left">2014-03-12</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">강신주의 감정수업 (스피노자와 함께 배우는 인간의 48가지 얼굴)</td>
+								<td>오병기</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-02-26</td>
+								<td align="left">2014-03-12</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">직장인을 위한 실무 엑셀 VBA 자동화 (직장인이라면 꼭 갖고 있어야 할
+									엑셀 VBA 지침서)</td>
+								<td>박정률</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-02-07</td>
+								<td align="left">2014-03-09</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">1차세계대전사</td>
+								<td>유창범</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-02-05</td>
+								<td align="left">2014-03-07</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">소음과 진동(2)</td>
+								<td>고유곤</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-02-05</td>
+								<td align="left">2014-03-07</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">Noise And Vibration Analysis - Signal
+									Analysis Andexperimental Procedures (Signal Analysis and
+									Experimental Procedures)</td>
+								<td>고유곤</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-02-04</td>
+								<td align="left">2014-03-06</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">알기쉬운 자동차 진동소음의 이해</td>
+								<td>고유곤</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-02-04</td>
+								<td align="left">2014-03-06</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">정글만리 1 (조정래 장편소설, 양장본 HardCover)</td>
+								<td>장근호</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-02-14</td>
+								<td align="left">2014-02-28</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">하룻밤에 읽는 한국사</td>
+								<td>윤광수</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-01-28</td>
+								<td align="left">2014-02-27</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">강신주의 감정수업 (스피노자와 함께 배우는 인간의 48가지 얼굴)</td>
+								<td>오병기</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-02-11</td>
+								<td align="left">2014-02-25</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">Digital Control Systems (Hardcover)</td>
+								<td>김신성</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-01-22</td>
+								<td align="left">2014-02-21</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">총 균 쇠 (무기 병균 금속은 인류의 운명을 어떻게 바꿨는가)</td>
+								<td>진도영</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-01-17</td>
+								<td align="left">2014-02-16</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">중소기업 정보보호 가이드라인</td>
+								<td>이철범</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-01-29</td>
+								<td align="left">2014-02-12</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">글로벌 경영혁신 지식경영 시스템</td>
+								<td>이철범</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-01-29</td>
+								<td align="left">2014-02-12</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">설득의 심리학 (사람의 마음을 사로잡는 6가지 불변의 원칙)</td>
+								<td>박정률</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-01-09</td>
+								<td align="left">2014-02-08</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">설득의 심리학 2 (YES를 끌어내는 설득의 50가지 비밀)</td>
+								<td>박정률</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-01-09</td>
+								<td align="left">2014-02-08</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">총 균 쇠 (무기 병균 금속은 인류의 운명을 어떻게 바꿨는가)</td>
+								<td>박정률</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-01-09</td>
+								<td align="left">2014-02-08</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">프레지 완전 활용법 (입문부터 활용까지 Prezi Playbook)</td>
+								<td>권철웅</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-01-08</td>
+								<td align="left">2014-02-07</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">청중과 발표자를 춤추게 하는 파워포인트 블루스 (POWERPOINT
+									BLUES)</td>
+								<td>권철웅</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-01-08</td>
+								<td align="left">2014-02-07</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">제강기능사 필기 실기</td>
+								<td>이지성</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-01-08</td>
+								<td align="left">2014-02-07</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">금속기사 필기 (2013)</td>
+								<td>이지성</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-01-08</td>
+								<td align="left">2014-02-07</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">질문이 답을 바꾼다 (탁월한 질문을 가진 사람의 힘)</td>
+								<td>오병기</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-01-24</td>
+								<td align="left">2014-02-07</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">엑셀 좀 하는 엑셀 매크로 & VBA 자동화 프로그래밍</td>
+								<td>박정률</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-01-23</td>
+								<td align="left">2014-02-06</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">직장인을 위한 실무 엑셀 VBA 자동화 (직장인이라면 꼭 갖고 있어야 할
+									엑셀 VBA 지침서)</td>
+								<td>박정률</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-01-23</td>
+								<td align="left">2014-02-06</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">Digital Control Systems (Hardcover)</td>
+								<td>김세리</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-01-22</td>
+								<td align="left">2014-02-05</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">사기열전 1</td>
+								<td>오병기</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2013-12-31</td>
+								<td align="left">2014-01-30</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">시의적절 주역이야기 1 (인생편)</td>
+								<td>오병기</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2013-12-31</td>
+								<td align="left">2014-01-30</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">소음과 진동(2)</td>
+								<td>고유곤</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-01-16</td>
+								<td align="left">2014-01-30</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">알기쉬운 자동차 진동소음의 이해</td>
+								<td>고유곤</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-01-16</td>
+								<td align="left">2014-01-30</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">Noise And Vibration Analysis - Signal
+									Analysis Andexperimental Procedures (Signal Analysis and
+									Experimental Procedures)</td>
+								<td>고유곤</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-01-14</td>
+								<td align="left">2014-01-28</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">기계진동학</td>
+								<td>유창범</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-01-13</td>
+								<td align="left">2014-01-27</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">1차세계대전사</td>
+								<td>유창범</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-01-13</td>
+								<td align="left">2014-01-27</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">매혹과 잔혹의 커피사</td>
+								<td>김세리</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-01-10</td>
+								<td align="left">2014-01-24</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">매혹과 잔혹의 커피사</td>
+								<td>윤광수</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-01-10</td>
+								<td align="left">2014-01-24</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">매혹과 잔혹의 커피사</td>
+								<td>윤광수</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-01-10</td>
+								<td align="left">2014-01-24</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">하룻밤에 읽는 한국사</td>
+								<td>윤광수</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-01-10</td>
+								<td align="left">2014-01-24</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">하룻밤에 읽는 한국사</td>
+								<td>윤광수</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-01-10</td>
+								<td align="left">2014-01-24</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">이것이 힉스다 (21세기 최대의 과학 혁명)</td>
+								<td>윤광수</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-01-10</td>
+								<td align="left">2014-01-24</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">이것이 힉스다 (21세기 최대의 과학 혁명)</td>
+								<td>윤광수</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-01-10</td>
+								<td align="left">2014-01-24</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">트렌드 코리아 2014 (서울대 소비트렌드 분석센터의 2014 전망)</td>
+								<td>남정현</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-01-10</td>
+								<td align="left">2014-01-24</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">질문이 답을 바꾼다 (탁월한 질문을 가진 사람의 힘)</td>
+								<td>오병기</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-01-10</td>
+								<td align="left">2014-01-24</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">최신 CNC 가공</td>
+								<td>윤광수</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-01-10</td>
+								<td align="left">2014-01-24</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">최신 CNC 가공</td>
+								<td>윤광수</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-01-10</td>
+								<td align="left">2014-01-24</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">CNC 선반 프로그램과 가공</td>
+								<td>윤광수</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-01-10</td>
+								<td align="left">2014-01-24</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">CNC 선반 프로그램과 가공</td>
+								<td>윤광수</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-01-10</td>
+								<td align="left">2014-01-24</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">기계도면 보는법 작성법</td>
+								<td>윤광수</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-01-10</td>
+								<td align="left">2014-01-24</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">기계도면 보는법 작성법</td>
+								<td>윤광수</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-01-10</td>
+								<td align="left">2014-01-24</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">강신주의 감정수업 (스피노자와 함께 배우는 인간의 48가지 얼굴)</td>
+								<td>박완석</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-01-10</td>
+								<td align="left">2014-01-24</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">트렌드 코리아 2014 (서울대 소비트렌드 분석센터의 2014 전망)</td>
+								<td>박완석</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-01-10</td>
+								<td align="left">2014-01-24</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">스티브 잡스</td>
+								<td>김세리</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-01-10</td>
+								<td align="left">2014-01-24</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">스티브 잡스</td>
+								<td>윤광수</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-01-10</td>
+								<td align="left">2014-01-24</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">스티브 잡스</td>
+								<td>윤광수</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-01-10</td>
+								<td align="left">2014-01-24</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">내 인생을 바꾸는 60가지 시크릿 (위대한 삶을 살기 위해 여기에 있는
+									당신)</td>
+								<td>김세리</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-01-09</td>
+								<td align="left">2014-01-23</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">설득의 심리학 (사람의 마음을 사로잡는 6가지 불변의 원칙)</td>
+								<td>이재석</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-01-09</td>
+								<td align="left">2014-01-23</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">트렌드 코리아 2014 (서울대 소비트렌드 분석센터의 2014 전망)</td>
+								<td>박완석</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-01-09</td>
+								<td align="left">2014-01-23</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">20대 경제생활 첫걸음 (바로바로 써먹는 생활 속 경제지식 101,첫 월급
+									관리부터 명품족이 되기까지)</td>
+								<td>조계일</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2014-01-08</td>
+								<td align="left">2014-01-22</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">A4 한 장으로 완성하는 기획서 작성법</td>
+								<td>윤광수</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2013-12-27</td>
+								<td align="left">2014-01-10</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">하룻밤에 읽는 한국사</td>
+								<td>윤광수</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2013-12-27</td>
+								<td align="left">2014-01-10</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">Gere의 핵심 재료역학</td>
+								<td>김정인</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2013-12-20</td>
+								<td align="left">2014-01-03</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">시마노 이야기 (동네 철공소에서 자전거 업계1위가 되기까지 세계를 제패한
+									성공 스토리)</td>
+								<td>권철웅</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2013-12-02</td>
+								<td align="left">2014-01-01</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">사기열전 1</td>
+								<td>오병기</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2013-12-16</td>
+								<td align="left">2013-12-30</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">시의적절 주역이야기 1 (인생편)</td>
+								<td>오병기</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2013-12-16</td>
+								<td align="left">2013-12-30</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">엑셀 VBA 바이블</td>
+								<td>이상유</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2013-11-27</td>
+								<td align="left">2013-12-11</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">시의적절 주역이야기 1 (인생편)</td>
+								<td>오병기</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2013-11-27</td>
+								<td align="left">2013-12-11</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">Motor Fan F1 머신 하이테크의 비밀 (현대 자동차 기술의 궁극적인
+									도달 점)</td>
+								<td>최필규</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2013-11-07</td>
+								<td align="left">2013-12-07</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">공학도를 위한 통계학 (EXCEL을 이용한 분석)</td>
+								<td>박현진</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2013-11-08</td>
+								<td align="left">2013-11-27</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">자동차 구조학</td>
+								<td>이재석</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2013-11-06</td>
+								<td align="left">2013-11-26</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">자동차 섀시 설계</td>
+								<td>이재석</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2013-11-06</td>
+								<td align="left">2013-11-26</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">Motor Fan 엔진 테크놀로지 (모터팬, 사진 일러스트로 보는 꿈의
+									자동차 기술)</td>
+								<td>최필규</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2013-11-15</td>
+								<td align="left">2013-11-26</td>
+
+
+
+							</tr>
+
+
+
+							<tr>
+
+								<td align="left">질문이 답을 바꾼다 (탁월한 질문을 가진 사람의 힘)</td>
+								<td>오병기</td>
+								<td class="hidden-sm hidden-xs hidden-md" id="b_group"
+									align="left">B-도서(단행본)</td>
+								<td class="hidden-xs" align="left">2013-11-19</td>
+								<td align="left">2013-11-26</td>
+
+
+
+							</tr>
+
+
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+</body>
+</html>

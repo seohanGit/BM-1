@@ -41,5 +41,7 @@ public class BoardDaoImplTest {
 		assertNotNull(model);
 		
 	}
+	
+	
 
 }

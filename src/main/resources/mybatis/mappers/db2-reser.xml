@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baron.member.sqlModel">
+
+	<!-- 에약관련 쿼리 -->
+	<!-- 예약상태 '1' = 예약 -->
+	<insert id="insertReservation" parameterType="BookModel">
+		INSERT INTO
+		sitlib.bookreser(id, book_cd, reser_date, reservechk)
+		VALUES(#{id},
+		#{book_cd}, (SELECT returndate FROM sitlib.bookrent WHERE book_cd =
+		#{book_cd} AND (rentchk='1' OR rentchk='2'))+ 2 day, 1)
+	</insert>
+
+	<insert id="insertReservation1" parameterType="String">
+		UPDATE
+		sitlib.bookmst
+		SET
+		reservechk='1'
+		WHERE book_cd=#{book_cd}
+	</insert>
+
+	<update id="updateReservation" parameterType="String">
+		UPDATE
+		sitlib.bookmst SET
+		rentchk='1', reservechk='0' WHERE
+		book_cd=#{book_cd}
+	</update>
+
+	<delete id="deleteReserve" parameterType="String">
+		DELETE FROM
+		sitlib.bookreser
+		WHERE book_cd = #{book_cd}
+	</delete>
+
+
+
+	<select id="selectReservation" parameterType="String"
+		resultType="BookModel">
+		SELECT *
+		FROM sitlib.bookreser A INNER JOIN tprlib.gr_insa
+		B
+		ON A.id = B.asabn
+		WHERE
+		book_cd=#{book_cd}
+		FETCH first 1 rows only
+	</select>
+
+	<select id="reservationList" parameterType="String" resultType="BookModel">
+		SELECT B.RETURNDATE, C.KNAME, D.TITLE, D.AUTHOR, A.BOOK_CD,
+		A.RESER_DATE, D.B_GROUP, D.rentchk FROM sitlib.bookreser A
+		Left outer join sitlib.bookrent B on A.id = B.id and A.book_cd =
+		B.book_cd
+		inner join TPRLIB.GR_INSA C on A.id = C.asabn
+		left outer join sitlib.bookmst D on A.book_cd = D.book_cd where co_gb =
+		'SEOHAN' and B.rentchk in (0, 1, 2, 3) and A.reservechk='1'
+		AND A.id = #{id}
+	</select>
+
+	<select id="reservationListAll" resultType="BookModel">
+		SELECT A.book_cd,
+		B.id, B.reser_date, A.title, A.b_group, A.rentchk, (SELECT kname FROM
+		tprlib.gr_insa WHERE asabn=B.id FETCH first 1 rows only) AS kname
+		FROM
+		sitlib.bookmst A INNER
+		JOIN sitlib.bookreser B
+		ON A.book_cd=B.book_cd
+		AND
+		A.reservechk=B.reservechk
+		WHERE
+		B.reservechk='1'
+		ORDER
+		BY
+		B.reser_date
+		DESC
+	</select>
+
+
+</mapper>

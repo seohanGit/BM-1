@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baron.member.sqlModel">
+	<!--4개월간 다수 대여 팀, 도서 -->
+
+	<select id="selectBestTeam" resultType="MemberModel"
+		parameterType="String">
+
+		SELECT B.team_nm,
+		COUNT(*) AS count FROM
+		sitlib.bookrent A INNER JOIN
+		tprlib.gr_insa B
+		ON A.id=B.asabn WHERE
+		left(A.rentdate,4) = #{year}
+		GROUP
+		BY
+		B.team_nm ORDER
+		BY count DESC
+		<!-- 1년간 팀별 대여현황 -->
+	</select>
+
+
+
+	<select id="selectBookCount" resultType="BookModel">
+		SELECT COUNT(*) AS
+		count, b_group, (SELECT count(*) FROM sitlib.bookmst) FROM sitlib.bookmst GROUP BY b_group order by B_group
+	</select>
+ 
+	<select id="selectBestPerson" parameterType="Dto" resultType="Dto">
+		SELECT (SELECT kname
+		FROM tprlib.gr_insa WHERE asabn = A.id FETCH first
+		1
+		rows only) kname
+		,(SELECT team_nm FROM tprlib.gr_insa WHERE asabn =
+		A.id FETCH
+		first 1 rows only) AS team_nm,
+		COUNT(*) AS count
+		FROM
+		sitlib.bookrent A
+		INNER JOIN
+		tprlib.gr_insa B
+		ON
+		A.id = B.asabn
+		WHERE
+		left(A.rentdate,4) =
+		#{year} AND
+		substr(A.rentdate,5,2) =
+		#{month}
+		GROUP BY
+		A.id
+		ORDER BY
+		count DESC
+	</select>
+	<select id="selectBestPersonYear" parameterType="Dto"
+		resultType="Dto">
+		SELECT (SELECT kname
+		FROM tprlib.gr_insa WHERE asabn = A.id
+		FETCH first 1
+		rows only) kname
+		,(SELECT team_nm FROM tprlib.gr_insa
+		WHERE asabn =
+		A.id FETCH
+		first 1 rows only) AS team_nm,
+		COUNT(*) AS count
+		FROM
+		sitlib.bookrent A
+		INNER JOIN
+		tprlib.gr_insa B
+		ON
+		A.id = B.asabn
+		WHERE
+		left(A.rentdate,4) =
+		#{year}
+		GROUP BY
+		A.id
+		ORDER BY
+		count DESC
+		FETCH first 10
+		rows only
+	</select>
+	<select id="rentByMonth" parameterType="String" resultType="Dto">
+		SELECT COUNT(*)
+		count, substr(rentdate,5,2) AS month
+		FROM
+		sitlib.bookrent
+		WHERE left(rentdate,4) = #{year}
+		GROUP BY
+		substr(rentdate,5,2)
+	</select>
+
+	<select id="selectGroupByB" parameterType="Dto" resultType="Dto">
+		SELECT COUNT(*)
+		count, B.b_group, substr(A.rentdate,5,2) AS
+		month
+		FROM
+		sitlib.bookrent A INNER JOIN sitlib.bookmst B
+		ON A.book_cd =
+		B.book_cd
+		WHERE left(A.rentdate,4) = #{year} AND substr(A.rentdate,5,2) =
+		#{month}
+		GROUP BY substr(A.rentdate,5,2), B.b_group
+		ORDER BY count desc, month
+	</select>
+	<select id="selectGroupByBYear" parameterType="Dto" resultType="Dto">
+		SELECT COUNT(*)
+		count, B.b_group
+		FROM
+		sitlib.bookrent A INNER JOIN
+		sitlib.bookmst B
+		ON A.book_cd =
+		B.book_cd
+		WHERE left(A.rentdate,4) =
+		#{year}
+		GROUP BY B.b_group
+
+	</select>
+
+	<select id="selectBestBook" resultType="BookModel"
+		parameterType="Dto">
+		SELECT COUNT(*) AS count,
+		B.book_cd,B.title,
+		B.author, B.b_group, B.imageurl
+		FROM
+		sitlib.bookrent A INNER JOIN
+		sitlib.bookmst B
+		ON A.book_cd = B.book_cd
+		WHERE left(rentdate,4) = #{year} 
+		GROUP BY
+		B.book_cd,B.title,B.author, B.b_group, B.imageurl
+		ORDER BY
+		count DESC
+	</select>
+	<select id="selectBestBookYear" resultType="BookModel"
+		parameterType="Dto">
+		SELECT COUNT(*) AS count,
+		B.book_cd,B.title,
+		B.author, B.b_group, B.imageurl
+		FROM
+		sitlib.bookrent A INNER JOIN
+		sitlib.bookmst B
+		ON A.book_cd
+		= B.book_cd
+		WHERE left(rentdate,4) = #{year}
+		GROUP BY
+		B.book_cd,B.title,B.author, B.b_group, B.imageurl
+		ORDER BY
+		count DESC
+	</select>
+	<select id="selectSumPurchase" parameterType="Dto"
+		resultType="Dto">
+		SELECT SUM(DOUBLE(PRICE)) PRICE, substr(rcv_date,5,2) AS month,
+		count(rcv_date) count
+		FROM sitlib.bookmst
+		WHERE left(rcv_date,4) = #{year}
+		GROUP BY substr(rcv_date,5,2)
+	</select>
+
+</mapper>

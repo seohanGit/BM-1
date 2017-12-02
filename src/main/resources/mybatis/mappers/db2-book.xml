@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="euc-kr" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baron.member.sqlModel">
+	<!-- sitlib.bookmst 관련 쿼리 -->
+
+
+	<select id="selectBookAll" resultType="BookModel">
+		SELECT * FROM
+		sitlib.bookmst A
+		ORDER BY RENTCHK
+	</select>
+
+	<insert id="insertBook" parameterType="BookModel">
+		INSERT INTO
+		sitlib.bookmst
+		(title, book_cd,b_group, c_group, publish,author,rentchk,imageurl,
+		rcv_date, isbn, price, summary, rcmdchk)
+		VALUES
+		(#{title},#{book_cd},#{b_group}, #{c_group}, #{publish},#{author},'0', #{imageurl},
+		#{rcv_date}, #{isbn}, #{price}, #{summary}, '0')
+	</insert>
+
+	<insert id="insertFile" parameterType="hashmap">
+		update
+		sitlib.bookmst
+		set imageurl = #{fileName}
+		where
+		book_cd = #{book_cd}
+	</insert>
+	
+	<select id="selectBook" parameterType="String" resultType="BookModel">
+		SELECT * FROM sitlib.bookmst WHERE book_cd=#{book_cd} FETCH first 1 rows only
+	</select>
+
+	<select id="searchBook" parameterType="Dto" resultType="BookModel"> 
+		 <bind name="keyword" value="'%' + _parameter.getKeyword() + '%'" />
+		SELECT A.title, A.author, A.publish, A.b_group, A.rentchk, A.rcmdChk, A.imageurl,
+		A.reservechk, A.book_cd, B.returndate
+		FROM
+		sitlib.bookmst A 
+		LEFT OUTER	JOIN sitlib.bookrent B	ON A.book_cd = B.book_cd AND A.rentchk = B.rentchk
+		WHERE
+		UCASE(A.TITLE) like  #{keyword}    
+		<if test="b_group != '' and b_group != null and b_group != '전체' ">
+		AND left(A.b_group,1) = #{b_group}  
+		</if>
+		<if test="c_group != '' and c_group != null and c_group != '전체'">
+		AND left(A.c_group,3) = #{c_group}  
+		</if>		
+		ORDER BY  a.rcv_date desc
+		FETCH first 200 rows only
+	</select>
+	<select id="searchAuthor" parameterType="String" resultType="BookModel">
+		<bind name="keyword" value="'%' + _parameter + '%'" />
+		SELECT A.title, A.author, A.publish, A.b_group, A.rentchk, A.rcmdChk, A.imageurl,
+		A.reservechk, A.book_cd, B.returndate
+		FROM
+		sitlib.bookmst A LEFT OUTER
+		JOIN sitlib.bookrent B
+		ON A.book_cd = B.book_cd AND A.rentchk =
+		B.rentchk
+		WHERE
+		LCASE(A.AUTHOR) like #{keyword} 
+		ORDER BY a.title
+		FETCH first 200 rows only
+	</select>
+	<select id="searchPublisher" parameterType="String" resultType="BookModel">
+		<bind name="keyword" value="'%' + _parameter + '%'" />
+		SELECT A.title, A.author, A.publish, A.b_group, A.rentchk, A.rcmdChk, A.imageurl,
+		A.reservechk, A.book_cd, B.returndate
+		FROM
+		sitlib.bookmst A LEFT OUTER
+		JOIN sitlib.bookrent B
+		ON A.book_cd = B.book_cd AND A.rentchk =
+		B.rentchk
+		WHERE
+		LCASE(A.PUBLISH) like #{keyword}
+		ORDER BY a.title 
+		FETCH first 200 rows only
+	</select>
+
+	<select id="listBook" parameterType="String" resultType="BookModel">
+		SELECT
+		A.title, A.author, A.publish, A.b_group, A.rentchk, A.rcmdChk, A.imageurl,
+		A.reservechk, A.book_cd, B.returndate
+		FROM
+		sitlib.bookmst A LEFT OUTER
+		JOIN sitlib.bookrent B
+		ON A.book_cd = B.book_cd AND A.rentchk =
+		B.rentchk
+		ORDER
+		BY a.title
+		FETCH first 200 rows only
+	</select>	
+	<select id="newBook"  resultType="BookModel" parameterType="Dto">
+		SELECT
+		A.title, A.author, A.publish, A.b_group, A.rentchk, A.imageurl,
+		A.reservechk, A.book_cd, b.returndate
+		FROM
+		sitlib.bookmst A  
+		left outer join sitlib.BOOKrent B on a.book_cd = b.book_cd and a.rentchk = b.rentchk
+		where rcv_date between #{date1} and #{date2} 
+		ORDER BY A.RCV_DATE DESC , A.RENTCHK DESC
+	</select>
+	
+	<select id="bestBook" resultType="BookModel" parameterType="Dto"> 
+		SELECT
+		title, author, b_group, a.publish, b.book_cd, a.rentchk, a.reservechk, A.rcmdChk, A.imageurl,
+		<![CDATA[case when b.returndate <> '' then b.returndate end as returnDate]]>
+		FROM
+		sitlib.bookmst A 
+		inner join sitlib.BOOKrent B on a.book_cd = b.book_cd 
+		where left(B.rentdate,6) = #{month}
+		group by title, author, b_group, a.publish, b.book_cd, a.rentchk, a.reservechk, A.rcmdChk, b.returndate,  A.imageurl
+		ORDER
+		BY count(b.book_cd) DESC
+		FETCH first 10 rows only
+	</select>
+	<select id="recommendBook" parameterType="String" resultType="BookModel">
+		SELECT
+		A.title, A.author, A.publish, A.b_group, A.rentchk, A.rcmdChk, A.imageurl,
+		A.reservechk, A.book_cd, B.returndate
+		FROM
+		sitlib.bookmst A
+		left outer join sitlib.BOOKrent B on a.book_cd = b.book_cd and a.rentchk = b.rentchk
+		where A.rcmdchk = '1'
+	</select>	
+
+	<delete id="deleteBook" parameterType="String">
+		DELETE FROM
+		sitlib.bookmst
+		WHERE
+		BOOK_CD=#{book_cd}
+	</delete>
+
+
+	 <update id="updateBook" parameterType="BookModel">
+		UPDATE sitlib.bookmst
+		SET
+		TITLE=#{title},
+		publish=#{publish},
+		author=#{author},
+		imageurl=#{imageurl},
+		book_cd=#{book_cd},
+		summary=#{summary}
+		WHERE BOOK_CD=#{book_cd1}
+	</update>
+	<select id="getNewbook" resultType="BookModel">
+		SELECT *
+		FROM sitlib.bookmst 
+		WHERE rcv_date is not null and imageurl != '' 
+		ORDER BY
+		rcv_date DESC
+		FETCH first 5 rows only
+	</select>
+	
+	<update id="setRecommend" parameterType="BookModel">
+		UPDATE sitlib.bookmst
+		SET
+		rcmdChk=#{rcmdChk}
+		WHERE BOOK_CD=#{book_cd}
+	</update>
+	<select id="getMaxSer"  resultType="String" parameterType="BookModel">
+		SELECT
+		coalesce(RIGHT(TRIM('00'||MAX(SUBSTR(BOOK_CD, 6, 3)) + 1),3),'001') MAXSER 
+		FROM SITLIB.BOOKMST
+		WHERE 
+		 b_group= #{b_group}
+		AND  c_group = #{c_group}  
+	</select>
+</mapper>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baron.member.sqlModel">
+
+
+
+	<select id="selectMemberById" resultType="int" parameterType="string">
+		SELECT COUNT(*)
+		FROM tprlib.gr_insa
+		WHERE id = #{id}
+	</select>
+
+	<insert id="insertMember" parameterType="MemberModel">
+		INSERT INTO
+		tprlib.gr_insa
+		(id,
+		pass, name,email,team_nm,cell)
+		VALUES (#{id},
+		#{password},
+		#{name},#{email},#{team_nm},#{cell})
+	</insert>
+	<select id="selectPass" resultType="String" parameterType="String">
+		SELECT pass
+		FROM tprlib.gr_insa
+		WHERE id = #{id}
+	</select>
+
+	<update id="updateMember" parameterType="MemberModel">
+		UPDATE
+		tprlib.gr_insa
+		SET
+		pass =
+		#{password},email = #{email},address =
+		#{address},cell =
+		#{cell},home =
+		#{home}
+		WHERE id = #{id}
+	</update>
+
+	<select id="login" resultType="MemberModel"
+		parameterType="MemberModel">
+		select mst.co_gb, mst.kname, mst.team_nm, mst.jikb, 
+				coalesce(tmj.kname, mst.kname) as chief, coalesce(tmj.asabn, mst.asabn) as chiefId, mst.mobi_no,
+				coalesce(MODIFY_FL,'') ADMINCHK
+                 from (
+                 select * from tprlib.GR_INSA where RETI_GB not in ('R') and ASABN=#{id} AND JIKB != '' AND TEAM_NM != ''
+                 )MST  
+                  left outer join (
+                  select * from AALIB.GR_EMP 
+                  where RETI_GB not in ('R') and CO_GB in ('SEOHAN','KAMTEC') and FAGB_CD in ('3','6') and JIKC_CD in ('13')
+                  ) TMJ 
+                  on MST.ASOSK=TMJ.ASOSK and MST.CO_GB=TMJ.CO_GB and tmj.kname != '' 			
+				left outer join (
+					SELECT A.* FROM AALIB.MENU_PERMISSION A
+		        	INNER JOIN AALIB.MAIN_MENU B  ON A.PRG_NO = B.PRG_NO AND A.GROUP_GB = B.GROUP_GB    AND B.FILE_CD =  #{serviceName}
+	        	) A ON MST.CO_GB = A.GROUP_GB AND MST.ASABN = A.ASABN
+				order by ADMINCHK desc, co_gb desc
+                FETCH first 1 rows only
+	</select>
+
+	<select id="selectMember" resultType="MemberModel"
+		parameterType="String">
+		select mst.co_gb, mst.kname, mst.team_nm, mst.jikb, 
+				coalesce(tmj.kname, mst.kname) as chief, coalesce(tmj.asabn, mst.asabn) as chiefId, mst.mobi_no
+                 from (
+                 select * from tprlib.GR_INSA where RETI_GB not in ('R') and ASABN=#{id} AND JIKB != '' AND TEAM_NM != ''
+                 )MST  
+                  left outer join (
+                  select * from AALIB.GR_EMP 
+                  where RETI_GB not in ('R') and CO_GB in ('SEOHAN','KAMTEC') and FAGB_CD in ('3','6') and JIKC_CD in ('13')
+                  ) TMJ 
+                  on MST.ASOSK=TMJ.ASOSK and MST.CO_GB=TMJ.CO_GB and tmj.kname != '' order by co_gb desc
+                   FETCH first 1 rows only
+	</select>
+
+	<select id="selectLate" resultType="MemberModel">
+		SELECT
+		A.id,A.name,A.email,A.address,A.cell,A.home, B.rentdate,
+		B.returndate
+		FROM tprlib.gr_insa as A ,BOOKRENT as B
+		WHERE VARCHAR_FORMAT(CURRENT
+		TIMESTAMP,
+		'YYYYMMDD') >
+		B.returndate
+		AND B.rentchk ='2' and
+		A.id=B.id
+	</select>
+
+
+
+	<select id="selectMemberList" parameterType="String" resultType="MemberModel">
+		SELECT *, (SELECT
+		COUNT(*) FROM sitlib.BOOKRENT B WHERE B.rentdate > #{rentdate}
+		 AND B.id=A.id ) AS numborrow
+		FROM tprlib.gr_insa A
+		ORDER BY
+		team_nm
+
+	</select>
+
+	<!-- 기타 쿼리 -->
+
+
+
+</mapper>

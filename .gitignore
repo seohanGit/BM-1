@@ -1,3 +1,7 @@
 /target/
+<<<<<<< HEAD
 jt400.jar
 src/main/resources/sqljdbc4.jar
+=======
+/target/
+>>>>>>> origin/master

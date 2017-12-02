@@ -20,6 +20,7 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.baron.bm.utils.FileUtils;
@@ -278,6 +279,25 @@ public class BookController {
 		return mav;
 	}
 
+	@RequestMapping("/getBookFromISBN")
+	@ResponseBody
+	public BookModel getBookFromISBN (String keyword, String page, String type)
+			throws Exception {  
+   
+		return requestservice.findBookOne(keyword);
+	}
+	@RequestMapping("/getMaxSer")
+	@ResponseBody
+	public BookModel getMaxSer (String b_group, String c_group)
+			throws Exception {  
+		BookModel book = new BookModel();
+		book.setB_group(b_group);
+		book.setC_group(c_group);
+		return bookservice.getMaxSer(book);
+	}
+	
+	
+	
 	@RequestMapping("/deletebook")
 	public String deleteBook(String keyword, String book_cd, HttpServletRequest request) {
 		String permission;

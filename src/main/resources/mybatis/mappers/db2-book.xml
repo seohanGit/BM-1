@@ -162,7 +162,7 @@
 	</update>
 	<select id="getMaxSer"  resultType="String" parameterType="BookModel">
 		SELECT
-		coalesce(RIGHT(TRIM('00'||MAX(SUBSTR(BOOK_CD, 6, 3)) + 1),3),'001') MAXSER 
+		coalesce(RIGHT(TRIM('00'||MAX(SUBSTR(BOOK_CD, 6, 4)) + 1),4),'0001') MAXSER 
 		FROM SITLIB.BOOKMST
 		WHERE 
 		 b_group= #{b_group}

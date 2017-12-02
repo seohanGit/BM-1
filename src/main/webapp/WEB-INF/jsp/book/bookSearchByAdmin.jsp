@@ -86,7 +86,7 @@
 						<div class="input-group right" align="right" style="width: 20%;">
 							<button style="width: 100px; vertical-align: baseline;"
 								class="btn btn-default" type="button" id="insertBook"
-								onclick="window.open('/insertbookForm','new','resizeble=yes, scrollbars=yes, width=500, height=850');">
+								onclick="window.open('/insertbookForm','new','resizeble=yes, scrollbars=yes, width=500, height=650');">
 								도서추가</button>
 
 							<!-- 								<button style="width: 100px; vertical-align: baseline;" -->

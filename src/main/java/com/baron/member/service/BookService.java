@@ -42,4 +42,6 @@ public interface BookService {
 	public void setRecommend(BookModel bookmodel); 
 	
 	public void downLoad(String fileName);
+ 
+	public BookModel getMaxSer(BookModel book);
 }

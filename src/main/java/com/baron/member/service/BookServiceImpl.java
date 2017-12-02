@@ -75,7 +75,7 @@ public class BookServiceImpl implements BookService {
 				e.printStackTrace();
 			} // try - catch
 		} // if 
-		model.setBook_cd(model.getB_group().substring(0,1) + model.getC_group().substring(0,3) + "-" + bookDao.getMaxSer(model)); 
+		 
 		if (model.getQuantity() == 1) {
 			bookDao.insertBook(model);
 		} else if (model.getQuantity() > 1) {
@@ -165,7 +165,6 @@ public class BookServiceImpl implements BookService {
 
 	@Override
 	public String selectname(String bookCode) {
-
 		return bookDao.selectname(bookCode);
 	}
 
@@ -264,24 +263,20 @@ public class BookServiceImpl implements BookService {
 	} 
 	@Override
 	public List<BookModel> selectBookAll() {
-
 		return bookDao.selectBookAll();
 	}
 
 	@Override
 	public List<CodeModel> selectBCodeList() {
-
 		return bookDao.selectBCodeList();
 	}
 
 	@Override
 	public List<CodeModel> selectCCodeList() {
-
 		return bookDao.selectCCodeList();
 	}
 
 	public boolean isThisDateValid(String dateToValidate, String dateFromat) {
-
 		if (dateToValidate == null) {
 			return false;
 		}
@@ -327,6 +322,12 @@ public class BookServiceImpl implements BookService {
 		}
 	}
 
+	@Override
+	public BookModel getMaxSer(BookModel book) {
+		book.setBook_cd(book.getB_group().substring(0,1) + book.getC_group().substring(0,3) + "-" + bookDao.getMaxSer(book));
+		return book;	
+	} 
+	
 	@Override
 	public List<BookModel> selectBookForImage() {
 		return etcDao.selectBookForImage();

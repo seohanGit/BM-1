@@ -31,7 +31,7 @@
 						<label style="width:10%;" for="exampleInputEmail1">ISBN</label> <input style="width:70%; display:-webkit-inline-box;"
 							 class="form-control" type="text" id="isbn"
 							name="isbn"  >
-					<button style="width:10%" class="btn btn-default" type="submit" id="getBookInfo">
+					<button style="width:10%" class="btn btn-default" type="button" id="getBookFromISBN">
 						<span class="glyphicon glyphicon-search"></span>
 					</button>
 
@@ -39,7 +39,7 @@
 					<div class="form-group">
 						<label for="exampleInputEmail1">도서번호</label> <input type="text"
 							class="form-control" id="book_cd" name="book_cd"
-							required="required"  disabled>
+							required="required"  >
 					</div>
 					<div class="form-group">
 						<label for="exampleInputPassword1">도서명</label> <input type="text"
@@ -84,23 +84,20 @@
 							class="form-control" name="price" id="price" placeholder="0"
 							required="required">
 					</div>
-					<div class="form-group file">
-						<label for="exampleInputPassword1">파일</label> <input type="file"
-							class="form-control" id="file" name="file" placeholder="파일">
-					</div>
+<!-- 					<div class="form-group file"> -->
+<!-- 						<label for="exampleInputPassword1">파일</label> <input type="file" -->
+<!-- 							class="form-control" id="file" name="file" placeholder="파일"> -->
+<!-- 					</div> -->
 					<div class="col-md-12 col-sm-12 col-xs-12">
 						<button type="submit" class="btn btn-default"
-							onClick="formChk(); opener.focus(); self.close(); ">확인</button>
+							onClick="formChk();  ">확인</button>
 					</div>
 				</form>
 			</div> 
 		</div> 
 
 	</div>
-	<script type="text/javascript">
-		$(document).ready(function() {
-			$('.file').hide();
-		});
+	<script type="text/javascript"> 
 		function formChk() {
 			var book_cd = $('#book_cd').val();
 			var title = $('#title').val();
@@ -112,26 +109,28 @@
 
 			if (book_cd == '') {
 				alert('도서번호을 입력하시기 바랍니다.');
-				book_cd.focus();
+				$('#book_cd').focus();
 				return false;
 			} else if (title == '') {
 				alert('도서명을 입력하시기 바랍니다.');
-				title.focus();
+				$('#title').focus();
 				return false;
 			} else if (author == '') {
 				alert('저자를 입력하시기 바랍니다.');
-				author.focus();
+				$('#author').focus();
 				return false;
 			} else if (publish == '') {
 				alert('출판사를 입력하시기 바랍니다.');
-				publish.focus();
+				$('#publish').focus();
 				return false;
 			} else if (price == '') {
 				alert('가격을 입력하시기 바랍니다.');
-				price.focus();
+				$('#price').focus();
 				return false;
 			} else {
 				document.requestForm.submit();
+				opener.focus(); 
+				self.close();
 				return true;
 			}
 		}
@@ -146,13 +145,6 @@
 					} else {
 						$('.file').hide();
 					}
-				})
-		$('#c_group').change(
-				function() {
-					var book_cd = $('#b_group').val().substr(0, 1)
-							+ this.value.substr(0, 3) + '-';
-					$('#book_cd').val(book_cd);
-					$('#book_cd').focus();
 				})
 	</script>
 	<script src="/resources/js/bootstrap.min.js"></script>

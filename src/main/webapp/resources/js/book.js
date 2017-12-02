@@ -290,10 +290,16 @@ $("#c_group").change(function() {
 	 
 }); 
 
-$('#getBookInfo').click(function() {
+$('#getBookFromISBN').click(function() {
+	getBookFromISBN();
+})
+ 
+
+
+function getBookFromISBN(){
 	$.ajax({
 		type : "GET", // GET or POST
-		url : "/findBook", // URL
+		url : "/getBookFromISBN", // URL
 		datatype : "json", // html, xml, json, jsonp, script, text
 		data : {
 			keyword : $('#isbn').val(),
@@ -303,9 +309,40 @@ $('#getBookInfo').click(function() {
 			alert('ajax failed');
 		},
 		success : function(data, status) { // Ajax complete handelr]
-			
-			$('#insertForm').empty().append(data);
+			$(data).each(function(index,item){                
+                $('#title').val(item.title);                
+                $('#b_group').val(item.b_group);
+                $('#c_group').val(item.c_group);
+                $('#publish').val(item.publish);
+                $('#author').val(item.author);
+                $('#summary').val(item.summary);
+                $('#price').val(item.price);
+            });
 		}
 	});
+}
 
-})
+$('#c_group').change(function() {
+	var book_cd = $('#b_group').val().substr(0, 1)
+				+ this.value.substr(0, 3) + '-';
+		$('#book_cd').val(book_cd);
+		$('#book_cd').focus();
+		
+		$.ajax({
+			type : "GET", // GET or POST
+			url : "/getMaxSer", // URL
+			datatype : "json", // html, xml, json, jsonp, script, text
+			data : {
+				b_group : $('#b_group').val(),
+				c_group : $('#c_group').val()
+			},
+			error : function() { // Ajax error handler
+				alert('ajax failed');
+			},
+			success : function(data, status) { // Ajax complete handelr]
+				$(data).each(function(index,item){
+					$('#book_cd').val(item.book_cd); 
+                });
+			}
+		}); 
+});

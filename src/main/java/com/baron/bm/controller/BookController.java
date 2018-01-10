@@ -286,11 +286,11 @@ public class BookController {
    
 		return requestservice.findBookOne(keyword);
 	}
+	
 	@RequestMapping("/getMaxSer")
 	@ResponseBody
-	public BookModel getMaxSer (String b_group, String c_group)
-			throws Exception {  
-		BookModel book = new BookModel();
+	public BookModel getMaxSer (String b_group, String c_group, BookModel book )
+			throws Exception {   
 		book.setB_group(b_group);
 		book.setC_group(c_group);
 		return bookservice.getMaxSer(book);
